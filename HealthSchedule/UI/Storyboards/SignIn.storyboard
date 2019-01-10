@@ -38,6 +38,9 @@
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZVm-zz-p7C" kind="show" id="hoa-u9-Ssj"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A4Z-a9-Nmb">
                                 <rect key="frame" x="56.5" y="313.5" width="262.5" height="40"/>
@@ -82,6 +85,7 @@
                             <constraint firstItem="VZl-Ty-V6i" firstAttribute="top" secondItem="A4Z-a9-Nmb" secondAttribute="bottom" constant="40" id="YZ5-IJ-IyF"/>
                             <constraint firstItem="Fj3-VI-qy5" firstAttribute="trailing" secondItem="aws-L2-XlN" secondAttribute="trailing" id="Zn2-XD-rhl"/>
                             <constraint firstItem="sE7-h4-csX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2rW-kn-xsv" secondAttribute="trailing" constant="30" id="a2h-5t-fw5"/>
+                            <constraint firstItem="aws-L2-XlN" firstAttribute="bottom" secondItem="Fj3-VI-qy5" secondAttribute="bottom" id="dfi-sn-7bC"/>
                             <constraint firstItem="Fj3-VI-qy5" firstAttribute="bottom" secondItem="aws-L2-XlN" secondAttribute="bottom" id="etx-y0-9kC"/>
                             <constraint firstItem="sE7-h4-csX" firstAttribute="trailing" secondItem="VZl-Ty-V6i" secondAttribute="trailing" id="hAY-2s-jlb"/>
                             <constraint firstItem="A4Z-a9-Nmb" firstAttribute="centerY" secondItem="nC4-f4-m6h" secondAttribute="centerY" id="hXy-uk-5ml"/>
@@ -94,9 +98,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fj3-VI-qy5"/>
                     </view>
-                    <connections>
-                        <segue destination="ZVm-zz-p7C" kind="show" identifier="SignInSegue" id="9IL-yC-K9v"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfX-Pp-t8p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
