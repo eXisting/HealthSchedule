@@ -71,7 +71,7 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.70980392156862748" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="UaC-sg-BL3" firstAttribute="centerX" secondItem="nC4-f4-m6h" secondAttribute="centerX" id="0aA-0C-y5B"/>
                             <constraint firstItem="aws-L2-XlN" firstAttribute="top" secondItem="Fj3-VI-qy5" secondAttribute="top" id="1bR-7E-lU0"/>
