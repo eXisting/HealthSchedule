@@ -15,6 +15,10 @@
 		ED089A6721E77D48006A8523 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6321E77D48006A8523 /* SignIn.storyboard */; };
 		ED089A6921E780B3006A8523 /* Experts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6821E780B3006A8523 /* Experts.storyboard */; };
 		ED089A6B21E78118006A8523 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6A21E78118006A8523 /* Exercises.storyboard */; };
+		ED089A7221E78E49006A8523 /* HospitalsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7121E78E49006A8523 /* HospitalsCollectionViewController.swift */; };
+		ED089A7521E7906E006A8523 /* HospitalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7421E7906E006A8523 /* HospitalCell.swift */; };
+		ED089A7821E79260006A8523 /* ContentViewCellPlaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */; };
+		ED089A7B21E7952F006A8523 /* ContentViewCellRateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7A21E7952F006A8523 /* ContentViewCellRateable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		ED089A6321E77D48006A8523 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		ED089A6821E780B3006A8523 /* Experts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Experts.storyboard; sourceTree = "<group>"; };
 		ED089A6A21E78118006A8523 /* Exercises.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exercises.storyboard; sourceTree = "<group>"; };
+		ED089A7121E78E49006A8523 /* HospitalsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalsCollectionViewController.swift; sourceTree = "<group>"; };
+		ED089A7421E7906E006A8523 /* HospitalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalCell.swift; sourceTree = "<group>"; };
+		ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCellPlaceable.swift; sourceTree = "<group>"; };
+		ED089A7A21E7952F006A8523 /* ContentViewCellRateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCellRateable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,9 @@
 				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
 				ED089A5321E77D13006A8523 /* Assets.xcassets */,
 				ED089A5821E77D13006A8523 /* Info.plist */,
+				ED089A7621E7909C006A8523 /* Abstracts */,
+				ED089A7321E7902D006A8523 /* Views */,
+				ED089A6E21E78751006A8523 /* Controllers */,
 				ED089A5E21E77D48006A8523 /* UI */,
 			);
 			path = HealthSchedule;
@@ -87,6 +98,39 @@
 				ED089A6321E77D48006A8523 /* SignIn.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		ED089A6E21E78751006A8523 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ED089A7121E78E49006A8523 /* HospitalsCollectionViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		ED089A7321E7902D006A8523 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED089A7421E7906E006A8523 /* HospitalCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED089A7621E7909C006A8523 /* Abstracts */ = {
+			isa = PBXGroup;
+			children = (
+				ED089A7C21E79BFD006A8523 /* Protocols */,
+			);
+			path = Abstracts;
+			sourceTree = "<group>";
+		};
+		ED089A7C21E79BFD006A8523 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */,
+				ED089A7A21E7952F006A8523 /* ContentViewCellRateable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,7 +208,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED089A7821E79260006A8523 /* ContentViewCellPlaceable.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
+				ED089A7B21E7952F006A8523 /* ContentViewCellRateable.swift in Sources */,
+				ED089A7521E7906E006A8523 /* HospitalCell.swift in Sources */,
+				ED089A7221E78E49006A8523 /* HospitalsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
