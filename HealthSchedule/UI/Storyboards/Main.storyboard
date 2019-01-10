@@ -77,7 +77,7 @@
         <scene sceneID="ZtL-om-HBq">
             <objects>
                 <viewControllerPlaceholder storyboardName="Experts" id="6GM-w8-LXu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ggp-V4-VHU"/>
+                    <tabBarItem key="tabBarItem" title="Experts" image="TabBarIcons/Expert" id="ggp-V4-VHU"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nys-YB-HpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -87,7 +87,7 @@
         <scene sceneID="Xal-FG-VYv">
             <objects>
                 <viewControllerPlaceholder storyboardName="Exercises" id="0dO-CR-JHv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="EZj-FQ-AH6"/>
+                    <tabBarItem key="tabBarItem" title="Exercises" image="TabBarIcons/Gym" id="EZj-FQ-AH6"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4o4-9T-9Lx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -95,6 +95,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="TabBarIcons/Expert" width="30" height="30"/>
+        <image name="TabBarIcons/Gym" width="30" height="30"/>
         <image name="TabBarIcons/Hospital" width="30" height="30"/>
         <image name="TabBarIcons/Message" width="30" height="30"/>
         <image name="TabBarIcons/Settings" width="30" height="30"/>
