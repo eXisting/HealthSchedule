@@ -1,14 +1,14 @@
 //
-//  HospitalsCollectionViewController.swift
+//  ExercisesCollectionViewController.swift
 //  HealthSchedule
 //
-//  Created by sys-246 on 1/10/19.
+//  Created by sys-246 on 1/11/19.
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
 import UIKit
 
-class BaseCollectionViewController: UICollectionViewController {
+class ExercisesCollectionViewController: UICollectionViewController {
   
   // MARK: - Outlets
   
@@ -18,10 +18,9 @@ class BaseCollectionViewController: UICollectionViewController {
   
   private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
   
-  private let itemsPerRow: CGFloat = 2
+  private let itemsPerRow: CGFloat = 3
   
   // MARK: - Overrides
-  
   
   override func viewDidLoad() {
     collectionView.register(UINib(nibName: "ContentViewCell", bundle: nil), forCellWithReuseIdentifier: "BaseContentViewCell")
@@ -36,12 +35,11 @@ class BaseCollectionViewController: UICollectionViewController {
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BaseUICollectionViewCell
     
-    cell.backgroundColor = .red
+    cell.backgroundColor = .blue
     
-    let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://redhothealthcare-zone1-6mudibe7tedrrcg51wj.netdna-ssl.com/wp-content/uploads/2017/05/hospital.jpg")
+    let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://files.brightside.me/files/news/part_34/340810/14565160-1-0-1496126804-1496126811-650-0c369e17e2-1496430586.jpg")
     
     cell.previewImage.image = backgroundImage
-    //cell.thumbnailImage = cell.backgroundImage?.image
     
     return cell
   }
@@ -49,7 +47,7 @@ class BaseCollectionViewController: UICollectionViewController {
 
 // MARK: - Collection View Flow Layout Delegate
 
-extension BaseCollectionViewController : UICollectionViewDelegateFlowLayout {
+extension ExercisesCollectionViewController : UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,

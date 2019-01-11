@@ -22,6 +22,8 @@
 		ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8821E8EB4F006A8523 /* ImageRequesting.swift */; };
 		ED089A8C21E8EF1A006A8523 /* BaseUIContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8B21E8EF1A006A8523 /* BaseUIContentViewCell.swift */; };
 		ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */; };
+		ED089A9521E8FD05006A8523 /* ExpertsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9421E8FD05006A8523 /* ExpertsCollectionViewController.swift */; };
+		ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9621E8FE9A006A8523 /* ExercisesCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		ED089A8821E8EB4F006A8523 /* ImageRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequesting.swift; sourceTree = "<group>"; };
 		ED089A8B21E8EF1A006A8523 /* BaseUIContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIContentViewCell.swift; sourceTree = "<group>"; };
 		ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
+		ED089A9421E8FD05006A8523 /* ExpertsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertsCollectionViewController.swift; sourceTree = "<group>"; };
+		ED089A9621E8FE9A006A8523 /* ExercisesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				ED089A7121E78E49006A8523 /* BaseCollectionViewController.swift */,
+				ED089A9421E8FD05006A8523 /* ExpertsCollectionViewController.swift */,
+				ED089A9621E8FE9A006A8523 /* ExercisesCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -245,9 +251,11 @@
 				ED089A8621E89B6A006A8523 /* RequestHandler.swift in Sources */,
 				ED089A8021E890DC006A8523 /* RateableRequesting.swift in Sources */,
 				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
+				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* BaseUIContentViewCell.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED089A7E21E89065006A8523 /* ContentViewCellRateable.swift in Sources */,
+				ED089A9521E8FD05006A8523 /* ExpertsCollectionViewController.swift in Sources */,
 				ED089A7221E78E49006A8523 /* BaseCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

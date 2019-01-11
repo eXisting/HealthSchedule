@@ -13,7 +13,7 @@
         <scene sceneID="abr-Vz-J3O">
             <objects>
                 <collectionViewController id="Kqo-uH-Ywk" userLabel="Hospitals" customClass="BaseCollectionViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="kjC-KK-RVR" customClass="Base">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="kjC-KK-RVR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
