@@ -8,5 +8,5 @@
 
 protocol RateableRequesting {
   func postRate(for url: String, withRate rate: Int)
-  func getRate(from url: String)
+  func getRate(from url: String) -> Int
 }

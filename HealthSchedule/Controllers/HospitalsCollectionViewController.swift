@@ -18,7 +18,7 @@ class HospitalsCollectionViewController: UICollectionViewController {
   
   private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
   
-  private let itemsPerRow: CGFloat = 3
+  private let itemsPerRow: CGFloat = 2
   
   // MARK: - Overrides
   
@@ -34,10 +34,9 @@ class HospitalsCollectionViewController: UICollectionViewController {
     
     cell.backgroundColor = .red
     
-    let url = URL(string: "https://redhothealthcare-zone1-6mudibe7tedrrcg51wj.netdna-ssl.com/wp-content/uploads/2017/05/hospital.jpg")
-    let data = try? Data(contentsOf: url!)
+    let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://redhothealthcare-zone1-6mudibe7tedrrcg51wj.netdna-ssl.com/wp-content/uploads/2017/05/hospital.jpg")
     
-    cell.backgroundImage?.image = UIImage(data: data!)
+    cell.backgroundImage?.image = backgroundImage
     cell.thumbnailImage = cell.backgroundImage?.image
     
     return cell

@@ -20,6 +20,8 @@
 		ED089A7821E79260006A8523 /* ContentViewCellPlaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */; };
 		ED089A7E21E89065006A8523 /* ContentViewCellRateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7D21E89065006A8523 /* ContentViewCellRateable.swift */; };
 		ED089A8021E890DC006A8523 /* RateableRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7F21E890DC006A8523 /* RateableRequesting.swift */; };
+		ED089A8621E89B6A006A8523 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8521E89B6A006A8523 /* RequestHandler.swift */; };
+		ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8821E8EB4F006A8523 /* ImageRequesting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCellPlaceable.swift; sourceTree = "<group>"; };
 		ED089A7D21E89065006A8523 /* ContentViewCellRateable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewCellRateable.swift; sourceTree = "<group>"; };
 		ED089A7F21E890DC006A8523 /* RateableRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateableRequesting.swift; sourceTree = "<group>"; };
+		ED089A8521E89B6A006A8523 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
+		ED089A8821E8EB4F006A8523 /* ImageRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequesting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,12 +74,12 @@
 		ED089A4921E77D12006A8523 /* HealthSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				ED089A7621E7909C006A8523 /* Abstracts */,
 				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
+				ED089A5821E77D13006A8523 /* Info.plist */,
 				ED089A5321E77D13006A8523 /* Assets.xcassets */,
+				ED089A7621E7909C006A8523 /* Abstracts */,
 				ED089A6E21E78751006A8523 /* Controllers */,
 				ED089A8421E899D9006A8523 /* Handlers */,
-				ED089A5821E77D13006A8523 /* Info.plist */,
 				ED089A5E21E77D48006A8523 /* UI */,
 				ED089A7321E7902D006A8523 /* Views */,
 			);
@@ -133,6 +137,7 @@
 				ED089A7D21E89065006A8523 /* ContentViewCellRateable.swift */,
 				ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */,
 				ED089A7F21E890DC006A8523 /* RateableRequesting.swift */,
+				ED089A8821E8EB4F006A8523 /* ImageRequesting.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 		ED089A8421E899D9006A8523 /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
+				ED089A8521E89B6A006A8523 /* RequestHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -219,7 +225,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED089A8621E89B6A006A8523 /* RequestHandler.swift in Sources */,
 				ED089A8021E890DC006A8523 /* RateableRequesting.swift in Sources */,
+				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
 				ED089A7821E79260006A8523 /* ContentViewCellPlaceable.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED089A7E21E89065006A8523 /* ContentViewCellRateable.swift in Sources */,
