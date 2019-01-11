@@ -7,7 +7,7 @@
 //
 
 protocol ContentViewCellRateable {
-  var rate: Int? { get }
-  
+    
   func sendRate(rate: Int, with requestHandler: RateableRequesting)
+  
 }

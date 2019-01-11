@@ -9,6 +9,8 @@
 import UIKit
 
 protocol ImageRequesting {
+  
   func postImage(for url: String, withImage image: UIImage)
   func getImage(from url: String) -> UIImage?
+  
 }

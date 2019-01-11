@@ -9,7 +9,9 @@
 import UIKit
 
 class RequestHandler {
+  
   static let shared = RequestHandler()
+  
 }
 
 extension RequestHandler: RateableRequesting {
