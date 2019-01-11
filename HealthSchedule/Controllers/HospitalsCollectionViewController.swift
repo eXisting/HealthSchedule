@@ -10,6 +10,8 @@ import UIKit
 
 class HospitalsCollectionViewController: UICollectionViewController {
   
+  // MARK: - Outlets
+  
   // MARK: - Properties
   
   private let reuseIdentifier = "HospitalCell"
@@ -27,9 +29,16 @@ class HospitalsCollectionViewController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell: UICollectionViewCell = collectionView
-      .dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+                                                  for: indexPath) as! HospitalCell
+    
     cell.backgroundColor = .red
+    
+    let url = URL(string: "https://redhothealthcare-zone1-6mudibe7tedrrcg51wj.netdna-ssl.com/wp-content/uploads/2017/05/hospital.jpg")
+    let data = try? Data(contentsOf: url!)
+    
+    cell.backgroundImage?.image = UIImage(data: data!)
+    cell.thumbnailImage = cell.backgroundImage?.image
     
     return cell
   }

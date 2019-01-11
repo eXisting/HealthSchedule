@@ -30,15 +30,29 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="po6-yF-eKg">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="po6-yF-eKg" secondAttribute="trailing" id="4IZ-7o-bPt"/>
+                                    <constraint firstItem="po6-yF-eKg" firstAttribute="top" secondItem="w07-3L-A3P" secondAttribute="top" id="HwM-ZY-KfV"/>
+                                    <constraint firstItem="po6-yF-eKg" firstAttribute="leading" secondItem="w07-3L-A3P" secondAttribute="leading" id="t0f-qX-pKe"/>
+                                    <constraint firstAttribute="bottom" secondItem="po6-yF-eKg" secondAttribute="bottom" id="wai-uk-n3X"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="backgroundImage" destination="po6-yF-eKg" id="NjD-mz-uNb"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HospitalHeader" id="Nuo-ut-7YX">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Here could be your advertisment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJr-eC-hah">
-                                    <rect key="frame" x="62" y="31" width="251" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Here could be your advertisement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJr-eC-hah">
+                                    <rect key="frame" x="62" y="31" width="260" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>

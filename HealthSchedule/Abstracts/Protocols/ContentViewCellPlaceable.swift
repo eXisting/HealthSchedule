@@ -15,8 +15,9 @@ enum ContentViewCellType {
 }
 
 protocol ContentViewCellPlaceable {
-  var identity: String { get }
-  var name: String { get }
+  var identity: String? { get }
+  var name: String? { get }
   var thumbnailImage: UIImage? { get }
+  var largeImage: UIImage? { get }
   var shortDescription: String? { get }
 }

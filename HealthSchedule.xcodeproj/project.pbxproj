@@ -18,7 +18,8 @@
 		ED089A7221E78E49006A8523 /* HospitalsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7121E78E49006A8523 /* HospitalsCollectionViewController.swift */; };
 		ED089A7521E7906E006A8523 /* HospitalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7421E7906E006A8523 /* HospitalCell.swift */; };
 		ED089A7821E79260006A8523 /* ContentViewCellPlaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */; };
-		ED089A7B21E7952F006A8523 /* ContentViewCellRateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7A21E7952F006A8523 /* ContentViewCellRateable.swift */; };
+		ED089A7E21E89065006A8523 /* ContentViewCellRateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7D21E89065006A8523 /* ContentViewCellRateable.swift */; };
+		ED089A8021E890DC006A8523 /* RateableRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7F21E890DC006A8523 /* RateableRequesting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +36,8 @@
 		ED089A7121E78E49006A8523 /* HospitalsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalsCollectionViewController.swift; sourceTree = "<group>"; };
 		ED089A7421E7906E006A8523 /* HospitalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalCell.swift; sourceTree = "<group>"; };
 		ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCellPlaceable.swift; sourceTree = "<group>"; };
-		ED089A7A21E7952F006A8523 /* ContentViewCellRateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCellRateable.swift; sourceTree = "<group>"; };
+		ED089A7D21E89065006A8523 /* ContentViewCellRateable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewCellRateable.swift; sourceTree = "<group>"; };
+		ED089A7F21E890DC006A8523 /* RateableRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateableRequesting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,13 +70,14 @@
 		ED089A4921E77D12006A8523 /* HealthSchedule */ = {
 			isa = PBXGroup;
 			children = (
+				ED089A7621E7909C006A8523 /* Abstracts */,
 				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
 				ED089A5321E77D13006A8523 /* Assets.xcassets */,
-				ED089A5821E77D13006A8523 /* Info.plist */,
-				ED089A7621E7909C006A8523 /* Abstracts */,
-				ED089A7321E7902D006A8523 /* Views */,
 				ED089A6E21E78751006A8523 /* Controllers */,
+				ED089A8421E899D9006A8523 /* Handlers */,
+				ED089A5821E77D13006A8523 /* Info.plist */,
 				ED089A5E21E77D48006A8523 /* UI */,
+				ED089A7321E7902D006A8523 /* Views */,
 			);
 			path = HealthSchedule;
 			sourceTree = "<group>";
@@ -127,10 +130,18 @@
 		ED089A7C21E79BFD006A8523 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				ED089A7D21E89065006A8523 /* ContentViewCellRateable.swift */,
 				ED089A7721E79260006A8523 /* ContentViewCellPlaceable.swift */,
-				ED089A7A21E7952F006A8523 /* ContentViewCellRateable.swift */,
+				ED089A7F21E890DC006A8523 /* RateableRequesting.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		ED089A8421E899D9006A8523 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Handlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,9 +219,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED089A8021E890DC006A8523 /* RateableRequesting.swift in Sources */,
 				ED089A7821E79260006A8523 /* ContentViewCellPlaceable.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
-				ED089A7B21E7952F006A8523 /* ContentViewCellRateable.swift in Sources */,
+				ED089A7E21E89065006A8523 /* ContentViewCellRateable.swift in Sources */,
 				ED089A7521E7906E006A8523 /* HospitalCell.swift in Sources */,
 				ED089A7221E78E49006A8523 /* HospitalsCollectionViewController.swift in Sources */,
 			);

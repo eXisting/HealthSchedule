@@ -8,8 +8,29 @@
 
 import UIKit
 
-class HospitalCell: UICollectionViewCell {
+final class HospitalCell: UICollectionViewCell, ContentViewCellPlaceable, ContentViewCellRateable {
   
+  @IBOutlet weak var backgroundImage: UIImageView!
+  
+  // MARK: - ContentViewCellPlaceable
+  
+  var rate: Int?
+  
+  func sendRate(rate: Int, with requestHandler: RateableRequesting) {
+    
+  }
+  
+  // MARK: - ContentViewCellPlaceable
+  
+  var identity: String?
+  
+  var name: String?
+  
+  var thumbnailImage: UIImage?
+  
+  var largeImage: UIImage?
+  
+  var shortDescription: String?
 }
 
 //extension HospitalCell: ContentViewCellPlaceable {
