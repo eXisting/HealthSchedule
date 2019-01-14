@@ -20,7 +20,7 @@
                     <rect key="frame" x="103.66666666666669" y="60" width="207" height="224"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nB7-V4-Wvi">
-                    <rect key="frame" x="0.0" y="292" width="414" height="562"/>
+                    <rect key="frame" x="0.0" y="292" width="414" height="570"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="aoO-ec-dLm">
                             <rect key="frame" x="24" y="40" width="366" height="45"/>
@@ -50,7 +50,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGG-tz-Qjk">
-                            <rect key="frame" x="24" y="502" width="366" height="36"/>
+                            <rect key="frame" x="24" y="510" width="366" height="36"/>
                             <color key="backgroundColor" red="0.38071269547038672" green="0.7843137255" blue="0.58987552095437223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Save">
@@ -87,7 +87,7 @@
                 <constraint firstItem="nB7-V4-Wvi" firstAttribute="top" secondItem="U9G-ie-rZ5" secondAttribute="bottom" constant="8" symbolic="YES" id="998-Ta-qUp"/>
                 <constraint firstItem="U9G-ie-rZ5" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="MTB-nZ-Xgh"/>
                 <constraint firstItem="nB7-V4-Wvi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Q98-Nw-l7f"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="nB7-V4-Wvi" secondAttribute="bottom" constant="8" id="SCQ-uI-1Km"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="nB7-V4-Wvi" secondAttribute="bottom" id="SCQ-uI-1Km"/>
                 <constraint firstItem="U9G-ie-rZ5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WNf-id-clR"/>
                 <constraint firstItem="U9G-ie-rZ5" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="hQa-S3-NrB"/>
                 <constraint firstItem="nB7-V4-Wvi" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="l9A-yQ-gna"/>
