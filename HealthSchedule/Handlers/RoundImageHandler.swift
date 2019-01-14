@@ -9,9 +9,9 @@
 import UIKit
 
 enum ImageType: String {
-  case Thumbnail = "thumbnail"
-  case MediumImage = "medium"
-  case BigImage = "big"
+  case thumbnail
+  case mediumImage
+  case bigImage
 }
 
 extension UIImageView {
