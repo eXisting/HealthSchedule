@@ -14,6 +14,8 @@ class BaseCollectionViewController: UICollectionViewController {
   
   // MARK: - Properties
   
+  private let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+  
   private let reuseIdentifier = "BaseContentViewCell"
   
   private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
@@ -35,7 +37,7 @@ class BaseCollectionViewController: UICollectionViewController {
   override func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BaseUICollectionViewCell
-    
+
     cell.backgroundColor = .white
     
     let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://redhothealthcare-zone1-6mudibe7tedrrcg51wj.netdna-ssl.com/wp-content/uploads/2017/05/hospital.jpg")
