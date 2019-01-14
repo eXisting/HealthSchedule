@@ -27,6 +27,7 @@
 		ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9821EC831C006A8523 /* ProfileView.xib */; };
 		ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9A21EC8523006A8523 /* SettingsViewController.swift */; };
 		ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9E21EC8848006A8523 /* BaseProfileView.swift */; };
+		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		ED089A9821EC831C006A8523 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		ED089A9A21EC8523006A8523 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ED089A9E21EC8848006A8523 /* BaseProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileView.swift; sourceTree = "<group>"; };
+		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				ED089A8521E89B6A006A8523 /* RequestHandler.swift */,
+				ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				ED089A7E21E89065006A8523 /* ContentViewCellRateable.swift in Sources */,
 				ED089A9521E8FD05006A8523 /* ExpertsCollectionViewController.swift in Sources */,
 				ED089A7221E78E49006A8523 /* BaseCollectionViewController.swift in Sources */,
+				ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

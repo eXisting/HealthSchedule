@@ -15,14 +15,21 @@ class SettingsViewController: UIViewController {
   // MARK: - Overrides
   
   override func viewDidLoad() {
-    let subView = BaseProfileView.instanceFromNib()
-//    print(subView.profileImageView.description)
-//    subView.translatesAutoresizingMaskIntoConstraints = false
-//    subView.addConstraints([
-//      NSLayoutConstraint(item: subView, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0),
-//      NSLayoutConstraint(item: subView, attribute: .height, relatedBy: .equal, toItem: self.view, attribute: .height, multiplier: 1.0, constant: 0)
-//      ])
-//    
-//    view.addSubview(subView)
+    let profileView = BaseProfileView.instanceFromNib()
+    
+    profileView.setEditingStateTo(false)
+    
+    profileView.nameField.text = "John"
+    profileView.surnameField.text = "Smith"
+    profileView.ageField.text = "44"
+    profileView.regionField.text = "Kharkiv"
+        
+    let placeholderImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png")
+    
+    profileView.profileImageView.image = placeholderImage
+    profileView.profileImageView.roundImageBy(divider: 3)
+    
+    profileView.frame = view.frame
+    view.addSubview(profileView)
   }
 }
