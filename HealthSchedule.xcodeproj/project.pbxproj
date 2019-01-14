@@ -24,6 +24,9 @@
 		ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */; };
 		ED089A9521E8FD05006A8523 /* ExpertsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9421E8FD05006A8523 /* ExpertsCollectionViewController.swift */; };
 		ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9621E8FE9A006A8523 /* ExercisesCollectionViewController.swift */; };
+		ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9821EC831C006A8523 /* ProfileView.xib */; };
+		ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9A21EC8523006A8523 /* SettingsViewController.swift */; };
+		ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9E21EC8848006A8523 /* BaseProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
 		ED089A9421E8FD05006A8523 /* ExpertsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertsCollectionViewController.swift; sourceTree = "<group>"; };
 		ED089A9621E8FE9A006A8523 /* ExercisesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesCollectionViewController.swift; sourceTree = "<group>"; };
+		ED089A9821EC831C006A8523 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		ED089A9A21EC8523006A8523 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		ED089A9E21EC8848006A8523 /* BaseProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,7 @@
 				ED089A7121E78E49006A8523 /* BaseCollectionViewController.swift */,
 				ED089A9421E8FD05006A8523 /* ExpertsCollectionViewController.swift */,
 				ED089A9621E8FE9A006A8523 /* ExercisesCollectionViewController.swift */,
+				ED089A9A21EC8523006A8523 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -126,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				ED089A8B21E8EF1A006A8523 /* BaseUIContentViewCell.swift */,
+				ED089A9E21EC8848006A8523 /* BaseProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */,
+				ED089A9821EC831C006A8523 /* ProfileView.xib */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -235,6 +244,7 @@
 				ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */,
 				ED089A6B21E78118006A8523 /* Exercises.storyboard in Resources */,
 				ED089A6921E780B3006A8523 /* Experts.storyboard in Resources */,
+				ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */,
 				ED089A6421E77D48006A8523 /* Hospitals.storyboard in Resources */,
 				ED089A5421E77D13006A8523 /* Assets.xcassets in Resources */,
 				ED089A6621E77D48006A8523 /* Main.storyboard in Resources */,
@@ -250,7 +260,9 @@
 			files = (
 				ED089A8621E89B6A006A8523 /* RequestHandler.swift in Sources */,
 				ED089A8021E890DC006A8523 /* RateableRequesting.swift in Sources */,
+				ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */,
 				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
+				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* BaseUIContentViewCell.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,

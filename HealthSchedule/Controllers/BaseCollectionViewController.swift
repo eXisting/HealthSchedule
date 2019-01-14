@@ -36,7 +36,7 @@ class BaseCollectionViewController: UICollectionViewController {
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BaseUICollectionViewCell
     
-    cell.backgroundColor = .red
+    cell.backgroundColor = .white
     
     let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://redhothealthcare-zone1-6mudibe7tedrrcg51wj.netdna-ssl.com/wp-content/uploads/2017/05/hospital.jpg")
     

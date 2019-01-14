@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BaseProfileView" customModule="HealthSchedule" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Msc-sJ-N25">
+                    <rect key="frame" x="0.0" y="267" width="375" height="400"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U9G-ie-rZ5">
+                    <rect key="frame" x="75" y="36" width="225" height="200"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Msc-sJ-N25" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="8r9-Xa-eM7"/>
+                <constraint firstItem="Msc-sJ-N25" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.6" id="9Cc-Os-w9K"/>
+                <constraint firstItem="Msc-sJ-N25" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Bho-1Z-yem"/>
+                <constraint firstItem="Msc-sJ-N25" firstAttribute="top" relation="greaterThanOrEqual" secondItem="U9G-ie-rZ5" secondAttribute="bottom" constant="8" id="Lgl-gU-ueL"/>
+                <constraint firstItem="U9G-ie-rZ5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WNf-id-clR"/>
+                <constraint firstItem="U9G-ie-rZ5" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="gtG-m6-xL5"/>
+                <constraint firstItem="U9G-ie-rZ5" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="hQa-S3-NrB"/>
+                <constraint firstItem="U9G-ie-rZ5" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.6" id="lKG-gh-myh"/>
+                <constraint firstItem="Msc-sJ-N25" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="tGC-xo-MYh"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="profileImageView" destination="U9G-ie-rZ5" id="oCM-Ww-0wL"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="154.27286356821591"/>
+        </view>
+    </objects>
+</document>
