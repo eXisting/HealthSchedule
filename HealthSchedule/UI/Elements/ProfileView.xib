@@ -56,6 +56,9 @@
                             <state key="normal" title="Save">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="onSaveClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="fyf-8a-l5r"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.91356678299492389" green="0.91356678299492389" blue="0.91356678299492389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -98,7 +101,6 @@
                 <outlet property="nameField" destination="aoO-ec-dLm" id="uKV-LE-VdD"/>
                 <outlet property="profileImageView" destination="U9G-ie-rZ5" id="Ni3-NK-Aps"/>
                 <outlet property="regionField" destination="cNf-bJ-j6f" id="G6g-Zc-xL3"/>
-                <outlet property="saveButton" destination="QGG-tz-Qjk" id="X96-SG-0DH"/>
                 <outlet property="surnameField" destination="8RO-B3-Wam" id="akt-N3-4CP"/>
                 <outlet property="textFieldsContainerView" destination="nB7-V4-Wvi" id="JgS-Wk-LTP"/>
             </connections>

@@ -88,15 +88,15 @@
 		ED089A4921E77D12006A8523 /* HealthSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
-				ED089A5821E77D13006A8523 /* Info.plist */,
-				ED089A5321E77D13006A8523 /* Assets.xcassets */,
 				ED089A7621E7909C006A8523 /* Abstracts */,
+				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
+				ED089A5321E77D13006A8523 /* Assets.xcassets */,
 				ED089A6E21E78751006A8523 /* Controllers */,
 				ED089A8421E899D9006A8523 /* Handlers */,
+				ED089A5821E77D13006A8523 /* Info.plist */,
+				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
 				ED089A5E21E77D48006A8523 /* UI */,
 				ED089A7321E7902D006A8523 /* Views */,
-				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
 			);
 			path = HealthSchedule;
 			sourceTree = "<group>";

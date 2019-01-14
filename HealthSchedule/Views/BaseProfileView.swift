@@ -18,8 +18,6 @@ class BaseProfileView: UIView {
   @IBOutlet weak var ageField: UITextField!
   @IBOutlet weak var regionField: UITextField!
   
-  @IBOutlet weak var saveButton: UIButton!
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -41,4 +39,7 @@ class BaseProfileView: UIView {
     return UINib(nibName: "ProfileView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! BaseProfileView
   }
   
+  @IBAction func onSaveClick(_ sender: Any) {
+    print("Clicked")
+  }
 }
