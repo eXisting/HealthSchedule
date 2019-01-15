@@ -20,17 +20,37 @@ class ExpertsCollectionViewController: UICollectionViewController {
   
   private let itemsPerRow: CGFloat = 3
   
-  private var experts = [Any]()
+  private var experts = [ExpertProfile]()
   
   // MARK: - Overrides
   
   override func viewDidLoad() {
-    collectionView.register(UINib(nibName: "ContentViewCell", bundle: nil), forCellWithReuseIdentifier: "BaseContentViewCell")
+    collectionView.register(
+      UINib(nibName: "ContentViewCell",bundle: nil),
+      forCellWithReuseIdentifier: "BaseContentViewCell")
     
-    RequestHandler.shared.getAsync(from: "", complition: { json in
-      self.experts = json
+    RequestHandler.shared.getAsync(from: RequestHandler.buildEndPointUrl(), complition: { json in
+      let _ = json.map { [weak self] profile in
+        
+        guard let jsonData = profile as? [String: Any],
+          var expert = ExpertProfile(json: jsonData) else {
+          print("Cannot populate expert")
+          return
+        }
+        
+        // TODO: Not working
+//        RequestHandler.shared.getImageAsync(from:
+//          expert.pictureUrls?[ProfileJsonFields.thumbnail.rawValue] as! String) { image in
+//          expert.setActiveImage(image)
+//        }
+        expert.setActiveImage(RequestHandler.shared.getImage(from: expert.pictureUrls?[ProfileJsonFields.thumbnail.rawValue] as! String))
+        self?.experts.append(expert)
+      }
       
       print("Controller called")
+      DispatchQueue.main.async {
+        self.collectionView.reloadData()
+      }
     })
   }
   
@@ -43,11 +63,15 @@ class ExpertsCollectionViewController: UICollectionViewController {
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BaseUICollectionViewCell
     
-    cell.backgroundColor = .white
-    
-    let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://seowatch.ru/images/seo-expert.png")
-    
-    cell.previewImage.image = backgroundImage
+    //cell.backgroundColor = .white
+    if indexPath.row < experts.count {
+      let expert = experts[indexPath.row]
+      cell.fullName.text = "\(expert.firstName) \(expert.lastName)"
+      cell.fullDescription.text = expert.location
+      
+      //let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://seowatch.ru/images/seo-expert.png")
+      cell.previewImage.image = expert.profilePhoto
+    }
     
     return cell
   }

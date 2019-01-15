@@ -23,20 +23,21 @@
                         <rect key="frame" x="20" y="20" width="394" height="306"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full name goes here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCE-jN-VCe">
-                        <rect key="frame" x="12" y="338" width="410" height="24"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <rect key="frame" x="12" y="338" width="410" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full description goes here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GD-3x-DC2">
-                        <rect key="frame" x="12" y="370" width="410" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full description goes here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GD-3x-DC2">
+                        <rect key="frame" x="12" y="362" width="410" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3GD-3x-DC2" secondAttribute="bottom" id="5Ch-c8-8pC"/>
                 <constraint firstItem="3GD-3x-DC2" firstAttribute="top" secondItem="OCE-jN-VCe" secondAttribute="bottom" constant="8" id="9ya-m5-YaG"/>
                 <constraint firstItem="61u-kq-90a" firstAttribute="top" secondItem="oRC-zE-QPj" secondAttribute="topMargin" id="BCn-wt-AH5"/>
                 <constraint firstItem="OCE-jN-VCe" firstAttribute="leading" secondItem="oRC-zE-QPj" secondAttribute="leading" constant="12" id="MGW-ev-vsH"/>

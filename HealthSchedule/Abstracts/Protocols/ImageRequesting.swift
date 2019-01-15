@@ -13,4 +13,6 @@ protocol ImageRequesting {
   func postImage(for url: String, with image: UIImage)
   func getImage(from url: String) -> UIImage?
   
+  func getImageAsync(from url: String, completion: @escaping (UIImage?) -> Void)
+    
 }

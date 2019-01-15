@@ -29,6 +29,7 @@
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
+		ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
+		ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				ED089A8421E899D9006A8523 /* Handlers */,
 				ED089A5821E77D13006A8523 /* Info.plist */,
 				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
+				ED6CBE7D21EDDDE900860010 /* Models */,
 				ED089A5E21E77D48006A8523 /* UI */,
 				ED089A7321E7902D006A8523 /* Views */,
 			);
@@ -187,6 +190,14 @@
 			path = Elements;
 			sourceTree = "<group>";
 		};
+		ED6CBE7D21EDDDE900860010 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,6 +280,7 @@
 				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
 				ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
+				ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* BaseUIContentViewCell.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,

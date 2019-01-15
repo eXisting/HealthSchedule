@@ -17,15 +17,12 @@ class RequestHandler {
   
   static let shared = RequestHandler()
   
-  // TEMP
-  private let endPoint = "https://randomuser.me/api"
-  
   private let defaultSession = URLSession(configuration: .default)
   private var dataTask: URLSessionDataTask?
   
   private func fetchAsync(from url: String, with query: String?, completion: @escaping ([Any]) -> Void) {
     
-    guard let url = URL(string: buildEndPointUrl()) else {
+    guard let url = URL(string: url) else {
       print("Error: cannot create URL")
       return
     }
@@ -65,9 +62,9 @@ class RequestHandler {
     task.resume()
   }
   
-  private func buildEndPointUrl() -> String {
+  class func buildEndPointUrl() -> String {
     
-    var url = endPoint
+    var url = "https://randomuser.me/api"
     
     url.append("/?results=")
     url.append("20")
@@ -80,6 +77,33 @@ class RequestHandler {
 }
 
 extension RequestHandler: ImageRequesting {
+  func getImageAsync(from url: String, completion: @escaping (UIImage?) -> Void) {
+    
+    guard let url = URL(string: url) else {
+      print("Error: cannot create URL")
+      return
+    }
+    let urlRequest = URLRequest(url: url)
+    
+    let task = defaultSession.dataTask(with: urlRequest) {
+      (data, response, error) in
+      
+      guard error == nil else {
+        print(error!)
+        return
+      }
+      
+      guard let responseData = data else {
+        print("Error: did not receive data")
+        return
+      }
+      
+      completion(UIImage(data: responseData))
+    }
+    
+    task.resume()
+  }
+  
   func postImage(for url: String, with image: UIImage) {
     // TODO
   }
@@ -95,12 +119,11 @@ extension RequestHandler: ImageRequesting {
 extension RequestHandler: ListsRequesting {
   
   func getAsync(from url: String, complition: @escaping ([Any]) -> Void) {
-    let result = fetchAsync(from: url, with: nil, completion: complition)
-    
+    fetchAsync(from: url, with: nil, completion: complition)    
   }
   
   func getAsync(from url: String, with query: String, complition: @escaping ([Any]) -> Void) {
-    //let result = fetchAsync(from: url, with: query, completion: complition)
+    // TODO
   }
   
   
