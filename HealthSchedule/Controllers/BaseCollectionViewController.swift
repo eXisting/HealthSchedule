@@ -28,9 +28,7 @@ class BaseCollectionViewController: UICollectionViewController {
   override func viewDidLoad() {
     collectionView.register(UINib(nibName: "ContentViewCell", bundle: nil), forCellWithReuseIdentifier: "BaseContentViewCell")
     
-    RequestHandler.shared.get(from: "https://itunes.apple.com/search", with: "media=music&entity=song&term=swift", complition: {
-      print("Controller called")
-    })
+    
   }
   
   override func collectionView(_ collectionView: UICollectionView,

@@ -20,10 +20,18 @@ class ExpertsCollectionViewController: UICollectionViewController {
   
   private let itemsPerRow: CGFloat = 3
   
+  private var experts = [Any]()
+  
   // MARK: - Overrides
-    
+  
   override func viewDidLoad() {
     collectionView.register(UINib(nibName: "ContentViewCell", bundle: nil), forCellWithReuseIdentifier: "BaseContentViewCell")
+    
+    RequestHandler.shared.getAsync(from: "", complition: { json in
+      self.experts = json
+      
+      print("Controller called")
+    })
   }
   
   override func collectionView(_ collectionView: UICollectionView,

@@ -8,6 +8,6 @@
 
 protocol ContentViewCellRateable {
     
-  func sendRate(rate: Int, with requestHandler: RateableRequesting)
+  //func sendRate(rate: Int, with requestHandler: RateableRequesting)
   
 }

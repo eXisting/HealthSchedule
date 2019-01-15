@@ -14,13 +14,10 @@ enum ContentViewCellType {
   case Exercise
 }
 
-final class BaseUICollectionViewCell: UICollectionViewCell, ContentViewCellRateable {
+final class BaseUICollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var previewImage: UIImageView!
   @IBOutlet weak var fullName: UILabel!
   @IBOutlet weak var fullDescription: UILabel!
   
-  func sendRate(rate: Int, with requestHandler: RateableRequesting) {
-    
-  }
 }

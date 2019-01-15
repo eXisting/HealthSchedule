@@ -8,58 +8,75 @@
 
 import UIKit
 
+enum RequestError: Error {
+  case EndPointError(reason: String)
+  case SerializationError(reason: String)
+}
+
 class RequestHandler {
   
   static let shared = RequestHandler()
   
+  // TEMP
+  private let endPoint = "https://randomuser.me/api"
+  
   private let defaultSession = URLSession(configuration: .default)
-
   private var dataTask: URLSessionDataTask?
   
-  private func fetch(from url: String, with query: String?, completion: @escaping () -> Void) -> [Any] {
+  private func fetchAsync(from url: String, with query: String?, completion: @escaping ([Any]) -> Void) {
     
-    //create the url with NSURL
-    let dataURL = URL(string: url)! //change the url
-    
-    dataTask?.cancel()
-    
-    if var urlComponents = URLComponents(string: url) {
-      urlComponents.query = query ?? ""
+    guard let url = URL(string: buildEndPointUrl()) else {
+      print("Error: cannot create URL")
+      return
+    }
+    let urlRequest = URLRequest(url: url)
+  
+    // make the request
+    let task = defaultSession.dataTask(with: urlRequest) {
+      (data, response, error) in
       
-      guard let url = urlComponents.url else { return [] }
-      
-      dataTask = defaultSession.dataTask(with: url) { data, response, error in
-        defer { self.dataTask = nil }
-        
-        if let error = error {
-          //self.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
-        } else if let data = data,
-          let response = response as? HTTPURLResponse,
-          response.statusCode == 200 {
-          //self.updateSearchResults(data)
-          
-          DispatchQueue.main.async {
-            //completion(self.tracks, self.errorMessage)
-          }
-        }
+      guard error == nil else {
+        print(error!)
+        return
       }
       
-      dataTask?.resume()
-    }
+      guard let responseData = data else {
+        print("Error: did not receive data")
+        return
+      }
       
-    return []
-  }
-}
-
-extension RequestHandler: RateableRequesting {
-  func postRate(for url: String, with rate: Int) {
-    // TODO
+      do {
+        guard let todo = try JSONSerialization.jsonObject(with: responseData, options: [])
+          as? [String: Any] else {
+            print("error trying to convert data to JSON")
+            return
+        }
+        
+        //print(todo["results"] ?? "nothing")
+        let result = todo["results"] as! [Any]
+        
+        completion(result)
+      } catch  {
+        print("error trying to convert data to JSON")
+        return
+      }
+    }
+    
+    task.resume()
   }
   
-  func getRate(from url: String) -> Int {
-    // TODO
-    return 0
+  private func buildEndPointUrl() -> String {
+    
+    var url = endPoint
+    
+    url.append("/?results=")
+    url.append("20")
+    url.append("&format=")
+    url.append("json")
+    
+    return url
   }
+  
 }
 
 extension RequestHandler: ImageRequesting {
@@ -77,16 +94,13 @@ extension RequestHandler: ImageRequesting {
 
 extension RequestHandler: ListsRequesting {
   
-  func get(from url: String, complition: @escaping () -> Void) -> [Any] {
-    let result = fetch(from: url, with: nil, completion: complition)
+  func getAsync(from url: String, complition: @escaping ([Any]) -> Void) {
+    let result = fetchAsync(from: url, with: nil, completion: complition)
     
-    return result
   }
   
-  func get(from url: String, with query: String, complition: @escaping () -> Void) -> [Any] {
-    let result = fetch(from: url, with: query, completion: complition)
-    
-    return []
+  func getAsync(from url: String, with query: String, complition: @escaping ([Any]) -> Void) {
+    //let result = fetchAsync(from: url, with: query, completion: complition)
   }
   
   
