@@ -18,7 +18,6 @@ class RequestHandler {
   static let shared = RequestHandler()
   
   private let defaultSession = URLSession(configuration: .default)
-  private var dataTask: URLSessionDataTask?
   
   private func fetchAsync(from url: String, with query: String?, completion: @escaping ([Any]) -> Void) {
     
@@ -77,7 +76,7 @@ class RequestHandler {
 }
 
 extension RequestHandler: ImageRequesting {
-  func getImageAsync(from url: String, completion: @escaping (UIImage?) -> Void) {
+  func getImageAsync(from url: String, for index: Int?, completion: @escaping (Int?, UIImage?) -> Void) {
     
     guard let url = URL(string: url) else {
       print("Error: cannot create URL")
@@ -98,7 +97,7 @@ extension RequestHandler: ImageRequesting {
         return
       }
       
-      completion(UIImage(data: responseData))
+      completion(index, UIImage(data: responseData))
     }
     
     task.resume()
@@ -119,7 +118,7 @@ extension RequestHandler: ImageRequesting {
 extension RequestHandler: ListsRequesting {
   
   func getAsync(from url: String, complition: @escaping ([Any]) -> Void) {
-    fetchAsync(from: url, with: nil, completion: complition)    
+    fetchAsync(from: url, with: nil, completion: complition)
   }
   
   func getAsync(from url: String, with query: String, complition: @escaping ([Any]) -> Void) {

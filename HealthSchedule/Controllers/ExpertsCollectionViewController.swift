@@ -29,8 +29,9 @@ class ExpertsCollectionViewController: UICollectionViewController {
       UINib(nibName: "ContentViewCell",bundle: nil),
       forCellWithReuseIdentifier: "BaseContentViewCell")
     
+    var processedImages = 0
     RequestHandler.shared.getAsync(from: RequestHandler.buildEndPointUrl(), complition: { json in
-      let _ = json.map { [weak self] profile in
+      let _ = json.enumerated().map { [weak self] (index, profile) in
         
         guard let jsonData = profile as? [String: Any],
           var expert = ExpertProfile(json: jsonData) else {
@@ -38,16 +39,22 @@ class ExpertsCollectionViewController: UICollectionViewController {
           return
         }
         
-        // TODO: Not working
-//        RequestHandler.shared.getImageAsync(from:
-//          expert.pictureUrls?[ProfileJsonFields.thumbnail.rawValue] as! String) { image in
-//          expert.setActiveImage(image)
-//        }
-        expert.setActiveImage(RequestHandler.shared.getImage(from: expert.pictureUrls?[ProfileJsonFields.thumbnail.rawValue] as! String))
+        RequestHandler.shared.getImageAsync(from:
+          expert.pictureUrls?[ProfileJsonFields.thumbnail.rawValue] as! String, for: index) {
+            [weak self] (expertIndex, image) in
+            self?.experts[expertIndex!].setActiveImage(image)
+            processedImages += 1
+            
+            if processedImages >= self?.experts.count ?? json.count {
+              DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+              }
+            }
+        }
+        
         self?.experts.append(expert)
       }
       
-      print("Controller called")
       DispatchQueue.main.async {
         self.collectionView.reloadData()
       }
@@ -61,7 +68,9 @@ class ExpertsCollectionViewController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BaseUICollectionViewCell
+    let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: reuseIdentifier,
+      for: indexPath) as! BaseUICollectionViewCell
     
     //cell.backgroundColor = .white
     if indexPath.row < experts.count {
@@ -69,7 +78,6 @@ class ExpertsCollectionViewController: UICollectionViewController {
       cell.fullName.text = "\(expert.firstName) \(expert.lastName)"
       cell.fullDescription.text = expert.location
       
-      //let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://seowatch.ru/images/seo-expert.png")
       cell.previewImage.image = expert.profilePhoto
     }
     
