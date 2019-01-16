@@ -4,7 +4,7 @@
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="recomendationOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expert" syncable="YES"/>
+        <relationship name="recomendationOf" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Expert" syncable="YES"/>
     </entity>
     <entity name="Expert" representedClassName="Expert" syncable="YES" codeGenerationType="class">
         <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,17 +12,26 @@
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rate" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="attachedToHospital" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hospital" syncable="YES"/>
+        <relationship name="attachedToHospital" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Hospital" syncable="YES"/>
     </entity>
     <entity name="Hospital" representedClassName="Hospital" syncable="YES" codeGenerationType="class">
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rate" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Service" representedClassName="Service" syncable="YES" codeGenerationType="class">
+        <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="providedByHospital" toMany="YES" deletionRule="Deny" destinationEntity="Hospital" syncable="YES"/>
+        <relationship name="relatedToExpert" toMany="YES" deletionRule="Deny" destinationEntity="Expert" syncable="YES"/>
     </entity>
     <elements>
         <element name="Exercise" positionX="-279.390625" positionY="13.69921875" width="128" height="105"/>
-        <element name="Expert" positionX="-266.5546875" positionY="286.08203125" width="128" height="135"/>
-        <element name="Hospital" positionX="-27.9296875" positionY="59.66796875" width="128" height="105"/>
+        <element name="Expert" positionX="-525.2421875" positionY="302.80859375" width="128" height="135"/>
+        <element name="Hospital" positionX="-34.7109375" positionY="35.75390625" width="128" height="120"/>
+        <element name="Service" positionX="46.8203125" positionY="234.94140625" width="128" height="120"/>
     </elements>
 </model>
