@@ -32,10 +32,12 @@
         <relationship name="providedBy" toMany="YES" deletionRule="Deny" destinationEntity="Hospital" inverseName="provides" inverseEntity="Hospital" syncable="YES"/>
         <relationship name="relatedTo" toMany="YES" deletionRule="Deny" destinationEntity="Expert" inverseName="attachedTo" inverseEntity="Expert" syncable="YES"/>
     </entity>
+    <entity name="ServiceToHospital" representedClassName="ServiceToHospital" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
     <elements>
         <element name="Exercise" positionX="-279.390625" positionY="13.69921875" width="128" height="105"/>
         <element name="Expert" positionX="-525.2421875" positionY="302.80859375" width="128" height="165"/>
         <element name="Hospital" positionX="-34.7109375" positionY="35.75390625" width="128" height="150"/>
-        <element name="Service" positionX="46.8203125" positionY="234.94140625" width="128" height="120"/>
+        <element name="Service" positionX="10.3046875" positionY="307.5078125" width="128" height="120"/>
+        <element name="ServiceToHospital" positionX="-252" positionY="234" width="128" height="45"/>
     </elements>
 </model>
