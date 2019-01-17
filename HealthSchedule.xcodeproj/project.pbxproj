@@ -12,7 +12,7 @@
 		ED089A6421E77D48006A8523 /* Hospitals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6021E77D48006A8523 /* Hospitals.storyboard */; };
 		ED089A6521E77D48006A8523 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6121E77D48006A8523 /* LaunchScreen.storyboard */; };
 		ED089A6621E77D48006A8523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6221E77D48006A8523 /* Main.storyboard */; };
-		ED089A6721E77D48006A8523 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6321E77D48006A8523 /* SignIn.storyboard */; };
+		ED089A6721E77D48006A8523 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6321E77D48006A8523 /* Login.storyboard */; };
 		ED089A6921E780B3006A8523 /* Experts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6821E780B3006A8523 /* Experts.storyboard */; };
 		ED089A6B21E78118006A8523 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6A21E78118006A8523 /* Exercises.storyboard */; };
 		ED089A7221E78E49006A8523 /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A7121E78E49006A8523 /* BaseCollectionViewController.swift */; };
@@ -26,6 +26,9 @@
 		ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9821EC831C006A8523 /* ProfileView.xib */; };
 		ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9A21EC8523006A8523 /* SettingsViewController.swift */; };
 		ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9E21EC8848006A8523 /* BaseProfileView.swift */; };
+		ED330C6321EF87B8001019FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* LoginViewController.swift */; };
+		ED330C6621EF8B66001019FC /* RootTabBarVewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6521EF8B66001019FC /* RootTabBarVewController.swift */; };
+		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
@@ -40,7 +43,7 @@
 		ED089A6021E77D48006A8523 /* Hospitals.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Hospitals.storyboard; sourceTree = "<group>"; };
 		ED089A6121E77D48006A8523 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		ED089A6221E77D48006A8523 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		ED089A6321E77D48006A8523 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		ED089A6321E77D48006A8523 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		ED089A6821E780B3006A8523 /* Experts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Experts.storyboard; sourceTree = "<group>"; };
 		ED089A6A21E78118006A8523 /* Exercises.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exercises.storyboard; sourceTree = "<group>"; };
 		ED089A7121E78E49006A8523 /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +57,9 @@
 		ED089A9821EC831C006A8523 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		ED089A9A21EC8523006A8523 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ED089A9E21EC8848006A8523 /* BaseProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileView.swift; sourceTree = "<group>"; };
+		ED330C6221EF87B8001019FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		ED330C6521EF8B66001019FC /* RootTabBarVewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarVewController.swift; sourceTree = "<group>"; };
+		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
@@ -121,7 +127,7 @@
 				ED089A6221E77D48006A8523 /* Main.storyboard */,
 				ED089A6A21E78118006A8523 /* Exercises.storyboard */,
 				ED089A6821E780B3006A8523 /* Experts.storyboard */,
-				ED089A6321E77D48006A8523 /* SignIn.storyboard */,
+				ED089A6321E77D48006A8523 /* Login.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -129,6 +135,8 @@
 		ED089A6E21E78751006A8523 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				ED330C6421EF8B52001019FC /* Main */,
+				ED330C6121EF878C001019FC /* Login */,
 				ED089A7121E78E49006A8523 /* BaseCollectionViewController.swift */,
 				ED089A9421E8FD05006A8523 /* ExpertsCollectionViewController.swift */,
 				ED089A9621E8FE9A006A8523 /* ExercisesCollectionViewController.swift */,
@@ -170,6 +178,7 @@
 			children = (
 				ED089A8521E89B6A006A8523 /* RequestHandler.swift */,
 				ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */,
+				ED330C6721F0748B001019FC /* AlertHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -188,6 +197,22 @@
 				ED089A9821EC831C006A8523 /* ProfileView.xib */,
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		ED330C6121EF878C001019FC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				ED330C6221EF87B8001019FC /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		ED330C6421EF8B52001019FC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				ED330C6521EF8B66001019FC /* RootTabBarVewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		ED6CBE7D21EDDDE900860010 /* Models */ = {
@@ -257,7 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED089A6521E77D48006A8523 /* LaunchScreen.storyboard in Resources */,
-				ED089A6721E77D48006A8523 /* SignIn.storyboard in Resources */,
+				ED089A6721E77D48006A8523 /* Login.storyboard in Resources */,
 				ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */,
 				ED089A6B21E78118006A8523 /* Exercises.storyboard in Resources */,
 				ED089A6921E780B3006A8523 /* Experts.storyboard in Resources */,
@@ -278,9 +303,11 @@
 				ED089A8621E89B6A006A8523 /* RequestHandler.swift in Sources */,
 				ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */,
 				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
+				ED330C6321EF87B8001019FC /* LoginViewController.swift in Sources */,
 				ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */,
+				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* BaseUIContentViewCell.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
@@ -288,6 +315,7 @@
 				ED089A9521E8FD05006A8523 /* ExpertsCollectionViewController.swift in Sources */,
 				ED089A7221E78E49006A8523 /* BaseCollectionViewController.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
+				ED330C6621EF8B66001019FC /* RootTabBarVewController.swift in Sources */,
 				ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

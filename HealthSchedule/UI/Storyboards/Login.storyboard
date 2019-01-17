@@ -13,7 +13,7 @@
         <!--SignIn-->
         <scene sceneID="CHd-sJ-sNj">
             <objects>
-                <viewController id="VYB-vo-3Vg" userLabel="SignIn" sceneMemberID="viewController">
+                <viewController id="VYB-vo-3Vg" userLabel="SignIn" customClass="LoginViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nC4-f4-m6h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +40,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ZVm-zz-p7C" kind="show" id="hoa-u9-Ssj"/>
+                                    <segue destination="ZVm-zz-p7C" kind="showDetail" identifier="signIn" id="HTa-eh-uGN"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A4Z-a9-Nmb">
@@ -98,10 +98,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fj3-VI-qy5"/>
                     </view>
+                    <connections>
+                        <outlet property="emailField" destination="A4Z-a9-Nmb" id="4C7-H7-Ssr"/>
+                        <outlet property="passwordField" destination="VZl-Ty-V6i" id="btI-Zc-000"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfX-Pp-t8p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-106.40000000000001" y="155.17241379310346"/>
+            <point key="canvasLocation" x="-511" y="154"/>
         </scene>
         <!--Main-->
         <scene sceneID="aOz-08-pHG">
@@ -109,7 +113,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="Main" storyboardName="Main" referencedIdentifier="Main" id="ZVm-zz-p7C" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXn-ss-5F9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="569" y="146"/>
+            <point key="canvasLocation" x="-16" y="153"/>
         </scene>
     </scenes>
     <resources>
