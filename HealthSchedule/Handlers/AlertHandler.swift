@@ -10,11 +10,30 @@ import UIKit
 
 class AlertHandler {
   
-  static func CreateAlert(title: String, message: String, style: UIAlertController.Style) -> UIAlertController {
-    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+  private class func createAlert(_ title: String,
+                           _ message: String,
+                           _ style: UIAlertController.Style) -> UIAlertController {
+    let alert = UIAlertController(
+      title: title,
+      message: message,
+      preferredStyle: UIAlertController.Style.alert)
+    
+    alert.addAction(UIAlertAction(
+      title: "OK",
+      style: UIAlertAction.Style.default,
+      handler: nil))
     
     return alert
+  }
+  
+  static func ShowAlert(for viewController: UIViewController,
+                        _ title: String,
+                        _ message: String,
+                        _ style: UIAlertController.Style) {
+    viewController.present(
+      createAlert(title, message, .alert),
+      animated: true,
+      completion: nil)
   }
   
 }
