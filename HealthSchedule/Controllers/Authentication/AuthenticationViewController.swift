@@ -8,11 +8,11 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class AuthenticationViewController: UIViewController {
   
   private let signInSegueId = "signIn"
   private let signUpSequeId = "signUp"
-  
+
   private let opaqueRed = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
   
   let n = "1"
@@ -21,8 +21,14 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var emailField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // TODO: pass data to next view controller
+  override func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    self.navigationController?.setNavigationBarHidden(false, animated: animated)
   }
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -40,6 +46,10 @@ class LoginViewController: UIViewController {
     }
     
     return true
+  }
+    
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // TODO: pass data to next view controller
   }
   
   func validateFields() -> Bool {
