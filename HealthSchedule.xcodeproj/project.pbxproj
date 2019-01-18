@@ -31,7 +31,7 @@
 		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
 		ED330C6A21F084BA001019FC /* RootNaviationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6921F084BA001019FC /* RootNaviationController.swift */; };
 		ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpViewController.swift */; };
-		ED330C8E21F1D5A5001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C8D21F1D5A5001019FC /* DesignableTextField.swift */; };
+		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
@@ -65,7 +65,7 @@
 		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		ED330C6921F084BA001019FC /* RootNaviationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNaviationController.swift; sourceTree = "<group>"; };
 		ED330C6B21F08536001019FC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		ED330C8D21F1D5A5001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
+		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
@@ -154,9 +154,9 @@
 		ED089A7321E7902D006A8523 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ED330C8F21F21B0C001019FC /* Designable */,
 				ED089A8B21E8EF1A006A8523 /* BaseUIContentViewCell.swift */,
 				ED089A9E21EC8848006A8523 /* BaseProfileView.swift */,
-				ED330C8D21F1D5A5001019FC /* DesignableTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,6 +222,14 @@
 				ED330C6521EF8B66001019FC /* RootTabBarVewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		ED330C8F21F21B0C001019FC /* Designable */ = {
+			isa = PBXGroup;
+			children = (
+				ED330C9021F21B35001019FC /* DesignableTextField.swift */,
+			);
+			path = Designable;
 			sourceTree = "<group>";
 		};
 		ED6CBE7D21EDDDE900860010 /* Models */ = {
@@ -316,7 +324,7 @@
 				ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */,
-				ED330C8E21F1D5A5001019FC /* DesignableTextField.swift in Sources */,
+				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
