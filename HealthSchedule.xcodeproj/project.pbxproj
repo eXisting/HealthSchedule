@@ -32,6 +32,7 @@
 		ED330C6A21F084BA001019FC /* RootNaviationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6921F084BA001019FC /* RootNaviationController.swift */; };
 		ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpViewController.swift */; };
 		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
+		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
@@ -66,6 +67,7 @@
 		ED330C6921F084BA001019FC /* RootNaviationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNaviationController.swift; sourceTree = "<group>"; };
 		ED330C6B21F08536001019FC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
+		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				ED089A8521E89B6A006A8523 /* RequestHandler.swift */,
 				ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */,
 				ED330C6721F0748B001019FC /* AlertHandler.swift */,
+				ED330C9221F223AE001019FC /* BlurHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED330C6A21F084BA001019FC /* RootNaviationController.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* BaseUIContentViewCell.swift in Sources */,
+				ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED089A7E21E89065006A8523 /* ContentViewCellRateable.swift in Sources */,
 				ED089A9521E8FD05006A8523 /* ExpertsCollectionViewController.swift in Sources */,

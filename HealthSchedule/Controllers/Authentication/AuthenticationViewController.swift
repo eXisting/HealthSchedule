@@ -25,7 +25,7 @@ class AuthenticationViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
     
-    blurEffect()
+    BlurHandler.performBlurOn(backgroundImage)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -59,24 +59,4 @@ class AuthenticationViewController: UIViewController {
     // TODO: Call API instead
     return emailField.text == n && passwordField.text == p
   }
-  
-  var context = CIContext(options: nil)
-  
-  func blurEffect() {
-    
-    let currentFilter = CIFilter(name: "CIGaussianBlur")
-    let beginImage = CIImage(image: backgroundImage.image!)
-    currentFilter!.setValue(beginImage, forKey: kCIInputImageKey)
-    currentFilter!.setValue(10, forKey: kCIInputRadiusKey)
-    
-    let cropFilter = CIFilter(name: "CICrop")
-    cropFilter!.setValue(currentFilter!.outputImage, forKey: kCIInputImageKey)
-    cropFilter!.setValue(CIVector(cgRect: beginImage!.extent), forKey: "inputRectangle")
-    
-    let output = cropFilter!.outputImage
-    let cgimg = context.createCGImage(output!, from: output!.extent)
-    let processedImage = UIImage(cgImage: cgimg!)
-    backgroundImage.image = processedImage
-  }
-  
 }
