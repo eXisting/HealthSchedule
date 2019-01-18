@@ -18,11 +18,14 @@ class AuthenticationViewController: UIViewController {
   let n = "1"
   let p = "2"
   
+  @IBOutlet weak var backgroundImage: UIImageView!
   @IBOutlet weak var emailField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
   
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    
+    blurEffect()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -55,6 +58,25 @@ class AuthenticationViewController: UIViewController {
   func validateFields() -> Bool {
     // TODO: Call API instead
     return emailField.text == n && passwordField.text == p
+  }
+  
+  var context = CIContext(options: nil)
+  
+  func blurEffect() {
+    
+    let currentFilter = CIFilter(name: "CIGaussianBlur")
+    let beginImage = CIImage(image: backgroundImage.image!)
+    currentFilter!.setValue(beginImage, forKey: kCIInputImageKey)
+    currentFilter!.setValue(10, forKey: kCIInputRadiusKey)
+    
+    let cropFilter = CIFilter(name: "CICrop")
+    cropFilter!.setValue(currentFilter!.outputImage, forKey: kCIInputImageKey)
+    cropFilter!.setValue(CIVector(cgRect: beginImage!.extent), forKey: "inputRectangle")
+    
+    let output = cropFilter!.outputImage
+    let cgimg = context.createCGImage(output!, from: output!.extent)
+    let processedImage = UIImage(cgImage: cgimg!)
+    backgroundImage.image = processedImage
   }
   
 }
