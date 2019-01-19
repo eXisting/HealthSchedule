@@ -9,7 +9,12 @@
 import UIKit
 
 class RootTabBarViewController: UITabBarController {
-  override func viewDidLoad() {
-    print("loaded...")
+  
+  private lazy var signUpData: [String: Any] = [:]
+  
+  func storeSignUpData(_ data: [String: Any]) {
+    for (key, value) in data {
+      signUpData[key] = value
+    }
   }
 }

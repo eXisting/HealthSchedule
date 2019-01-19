@@ -245,20 +245,101 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jxa-pV-PM2"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="TabBarIcons/Dot" id="dGR-Mm-BVF"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96y-uC-50f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1459" y="153"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="2Z6-4L-jZP">
             <objects>
-                <viewController id="z6k-iK-L1n" sceneMemberID="viewController">
+                <viewController id="z6k-iK-L1n" customClass="SignUpViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bAd-Sv-VbO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Backgrounds/SignUp" translatesAutoresizingMaskIntoConstraints="NO" id="ifL-Qy-Dm6" userLabel="Background">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="lAy-YC-Sys">
+                                <rect key="frame" x="41.333333333333343" y="104" width="331.33333333333326" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7wd-WO-pJi">
+                                <rect key="frame" x="0.0" y="165.99999999999997" width="414" height="358.33333333333326"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fDh-vs-h6i" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="0.0" width="382" height="83.666666666666671"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/user"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CYn-DI-OWy" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="91.666666666666686" width="382" height="83.666666666666686"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/email"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bTi-dF-Q5f" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="183.33333333333331" width="382" height="83.333333333333314"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/key"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Verify password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="W2P-gl-0cT" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="274.66666666666669" width="382" height="83.666666666666686"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/lock"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bTi-dF-Q5f" firstAttribute="width" secondItem="fDh-vs-h6i" secondAttribute="width" id="3ga-pK-bqM"/>
+                                    <constraint firstItem="CYn-DI-OWy" firstAttribute="width" secondItem="fDh-vs-h6i" secondAttribute="width" id="EEV-uP-BV2"/>
+                                    <constraint firstAttribute="trailing" secondItem="fDh-vs-h6i" secondAttribute="trailing" constant="16" id="ET4-k9-Yqx"/>
+                                    <constraint firstItem="fDh-vs-h6i" firstAttribute="leading" secondItem="7wd-WO-pJi" secondAttribute="leading" constant="16" id="kNx-ft-s13"/>
+                                    <constraint firstItem="W2P-gl-0cT" firstAttribute="width" secondItem="bTi-dF-Q5f" secondAttribute="width" id="yoE-eN-KW8"/>
+                                </constraints>
+                            </stackView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tw0-hn-Qzd">
+                                <rect key="frame" x="16" y="532.33333333333337" width="382" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="-31557599.629726052">
+                                    <!--2000-01-01 18:00:00 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="347108400">
+                                    <!--2012-01-01 11:00:00 +0000-->
+                                </date>
+                            </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLf-iN-U7H">
                                 <rect key="frame" x="124.33333333333333" y="786" width="165.33333333333337" height="44"/>
                                 <color key="backgroundColor" red="0.80891758420000004" green="0.48794724750000001" blue="0.13235060909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -273,28 +354,54 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="njS-0n-8Ok" firstAttribute="bottom" secondItem="ifL-Qy-Dm6" secondAttribute="bottom" id="1dW-ek-zwU"/>
+                            <constraint firstItem="tw0-hn-Qzd" firstAttribute="top" secondItem="7wd-WO-pJi" secondAttribute="bottom" constant="8" id="1oo-Vf-cTj"/>
+                            <constraint firstItem="7wd-WO-pJi" firstAttribute="leading" secondItem="njS-0n-8Ok" secondAttribute="leading" id="3Y2-fF-as6"/>
                             <constraint firstItem="njS-0n-8Ok" firstAttribute="bottom" secondItem="fLf-iN-U7H" secondAttribute="bottom" constant="32" id="7Se-BI-Njc"/>
+                            <constraint firstItem="7wd-WO-pJi" firstAttribute="height" secondItem="bAd-Sv-VbO" secondAttribute="height" multiplier="0.4" id="7l4-go-ENc"/>
+                            <constraint firstItem="fLf-iN-U7H" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tw0-hn-Qzd" secondAttribute="bottom" constant="8" id="9n7-rj-XU3"/>
+                            <constraint firstItem="7wd-WO-pJi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="lAy-YC-Sys" secondAttribute="bottom" constant="16" id="Og1-fu-5yQ"/>
+                            <constraint firstItem="7wd-WO-pJi" firstAttribute="top" secondItem="lAy-YC-Sys" secondAttribute="bottom" priority="750" constant="32" id="PLd-dq-iW4"/>
+                            <constraint firstItem="lAy-YC-Sys" firstAttribute="centerX" secondItem="bAd-Sv-VbO" secondAttribute="centerX" id="Ta3-Ie-I0f"/>
+                            <constraint firstItem="ifL-Qy-Dm6" firstAttribute="leading" secondItem="njS-0n-8Ok" secondAttribute="leading" id="Ukz-2i-3zV"/>
+                            <constraint firstItem="ifL-Qy-Dm6" firstAttribute="top" secondItem="njS-0n-8Ok" secondAttribute="top" id="dpk-bm-DtN"/>
+                            <constraint firstItem="njS-0n-8Ok" firstAttribute="trailing" secondItem="7wd-WO-pJi" secondAttribute="trailing" id="gep-gb-H93"/>
+                            <constraint firstItem="njS-0n-8Ok" firstAttribute="trailing" secondItem="tw0-hn-Qzd" secondAttribute="trailing" constant="16" id="izQ-Lc-2f4"/>
                             <constraint firstItem="fLf-iN-U7H" firstAttribute="width" secondItem="bAd-Sv-VbO" secondAttribute="width" multiplier="0.4" id="j6r-Rq-Wjg"/>
+                            <constraint firstItem="lAy-YC-Sys" firstAttribute="top" secondItem="njS-0n-8Ok" secondAttribute="top" constant="16" id="jW9-Zo-iZG"/>
                             <constraint firstItem="fLf-iN-U7H" firstAttribute="centerX" secondItem="bAd-Sv-VbO" secondAttribute="centerX" id="n25-JO-qZU"/>
+                            <constraint firstItem="lAy-YC-Sys" firstAttribute="width" secondItem="bAd-Sv-VbO" secondAttribute="width" multiplier="0.8" id="nT6-kO-PCb"/>
+                            <constraint firstItem="tw0-hn-Qzd" firstAttribute="height" relation="lessThanOrEqual" secondItem="bAd-Sv-VbO" secondAttribute="height" multiplier="0.25" id="sdv-mY-aPY"/>
+                            <constraint firstItem="tw0-hn-Qzd" firstAttribute="leading" secondItem="njS-0n-8Ok" secondAttribute="leading" constant="16" id="uVh-Uf-5jt"/>
+                            <constraint firstItem="7wd-WO-pJi" firstAttribute="centerX" secondItem="bAd-Sv-VbO" secondAttribute="centerX" id="vxX-x9-FMq"/>
+                            <constraint firstItem="njS-0n-8Ok" firstAttribute="trailing" secondItem="ifL-Qy-Dm6" secondAttribute="trailing" id="xyg-Nk-rj4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="njS-0n-8Ok"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="TabBarIcons/Dot" id="0SA-V1-HHS"/>
+                    <connections>
+                        <outlet property="birthdayPicker" destination="tw0-hn-Qzd" id="YgG-QK-9Ze"/>
+                        <outlet property="emailField" destination="CYn-DI-OWy" id="Wgp-OJ-meU"/>
+                        <outlet property="nameField" destination="fDh-vs-h6i" id="2EZ-he-h9g"/>
+                        <outlet property="passowrdVerifyField" destination="W2P-gl-0cT" id="Pif-vD-ezU"/>
+                        <outlet property="passwordField" destination="bTi-dF-Q5f" id="IlW-kh-2bq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNY-Tt-1D4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="152"/>
+            <point key="canvasLocation" x="534.78260869565224" y="151.33928571428569"/>
         </scene>
     </scenes>
     <resources>
         <image name="Backgrounds/SignInBackground" width="312" height="312"/>
+        <image name="Backgrounds/SignUp" width="1600" height="900"/>
         <image name="Icons/email" width="37.5" height="37.5"/>
         <image name="Icons/facebook-logo" width="48" height="48"/>
         <image name="Icons/google-plus-logo" width="48" height="48"/>
         <image name="Icons/instagram-social-network-logo-of-photo-camera" width="48" height="48"/>
         <image name="Icons/key" width="37.5" height="37.5"/>
+        <image name="Icons/lock" width="75" height="75"/>
+        <image name="Icons/user" width="37.5" height="37.5"/>
         <image name="Pictures/logo" width="640" height="640"/>
-        <image name="TabBarIcons/Dot" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="F4c-cZ-VOS"/>
