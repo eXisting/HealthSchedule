@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController {
   // MARK: - Overrides
   
   override func viewDidLoad() {
-    let profileView = BaseProfileView.instanceFromNib() as! BaseProfileView
+    let profileView = BaseProfileView.instanceFromNib()
     
     profileView.setEditingStateTo(false)
     
