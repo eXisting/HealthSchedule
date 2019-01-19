@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UITabBarController {
+class SignUpViewController: UIViewController {
   
   var rootNaviationController: RootNavigationController?
 
