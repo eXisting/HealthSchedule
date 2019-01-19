@@ -35,11 +35,13 @@ class BaseProfileView: UIView {
     regionField.isUserInteractionEnabled = state
   }
   
-  class func instanceFromNib() -> BaseProfileView {
-    return UINib(nibName: "ProfileView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! BaseProfileView
-  }
-  
   @IBAction func onSaveClick(_ sender: Any) {
     print("Clicked")
   }
+}
+
+extension BaseProfileView: LoadableAsNib {
+    static func instanceFromNib<T>() -> T where T : UIView {
+        return UINib(nibName: "ProfileView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! T
+    }
 }
