@@ -10,11 +10,4 @@ import UIKit
 
 class RootTabBarViewController: UITabBarController {
   
-  private lazy var signUpData: [String: Any] = [:]
-  
-  func storeSignUpData(_ data: [String: Any]) {
-    for (key, value) in data {
-      signUpData[key] = value
-    }
-  }
 }

@@ -9,5 +9,11 @@
 import UIKit
 
 class RootNavigationController: UINavigationController {
-  var testField: String = ""
+  private lazy var signUpData: [String: Any] = [:]
+  
+  func storeSignUpData(_ data: [String: Any]) {
+    for (key, value) in data {
+      signUpData[key] = value
+    }
+  }
 }
