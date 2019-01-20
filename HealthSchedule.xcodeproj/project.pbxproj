@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DBADDE5621F4CD9200C3EA2F /* DetailedSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBADDE5521F4CD9200C3EA2F /* DetailedSignUpViewController.swift */; };
 		ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A4A21E77D12006A8523 /* AppDelegate.swift */; };
 		ED089A5421E77D13006A8523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		ED089A6421E77D48006A8523 /* Hospitals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6021E77D48006A8523 /* Hospitals.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DBADDE5521F4CD9200C3EA2F /* DetailedSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSignUpViewController.swift; sourceTree = "<group>"; };
 		ED089A4721E77D12006A8523 /* HealthSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED089A4A21E77D12006A8523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED089A5321E77D13006A8523 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */,
 				ED330C6921F084BA001019FC /* RootNaviationController.swift */,
 				ED330C6B21F08536001019FC /* SignUpViewController.swift */,
+				DBADDE5521F4CD9200C3EA2F /* DetailedSignUpViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
+				DBADDE5621F4CD9200C3EA2F /* DetailedSignUpViewController.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
