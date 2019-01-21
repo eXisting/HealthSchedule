@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RecommendationsTable extends Migration
+class ProviderExceptionSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class RecommendationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('recommendations', function (Blueprint $table) {
+        Schema::create('provider_exception_schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
             $table->unsignedInteger('provider_id');
-            $table->string('title');
-            $table->text('description');
+            $table->date('exception_at');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->boolean('working');
             $table->timestamps();
 
-            $table->foreign( 'user_id' )->references( 'id' )->on( 'users' );
             $table->foreign( 'provider_id' )->references( 'id' )->on( 'users' );
         });
     }
@@ -33,10 +33,9 @@ class RecommendationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('recommendations', function (Blueprint $table) {
-            $table->dropForeign('recommendations_user_id_foreign');
-            $table->dropForeign('recommendations_provider_id_foreign');
+        Schema::table('provider_exception_schedules', function (Blueprint $table) {
+            $table->dropForeign('provider_exception_schedules_provider_id_foreign');
         });
-        Schema::dropIfExists('recommendations');
+        Schema::dropIfExists('provider_exception_schedules');
     }
 }

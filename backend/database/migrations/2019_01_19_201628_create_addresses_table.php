@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ProviderExceptionScheduleTable extends Migration
+class CreateAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class ProviderExceptionScheduleTable extends Migration
      */
     public function up()
     {
-        Schema::create('provider_exception_schedule', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('provider_id');
-            $table->dateTime('exception_at');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
-            $table->boolean('working');
+            $table->string('address');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class ProviderExceptionScheduleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provider_exception_schedule');
+        Schema::dropIfExists('addresses');
     }
 }

@@ -17,17 +17,21 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_role_id');
             $table->unsignedInteger('address_id');
-            $table->unsignedSmallInteger('city_id');
+            $table->unsignedInteger('city_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->tinyInteger('confirmed_status')->default(0);
+            $table->boolean('confirmed_status')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('birthday_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign( 'user_role_id' )->references( 'id' )->on( 'user_roles' );
+            $table->foreign( 'address_id' )->references( 'id' )->on( 'addresses' );
+            $table->foreign( 'city_id' )->references( 'id' )->on( 'cities' );
         });
     }
 
@@ -38,6 +42,11 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_user_role_id_foreign');
+            $table->dropForeign('users_address_id_foreign');
+            $table->dropForeign('users_city_id_foreign');
+        });
         Schema::dropIfExists('users');
     }
 }
