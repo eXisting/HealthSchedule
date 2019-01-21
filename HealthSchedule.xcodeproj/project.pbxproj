@@ -35,6 +35,7 @@
 		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
 		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
 		ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */; };
+		ED3D233E21F617A600BCADE9 /* SelectExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D233D21F617A600BCADE9 /* SelectExperienceView.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
@@ -72,6 +73,7 @@
 		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
 		ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWithExperienceView.xib; sourceTree = "<group>"; };
+		ED3D233D21F617A600BCADE9 /* SelectExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectExperienceView.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				ED330C8F21F21B0C001019FC /* Designable */,
 				ED089A8B21E8EF1A006A8523 /* BaseUIContentViewCell.swift */,
 				ED089A9E21EC8848006A8523 /* BaseProfileView.swift */,
+				ED3D233D21F617A600BCADE9 /* SelectExperienceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* DetailedSignUpViewController.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
+				ED3D233E21F617A600BCADE9 /* SelectExperienceView.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED330C6A21F084BA001019FC /* RootNaviationController.swift in Sources */,
