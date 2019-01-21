@@ -18,7 +18,7 @@ class ProviderScheduleTable extends Migration
             $table->integer('provider_id');
             $table->integer('week_day');
             $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->dateTime('end_time');
             $table->boolean('working');
             $table->timestamps();
         });

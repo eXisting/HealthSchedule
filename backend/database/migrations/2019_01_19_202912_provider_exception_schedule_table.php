@@ -16,9 +16,9 @@ class ProviderExceptionScheduleTable extends Migration
         Schema::create('provider_exception_schedule', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('provider_id');
-            $table->timestamp('exception_at');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->dateTime('exception_at');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
             $table->boolean('working');
             $table->timestamps();
         });
