@@ -19,6 +19,8 @@ class ProfessionsTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->timestamps();
+
+            $table->foreign( 'category_id' )->references( 'id' )->on( 'categories' );
         });
     }
 
@@ -29,6 +31,9 @@ class ProfessionsTable extends Migration
      */
     public function down()
     {
+        Schema::table('professions', function (Blueprint $table) {
+            $table->dropForeign('professions_category_id_foreign');
+        });
         Schema::dropIfExists('professions');
     }
 }
