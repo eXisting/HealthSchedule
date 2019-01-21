@@ -18,7 +18,7 @@ class RequestsTable extends Migration
             $table->integer('user_id');
             $table->integer('provider_id');
             $table->integer('status_id');
-            $table->integer('rate');
+            $table->tinyInteger('rate');
             $table->text('description');
             $table->timestamp('request_at');
             $table->timestamps();

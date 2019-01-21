@@ -15,8 +15,8 @@ class RecommendationsTable extends Migration
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('provider_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('provider_id');
             $table->string('title');
             $table->text('description');
             $table->timestamps();

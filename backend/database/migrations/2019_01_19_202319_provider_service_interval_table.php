@@ -15,9 +15,12 @@ class ProviderServiceIntervalTable extends Migration
     {
         Schema::create('provider_service_interval', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('address_id');
             $table->integer('provider_id');
             $table->integer('service_id');
             $table->integer('interval');
+            $table->double('price');
+            $table->text('description');
             $table->timestamps();
         });
     }
