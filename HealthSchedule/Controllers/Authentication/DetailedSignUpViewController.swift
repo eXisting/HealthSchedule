@@ -15,7 +15,7 @@ enum AccountType : Int {
 
 class DetailedSignUpViewController: UIViewController {
   
-  @IBOutlet var providerViews: [UIView]!
+  @IBOutlet var providerViewsContainer: UIStackView!
   
   @IBOutlet weak var experienceTextValue: UILabel!
   @IBOutlet weak var experiencePicker: UISlider!
@@ -34,8 +34,6 @@ class DetailedSignUpViewController: UIViewController {
   }
   
   private func toogleProviderViews(_ state: Bool) {
-    for providerView in providerViews {
-      providerView.isHidden = state
-    }
+      providerViewsContainer.isHidden = state
   }
 }
