@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,9 +13,19 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  *
  * Properties
  * @property string $id
- * @property string $name
+ * @property integer $user_role_id
+ * @property integer $address_id
+ * @property integer $city_id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $phone
  * @property string $email
  * @property string $password
+ * @property boolean $confirmed_status
+ * @property Carbon $email_verified_at
+ * @property Carbon $birthday_at
+ *
+ * Relationships
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -28,7 +39,36 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'email_verified_at', 'password', 'remember_token'
+        'user_role_id',
+        'address_id',
+        'city_id',
+        'first_name',
+        'last_name',
+        'phone',
+        'email',
+        'password',
+        'confirmed_status',
+        'email_verified_at',
+        'birthday_at',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user_role_id' => 'integer',
+        'address_id' => 'integer',
+        'city_id' => 'integer',
+        'first_name' => 'string',
+        'last_name' => 'string',
+        'phone' => 'string',
+        'email' => 'string',
+        'password' => 'string',
+        'confirmed_status' => 'boolean',
+        'email_verified_at' => 'datetime',
+        'birthday_at' => 'datetime',
     ];
 
     /**
