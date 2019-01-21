@@ -23,8 +23,6 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-
-
         return [
 
         ];
