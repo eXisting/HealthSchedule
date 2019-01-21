@@ -34,6 +34,7 @@
 		ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpViewController.swift */; };
 		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
 		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
+		ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
@@ -70,6 +71,7 @@
 		ED330C6B21F08536001019FC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
+		ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWithExperienceView.xib; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */,
 				ED089A9821EC831C006A8523 /* ProfileView.xib */,
+				ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */,
 				ED089A6B21E78118006A8523 /* Exercises.storyboard in Resources */,
 				ED089A6921E780B3006A8523 /* Experts.storyboard in Resources */,
+				ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */,
 				ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */,
 				ED089A6421E77D48006A8523 /* Hospitals.storyboard in Resources */,
 				ED089A5421E77D13006A8523 /* Assets.xcassets in Resources */,
