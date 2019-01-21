@@ -21,3 +21,4 @@ Route::middleware('jwt.auth')->get('users', function () {
 });
 
 Route::post('login', 'Auth\LoginController@login');
+Route::post('register', 'Auth\RegisterController@register');
