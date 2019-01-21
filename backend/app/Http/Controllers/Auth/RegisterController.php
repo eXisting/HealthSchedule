@@ -55,6 +55,12 @@ class RegisterController extends Controller
         ]);
     }
 
+    protected function register()
+    {
+
+
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
