@@ -20,8 +20,4 @@ Route::middleware('jwt.auth')->get('users', function () {
     return auth('api')->user();
 });
 
-Route::post('login', 'Auth/LoginController@login');
-
-Route::get('/test', function (Request $request) {
-    return (new \App\Models\User());
-});
+Route::post('login', 'Auth\LoginController@login');
