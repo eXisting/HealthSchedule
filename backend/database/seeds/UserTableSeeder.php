@@ -28,7 +28,7 @@ class UserTableSeeder extends Seeder
 
         #region Users
 
-        $users = factory(\App\Models\User::class, 10)->create();
+        $users = factory(\App\Models\User::class, 15)->create();
 
         #endregion
 
@@ -103,6 +103,48 @@ class UserTableSeeder extends Seeder
                         'start_time' => $start_time,
                         'end_time' => $end_time,
                     ]);
+            }
+        });
+
+        #endregion
+
+        #region ProviderExceptionSchedules
+
+        $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->random(rand(2,3))->pluck('id')->each(function ($provider_id) {
+            collect([1,2,3,4])->random(rand(1,3))->each(function ($day_count) use ($provider_id) {
+                $start_time = \Carbon\Carbon::createFromTime(rand(7,11), rand(0,45));
+                $end_time = \Carbon\Carbon::createFromTime(rand(13,22), rand(0,45));
+                $exception_at = \Carbon\Carbon::now()->addWeek(1)->addDays($day_count)->toDateTimeString();
+
+                factory(\App\Models\ProviderExceptionSchedule::class, 1)
+                    ->create([
+                        'provider_id' => $provider_id,
+                        'exception_at' => $exception_at,
+                        'start_time' => $start_time,
+                        'end_time' => $end_time,
+                    ]);
+            });
+        });
+
+        #endregion
+
+        #region ProviderProfessions
+
+        $categoriesArr = \App\Models\Category::query()->whereHas('professions')->with('professions')->get();
+
+        $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->each(function ($user) use ($categoriesArr) {
+
+            $category = $categoriesArr->random(1)->first();
+
+            $count = $category->professions->count();
+
+            if($count) {
+                $category->professions->random(rand(1,$count > 3 ? $count-3: $count))->each(function ($prof) use ($user) {
+                    factory(\App\Models\ProviderProfession::class, 1)->create([
+                        'provider_id' => $user->id,
+                        'profession_id' => $prof->id,
+                    ]);
+                });
             }
         });
 

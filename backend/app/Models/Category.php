@@ -45,5 +45,10 @@ class Category extends Model
 
     #region Relationships
 
+    public function professions()
+    {
+        return $this->hasMany(Profession::class, 'category_id');
+    }
+
     #endregion
 }

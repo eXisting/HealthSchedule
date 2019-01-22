@@ -63,11 +63,16 @@ $factory->define(App\Models\Profession::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\ProviderExceptionSchedule::class, function (Faker $faker) {
-    return [];
+    return [
+        'working' => $faker->boolean,
+    ];
 });
 
 $factory->define(App\Models\ProviderProfession::class, function (Faker $faker) {
-    return [];
+    return [
+//        'provider_id' => \App\Models\User::query()->inRandomOrder()->first()->id,
+//        'profession_id' => \App\Models\Profession::,
+    ];
 });
 
 $factory->define(App\Models\ProviderSchedule::class, function (Faker $faker) {
