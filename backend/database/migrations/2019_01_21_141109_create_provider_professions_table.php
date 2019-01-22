@@ -19,8 +19,8 @@ class CreateProviderProfessionsTable extends Migration
             $table->unsignedInteger('profession_id');
             $table->timestamps();
 
-            $table->foreign( 'provider_id' )->references( 'id' )->on( 'users' );
-            $table->foreign( 'profession_id' )->references( 'id' )->on( 'professions' );
+            $table->foreign('provider_id')->references('id')->on('users');
+            $table->foreign('profession_id')->references('id')->on('professions');
         });
     }
 

@@ -37,7 +37,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login() {
+    public function login()
+    {
         $credentials = request(['email', 'password']);
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
