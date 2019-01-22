@@ -12,8 +12,6 @@ class AuthenticationViewController: UIViewController {
   
   private let signInSegueId = "signIn"
   private let signUpSequeId = "signUp"
-
-  private let opaqueRed = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
   
   let n = "1"
   let p = "2"
@@ -42,8 +40,8 @@ class AuthenticationViewController: UIViewController {
         "Either login or password is incorrect",
         .alert)
       
-      emailField.backgroundColor = opaqueRed
-      passwordField.backgroundColor = opaqueRed
+      emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
+      passwordField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
       
       return false
     }
