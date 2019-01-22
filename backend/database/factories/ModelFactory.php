@@ -106,7 +106,16 @@ $factory->define(App\Models\RequestStatus::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\Service::class, function (Faker $faker) {
-    return [];
+    return [
+        'address_id' => 'integer',
+        'provider_id' => 'integer',
+        'profession_id' => 'integer',
+        'title' => 'string',
+        'name' => 'string',
+        'price' => 'double',
+        'description' => 'string',
+        'interval' => 'datetime:H-i',
+    ];
 });
 
 $factory->define(App\Models\UserImage::class, function (Faker $faker) {
