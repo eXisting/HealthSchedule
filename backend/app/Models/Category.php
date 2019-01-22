@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
-    #region Properties
+    //region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +24,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'title',
+        'name', 'title'
     ];
 
     /**
@@ -34,21 +34,21 @@ class Category extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'title' => 'string',
+        'title' => 'string'
     ];
 
-    #endregion
+    //endregion
 
-    #region Methods
+    //region Methods
 
-    #endregion
+    //endregion
 
-    #region Relationships
+    //region Relationships
 
     public function professions()
     {
         return $this->hasMany(Profession::class, 'category_id');
     }
 
-    #endregion
+    //endregion
 }

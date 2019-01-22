@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/testss', function () {
-    dd(\App\Models\Category::find(1)->professions);
-});
+// Route::get('/testss', function () {
+//     dd(\App\Models\Category::find(1)->professions);
+// });
