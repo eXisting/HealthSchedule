@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * Properties
  * @property integer $id
  * @property integer $user_id
- * @property integer $service_id
+ * @property integer $provider_service_id
  * @property integer $status_id
  * @property integer $rate
  * @property string $description
@@ -29,7 +29,7 @@ class Request extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'service_id', 'status_id', 'rate', 'description', 'request_at',
+        'user_id', 'provider_service_id', 'status_id', 'rate', 'description', 'request_at',
     ];
 
     /**
@@ -39,7 +39,7 @@ class Request extends Model
      */
     protected $casts = [
         'user_id' => 'integer',
-        'service_id' => 'integer',
+        'provider_service_id' => 'integer',
         'status_id' => 'integer',
         'rate' => 'integer',
         'description' => 'string',
