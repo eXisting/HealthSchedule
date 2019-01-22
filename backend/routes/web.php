@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/testss', function () {
+   $start_time = \Carbon\Carbon::createFromTime(8);
+    $end_time = \Carbon\Carbon::createFromTime(8);
+    dd($time);
+});

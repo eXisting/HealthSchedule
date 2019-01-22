@@ -71,7 +71,9 @@ $factory->define(App\Models\ProviderProfession::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\ProviderSchedule::class, function (Faker $faker) {
-    return [];
+    return [
+        'working' => $faker->boolean,
+    ];
 });
 
 $factory->define(App\Models\ProviderVerify::class, function (Faker $faker) {

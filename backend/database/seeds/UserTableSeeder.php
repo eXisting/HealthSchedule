@@ -87,6 +87,24 @@ class UserTableSeeder extends Seeder
             $providerVerifies = $providerVerifies->merge( factory(\App\Models\ProviderVerify::class, rand(1,3))->create([ 'provider_id' => $provider_id ]) );
         });
 
+        #endregion
+
+        #region ProviderSchedules
+
+        $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->pluck('id')->each(function ($provider_id) {
+            for ($weekday=0; $weekday<=6; $weekday++) {
+                $start_time = \Carbon\Carbon::createFromTime(rand(7,11), rand(0,45));
+                $end_time = \Carbon\Carbon::createFromTime(rand(13,22), rand(0,45));
+
+                factory(\App\Models\ProviderSchedule::class, 1)
+                    ->create([
+                        'provider_id' => $provider_id,
+                        'week_day' => $weekday,
+                        'start_time' => $start_time,
+                        'end_time' => $end_time,
+                    ]);
+            }
+        });
 
         #endregion
     }
