@@ -15,7 +15,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
     return [
-        'user_role_id' => rand(1,3),
+        'user_role_id' => \App\Models\UserRole::all()->random()->id,
         'address_id' => factory(\App\Models\Address::class)->create()->id,
         'city_id' => factory(\App\Models\City::class)->create()->id,
         'first_name' => $faker->firstName,
@@ -43,7 +43,7 @@ $factory->define(App\Models\City::class, function (Faker $faker) {
     $cityName = $faker->city;
     return [
         'title' => $cityName,
-        'name' => mb_strtolower($cityName)
+        'name' => str_slug($cityName, '_')
 
     ];
 });
@@ -84,12 +84,23 @@ $factory->define(App\Models\Service::class, function (Faker $faker) {
     return [];
 });
 
-$factory->define(App\Models\User::class, function (Faker $faker) {
-    return [];
-});
-
 $factory->define(App\Models\UserImage::class, function (Faker $faker) {
-    return [];
+
+//    $user_ids =\App\Models\User::all()->random(5)->unique()->pluck('id');
+//
+//    $user_id = 0;
+//
+//    $user_ids->each(function ($value) use (&$user_id) {
+//        if(!\App\Models\UserImage::query()->where('user_id', $value)->first()) {
+//            $user_id = $value;
+//        }
+//    });
+
+//    dd($user_ids, $user_id);
+
+    return [
+        'image_path' => $faker->imageUrl()
+    ];
 });
 
 $factory->define(App\Models\UserRole::class, function (Faker $faker) {

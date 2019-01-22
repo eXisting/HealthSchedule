@@ -11,6 +11,8 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        #region UserRoles
+
         $userRole = collect( [] );
 
         collect( [
@@ -22,8 +24,23 @@ class UserTableSeeder extends Seeder
             $userRole = $userRole->merge( factory( \App\Models\UserRole::class , 1 )->create( $item ) );
         } );
 
+        #endregion
+
+        #region Users
+
         $users = factory(\App\Models\User::class, 10)->create();
 
+        #endregion
+
+        #region UserImages
+
+        $userImage = collect( [] );
+
+        $users->random(5)->pluck('id')->each(function ($user_id) use (&$userImage) {
+            $userImage = $userImage->merge( factory(\App\Models\UserImage::class, 1)->create([ 'user_id' => $user_id ]) );
+        });
+
+        #endregion
 
     }
 }
