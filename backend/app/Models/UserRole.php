@@ -18,6 +18,10 @@ class UserRole extends Model
 {
     #region Properties
 
+    CONST CLIENT = 2;
+    CONST PROVIDER = 1;
+    CONST ADMIN = 3;
+
     /**
      * The attributes that are mass assignable.
      *

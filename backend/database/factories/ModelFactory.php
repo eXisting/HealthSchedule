@@ -36,7 +36,12 @@ $factory->define(App\Models\Address::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\Category::class, function (Faker $faker) {
-    return [];
+    $category = $faker->word;
+    return [
+        'title' => $category,
+        'name' => str_slug($category, '_')
+
+    ];
 });
 
 $factory->define(App\Models\City::class, function (Faker $faker) {
@@ -49,7 +54,12 @@ $factory->define(App\Models\City::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\Profession::class, function (Faker $faker) {
-    return [];
+    $profession = $faker->word;
+    return [
+        'title' => $profession,
+        'name' => str_slug($profession, '_')
+
+    ];
 });
 
 $factory->define(App\Models\ProviderExceptionSchedule::class, function (Faker $faker) {
@@ -65,11 +75,19 @@ $factory->define(App\Models\ProviderSchedule::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\ProviderVerify::class, function (Faker $faker) {
-    return [];
+    return [
+        'provider_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::PROVIDER)->inRandomOrder()->first()->id,
+        'document_path' => $faker->imageUrl()
+    ];
 });
 
 $factory->define(App\Models\Recommendation::class, function (Faker $faker) {
-    return [];
+    return [
+        'user_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::CLIENT)->inRandomOrder()->first()->id,
+        'provider_id' =>\App\Models\User::query()->where('user_role_id', \App\Models\UserRole::PROVIDER)->inRandomOrder()->first()->id,
+        'title' => $faker->jobTitle,
+        'description' => $faker->text(350),
+    ];
 });
 
 $factory->define(App\Models\Request::class, function (Faker $faker) {
@@ -85,19 +103,6 @@ $factory->define(App\Models\Service::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\UserImage::class, function (Faker $faker) {
-
-//    $user_ids =\App\Models\User::all()->random(5)->unique()->pluck('id');
-//
-//    $user_id = 0;
-//
-//    $user_ids->each(function ($value) use (&$user_id) {
-//        if(!\App\Models\UserImage::query()->where('user_id', $value)->first()) {
-//            $user_id = $value;
-//        }
-//    });
-
-//    dd($user_ids, $user_id);
-
     return [
         'image_path' => $faker->imageUrl()
     ];

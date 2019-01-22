@@ -34,7 +34,7 @@ class UserTableSeeder extends Seeder
 
         #region UserImages
 
-        $userImage = collect( [] );
+        $userImage = collect([]);
 
         $users->random(5)->pluck('id')->each(function ($user_id) use (&$userImage) {
             $userImage = $userImage->merge( factory(\App\Models\UserImage::class, 1)->create([ 'user_id' => $user_id ]) );
@@ -42,5 +42,52 @@ class UserTableSeeder extends Seeder
 
         #endregion
 
+        #region Categories
+
+        $categories = factory(\App\Models\Category::class, 10)->create();
+
+        #endregion
+
+        #region Professions
+
+        $professions = collect([]);
+
+        $categories->random(8)->pluck('id')->each(function ($category_id) use (&$professions) {
+            $professions = $professions->merge( factory(\App\Models\Profession::class, 6)->create([ 'category_id' => $category_id ]) );
+        });
+
+        #endregion
+
+        #region RequestStatuses
+
+        $requestStatuses = collect([]);
+
+        collect( [
+            [ 'title' => 'Принято', 'name' => 'accepted' ] ,
+            [ 'title' => 'Отклонено', 'name' => 'rejected' ] ,
+            [ 'title' => 'Пройдено', 'name' => 'passed' ] ,
+        ] )->each( function( $item ) use ( &$requestStatuses )
+        {
+            $requestStatuses = $requestStatuses->merge( factory( \App\Models\RequestStatus::class , 1 )->create( $item ) );
+        } );
+
+        #endregion
+
+        #region Recommendations
+
+        $recommendations = factory(\App\Models\Recommendation::class, 10)->create();
+
+        #endregion
+
+        #region ProviderVerifies
+
+        $providerVerifies = collect([]);
+
+        $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->pluck('id')->each(function ($provider_id) use (&$providerVerifies) {
+            $providerVerifies = $providerVerifies->merge( factory(\App\Models\ProviderVerify::class, rand(1,3))->create([ 'provider_id' => $provider_id ]) );
+        });
+
+
+        #endregion
     }
 }
