@@ -8,40 +8,27 @@
 
 import UIKit
 
-class SelectExperienceView: UIView {
+class SelectWithExperienceView: UIView {
   
   @IBOutlet weak var contentStack: UIStackView!
   
-  private let CURRENT_CONTENT_XIB_NAME = "SelectWithExperienceView"
-  
   @IBOutlet weak var experienceTextValue: UILabel!
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    commonInit()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    commonInit()
-  }
-  
-  func commonInit() {
-    Bundle.main.loadNibNamed(CURRENT_CONTENT_XIB_NAME, owner: self, options: nil)
-    contentStack.expandViewTo(self)
-  }
-  
   @IBAction func onSlidebarValueChanged(_ sender: UISlider) {
-  
+    experienceTextValue.text = "\(sender.value)"
   }
   
   @IBAction func onSelectCategory(_ sender: UIButton) {
-    
+    print("Sekect category clicked")
+  }
+  
+  class func instanceFromNib() -> UIView {
+    return UINib(nibName: "SelectWithExperienceView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
   }
 }
 
-extension UIStackView {
-  func expandViewTo(_ container: UIView!) {
+extension UIView {
+  func expandPutViewTo(_ container: UIView!) {
     self.translatesAutoresizingMaskIntoConstraints = false;
     self.frame = container.frame;
     container.addSubview(self);

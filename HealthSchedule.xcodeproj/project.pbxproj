@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DBADDE5621F4CD9200C3EA2F /* DetailedSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBADDE5521F4CD9200C3EA2F /* DetailedSignUpViewController.swift */; };
 		ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A4A21E77D12006A8523 /* AppDelegate.swift */; };
-		ED089A5421E77D13006A8523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		ED089A6421E77D48006A8523 /* Hospitals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6021E77D48006A8523 /* Hospitals.storyboard */; };
 		ED089A6521E77D48006A8523 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6121E77D48006A8523 /* LaunchScreen.storyboard */; };
 		ED089A6621E77D48006A8523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6221E77D48006A8523 /* Main.storyboard */; };
@@ -35,11 +34,12 @@
 		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
 		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
 		ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */; };
-		ED3D233E21F617A600BCADE9 /* SelectExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D233D21F617A600BCADE9 /* SelectExperienceView.swift */; };
+		ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
 		ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */; };
+		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,7 +73,7 @@
 		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
 		ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWithExperienceView.xib; sourceTree = "<group>"; };
-		ED3D233D21F617A600BCADE9 /* SelectExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectExperienceView.swift; sourceTree = "<group>"; };
+		ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWithExperienceView.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 				ED330C8F21F21B0C001019FC /* Designable */,
 				ED089A8B21E8EF1A006A8523 /* BaseUIContentViewCell.swift */,
 				ED089A9E21EC8848006A8523 /* BaseProfileView.swift */,
-				ED3D233D21F617A600BCADE9 /* SelectExperienceView.swift */,
+				ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,11 +314,11 @@
 				ED089A6721E77D48006A8523 /* Authentication.storyboard in Resources */,
 				ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */,
 				ED089A6B21E78118006A8523 /* Exercises.storyboard in Resources */,
+				ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */,
 				ED089A6921E780B3006A8523 /* Experts.storyboard in Resources */,
 				ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */,
 				ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */,
 				ED089A6421E77D48006A8523 /* Hospitals.storyboard in Resources */,
-				ED089A5421E77D13006A8523 /* Assets.xcassets in Resources */,
 				ED089A6621E77D48006A8523 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,7 +340,7 @@
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* DetailedSignUpViewController.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
-				ED3D233E21F617A600BCADE9 /* SelectExperienceView.swift in Sources */,
+				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED330C6A21F084BA001019FC /* RootNaviationController.swift in Sources */,
