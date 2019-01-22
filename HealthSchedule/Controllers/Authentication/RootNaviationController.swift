@@ -9,6 +9,7 @@
 import UIKit
 
 class RootNavigationController: UINavigationController {
+  let maxExperienceCount = 3
   private lazy var signUpData: [String: Any] = [:]
   
   func storeSignUpData(_ data: [String: Any]) {
