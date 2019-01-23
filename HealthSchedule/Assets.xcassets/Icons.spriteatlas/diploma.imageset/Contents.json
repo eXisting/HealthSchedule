@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "download.jpeg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "diploma.png",
       "scale" : "2x"
     },
     {
