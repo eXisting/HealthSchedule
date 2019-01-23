@@ -19,6 +19,7 @@ class RecommendationsTable extends Migration
             $table->unsignedInteger('provider_id');
             $table->string('title');
             $table->text('description');
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
 
             $table->foreign( 'user_id' )->references( 'id' )->on( 'users' );

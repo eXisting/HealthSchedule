@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $image_path
  *
  * Relationships
+ * @property User $user
  */
 class UserImage extends Model
 {
@@ -44,6 +45,14 @@ class UserImage extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     #endregion
 }

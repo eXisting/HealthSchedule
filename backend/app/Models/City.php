@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  *
  * Relationships
+ * @property User $providers
+ * @property User $users
  */
 class City extends Model
 {
@@ -44,6 +46,22 @@ class City extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providers()
+    {
+        return $this->hasMany(User::class)->where('user_role_id', UserRole::PROVIDER);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class)->where('user_role_id', UserRole::CLIENT);
+    }
 
     #endregion
 }

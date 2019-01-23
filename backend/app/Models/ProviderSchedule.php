@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $working
  *
  * Relationships
+ * @property User $provider
  */
 class ProviderSchedule extends Model
 {
@@ -51,6 +52,14 @@ class ProviderSchedule extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function provider()
+    {
+        return $this->hasOne(User::class, 'id', 'provider_id');
+    }
 
     #endregion
 }

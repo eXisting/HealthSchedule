@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $document_path
  *
  * Relationships
+ * @property User $provider
  */
 class ProviderVerify extends Model
 {
@@ -44,6 +45,14 @@ class ProviderVerify extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function provider()
+    {
+        return $this->hasOne(User::class, 'id', 'provider_id');
+    }
 
     #endregion
 }

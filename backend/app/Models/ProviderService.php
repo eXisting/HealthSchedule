@@ -2,21 +2,27 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ProviderProfession
+ * Class ProviderService
  *
  * Properties
  * @property integer $id
+ * @property integer $address_id
  * @property integer $provider_id
- * @property integer $profession_id
+ * @property integer $service_id
+ * @property double $price
+ * @property string $description
+ * @property Carbon $interval
  *
  * Relationships
+ * @property Address $address
  * @property User $provider
- * @property Profession $profession
+ * @property Service $service
  */
-class ProviderProfession extends Model
+class ProviderService extends Model
 {
     #region Properties
 
@@ -26,7 +32,7 @@ class ProviderProfession extends Model
      * @var array
      */
     protected $fillable = [
-        'provider_id', 'profession_id',
+        'address_id', 'provider_id', 'service_id', 'price', 'description', 'interval',
     ];
 
     /**
@@ -35,8 +41,12 @@ class ProviderProfession extends Model
      * @var array
      */
     protected $casts = [
+        'address_id' => 'integer',
         'provider_id' => 'integer',
-        'profession_id' => 'integer',
+        'service_id' => 'integer',
+        'price' => 'double',
+        'description' => 'string',
+        'interval' => 'datetime:H-m',
     ];
 
     #endregion
@@ -46,6 +56,14 @@ class ProviderProfession extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -58,9 +76,9 @@ class ProviderProfession extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function profession()
+    public function service()
     {
-        return $this->belongsTo(Profession::class);
+        return $this->belongsTo(Service::class);
     }
 
     #endregion

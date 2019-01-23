@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  *
  * Relationships
+ * @property Profession $professions
  */
 class Category extends Model
 {
@@ -24,7 +25,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'title',
+        'name', 'title'
     ];
 
     /**
@@ -34,7 +35,7 @@ class Category extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'title' => 'string',
+        'title' => 'string'
     ];
 
     #endregion
@@ -44,6 +45,14 @@ class Category extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function professions()
+    {
+        return $this->hasMany(Profession::class, 'category_id');
+    }
 
     #endregion
 }
