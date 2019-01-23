@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $is_active
  *
  * Relationships
+ * @property User $user
+ * @property User $provider
  */
 class Recommendation extends Model
 {
@@ -50,6 +52,22 @@ class Recommendation extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function provider()
+    {
+        return $this->hasOne(User::class, 'id', 'provider_id');
+    }
 
     #endregion
 }

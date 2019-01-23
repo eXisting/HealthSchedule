@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  *
  * Relationships
+ * @property Profession $profession
+ * @property ProviderService $providerServices
  */
 class Service extends Model
 {
@@ -47,9 +49,20 @@ class Service extends Model
 
     #region Relationships
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function profession()
     {
         return $this->belongsTo(Profession::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providerServices()
+    {
+        return $this->hasMany(ProviderService::class, 'service_id', 'id');
     }
 
     #endregion

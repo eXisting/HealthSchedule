@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $profession_id
  *
  * Relationships
+ * @property User $provider
+ * @property Profession $profession
  */
 class ProviderProfession extends Model
 {
@@ -44,6 +46,22 @@ class ProviderProfession extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function provider()
+    {
+        return $this->hasOne(User::class, 'id', 'provider_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function profession()
+    {
+        return $this->belongsTo(Profession::class);
+    }
 
     #endregion
 }

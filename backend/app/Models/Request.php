@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $request_at
  *
  * Relationships
+ * @property User $user
+ * @property ProviderService $providerService
+ * @property RequestStatus $status
  */
 class Request extends Model
 {
@@ -53,6 +56,30 @@ class Request extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function providerService()
+    {
+        return $this->belongsTo(ProviderService::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function status()
+    {
+        return $this->hasOne(RequestStatus::class, 'id', 'status_id');
+    }
 
     #endregion
 }

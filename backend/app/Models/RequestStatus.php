@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  *
  * Relationships
+ * @property Request $requests
  */
 class RequestStatus extends Model
 {
@@ -44,6 +45,14 @@ class RequestStatus extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function requests()
+    {
+        return $this->hasMany(Request::class, 'status_id', 'id');
+    }
 
     #endregion
 }

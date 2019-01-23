@@ -26,6 +26,18 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon $birthday_at
  *
  * Relationships
+ * @property UserRole $role
+ * @property Address $address
+ * @property City $city
+ * @property ProviderService $providerServices
+ * @property Profession $professions
+ * @property UserImage $image
+ * @property ProviderSchedule $providerSchedules
+ * @property ProviderExceptionSchedule $providerExceptionSchedules
+ * @property Request $userRequests
+ * @property Request $providerRequests
+ * @property Recommendation $userRecommendations
+ * @property Recommendation $providerRecommendations
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -84,11 +96,17 @@ class User extends Authenticatable implements JWTSubject
 
     #region Methods
 
+    /**
+     * @return mixed
+     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
+    /**
+     * @return array
+     */
     public function getJWTCustomClaims()
     {
         return [];
@@ -98,14 +116,100 @@ class User extends Authenticatable implements JWTSubject
 
     #region Relationships
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(UserRole::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function city()
     {
         return $this->belongsTo(City::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function providerServices()
+    {
+        return $this->hasOne(ProviderService::class, 'provider_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function professions()
     {
         return $this->hasManyThrough(Profession::class, ProviderProfession::class, 'provider_id', 'id', 'id', 'profession_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function image()
+    {
+        return $this->hasOne(UserImage::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providerSchedules()
+    {
+        return $this->hasMany(ProviderSchedule::class, 'provider_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providerExceptionSchedules()
+    {
+        return $this->hasMany(ProviderExceptionSchedule::class, 'provider_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userRequests()
+    {
+        return $this->hasMany(Request::class, 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function providerRequests()
+    {
+        return $this->hasManyThrough(Request::class, ProviderService::class, 'provider_id', 'id', 'id', 'provider_service_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userRecommendations()
+    {
+        return $this->hasMany(Recommendation::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providerRecommendations()
+    {
+        return $this->hasMany(Recommendation::class, 'provider_id', 'id');
     }
 
     #endregion

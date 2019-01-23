@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $interval
  *
  * Relationships
+ * @property Address $address
+ * @property User $provider
+ * @property Service $service
  */
 class ProviderService extends Model
 {
@@ -53,6 +56,30 @@ class ProviderService extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function provider()
+    {
+        return $this->hasOne(User::class, 'id', 'provider_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 
     #endregion
 }

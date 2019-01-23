@@ -13,10 +13,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  *
  * Relationships
+ * @property Profession $professions
  */
 class Category extends Model
 {
-    //region Properties
+    #region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -37,18 +38,21 @@ class Category extends Model
         'title' => 'string'
     ];
 
-    //endregion
+    #endregion
 
-    //region Methods
+    #region Methods
 
-    //endregion
+    #endregion
 
-    //region Relationships
+    #region Relationships
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function professions()
     {
         return $this->hasMany(Profession::class, 'category_id');
     }
 
-    //endregion
+    #endregion
 }

@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  *
  * Relationships
+ * @property User $providers
+ * @property User $users
  */
 class City extends Model
 {
@@ -56,7 +58,7 @@ class City extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function clients()
+    public function users()
     {
         return $this->hasMany(User::class)->where('user_role_id', UserRole::CLIENT);
     }
