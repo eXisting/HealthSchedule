@@ -403,7 +403,7 @@
                                 <rect key="frame" x="16" y="169.66666666666666" width="382" height="478.33333333333337"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="2v3-I3-uJH" userLabel="ContentStackView">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="834.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="482.33333333333331"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ydo-J9-1Cf" userLabel="ChooseImageStackView">
                                                 <rect key="frame" x="76.333333333333329" y="0.0" width="229.33333333333337" height="257.66666666666669"/>
@@ -461,8 +461,8 @@
                                                     <constraint firstItem="pHi-qx-zu1" firstAttribute="width" secondItem="u6a-gH-kLV" secondAttribute="width" id="ave-LR-OVi"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wSZ-4v-9Kk" userLabel="ProviderViewsContainer">
-                                                <rect key="frame" x="0.0" y="514.33333333333337" width="382" height="320.33333333333337"/>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wSZ-4v-9Kk" userLabel="ProviderViewsContainer">
+                                                <rect key="frame" x="0.0" y="482.33333333333337" width="382" height="155"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="v85-O0-A8h" userLabel="ChooseImageStackView">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="147"/>
@@ -491,7 +491,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="X1A-WG-elA" userLabel="Exp">
-                                                        <rect key="frame" x="0.0" y="155" width="382" height="165.33333333333337"/>
+                                                        <rect key="frame" x="0.0" y="155" width="382" height="0.0"/>
                                                         <color key="tintColor" red="0.1238434243" green="0.70529064119999996" blue="0.062935991220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </stackView>
                                                 </subviews>
