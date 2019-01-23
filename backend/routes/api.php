@@ -16,8 +16,13 @@ use Illuminate\Http\Request;
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-Route::middleware('jwt.auth')->get('users', function () {
-    return auth('api')->user();
-});
+// Route::middleware('jwt.auth')->get('user', function () {
+
+//     return auth('api')->user();
+// });
 
 Route::post('login', 'Auth\LoginController@login');
+Route::post('register', 'Auth\RegisterController@register');
+
+Route::get('/category/{category}/professions', 'ProfessionsController@professions');
+//Get /category/{category_id}/professions ()(professions)
