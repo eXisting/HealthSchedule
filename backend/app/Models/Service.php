@@ -47,5 +47,10 @@ class Service extends Model
 
     #region Relationships
 
+    public function profession()
+    {
+        return $this->belongsTo(Profession::class);
+    }
+
     #endregion
 }

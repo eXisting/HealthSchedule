@@ -47,5 +47,10 @@ class Profession extends Model
 
     #region Relationships
 
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'profession_id');
+    }
+
     #endregion
 }

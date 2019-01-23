@@ -96,4 +96,13 @@ class User extends Authenticatable implements JWTSubject
 
     #endregion
 
+    #region Relationships
+
+    public function professions()
+    {
+        return $this->hasManyThrough(Profession::class, ProviderProfession::class, 'provider_id', 'id', 'id', 'profession_id');
+    }
+
+    #endregion
+
 }

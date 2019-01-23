@@ -15,6 +15,8 @@
 //     return view('welcome');
 // });
 
-// Route::get('/testss', function () {
-//     dd(\App\Models\Category::find(1)->professions);
-// });
+ Route::get('/testss', function () {
+     $minutes = collect([15,30, 45]);
+
+     dd($minutes->random(1));
+ });
