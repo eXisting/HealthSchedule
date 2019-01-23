@@ -121,7 +121,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function role()
     {
-        return $this->belongsTo(UserRole::class);
+        return $this->belongsTo(UserRole::class, 'user_role_id');
     }
 
     /**
@@ -141,11 +141,11 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function providerServices()
     {
-        return $this->hasOne(ProviderService::class, 'provider_id', 'id');
+        return $this->hasMany(ProviderService::class, 'provider_id', 'id');
     }
 
     /**
@@ -193,7 +193,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function providerRequests()
     {
-        return $this->hasManyThrough(Request::class, ProviderService::class, 'provider_id', 'id', 'id', 'provider_service_id');
+        return $this->hasManyThrough(Request::class, ProviderService::class, 'provider_id', 'provider_service_id', 'id', 'id');
     }
 
     /**

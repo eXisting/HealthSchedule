@@ -15,8 +15,4 @@
 //     return view('welcome');
 // });
 
- Route::get('/testss', function () {
-     $results = \App\Models\City::find(3)->clients;
 
-     dd($results);
- });
