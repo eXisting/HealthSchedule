@@ -149,5 +149,25 @@ class UserTableSeeder extends Seeder
         });
 
         #endregion
+
+        #region Services
+
+        $services = factory(\App\Models\Service::class, 250)->create();
+
+        #endregion
+
+        #region ProviderServices
+
+        $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->each(function ($provider) {
+
+        });
+
+        #endregion
+
+        #region Services
+
+
+
+        #endregion
     }
 }

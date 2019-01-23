@@ -17,6 +17,7 @@ class CreateProviderServicesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('address_id');
             $table->unsignedInteger('provider_id');
+            $table->unsignedInteger('service_id');
             $table->double('price');
             $table->text('description');
             $table->time('interval');
@@ -24,6 +25,7 @@ class CreateProviderServicesTable extends Migration
 
             $table->foreign( 'address_id' )->references( 'id' )->on( 'addresses' );
             $table->foreign( 'provider_id' )->references( 'id' )->on( 'users' );
+            $table->foreign( 'service_id' )->references( 'id' )->on( 'services' );
         });
     }
 
@@ -36,6 +38,7 @@ class CreateProviderServicesTable extends Migration
     {
         Schema::table('provider_services', function (Blueprint $table) {
             $table->dropForeign('provider_services_address_id_foreign');
+            $table->dropForeign('provider_services_service_id_foreign');
             $table->dropForeign('provider_services_provider_id_foreign');
         });
         Schema::dropIfExists('provider_services');

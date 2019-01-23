@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,14 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * Properties
  * @property integer $id
- * @property integer $address_id
- * @property integer $provider_id
  * @property integer $profession_id
  * @property string $title
  * @property string $name
- * @property double $price
- * @property string $description
- * @property Carbon $interval
  *
  * Relationships
  */
@@ -31,7 +25,7 @@ class Service extends Model
      * @var array
      */
     protected $fillable = [
-        'address_id', 'provider_id', 'profession_id', 'title', 'name', 'price', 'description', 'interval',
+        'profession_id', 'title', 'name',
     ];
 
     /**
@@ -40,14 +34,9 @@ class Service extends Model
      * @var array
      */
     protected $casts = [
-        'address_id' => 'integer',
-        'provider_id' => 'integer',
         'profession_id' => 'integer',
         'title' => 'string',
         'name' => 'string',
-        'price' => 'double',
-        'description' => 'string',
-        'interval' => 'datetime:H-i',
     ];
 
     #endregion

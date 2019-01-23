@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $provider_id
  * @property string $title
  * @property string $description
+ * @property boolean $is_active
  *
  * Relationships
  */
@@ -26,7 +27,7 @@ class Recommendation extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'provider_id', 'title', 'description',
+        'user_id', 'provider_id', 'title', 'description', 'is_active'
     ];
 
     /**
@@ -39,6 +40,7 @@ class Recommendation extends Model
         'provider_id' => 'integer',
         'title' => 'string',
         'description' => 'string',
+        'is_active' => 'boolean',
     ];
 
     #endregion

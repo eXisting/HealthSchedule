@@ -69,10 +69,7 @@ $factory->define(App\Models\ProviderExceptionSchedule::class, function (Faker $f
 });
 
 $factory->define(App\Models\ProviderProfession::class, function (Faker $faker) {
-    return [
-//        'provider_id' => \App\Models\User::query()->inRandomOrder()->first()->id,
-//        'profession_id' => \App\Models\Profession::,
-    ];
+    return [];
 });
 
 $factory->define(App\Models\ProviderSchedule::class, function (Faker $faker) {
@@ -94,6 +91,7 @@ $factory->define(App\Models\Recommendation::class, function (Faker $faker) {
         'provider_id' =>\App\Models\User::query()->where('user_role_id', \App\Models\UserRole::PROVIDER)->inRandomOrder()->first()->id,
         'title' => $faker->jobTitle,
         'description' => $faker->text(350),
+        'is_active' => $faker->boolean
     ];
 });
 
@@ -107,14 +105,9 @@ $factory->define(App\Models\RequestStatus::class, function (Faker $faker) {
 
 $factory->define(App\Models\Service::class, function (Faker $faker) {
     return [
-        'address_id' => 'integer',
-        'provider_id' => 'integer',
-        'profession_id' => 'integer',
+        'profession_id' => \App\Models\Profession::query()->inRandomOrder()->first()->id,
         'title' => 'string',
         'name' => 'string',
-        'price' => 'double',
-        'description' => 'string',
-        'interval' => 'datetime:H-i',
     ];
 });
 
@@ -126,4 +119,15 @@ $factory->define(App\Models\UserImage::class, function (Faker $faker) {
 
 $factory->define(App\Models\UserRole::class, function (Faker $faker) {
     return [];
+});
+
+$factory->define(App\Models\ProviderService::class, function (Faker $faker) {
+    $minutes = collect([15,30, 45]);
+
+    return [
+        'address_id' => factory(\App\Models\Address::class, 1)->create()->id,
+        'price' => rand(100,500),
+        'description' => $faker->text,
+        'interval' => \Carbon\Carbon::createFromTime(rand(0,2), $minutes->random(1))
+    ];
 });
