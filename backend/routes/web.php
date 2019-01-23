@@ -16,7 +16,7 @@
 // });
 
  Route::get('/testss', function () {
-     $minutes = collect([15,30, 45]);
+     $results = \App\Models\City::find(3)->clients;
 
-     dd($minutes->random(1));
+     dd($results);
  });

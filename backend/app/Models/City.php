@@ -45,5 +45,21 @@ class City extends Model
 
     #region Relationships
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providers()
+    {
+        return $this->hasMany(User::class)->where('user_role_id', UserRole::PROVIDER);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function clients()
+    {
+        return $this->hasMany(User::class)->where('user_role_id', UserRole::CLIENT);
+    }
+
     #endregion
 }

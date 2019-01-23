@@ -98,6 +98,11 @@ class User extends Authenticatable implements JWTSubject
 
     #region Relationships
 
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
     public function professions()
     {
         return $this->hasManyThrough(Profession::class, ProviderProfession::class, 'provider_id', 'id', 'id', 'profession_id');
