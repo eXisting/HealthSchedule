@@ -105,9 +105,9 @@ private extension DetailedSignUpViewController {
     NSLayoutConstraint(item: addMoreExperienceButton,
                        attribute: .height,
                        relatedBy: .equal,
-                       toItem: self.view,
-                       attribute: .height,
-                       multiplier: 0.08,
+                       toItem: addMoreExperienceButton,
+                       attribute: .width,
+                       multiplier: 1,
                        constant: 0).isActive = true
     
     addMoreExperienceButton.addTarget(self, action: #selector(onAddMoreExperienceButtonClick), for: .touchUpInside)
@@ -131,14 +131,6 @@ private extension DetailedSignUpViewController {
     
     removeButton.backgroundImage(for: .normal)
     removeButton.setImage( UIImage.init(named: "Icons/minus"), for: .normal)
-        
-    NSLayoutConstraint(item: removeButton,
-                       attribute: .width,
-                       relatedBy: .equal,
-                       toItem: view,
-                       attribute: .width,
-                       multiplier: 0.05,
-                       constant: 0).isActive = true
     
     NSLayoutConstraint(item: removeButton,
                        attribute: .height,
@@ -161,6 +153,14 @@ private extension DetailedSignUpViewController {
                        relatedBy: .equal,
                        toItem: view,
                        attribute: .left,
+                       multiplier: 1,
+                       constant: 0).isActive = true
+    
+    NSLayoutConstraint(item: removeButton,
+                       attribute: .width,
+                       relatedBy: .equal,
+                       toItem: removeButton,
+                       attribute: .height,
                        multiplier: 1,
                        constant: 0).isActive = true
     
