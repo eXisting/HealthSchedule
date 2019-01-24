@@ -40,18 +40,25 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $credentials = [
-            $this->username($request) => $request->username,
-            'password' => $request->password,
-        ];
-
-        if (!$token = auth('api')->attempt($credentials)) {
+        if (!$token = auth('api')->attempt($this->createCredentials($request))) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         return response()->json([
             'token' => $token,
             'expires' => auth('api')->factory()->getTTL() * 60,
         ]);
+    }
+
+    /**
+     * @param LoginRequest $request
+     * @return array
+     */
+    private function createCredentials($request)
+    {
+        return [
+            $this->username($request) => $request->username,
+            'password' => $request->password,
+        ];
     }
 
     /**
@@ -66,4 +73,6 @@ class LoginController extends Controller
             return 'email';
         }
     }
+
+
 }
