@@ -58,7 +58,7 @@ class DetailedSignUpViewController: UIViewController {
 // Experience views staff
 private extension DetailedSignUpViewController {
   func loadViewsFromXib() {
-    for _ in 0..<(rootNaviationController?.maxExperienceCount ?? 3) {
+    for _ in 0..<maxAddedOrDefualt {
       experienceBlocks.append(SelectWithExperienceView.instanceFromNib() as! SelectWithExperienceView)
     }
   }
