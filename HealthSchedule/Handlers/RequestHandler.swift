@@ -19,14 +19,15 @@ class RequestHandler {
   
   private let defaultSession = URLSession(configuration: .default)
   
-  private func fetchAsync(from url: String, with params: String?, completion: @escaping ([Any]) -> Void) {
+  private func fetchAsync(from url: String, completion: @escaping ([Any]) -> Void) {
     
     guard let url = URL(string: url) else {
       print("Error: cannot create URL")
       return
     }
-    let urlRequest = URLRequest(url: url)
-  
+    var urlRequest = URLRequest(url: url)
+    urlRequest.httpMethod = "GET"
+    
     // make the request
     let task = defaultSession.dataTask(with: urlRequest) {
       (data, response, error) in
@@ -116,16 +117,7 @@ extension RequestHandler: ImageRequesting {
 }
 
 extension RequestHandler: ListsRequesting {
-  
   func getAsync(from url: String, complition: @escaping ([Any]) -> Void) {
-    fetchAsync(from: url, with: nil, completion: complition)
+    fetchAsync(from: url, completion: complition)
   }
-  
-  func getAsync(from url: String, with params: String, complition: @escaping ([Any]) -> Void) {
-    // TODO
-  }
-  
-  
-  
-  
 }
