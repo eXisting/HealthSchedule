@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -37,10 +38,9 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login()
+    public function login(LoginRequest $request)
     {
-        $credentials = request(['email', 'password']);
-        if (!$token = auth('api')->attempt($credentials)) {
+        if (!$token = auth('api')->attempt($this->createCredentials($request))) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         return response()->json([
@@ -48,4 +48,31 @@ class LoginController extends Controller
             'expires' => auth('api')->factory()->getTTL() * 60,
         ]);
     }
+
+    /**
+     * @param LoginRequest $request
+     * @return array
+     */
+    private function createCredentials($request)
+    {
+        return [
+            $this->username($request) => $request->username,
+            'password' => $request->password,
+        ];
+    }
+
+    /**
+     * @param LoginRequest $request
+     * @return string
+     */
+    private function username($request)
+    {
+        if(preg_match('#380\d{9}$#', $request->username)) {
+            return 'phone';
+        } else {
+            return 'email';
+        }
+    }
+
+
 }
