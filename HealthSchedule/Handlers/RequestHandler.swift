@@ -19,7 +19,7 @@ class RequestHandler {
   
   private let defaultSession = URLSession(configuration: .default)
   
-  private func fetchAsync(from url: String, with query: String?, completion: @escaping ([Any]) -> Void) {
+  private func fetchAsync(from url: String, with params: String?, completion: @escaping ([Any]) -> Void) {
     
     guard let url = URL(string: url) else {
       print("Error: cannot create URL")
@@ -121,7 +121,7 @@ extension RequestHandler: ListsRequesting {
     fetchAsync(from: url, with: nil, completion: complition)
   }
   
-  func getAsync(from url: String, with query: String, complition: @escaping ([Any]) -> Void) {
+  func getAsync(from url: String, with params: String, complition: @escaping ([Any]) -> Void) {
     // TODO
   }
   
