@@ -19,7 +19,8 @@ class DetailedSignUpViewController: UIViewController {
   
   @IBOutlet weak var experienceFieldsContiner: UIStackView!
   
-  private var experienceAddedCounter = 0
+  private var experienceAddedCount = 0
+  private var maxAddedOrDefualt = 3
   private var rootNaviationController: RootNavigationController?
   
   private var experienceBlocks: [SelectWithExperienceView]
@@ -32,15 +33,17 @@ class DetailedSignUpViewController: UIViewController {
     super.init(coder: aDecoder)
     
     rootNaviationController = self.navigationController as? RootNavigationController
+    maxAddedOrDefualt = rootNaviationController?.maxExperienceCount ?? 3
     loadViewsFromXib()
   }
   
   override func viewDidLoad() {
     if experienceBlocks.count > 0 {
-      laidOutExperienceView(experienceBlocks[experienceAddedCounter])
+      laidOutExperienceView(experienceBlocks.first!)
     }
     
     laidOutAddButton()
+    experienceAddedCount = experienceFieldsContiner.arrangedSubviews.count - 1
   }
   
   @IBAction func onUserTypeChanged(_ sender: UISegmentedControl) {
@@ -78,11 +81,9 @@ private extension DetailedSignUpViewController {
                        multiplier: 0.15,
                        constant: 0).isActive = true
     
-    if experienceAddedCounter > 0 {
+    if experienceAddedCount > 0 {
       laidOutRemoveButtonOn(view)
     }
-    
-    experienceAddedCounter += 1
   }
 }
 
@@ -114,13 +115,18 @@ private extension DetailedSignUpViewController {
   }
   
   @objc func onAddMoreExperienceButtonClick(sender: UIButton!) {
-    if experienceAddedCounter < rootNaviationController?.maxExperienceCount ?? 3 {
-      laidOutExperienceView(experienceBlocks[experienceAddedCounter])
+    if experienceAddedCount < maxAddedOrDefualt {
+      laidOutExperienceView(experienceBlocks[experienceAddedCount])
       
       // Append add button to the end of stack view
       experienceFieldsContiner.removeArrangedSubview(addMoreExperienceButton)
       addMoreExperienceButton.removeFromSuperview()
-      laidOutAddButton()
+      
+      if experienceAddedCount + 1 < maxAddedOrDefualt {
+        laidOutAddButton()
+      }
+      
+      experienceAddedCount = experienceFieldsContiner.arrangedSubviews.count - 1
     }
   }
   
