@@ -133,7 +133,7 @@ private extension DetailedSignUpViewController {
   func laidOutRemoveButtonOn(_ view: UIView) {
     let removeButton = UIButton()
     removeButton.translatesAutoresizingMaskIntoConstraints = false
-    experienceFieldsContiner.addSubview(removeButton)
+    view.addSubview(removeButton)
     
     removeButton.backgroundImage(for: .normal)
     removeButton.setImage( UIImage.init(named: "Icons/minus"), for: .normal)
