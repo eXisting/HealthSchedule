@@ -26,4 +26,5 @@ Route::post('register/provider', 'Auth\ProviderRegisterController@registerUser')
 Route::post('register/user', 'Auth\UserRegisterController@registerUser');
 
 Route::get('/category/{category}/professions', 'ProfessionsController@professions');
+Route::get('/cities', 'CityController@all');
 //Get /category/{category_id}/professions ()(professions)
