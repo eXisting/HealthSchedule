@@ -22,7 +22,8 @@ use Illuminate\Http\Request;
 // });
 
 Route::post('login', 'Auth\LoginController@login');
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('register/provider', 'Auth\ProviderRegisterController@registerUser');
+Route::post('register/user', 'Auth\UserRegisterController@registerUser');
 
 Route::get('/category/{category}/professions', 'ProfessionsController@professions');
 //Get /category/{category_id}/professions ()(professions)
