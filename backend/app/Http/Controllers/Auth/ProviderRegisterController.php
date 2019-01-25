@@ -61,8 +61,8 @@ class ProviderRegisterController extends RegisterController
             });
         }
 
-        $token = JWTAuth::fromUser($provider);
+        $success = true;
 
-        return response()->json(compact('token'));
+        return response()->json(compact('success'));
     }
 }
