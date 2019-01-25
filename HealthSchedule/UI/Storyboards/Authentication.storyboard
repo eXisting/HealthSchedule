@@ -461,43 +461,33 @@
                                                     <constraint firstItem="pHi-qx-zu1" firstAttribute="width" secondItem="u6a-gH-kLV" secondAttribute="width" id="ave-LR-OVi"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wSZ-4v-9Kk" userLabel="ProviderViewsContainer">
-                                                <rect key="frame" x="0.0" y="482.33333333333337" width="382" height="155"/>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="wSZ-4v-9Kk" userLabel="ProviderViewsContainer">
+                                                <rect key="frame" x="0.0" y="482.33333333333337" width="382" height="163"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="v85-O0-A8h" userLabel="ChooseImageStackView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="147"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-16" translatesAutoresizingMaskIntoConstraints="NO" id="pAf-5n-KfZ" userLabel="ChooseDiiploma">
+                                                        <rect key="frame" x="95.666666666666686" y="0.0" width="191" height="147"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pAf-5n-KfZ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="147"/>
-                                                                <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons/diploma" translatesAutoresizingMaskIntoConstraints="NO" id="zH3-Cv-3h5" userLabel="Dimploma">
-                                                                        <rect key="frame" x="95.666666666666686" y="0.0" width="191" height="88"/>
-                                                                    </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your cerificate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e0Y-mj-klm">
-                                                                        <rect key="frame" x="103.66666666666669" y="88" width="175" height="59"/>
-                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="zH3-Cv-3h5" firstAttribute="height" secondItem="pAf-5n-KfZ" secondAttribute="height" multiplier="0.6" id="9hD-LY-OoU"/>
-                                                                    <constraint firstItem="zH3-Cv-3h5" firstAttribute="width" secondItem="pAf-5n-KfZ" secondAttribute="width" multiplier="0.5" id="e1l-3V-ScM"/>
-                                                                </constraints>
-                                                            </stackView>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons/diploma" translatesAutoresizingMaskIntoConstraints="NO" id="zH3-Cv-3h5" userLabel="Dimploma">
+                                                                <rect key="frame" x="17.333333333333329" y="0.0" width="156" height="117.66666666666667"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your cerificate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e0Y-mj-klm">
+                                                                <rect key="frame" x="8" y="101.66666666666663" width="175" height="45.333333333333343"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="pAf-5n-KfZ" firstAttribute="width" secondItem="v85-O0-A8h" secondAttribute="width" id="vxZ-n8-yWf"/>
-                                                            <constraint firstItem="pAf-5n-KfZ" firstAttribute="height" secondItem="v85-O0-A8h" secondAttribute="height" id="ywh-bD-Zjd"/>
+                                                            <constraint firstItem="zH3-Cv-3h5" firstAttribute="height" secondItem="pAf-5n-KfZ" secondAttribute="height" multiplier="0.8" id="y8G-fs-wPn"/>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="X1A-WG-elA" userLabel="Exp">
-                                                        <rect key="frame" x="0.0" y="155" width="382" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="163" width="382" height="0.0"/>
                                                         <color key="tintColor" red="0.1238434243" green="0.70529064119999996" blue="0.062935991220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="pAf-5n-KfZ" firstAttribute="width" secondItem="wSZ-4v-9Kk" secondAttribute="width" multiplier="0.5" id="BEM-TP-uji"/>
                                                     <constraint firstItem="X1A-WG-elA" firstAttribute="width" secondItem="wSZ-4v-9Kk" secondAttribute="width" id="nzN-eM-P0T"/>
-                                                    <constraint firstItem="v85-O0-A8h" firstAttribute="width" secondItem="wSZ-4v-9Kk" secondAttribute="width" id="sqO-VA-LPA"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -522,10 +512,10 @@
                         <constraints>
                             <constraint firstItem="jdM-Od-D32" firstAttribute="bottom" secondItem="7MX-yh-CbO" secondAttribute="bottom" priority="750" constant="32" id="9oU-bO-p4f"/>
                             <constraint firstItem="6dP-VU-aBN" firstAttribute="width" secondItem="7MX-yh-CbO" secondAttribute="width" id="Bkh-Vv-d55"/>
+                            <constraint firstItem="pAf-5n-KfZ" firstAttribute="height" secondItem="BBp-VY-Wrv" secondAttribute="height" multiplier="0.2" id="Dce-Nw-fo8"/>
                             <constraint firstItem="u6a-gH-kLV" firstAttribute="height" secondItem="BBp-VY-Wrv" secondAttribute="height" multiplier="0.08" id="GDD-wv-ZVz"/>
                             <constraint firstItem="ffY-NZ-uG9" firstAttribute="width" secondItem="BBp-VY-Wrv" secondAttribute="width" id="MpL-SO-NeZ"/>
                             <constraint firstItem="7MX-yh-CbO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6dP-VU-aBN" secondAttribute="bottom" constant="8" id="Qhb-if-ZbV"/>
-                            <constraint firstItem="v85-O0-A8h" firstAttribute="height" secondItem="BBp-VY-Wrv" secondAttribute="height" multiplier="0.2" id="So9-Ot-1Zf"/>
                             <constraint firstItem="jdM-Od-D32" firstAttribute="trailing" secondItem="QVK-t7-yXW" secondAttribute="trailing" constant="16" id="Unn-p4-nXo"/>
                             <constraint firstItem="QVK-t7-yXW" firstAttribute="top" secondItem="jdM-Od-D32" secondAttribute="top" constant="16" id="Uy9-wQ-QWw"/>
                             <constraint firstItem="7MX-yh-CbO" firstAttribute="height" secondItem="BBp-VY-Wrv" secondAttribute="height" multiplier="0.1" priority="750" id="X5b-FE-zSP"/>
