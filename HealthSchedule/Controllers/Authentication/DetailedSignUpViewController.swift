@@ -15,35 +15,33 @@ enum AccountType : Int {
 
 class DetailedSignUpViewController: UIViewController {
   
-  @IBOutlet var providerViewsContainer: UIStackView!
-  
+  @IBOutlet weak var providerViewsContainer: UIStackView!
   @IBOutlet weak var experienceFieldsContiner: UIStackView!
   
-  private var experienceAddedCount = 0
   private var maxAddedOrDefualt = 3
   private var rootNaviationController: RootNavigationController?
   
-  private var experienceBlocks: [SelectWithExperienceView]
-  private var addMoreExperienceButton: UIButton
+  private var experienceBlocks = [SelectWithExperienceView]()
+  private var addMoreExperienceButton = UIButton()
   
   required init?(coder aDecoder: NSCoder) {
-    experienceBlocks = []
-    addMoreExperienceButton = UIButton()
-    
     super.init(coder: aDecoder)
     
     rootNaviationController = self.navigationController as? RootNavigationController
     maxAddedOrDefualt = rootNaviationController?.maxExperienceCount ?? 3
+  }
+  
+  override func loadView() {
+    super.loadView()
     loadViewsFromXib()
   }
   
   override func viewDidLoad() {
     if experienceBlocks.count > 0 {
-      laidOutExperienceView(experienceBlocks.first!)
+      laidOutExperienceView(experienceBlocks.first!, at: 0)
     }
     
     laidOutAddButton()
-    experienceAddedCount = experienceFieldsContiner.arrangedSubviews.count - 1
   }
   
   @IBAction func onUserTypeChanged(_ sender: UISegmentedControl) {
@@ -63,9 +61,10 @@ private extension DetailedSignUpViewController {
     }
   }
   
-  func laidOutExperienceView(_ view: UIView!) {
+  func laidOutExperienceView(_ view: SelectWithExperienceView!, at index: Int) {
     view.translatesAutoresizingMaskIntoConstraints = false
-    experienceFieldsContiner.addArrangedSubview(view)
+    
+    experienceFieldsContiner.insertArrangedSubview(view, at: index)
     
     NSLayoutConstraint(item: view, attribute: .width,
                        relatedBy: .equal,
@@ -81,8 +80,9 @@ private extension DetailedSignUpViewController {
                        multiplier: 0.15,
                        constant: 0).isActive = true
     
-    if experienceAddedCount > 0 {
-      laidOutRemoveButtonOn(view)
+    if experienceFieldsContiner.arrangedSubviews.count - 1 > 0 {
+      let removeButton = view.laidOutRemoveButton()
+      removeButton.addTarget(self, action: #selector(onRemoveExperienceButtonClick), for: .touchUpInside)
     }
   }
 }
@@ -91,6 +91,7 @@ private extension DetailedSignUpViewController {
 private extension DetailedSignUpViewController {
   func laidOutAddButton() {
     addMoreExperienceButton.translatesAutoresizingMaskIntoConstraints = false
+    
     experienceFieldsContiner.addArrangedSubview(addMoreExperienceButton)
     addMoreExperienceButton.backgroundImage(for: .normal)
     addMoreExperienceButton.setImage( UIImage.init(named: "Icons/plus"), for: .normal)
@@ -114,70 +115,38 @@ private extension DetailedSignUpViewController {
     addMoreExperienceButton.addTarget(self, action: #selector(onAddMoreExperienceButtonClick), for: .touchUpInside)
   }
   
+  func removeAddButton() {
+    experienceFieldsContiner.removeArrangedSubview(addMoreExperienceButton)
+    addMoreExperienceButton.removeFromSuperview()
+  }
+  
   @objc func onAddMoreExperienceButtonClick(sender: UIButton!) {
+    let experienceAddedCount = experienceFieldsContiner.arrangedSubviews.count - 1
+    
     if experienceAddedCount < maxAddedOrDefualt {
-      laidOutExperienceView(experienceBlocks[experienceAddedCount])
+      laidOutExperienceView(experienceBlocks[experienceAddedCount], at: experienceAddedCount)
       
-      // Append add button to the end of stack view
-      experienceFieldsContiner.removeArrangedSubview(addMoreExperienceButton)
-      addMoreExperienceButton.removeFromSuperview()
-      
-      if experienceAddedCount + 1 < maxAddedOrDefualt {
-        laidOutAddButton()
+      if experienceFieldsContiner.arrangedSubviews.count - 1 >= maxAddedOrDefualt {
+        removeAddButton()
       }
-      
-      experienceAddedCount = experienceFieldsContiner.arrangedSubviews.count - 1
     }
   }
-  
-  func laidOutRemoveButtonOn(_ view: UIView) {
-    let removeButton = UIButton()
-    removeButton.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(removeButton)
-    
-    removeButton.backgroundImage(for: .normal)
-    removeButton.setImage( UIImage.init(named: "Icons/minus"), for: .normal)
-    
-    NSLayoutConstraint(item: removeButton,
-                       attribute: .height,
-                       relatedBy: .equal,
-                       toItem: view,
-                       attribute: .height,
-                       multiplier: 0.15,
-                       constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: removeButton,
-                       attribute: .bottom,
-                       relatedBy: .equal,
-                       toItem: view,
-                       attribute: .bottom,
-                       multiplier: 1,
-                       constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: removeButton,
-                       attribute: .left,
-                       relatedBy: .equal,
-                       toItem: view,
-                       attribute: .left,
-                       multiplier: 1,
-                       constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: removeButton,
-                       attribute: .width,
-                       relatedBy: .equal,
-                       toItem: removeButton,
-                       attribute: .height,
-                       multiplier: 1,
-                       constant: 0).isActive = true
-    
-    removeButton.addTarget(self, action: #selector(onRemoveExperienceButtonClick), for: .touchUpInside)
-  }
-  
+}
+
+// MARK: - Remove button action
+extension DetailedSignUpViewController {
   @objc func onRemoveExperienceButtonClick(sender: UIButton) {
-    print("Remove button tapped")
+//    print("Remove button tapped")
 //    let choosenExperience = sender.superview!
 //    // Append add button to the end of stack view
 //    experienceFieldsContiner.removeArrangedSubview(choosenExperience)
 //    choosenExperience.removeFromSuperview()
+//    
+//    if experienceFieldsContiner.arrangedSubviews.count - 1 < maxAddedOrDefualt {
+//      removeAddButton()
+//      laidOutAddButton()
+//    }
+//    
+//    experienceFieldsContiner.setNeedsLayout()
   }
 }

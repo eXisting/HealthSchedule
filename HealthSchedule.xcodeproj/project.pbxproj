@@ -91,6 +91,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB9F293521FDF4A400EE92F4 /* BaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BaseClasses;
+			sourceTree = "<group>";
+		};
 		ED089A3E21E77D12006A8523 = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +180,7 @@
 		ED089A7621E7909C006A8523 /* Abstracts */ = {
 			isa = PBXGroup;
 			children = (
-				ED089A8A21E8EEF8006A8523 /* BaseClasses */,
+				DB9F293521FDF4A400EE92F4 /* BaseClasses */,
 				ED089A7C21E79BFD006A8523 /* Protocols */,
 			);
 			path = Abstracts;
@@ -198,13 +205,6 @@
 				ED330C9221F223AE001019FC /* BlurHandler.swift */,
 			);
 			path = Handlers;
-			sourceTree = "<group>";
-		};
-		ED089A8A21E8EEF8006A8523 /* BaseClasses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BaseClasses;
 			sourceTree = "<group>";
 		};
 		ED089A8D21E8EF53006A8523 /* Elements */ = {
