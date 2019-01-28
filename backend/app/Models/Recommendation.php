@@ -70,4 +70,19 @@ class Recommendation extends Model
     }
 
     #endregion
+
+    #region Scopes
+
+    /**
+     * Scope a query to only include active recommendations.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    #endregion
 }
