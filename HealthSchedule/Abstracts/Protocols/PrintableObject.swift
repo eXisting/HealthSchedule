@@ -9,5 +9,5 @@
 import UIKit
 
 protocol PrintableObject {
-  func getString() -> String
+  func getViewableString() -> String
 }
