@@ -10,7 +10,7 @@ import UIKit
 
 enum Endpoints: String {
   case allCities = "/api/cities"
-  case allProfessions = "/api/category/doctor/professions"
+  case allProfessions = "/api/category/doctors/professions"
   
   case signIn = "/api/login"
   case signUpAsUser = "/api/register/user"
