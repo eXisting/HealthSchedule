@@ -59,7 +59,7 @@ class DetailedSignUpViewController: UIViewController {
     //TODO: loader
     
     guard let _ = citiesList else {
-      RequestManager.getListAsyncFor(type: City.self) { [weak self] cities in
+      RequestManager.getListAsyncFor(type: City.self, from: Endpoints.allCities) { [weak self] cities in
         self?.citiesList = cities
         
         DispatchQueue.main.async{

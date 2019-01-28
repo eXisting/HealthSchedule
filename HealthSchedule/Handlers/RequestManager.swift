@@ -26,8 +26,8 @@ class RequestManager {
     return endpoint + route
   }
   
-  class func getListAsyncFor<T: JsonInitiableModel>(type: T.Type, _ complition: @escaping ([T]) -> Void) {
-    listRequest.getAsync(from: buildEndpoint(Endpoints.allCities.rawValue)) { json in
+  class func getListAsyncFor<T: JsonInitiableModel>(type: T.Type, from endpoint: Endpoints, _ complition: @escaping ([T]) -> Void) {
+    listRequest.getAsync(from: buildEndpoint(endpoint.rawValue)) { json in
       var result = [T]()
       
       for element in json {
