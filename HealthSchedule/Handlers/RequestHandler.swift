@@ -57,20 +57,7 @@ class RequestHandler {
     }
     
     task.resume()
-  }
-  
-  class func buildEndPointUrl() -> String {
-    
-    var url = "https://randomuser.me/api"
-    
-    url.append("/?results=")
-    url.append("20")
-    url.append("&format=")
-    url.append("json")
-    
-    return url
-  }
-  
+  }  
 }
 
 extension RequestHandler: ImageRequesting {
