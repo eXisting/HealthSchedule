@@ -34,3 +34,9 @@ extension City {
     self.title = title
   }
 }
+
+extension City: PrintableObject {
+  func getViewableString() -> String {
+    return title
+  }
+}
