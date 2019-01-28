@@ -31,6 +31,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property City $city
  * @property ProviderService $providerServices
  * @property Profession $professions
+ * @property ProviderProfession $providerProfessions
  * @property UserImage $image
  * @property ProviderSchedule $providerSchedules
  * @property ProviderExceptionSchedule $providerExceptionSchedules
@@ -154,6 +155,14 @@ class User extends Authenticatable implements JWTSubject
     public function professions()
     {
         return $this->hasManyThrough(Profession::class, ProviderProfession::class, 'provider_id', 'id', 'id', 'profession_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providerProfessions()
+    {
+        return $this->hasMany(ProviderProfession::class, 'provider_id', 'id');
     }
 
     /**
