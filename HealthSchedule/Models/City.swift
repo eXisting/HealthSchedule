@@ -15,14 +15,14 @@ enum CityJsonFields: String {
 }
 
 struct City {
-  var id: String
+  var id: Int
   var name: String
   var title: String
 }
 
 extension City {
-  init?(json: [String: Any]) {
-    guard let id = json[CityJsonFields.id.rawValue] as? String,
+  init?(json: [String: Any]) {    
+    guard let id = json[CityJsonFields.id.rawValue] as? Int,
       let name = json[CityJsonFields.name.rawValue] as? String,
       let title = json[CityJsonFields.title.rawValue] as? String else {
         print("Cannot parse json fields in City.init!")
