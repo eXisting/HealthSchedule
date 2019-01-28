@@ -19,6 +19,8 @@ class RequestHandler {
   
   private let defaultSession = URLSession(configuration: .default)
   
+  private init() {}
+  
   private func fetchAsync(from url: String, completion: @escaping ([Any]) -> Void) {
     
     guard let url = URL(string: url) else {
