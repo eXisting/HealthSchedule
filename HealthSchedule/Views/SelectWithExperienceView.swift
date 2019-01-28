@@ -21,11 +21,10 @@ class SelectWithExperienceView: UIView {
   @IBAction func onSelectCategory(_ sender: UIButton) {
     print("Sekect category clicked")
   }
-  
-  class func instanceFromNib() -> UIView {
-    return UINib(nibName: "SelectWithExperienceView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
-  }
-  
+}
+
+// Remove button stuff
+extension SelectWithExperienceView {
   func laidOutRemoveButton() -> UIButton {
     let removeButton = UIButton()
     removeButton.translatesAutoresizingMaskIntoConstraints = false

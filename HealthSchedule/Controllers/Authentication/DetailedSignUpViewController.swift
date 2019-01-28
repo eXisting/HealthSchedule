@@ -110,7 +110,8 @@ class DetailedSignUpViewController: UIViewController {
 private extension DetailedSignUpViewController {
   func loadViewsFromXib() {
     for _ in 0..<maxAddedOrDefualt {
-      experienceBlocks.append(SelectWithExperienceView.instanceFromNib() as! SelectWithExperienceView)
+      let section: SelectWithExperienceView = UIView.instanceFromNib("SelectWithExperienceView")
+      experienceBlocks.append(section)
     }
   }
   
