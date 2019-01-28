@@ -6,4 +6,26 @@
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+enum ValidationType: String {
+  case email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+  case phone = "^[0-9]{12}$"
+}
+
+class ValidationController {
+  static let shared = ValidationController()
+  
+  private init() {}
+  
+  func validate(_ text: String, ofType regex: ValidationType) -> Bool {
+    let regEx = regex.rawValue
+    
+    let test = NSPredicate(format:"SELF MATCHES %@", regEx)
+    return test.evaluate(with: text)
+  }
+  
+  func confirmPassword(_ password: String, _ confirm: String) -> Bool {
+    return !password.isEmpty && !confirm.isEmpty && password == confirm
+  }
+}

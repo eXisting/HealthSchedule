@@ -28,8 +28,26 @@ class SignUpViewController: UIViewController {
   }
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    // TODO: Validation
-    return true
+    let redColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
+    var isValid = true
+    
+    if !ValidationController.shared.validate(phoneField.text!, ofType: .phone) {
+      isValid = false
+      phoneField.backgroundColor = redColor
+    }
+    
+    if !ValidationController.shared.validate(emailField.text!, ofType: .email) {
+      emailField.backgroundColor = redColor
+      isValid = false
+    }
+    
+    if !ValidationController.shared.confirmPassword(passwordField.text!, passowrdVerifyField.text!) {
+      passwordField.backgroundColor = redColor
+      passowrdVerifyField.backgroundColor = redColor
+      isValid = false
+    }
+    
+    return isValid
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
