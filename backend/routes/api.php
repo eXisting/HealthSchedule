@@ -13,18 +13,25 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-// Route::middleware('jwt.auth')->get('user', function () {
-
-//     return auth('api')->user();
-// });
-
 Route::post('login', 'Auth\LoginController@login');
-Route::post('register/provider', 'Auth\ProviderRegisterController@registerUser');
-Route::post('register/user', 'Auth\UserRegisterController@registerUser');
+
+Route::prefix('register')->group(function () {
+    Route::post('/provider', 'Auth\Register\ProviderRegisterController@register');
+    Route::post('/user', 'Auth\Register\UserRegisterController@register');
+});
+
+Route::middleware('jwt.auth')->group(function () {
+    Route::get('user', function () {
+        return auth('api')->user();
+    });
+
+    Route::get('provider', function () {
+        return auth('api')->user();
+    });
+});
+
 
 Route::get('/category/{category}/professions', 'ProfessionsController@professions');
+
 Route::get('/cities', 'CityController@all');
 //Get /category/{category_id}/professions ()(professions)
