@@ -21,13 +21,26 @@ Route::prefix('register')->group(function () {
 });
 
 Route::middleware('jwt.auth')->group(function () {
-    Route::get('user', function () {
-        return auth('api')->user();
+
+    Route::prefix('user')->group(function () {
+
+        Route::get('/', 'UserController@getByToken');
+
+        Route::prefix('recommendations')->group(function () {
+            Route::get('/', 'UserRecommendationController@recommendations');
+            Route::get('/{id}', 'UserRecommendationController@recommendation');
+            Route::put('/{id}/{recommendation_status}', 'UserRecommendationController@changeStatus');
+        });
     });
 
-    Route::get('provider', function () {
-        return auth('api')->user();
-    });
+
+    Route::get('/provider', 'ProviderController@getByToken');
+
+});
+
+Route::prefix('register')->group(function () {
+    Route::post('/provider', 'Auth\Register\ProviderRegisterController@register');
+    Route::post('/user', 'Auth\Register\UserRegisterController@register');
 });
 
 
