@@ -20,7 +20,7 @@ struct City {
   var title: String
 }
 
-extension City {
+extension City: JsonInitiableModel {
   init?(json: [String: Any]) {    
     guard let id = json[CityJsonFields.id.rawValue] as? Int,
       let name = json[CityJsonFields.name.rawValue] as? String,

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class RootNavigationController: UINavigationController {
+class RootAuthNavigationController: UINavigationController {
   let maxExperienceCount = 3
-  private lazy var signUpData: [String: Any] = [:]
-  
+  private lazy var signUpData = [String: Any]()
+    
   func storeSignUpData(_ data: [String: Any]) {
     for (key, value) in data {
       signUpData[key] = value

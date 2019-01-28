@@ -20,20 +20,17 @@ class DetailedSignUpViewController: UIViewController {
   @IBOutlet weak var location: UITextField!
   
   private var maxAddedOrDefualt = 3
-  private var rootNaviationController: RootNavigationController?
+  private var rootNaviationController: RootAuthNavigationController?
   
   private var experienceBlocks = [SelectWithExperienceView]()
   private var addMoreExperienceButton = UIButton()
   
-  private let request: ListsRequesting! = RequestHandler()
-  
-  // Remote data
   private var citiesList: [City]?
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
-    rootNaviationController = self.navigationController as? RootNavigationController
+    rootNaviationController = self.navigationController as? RootAuthNavigationController
     maxAddedOrDefualt = rootNaviationController?.maxExperienceCount ?? 3
   }
   
@@ -59,46 +56,39 @@ class DetailedSignUpViewController: UIViewController {
   }
   
   @IBAction func onDidBeginEditing(_ sender: Any) {
-    // TODO: refactor this
+    //TODO: loader
     
-    request.getAsync(from: "http://127.0.0.1:8000/api/cities") { [weak self] cities in
-      if cities.count == 0 {
-        AlertHandler.ShowAlert(for: self!, "Error!", "Cannot load list of cities!", .alert)
-        return
-      }
-      DispatchQueue.main.async{
-        var citiesTitles = [String]()
-        self?.citiesList = []
+    guard let _ = citiesList else {
+      RequestManager.getListAsyncFor(type: City.self) { [weak self] cities in
+        self?.citiesList = cities
         
-        for jsonCity in cities {
-          guard let city = jsonCity as? [String:Any] else {
-            print("Cannot cast to [String:Any]")
-            continue
-          }
-          
-          guard let cityObject = City(json: city) else {
-            continue
-          }
-          
-          citiesTitles.append(cityObject.title)
-          self?.citiesList?.append(cityObject)
+        DispatchQueue.main.async{
+          self?.presentPopOver()
         }
-        
-        let controller = PopOverViewController<City>.init(values: (self?.citiesList)!, onSelect: (self?.selectCityObserver)!)
-        
-        controller.modalPresentationStyle = .popover
-        controller.preferredContentSize = CGSize(width: 300, height: 200)
-        
-        let presentationController = controller.presentationController as! UIPopoverPresentationController
-        presentationController.sourceView = self?.view
-        presentationController.sourceRect = self?.view?.bounds ?? .zero
-        presentationController.permittedArrowDirections = [.left, .right]
-        
-        self?.present(controller, animated: true)
       }
+      
+      return
     }
     
-    // loader
+    presentPopOver()
+  }
+  
+  private func presentPopOver() {
+    guard let cities = citiesList else {
+      return
+    }
+    
+    let controller = PopOverViewController<City>.init(values: cities, onSelect: selectCityObserver)
+    
+    controller.modalPresentationStyle = .popover
+    controller.preferredContentSize = CGSize(width: 300, height: 200)
+    
+    let presentationController = controller.presentationController as! UIPopoverPresentationController
+    presentationController.sourceView = view
+    presentationController.sourceRect = view.bounds
+    presentationController.permittedArrowDirections = [.left, .right]
+    
+    present(controller, animated: true)
   }
   
   private func selectCityObserver(_ selectedItem: PrintableObject) {

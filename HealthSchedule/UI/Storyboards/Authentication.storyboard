@@ -188,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="-513.28125" y="152.41581259150803"/>
         </scene>
-        <!--Root Navigation Controller-->
+        <!--Root Auth Navigation Controller-->
         <scene sceneID="cyp-hy-Jc7">
             <objects>
-                <navigationController id="CQz-P0-WzJ" customClass="RootNavigationController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="CQz-P0-WzJ" customClass="RootAuthNavigationController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xaI-ha-1J1">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
