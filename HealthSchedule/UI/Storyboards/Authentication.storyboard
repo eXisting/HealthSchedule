@@ -439,7 +439,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VyR-F8-6qY" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VyR-F8-6qY" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="133.66666666666669" width="382" height="59"/>
                                                         <color key="backgroundColor" red="0.30457309780000003" green="0.30457309780000003" blue="0.30457309780000003" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -451,6 +451,9 @@
                                                                 <real key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="onDidBeginEditing:" destination="ahU-hk-xdU" eventType="editingDidBegin" id="pRn-d3-qFG"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -538,6 +541,7 @@
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
                         <outlet property="experienceFieldsContiner" destination="X1A-WG-elA" id="Y92-OK-LsS"/>
+                        <outlet property="location" destination="VyR-F8-6qY" id="oDT-V3-auq"/>
                         <outlet property="providerViewsContainer" destination="wSZ-4v-9Kk" id="pTO-yw-p4g"/>
                     </connections>
                 </viewController>
