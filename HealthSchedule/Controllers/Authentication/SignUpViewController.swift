@@ -10,7 +10,7 @@ import UIKit
 
 class SignUpViewController: UIViewController {
   
-  private var rootNaviationController: RootNavigationController?
+  private var rootNaviationController: RootAuthNavigationController?
   
   // MARK: - Outlets
   
@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
-    rootNaviationController = self.navigationController as? RootNavigationController
+    rootNaviationController = self.navigationController as? RootAuthNavigationController
   }
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

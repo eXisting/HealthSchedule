@@ -19,39 +19,39 @@ class RequestHandler {
   
   private let defaultSession = URLSession(configuration: .default)
   
-  private func fetchAsync(from url: String, with query: String?, completion: @escaping ([Any]) -> Void) {
+  private init() {}
+  
+  private func fetchAsync(from url: String, completion: @escaping ([Any]) -> Void) {
     
     guard let url = URL(string: url) else {
       print("Error: cannot create URL")
       return
     }
-    let urlRequest = URLRequest(url: url)
-  
-    // make the request
+    var urlRequest = URLRequest(url: url)
+    urlRequest.httpMethod = "GET"
+    
     let task = defaultSession.dataTask(with: urlRequest) {
-      (data, response, error) in
+      (recivedData, serverResponse, error) in
       
       guard error == nil else {
         print(error!)
         return
       }
       
-      guard let responseData = data else {
+      guard let jsonData = recivedData else {
         print("Error: did not receive data")
         return
       }
       
-      do {
-        guard let todo = try JSONSerialization.jsonObject(with: responseData, options: [])
-          as? [String: Any] else {
-            print("error trying to convert data to JSON")
-            return
-        }
+      do {        
+        //for debugging
+//        if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+//          print(JSONString)
+//        }
         
-        //print(todo["results"] ?? "nothing")
-        let result = todo["results"] as! [Any]
+        let json = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [Any]
         
-        completion(result)
+        completion(json ?? [])
       } catch  {
         print("error trying to convert data to JSON")
         return
@@ -59,20 +59,7 @@ class RequestHandler {
     }
     
     task.resume()
-  }
-  
-  class func buildEndPointUrl() -> String {
-    
-    var url = "https://randomuser.me/api"
-    
-    url.append("/?results=")
-    url.append("20")
-    url.append("&format=")
-    url.append("json")
-    
-    return url
-  }
-  
+  }  
 }
 
 extension RequestHandler: ImageRequesting {
@@ -116,16 +103,7 @@ extension RequestHandler: ImageRequesting {
 }
 
 extension RequestHandler: ListsRequesting {
-  
   func getAsync(from url: String, complition: @escaping ([Any]) -> Void) {
-    fetchAsync(from: url, with: nil, completion: complition)
+    fetchAsync(from: url, completion: complition)
   }
-  
-  func getAsync(from url: String, with query: String, complition: @escaping ([Any]) -> Void) {
-    // TODO
-  }
-  
-  
-  
-  
 }

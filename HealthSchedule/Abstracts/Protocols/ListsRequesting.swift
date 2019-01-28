@@ -11,6 +11,5 @@ import UIKit
 protocol ListsRequesting {
   
   func getAsync(from url: String, complition: @escaping (_ list: [Any]) -> Void)
-  func getAsync(from url: String, with query: String, complition: @escaping (_ list: [Any]) -> Void)
   
 }

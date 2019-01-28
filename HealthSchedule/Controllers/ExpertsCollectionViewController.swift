@@ -28,37 +28,6 @@ class ExpertsCollectionViewController: UICollectionViewController {
     collectionView.register(
       UINib(nibName: "ContentViewCell",bundle: nil),
       forCellWithReuseIdentifier: "BaseContentViewCell")
-    
-    var processedImages = 0
-    RequestHandler.shared.getAsync(from: RequestHandler.buildEndPointUrl(), complition: { json in
-      let _ = json.enumerated().map { [weak self] (index, profile) in
-        
-        guard let jsonData = profile as? [String: Any],
-          var expert = ExpertProfile(json: jsonData) else {
-          print("Cannot populate expert")
-          return
-        }
-        
-        RequestHandler.shared.getImageAsync(from:
-          expert.pictureUrls?[ProfileJsonFields.thumbnail.rawValue] as! String, for: index) {
-            [weak self] (expertIndex, image) in
-            self?.experts[expertIndex!].setActiveImage(image)
-            processedImages += 1
-            
-            if processedImages >= self?.experts.count ?? json.count {
-              DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-              }
-            }
-        }
-        
-        self?.experts.append(expert)
-      }
-      
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
-      }
-    })
   }
   
   override func collectionView(_ collectionView: UICollectionView,
