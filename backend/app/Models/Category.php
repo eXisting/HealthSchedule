@@ -42,6 +42,14 @@ class Category extends Model
 
     #region Methods
 
+    /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
     #endregion
 
     #region Relationships
