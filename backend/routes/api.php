@@ -27,9 +27,9 @@ Route::middleware('jwt.auth')->group(function () {
         Route::get('/', 'UserController@getByToken');
 
         Route::prefix('recommendations')->group(function () {
-            Route::get('/', 'UserRecommendationController@recommendations');
-            Route::get('/{id}', 'UserRecommendationController@recommendation');
-            Route::put('/{id}/{recommendation_status}', 'UserRecommendationController@changeStatus');
+            Route::get('/', 'RecommendationController@recommendations');
+            Route::get('/{id}', 'RecommendationController@recommendation');
+            Route::put('/{id}/{recommendation_status}', 'RecommendationController@changeStatus');
         });
     });
 

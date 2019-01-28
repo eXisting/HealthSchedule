@@ -14,7 +14,7 @@ use Gate;
  * @property User $user
  * @property RecommendationRepository $recommendation
  */
-class UserRecommendationController extends Controller
+class RecommendationController extends Controller
 {
     /**
      * @var User
@@ -48,6 +48,10 @@ class UserRecommendationController extends Controller
         return response()->json($recommendations);
     }
 
+    /**
+     * @param integer $recommendation_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function recommendation($recommendation_id)
     {
         $recommendation = $this->recommendation->getRecommendationWithProvider($recommendation_id);
@@ -63,6 +67,11 @@ class UserRecommendationController extends Controller
         return response()->json($recommendation);
     }
 
+    /**
+     * @param integer $recommendation_id
+     * @param string $status
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function changeStatus($recommendation_id, $status)
     {
         if($recommendation_id) {

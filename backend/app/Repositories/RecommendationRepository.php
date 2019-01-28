@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Recommendation;
-use App\Models\User;
 
 /**
  * Class RecommendationRepository
@@ -14,12 +13,12 @@ use App\Models\User;
 class RecommendationRepository
 {
     /**
-     * @var User
+     * @var Recommendation
      */
     public $model;
 
     /**
-     * UserRepository constructor.
+     * RecommendationRepository constructor.
      */
     public function __construct()
     {
@@ -27,11 +26,11 @@ class RecommendationRepository
     }
 
     /**
-     * @param $id
+     * @param integer $recommendation_id
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
-    public function getRecommendationWithProvider($id)
+    public function getRecommendationWithProvider($recommendation_id)
     {
-        return $this->model->query()->with('provider')->find($id);
+        return $this->model->query()->with('provider')->find($recommendation_id);
     }
 }
