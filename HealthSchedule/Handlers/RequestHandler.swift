@@ -28,31 +28,28 @@ class RequestHandler {
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = "GET"
     
-    // make the request
     let task = defaultSession.dataTask(with: urlRequest) {
-      (data, response, error) in
+      (recivedData, serverResponse, error) in
       
       guard error == nil else {
         print(error!)
         return
       }
       
-      guard let responseData = data else {
+      guard let jsonData = recivedData else {
         print("Error: did not receive data")
         return
       }
       
-      do {
-        guard let todo = try JSONSerialization.jsonObject(with: responseData, options: [])
-          as? [String: Any] else {
-            print("error trying to convert data to JSON")
-            return
-        }
+      do {        
+        //for debugging
+//        if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+//          print(JSONString)
+//        }
         
-        //print(todo["results"] ?? "nothing")
-        let result = todo["results"] as! [Any]
+        let json = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [Any]
         
-        completion(result)
+        completion(json ?? [])
       } catch  {
         print("error trying to convert data to JSON")
         return
