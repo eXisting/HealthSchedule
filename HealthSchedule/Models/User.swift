@@ -16,8 +16,8 @@ enum UserJsonFields: String {
   case phone = "phone"
   case status = "confirmed_status"
   case birthday = "birthday_at"
+  case image = "image"
 
-//  case picture = "picture"
 //  case large = "large"
 //  case thumbnail = "thumbnail"
 }
@@ -36,6 +36,8 @@ struct User {
   var status: Bool
   var birthday: Any
   
+  
+  var photo: RemoteImage?
   var userType: UserType = .client
 }
 
@@ -50,6 +52,10 @@ extension User: JsonInitiableModel {
       let birthday = json[UserJsonFields.birthday.rawValue] else {
         print("Cannot parse json fields in User.init!")
         return nil
+    }
+    
+    if let userImageObjectJson = json[UserJsonFields.image.rawValue] as? [String:Any] {
+      photo = RemoteImage(json: userImageObjectJson)
     }
     
     self.id = id

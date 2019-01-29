@@ -42,7 +42,7 @@ class AuthenticationViewController: UIViewController {
   
   func requestUser(errorHandler: () -> Void) {
     // TODO: replace with text fields values
-    let b = ["username":"freddy.mcglynn@example.net", "password":"secret"]
+    let b = ["username":"leuschke.connie@example.org", "password":"secret"]
     RequestManager.signIn(authType: .client, body: b) { (user, error) in
       // TODO: store it and pass to another controlelr in case when error is nil
       print(user)
