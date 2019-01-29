@@ -2,8 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
+/**
+ * Class ProviderController
+ *
+ * Properties
+ * @property User $provider
+ */
 class ProviderController extends Controller
 {
+    /**
+     * @var User
+     */
+    private $provider;
+
+    /**
+     * ProviderController constructor.
+     */
+    public function __construct()
+    {
+        $this->provider = auth('api')->user();
+    }
+
     /**
      * Return provider object by jwt
      *
@@ -11,7 +32,7 @@ class ProviderController extends Controller
      */
     public function getByToken()
     {
-        return auth('api')->user();
+        return $this->provider->load('image');
     }
 
 }
