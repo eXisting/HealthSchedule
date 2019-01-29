@@ -71,7 +71,7 @@ class RequestHandler {
     }
   }
   
-  func postAsync(to url: String, params: JsonDictionary?, bodyData: JsonDictionary, completion: @escaping PostComplition) {
+  private func postAsync(to url: String, params: JsonDictionary?, bodyData: JsonDictionary, completion: @escaping PostComplition) {
     // TODO: Return error in tuple
     
     guard var urlRequest = buildUrlRequest(url, params, "POST") else {
@@ -179,7 +179,7 @@ extension RequestHandler: AuthProviding {
 
 
 // Helpers
-extension RequestHandler {
+private extension RequestHandler {
   private func buildUrlRequest(_ url: String, _ params: JsonDictionary?, _ method: String) -> URLRequest? {
     
     var parameterString = ""
