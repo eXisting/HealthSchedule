@@ -46,7 +46,7 @@ class ProviderService extends Model
         'service_id' => 'integer',
         'price' => 'double',
         'description' => 'string',
-        'interval' => 'datetime:H-m',
+        'interval' => 'datetime:H:m',
     ];
 
     #endregion
