@@ -40,8 +40,6 @@ class ProviderRegisterController extends RegisterController implements RegisterI
      */
     public $verify;
 
-
-
     /**
      * ProviderRegisterController constructor.
      * @param ProviderRegisterRequest $request
