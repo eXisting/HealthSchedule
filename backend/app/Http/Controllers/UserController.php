@@ -2,8 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
+/**
+ * Class UserController
+ *
+ * Properties
+ * @property User $user
+ */
 class UserController extends Controller
 {
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * UserController constructor.
+     */
+    public function __construct()
+    {
+        $this->user = auth('api')->user();
+    }
+
     /**
      * Return user object by jwt
      *
@@ -11,7 +32,7 @@ class UserController extends Controller
      */
     public function getByToken()
     {
-        return auth('api')->user();
+        return $this->user->load('image');
     }
 
 }
