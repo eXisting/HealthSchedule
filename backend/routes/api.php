@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +27,7 @@ Route::middleware('jwt.auth')->group(function () {
         Route::prefix('recommendations')->group(function () {
             Route::get('/', 'RecommendationController@recommendations');
             Route::get('/{id}', 'RecommendationController@recommendation');
+            Route::post('/', 'RecommendationController@store');
             Route::put('/{id}/{recommendation_status}', 'RecommendationController@changeStatus');
         });
     });

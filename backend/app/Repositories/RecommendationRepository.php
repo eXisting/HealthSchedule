@@ -33,4 +33,20 @@ class RecommendationRepository
     {
         return $this->model->query()->with('provider')->find($recommendation_id);
     }
+
+    /**
+     * @param integer $provider_id
+     * @param array $data
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function create($provider_id, $data)
+    {
+        $result = $this->model->create(array_merge($data, [ 'provider_id' => $provider_id ]));
+
+        if(!$result) {
+            return response()->json(['message' => 'Recommendation did not save']);
+        }
+
+        return $result;
+    }
 }

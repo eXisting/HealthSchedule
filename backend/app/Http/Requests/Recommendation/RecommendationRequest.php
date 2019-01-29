@@ -1,9 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Recommendation;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class RecommendationRequest
+ *
+ * Properties
+ * @property integer $user_id
+ * @property string $title
+ * @property string $description
+ */
 class RecommendationRequest extends FormRequest
 {
     /**
@@ -24,7 +32,9 @@ class RecommendationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => 'required|integer',
+            'title' => 'required|string',
+            'description' => 'required|string',
         ];
     }
 }
