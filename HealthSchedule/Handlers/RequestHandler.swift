@@ -180,13 +180,7 @@ private extension RequestHandler {
     
     var parameterString = ""
     if let parameters = params {
-      let parameterArray = parameters.map { key, value -> String in
-        let percentEscapedKey = key.addingPercentEncodingForURLQueryValue()!
-        let percentEscapedValue = value.addingPercentEncodingForURLQueryValue()!
-        return "\(percentEscapedKey)=\(percentEscapedValue)"
-      }
-      
-      parameterString = "?" + parameterArray.joined(separator: "&")
+      parameterString = parameters.asParamsString()
     }
     
     guard let url = URL(string: url + parameterString) else {
@@ -232,4 +226,19 @@ extension String {
     return addingPercentEncoding(withAllowedCharacters: allowed)
   }
   
+}
+
+extension Dictionary where Key == String, Value == String {
+  
+  // Shortcut for parsing dictionary as params string
+  
+  func asParamsString() -> String {
+    let parameterArray = map { key, value -> String in
+      let percentEscapedKey = key.addingPercentEncodingForURLQueryValue()!
+      let percentEscapedValue = value.addingPercentEncodingForURLQueryValue()!
+      return "\(percentEscapedKey)=\(percentEscapedValue)"
+    }
+    
+    return "?" + parameterArray.joined(separator: "&")
+  }
 }
