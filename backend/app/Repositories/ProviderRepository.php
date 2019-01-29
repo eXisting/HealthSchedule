@@ -28,15 +28,12 @@ class ProviderRepository
 
     /**
      * @param $provider_id
-     * @param $profession_id
+     * @param array $data
      * @return \Illuminate\Http\JsonResponse
      */
-    public function saveProfession($provider_id, $profession_id)
+    public function saveProfession($provider_id, $data)
     {
-        $result = (new ProviderProfession())->create([
-            'provider_id' => $provider_id,
-            'profession_id' => $profession_id,
-        ]);
+        $result = (new ProviderProfession())->create(array_merge($data, ['provider_id' => $provider_id]));
 
         if(!$result) {
             return response()->json(['message' => 'User did not create']);
