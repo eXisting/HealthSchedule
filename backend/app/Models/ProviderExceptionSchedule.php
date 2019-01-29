@@ -40,8 +40,8 @@ class ProviderExceptionSchedule extends Model
     protected $casts = [
         'provider_id' => 'integer',
         'exception_at' => 'datetime:Y-m-d',
-        'start_time' => 'datetime:H-i',
-        'end_time' => 'datetime:H-i',
+        'start_time' => 'datetime:H:i',
+        'end_time' => 'datetime:H:i',
         'working' => 'boolean',
     ];
 
