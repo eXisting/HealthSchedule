@@ -75,8 +75,8 @@ class ProviderRegisterController extends RegisterController implements RegisterI
         }
 
         if(count($this->request->professions)) {
-            collect($this->request->professions)->each(function ($profession_id) use ($provider) {
-                $this->provider->saveProfession($provider->id, $profession_id);
+            collect($this->request->professions)->each(function ($data) use ($provider) {
+                $this->provider->saveProfession($provider->id, $data);
             });
         }
 

@@ -51,7 +51,11 @@ class ProviderRegisterRequest extends FormRequest
             'city_id' => 'required|integer|exists:cities,id',
             'birthday' => 'required|date|date_format:"Y-m-d H:i:s"',
             'professions' => 'required',
-            'professions.*' => 'required|integer|exists:professions,id',
+            'professions.*.profession_id' => 'required|integer|exists:professions,id',
+            'professions.*.company_name' => 'required|string',
+            'professions.*.city_id' => 'required|integer|exists:cities,id',
+            'professions.*.start_at' => 'required|date|date_format:"Y-m-d H:i:s"',
+            'professions.*.end_at' => 'required|date|date_format:"Y-m-d H:i:s"',
             'address' => 'required|string|max:255',
             'verifies' => 'required',
             'verifies.*' => 'required|image|mimes:jpeg,jpg,png'

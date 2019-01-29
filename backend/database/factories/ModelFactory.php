@@ -69,7 +69,12 @@ $factory->define(App\Models\ProviderExceptionSchedule::class, function (Faker $f
 });
 
 $factory->define(App\Models\ProviderProfession::class, function (Faker $faker) {
-    return [];
+    return [
+        'city_id' => \App\Models\City::query()->inRandomOrder()->first()->id,
+        'company_name' => $faker->company,
+        'start_at' => \Carbon\Carbon::create(2000-rand(1,10), rand(1,12))->toDateTimeString(),
+        'end_at' => \Carbon\Carbon::create(2000+rand(1,10), rand(1,12))->toDateTimeString(),
+    ];
 });
 
 $factory->define(App\Models\ProviderSchedule::class, function (Faker $faker) {
