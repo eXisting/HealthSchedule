@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Recommendation\RecommendationRequest;
 use App\Models\Recommendation;
 use App\Models\User;
 use App\Repositories\RecommendationRepository;
@@ -11,15 +12,15 @@ use Gate;
  * Class UserRecommendationController
  *
  * Properties
- * @property User $user
+ * @property User $authUser
  * @property RecommendationRepository $recommendation
  */
-class UserRecommendationController extends Controller
+class RecommendationController extends Controller
 {
     /**
      * @var User
      */
-    private $user;
+    private $authUser;
 
     /**
      * @var RecommendationRepository
@@ -31,7 +32,7 @@ class UserRecommendationController extends Controller
      */
     public function __construct()
     {
-        $this->user = auth('api')->user();
+        $this->authUser = auth('api')->user();
         $this->recommendation = new RecommendationRepository();
     }
 
@@ -41,13 +42,17 @@ class UserRecommendationController extends Controller
     public function recommendations()
     {
         /** @var Recommendation $recommendations */
-        $recommendations = $this->user->userRecommendations()
+        $recommendations = $this->authUser->userRecommendations()
             ->where('is_active', 1)
             ->get();
 
         return response()->json($recommendations);
     }
 
+    /**
+     * @param integer $recommendation_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function recommendation($recommendation_id)
     {
         $recommendation = $this->recommendation->getRecommendationWithProvider($recommendation_id);
@@ -63,6 +68,11 @@ class UserRecommendationController extends Controller
         return response()->json($recommendation);
     }
 
+    /**
+     * @param integer $recommendation_id
+     * @param string $status
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function changeStatus($recommendation_id, $status)
     {
         if($recommendation_id) {
@@ -88,6 +98,24 @@ class UserRecommendationController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * @param RecommendationRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(RecommendationRequest $request)
+    {
+        if(Gate::denies('provider-create-recommendation', $request->user_id)) {
+            return response()->json(['message' => 'Not enough rights']);
+        }
+
+        $this->recommendation->create($this->authUser->id, $request->all());
+
+        $success = true;
+
+        return response()->json(compact('success'));
+
     }
 
 }
