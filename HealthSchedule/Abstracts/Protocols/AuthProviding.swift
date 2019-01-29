@@ -9,11 +9,10 @@
 import UIKit
 
 protocol AuthProviding {
-  // Get token
+  // Get token, you need to get user internally in completion
   func login(to url: String, params: RequestHandler.JsonDictionary?, bodyData: RequestHandler.JsonDictionary, completion: @escaping RequestHandler.PostComplition)
   
   func singUp()
-  func singIn()
 }
 
 enum TokenJsonFields: String {

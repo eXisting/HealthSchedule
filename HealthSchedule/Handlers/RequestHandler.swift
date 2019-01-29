@@ -171,10 +171,6 @@ extension RequestHandler: AuthProviding {
   func singUp() {
     // TODO
   }
-  
-  func singIn() {
-    // TODO
-  }
 }
 
 
