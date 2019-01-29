@@ -17,9 +17,6 @@ enum UserJsonFields: String {
   case status = "confirmed_status"
   case birthday = "birthday_at"
   case image = "image"
-
-//  case large = "large"
-//  case thumbnail = "thumbnail"
 }
 
 enum UserType: Int {
