@@ -34,6 +34,7 @@
 		ED1ED02421FF353400141CF5 /* Profession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02321FF353400141CF5 /* Profession.swift */; };
 		ED1ED02621FF45E900141CF5 /* JsonInitiableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */; };
 		ED1ED02921FF5C2D00141CF5 /* ValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */; };
+		ED1ED02B21FF678A00141CF5 /* AuthProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
 		ED330C6621EF8B66001019FC /* RootTabBarVewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6521EF8B66001019FC /* RootTabBarVewController.swift */; };
 		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
@@ -43,9 +44,10 @@
 		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
 		ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */; };
 		ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */; };
+		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
-		ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */; };
+		ED6CBE7C21ECD80600860010 /* GetRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* GetRequesting.swift */; };
 		ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,7 @@
 		ED1ED02321FF353400141CF5 /* Profession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profession.swift; sourceTree = "<group>"; };
 		ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonInitiableModel.swift; sourceTree = "<group>"; };
 		ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationController.swift; sourceTree = "<group>"; };
+		ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviding.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		ED330C6521EF8B66001019FC /* RootTabBarVewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarVewController.swift; sourceTree = "<group>"; };
 		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
@@ -90,9 +93,10 @@
 		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
 		ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWithExperienceView.xib; sourceTree = "<group>"; };
 		ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWithExperienceView.swift; sourceTree = "<group>"; };
+		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
-		ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRequesting.swift; sourceTree = "<group>"; };
+		ED6CBE7B21ECD80600860010 /* GetRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequesting.swift; sourceTree = "<group>"; };
 		ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,9 +213,10 @@
 			children = (
 				ED089A7D21E89065006A8523 /* ContentViewCellRateable.swift */,
 				ED089A8821E8EB4F006A8523 /* ImageRequesting.swift */,
-				ED6CBE7B21ECD80600860010 /* ListsRequesting.swift */,
+				ED6CBE7B21ECD80600860010 /* GetRequesting.swift */,
 				ED1ED01B21FF231C00141CF5 /* PrintableObject.swift */,
 				ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */,
+				ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */,
 				ED1ED01921FF199100141CF5 /* City.swift */,
 				ED1ED02321FF353400141CF5 /* Profession.swift */,
+				ED5DBCB5220066E3006070E0 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -366,7 +372,7 @@
 				ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */,
 				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
-				ED6CBE7C21ECD80600860010 /* ListsRequesting.swift in Sources */,
+				ED6CBE7C21ECD80600860010 /* GetRequesting.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Profession.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
@@ -380,6 +386,7 @@
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationController.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
+				ED1ED02B21FF678A00141CF5 /* AuthProviding.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED330C6A21F084BA001019FC /* RootNaviationController.swift in Sources */,
@@ -393,6 +400,7 @@
 				ED330C6621EF8B66001019FC /* RootTabBarVewController.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */,
+				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

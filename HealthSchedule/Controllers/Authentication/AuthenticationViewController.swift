@@ -13,9 +13,6 @@ class AuthenticationViewController: UIViewController {
   private let signInSegueId = "signIn"
   private let signUpSequeId = "signUp"
   
-  let n = "1"
-  let p = "2"
-  
   @IBOutlet weak var backgroundImage: UIImageView!
   @IBOutlet weak var emailField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
@@ -33,28 +30,33 @@ class AuthenticationViewController: UIViewController {
   }
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    if identifier == signInSegueId && !validateFields() {
-      AlertHandler.ShowAlert(
-        for: self,
-        "Validation",
-        "Either login or password is incorrect",
-        .alert)
-      
-      emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
-      passwordField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
-      
-      return false
-    }
+    // TODO: wait until data received
+    requestUser(errorHandler: validatonAlert)
     
-    return true
+    return false
   }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // TODO: pass data to next view controller
   }
   
-  func validateFields() -> Bool {
-    // TODO: Call API instead
-    return emailField.text == n && passwordField.text == p
+  func requestUser(errorHandler: () -> Void) {
+    // TODO: replace with text fields values
+    let b = ["username":"freddy.mcglynn@example.net", "password":"secret"]
+    RequestManager.signIn(authType: .client, body: b) { (user, error) in
+      // TODO: store it and pass to another controlelr in case when error is nil
+      print(user)
+    }
+  }
+  
+  private func validatonAlert() {
+    AlertHandler.ShowAlert(
+      for: self,
+      "Validation",
+      "Either login or password is incorrect",
+      .alert)
+    
+    emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
+    passwordField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
   }
 }

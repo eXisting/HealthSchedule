@@ -47,7 +47,8 @@ class SignUpViewController: UIViewController {
       isValid = false
     }
     
-    return isValid
+    //return isValid
+    return true
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
