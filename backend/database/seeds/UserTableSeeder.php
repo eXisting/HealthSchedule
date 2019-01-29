@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class UserTableSeeder extends Seeder
 {
@@ -139,10 +140,14 @@ class UserTableSeeder extends Seeder
             $count = $category->professions->count();
 
             if($count) {
-                $category->professions->random(rand(1,$count > 3 ? $count-3: $count))->each(function ($prof) use ($user) {
+                $category->professions->random(rand(1,$count > 3 ? $count-3: $count))->each(function (Faker $faker, $prof) use ($user) {
                     factory(\App\Models\ProviderProfession::class, 1)->create([
                         'provider_id' => $user->id,
                         'profession_id' => $prof->id,
+                        'city_id' => \App\Models\City::query()->inRandomOrder()->first()->id,
+                        'company_name' => $faker->company,
+                        'start_at' => \Carbon\Carbon::create(2000-rand(1,10), rand(1,12))->toDateTimeString(),
+                        'end_at' => \Carbon\Carbon::create(2000+rand(1,10), rand(1,12))->toDateTimeString()
                     ]);
                 });
             }
