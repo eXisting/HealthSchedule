@@ -91,13 +91,13 @@ class RequestHandler {
     guard var urlRequest = buildUrlRequest(url, params, "POST") else {
       return
     }
-    
+    print(url)
     let encoder = JSONEncoder()
     do {
       let jsonData = try encoder.encode(bodyData)
       urlRequest.httpBody = jsonData
       
-      print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
+      //print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
     } catch {
       print("Cannot encode data")
     }
@@ -113,7 +113,7 @@ class RequestHandler {
       }
     
       do {
-        //debugResponse(jsonData)
+        //RequestHandler.debugResponse(jsonData)
         let json = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
         let result: (Any, Error?) = (json, nil)
         completion(result)

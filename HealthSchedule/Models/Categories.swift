@@ -1,5 +1,5 @@
 //
-//  Profession.swift
+//  Category.swift
 //  HealthSchedule
 //
 //  Created by sys-246 on 1/28/19.
@@ -8,27 +8,27 @@
 
 import UIKit
 
-enum ProfessionJsonFields: String {
+enum CategoryJsonFields: String {
   case id = "id"
   case categoryId = "category_id"
   case name = "name"
   case title = "title"
 }
 
-struct Profession {
+struct Category {
   var id: Int
   var categoryId: Int
   var name: String
   var title: String
 }
 
-extension Profession: JsonInitiableModel {
+extension Category: JsonInitiableModel {
   init?(json: [String: Any]) {
-    guard let id = json[ProfessionJsonFields.id.rawValue] as? Int,
-      let categoryId = json[ProfessionJsonFields.categoryId.rawValue] as? Int,
-      let name = json[ProfessionJsonFields.name.rawValue] as? String,
-      let title = json[ProfessionJsonFields.title.rawValue] as? String else {
-        print("Cannot parse json fields in Profession.init!")
+    guard let id = json[CategoryJsonFields.id.rawValue] as? Int,
+      let categoryId = json[CategoryJsonFields.categoryId.rawValue] as? Int,
+      let name = json[CategoryJsonFields.name.rawValue] as? String,
+      let title = json[CategoryJsonFields.title.rawValue] as? String else {
+        print("Cannot parse json fields in Category.init!")
         return nil
     }
     
@@ -39,7 +39,7 @@ extension Profession: JsonInitiableModel {
   }
 }
 
-extension Profession: PrintableObject {
+extension Category: PrintableObject {
   func getViewableString() -> String {
     return title
   }

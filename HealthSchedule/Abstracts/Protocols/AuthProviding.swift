@@ -20,23 +20,22 @@ enum TokenJsonFields: String {
 }
 
 struct Token {
-  var expires: Int
   var token: String
   
+  var expires: Int?
   var success: Bool?
 }
 
 extension Token: JsonInitiableModel {
   init?(json: [String: Any]) {
-    guard let expires = json[TokenJsonFields.expires.rawValue] as? Int,
-      let token = json[TokenJsonFields.token.rawValue] as? String else {
+    guard let token = json[TokenJsonFields.token.rawValue] as? String else {
         print("Cannot parse json fields in Token.init!")
         return nil
     }
     
+    expires = json[TokenJsonFields.expires.rawValue] as? Int
     success = json[TokenJsonFields.success.rawValue] as? Bool
     
-    self.expires = expires
     self.token = token
   }
 }

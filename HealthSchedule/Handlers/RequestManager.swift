@@ -77,4 +77,29 @@ class RequestManager {
       }
     }
   }
+  
+  class func signUp(authType: UserType, body: RequestHandler.JsonDictionary, _ complition: @escaping RequestHandler.PostComplition) {
+    let signUpEndpoint = authType == .client ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
+    
+    authRequests.fetchToken(from: buildEndpoint(signUpEndpoint.rawValue), bodyData: body) { (data, error) in
+      guard let tokenJson = data as? [String:Any] else {
+        print("Token has wrong format")
+        return
+      }
+      
+      var tokenHeaders: RequestHandler.JsonDictionary = [:]
+      guard let tokenObject = Token(json: tokenJson) else {
+        print("Cannot init token object in signUp")
+        return
+      }
+      
+      // TODO: Check wether token's success is true
+      
+      tokenHeaders[TokenJsonFields.token.rawValue] = tokenObject.token
+      
+      getAsyncFor(type: User.self, from: authType == .client ? .user : .provider, tokenHeaders) { user in
+        complition((user, nil))
+      }
+    }
+  }
 }

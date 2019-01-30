@@ -11,7 +11,7 @@ import UIKit
 class AuthenticationViewController: UIViewController {
   
   private let signInSegueId = "signIn"
-  private let signUpSequeId = "signUp"
+  private let signUpSequeId = "signUpStart"
   
   @IBOutlet weak var backgroundImage: UIImageView!
   @IBOutlet weak var emailField: UITextField!
@@ -32,7 +32,11 @@ class AuthenticationViewController: UIViewController {
   }
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    // TODO: wait until data received    
+    // TODO: wait until data received
+    if identifier == signUpSequeId {
+      signUp(errorHandler: validatonAlert)
+      return false
+    }
     requestUser(errorHandler: validatonAlert)
     
     return isLoginSucceded
@@ -54,6 +58,44 @@ class AuthenticationViewController: UIViewController {
       
       print(user)
       self?.isLoginSucceded = true
+    }
+  }
+  
+  func signUp(errorHandler: @escaping (Error?) -> Void) {
+//    let body = [
+//      "email":"johny1234@gmail.com",
+//      "phone":"123453124512",
+//      "password":"qwerty",
+//      "first_name":"Magic name2",
+//      "last_name":"hehdasdase",
+//      "photo":"",
+//      "city_id":"2",
+//      "birthday":"1999-11-11 00:00:00"
+//    ]
+    
+    let body = [
+      "email":"johny1234@gmail.com",
+      "phone":"123453124512",
+      "password":"qwerty",
+      "first_name":"Magic name2",
+      "last_name":"hehdasdase",
+      "photo":"",
+      "city_id":"2",
+      "birthday":"1999-11-11 00:00:00",
+      "address":"cudo street",
+      "professions":"",
+      "verifies":""
+    ]
+
+    
+    RequestManager.signUp(authType: .client, body: body) { [weak self] (userData, error) in
+      // TODO: store it and pass to another controlelr in case when error is nil
+      guard let user = userData as? User else {
+        errorHandler(error)
+        return
+      }
+      
+      print(user)
     }
   }
   

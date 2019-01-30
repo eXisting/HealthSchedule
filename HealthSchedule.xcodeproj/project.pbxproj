@@ -31,7 +31,7 @@
 		ED1ED01C21FF231C00141CF5 /* PrintableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01B21FF231C00141CF5 /* PrintableObject.swift */; };
 		ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */; };
 		ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02121FF34B700141CF5 /* RequestManager.swift */; };
-		ED1ED02421FF353400141CF5 /* Profession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02321FF353400141CF5 /* Profession.swift */; };
+		ED1ED02421FF353400141CF5 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02321FF353400141CF5 /* Categories.swift */; };
 		ED1ED02621FF45E900141CF5 /* JsonInitiableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */; };
 		ED1ED02921FF5C2D00141CF5 /* ValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */; };
 		ED1ED02B21FF678A00141CF5 /* AuthProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */; };
@@ -81,7 +81,7 @@
 		ED1ED01B21FF231C00141CF5 /* PrintableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintableObject.swift; sourceTree = "<group>"; };
 		ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibLoad.swift; sourceTree = "<group>"; };
 		ED1ED02121FF34B700141CF5 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
-		ED1ED02321FF353400141CF5 /* Profession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profession.swift; sourceTree = "<group>"; };
+		ED1ED02321FF353400141CF5 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonInitiableModel.swift; sourceTree = "<group>"; };
 		ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationController.swift; sourceTree = "<group>"; };
 		ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviding.swift; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 			children = (
 				ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */,
 				ED1ED01921FF199100141CF5 /* City.swift */,
-				ED1ED02321FF353400141CF5 /* Profession.swift */,
+				ED1ED02321FF353400141CF5 /* Categories.swift */,
 				ED5DBCB5220066E3006070E0 /* User.swift */,
 				ED5DBCB72200ACD7006070E0 /* RemoteImage.swift */,
 			);
@@ -377,7 +377,7 @@
 				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
 				ED6CBE7C21ECD80600860010 /* GetRequesting.swift in Sources */,
-				ED1ED02421FF353400141CF5 /* Profession.swift in Sources */,
+				ED1ED02421FF353400141CF5 /* Categories.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */,
