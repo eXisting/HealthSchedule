@@ -112,10 +112,9 @@ class RecommendationController extends Controller
 
         $this->recommendation->create($this->authUser->id, $request->all());
 
-        $success = true;
-
-        return response()->json(compact('success'));
+        return response()->json(['success' => true]);
 
     }
+
 
 }
