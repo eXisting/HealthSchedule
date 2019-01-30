@@ -184,10 +184,5 @@ class UserTableSeeder extends Seeder
 
         #endregion
 
-        #region ProviderExperiences
-
-        $experiences = factory(\App\Models\ProviderExperience::class, 10)->create();
-
-        #endregion
     }
 }
