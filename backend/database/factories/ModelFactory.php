@@ -69,7 +69,12 @@ $factory->define(App\Models\ProviderExceptionSchedule::class, function (Faker $f
 });
 
 $factory->define(App\Models\ProviderProfession::class, function (Faker $faker) {
-    return [];
+    return [
+        'city_id' => \App\Models\City::query()->inRandomOrder()->first()->id,
+        'company_name' => $faker->company,
+        'start_at' => \Carbon\Carbon::create(2000-rand(1,10), rand(1,12))->toDateTimeString(),
+        'end_at' => \Carbon\Carbon::create(2000+rand(1,10), rand(1,12))->toDateTimeString(),
+    ];
 });
 
 $factory->define(App\Models\ProviderSchedule::class, function (Faker $faker) {
@@ -137,18 +142,5 @@ $factory->define(App\Models\ProviderService::class, function (Faker $faker) {
         'price' => rand(100,500),
         'description' => $faker->text,
         'interval' => \Carbon\Carbon::createFromTime(rand(0,1), $minutes->random())
-    ];
-});
-
-$factory->define(App\Models\ProviderExperience::class, function (Faker $faker) {
-    $year = 2000;
-
-    return [
-        'provider_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::PROVIDER)->inRandomOrder()->first()->id,
-        'profession_id' => \App\Models\Profession::query()->inRandomOrder()->first()->id,
-        'city_id' => \App\Models\City::query()->inRandomOrder()->first()->id,
-        'company_name' => $faker->company,
-        'start_at' => \Carbon\Carbon::create($year-rand(1,10), rand(1,12))->toDateTimeString(),
-        'end_at' => \Carbon\Carbon::create($year+rand(1,10), rand(1,12))->toDateTimeString()
     ];
 });

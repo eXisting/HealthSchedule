@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,10 +12,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $id
  * @property integer $provider_id
  * @property integer $profession_id
+ * @property integer $city_id
+ * @property string $company_name
+ * @property Carbon $start_at
+ * @property Carbon $end_at
  *
  * Relationships
  * @property User $provider
  * @property Profession $profession
+ * @property City $city
  */
 class ProviderProfession extends Model
 {
@@ -26,7 +32,7 @@ class ProviderProfession extends Model
      * @var array
      */
     protected $fillable = [
-        'provider_id', 'profession_id',
+        'provider_id', 'profession_id', 'city_id', 'company_name', 'start_at', 'end_at',
     ];
 
     /**
@@ -37,6 +43,10 @@ class ProviderProfession extends Model
     protected $casts = [
         'provider_id' => 'integer',
         'profession_id' => 'integer',
+        'city_id' => 'integer',
+        'company_name' => 'string',
+        'start_at' => 'datetime',
+        'end_at' => 'datetime',
     ];
 
     #endregion
@@ -61,6 +71,14 @@ class ProviderProfession extends Model
     public function profession()
     {
         return $this->belongsTo(Profession::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     #endregion
