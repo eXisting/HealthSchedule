@@ -17,6 +17,8 @@ enum UserJsonFields: String {
   case status = "confirmed_status"
   case birthday = "birthday_at"
   case image = "image"
+  
+  case role = "user_role_id"
 }
 
 enum UserType: Int {
@@ -46,7 +48,8 @@ extension User: JsonInitiableModel {
       let email = json[UserJsonFields.email.rawValue] as? String,
       let phone = json[UserJsonFields.phone.rawValue] as? String,
       let status = json[UserJsonFields.status.rawValue] as? Bool,
-      let birthday = json[UserJsonFields.birthday.rawValue] else {
+      let birthday = json[UserJsonFields.birthday.rawValue],
+      let role = json[UserJsonFields.role.rawValue] as? Int else {
         print("Cannot parse json fields in User.init!")
         return nil
     }
@@ -62,5 +65,7 @@ extension User: JsonInitiableModel {
     self.phone = phone
     self.status = status
     self.birthday = birthday
+    
+    userType = UserType(rawValue: role) ?? .client
   }
 }

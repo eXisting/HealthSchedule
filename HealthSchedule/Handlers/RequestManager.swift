@@ -8,19 +8,6 @@
 
 import UIKit
 
-enum Endpoints: String {
-  case allCities = "/api/cities"
-  case allProfessions = "/api/category/doctors/professions"
-  
-  case signIn = "/api/login"
-  
-  case user = "/api/user"
-  case provider = "/api/provider"
-
-  case signUpAsUser = "/api/register/user"
-  case signUpAsProvider = "/api/register/provider"
-}
-
 class RequestManager {
   static let rootEndpoint = "http://127.0.0.1:8000"
   
@@ -69,7 +56,7 @@ class RequestManager {
   }
   
   class func signIn(authType: UserType, body: RequestHandler.JsonDictionary, _ complition: @escaping RequestHandler.PostComplition) {
-    authRequests.login(to: buildEndpoint(Endpoints.signIn.rawValue), params: nil, bodyData: body) { (data, error) in
+    authRequests.fetchToken(from: buildEndpoint(Endpoints.signIn.rawValue), bodyData: body) { (data, error) in
       guard let tokenJson = data as? [String:Any] else {
         print("Token has wrong format")
         return
@@ -86,7 +73,6 @@ class RequestManager {
       let signInEndpoint = authType == .client ? Endpoints.user : Endpoints.provider
       
       getAsyncFor(type: User.self, from: signInEndpoint, tokenHeaders) { user in
-        // TODO: manage two types of authentications
         complition((user, nil))
       }
     }

@@ -8,6 +8,20 @@
 
 import UIKit
 
+enum Endpoints: String {
+  // GET
+  case user = "/api/user"
+  case provider = "/api/provider"
+  case allCities = "/api/cities"
+  case allProfessions = "/api/category/doctors/professions"
+  
+  // POST
+  case signUpAsUser = "/api/register/user"
+  case signUpAsProvider = "/api/register/provider"
+  
+  case signIn = "/api/login"
+}
+
 enum RequestError: Error {
   case EndPointError(reason: String)
   case SerializationError(reason: String)
@@ -164,12 +178,8 @@ extension RequestHandler: GetRequesting {
 }
 
 extension RequestHandler: AuthProviding {
-  func login(to url: String, params: JsonDictionary?, bodyData: JsonDictionary, completion: @escaping RequestHandler.PostComplition) {
-    postAsync(to: url, params: params, bodyData: bodyData, completion: completion)
-  }
-  
-  func singUp() {
-    // TODO
+  func fetchToken(from url: String, bodyData: JsonDictionary, completion: @escaping RequestHandler.PostComplition) {
+    postAsync(to: url, params: nil, bodyData: bodyData, completion: completion)
   }
 }
 

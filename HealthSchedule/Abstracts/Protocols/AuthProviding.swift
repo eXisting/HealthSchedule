@@ -10,19 +10,20 @@ import UIKit
 
 protocol AuthProviding {
   // Get token, you need to get user internally in completion
-  func login(to url: String, params: RequestHandler.JsonDictionary?, bodyData: RequestHandler.JsonDictionary, completion: @escaping RequestHandler.PostComplition)
-  
-  func singUp()
+  func fetchToken(from url: String, bodyData: RequestHandler.JsonDictionary, completion: @escaping RequestHandler.PostComplition)
 }
 
 enum TokenJsonFields: String {
   case expires = "expires"
   case token = "token"
+  case success = "success"
 }
 
 struct Token {
   var expires: Int
   var token: String
+  
+  var success: Bool?
 }
 
 extension Token: JsonInitiableModel {
@@ -32,6 +33,8 @@ extension Token: JsonInitiableModel {
         print("Cannot parse json fields in Token.init!")
         return nil
     }
+    
+    success = json[TokenJsonFields.success.rawValue] as? Bool
     
     self.expires = expires
     self.token = token
