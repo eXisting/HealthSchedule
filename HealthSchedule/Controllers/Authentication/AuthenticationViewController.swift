@@ -17,6 +17,8 @@ class AuthenticationViewController: UIViewController {
   @IBOutlet weak var emailField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
   
+  private var isLoginSucceded = false
+  
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
     
@@ -30,30 +32,36 @@ class AuthenticationViewController: UIViewController {
   }
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    // TODO: wait until data received
+    // TODO: wait until data received    
     requestUser(errorHandler: validatonAlert)
     
-    return false
+    return isLoginSucceded
   }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // TODO: pass data to next view controller
   }
   
-  func requestUser(errorHandler: () -> Void) {
+  func requestUser(errorHandler: @escaping (Error?) -> Void) {
     // TODO: replace with text fields values
     let b = ["username":"leuschke.connie@example.org", "password":"secret"]
-    RequestManager.signIn(authType: .client, body: b) { (user, error) in
+    RequestManager.signIn(authType: .client, body: b) { [weak self] (userData, error) in
       // TODO: store it and pass to another controlelr in case when error is nil
+      guard let user = userData as? User else {
+        errorHandler(error)
+        return
+      }
+      
       print(user)
+      self?.isLoginSucceded = true
     }
   }
   
-  private func validatonAlert() {
+  private func validatonAlert(_ error: Error?) {
     AlertHandler.ShowAlert(
       for: self,
       "Validation",
-      "Either login or password is incorrect",
+      error?.localizedDescription ?? "Either login or password is incorrect!",
       .alert)
     
     emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
