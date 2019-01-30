@@ -49,8 +49,11 @@
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* GetRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* GetRequesting.swift */; };
-		ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
+		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
+		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
+		EDD3CD292201F33700E38879 /* ProviderSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ProviderSchedule.swift */; };
+		EDD3CD2B2201F3FD00E38879 /* ProviderScheduleException.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2A2201F3FD00E38879 /* ProviderScheduleException.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,7 +102,10 @@
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* GetRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequesting.swift; sourceTree = "<group>"; };
-		ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertProfile.swift; sourceTree = "<group>"; };
+		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
+		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
+		EDD3CD282201F33700E38879 /* ProviderSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSchedule.swift; sourceTree = "<group>"; };
+		EDD3CD2A2201F3FD00E38879 /* ProviderScheduleException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderScheduleException.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,11 +290,14 @@
 		ED6CBE7D21EDDDE900860010 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ED6CBE7E21EDDDFC00860010 /* ExpertProfile.swift */,
 				ED1ED01921FF199100141CF5 /* City.swift */,
 				ED1ED02321FF353400141CF5 /* Category.swift */,
 				ED5DBCB5220066E3006070E0 /* User.swift */,
 				ED5DBCB72200ACD7006070E0 /* RemoteImage.swift */,
+				EDD3CD242201E7A400E38879 /* ProviderProfession.swift */,
+				EDD3CD262201F21700E38879 /* ProviderService.swift */,
+				EDD3CD282201F33700E38879 /* ProviderSchedule.swift */,
+				EDD3CD2A2201F3FD00E38879 /* ProviderScheduleException.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,8 +389,8 @@
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
-				ED6CBE7F21EDDDFC00860010 /* ExpertProfile.swift in Sources */,
 				ED1ED02621FF45E900141CF5 /* JsonInitiableModel.swift in Sources */,
+				EDD3CD2B2201F3FD00E38879 /* ProviderScheduleException.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				ED1ED01621FF04EC00141CF5 /* PopOverViewController.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* DetailedSignUpViewController.swift in Sources */,
@@ -389,9 +398,11 @@
 				ED1ED01C21FF231C00141CF5 /* PrintableObject.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationController.swift in Sources */,
+				EDD3CD292201F33700E38879 /* ProviderSchedule.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED1ED02B21FF678A00141CF5 /* AuthProviding.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
+				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,
 				ED089A9721E8FE9A006A8523 /* ExercisesCollectionViewController.swift in Sources */,
 				ED330C6A21F084BA001019FC /* RootNaviationController.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* BaseUIContentViewCell.swift in Sources */,
@@ -405,6 +416,7 @@
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
+				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

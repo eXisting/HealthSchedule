@@ -16,6 +16,7 @@ enum UserJsonFields: String {
   case phone = "phone"
   case status = "confirmed_status"
   case birthday = "birthday_at"
+  case addressId = "address_id"
   case image = "image"
   
   case role = "user_role_id"
@@ -27,6 +28,25 @@ enum UserType: Int {
 }
 
 struct User {
+  // CONSIDER USE DIFFERENT APPROACH
+  struct Provider {
+    var professions: [ProviderProfession]
+    var certificates: [RemoteImage]
+    var services: [ProviderService]
+    
+    var scheduleTemplate: [ProviderSchedule]
+    var scheduleExceptions: [ProviderScheduleException]
+    
+    init?(json: [String: Any]) {
+      // TODO: Init
+      professions = []
+      certificates = []
+      services = []
+      scheduleTemplate = []
+      scheduleExceptions = []
+    }
+  }
+  
   var id: Int
   var firstName: String
   var lastName: String
@@ -35,9 +55,10 @@ struct User {
   var status: Bool
   var birthday: Any
   
-  
-  var photo: RemoteImage?
   var userType: UserType = .client
+  
+  var providerData: Provider?
+  var photo: RemoteImage?
 }
 
 extension User: JsonInitiableModel {
@@ -59,13 +80,18 @@ extension User: JsonInitiableModel {
     }
     
     self.id = id
-    self.firstName = firstName
-    self.lastName = lastName
+    self.firstName = firstName.capitalized
+    self.lastName = lastName.capitalized
     self.email = email
     self.phone = phone
     self.status = status
     self.birthday = birthday
     
     userType = UserType(rawValue: role) ?? .client
+    
+    if userType == .provider {
+      // TODO: Fill provider data
+      providerData = Provider(json: json)
+    }
   }
 }

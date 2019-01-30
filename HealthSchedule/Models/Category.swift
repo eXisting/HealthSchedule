@@ -35,7 +35,7 @@ extension Category: JsonInitiableModel {
     self.id = id
     self.categoryId = categoryId
     self.name = name
-    self.title = title
+    self.title = title.capitalized
   }
 }
 
