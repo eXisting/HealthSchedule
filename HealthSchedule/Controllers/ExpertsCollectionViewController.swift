@@ -20,8 +20,6 @@ class ExpertsCollectionViewController: UICollectionViewController {
   
   private let itemsPerRow: CGFloat = 3
   
-  private var experts = [ExpertProfile]()
-  
   // MARK: - Overrides
   
   override func viewDidLoad() {
@@ -40,15 +38,6 @@ class ExpertsCollectionViewController: UICollectionViewController {
     let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: reuseIdentifier,
       for: indexPath) as! BaseUICollectionViewCell
-    
-    //cell.backgroundColor = .white
-    if indexPath.row < experts.count {
-      let expert = experts[indexPath.row]
-      cell.fullName.text = "\(expert.firstName) \(expert.lastName)"
-      cell.fullDescription.text = expert.location
-      
-      cell.previewImage.image = expert.profilePhoto
-    }
     
     return cell
   }

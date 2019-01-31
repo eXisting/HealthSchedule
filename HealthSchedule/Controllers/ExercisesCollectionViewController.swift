@@ -35,11 +35,11 @@ class ExercisesCollectionViewController: UICollectionViewController {
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BaseUICollectionViewCell
     
-    cell.backgroundColor = .white
-    
-    let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://files.brightside.me/files/news/part_34/340810/14565160-1-0-1496126804-1496126811-650-0c369e17e2-1496430586.jpg")
-    
-    cell.previewImage.image = backgroundImage
+//    cell.backgroundColor = .white
+//    
+//    let backgroundImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://files.brightside.me/files/news/part_34/340810/14565160-1-0-1496126804-1496126811-650-0c369e17e2-1496430586.jpg")
+//    
+//    cell.previewImage.image = backgroundImage
     
     return cell
   }
