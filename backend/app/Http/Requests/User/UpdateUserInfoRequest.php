@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\UploadedFile;
 
 /**
- * Class UserRegisterRequest
+ * Class UpdateUserInfoRequest
  *
  * Properties
- * @property string $email
- * @property string $phone
- * @property string $password
+ * @property integer $city_id
  * @property string $first_name
  * @property string $last_name
- * @property UploadedFile $photo
- * @property integer $city_id
+ * @property string $email
+ * @property string $phone
  * @property Carbon $birthday
  */
-class UserRegisterRequest extends FormRequest
+class UpdateUserInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,13 +36,14 @@ class UserRegisterRequest extends FormRequest
      */
     public function rules()
     {
+        /** @var User $user */
+        $user = auth('api')->user();
+
         return [
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'nullable|string|max:12|unique:users',
-            'password' => 'required|string|min:6',
+            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+            'phone' => 'nullable|string|max:12|unique:users,phone,'.$user->id,
             'first_name' => 'required|string|max:64',
             'last_name' => 'required|string|max:64',
-            'photo' => 'nullable|image|mimes:jpeg,jpg,png',
             'city_id' => 'required|integer|exists:cities,id',
             'birthday_at' => 'required|date|date_format:"Y-m-d"',
         ];

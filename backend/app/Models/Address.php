@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $address
  *
  * Relationships
+ * @property ProviderService $providerServices
+ * @property User $users
  */
 class Address extends Model
 {
@@ -42,6 +44,22 @@ class Address extends Model
     #endregion
 
     #region Relationships
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class, 'address_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providerServices()
+    {
+        return $this->hasMany(ProviderService::class, 'address_id', 'id');
+    }
 
     #endregion
 }
