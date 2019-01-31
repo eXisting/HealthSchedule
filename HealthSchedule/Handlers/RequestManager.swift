@@ -78,7 +78,7 @@ class RequestManager {
     }
   }
   
-  class func signUp(authType: UserType, body: RequestHandler.JsonDictionary, _ complition: @escaping RequestHandler.PostComplition) {
+  class func signUp(authType: UserType, body: RequestHandler.BodyDictionary, _ complition: @escaping RequestHandler.PostComplition) {
     let signUpEndpoint = authType == .client ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
     
     authRequests.fetchToken(from: buildEndpoint(signUpEndpoint.rawValue), bodyData: body) { (data, error) in

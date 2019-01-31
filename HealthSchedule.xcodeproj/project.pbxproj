@@ -54,6 +54,7 @@
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ProviderSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ProviderSchedule.swift */; };
 		EDD3CD2B2201F3FD00E38879 /* ProviderScheduleException.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2A2201F3FD00E38879 /* ProviderScheduleException.swift */; };
+		EDD3CD2D220304DA00E38879 /* DateOperationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2C220304DA00E38879 /* DateOperationsHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ProviderSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSchedule.swift; sourceTree = "<group>"; };
 		EDD3CD2A2201F3FD00E38879 /* ProviderScheduleException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderScheduleException.swift; sourceTree = "<group>"; };
+		EDD3CD2C220304DA00E38879 /* DateOperationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOperationsHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +239,7 @@
 				ED330C6721F0748B001019FC /* AlertHandler.swift */,
 				ED330C9221F223AE001019FC /* BlurHandler.swift */,
 				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
+				EDD3CD2C220304DA00E38879 /* DateOperationsHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
+				EDD3CD2D220304DA00E38879 /* DateOperationsHandler.swift in Sources */,
 				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

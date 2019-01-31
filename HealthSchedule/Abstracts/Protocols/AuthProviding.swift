@@ -10,7 +10,7 @@ import UIKit
 
 protocol AuthProviding {
   // Get token, you need to get user internally in completion
-  func fetchToken(from url: String, bodyData: RequestHandler.JsonDictionary, completion: @escaping RequestHandler.PostComplition)
+  func fetchToken(from url: String, bodyData: RequestHandler.BodyDictionary, completion: @escaping RequestHandler.PostComplition)
 }
 
 enum TokenJsonFields: String {

@@ -24,7 +24,7 @@ struct ProviderProfession {
   var professionId: Int
   var cityId: Int
   var companyName: String
-  var startAt: Date?
+  var startAt: Date
   var endAt: Date?
 }
 
@@ -48,5 +48,26 @@ extension ProviderProfession: JsonInitiableModel {
     self.companyName = companyName
     self.startAt = startAt
     self.endAt = endAt
+  }
+}
+
+extension ProviderProfession {
+  func asJsonObject() -> [String:String] {
+    var formatter = DateOperationsHandler.shared.dateFormatter
+    
+    var endDate = ""
+    if let end = endAt {
+      endDate = formatter.string(from: end)
+    }
+    
+    return [
+      ProviderProfessionJsonFields.id.rawValue: String(id),
+      ProviderProfessionJsonFields.providerId.rawValue: String(providerId),
+      ProviderProfessionJsonFields.professionId.rawValue: String(providerId),
+      ProviderProfessionJsonFields.cityId.rawValue: String(cityId),
+      ProviderProfessionJsonFields.companyName.rawValue: companyName,
+      ProviderProfessionJsonFields.startAt.rawValue: formatter.string(from: startAt),
+      ProviderProfessionJsonFields.endAt.rawValue: endDate
+    ]
   }
 }

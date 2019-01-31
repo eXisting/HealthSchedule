@@ -31,6 +31,7 @@ class RequestHandler {
   
   typealias PostComplition = (((Any, Error?)) -> Void)
   typealias JsonDictionary = [String:String]
+  typealias BodyDictionary = [String:Any]
 
   static let shared = RequestHandler()
   
@@ -85,21 +86,20 @@ class RequestHandler {
     }
   }
   
-  private func postAsync(to url: String, params: JsonDictionary?, bodyData: JsonDictionary, completion: @escaping PostComplition) {
+  private func postAsync(to url: String, params: JsonDictionary?, bodyData: BodyDictionary, completion: @escaping PostComplition) {
     // TODO: Return error in tuple
     
     guard var urlRequest = buildUrlRequest(url, params, "POST") else {
       return
     }
     print(url)
-    let encoder = JSONEncoder()
     do {
-      let jsonData = try encoder.encode(bodyData)
-      urlRequest.httpBody = jsonData
+      let data = try JSONSerialization.data(withJSONObject: bodyData)
+      urlRequest.httpBody = data
       
       //print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
     } catch {
-      print("Cannot encode data")
+      print("Cannot either serialize or encode body data")
     }
     
    let task = defaultSession.dataTask(with: urlRequest) { (responseData, response, responseError) in
@@ -178,7 +178,7 @@ extension RequestHandler: GetRequesting {
 }
 
 extension RequestHandler: AuthProviding {
-  func fetchToken(from url: String, bodyData: JsonDictionary, completion: @escaping RequestHandler.PostComplition) {
+  func fetchToken(from url: String, bodyData: BodyDictionary, completion: @escaping RequestHandler.PostComplition) {
     postAsync(to: url, params: nil, bodyData: bodyData, completion: completion)
   }
 }
