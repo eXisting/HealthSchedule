@@ -34,8 +34,8 @@ struct User {
     var certificates: [RemoteImage]
     var services: [ProviderService]
     
-    var scheduleTemplate: [ProviderSchedule]
-    var scheduleExceptions: [ProviderScheduleException]
+    var scheduleTemplate: [ScheduleWeekDay]
+    var scheduleExceptions: [ScheduleDateException]
     
     init?(json: [String: Any]) {
       // TODO: Init
