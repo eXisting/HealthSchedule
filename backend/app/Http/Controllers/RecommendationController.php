@@ -15,13 +15,8 @@ use Gate;
  * @property User $authUser
  * @property RecommendationRepository $recommendation
  */
-class RecommendationController extends Controller
+class RecommendationController extends AuthUserController
 {
-    /**
-     * @var User
-     */
-    private $authUser;
-
     /**
      * @var RecommendationRepository
      */
@@ -32,14 +27,27 @@ class RecommendationController extends Controller
      */
     public function __construct()
     {
-        $this->authUser = auth('api')->user();
+        parent::__construct();
         $this->recommendation = new RecommendationRepository();
+    }
+
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function providerRecommendations()
+    {
+        /** @var Recommendation $recommendations */
+        $recommendations = $this->authUser->providerRecommendations()
+            ->get();
+
+        return response()->json($recommendations);
     }
 
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function recommendations()
+    public function userRecommendations()
     {
         /** @var Recommendation $recommendations */
         $recommendations = $this->authUser->userRecommendations()
