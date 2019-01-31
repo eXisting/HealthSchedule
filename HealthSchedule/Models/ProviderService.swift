@@ -51,3 +51,16 @@ extension ProviderService: JsonInitiableModel {
   }
 }
 
+extension ProviderService: JsonConvertable {
+  func asJson() -> RequestHandler.JsonDictionary {
+    return [
+      ProviderServiceJsonFields.id.rawValue: String(id),
+      ProviderServiceJsonFields.providerId.rawValue: String(providerId),
+      ProviderServiceJsonFields.serviceId.rawValue: String(serviceId),
+      ProviderServiceJsonFields.addressId.rawValue: String(addressId),
+      ProviderServiceJsonFields.price.rawValue: String(price),
+      ProviderServiceJsonFields.description.rawValue: description,
+      ProviderServiceJsonFields.interval.rawValue: DateOperationsHandler.shared.dateFormatter.string(from: interval)
+    ]
+  }
+}
