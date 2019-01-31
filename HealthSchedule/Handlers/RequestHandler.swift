@@ -125,43 +125,6 @@ class RequestHandler {
   } 
 }
 
-extension RequestHandler: ImageRequesting {
-  func getImageAsync(from url: String, for index: Int?, completion: @escaping (Int?, UIImage?) -> Void) {
-    
-    guard let urlRequest = buildUrlRequest(url, nil, "GET") else {
-      print("Error: cannot create URL")
-      return
-    }
-    
-    let task = defaultSession.dataTask(with: urlRequest) { (data, response, error) in
-      guard error == nil else {
-        print(error!)
-        return
-      }
-      
-      guard let responseData = data else {
-        print("Error: did not receive data")
-        return
-      }
-      
-      completion(index, UIImage(data: responseData))
-    }
-    
-    task.resume()
-  }
-  
-  func postImage(for url: String, with image: UIImage) {
-    // TODO
-  }
-  
-  func getImage(from url: String) -> UIImage? {
-    let endpointUrl = URL(string: url)
-    let data = try? Data(contentsOf: endpointUrl!)
-    
-    return UIImage(data: data!)
-  }
-}
-
 extension RequestHandler: GetRequesting {
   func getObjectAsync(from url: String, _ params: JsonDictionary?, complition: @escaping (Any) -> Void) {
     fetchObjectAsync(from: url, params, completion: complition)

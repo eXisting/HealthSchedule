@@ -15,21 +15,21 @@ class SettingsViewController: UIViewController {
   // MARK: - Overrides
   
   override func viewDidLoad() {
-    let profileView = BaseProfileView.instanceFromNib()
-    
-    profileView.setEditingStateTo(false)
-    
-    profileView.nameField.text = "John"
-    profileView.surnameField.text = "Smith"
-    profileView.ageField.text = "44"
-    profileView.regionField.text = "Kharkiv"
-        
-    let placeholderImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png")
-    
-    profileView.profileImageView.image = placeholderImage
-    profileView.profileImageView.roundImageBy(divider: 3)
-    
-    profileView.frame = view.frame
-    view.addSubview(profileView)
+//    let profileView = BaseProfileView.instanceFromNib()
+//    
+//    profileView.setEditingStateTo(false)
+//    
+//    profileView.nameField.text = "John"
+//    profileView.surnameField.text = "Smith"
+//    profileView.ageField.text = "44"
+//    profileView.regionField.text = "Kharkiv"
+//        
+//    let placeholderImage = (RequestHandler.shared as ImageRequesting).getImage(from: "https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png")
+//    
+//    profileView.profileImageView.image = placeholderImage
+//    profileView.profileImageView.roundImageBy(divider: 3)
+//    
+//    profileView.frame = view.frame
+//    view.addSubview(profileView)
   }
 }

@@ -48,7 +48,7 @@ class AuthenticationViewController: UIViewController {
   
   func requestUser(errorHandler: @escaping (Error?) -> Void) {
     // TODO: replace with text fields values
-    let b = ["username":"keebler.macey@example.com", "password":"secret"]
+    let b = ["username":"johny1234@gmail.com", "password":"qwerty"]
     RequestManager.signIn(authType: .client, body: b) { [weak self] (userData, error) in
       // TODO: store it and pass to another controlelr in case when error is nil
       guard let user = userData as? User else {
@@ -73,30 +73,44 @@ class AuthenticationViewController: UIViewController {
 //      "birthday":"1999-11-11 00:00:00"
 //    ]
     
-    let body = [
-      "email":"johny1234@gmail.com",
-      "phone":"123453124512",
-      "password":"qwerty",
-      "first_name":"Magic name2",
-      "last_name":"hehdasdase",
-      "photo":"",
-      "city_id":"2",
-      "birthday":"1999-11-11 00:00:00",
-      "address":"cudo street",
-      "professions":"",
-      "verifies":""
-    ]
-
-    
-    RequestManager.signUp(authType: .client, body: body) { [weak self] (userData, error) in
-      // TODO: store it and pass to another controlelr in case when error is nil
-      guard let user = userData as? User else {
-        errorHandler(error)
-        return
-      }
-      
-      print(user)
-    }
+//    let dateFormatter = DateFormatter()
+//    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//    guard let start = dateFormatter.date(from: "2010-11-11 00:00:00") else {
+//      fatalError("ERROR: Date conversion failed due to mismatched format.")
+//    }
+//    guard let end = dateFormatter.date(from: "2012-11-11 00:00:00") else {
+//      fatalError("ERROR: Date conversion failed due to mismatched format.")
+//    }
+//
+//    let prof = ProviderProfession(id: 0, providerId: 2, professionId: 2, cityId: 1, companyName: "SomeCompany", startAt: start, endAt: end)
+//
+//
+//    let verifies = ["https://images-na.ssl-images-amazon.com/images/I/81W5nfYYxoL._SX425_.jpg"]
+//
+//    let body = [
+//      "email":"johny1234@gmail.com",
+//      "phone":"123453124512",
+//      "password":"qwerty",
+//      "first_name":"Magic name2",
+//      "last_name":"hehdasdase",
+//      "photo":"",
+//      "city_id":"2",
+//      "birthday":"1999-11-11 00:00:00",
+//      "address":"cudo street",
+//      "professions":[prof.asJsonObject()],
+//      "verifies":""
+//      ] as [String: Any]
+//
+//
+//    RequestManager.signUp(authType: .provider, body: body) { [weak self] (userData, error) in
+//      // TODO: store it and pass to another controlelr in case when error is nil
+//      guard let user = userData as? User else {
+//        errorHandler(error)
+//        return
+//      }
+//
+//      print(user)
+//    }
   }
   
   private func validatonAlert(_ error: Error?) {
