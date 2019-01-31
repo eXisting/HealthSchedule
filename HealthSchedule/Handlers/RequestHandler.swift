@@ -92,22 +92,20 @@ class RequestHandler {
     guard var urlRequest = buildUrlRequest(url, params, "POST") else {
       return
     }
-    print(url)
+    
     do {
       let data = try JSONSerialization.data(withJSONObject: bodyData)
       urlRequest.httpBody = data
-      
-      //print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
     } catch {
       print("Cannot either serialize or encode body data")
     }
     
-   let task = defaultSession.dataTask(with: urlRequest) { (responseData, response, responseError) in
-      guard responseError == nil else {
+   let task = defaultSession.dataTask(with: urlRequest) { (data, response, error) in
+      guard error == nil else {
         return
       }
     
-      guard let jsonData = responseData else {
+      guard let jsonData = data else {
         print("no readable data received in response")
         return
       }
@@ -130,15 +128,12 @@ class RequestHandler {
 extension RequestHandler: ImageRequesting {
   func getImageAsync(from url: String, for index: Int?, completion: @escaping (Int?, UIImage?) -> Void) {
     
-    guard let url = URL(string: url) else {
+    guard let urlRequest = buildUrlRequest(url, nil, "GET") else {
       print("Error: cannot create URL")
       return
     }
-    let urlRequest = URLRequest(url: url)
     
-    let task = defaultSession.dataTask(with: urlRequest) {
-      (data, response, error) in
-      
+    let task = defaultSession.dataTask(with: urlRequest) { (data, response, error) in
       guard error == nil else {
         print(error!)
         return
@@ -187,8 +182,8 @@ extension RequestHandler: AuthProviding {
 // Helpers
 private extension RequestHandler {
   private func buildUrlRequest(_ url: String, _ params: JsonDictionary?, _ method: String) -> URLRequest? {
-    
     var parameterString = ""
+    
     if let parameters = params {
       parameterString = parameters.asParamsString()
     }

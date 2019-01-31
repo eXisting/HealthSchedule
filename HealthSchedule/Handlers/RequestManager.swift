@@ -62,13 +62,13 @@ class RequestManager {
         return
       }
       
-      var tokenHeaders: RequestHandler.JsonDictionary = [:]
-      guard let tokenObject = Token(json: tokenJson) else {
+      guard let tokenObject = Token(json: tokenJson),
+        let token = tokenObject.token else {
         print("Cannot init token object in signIn")
         return
       }
       
-      tokenHeaders[TokenJsonFields.token.rawValue] = tokenObject.token
+      let tokenHeaders: RequestHandler.JsonDictionary = [TokenJsonFields.token.rawValue: token]
 
       let signInEndpoint = authType == .client ? Endpoints.user : Endpoints.provider
       
@@ -87,15 +87,22 @@ class RequestManager {
         return
       }
       
-      var tokenHeaders: RequestHandler.JsonDictionary = [:]
       guard let tokenObject = Token(json: tokenJson) else {
         print("Cannot init token object in signUp")
         return
       }
       
-      // TODO: Check wether token's success is true
+      if authType == .provider {
+        complition((tokenObject.success!, nil))
+        return
+      }
       
-      tokenHeaders[TokenJsonFields.token.rawValue] = tokenObject.token
+      guard let token = tokenObject.token else {
+        complition((false, nil))
+        return
+      }
+      
+      let tokenHeaders: RequestHandler.JsonDictionary = [TokenJsonFields.token.rawValue: token]
       
       getAsyncFor(type: User.self, from: authType == .client ? .user : .provider, tokenHeaders) { user in
         complition((user, nil))
