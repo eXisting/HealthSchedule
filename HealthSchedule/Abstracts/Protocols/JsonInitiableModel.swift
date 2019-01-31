@@ -11,3 +11,7 @@ import UIKit
 protocol JsonInitiableModel {
   init?(json: [String: Any])
 }
+
+protocol JsonConvertable {
+  func asJson() -> RequestHandler.JsonDictionary
+}

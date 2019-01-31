@@ -51,9 +51,9 @@ extension ProviderProfession: JsonInitiableModel {
   }
 }
 
-extension ProviderProfession {
-  func asJsonObject() -> [String:String] {
-    var formatter = DateOperationsHandler.shared.dateFormatter
+extension ProviderProfession: JsonConvertable {
+  func asJson() -> RequestHandler.JsonDictionary {
+    let formatter = DateOperationsHandler.shared.dateFormatter
     
     var endDate = ""
     if let end = endAt {
