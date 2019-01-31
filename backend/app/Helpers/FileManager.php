@@ -10,6 +10,7 @@ namespace App\Helpers;
 
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
+use File;
 
 class FileManager
 {
@@ -31,5 +32,13 @@ class FileManager
         }
 
         return $image_path;
+    }
+
+    /**
+     * @param string $path
+     */
+    public static function deleteFile($path)
+    {
+        File::delete(public_path($path));
     }
 }

@@ -8,31 +8,18 @@ use App\Models\User;
  * Class UserController
  *
  * Properties
- * @property User $user
+ * @property User $authUser
  */
-class UserController extends Controller
+class UserController extends AuthUserController
 {
-    /**
-     * @var User
-     */
-    private $user;
 
     /**
      * UserController constructor.
      */
     public function __construct()
     {
-        $this->user = auth('api')->user();
+        parent::__construct();
     }
 
-    /**
-     * Return user object by jwt
-     *
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function getByToken()
-    {
-        return $this->user->load('image');
-    }
 
 }
