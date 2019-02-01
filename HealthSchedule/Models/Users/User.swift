@@ -13,13 +13,13 @@ enum UserJsonFields: String, CodingKey {
   case image
   case phone
   case email
+  case role
+  case city
   
   case firstName = "first_name"
   case lastName = "last_name"
   case status = "confirmed_status"
   case birthday = "birthday_at"
-  case addressId = "address_id"
-  case role = "user_role_id"
 }
 
 enum UserType: Int, Codable {
@@ -36,10 +36,9 @@ struct User {
   var status: Bool
   var birthday: Date
   
-  var userType: UserType = .client
-  
-//  var providerData: Provider?
-//  var photo: ProfileImage?
+  var role: Role
+  var city: City
+  var photo: ProfileImage?
 }
 
 extension User: Codable {
@@ -51,8 +50,9 @@ extension User: Codable {
     try container.encode(email, forKey: .email)
     try container.encode(phone, forKey: .phone)
     try container.encode(status, forKey: .status)
-    try container.encode(userType, forKey: .role)
-    
+    try container.encode(role, forKey: .role)
+    try container.encode(city, forKey: .city)
+
     let birthdayString = DatesManager.shared.dateToString(birthday)
     try container.encode(birthdayString, forKey: .birthday)
   }
@@ -65,15 +65,11 @@ extension User: Codable {
     email = try container.decode(String.self, forKey: .email)
     phone = try container.decode(String.self, forKey: .phone)
     status = try container.decode(Bool.self, forKey: .status)
-    
+    city = try container.decode(City.self, forKey: .city)
+    role = try container.decode(Role.self, forKey: .role)
+    photo = try? container.decode(ProfileImage.self, forKey: .image)
+
     let birthdayString = try container.decode(String.self, forKey: .birthday)
     birthday = DatesManager.shared.stringToDate(birthdayString)
-    
-    let role = try container.decode(Int.self, forKey: .role)    
-    userType = UserType(rawValue: role) ?? .client
-    if userType == .provider {
-      // TODO: Fill provider data
-      //providerData = Provider(json: json)
-    }
   }
 }

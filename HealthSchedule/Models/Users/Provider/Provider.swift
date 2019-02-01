@@ -8,20 +8,18 @@
 
 import UIKit
 
+enum ProviderJsonFields: String, CodingKey {
+  case address
+}
+
 struct Provider {
-  var professions: [ProviderProfession]
+//  var professions: [ProviderProfession]
 //  var certificates: [ProfileImage]
 //  var services: [ProviderService]
   
 //  var scheduleTemplate: [ScheduleWeekDay]
 //  var scheduleExceptions: [ScheduleDateException]
-  
-  init?(json: [String: Any]) {
-    // TODO: Init
-    professions = []
-//    certificates = []
-//    services = []
-//    scheduleTemplate = []
-//    scheduleExceptions = []
-  }
+  var address: Address?
 }
+
+extension Provider: Codable {}

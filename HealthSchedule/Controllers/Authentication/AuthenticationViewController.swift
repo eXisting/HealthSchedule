@@ -46,7 +46,7 @@ class AuthenticationViewController: UIViewController {
   
   func requestUser(errorHandler: @escaping (Error?) -> Void) {
     // TODO: replace with text fields values
-    let b = ["username":"johny1234@gmail.com", "password":"qwerty"]
+    let b = ["username":"marks.freeda@example.com", "password":"secret"]
     RequestManager.signIn(authType: .client, body: b) { [weak self] (user, info, error) in
       if let infoObject = info {
         AlertHandler.ShowAlert(for: self!, "Congrats!", infoObject.rawValue, .alert)

@@ -50,6 +50,8 @@
 		ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830022046B0A00BE8EF0 /* Parser.swift */; };
 		ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448302220473BD00BE8EF0 /* ProfileImage.swift */; };
 		ED448306220477B900BE8EF0 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448305220477B900BE8EF0 /* Provider.swift */; };
+		ED44830C2204A23400BE8EF0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830B2204A23400BE8EF0 /* Address.swift */; };
+		ED44830E2204A52500BE8EF0 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830D2204A52500BE8EF0 /* Role.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
@@ -109,6 +111,8 @@
 		ED44830022046B0A00BE8EF0 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		ED448302220473BD00BE8EF0 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		ED448305220477B900BE8EF0 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		ED44830B2204A23400BE8EF0 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		ED44830D2204A52500BE8EF0 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 		ED448304220477A800BE8EF0 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				ED44830F2204A61800BE8EF0 /* Common */,
 				ED4483092204987800BE8EF0 /* Provider */,
 				ED5DBCB5220066E3006070E0 /* User.swift */,
 			);
@@ -359,10 +364,19 @@
 			children = (
 				ED1ED02321FF353400141CF5 /* Category.swift */,
 				ED1ED01921FF199100141CF5 /* City.swift */,
-				ED448302220473BD00BE8EF0 /* ProfileImage.swift */,
+				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
 				EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */,
 				EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */,
-				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ED44830F2204A61800BE8EF0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ED448302220473BD00BE8EF0 /* ProfileImage.swift */,
+				ED44830B2204A23400BE8EF0 /* Address.swift */,
+				ED44830D2204A52500BE8EF0 /* Role.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -468,6 +482,7 @@
 				ED1ED01621FF04EC00141CF5 /* PopOverViewController.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* DetailedSignUpViewController.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
+				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED1ED01C21FF231C00141CF5 /* PrintableObject.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationController.swift in Sources */,
@@ -496,6 +511,7 @@
 				ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DatesManager.swift in Sources */,
+				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
