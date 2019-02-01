@@ -8,56 +8,42 @@
 
 import UIKit
 
-enum ScheduleWeekDayJsonFields: String {
-  case id = "id"
-  case providerId = "provider_id"
-  case weekDay = "week_day"
-  case startTime = "start_time"
-  case endTime = "end_time"
-  case workingStatus = "working"
-}
-
 struct ScheduleWeekDay {
   var id: Int
   var providerId: Int
   var weekDay: Int
+  var workingStatus: Int
+  
   var startTime: Date
   var endTime: Date
-  var workingStatus: Int
 }
 
-extension ScheduleWeekDay: JsonInitiableModel {
-  init?(json: [String: Any]) {
-    guard let id = json[ScheduleWeekDayJsonFields.id.rawValue] as? Int,
-      let providerId = json[ScheduleWeekDayJsonFields.providerId.rawValue] as? Int,
-      let weekDay = json[ScheduleWeekDayJsonFields.weekDay.rawValue] as? Int,
-      let startTime = json[ScheduleWeekDayJsonFields.startTime.rawValue] as? Date,
-      let endTime = json[ScheduleWeekDayJsonFields.endTime.rawValue] as? Date,
-      let workingStatus = json[ScheduleWeekDayJsonFields.workingStatus.rawValue] as? Int else {
-        print("Cannot parse json fields in ScheduleWeekDay.init!")
-        return nil
-    }
+extension ScheduleWeekDay: Codable {
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: ScheduleJsonFields.self)
+    try container.encode(id, forKey: .id)
+    try container.encode(providerId, forKey: .providerId)
+    try container.encode(weekDay, forKey: .weekDay)
+    try container.encode(workingStatus, forKey: .workingStatus)
+
+    let startnDateString = DatesManager.shared.dateToString(startTime)
+    try container.encode(startnDateString, forKey: .startTime)
     
-    self.id = id
-    self.providerId = providerId
-    self.weekDay = weekDay
-    self.startTime = startTime
-    self.endTime = endTime
-    self.workingStatus = workingStatus
+    let endDateString = DatesManager.shared.dateToString(endTime)
+    try container.encode(endDateString, forKey: .endTime)
   }
-}
-
-extension ScheduleWeekDay: JsonConvertable {
-  func asJson() -> Parser.JsonDictionary {
-    let formatter = DatesManager.shared.dateFormatter
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: ScheduleJsonFields.self)
+    id = try container.decode(Int.self, forKey: .id)
+    providerId = try container.decode(Int.self, forKey: .providerId)
+    weekDay = try container.decode(Int.self, forKey: .weekDay)
+    workingStatus = try container.decode(Int.self, forKey: .workingStatus)
     
-    return [
-      ScheduleWeekDayJsonFields.id.rawValue: String(id),
-      ScheduleWeekDayJsonFields.providerId.rawValue: String(providerId),
-      ScheduleWeekDayJsonFields.weekDay.rawValue: String(weekDay),
-      ScheduleWeekDayJsonFields.startTime.rawValue: formatter.string(from: startTime),
-      ScheduleWeekDayJsonFields.endTime.rawValue: formatter.string(from: endTime),
-      ScheduleWeekDayJsonFields.workingStatus.rawValue: String(workingStatus)
-    ]
+    let startString = try container.decode(String.self, forKey: .startTime)
+    let endString = try container.decode(String.self, forKey: .endTime)
+    
+    startTime = DatesManager.shared.stringToDate(startString)
+    endTime = DatesManager.shared.stringToDate(endString)
   }
 }

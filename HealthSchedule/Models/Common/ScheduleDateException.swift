@@ -8,10 +8,12 @@
 
 import UIKit
 
-enum ScheduleDateExceptionJsonFields: String, CodingKey {
+enum ScheduleJsonFields: String, CodingKey {
   case id
   case providerId = "provider_id"
   case workingStatus = "working"
+  
+  case weekDay = "week_day"
   
   case exceptionAt = "exception_at"
   case startTime = "start_time"
@@ -30,7 +32,7 @@ struct ScheduleDateException {
 
 extension ScheduleDateException: Codable {
   func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: ScheduleDateExceptionJsonFields.self)
+    var container = encoder.container(keyedBy: ScheduleJsonFields.self)
     try container.encode(id, forKey: .id)
     try container.encode(providerId, forKey: .providerId)
     try container.encode(workingStatus, forKey: .workingStatus)
@@ -46,7 +48,7 @@ extension ScheduleDateException: Codable {
   }
   
   init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: ScheduleDateExceptionJsonFields.self)
+    let container = try decoder.container(keyedBy: ScheduleJsonFields.self)
     id = try container.decode(Int.self, forKey: .id)
     providerId = try container.decode(Int.self, forKey: .providerId)
     workingStatus = try container.decode(Int.self, forKey: .workingStatus)
