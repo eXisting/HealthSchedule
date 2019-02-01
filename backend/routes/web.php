@@ -11,8 +11,6 @@
 |
 */
 
- Route::get('/', function () {
-     return 'home';
- });
-
-
+//  Route::get('/', function () {
+//      return 'home';
+//  });

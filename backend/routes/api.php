@@ -19,9 +19,10 @@ Route::prefix('register')->group(function () {
 });
 
 Route::middleware('jwt.auth')->group(function () {
-
+    Route::prefix('services')->group(function () {
+        Route::get('/', 'ServiceController@all');
+    });
     Route::prefix('user')->group(function () {
-
         Route::get('/', 'AuthUserController@get');
 
         Route::put('/info', 'AuthUserController@updateUser');
@@ -38,7 +39,6 @@ Route::middleware('jwt.auth')->group(function () {
     });
 
     Route::prefix('provider')->group(function () {
-
         Route::put('/address', 'ProviderAddressController@update');
 
         Route::prefix('recommendations')->group(function () {
@@ -76,17 +76,13 @@ Route::middleware('jwt.auth')->group(function () {
             Route::put('/{id}', 'ProviderExceptionScheduleController@update');
             Route::delete('/{id}', 'ProviderExceptionScheduleController@delete');
         });
-
-
     });
-
 });
 
 Route::prefix('register')->group(function () {
     Route::post('/provider', 'Auth\Register\ProviderRegisterController@register');
     Route::post('/user', 'Auth\Register\UserRegisterController@register');
 });
-
 
 Route::get('/category/{category}/professions', 'ProfessionsController@professions');
 
