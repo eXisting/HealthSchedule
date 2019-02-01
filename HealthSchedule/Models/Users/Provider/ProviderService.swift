@@ -8,14 +8,15 @@
 
 import UIKit
 
-enum ProviderServiceJsonFields: String {
-  case id = "id"
+enum ProviderServiceJsonFields: String, CodingKey {
+  case id
+  case price
+  case description
+  case interval
+  
   case providerId = "provider_id"
   case serviceId = "service_id"
   case addressId = "address_id"
-  case price = "price"
-  case description = "description"
-  case interval = "interval"
 }
 
 struct ProviderService {
@@ -25,42 +26,35 @@ struct ProviderService {
   var addressId: Int
   var price: Double
   var description: String
+  
   var interval: Date
 }
 
-extension ProviderService: JsonInitiableModel {
-  init?(json: [String: Any]) {
-    guard let id = json[ProviderServiceJsonFields.id.rawValue] as? Int,
-      let providerId = json[ProviderServiceJsonFields.providerId.rawValue] as? Int,
-      let serviceId = json[ProviderServiceJsonFields.serviceId.rawValue] as? Int,
-      let addressId = json[ProviderServiceJsonFields.addressId.rawValue] as? Int,
-      let price = json[ProviderServiceJsonFields.price.rawValue] as? Double,
-      let description = json[ProviderServiceJsonFields.description.rawValue] as? String,
-      let interval = json[ProviderServiceJsonFields.interval.rawValue] as? Date else {
-        print("Cannot parse json fields in ProviderService.init!")
-        return nil
-    }
-    
-    self.id = id
-    self.providerId = providerId
-    self.serviceId = serviceId
-    self.addressId = addressId
-    self.price = price
-    self.description = description
-    self.interval = interval
-  }
-}
+extension ProviderService: Codable {
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: ProviderServiceJsonFields.self)
+    try container.encode(id, forKey: .id)
+    try container.encode(providerId, forKey: .providerId)
+    try container.encode(serviceId, forKey: .serviceId)
+    try container.encode(addressId, forKey: .addressId)
+    try container.encode(price, forKey: .price)
+    try container.encode(description, forKey: .description)
 
-extension ProviderService: JsonConvertable {
-  func asJson() -> Parser.JsonDictionary {
-    return [
-      ProviderServiceJsonFields.id.rawValue: String(id),
-      ProviderServiceJsonFields.providerId.rawValue: String(providerId),
-      ProviderServiceJsonFields.serviceId.rawValue: String(serviceId),
-      ProviderServiceJsonFields.addressId.rawValue: String(addressId),
-      ProviderServiceJsonFields.price.rawValue: String(price),
-      ProviderServiceJsonFields.description.rawValue: description,
-      ProviderServiceJsonFields.interval.rawValue: DatesManager.shared.dateFormatter.string(from: interval)
-    ]
+    let intervalDateString = DatesManager.shared.dateToString(interval)
+    try container.encode(intervalDateString, forKey: .interval)
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: ProviderServiceJsonFields.self)
+    id = try container.decode(Int.self, forKey: .id)
+    providerId = try container.decode(Int.self, forKey: .providerId)
+    serviceId = try container.decode(Int.self, forKey: .serviceId)
+    addressId = try container.decode(Int.self, forKey: .addressId)
+    price = try container.decode(Double.self, forKey: .price)
+    description = try container.decode(String.self, forKey: .description)
+
+    let dateString = try container.decode(String.self, forKey: .interval)
+    
+    interval = DatesManager.shared.stringToDate(dateString)
   }
 }

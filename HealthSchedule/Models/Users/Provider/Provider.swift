@@ -10,18 +10,18 @@ import UIKit
 
 struct Provider {
   var professions: [ProviderProfession]
-  var certificates: [ProfileImage]
-  var services: [ProviderService]
+//  var certificates: [ProfileImage]
+//  var services: [ProviderService]
   
-  var scheduleTemplate: [ScheduleWeekDay]
-  var scheduleExceptions: [ScheduleDateException]
+//  var scheduleTemplate: [ScheduleWeekDay]
+//  var scheduleExceptions: [ScheduleDateException]
   
   init?(json: [String: Any]) {
     // TODO: Init
     professions = []
-    certificates = []
-    services = []
-    scheduleTemplate = []
-    scheduleExceptions = []
+//    certificates = []
+//    services = []
+//    scheduleTemplate = []
+//    scheduleExceptions = []
   }
 }
