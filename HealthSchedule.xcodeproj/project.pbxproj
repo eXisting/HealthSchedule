@@ -338,24 +338,40 @@
 		ED448304220477A800BE8EF0 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				ED4483092204987800BE8EF0 /* Provider */,
 				ED5DBCB5220066E3006070E0 /* User.swift */,
-				ED448305220477B900BE8EF0 /* Provider.swift */,
 			);
 			path = Users;
+			sourceTree = "<group>";
+		};
+		ED4483092204987800BE8EF0 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				EDD3CD242201E7A400E38879 /* ProviderProfession.swift */,
+				EDD3CD262201F21700E38879 /* ProviderService.swift */,
+				ED448305220477B900BE8EF0 /* Provider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		ED44830A2204989A00BE8EF0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ED1ED02321FF353400141CF5 /* Category.swift */,
+				ED1ED01921FF199100141CF5 /* City.swift */,
+				ED448302220473BD00BE8EF0 /* ProfileImage.swift */,
+				EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */,
+				EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */,
+				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		ED6CBE7D21EDDDE900860010 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ED44830A2204989A00BE8EF0 /* Common */,
 				ED448304220477A800BE8EF0 /* Users */,
-				ED1ED01921FF199100141CF5 /* City.swift */,
-				ED1ED02321FF353400141CF5 /* Category.swift */,
-				EDD3CD242201E7A400E38879 /* ProviderProfession.swift */,
-				EDD3CD262201F21700E38879 /* ProviderService.swift */,
-				EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */,
-				EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */,
-				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
-				ED448302220473BD00BE8EF0 /* ProfileImage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
