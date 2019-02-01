@@ -8,29 +8,18 @@
 
 import UIKit
 
-enum RemoteImageJsonFields: String {
-  case id = "id"
+enum RemoteImageJsonFields: String, CodingKey {
+  case id
   case userId = "user_id"
   case url = "image_path"
 }
 
-struct RemoteImage {
+struct ProfileImage {
   var id: Int
   var userId: Int
   var url: String
 }
 
-extension RemoteImage: JsonInitiableModel {
-  init?(json: [String : Any]) {
-    guard let id = json[RemoteImageJsonFields.id.rawValue] as? Int,
-      let userId = json[RemoteImageJsonFields.userId.rawValue] as? Int,
-      let url = json[RemoteImageJsonFields.url.rawValue] as? String else {
-        print("Cannot parse json fields in RemoteImage.init!")
-        return nil
-    }
+extension ProfileImage: Codable {
   
-    self.id = id
-    self.userId = userId
-    self.url = url
-  }
 }

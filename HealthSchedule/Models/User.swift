@@ -31,7 +31,7 @@ struct User {
   // CONSIDER USE DIFFERENT APPROACH
   struct Provider {
     var professions: [ProviderProfession]
-    var certificates: [RemoteImage]
+    var certificates: [ProfileImage]
     var services: [ProviderService]
     
     var scheduleTemplate: [ScheduleWeekDay]
@@ -58,7 +58,7 @@ struct User {
   var userType: UserType = .client
   
   var providerData: Provider?
-  var photo: RemoteImage?
+  var photo: ProfileImage?
 }
 
 extension User: JsonInitiableModel {
@@ -76,7 +76,7 @@ extension User: JsonInitiableModel {
     }
     
     if let userImageObjectJson = json[UserJsonFields.image.rawValue] as? [String:Any] {
-      photo = RemoteImage(json: userImageObjectJson)
+      // PHOTO
     }
     
     self.id = id

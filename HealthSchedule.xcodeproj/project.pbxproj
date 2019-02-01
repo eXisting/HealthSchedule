@@ -48,8 +48,8 @@
 		ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482F2220457B600BE8EF0 /* Serializer.swift */; };
 		ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */; };
 		ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830022046B0A00BE8EF0 /* Parser.swift */; };
+		ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448302220473BD00BE8EF0 /* ProfileImage.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
-		ED5DBCB82200ACD7006070E0 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB72200ACD7006070E0 /* RemoteImage.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* GetRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* GetRequesting.swift */; };
@@ -106,8 +106,8 @@
 		ED4482F2220457B600BE8EF0 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensions.swift; sourceTree = "<group>"; };
 		ED44830022046B0A00BE8EF0 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		ED448302220473BD00BE8EF0 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		ED5DBCB72200ACD7006070E0 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* GetRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequesting.swift; sourceTree = "<group>"; };
@@ -245,10 +245,10 @@
 			children = (
 				ED4482F622045D4E00BE8EF0 /* Request */,
 				ED4482ED22044EEE00BE8EF0 /* Parser */,
-				ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */,
 				ED330C6721F0748B001019FC /* AlertHandler.swift */,
 				ED330C9221F223AE001019FC /* BlurHandler.swift */,
 				EDD3CD2C220304DA00E38879 /* DatesManager.swift */,
+				ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -311,8 +311,8 @@
 		ED4482F622045D4E00BE8EF0 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
 				ED4482FF220466D800BE8EF0 /* Base */,
+				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -339,12 +339,12 @@
 				ED1ED01921FF199100141CF5 /* City.swift */,
 				ED1ED02321FF353400141CF5 /* Category.swift */,
 				ED5DBCB5220066E3006070E0 /* User.swift */,
-				ED5DBCB72200ACD7006070E0 /* RemoteImage.swift */,
 				EDD3CD242201E7A400E38879 /* ProviderProfession.swift */,
 				EDD3CD262201F21700E38879 /* ProviderService.swift */,
 				EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */,
 				EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */,
 				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
+				ED448302220473BD00BE8EF0 /* ProfileImage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -428,7 +428,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED089A8621E89B6A006A8523 /* RequestHandler.swift in Sources */,
-				ED5DBCB82200ACD7006070E0 /* RemoteImage.swift in Sources */,
 				ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */,
 				ED089A8921E8EB4F006A8523 /* ImageRequesting.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
@@ -465,6 +464,7 @@
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
 				ED330C6621EF8B66001019FC /* RootTabBarVewController.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
+				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DatesManager.swift in Sources */,
