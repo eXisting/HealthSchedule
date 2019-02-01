@@ -24,7 +24,7 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::get('/', 'AuthUserController@get');
 
-        Route::put('/info', 'UserController@updateUser');
+        Route::put('/info', 'UserController@update');
 
         Route::put('/photo', 'UserImageController@update');
 
@@ -63,7 +63,7 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::prefix('verifies')->group(function () {
             Route::post('/', 'ProviderVerifyController@create');
-            Route::delete('/{id}', 'ProviderVerifyController@delete');
+            Route::delete('/{provider_verify}', 'ProviderVerifyController@delete');
         });
 
         Route::prefix('schedules')->group(function () {

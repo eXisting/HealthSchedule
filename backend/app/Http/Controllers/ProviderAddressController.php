@@ -33,6 +33,7 @@ class ProviderAddressController extends AuthUserController
         $address = $this->authUser->address;
 
         if($address) {
+            dd($address->address == $request->address, !($address->users || $address->providerServices));
             if ($address->address == $request->address) {
                 return response()->json(['success' => true]);
             }
