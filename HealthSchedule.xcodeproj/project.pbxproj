@@ -32,7 +32,6 @@
 		ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */; };
 		ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02121FF34B700141CF5 /* RequestManager.swift */; };
 		ED1ED02421FF353400141CF5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02321FF353400141CF5 /* Category.swift */; };
-		ED1ED02621FF45E900141CF5 /* JsonInitiableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */; };
 		ED1ED02921FF5C2D00141CF5 /* ValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */; };
 		ED1ED02B21FF678A00141CF5 /* AuthProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
@@ -93,7 +92,6 @@
 		ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibLoad.swift; sourceTree = "<group>"; };
 		ED1ED02121FF34B700141CF5 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		ED1ED02321FF353400141CF5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonInitiableModel.swift; sourceTree = "<group>"; };
 		ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationController.swift; sourceTree = "<group>"; };
 		ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviding.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 				ED089A8821E8EB4F006A8523 /* ImageRequesting.swift */,
 				ED6CBE7B21ECD80600860010 /* GetRequesting.swift */,
 				ED1ED01B21FF231C00141CF5 /* PrintableObject.swift */,
-				ED1ED02521FF45E900141CF5 /* JsonInitiableModel.swift */,
 				ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */,
 			);
 			path = Protocols;
@@ -476,7 +473,6 @@
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
-				ED1ED02621FF45E900141CF5 /* JsonInitiableModel.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				ED1ED01621FF04EC00141CF5 /* PopOverViewController.swift in Sources */,
