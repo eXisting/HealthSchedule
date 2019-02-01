@@ -21,17 +21,23 @@ class Parser {
     }
     
     for element in elementsList {
-      
-      guard let elementData = Serializer.getDataFrom(object: element) else {
-        continue
-      }
-      
-      guard let destinationObject = Serializer.decodeDataInto(type: DestinationType.self, elementData) else {
-        print("Cannot cast to [String:Any] in anyToObjectArray")
+      guard let destinationObject = anyToObject(destination: DestinationType.self, element) else {
         continue
       }
       
       result.append(destinationObject)
+    }
+    
+    return result
+  }
+  
+  class func anyToObject<DestinationType: Decodable>(destination: DestinationType.Type, _ object: Any) -> DestinationType? {
+    guard let data = Serializer.getDataFrom(object: object) else {
+      return nil
+    }
+    
+    guard let result = Serializer.decodeDataInto(type: DestinationType.self, data) else {
+      return nil
     }
     
     return result

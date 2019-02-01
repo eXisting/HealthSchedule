@@ -24,15 +24,9 @@ class RequestManager {
     }
   }
   
-  class func getAsyncFor<T: JsonInitiableModel>(type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ complition: @escaping (T) -> Void) {
+  class func getAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ complition: @escaping (T) -> Void) {
     getRequest.getAsync(from: buildEndpoint(endpoint.rawValue), params) { json in
-      guard let parseableJson = json as? [String:Any] else {
-        print("Cannot cast to [String:Any] in getAsyncFor")
-        return
-      }
-
-      guard let initableObject = T(json: parseableJson) else {
-        print("Cannot init object in getAsyncFor")
+      guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
         return
       }
 

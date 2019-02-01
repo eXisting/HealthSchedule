@@ -13,7 +13,18 @@ class DatesManager {
   
   let dateFormatter = DateFormatter()
   
+  private var defaultDate: Date!
+  
+  func createDateFrom(_ dateString: String) -> Date {
+    guard let date = dateFormatter.date(from: dateString) else {
+      return defaultDate
+    }
+    
+    return date
+  }
+  
   private init() {
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    defaultDate = dateFormatter.date(from: "2000-01-01 01:01:01")
   }
 }
