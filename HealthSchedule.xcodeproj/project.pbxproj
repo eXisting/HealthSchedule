@@ -48,9 +48,10 @@
 		ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */; };
 		ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830022046B0A00BE8EF0 /* Parser.swift */; };
 		ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448302220473BD00BE8EF0 /* ProfileImage.swift */; };
-		ED448306220477B900BE8EF0 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448305220477B900BE8EF0 /* Provider.swift */; };
+		ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448305220477B900BE8EF0 /* ProviderData.swift */; };
 		ED44830C2204A23400BE8EF0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830B2204A23400BE8EF0 /* Address.swift */; };
 		ED44830E2204A52500BE8EF0 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830D2204A52500BE8EF0 /* Role.swift */; };
+		ED4483112204AA4400BE8EF0 /* UsersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483102204AA4400BE8EF0 /* UsersManager.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
@@ -108,9 +109,10 @@
 		ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensions.swift; sourceTree = "<group>"; };
 		ED44830022046B0A00BE8EF0 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		ED448302220473BD00BE8EF0 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
-		ED448305220477B900BE8EF0 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		ED448305220477B900BE8EF0 /* ProviderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderData.swift; sourceTree = "<group>"; };
 		ED44830B2204A23400BE8EF0 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		ED44830D2204A52500BE8EF0 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
+		ED4483102204AA4400BE8EF0 /* UsersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersManager.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
 				ED089A5321E77D13006A8523 /* Assets.xcassets */,
 				ED089A6E21E78751006A8523 /* Controllers */,
-				ED089A8421E899D9006A8523 /* Handlers */,
+				ED089A8421E899D9006A8523 /* OperationHandlers */,
 				ED089A5821E77D13006A8523 /* Info.plist */,
 				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
 				ED6CBE7D21EDDDE900860010 /* Models */,
@@ -243,17 +245,18 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		ED089A8421E899D9006A8523 /* Handlers */ = {
+		ED089A8421E899D9006A8523 /* OperationHandlers */ = {
 			isa = PBXGroup;
 			children = (
+				ED4483122204AA4700BE8EF0 /* Managers */,
 				ED4482F622045D4E00BE8EF0 /* Request */,
 				ED4482ED22044EEE00BE8EF0 /* Parser */,
 				ED330C6721F0748B001019FC /* AlertHandler.swift */,
-				ED330C9221F223AE001019FC /* BlurHandler.swift */,
-				EDD3CD2C220304DA00E38879 /* DatesManager.swift */,
 				ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */,
+				ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */,
+				ED330C9221F223AE001019FC /* BlurHandler.swift */,
 			);
-			path = Handlers;
+			path = OperationHandlers;
 			sourceTree = "<group>";
 		};
 		ED089A8D21E8EF53006A8523 /* Elements */ = {
@@ -270,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				ED1ED01521FF04EC00141CF5 /* PopOverViewController.swift */,
-				ED1ED02821FF5C2D00141CF5 /* ValidationController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -351,7 +353,7 @@
 			children = (
 				EDD3CD242201E7A400E38879 /* ProviderProfession.swift */,
 				EDD3CD262201F21700E38879 /* ProviderService.swift */,
-				ED448305220477B900BE8EF0 /* Provider.swift */,
+				ED448305220477B900BE8EF0 /* ProviderData.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -376,6 +378,15 @@
 				ED44830D2204A52500BE8EF0 /* Role.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		ED4483122204AA4700BE8EF0 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EDD3CD2C220304DA00E38879 /* DatesManager.swift */,
+				ED4483102204AA4400BE8EF0 /* UsersManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		ED6CBE7D21EDDDE900860010 /* Models */ = {
@@ -480,6 +491,7 @@
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED1ED01C21FF231C00141CF5 /* PrintableObject.swift in Sources */,
+				ED4483112204AA4400BE8EF0 /* UsersManager.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationController.swift in Sources */,
 				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
@@ -500,7 +512,7 @@
 				ED089A9521E8FD05006A8523 /* ExpertsCollectionViewController.swift in Sources */,
 				ED089A7221E78E49006A8523 /* BaseCollectionViewController.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
-				ED448306220477B900BE8EF0 /* Provider.swift in Sources */,
+				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED330C6621EF8B66001019FC /* RootTabBarVewController.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,

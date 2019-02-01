@@ -31,29 +31,14 @@ class AuthenticationViewController: UIViewController {
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     // TODO: wait until data received
-    if identifier == signUpSequeId {
-      signUp(errorHandler: validatonAlert)
-      return false
+    UsersManager.shared.login(login: "carolyn.mante@example.net", password: "secret") { user in
+      print("Perform segue")
     }
-    requestUser(errorHandler: validatonAlert)
-    
     return false
   }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // TODO: pass data to next view controller
-  }
-  
-  func requestUser(errorHandler: @escaping (Error?) -> Void) {
-    // TODO: replace with text fields values
-    let b = ["username":"marks.freeda@example.com", "password":"secret"]
-    RequestManager.signIn(authType: .client, body: b) { [weak self] (user, info, error) in
-      if let infoObject = info {
-        AlertHandler.ShowAlert(for: self!, "Congrats!", infoObject.rawValue, .alert)
-        return
-      }
-      print(user)
-    }
   }
   
   func signUp(errorHandler: @escaping (Error?) -> Void) {

@@ -18,6 +18,14 @@ struct Token {
   var token: String?
   var expires: Int?
   var success: Bool?
+  
+  func asParams() -> Parser.JsonDictionary {
+    guard let tokenValue = token else {
+      return [TokenJsonFields.token.rawValue: ""]
+    }
+    
+    return [TokenJsonFields.token.rawValue: tokenValue]
+  }
 }
 
 extension Token: Codable {}

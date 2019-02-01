@@ -14,6 +14,7 @@ enum Endpoints: String {
   case provider = "/api/provider"
   case allCities = "/api/cities"
   case allProfessions = "/api/category/doctors/professions"
+  case providerProfessions = "/api/provider/professions"
   
   // POST
   case signUpAsUser = "/api/register/user"

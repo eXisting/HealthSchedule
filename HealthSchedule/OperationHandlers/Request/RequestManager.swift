@@ -14,7 +14,7 @@ class RequestManager {
   private static let getRequest: GetRequesting = RequestHandler.shared
   private static let authRequests: AuthProviding = RequestHandler.shared
   
-  private static var sessionToken: String?
+  static private(set) var sessionToken: Token?
   
   class func getListAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ complition: @escaping ([T]) -> Void) {
     getRequest.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { json in      
@@ -34,11 +34,9 @@ class RequestManager {
     }
   }
   
-  class func signIn(authType: UserType, body: Parser.JsonDictionary, _ complition: @escaping RequestHandler.UserComplition) {
+  class func signIn(body: Parser.JsonDictionary, _ complition: @escaping RequestHandler.UserComplition) {
     authRequests.getToken(from: buildEndpoint(Endpoints.signIn.rawValue), bodyData: body) { (data, error) in
-      let endpoint = authType == .client ? Endpoints.user : Endpoints.provider
-      
-      getAsyncFor(type: User.self, from: endpoint, [TokenJsonFields.token.rawValue: rememberTokenFrom(data)]) { user in
+      getAsyncFor(type: User.self, from: .user, rememberTokenFrom(data).asParams()) { user in
         complition((user, nil, nil))
       }
     }
@@ -50,7 +48,7 @@ class RequestManager {
     let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
     
     authRequests.getToken(from: buildEndpoint(endpoint.rawValue), bodyData: body) { (data, error) in
-      getAsyncFor(type: User.self, from: .user, [TokenJsonFields.token.rawValue: rememberTokenFrom(data)]) { user in
+      getAsyncFor(type: User.self, from: .user, rememberTokenFrom(data).asParams()) { user in
         complition((user, !isClientSignUp ? .accountModeration : nil, nil))
       }
     }
@@ -62,18 +60,12 @@ extension RequestManager {
     return rootEndpoint + route
   }
   
-  private class func rememberTokenFrom(_ data: Data) -> String {
+  private class func rememberTokenFrom(_ data: Data) -> Token {
     guard let token = Serializer.decodeDataInto(type: Token.self, data) else {
-      return ""
+      return Token()
     }
     
-    guard let tokenValue = token.token else {
-      print("No token found!")
-      return ""
-    }
-    
-    sessionToken = tokenValue
-    
-    return tokenValue
+    sessionToken = token
+    return token
   }
 }
