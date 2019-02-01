@@ -13,8 +13,6 @@ enum UserMessage: String {
 }
 
 class Serializer {
-  typealias JsonDictionary = [String:String]
-  typealias BodyDictionary = [String:Any]
   
   private static let decoder = JSONDecoder()
   private static let encoder = JSONEncoder()

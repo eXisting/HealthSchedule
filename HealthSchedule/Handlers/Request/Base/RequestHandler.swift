@@ -33,7 +33,7 @@ class RequestHandler {
   
   private init() {}
   
-  private func getJsonAsync(from url: String, _ params: Serializer.JsonDictionary?, completion: @escaping (Any) -> Void) {
+  private func getJsonAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
     guard let urlRequest = buildUrlRequest(url, params, "GET") else {
       return
     }
@@ -61,7 +61,7 @@ class RequestHandler {
     task.resume()
   }
   
-  private func postAsync(to url: String, params: Serializer.JsonDictionary?, bodyData: Serializer.BodyDictionary, completion: @escaping (Data, Error?) -> Void) {
+  private func postAsync(to url: String, params: Parser.JsonDictionary?, bodyData: Parser.BodyDictionary, completion: @escaping (Data, Error?) -> Void) {
     // TODO: Return error in tuple    
     guard var urlRequest = buildUrlRequest(url, params, "POST") else {
       return
@@ -89,27 +89,21 @@ class RequestHandler {
 // MARK: - EXTENSIONS
 
 extension RequestHandler: AuthProviding {
-  func getToken(from url: String, bodyData: Serializer.BodyDictionary, completion: @escaping PostComplition) {
+  func getToken(from url: String, bodyData: Parser.BodyDictionary, completion: @escaping PostComplition) {
     postAsync(to: url, params: nil, bodyData: bodyData, completion: completion)
   }
 }
 
 extension RequestHandler: GetRequesting {
-  func getObjectAsync(from url: String, _ params: Serializer.JsonDictionary?, complition: @escaping (Any) -> Void) {
+  func getAsync(from url: String, _ params: Parser.JsonDictionary?, complition: @escaping (Any) -> Void) {
     getJsonAsync(from: url, params, completion: complition)
-  }
-  
-  func getAsync(from url: String, _ params: Serializer.JsonDictionary?, complition: @escaping ([Any]) -> Void) {
-    getJsonAsync(from: url, params) { data in
-      complition([data])
-    }
   }
 }
 
 // MARK: - HELPERS
 
 private extension RequestHandler {
-  func buildUrlRequest(_ url: String, _ params: Serializer.JsonDictionary?, _ method: String) -> URLRequest? {
+  func buildUrlRequest(_ url: String, _ params: Parser.JsonDictionary?, _ method: String) -> URLRequest? {
     var parameterString = ""
     
     if let parameters = params {
@@ -123,7 +117,7 @@ private extension RequestHandler {
     
     var request = URLRequest(url: url)
     
-    var headers: Serializer.JsonDictionary = [:]
+    var headers: Parser.JsonDictionary = [:]
     headers["Content-Type"] = "application/json"
     
     request.allHTTPHeaderFields = headers

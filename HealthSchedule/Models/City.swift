@@ -8,32 +8,13 @@
 
 import UIKit
 
-enum CityJsonFields: String {
-  case id = "id"
-  case name = "name"
-  case title = "title"
-}
-
 struct City {
   var id: Int
   var name: String
   var title: String
 }
 
-extension City: JsonInitiableModel {
-  init?(json: [String: Any]) {    
-    guard let id = json[CityJsonFields.id.rawValue] as? Int,
-      let name = json[CityJsonFields.name.rawValue] as? String,
-      let title = json[CityJsonFields.title.rawValue] as? String else {
-        print("Cannot parse json fields in City.init!")
-        return nil
-    }
-    
-    self.id = id
-    self.name = name
-    self.title = title
-  }
-}
+extension City: Codable {}
 
 extension City: PrintableObject {
   func getViewableString() -> String {

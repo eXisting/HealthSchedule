@@ -13,5 +13,5 @@ protocol JsonInitiableModel {
 }
 
 protocol JsonConvertable {
-  func asJson() -> Serializer.JsonDictionary
+  func asJson() -> Parser.JsonDictionary
 }

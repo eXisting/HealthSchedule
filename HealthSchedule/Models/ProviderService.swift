@@ -52,7 +52,7 @@ extension ProviderService: JsonInitiableModel {
 }
 
 extension ProviderService: JsonConvertable {
-  func asJson() -> Serializer.JsonDictionary {
+  func asJson() -> Parser.JsonDictionary {
     return [
       ProviderServiceJsonFields.id.rawValue: String(id),
       ProviderServiceJsonFields.providerId.rawValue: String(providerId),

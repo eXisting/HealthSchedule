@@ -9,8 +9,5 @@
 import UIKit
 
 protocol GetRequesting {
-  
-  func getAsync(from url: String, _ params: Serializer.JsonDictionary?, complition: @escaping (_ list: [Any]) -> Void)
-  func getObjectAsync(from url: String, _ params: Serializer.JsonDictionary?, complition: @escaping (_ object: Any) -> Void)
-
+  func getAsync(from url: String, _ params: Parser.JsonDictionary?, complition: @escaping (_ object: Any) -> Void)
 }

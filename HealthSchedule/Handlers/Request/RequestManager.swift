@@ -16,29 +16,16 @@ class RequestManager {
   
   private static var sessionToken: String?
   
-  class func getListAsyncFor<T: JsonInitiableModel>(type: T.Type, from endpoint: Endpoints, _ headers: Serializer.JsonDictionary?, _ complition: @escaping ([T]) -> Void) {
-    getRequest.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { json in
-      var result = [T]()
-      
-      for element in json {
-        guard let parseableJson = element as? [String:Any] else {
-          print("Cannot cast to [String:Any] in getListAsyncFor")
-          continue
-        }
-        
-        guard let initableObject = T(json: parseableJson) else {
-          continue
-        }
-        
-        result.append(initableObject)
-      }
+  class func getListAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ complition: @escaping ([T]) -> Void) {
+    getRequest.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { json in      
+      let result = Parser.anyArrayToObjectArray(destination: T.self, json)
       
       complition(result)
     }
   }
   
-  class func getAsyncFor<T: JsonInitiableModel>(type: T.Type, from endpoint: Endpoints, _ params: Serializer.JsonDictionary?, _ complition: @escaping (T) -> Void) {
-    getRequest.getObjectAsync(from: buildEndpoint(endpoint.rawValue), params) { json in
+  class func getAsyncFor<T: JsonInitiableModel>(type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ complition: @escaping (T) -> Void) {
+    getRequest.getAsync(from: buildEndpoint(endpoint.rawValue), params) { json in
       guard let parseableJson = json as? [String:Any] else {
         print("Cannot cast to [String:Any] in getAsyncFor")
         return
@@ -53,7 +40,7 @@ class RequestManager {
     }
   }
   
-  class func signIn(authType: UserType, body: Serializer.JsonDictionary, _ complition: @escaping RequestHandler.UserComplition) {
+  class func signIn(authType: UserType, body: Parser.JsonDictionary, _ complition: @escaping RequestHandler.UserComplition) {
     authRequests.getToken(from: buildEndpoint(Endpoints.signIn.rawValue), bodyData: body) { (data, error) in
       let endpoint = authType == .client ? Endpoints.user : Endpoints.provider
       
@@ -63,7 +50,7 @@ class RequestManager {
     }
   }
   
-  class func signUp(authType: UserType, body: Serializer.BodyDictionary, _ complition: @escaping RequestHandler.UserComplition) {
+  class func signUp(authType: UserType, body: Parser.BodyDictionary, _ complition: @escaping RequestHandler.UserComplition) {
     let isClientSignUp = authType == .client
     
     let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
