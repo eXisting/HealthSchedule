@@ -17,15 +17,15 @@ class RequestsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('provider_service_id');
-            $table->unsignedInteger('status_id');
+            $table->boolean('status')->default(null);
             $table->tinyInteger('rate');
             $table->text('description');
             $table->dateTime('request_at');
             $table->timestamps();
 
-            $table->foreign( 'user_id' )->references( 'id' )->on( 'users' );
-            $table->foreign( 'provider_service_id' )->references( 'id' )->on( 'provider_services' );
-            $table->foreign( 'status_id' )->references( 'id' )->on( 'request_statuses' );
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('provider_service_id')->references('id')->on('provider_services');
+            // $table->foreign('status_id')->references('id')->on('request_statuses');
         });
     }
 
@@ -39,7 +39,7 @@ class RequestsTable extends Migration
         Schema::table('requests', function (Blueprint $table) {
             $table->dropForeign('requests_user_id_foreign');
             $table->dropForeign('requests_provider_service_id_foreign');
-            $table->dropForeign('requests_status_id_foreign');
+            // $table->dropForeign('requests_status_id_foreign');
         });
         Schema::dropIfExists('requests');
     }

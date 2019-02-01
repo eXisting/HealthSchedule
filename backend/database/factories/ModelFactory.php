@@ -40,7 +40,6 @@ $factory->define(App\Models\Category::class, function (Faker $faker) {
     return [
         'title' => $category,
         'name' => str_slug($category, '_')
-
     ];
 });
 
@@ -49,7 +48,6 @@ $factory->define(App\Models\City::class, function (Faker $faker) {
     return [
         'title' => $cityName,
         'name' => str_slug($cityName, '_')
-
     ];
 });
 
@@ -58,7 +56,6 @@ $factory->define(App\Models\Profession::class, function (Faker $faker) {
     return [
         'title' => $profession,
         'name' => str_slug($profession, '_')
-
     ];
 });
 
@@ -72,8 +69,8 @@ $factory->define(App\Models\ProviderProfession::class, function (Faker $faker) {
     return [
         'city_id' => \App\Models\City::query()->inRandomOrder()->first()->id,
         'company_name' => $faker->company,
-        'start_at' => \Carbon\Carbon::create(2000-rand(1,10), rand(1,12))->toDateTimeString(),
-        'end_at' => \Carbon\Carbon::create(2000+rand(1,10), rand(1,12))->toDateTimeString(),
+        'start_at' => \Carbon\Carbon::create(2000 - rand(1, 10), rand(1, 12))->toDateTimeString(),
+        'end_at' => \Carbon\Carbon::create(2000 + rand(1, 10), rand(1, 12))->toDateTimeString(),
     ];
 });
 
@@ -93,7 +90,7 @@ $factory->define(App\Models\ProviderVerify::class, function (Faker $faker) {
 $factory->define(App\Models\Recommendation::class, function (Faker $faker) {
     return [
         'user_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::CLIENT)->inRandomOrder()->first()->id,
-        'provider_id' =>\App\Models\User::query()->where('user_role_id', \App\Models\UserRole::PROVIDER)->inRandomOrder()->first()->id,
+        'provider_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::PROVIDER)->inRandomOrder()->first()->id,
         'title' => $faker->jobTitle,
         'description' => $faker->text(350),
         'is_active' => $faker->boolean
@@ -104,10 +101,11 @@ $factory->define(App\Models\Request::class, function (Faker $faker) {
     return [
         'user_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::CLIENT)->inRandomOrder()->first()->id,
         'provider_service_id' => \App\Models\ProviderService::query()->inRandomOrder()->first()->id,
-        'status_id' => \App\Models\RequestStatus::query()->inRandomOrder()->first()->id,
-        'rate' => rand(1,5),
+        // 'status_id' => \App\Models\RequestStatus::query()->inRandomOrder()->first()->id,
+        'status' => $faker->boolean,
+        'rate' => rand(1, 5),
         'description' => $faker->text,
-        'request_at' => rand(0,1) ? \Carbon\Carbon::now()->addDays(rand(-10, -1))->toDateTimeString() : \Carbon\Carbon::now()->addDays(rand(5, 60))->toDateTimeString(),
+        'request_at' => rand(0, 1) ? \Carbon\Carbon::now()->addDays(rand(-10, -1))->toDateTimeString() : \Carbon\Carbon::now()->addDays(rand(5, 60))->toDateTimeString(),
     ];
 });
 
@@ -135,12 +133,12 @@ $factory->define(App\Models\UserRole::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\ProviderService::class, function (Faker $faker) {
-    $minutes = collect([15,30, 45]);
+    $minutes = collect([15, 30, 45]);
 
     return [
         'address_id' => factory(\App\Models\Address::class)->create()->id,
-        'price' => rand(100,500),
+        'price' => rand(100, 500),
         'description' => $faker->text,
-        'interval' => \Carbon\Carbon::createFromTime(rand(0,1), $minutes->random())
+        'interval' => \Carbon\Carbon::createFromTime(rand(0, 1), $minutes->random())
     ];
 });
