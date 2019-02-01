@@ -15,12 +15,16 @@ class DatesManager {
   
   private var defaultDate: Date!
   
-  func createDateFrom(_ dateString: String) -> Date {
+  func stringToDate(_ dateString: String) -> Date {
     guard let date = dateFormatter.date(from: dateString) else {
       return defaultDate
     }
     
     return date
+  }
+  
+  func dateToString(_ date: Date) -> String {
+    return dateFormatter.string(from: date)
   }
   
   private init() {

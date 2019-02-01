@@ -51,8 +51,10 @@ extension User: Codable {
     try container.encode(email, forKey: .email)
     try container.encode(phone, forKey: .phone)
     try container.encode(status, forKey: .status)
-    try container.encode(birthday, forKey: .birthday)
     try container.encode(userType, forKey: .role)
+    
+    let birthdayString = DatesManager.shared.dateToString(birthday)
+    try container.encode(birthdayString, forKey: .birthday)
   }
   
   init(from decoder: Decoder) throws {
@@ -65,7 +67,7 @@ extension User: Codable {
     status = try container.decode(Bool.self, forKey: .status)
     
     let birthdayString = try container.decode(String.self, forKey: .birthday)
-    birthday = DatesManager.shared.createDateFrom(birthdayString)
+    birthday = DatesManager.shared.stringToDate(birthdayString)
     
     let role = try container.decode(Int.self, forKey: .role)    
     userType = UserType(rawValue: role) ?? .client

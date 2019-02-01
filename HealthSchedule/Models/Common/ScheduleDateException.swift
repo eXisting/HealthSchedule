@@ -8,56 +8,55 @@
 
 import UIKit
 
-enum ScheduleDateExceptionJsonFields: String {
-  case id = "id"
+enum ScheduleDateExceptionJsonFields: String, CodingKey {
+  case id
   case providerId = "provider_id"
+  case workingStatus = "working"
+  
   case exceptionAt = "exception_at"
   case startTime = "start_time"
   case endTime = "end_time"
-  case workingStatus = "working"
 }
 
 struct ScheduleDateException {
   var id: Int
   var providerId: Int
+  var workingStatus: Int
+ 
   var exceptionAt: Date
   var startTime: Date
   var endTime: Date
-  var workingStatus: Int
 }
 
-extension ScheduleDateException: JsonInitiableModel {
-  init?(json: [String: Any]) {
-    guard let id = json[ScheduleDateExceptionJsonFields.id.rawValue] as? Int,
-      let providerId = json[ScheduleDateExceptionJsonFields.providerId.rawValue] as? Int,
-      let exceptionAt = json[ScheduleDateExceptionJsonFields.exceptionAt.rawValue] as? Date,
-      let startTime = json[ScheduleDateExceptionJsonFields.startTime.rawValue] as? Date,
-      let endTime = json[ScheduleDateExceptionJsonFields.endTime.rawValue] as? Date,
-      let workingStatus = json[ScheduleDateExceptionJsonFields.workingStatus.rawValue] as? Int else {
-        print("Cannot parse json fields in ProviderSchedule.init!")
-        return nil
-    }
+extension ScheduleDateException: Codable {
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: ScheduleDateExceptionJsonFields.self)
+    try container.encode(id, forKey: .id)
+    try container.encode(providerId, forKey: .providerId)
+    try container.encode(workingStatus, forKey: .workingStatus)
     
-    self.id = id
-    self.providerId = providerId
-    self.exceptionAt = exceptionAt
-    self.startTime = startTime
-    self.endTime = endTime
-    self.workingStatus = workingStatus
+    let exceptionDateString = DatesManager.shared.dateToString(exceptionAt)
+    try container.encode(exceptionDateString, forKey: .exceptionAt)
+    
+    let startDateString = DatesManager.shared.dateToString(exceptionAt)
+    try container.encode(startDateString, forKey: .startTime)
+    
+    let endDateString = DatesManager.shared.dateToString(exceptionAt)
+    try container.encode(endDateString, forKey: .endTime)
   }
-}
-
-extension ScheduleDateException: JsonConvertable {
-  func asJson() -> Parser.JsonDictionary {
-    let formatter = DatesManager.shared.dateFormatter
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: ScheduleDateExceptionJsonFields.self)
+    id = try container.decode(Int.self, forKey: .id)
+    providerId = try container.decode(Int.self, forKey: .providerId)
+    workingStatus = try container.decode(Int.self, forKey: .workingStatus)
     
-    return [
-      ScheduleDateExceptionJsonFields.id.rawValue: String(id),
-      ScheduleDateExceptionJsonFields.providerId.rawValue: String(providerId),
-      ScheduleDateExceptionJsonFields.exceptionAt.rawValue: formatter.string(from: exceptionAt),
-      ScheduleDateExceptionJsonFields.startTime.rawValue: formatter.string(from: startTime),
-      ScheduleDateExceptionJsonFields.endTime.rawValue: formatter.string(from: endTime),
-      ScheduleDateExceptionJsonFields.workingStatus.rawValue: String(workingStatus)
-    ]
+    let dateString = try container.decode(String.self, forKey: .exceptionAt)
+    let startString = try container.decode(String.self, forKey: .startTime)
+    let endString = try container.decode(String.self, forKey: .endTime)
+    
+    exceptionAt = DatesManager.shared.stringToDate(dateString)
+    startTime = DatesManager.shared.stringToDate(startString)
+    endTime = DatesManager.shared.stringToDate(endString)
   }
 }
