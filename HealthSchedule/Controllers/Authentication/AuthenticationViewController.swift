@@ -17,8 +17,6 @@ class AuthenticationViewController: UIViewController {
   @IBOutlet weak var emailField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
   
-  private var isLoginSucceded = false
-  
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
     
@@ -39,7 +37,7 @@ class AuthenticationViewController: UIViewController {
     }
     requestUser(errorHandler: validatonAlert)
     
-    return isLoginSucceded
+    return false
   }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,16 +46,13 @@ class AuthenticationViewController: UIViewController {
   
   func requestUser(errorHandler: @escaping (Error?) -> Void) {
     // TODO: replace with text fields values
-    let b = ["username":"johny1234@gmail.com", "password":"qwerty"]
-    RequestManager.signIn(authType: .client, body: b) { [weak self] (userData, error) in
-      // TODO: store it and pass to another controlelr in case when error is nil
-      guard let user = userData as? User else {
-        errorHandler(error)
+    let b = ["username":"arnoldo.bogisich@example.com", "password":"secret"]
+    RequestManager.signIn(authType: .client, body: b) { [weak self] (user, info, error) in
+      if let infoObject = info {
+        AlertHandler.ShowAlert(for: self!, "Congrats!", infoObject.rawValue, .alert)
         return
       }
-      
       print(user)
-      self?.isLoginSucceded = true
     }
   }
   

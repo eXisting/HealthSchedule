@@ -52,7 +52,7 @@ extension ProviderService: JsonInitiableModel {
 }
 
 extension ProviderService: JsonConvertable {
-  func asJson() -> RequestHandler.JsonDictionary {
+  func asJson() -> Serializer.JsonDictionary {
     return [
       ProviderServiceJsonFields.id.rawValue: String(id),
       ProviderServiceJsonFields.providerId.rawValue: String(providerId),
@@ -60,7 +60,7 @@ extension ProviderService: JsonConvertable {
       ProviderServiceJsonFields.addressId.rawValue: String(addressId),
       ProviderServiceJsonFields.price.rawValue: String(price),
       ProviderServiceJsonFields.description.rawValue: description,
-      ProviderServiceJsonFields.interval.rawValue: DateOperationsHandler.shared.dateFormatter.string(from: interval)
+      ProviderServiceJsonFields.interval.rawValue: DatesManager.shared.dateFormatter.string(from: interval)
     ]
   }
 }

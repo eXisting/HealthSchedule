@@ -48,8 +48,8 @@ extension ScheduleWeekDay: JsonInitiableModel {
 }
 
 extension ScheduleWeekDay: JsonConvertable {
-  func asJson() -> RequestHandler.JsonDictionary {
-    let formatter = DateOperationsHandler.shared.dateFormatter
+  func asJson() -> Serializer.JsonDictionary {
+    let formatter = DatesManager.shared.dateFormatter
     
     return [
       ScheduleWeekDayJsonFields.id.rawValue: String(id),

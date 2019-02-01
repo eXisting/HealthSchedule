@@ -48,8 +48,8 @@ extension ScheduleDateException: JsonInitiableModel {
 }
 
 extension ScheduleDateException: JsonConvertable {
-  func asJson() -> RequestHandler.JsonDictionary {
-    let formatter = DateOperationsHandler.shared.dateFormatter
+  func asJson() -> Serializer.JsonDictionary {
+    let formatter = DatesManager.shared.dateFormatter
     
     return [
       ScheduleDateExceptionJsonFields.id.rawValue: String(id),
