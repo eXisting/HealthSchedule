@@ -42,7 +42,7 @@ class UsersManager {
   
   // MARK: - Provider requests
   
-  func professions(complition: @escaping ([ProviderProfession]) -> Void) {
+  func getProfessions(complition: @escaping ([ProviderProfession]) -> Void) {
     RequestManager.getListAsyncFor(type: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { list in
       complition(list)
     }
