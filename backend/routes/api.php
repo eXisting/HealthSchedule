@@ -24,15 +24,15 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::get('/', 'AuthUserController@get');
 
-        Route::put('/info', 'AuthUserController@updateUser');
+        Route::put('/info', 'UserController@updateUser');
 
         Route::put('/photo', 'UserImageController@update');
 
-        Route::put('/password', 'AuthUserController@updatePassword');
+        Route::put('/password', 'UserController@updatePassword');
 
         Route::prefix('recommendations')->group(function () {
-            Route::get('/', 'RecommendationController@userRecommendations');
-            Route::get('/{id}', 'RecommendationController@recommendation');
+            Route::get('/', 'UserRecommendationController@recommendations');
+            Route::get('/{id}', 'UserRecommendationController@recommendation');
             Route::put('/{id}/{recommendation_status}', 'RecommendationController@changeStatus');
         });
     });
@@ -42,7 +42,8 @@ Route::middleware('jwt.auth')->group(function () {
         Route::put('/address', 'ProviderAddressController@update');
 
         Route::prefix('recommendations')->group(function () {
-            Route::get('/', 'RecommendationController@providerRecommendations');
+            Route::get('/', 'ProviderRecommendationController@recommendations');
+            Route::get('/{id}', 'ProviderRecommendationController@recommendation');
             Route::post('/', 'RecommendationController@store');
         });
 

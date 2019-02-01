@@ -53,6 +53,14 @@ class AuthServiceProvider extends ServiceProvider
 
         #region ProviderRecommendation
 
+        $gate->define('provider-get-recommendation', function ($provider, $recommendation) {
+            /**
+             * @var User $provider
+             * @var Recommendation $recommendation
+             */
+            return $provider->id === $recommendation->provider_id;
+        });
+
         $gate->define('provider-create-recommendation', function ($provider, $user_id) {
             /**
              * @var User $provider
