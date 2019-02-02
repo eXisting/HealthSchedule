@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateProviderProfessionRequest;
-use App\Http\Requests\Provider\Address\UpdateProviderAddressRequest;
+use App\Http\Requests\Provider\Profession\CreateProviderProfessionRequest;
+use App\Http\Requests\Provider\Profession\UpdateProviderProfessionRequest;
 use App\Models\ProviderProfession;
 use App\Models\User;
 use Gate;
@@ -41,6 +41,12 @@ class ProviderProfessionController extends AuthUserController
     {
         $data = array_merge($request->all(), ['provider_id' => $this->authUser->id]);
 
+        try {
+            $this->authUser->providerProfessions()->create($data);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false,'message' => $e->getMessage()]);
+        }
+
         $result = $this->authUser->providerProfessions()->create($data);
 
         if($result) {
@@ -51,31 +57,31 @@ class ProviderProfessionController extends AuthUserController
     }
 
     /**
-     * @param ProviderProfession $profession
-     * @param UpdateProviderAddressRequest $request
+     * @param ProviderProfession $providerProfession
+     * @param UpdateProviderProfessionRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ProviderProfession $profession, UpdateProviderAddressRequest $request)
+    public function update(ProviderProfession $providerProfession, UpdateProviderProfessionRequest $request)
     {
-        if(Gate::denies('provider-update-profession', $profession)) {
+        if(Gate::denies('provider-update-profession', $providerProfession)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
-        return response()->json(['success' => $profession->update($request->all())]);
+        return response()->json(['success' => $providerProfession->update($request->all())]);
     }
 
     /**
-     * @param ProviderProfession $profession
+     * @param ProviderProfession $providerProfession
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(ProviderProfession $profession)
+    public function delete(ProviderProfession $providerProfession)
     {
-        if(Gate::denies('provider-delete-profession', $profession)) {
+        if(Gate::denies('provider-delete-profession', $providerProfession)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
         try {
-            $profession->delete();
+            $providerProfession->delete();
         } catch (\Exception $e) {
             return response()->json(['success' => false,'message' => $e->getMessage()]);
         }

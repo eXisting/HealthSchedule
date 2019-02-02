@@ -30,22 +30,22 @@ class ProviderAddressController extends AuthUserController
      */
     public function update(UpdateProviderAddressRequest $request)
     {
-        $address = $this->authUser->address;
-
-        if($address) {
-            dd($address->address == $request->address, !($address->users || $address->providerServices));
-            if ($address->address == $request->address) {
-                return response()->json(['success' => true]);
-            }
-
-            if (!($address->users || $address->providerServices)) {
-                $address->delete();
-            }
-        }
-
         $address = (new Address())->firstOrCreate(['address' => $request->address], ['address' => $request->address]);
 
-        $this->authUser->update(['address_id' => $address->id]);
+        if($address->id != $this->authUser->address_id) {
+
+            $oldAddress = $this->authUser->address;
+
+            $this->authUser->update(['address_id' => $address->id]);
+
+            if ($oldAddress && !($oldAddress->users()->exists() || $oldAddress->providerServices()->exists())) {
+                try {
+                    $oldAddress->delete();
+                } catch (\Exception $e) {
+                    return response()->json(['success' => false,'message' => $e->getMessage()]);
+                }
+            }
+        }
 
         return response()->json(['success' => true]);
     }

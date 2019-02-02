@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Recommendation\RecommendationRequest;
 use App\Models\Recommendation;
 use App\Models\User;
 use App\Repositories\RecommendationRepository;
@@ -55,5 +56,21 @@ class ProviderRecommendationController extends RecommendationController
         }
 
         return response()->json($recommendation);
+    }
+
+    /**
+     * @param RecommendationRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(RecommendationRequest $request)
+    {
+        if(Gate::denies('provider-create-recommendation', $request->user_id)) {
+            return response()->json(['message' => 'Not enough rights']);
+        }
+
+        $this->recommendation->create($this->authUser->id, $request->all());
+
+        return response()->json(['success' => true]);
+
     }
 }

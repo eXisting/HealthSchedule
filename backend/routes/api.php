@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/tests', function () {
+    dd(\App\Models\User::query()->find(16));
+});
+
 Route::post('login', 'Auth\LoginController@login');
 
 Route::prefix('register')->group(function () {
@@ -32,8 +36,8 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::prefix('recommendations')->group(function () {
             Route::get('/', 'UserRecommendationController@recommendations');
-            Route::get('/{id}', 'UserRecommendationController@recommendation');
-            Route::put('/{id}/{recommendation_status}', 'RecommendationController@changeStatus');
+            Route::get('/{recommendation_id}', 'UserRecommendationController@recommendation');
+            Route::put('/{recommendation}/{recommendation_status}', 'RecommendationController@changeStatus');
         });
     });
 
@@ -43,22 +47,22 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::prefix('recommendations')->group(function () {
             Route::get('/', 'ProviderRecommendationController@recommendations');
-            Route::get('/{id}', 'ProviderRecommendationController@recommendation');
-            Route::post('/', 'RecommendationController@store');
+            Route::get('/{recommendation_id}', 'ProviderRecommendationController@recommendation');
+            Route::post('/', 'ProviderRecommendationController@store');
         });
 
         Route::prefix('professions')->group(function () {
             Route::get('/', 'ProviderProfessionController@all');
             Route::post('/', 'ProviderProfessionController@create');
-            Route::put('/{id}', 'ProviderProfessionController@update');
-            Route::delete('/{id}', 'ProviderProfessionController@delete');
+            Route::put('/{providerProfession}', 'ProviderProfessionController@update');
+            Route::delete('/{providerProfession}', 'ProviderProfessionController@delete');
         });
 
         Route::prefix('services')->group(function () {
             Route::get('/', 'ProviderServiceController@all');
             Route::post('/', 'ProviderServiceController@create');
-            Route::put('/{id}', 'ProviderServiceController@update');
-            Route::delete('/{id}', 'ProviderServiceController@delete');
+            Route::put('/{providerService}', 'ProviderServiceController@update');
+            Route::delete('/{providerService}', 'ProviderServiceController@delete');
         });
 
         Route::prefix('verifies')->group(function () {

@@ -48,7 +48,7 @@ class UserRecommendationController extends RecommendationController
         $recommendation = $this->recommendation->getRecommendationWithProvider($recommendation_id);
 
         if(!$recommendation) {
-            return response()->json(['message' => 'Recommendation not found']);
+            return response(['message' => 'Recommendation not found'], 404);
         }
 
         if(Gate::denies('user-get-recommendation', $recommendation)) {
