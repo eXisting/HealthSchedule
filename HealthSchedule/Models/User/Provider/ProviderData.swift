@@ -13,13 +13,15 @@ enum ProviderDataJsonFields: String, CodingKey {
 }
 
 struct ProviderData {
-  var professions: [ProviderProfession]
-  var certificates: [ProfileImage]
-  var services: [ProviderService]
+  var professions: [ProviderProfession] = []
+  var certificates: [ProfileImage] = []
+  var services: [ProviderService] = []
   
-  var scheduleTemplate: [ScheduleWeekDay]
-  var scheduleExceptions: [ScheduleDateException]
+  var scheduleTemplate: [ScheduleWeekDay] = []
+  var scheduleExceptions: [ScheduleDateException] = []
   var address: Address?
+  
+  init() {}
 }
 
 extension ProviderData: Codable {}

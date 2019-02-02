@@ -39,6 +39,8 @@ struct User {
   var role: Role
   var city: City
   var photo: ProfileImage?
+  
+  var providerData: ProviderData?
 }
 
 extension User: Codable {
@@ -71,5 +73,7 @@ extension User: Codable {
 
     let birthdayString = try container.decode(String.self, forKey: .birthday)
     birthday = DatesManager.shared.stringToDate(birthdayString)
+    
+    providerData = ProviderData()
   }
 }
