@@ -24,6 +24,10 @@ Route::prefix('register')->group(function () {
 
 Route::middleware('jwt.auth')->group(function () {
 
+    Route::prefix('services')->group(function () {
+        Route::get('/', 'ServiceController@all');
+    });
+
     Route::prefix('user')->group(function () {
 
         Route::get('/', 'AuthUserController@get');
@@ -81,10 +85,7 @@ Route::middleware('jwt.auth')->group(function () {
             Route::put('/{exceptionSchedule}', 'ProviderExceptionScheduleController@update');
             Route::delete('/{exceptionSchedule}', 'ProviderExceptionScheduleController@delete');
         });
-
-
     });
-
 });
 
 Route::get('/category/{category}/professions', 'ProfessionsController@professions');
