@@ -5,6 +5,7 @@ namespace App\Http\Requests\User;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class UpdateUserInfoRequest
@@ -40,12 +41,15 @@ class UpdateUserInfoRequest extends FormRequest
         $user = auth('api')->user();
 
         return [
-            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-            'phone' => 'nullable|string|max:12|unique:users,phone,'.$user->id,
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:12|unique:users,phone,' . $user->id,
             'first_name' => 'required|string|max:64',
             'last_name' => 'required|string|max:64',
             'city_id' => 'required|integer|exists:cities,id',
             'birthday_at' => 'required|date|date_format:"Y-m-d"',
         ];
+//        $validator = Validator::make($this->all(), $data);
+//        dd($validator->errors());
     }
+
 }

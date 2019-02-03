@@ -40,8 +40,8 @@ class ProviderSchedule extends Model
     protected $casts = [
         'provider_id' => 'integer',
         'week_day' => 'integer',
-        'start_time' => 'datetime:H-i',
-        'end_time' => 'datetime:H-i',
+        'start_time' => 'time',
+        'end_time' => 'time',
         'working' => 'boolean',
     ];
 
