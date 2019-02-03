@@ -32,8 +32,8 @@ class UpdateProviderExceptionScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'start_time' => 'required|date|date_format:"H:i"',
-            'end_time' => 'required|date|date_format:"H:i"',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
             'working' => 'required|boolean',
         ];
     }

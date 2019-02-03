@@ -40,9 +40,9 @@ class ProviderScheduleController extends AuthUserController
      */
     public function update(UpdateProviderSchedulesRequest $request)
     {
-        if(count($this->authUser->providerSchedules)) {
+        if($this->authUser->providerSchedules()->exists()) {
             try {
-                $this->authUser->providerSchedules->delete();
+                $this->authUser->providerSchedules()->delete();
             } catch (\Exception $e) {
                 return response()->json(['success' => false,'message' => $e->getMessage()]);
             }

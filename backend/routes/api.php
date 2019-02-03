@@ -72,26 +72,20 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::prefix('schedules')->group(function () {
             Route::get('/', 'ProviderScheduleController@all');
-            Route::post('/', 'ProviderScheduleController@update');
+            Route::put('/', 'ProviderScheduleController@update');
         });
 
         Route::prefix('exception-schedules')->group(function () {
             Route::get('/', 'ProviderExceptionScheduleController@all');
             Route::post('/', 'ProviderExceptionScheduleController@create');
-            Route::put('/{id}', 'ProviderExceptionScheduleController@update');
-            Route::delete('/{id}', 'ProviderExceptionScheduleController@delete');
+            Route::put('/{exceptionSchedule}', 'ProviderExceptionScheduleController@update');
+            Route::delete('/{exceptionSchedule}', 'ProviderExceptionScheduleController@delete');
         });
 
 
     });
 
 });
-
-Route::prefix('register')->group(function () {
-    Route::post('/provider', 'Auth\Register\ProviderRegisterController@register');
-    Route::post('/user', 'Auth\Register\UserRegisterController@register');
-});
-
 
 Route::get('/category/{category}/professions', 'ProfessionsController@professions');
 

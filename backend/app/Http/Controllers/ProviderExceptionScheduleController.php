@@ -33,7 +33,7 @@ class ProviderExceptionScheduleController extends AuthUserController
      */
     public function all()
     {
-        return response()->json($this->authUser->providerExceptionSchedules()->with('profession', 'city')->get());
+        return response()->json($this->authUser->providerExceptionSchedules()->get());
     }
 
     /**

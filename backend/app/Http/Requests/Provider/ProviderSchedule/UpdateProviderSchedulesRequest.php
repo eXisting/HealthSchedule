@@ -33,8 +33,8 @@ class UpdateProviderSchedulesRequest extends FormRequest
         return [
             'schedules' => 'required',
             'schedules.*.week_day' => 'required|integer',
-            'schedules.*.start_time' => 'required|date|date_format:"H:i"',
-            'schedules.*.end_time' => 'required|date|date_format:"H:i"',
+            'schedules.*.start_time' => 'required|date_format:H:i',
+            'schedules.*.end_time' => 'required|date_format:H:i',
             'schedules.*.working' => 'required|boolean',
         ];
     }

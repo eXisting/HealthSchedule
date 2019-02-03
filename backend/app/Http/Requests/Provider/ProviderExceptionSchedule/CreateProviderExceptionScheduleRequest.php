@@ -35,8 +35,8 @@ class CreateProviderExceptionScheduleRequest extends FormRequest
     {
         return [
             'exception_at' => 'required|date|date_format:"Y-m-d"',
-            'start_time' => 'required|date|date_format:"H:i"',
-            'end_time' => 'required|date|date_format:"H:i"',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
             'working' => 'required|boolean',
         ];
     }
