@@ -19,9 +19,9 @@ return [
 
     'image_path' => [
 
-        'user_photo' => '/uploads/images/user-photo',
+        'user_photo' => '/uploads/images/user-photo/',
 
-        'provider_verify' => '/uploads/images/provider-verify',
+        'provider_verify' => '/uploads/images/provider-verify/',
 
     ]
 ];

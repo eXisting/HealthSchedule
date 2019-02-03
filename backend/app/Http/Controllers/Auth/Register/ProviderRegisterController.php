@@ -81,7 +81,7 @@ class ProviderRegisterController extends RegisterController implements RegisterI
         }
 
         if($this->request->hasFile('photo')) {
-            $this->image->save($this->request->file('photo'), 'user-photo', $provider->id);
+            $this->image->save($this->request->file('photo'), 'user_photo', $provider->id);
         }
 
         if($this->request->hasFile('verifies')) {

@@ -7,6 +7,7 @@ use App\Http\Requests\Provider\Verify\CreateProviderVerifiesRequest;
 use App\Models\ProviderVerify;
 use App\Models\User;
 use App\Repositories\ProviderVerifyRepository;
+use Gate;
 
 /**
  * Class ProviderAddressController

@@ -35,6 +35,15 @@ class RecommendationRepository
     }
 
     /**
+     * @param integer $recommendation_id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getRecommendationWithUser($recommendation_id)
+    {
+        return $this->model->query()->with('user')->find($recommendation_id);
+    }
+
+    /**
      * @param integer $provider_id
      * @param array $data
      * @return \Illuminate\Http\JsonResponse
