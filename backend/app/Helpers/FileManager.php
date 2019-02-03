@@ -22,7 +22,7 @@ class FileManager
     public static function saveImage($image, $type)
     {
         $filename = time() . '_' . str_random(8) . '.' . $image->getClientOriginalExtension();
-        $image_path = config('image.image-path'.$type) . $filename;
+        $image_path = config('image.image_path.'.$type) . $filename;
 
         $image = Image::make($image);
         if($image->width() > 1000 || $image->height() > 1000) {

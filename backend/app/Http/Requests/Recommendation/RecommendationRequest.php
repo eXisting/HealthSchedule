@@ -32,7 +32,7 @@ class RecommendationRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer',
+            'user_id' => 'required|integer|exists:users,id',
             'title' => 'required|string',
             'description' => 'required|string',
         ];

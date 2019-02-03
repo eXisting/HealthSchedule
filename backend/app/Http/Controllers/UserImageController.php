@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\FileManager;
 use App\Http\Requests\User\UpdateUserImageRequest;
 use App\Models\User;
+use App\Models\UserImage;
+use App\Repositories\UserImageRepository;
 
 /**
  * Class UserImageController
@@ -14,6 +16,10 @@ use App\Models\User;
  */
 class UserImageController extends AuthUserController
 {
+    /**
+     * @var UserImageRepository
+     */
+    public $image;
 
     /**
      * UserImageController constructor.
@@ -21,6 +27,7 @@ class UserImageController extends AuthUserController
     public function __construct()
     {
         parent::__construct();
+        $this->image = new UserImageRepository();
     }
 
     /**
@@ -31,27 +38,24 @@ class UserImageController extends AuthUserController
     {
         $image = $this->authUser->image;
 
-        $image_path = FileManager::saveImage( $request->file('photo'), 'user-photo' );
-
-        if(!$image_path) {
-            return response()->json(['message' => 'Image did not save', 'success' => false]);
-        }
-
         if($image) {
             FileManager::deleteFile($image->image_path);
-
-            $result = $image->update(['image_path' => $image_path]);
-        } else {
-            $imageFromDb = $this->authUser->image()->create(['image_path' => $image_path]);
-
-            if($imageFromDb) {
-                $result = true;
-            } else {
-                $result = false;
+            try {
+                $image->delete();
+            } catch (\Exception $e) {
+                return response()->json(['success' => false,'message' => $e->getMessage()]);
             }
         }
 
-        return response()->json(['success' => $result]);
+        if($request->hasFile('photo')) {
+            /** @var UserImage $newImage */
+            $newImage = $this->image->save($request->file('photo'), 'user_photo', $this->authUser->id);
+
+            return response()->json(['success' => true, 'image_path' => $newImage->image_path]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Has not image in request body']);
+        }
+
     }
 
 }

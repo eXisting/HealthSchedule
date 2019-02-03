@@ -64,6 +64,10 @@ class Handler extends ExceptionHandler
             }
         }
 
+        if ($exception->getMessage() === 'The given data was invalid.') {
+            return response(['error' => 'The given data was invalid.'], 422);
+        }
+
         return parent::render($request, $exception);
     }
 }

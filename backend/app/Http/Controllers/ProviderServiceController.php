@@ -6,6 +6,7 @@ use App\Http\Requests\Provider\Service\CreateProviderServiceRequest;
 use App\Http\Requests\Provider\Service\UpdateProviderServiceRequest;
 use App\Models\ProviderService;
 use App\Models\User;
+use App\Repositories\AddressRepository;
 use Gate;
 
 /**
@@ -39,7 +40,11 @@ class ProviderServiceController extends AuthUserController
      */
     public function create(CreateProviderServiceRequest $request)
     {
-        $data = array_merge($request->all(), ['provider_id' => $this->authUser->id]);
+        $addressRep = new AddressRepository();
+
+        $address = $addressRep->findOrCreate($request->address);
+
+        $data = array_merge($request->all(), ['address_id' => $address->id]);
 
         $result = $this->authUser->providerServices()->create($data);
 
@@ -51,31 +56,37 @@ class ProviderServiceController extends AuthUserController
     }
 
     /**
-     * @param ProviderService $service
+     * @param ProviderService $providerService
      * @param UpdateProviderServiceRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ProviderService $service, UpdateProviderServiceRequest $request)
+    public function update(ProviderService $providerService, UpdateProviderServiceRequest $request)
     {
-        if(Gate::denies('provider-update-service', $service)) {
+        if(Gate::denies('provider-update-service', $providerService)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
-        return response()->json(['success' => $service->update($request->all())]);
+        $addressRep = new AddressRepository();
+
+        $address = $addressRep->findOrCreate($request->address);
+
+        $data = array_merge($request->all(), ['address_id' => $address->id]);
+
+        return response()->json(['success' => $providerService->update($data)]);
     }
 
     /**
-     * @param ProviderService $service
+     * @param ProviderService $providerService
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(ProviderService $service)
+    public function delete(ProviderService $providerService)
     {
-        if(Gate::denies('provider-delete-service', $service)) {
+        if(Gate::denies('provider-delete-service', $providerService)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
         try {
-            $service->delete();
+            $providerService->delete();
         } catch (\Exception $e) {
             return response()->json(['success' => false,'message' => $e->getMessage()]);
         }
