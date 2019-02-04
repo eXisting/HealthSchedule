@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ProviderExceptionSchedule;
 use App\Models\ProviderProfession;
 use App\Models\ProviderService;
 use App\Models\ProviderVerify;
@@ -51,6 +52,14 @@ class AuthServiceProvider extends ServiceProvider
         #endregion
 
         #region ProviderRecommendation
+
+        $gate->define('provider-get-recommendation', function ($provider, $recommendation) {
+            /**
+             * @var User $provider
+             * @var Recommendation $recommendation
+             */
+            return $provider->id === $recommendation->provider_id;
+        });
 
         $gate->define('provider-create-recommendation', function ($provider, $user_id) {
             /**
@@ -102,6 +111,8 @@ class AuthServiceProvider extends ServiceProvider
 
         #endregion
 
+        #region ProviderVerify
+
         $gate->define('provider-delete-verify', function ($provider, $verify) {
             /**
              * @var User $provider
@@ -109,6 +120,29 @@ class AuthServiceProvider extends ServiceProvider
              */
             return $provider->id === $verify->provider_id;
         });
+
+        #endregion
+
+        #region ProviderExceptionSchedule
+
+        $gate->define('provider-update-exception-schedule', function ($provider, $exceptionSchedule) {
+            /**
+             * @var User $provider
+             * @var ProviderExceptionSchedule $service
+             */
+            return $provider->id === $exceptionSchedule->provider_id;
+        });
+
+        $gate->define('provider-delete-exception-schedule', function ($provider, $exceptionSchedule) {
+            /**
+             * @var User $provider
+             * @var ProviderExceptionSchedule $service
+             */
+            return $provider->id === $exceptionSchedule->provider_id;
+        });
+
+
+        #endregion
 
 
     }

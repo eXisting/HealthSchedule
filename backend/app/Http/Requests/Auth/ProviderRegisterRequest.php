@@ -49,7 +49,7 @@ class ProviderRegisterRequest extends FormRequest
             'last_name' => 'required|string|max:64',
             'photo' => 'nullable|image|mimes:jpeg,jpg,png',
             'city_id' => 'required|integer|exists:cities,id',
-            'birthday' => 'required|date|date_format:"Y-m-d H:i:s"',
+            'birthday_at' => 'required|date|date_format:"Y-m-d"',
             'professions' => 'required',
             'professions.*.profession_id' => 'required|integer|exists:professions,id',
             'professions.*.company_name' => 'required|string',

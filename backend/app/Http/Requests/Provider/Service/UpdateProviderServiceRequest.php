@@ -39,7 +39,7 @@ class UpdateProviderServiceRequest extends FormRequest
             'service_id' => 'required|integer|exists:services,id',
             'price' => 'required|numeric',
             'description' => 'required|string',
-            'interval' => 'required|date|date_format:"H:i"',
+            'interval' => 'required|date_format:H:i',
         ];
     }
 }

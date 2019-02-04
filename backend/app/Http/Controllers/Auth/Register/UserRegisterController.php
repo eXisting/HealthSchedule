@@ -58,7 +58,7 @@ class UserRegisterController extends RegisterController implements RegisterInter
         }
 
         if($this->request->hasFile('photo')) {
-            $this->image->save($this->request->file('photo'), 'user-photo', $user->id);
+            $this->image->save($this->request->file('photo'), 'user_photo', $user->id);
         }
 
         $success = true;
