@@ -31,8 +31,12 @@ class AuthenticationViewController: UIViewController {
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     // TODO: wait until data received
-    UserManager.shared.login(login: "gibson.urban@example.net", password: "secret") { user in
+    UserManager.shared.login(login: "kylee69@example.net", password: "secret") { user in
       print("Perform segue")
+      
+      UserManager.shared.saveAddress {
+        print("Saved")
+      }
     }
     return false
   }

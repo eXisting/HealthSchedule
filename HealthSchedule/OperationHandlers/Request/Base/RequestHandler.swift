@@ -8,25 +8,10 @@
 
 import UIKit
 
-enum Endpoints: String {
-  // GET
-  case user = "/api/user"
-  case provider = "/api/provider"
-  case allCities = "/api/cities"
-  case allProfessions = "/api/category/doctors/professions"
-  case providerProfessions = "/api/provider/professions"
-  
-  // POST
-  case signUpAsUser = "/api/register/user"
-  case signUpAsProvider = "/api/register/provider"
-  
-  case signIn = "/api/login"
-}
-
 class RequestHandler {
   
-  typealias PostComplition = (((Data, Error?)) -> Void)
-  typealias UserComplition = (((User, UserMessage?, Error?)) -> Void)
+  typealias PostCompletion = ((Data, Error?) -> Void)
+  typealias Usercompletion = (((User, UserMessage?, Error?)) -> Void)
 
   static let shared = RequestHandler()
   
@@ -35,7 +20,7 @@ class RequestHandler {
   private init() {}
   
   private func getJsonAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
-    guard let urlRequest = buildUrlRequest(url, params, "GET") else {
+    guard let urlRequest = buildUrlRequest(url, params, RequestType.get.rawValue) else {
       return
     }
     
@@ -62,13 +47,13 @@ class RequestHandler {
     task.resume()
   }
   
-  private func postAsync(to url: String, params: Parser.JsonDictionary?, bodyData: Parser.BodyDictionary, completion: @escaping (Data, Error?) -> Void) {
+  private func postDataAsync(to url: String, type: RequestType, params: Parser.JsonDictionary?, body: Data, completion: @escaping PostCompletion) {
     // TODO: Return error in tuple    
-    guard var urlRequest = buildUrlRequest(url, params, "POST") else {
+    guard var urlRequest = buildUrlRequest(url, params, type.rawValue) else {
       return
     }
     
-    urlRequest.httpBody = Serializer.getDataFrom(object: bodyData)
+    urlRequest.httpBody = body
     
     let task = defaultSession.dataTask(with: urlRequest) { (data, response, error) in
       guard error == nil else {
@@ -90,14 +75,18 @@ class RequestHandler {
 // MARK: - EXTENSIONS
 
 extension RequestHandler: AuthProviding {
-  func getToken(from url: String, bodyData: Parser.BodyDictionary, completion: @escaping PostComplition) {
-    postAsync(to: url, params: nil, bodyData: bodyData, completion: completion)
+  func getToken(from url: String, body: Data, completion: @escaping PostCompletion) {
+    postDataAsync(to: url, type: .post, params: nil, body: body, completion: completion)
   }
 }
 
-extension RequestHandler: GetRequesting {
-  func getAsync(from url: String, _ params: Parser.JsonDictionary?, complition: @escaping (Any) -> Void) {
-    getJsonAsync(from: url, params, completion: complition)
+extension RequestHandler: Requesting {
+  func postAsync(to url: String, as type: RequestType, _ body: Data, _ params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
+    postDataAsync(to: url, type: type, params: params, body: body, completion: completion)
+  }
+  
+  func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
+    getJsonAsync(from: url, params, completion: completion)
   }
 }
 
@@ -118,10 +107,7 @@ private extension RequestHandler {
     
     var request = URLRequest(url: url)
     
-    var headers: Parser.JsonDictionary = [:]
-    headers["Content-Type"] = "application/json"
-    
-    request.allHTTPHeaderFields = headers
+    request.allHTTPHeaderFields = ["Content-Type": "application/json"]
     request.httpMethod = method
     
     return request

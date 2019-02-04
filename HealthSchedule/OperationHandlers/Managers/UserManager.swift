@@ -17,10 +17,13 @@ class UserManager {
   
   // MARK: - Authentication
   
-  func login(login: String, password: String, complition: @escaping (User) -> Void) {
+  func login(login: String, password: String, completion: @escaping (User) -> Void) {
     let postBody = ["username": login, "password": password]
+    guard let data = Serializer.getDataFrom(json: postBody) else {
+      return
+    }
     
-    RequestManager.signIn(body: postBody) { [weak self] (user, info, error) in
+    RequestManager.signIn(userData: data) { [weak self] (user, info, error) in
       if let _ = info {
         return
       }
@@ -31,38 +34,57 @@ class UserManager {
       if user.role.name == "provider" {
         self?.requestProviderData()
         
-        complition(user)
+        completion(user)
         return
       }
       
-      complition(user)
+      completion(user)
     }
   }
   
-  func register(userType: UserType, _ postData: Parser.BodyDictionary, complition: @escaping (User?) -> Void) {
-    RequestManager.signUp(authType: userType, body: postData) { [weak self] (user, info, error) in
+  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (User?) -> Void) {
+    guard let data = Serializer.getDataFrom(json: postData) else {
+      return
+    }
+    
+    RequestManager.signUp(authType: userType, userData: data) { [weak self] (user, info, error) in
       if let _ = info {
         return
       }
       
       self?.user = user
       
-      complition(user)
+      completion(user)
     }
   }
   
   // MARK: - Provider requests
   
-  func getProfessions(complition: @escaping ([ProviderProfession]) -> Void) {
+  func getProfessions(completion: @escaping ([ProviderProfession]) -> Void) {
     RequestManager.getListAsyncFor(type: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { [weak self] list in
       self?.user?.providerData?.professions = list
       
-      complition(list)
+      completion(list)
     }
   }
   
+  func saveAddress(address: String, completion: @escaping (String) -> Void) {
+    guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
+      completion("Cannot encode in save professions")
+      return
+    }
+    
+    RequestManager.postAsync(to: .providerAddress, as: .put, data, RequestManager.sessionToken?.asParams()) { status in
+      if status == .ok {
+        completion("New address saved successfuly!")
+      } else {
+        completion("Server error!")
+      }
+    }
+  }
+    
   private func requestProviderData() {
-    getProfessions() { list in print("Professions obtrained!")}
+    getProfessions() { list in print("Professions obtained!")}
     // TODO: Load rest data here
   }
 }

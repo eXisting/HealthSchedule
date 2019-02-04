@@ -43,11 +43,11 @@ class Serializer {
     return result
   }
   
-  class func getDataFrom(object: Any) -> Data? {
+  class func getDataFrom(json: Any) -> Data? {
     var result: Data?
     
     do {
-      result = try JSONSerialization.data(withJSONObject: object)
+      result = try JSONSerialization.data(withJSONObject: json)
     } catch {
       print("Cannot either serialize or encode body data")
     }

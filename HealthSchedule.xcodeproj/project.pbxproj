@@ -51,10 +51,11 @@
 		ED44830C2204A23400BE8EF0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830B2204A23400BE8EF0 /* Address.swift */; };
 		ED44830E2204A52500BE8EF0 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830D2204A52500BE8EF0 /* Role.swift */; };
 		ED4483112204AA4400BE8EF0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483102204AA4400BE8EF0 /* UserManager.swift */; };
+		ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483142208380E00BE8EF0 /* RequestEnums.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7721ECB9DF00860010 /* RoundImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
-		ED6CBE7C21ECD80600860010 /* GetRequesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* GetRequesting.swift */; };
+		ED6CBE7C21ECD80600860010 /* CommonProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* CommonProtocols.swift */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
@@ -111,10 +112,11 @@
 		ED44830B2204A23400BE8EF0 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		ED44830D2204A52500BE8EF0 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		ED4483102204AA4400BE8EF0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		ED4483142208380E00BE8EF0 /* RequestEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEnums.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7621ECB9DF00860010 /* RoundImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageHandler.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
-		ED6CBE7B21ECD80600860010 /* GetRequesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequesting.swift; sourceTree = "<group>"; };
+		ED6CBE7B21ECD80600860010 /* CommonProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonProtocols.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				ED089A8521E89B6A006A8523 /* RequestHandler.swift */,
+				ED4483142208380E00BE8EF0 /* RequestEnums.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -388,7 +391,7 @@
 		ED4483132204B95F00BE8EF0 /* Abstracts */ = {
 			isa = PBXGroup;
 			children = (
-				ED6CBE7B21ECD80600860010 /* GetRequesting.swift */,
+				ED6CBE7B21ECD80600860010 /* CommonProtocols.swift */,
 				ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */,
 			);
 			path = Abstracts;
@@ -484,10 +487,11 @@
 				ED089A8621E89B6A006A8523 /* RequestHandler.swift in Sources */,
 				ED089A9F21EC8848006A8523 /* BaseProfileView.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
-				ED6CBE7C21ECD80600860010 /* GetRequesting.swift in Sources */,
+				ED6CBE7C21ECD80600860010 /* CommonProtocols.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				ED089A9B21EC8523006A8523 /* SettingsViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
+				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				ED1ED01621FF04EC00141CF5 /* PopOverViewController.swift in Sources */,

@@ -10,5 +10,5 @@ import UIKit
 
 protocol AuthProviding {
   // Get token, you need to get user internally in completion
-  func getToken(from url: String, bodyData: Parser.BodyDictionary, completion: @escaping RequestHandler.PostComplition)
+  func getToken(from url: String, body: Data, completion: @escaping RequestHandler.PostCompletion)
 }

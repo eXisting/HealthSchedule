@@ -10,7 +10,6 @@ import UIKit
 
 class Parser {
   typealias JsonDictionary = [String:String]
-  typealias BodyDictionary = [String:Any]
   
   class func anyArrayToObjectArray<DestinationType: Decodable>(destination: DestinationType.Type, _ data: Any) -> [DestinationType] {
     var result = [DestinationType]()
@@ -32,7 +31,7 @@ class Parser {
   }
   
   class func anyToObject<DestinationType: Decodable>(destination: DestinationType.Type, _ object: Any) -> DestinationType? {
-    guard let data = Serializer.getDataFrom(object: object) else {
+    guard let data = Serializer.getDataFrom(json: object) else {
       return nil
     }
     

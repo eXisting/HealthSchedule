@@ -11,45 +11,57 @@ import UIKit
 class RequestManager {
   static let rootEndpoint = "http://127.0.0.1:8000"
   
-  private static let getRequest: GetRequesting = RequestHandler.shared
+  private static let request: Requesting = RequestHandler.shared
   private static let authRequests: AuthProviding = RequestHandler.shared
   
   static private(set) var sessionToken: Token?
   
-  class func getListAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ complition: @escaping ([T]) -> Void) {
-    getRequest.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { json in      
+  // MARK: - GET
+  
+  class func getListAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ completion: @escaping ([T]) -> Void) {
+    request.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { json in
       let result = Parser.anyArrayToObjectArray(destination: T.self, json)
       
-      complition(result)
+      completion(result)
     }
   }
   
-  class func getAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ complition: @escaping (T) -> Void) {
-    getRequest.getAsync(from: buildEndpoint(endpoint.rawValue), params) { json in
+  class func getAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ completion: @escaping (T) -> Void) {
+    request.getAsync(from: buildEndpoint(endpoint.rawValue), params) { json in
       guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
         return
       }
 
-      complition(initableObject)
+      completion(initableObject)
     }
   }
   
-  class func signIn(body: Parser.JsonDictionary, _ complition: @escaping RequestHandler.UserComplition) {
-    authRequests.getToken(from: buildEndpoint(Endpoints.signIn.rawValue), bodyData: body) { (data, error) in
+  // MARK: - POST
+  
+  class func postAsync(to endpoint: Endpoints, as type: RequestType, _ data: Data, _ params: Parser.JsonDictionary?, _ completion: @escaping (Status) -> Void) {
+    request.postAsync(to: buildEndpoint(endpoint.rawValue), as: type, data, params) { (data, error) in
+      completion(error == nil ? .ok : .failure)
+    }
+  }
+  
+  // MARK: - AUTHENTICATION
+  
+  class func signIn(userData: Data, _ completion: @escaping RequestHandler.Usercompletion) {
+    authRequests.getToken(from: buildEndpoint(Endpoints.signIn.rawValue), body: userData) { (data, error) in
       getAsyncFor(type: User.self, from: .user, rememberTokenFrom(data).asParams()) { user in
-        complition((user, nil, nil))
+        completion((user, nil, nil))
       }
     }
   }
   
-  class func signUp(authType: UserType, body: Parser.BodyDictionary, _ complition: @escaping RequestHandler.UserComplition) {
+  class func signUp(authType: UserType, userData: Data, _ completion: @escaping RequestHandler.Usercompletion) {
     let isClientSignUp = authType == .client
     
     let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
     
-    authRequests.getToken(from: buildEndpoint(endpoint.rawValue), bodyData: body) { (data, error) in
+    authRequests.getToken(from: buildEndpoint(endpoint.rawValue), body: userData) { (data, error) in
       getAsyncFor(type: User.self, from: .user, rememberTokenFrom(data).asParams()) { user in
-        complition((user, !isClientSignUp ? .accountModeration : nil, nil))
+        completion((user, !isClientSignUp ? .accountModeration : nil, nil))
       }
     }
   }
