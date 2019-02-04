@@ -43,6 +43,14 @@ Route::middleware('jwt.auth')->group(function () {
             Route::get('/{recommendation_id}', 'UserRecommendationController@recommendation');
             Route::put('/{recommendation}/{recommendation_status}', 'RecommendationController@changeStatus');
         });
+
+        Route::prefix('requests')->group(function () {
+            Route::get('/', 'UserRequestController@requests');
+            Route::get('/{request_id}', 'UserRequestController@request');
+            Route::post('/', 'UserRequestController@store');
+            Route::put('/{request}', 'UserRequestController@update');
+            Route::put('/{request}/rate', 'RequestController@changeStatus');
+        });
     });
 
     Route::prefix('provider')->group(function () {
@@ -53,6 +61,12 @@ Route::middleware('jwt.auth')->group(function () {
             Route::get('/', 'ProviderRecommendationController@recommendations');
             Route::get('/{recommendation_id}', 'ProviderRecommendationController@recommendation');
             Route::post('/', 'ProviderRecommendationController@store');
+        });
+
+        Route::prefix('requests')->group(function () {
+            Route::get('/', 'ProviderRequestController@requests');
+            Route::get('/{request_id}', 'ProviderRequestController@request');
+            Route::put('/{request}/{request_status}', 'RequestController@changeStatus');
         });
 
         Route::prefix('professions')->group(function () {

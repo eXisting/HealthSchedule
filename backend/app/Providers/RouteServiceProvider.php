@@ -24,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::pattern( 'recommendation_status' , 'active|inactive' );
+        Route::pattern( 'request_status' , 'active|inactive' );
         parent::boot();
     }
 
