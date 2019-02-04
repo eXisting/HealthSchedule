@@ -13,7 +13,8 @@
         <!--Settings-->
         <scene sceneID="qht-D2-HrT">
             <objects>
-                <viewController id="TVo-p9-BNF" userLabel="Settings" customClass="SettingsViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gL2-Ak-XH5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="TVo-p9-BNF" userLabel="Settings" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OI7-u2-kvW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,21 +23,19 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Preferences" image="TabBarIcons/Settings" selectedImage="TabBarIcons/Settings" id="yaD-Bo-KYr"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gL2-Ak-XH5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1986" y="-638"/>
         </scene>
-        <!--Root Tab Bar View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController storyboardIdentifier="Main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="49e-Tb-3d3" customClass="RootTabBarViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="49e-Tb-3d3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="fill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="6GM-w8-LXu" kind="relationship" relationship="viewControllers" id="CyM-eg-yph"/>
                         <segue destination="TVo-p9-BNF" kind="relationship" relationship="viewControllers" id="0tF-Gc-PHD"/>
                     </connections>
                 </tabBarController>
@@ -44,41 +43,8 @@
             </objects>
             <point key="canvasLocation" x="-959" y="-637"/>
         </scene>
-        <!--Hospitals-->
-        <scene sceneID="X4l-68-esG">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Hospitals" id="kyJ-WZ-fQD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Hospitals" image="TabBarIcons/Hospital" id="3At-q3-ep4"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a6b-cs-0FB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-168" y="-734"/>
-        </scene>
-        <!--Experts-->
-        <scene sceneID="ZtL-om-HBq">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Experts" id="6GM-w8-LXu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Experts" image="TabBarIcons/Expert" id="ggp-V4-VHU"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nys-YB-HpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-159" y="-638"/>
-        </scene>
-        <!--Exercises-->
-        <scene sceneID="Xal-FG-VYv">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Exercises" id="0dO-CR-JHv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Exercises" image="TabBarIcons/Gym" id="EZj-FQ-AH6"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4o4-9T-9Lx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-168" y="-548"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="TabBarIcons/Expert" width="22.5" height="22.5"/>
-        <image name="TabBarIcons/Gym" width="22.5" height="22.5"/>
-        <image name="TabBarIcons/Hospital" width="22.5" height="22.5"/>
         <image name="TabBarIcons/Settings" width="22.5" height="22.5"/>
     </resources>
 </document>

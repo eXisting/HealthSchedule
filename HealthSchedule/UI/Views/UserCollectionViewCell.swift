@@ -14,7 +14,7 @@ enum ContentViewCellType {
   case Exercise
 }
 
-final class BaseUICollectionViewCell: UICollectionViewCell {
+final class UserCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var previewImage: UIImageView!
   @IBOutlet weak var fullName: UILabel!

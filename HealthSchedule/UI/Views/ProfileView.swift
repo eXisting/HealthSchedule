@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseProfileView: UIView {
+class ProfileView: UIView {
   
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var textFieldsContainerView: UIView!
@@ -34,11 +34,7 @@ class BaseProfileView: UIView {
     ageField.isUserInteractionEnabled = state
     regionField.isUserInteractionEnabled = state
   }
-  
-  class func instanceFromNib() -> BaseProfileView {
-    return UINib(nibName: "ProfileView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! BaseProfileView
-  }
-  
+    
   @IBAction func onSaveClick(_ sender: Any) {
     print("Clicked")
   }
