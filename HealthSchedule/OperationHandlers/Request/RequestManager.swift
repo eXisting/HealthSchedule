@@ -11,8 +11,8 @@ import UIKit
 class RequestManager {
   static let rootEndpoint = "http://127.0.0.1:8000"
   
-  private static let request: Requesting = RequestHandler.shared
-  private static let authRequests: AuthProviding = RequestHandler.shared
+  private static let request: Requesting = UrlSessionHandler.shared
+  private static let authRequests: AuthProviding = UrlSessionHandler.shared
   
   static private(set) var sessionToken: Token?
   
@@ -38,15 +38,15 @@ class RequestManager {
   
   // MARK: - POST
   
-  class func postAsync(to endpoint: Endpoints, as type: RequestType, _ data: Data, _ params: Parser.JsonDictionary?, _ completion: @escaping (Status) -> Void) {
-    request.postAsync(to: buildEndpoint(endpoint.rawValue), as: type, data, params) { (data, error) in
+  class func postAsync(to url: String, as type: RequestType, _ data: Data?, _ params: Parser.JsonDictionary?, _ completion: @escaping (Status) -> Void) {
+    request.postAsync(to: buildEndpoint(url), as: type, data, params) { (data, error) in
       completion(error == nil ? .ok : .failure)
     }
   }
   
   // MARK: - AUTHENTICATION
   
-  class func signIn(userData: Data, _ completion: @escaping RequestHandler.Usercompletion) {
+  class func signIn(userData: Data, _ completion: @escaping UrlSessionHandler.Usercompletion) {
     authRequests.getToken(from: buildEndpoint(Endpoints.signIn.rawValue), body: userData) { (data, error) in
       getAsyncFor(type: User.self, from: .user, rememberTokenFrom(data).asParams()) { user in
         completion((user, nil, nil))
@@ -54,7 +54,7 @@ class RequestManager {
     }
   }
   
-  class func signUp(authType: UserType, userData: Data, _ completion: @escaping RequestHandler.Usercompletion) {
+  class func signUp(authType: UserType, userData: Data, _ completion: @escaping UrlSessionHandler.Usercompletion) {
     let isClientSignUp = authType == .client
     
     let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider

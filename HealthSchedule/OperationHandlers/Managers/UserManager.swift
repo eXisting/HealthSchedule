@@ -68,13 +68,13 @@ class UserManager {
     }
   }
   
-  func saveAddress(address: String, completion: @escaping (String) -> Void) {
+  func saveAddress(_ address: String, completion: @escaping (String) -> Void) {
     guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
       completion("Cannot encode in save professions")
       return
     }
     
-    RequestManager.postAsync(to: .providerAddress, as: .put, data, RequestManager.sessionToken?.asParams()) { status in
+    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) { status in
       if status == .ok {
         completion("New address saved successfuly!")
       } else {
@@ -82,9 +82,21 @@ class UserManager {
       }
     }
   }
+  
+  func removeProfessionWith(id: Int, completion: @escaping (String) -> Void) {
+    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
     
+    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) { status in
+      if status == .ok {
+        completion("Deleted successfuly!")
+      } else {
+        completion("Server error!")
+      }
+    }
+  }
+  
   private func requestProviderData() {
-    getProfessions() { list in print("Professions obtained!")}
+    getProfessions() { list in print("Professions obtained!") }
     // TODO: Load rest data here
   }
 }

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class RequestHandler {
+class UrlSessionHandler {
   
   typealias PostCompletion = ((Data, Error?) -> Void)
   typealias Usercompletion = (((User, UserMessage?, Error?)) -> Void)
 
-  static let shared = RequestHandler()
+  static let shared = UrlSessionHandler()
   
   private let defaultSession = URLSession(configuration: .default)
   
@@ -47,7 +47,7 @@ class RequestHandler {
     task.resume()
   }
   
-  private func postDataAsync(to url: String, type: RequestType, params: Parser.JsonDictionary?, body: Data, completion: @escaping PostCompletion) {
+  private func postDataAsync(to url: String, type: RequestType, body: Data?, params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
     // TODO: Return error in tuple    
     guard var urlRequest = buildUrlRequest(url, params, type.rawValue) else {
       return
@@ -74,15 +74,15 @@ class RequestHandler {
 
 // MARK: - EXTENSIONS
 
-extension RequestHandler: AuthProviding {
+extension UrlSessionHandler: AuthProviding {
   func getToken(from url: String, body: Data, completion: @escaping PostCompletion) {
-    postDataAsync(to: url, type: .post, params: nil, body: body, completion: completion)
+    postDataAsync(to: url, type: .post, body: body, params: nil, completion: completion)
   }
 }
 
-extension RequestHandler: Requesting {
-  func postAsync(to url: String, as type: RequestType, _ body: Data, _ params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
-    postDataAsync(to: url, type: type, params: params, body: body, completion: completion)
+extension UrlSessionHandler: Requesting {
+  func postAsync(to url: String, as type: RequestType, _ body: Data?, _ params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
+    postDataAsync(to: url, type: type, body: body, params: params, completion: completion)
   }
   
   func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
@@ -92,7 +92,7 @@ extension RequestHandler: Requesting {
 
 // MARK: - HELPERS
 
-private extension RequestHandler {
+private extension UrlSessionHandler {
   func buildUrlRequest(_ url: String, _ params: Parser.JsonDictionary?, _ method: String) -> URLRequest? {
     var parameterString = ""
     

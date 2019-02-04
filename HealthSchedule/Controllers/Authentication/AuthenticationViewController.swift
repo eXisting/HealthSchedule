@@ -34,8 +34,8 @@ class AuthenticationViewController: UIViewController {
     UserManager.shared.login(login: "kylee69@example.net", password: "secret") { user in
       print("Perform segue")
       
-      UserManager.shared.saveAddress {
-        print("Saved")
+      UserManager.shared.saveAddress("Super new address") { text in
+        print(text)
       }
     }
     return false

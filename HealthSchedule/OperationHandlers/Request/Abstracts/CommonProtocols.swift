@@ -10,5 +10,5 @@ import UIKit
 
 protocol Requesting {
   func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void)
-  func postAsync(to url: String, as type: RequestType, _ body: Data, _ params: Parser.JsonDictionary?, completion: @escaping RequestHandler.PostCompletion)
+  func postAsync(to url: String, as type: RequestType, _ body: Data?, _ params: Parser.JsonDictionary?, completion: @escaping UrlSessionHandler.PostCompletion)
 }

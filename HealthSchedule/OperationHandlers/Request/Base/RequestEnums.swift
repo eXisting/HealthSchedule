@@ -22,7 +22,7 @@ enum Endpoints: String {
   // PUT
   case providerAddress = "/api/provider/address"
   
-  // GET / POST
+  // GET / POST / DELETE ( /{id} )
   case providerProfessions = "/api/provider/professions"
   
   // GET / PUT
