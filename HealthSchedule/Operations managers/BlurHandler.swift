@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import CoreImage
 
 class BlurHandler {
   
-  private static var context = CIContext(options: nil)
-  
-  static func performBlurOn(_ view: UIImageView) {
+  static func performBlurOn(_ imageView: UIImageView, blurPercent: Int) {
+    let context = CIContext(options: nil)
+    
     let currentFilter = CIFilter(name: "CIGaussianBlur")
-    let beginImage = CIImage(image: view.image!)
+    let beginImage = CIImage(image: imageView.image!)
     currentFilter!.setValue(beginImage, forKey: kCIInputImageKey)
-    currentFilter!.setValue(10, forKey: kCIInputRadiusKey)
+    currentFilter!.setValue(blurPercent, forKey: kCIInputRadiusKey)
     
     let cropFilter = CIFilter(name: "CICrop")
     cropFilter!.setValue(currentFilter!.outputImage, forKey: kCIInputImageKey)
@@ -25,6 +26,6 @@ class BlurHandler {
     let output = cropFilter!.outputImage
     let cgimg = context.createCGImage(output!, from: output!.extent)
     let processedImage = UIImage(cgImage: cgimg!)
-    view.image = processedImage
+    imageView.image = processedImage
   }
 }

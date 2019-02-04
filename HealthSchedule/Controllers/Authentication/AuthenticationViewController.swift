@@ -9,18 +9,21 @@
 import UIKit
 
 class AuthenticationViewController: UIViewController {
+    
+//  @IBOutlet weak var backgroundImage: UIImageView!
+//  @IBOutlet weak var emailField: UITextField!
+//  @IBOutlet weak var passwordField: UITextField!
   
-  private let signInSegueId = "signIn"
-  private let signUpSequeId = "signUpStart"
+  var nav: UINavigationController?
   
-  @IBOutlet weak var backgroundImage: UIImageView!
-  @IBOutlet weak var emailField: UITextField!
-  @IBOutlet weak var passwordField: UITextField!
+  override func loadView() {
+    super.loadView()
+    
+    (view as! AuthMainView).setUpViews()
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    
-    BlurHandler.performBlurOn(backgroundImage)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -97,14 +100,14 @@ class AuthenticationViewController: UIViewController {
 //    }
   }
   
-  private func validatonAlert(_ error: Error?) {
-    AlertHandler.ShowAlert(
-      for: self,
-      "Validation",
-      error?.localizedDescription ?? "Either login or password is incorrect!",
-      .alert)
-    
-    emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
-    passwordField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
-  }
+//  private func validatonAlert(_ error: Error?) {
+//    AlertHandler.ShowAlert(
+//      for: self,
+//      "Validation",
+//      error?.localizedDescription ?? "Either login or password is incorrect!",
+//      .alert)
+//    
+//    emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
+//    passwordField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
+//  }
 }

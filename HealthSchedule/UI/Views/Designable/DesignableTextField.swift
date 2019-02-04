@@ -14,7 +14,7 @@ class DesignableTextField: UITextField {
   // Provides left padding for images
   override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
     var textRect = super.leftViewRect(forBounds: bounds)
-    textRect.origin.x += leftPadding
+    textRect.origin.x += leftPadding + 10
     return textRect
   }
   

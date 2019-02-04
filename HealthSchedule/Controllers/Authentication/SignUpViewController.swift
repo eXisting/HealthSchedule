@@ -10,8 +10,6 @@ import UIKit
 
 class SignUpViewController: UIViewController {
   
-  private var rootNaviationController: RootAuthNavigationController?
-  
   // MARK: - Outlets
   
   @IBOutlet weak var phoneField: UITextField!
@@ -20,13 +18,7 @@ class SignUpViewController: UIViewController {
   @IBOutlet weak var passowrdVerifyField: UITextField!
   
   @IBOutlet weak var birthdayPicker: UIDatePicker!
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
     
-    rootNaviationController = self.navigationController as? RootAuthNavigationController
-  }
-  
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     let redColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
     var isValid = true

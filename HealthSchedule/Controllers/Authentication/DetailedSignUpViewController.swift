@@ -20,20 +20,12 @@ class DetailedSignUpViewController: UIViewController {
   @IBOutlet weak var location: UITextField!
   
   private var maxAddedOrDefualt = 3
-  private var rootNaviationController: RootAuthNavigationController?
   
   private var experienceBlocks = [SelectWithExperienceView]()
   private var addMoreExperienceButton = UIButton()
   
   private var citiesList: [City]?
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
     
-    rootNaviationController = self.navigationController as? RootAuthNavigationController
-    maxAddedOrDefualt = rootNaviationController?.maxExperienceCount ?? 3
-  }
-  
   override func loadView() {
     super.loadView()
     loadViewsFromXib()
