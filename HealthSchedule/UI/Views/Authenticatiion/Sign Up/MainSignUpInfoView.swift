@@ -24,34 +24,36 @@ class MainSignUpInfoView: UIView {
   }
   
   private func setUpTextFields() {
-    emailField.addLineToView(position: .bottom, color: .lightGray, width: 1)
-    passwordField.addLineToView(position: .bottom, color: .lightGray, width: 1)
-    nameFIeld.addLineToView(position: .bottom, color: .lightGray, width: 1)
-    phoneField.addLineToView(position: .bottom, color: .lightGray, width: 1)
+    let leftPadding = emailField.imageSize + emailField.leftPadding
+    let rightPadding = emailField.imageSize
+    
+    emailField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
+    passwordField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
+    nameFIeld.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
+    phoneField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
     
     emailField.attributedPlaceholder = NSAttributedString(
       string: "E-mail",
-      attributes: [NSAttributedString.Key.strokeColor: UIColor.white])
+      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
     
     passwordField.attributedPlaceholder = NSAttributedString(
       string: "Password",
-      attributes: [NSAttributedString.Key.strokeColor: UIColor.white])
+      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
     
     nameFIeld.attributedPlaceholder = NSAttributedString(
       string: "Name and surname",
-      attributes: [NSAttributedString.Key.strokeColor: UIColor.white])
+      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
     
     phoneField.attributedPlaceholder = NSAttributedString(
       string: "Phone",
-      attributes: [NSAttributedString.Key.strokeColor: UIColor.white])
+      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
   }
   
   private func setUpBackground() {
-    let background = UIImageView(image: UIImage(named: "Backgrounds/signUp"))
+    let background = UIImageView(image: UIImage(named: "Backgrounds/auth"))
     
     background.frame = frame
     background.contentMode = .scaleAspectFill
-    BlurHandler.performBlurOn(background, blurPercent: 0)
     
     insertSubview(background, at: 0)
   }

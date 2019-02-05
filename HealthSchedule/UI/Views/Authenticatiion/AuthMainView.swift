@@ -30,7 +30,6 @@ class AuthMainView: UIView {
     
     background.frame = frame
     background.contentMode = .scaleAspectFill
-    BlurHandler.performBlurOn(background, blurPercent: 9)
     
     insertSubview(background, at: 0)
   }
@@ -40,8 +39,11 @@ class AuthMainView: UIView {
   }
   
   private func setUpTextFields() {
-    loginField.addLineToView(position: .bottom, color: .white, width: 1)
-    passwordField.addLineToView(position: .bottom, color: .white, width: 1)
+    let leftPadding = loginField.imageSize + loginField.leftPadding
+    let rightPadding = loginField.imageSize
+    
+    loginField.addLineToView(position: .bottom, color: .black, width: 1, leftPadding, rightPadding)
+    passwordField.addLineToView(position: .bottom, color: .black, width: 1, leftPadding, rightPadding)
     
     loginField.attributedPlaceholder = NSAttributedString(
       string: "Username",

@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 class DesignableTextField: UITextField {
   
-  private let imageSize: CGFloat = 30.0
+  let imageSize: CGFloat = 30.0
   
   override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
     var textRect = super.leftViewRect(forBounds: bounds)
