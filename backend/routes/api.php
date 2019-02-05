@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/tests', function () {
-    dd(\App\Models\User::query()->find(16));
-});
-
 Route::post('login', 'Auth\LoginController@login');
 
 Route::prefix('register')->group(function () {
@@ -38,6 +34,11 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::put('/password', 'UserController@updatePassword');
 
+        Route::prefix('providers')->group(function () {
+            Route::get('/', 'UserController@providers');
+            Route::get('/{provider}', 'UserController@provider');
+        });
+
         Route::prefix('recommendations')->group(function () {
             Route::get('/', 'UserRecommendationController@recommendations');
             Route::get('/{recommendation_id}', 'UserRecommendationController@recommendation');
@@ -49,13 +50,18 @@ Route::middleware('jwt.auth')->group(function () {
             Route::get('/{request_id}', 'UserRequestController@request');
             Route::post('/', 'UserRequestController@store');
             Route::put('/{request}', 'UserRequestController@update');
-            Route::put('/{request}/rate', 'RequestController@changeStatus');
+            Route::put('/{request}/rate', 'UserRequestController@updateRate');
         });
     });
 
     Route::prefix('provider')->group(function () {
 
         Route::put('/address', 'ProviderAddressController@update');
+
+        Route::prefix('users')->group(function () {
+            Route::get('/', 'ProviderController@users');
+            Route::get('/{user}', 'ProviderController@user');
+        });
 
         Route::prefix('recommendations')->group(function () {
             Route::get('/', 'ProviderRecommendationController@recommendations');

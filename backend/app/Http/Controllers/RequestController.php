@@ -38,7 +38,7 @@ class RequestController extends AuthUserController
      */
     public function changeStatus(Request $request, $status)
     {
-        if(Gate::denies('provider-change-status-recommendation', $request)) {
+        if(Gate::denies('provider-change-status-request', $request)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 

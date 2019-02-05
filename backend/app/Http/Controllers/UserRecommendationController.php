@@ -7,6 +7,7 @@ use App\Models\Recommendation;
 use App\Models\User;
 use App\Repositories\RecommendationRepository;
 use Gate;
+use Illuminate\Http\Request;
 
 /**
  * Class UserRecommendationController
@@ -27,14 +28,19 @@ class UserRecommendationController extends RecommendationController
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function recommendations()
+    public function recommendations(Request $request)
     {
+        $query = $this->authUser->userRecommendations();
+
+        if($request->provider_id) {
+            $query->where('provider_id', $request->provider_id);
+        }
+
         /** @var Recommendation $recommendations */
-        $recommendations = $this->authUser->userRecommendations()
-            ->where('is_active', 1)
-            ->get();
+        $recommendations = $query->get();
 
         return response()->json($recommendations);
     }

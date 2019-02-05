@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Recommendation\RecommendationRequest;
+use App\Http\Requests\User\Request\UpdateUserRequestRateRequest;
 use App\Http\Requests\User\Request\CreateUserRequestRequest;
+use App\Http\Requests\User\Request\UpdateUserRequestRequest;
 use App\Models\ProviderService;
 use App\Models\Request;
 use App\Models\User;
@@ -74,19 +76,39 @@ class UserRequestController extends RequestController
             return response(['success' => false], 404);
         }
 
-        $this->request->create($this->authUser->id, $request->all());
+        $data = array_merge($request->all(), ['provider_service_id' => $providerService->id]);
+
+        $this->request->create($this->authUser->id, $data);
 
         return response()->json(['success' => true]);
     }
 
-    public function update()
+    /**
+     * @param UpdateUserRequestRequest $updateRequest
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateUserRequestRequest $updateRequest, Request $request)
     {
-        //
+        if(Gate::denies('user-update-request', $request)) {
+            return response()->json(['message' => 'Not enough rights']);
+        }
+
+        return response()->json(['success' => $request->update($updateRequest->all())]);
     }
 
-    public function updateRate()
+    /**
+     * @param UpdateUserRequestRateRequest $rateRequest
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateRate(UpdateUserRequestRateRequest $rateRequest, Request $request)
     {
-        //
+        if(Gate::denies('user-update-rate-request', $request)) {
+            return response()->json(['message' => 'Not enough rights']);
+        }
+
+        return response()->json(['success' => $request->update($rateRequest->all())]);
     }
 
 }

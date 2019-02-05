@@ -50,7 +50,7 @@ class RequestRepository
      */
     public function create($provider_id, $data)
     {
-        $result = $this->model->create(array_merge($data, [ 'provider_id' => $provider_id ]));
+        $result = $this->model->create(array_merge($data, [ 'user_id' => $provider_id ]));
 
         if(!$result) {
             return response()->json(['message' => 'Request did not save']);
