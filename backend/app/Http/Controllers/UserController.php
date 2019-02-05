@@ -6,6 +6,8 @@ use App\Http\Requests\User\UpdateUserPasswordRequest;
 use App\Http\Requests\User\UpdateUserInfoRequest;
 use App\Models\User;
 use Hash;
+use DB;
+use Gate;
 
 /**
  * Class UserController
@@ -22,6 +24,42 @@ class UserController extends AuthUserController
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function providers()
+    {
+        $providers = DB::table('users AS user')
+            ->select(
+                'professions.title AS profession_title',
+                'users.id AS provider_id',
+                'users.first_name as provider_first_name',
+                'users.last_name as provider_last_name'
+            )
+            ->join('requests', 'requests.user_id', '=', 'user.id')
+            ->join('provider_services', 'provider_services.id', '=', 'requests.provider_service_id')
+            ->join('users', 'users.id', '=', 'provider_services.provider_id')
+            ->join('services', 'services.id', '=', 'provider_services.service_id')
+            ->join('professions', 'professions.id', '=', 'services.profession_id')
+            ->where('user.id', $this->authUser->id)
+            ->get();
+
+        if(count($providers)) {
+            $providers = collect($providers)->unique('provider_id')->groupBy('profession_title');
+        }
+
+        return $providers;
+    }
+
+    /**
+     * @param User $provider
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function provider(User $provider)
+    {
+        return response()->json($provider);
     }
 
     /**

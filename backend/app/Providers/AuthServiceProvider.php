@@ -7,6 +7,7 @@ use App\Models\ProviderProfession;
 use App\Models\ProviderService;
 use App\Models\ProviderVerify;
 use App\Models\Recommendation;
+use App\Models\Request;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -144,6 +145,65 @@ class AuthServiceProvider extends ServiceProvider
 
         #endregion
 
+        #region UserRequests
+
+        $gate->define('user-get-request', function ($user, $request) {
+            /**
+             * @var User $user
+             * @var Request $request
+             */
+            return $user->id === $request->user_id;
+        });
+
+        $gate->define('user-update-request', function ($user, $request) {
+            /**
+             * @var User $user
+             * @var Request $request
+             */
+            return $user->id === $request->user_id;
+        });
+
+        $gate->define('user-update-rate-request', function ($user, $request) {
+            /**
+             * @var User $user
+             * @var Request $request
+             */
+            return $user->id === $request->user_id;
+        });
+
+        #endregion
+
+        #region ProviderRequest
+
+        $gate->define('provider-get-request', function ($provider, $request) {
+            /**
+             * @var User $provider
+             * @var Request $request
+             */
+            return $request->providerService()->where('provider_id', $provider->id)->exists();
+        });
+
+        $gate->define('provider-change-status-request', function ($provider, $request) {
+            /**
+             * @var User $provider
+             * @var Request $request
+             */
+            return $request->providerService()->where('provider_id', $provider->id)->exists();
+        });
+
+        #endregion
+
+        #region Provider
+
+        $gate->define('provider-get-user', function ($provider, $user_id) {
+            /**
+             * @var User $provider
+             * @var integer $user_id
+             */
+            return $provider->providerRequests()->where('requests.user_id', $user_id)->exists();
+        });
+
+        #endregion
 
     }
 }
