@@ -127,6 +127,8 @@
                         <viewLayoutGuide key="safeArea" id="PVb-99-Yjb"/>
                         <connections>
                             <outlet property="loginField" destination="0Pz-kf-LGf" id="Ykp-cW-5Uc"/>
+                            <outlet property="loginForm" destination="ur7-Qo-TJj" id="AE5-cL-52z"/>
+                            <outlet property="logo" destination="PUM-Cr-6hS" id="xQb-ur-z6U"/>
                             <outlet property="passwordField" destination="60c-th-Yrk" id="7S8-qn-9zh"/>
                             <outlet property="signInButton" destination="aEz-vG-unf" id="Alz-eq-GGB"/>
                             <outlet property="signUpButton" destination="756-xS-ewN" id="cls-b4-S4r"/>

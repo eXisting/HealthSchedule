@@ -9,6 +9,8 @@
 import UIKit
 
 class AuthMainView: UIView {
+  @IBOutlet weak var logo: UIImageView!
+  @IBOutlet weak var loginForm: UIStackView!
   
   @IBOutlet weak var loginField: DesignableTextField!
   @IBOutlet weak var passwordField: DesignableTextField!
@@ -17,6 +19,7 @@ class AuthMainView: UIView {
   @IBOutlet weak var signUpButton: UIButton!
   
   func setUpViews() {
+    setUpLogo()
     setUpBackground()
     setUpTextFields()
     setUpLoginButton()
@@ -27,20 +30,30 @@ class AuthMainView: UIView {
     
     background.frame = frame
     background.contentMode = .center
-    background.backgroundColor = UIColor.white.withAlphaComponent(0.4)
     BlurHandler.performBlurOn(background, blurPercent: 9)
     
     insertSubview(background, at: 0)
   }
   
+  private func setUpLogo() {
+    logo.changeColor(to: .black)
+  }
+  
   private func setUpTextFields() {
     loginField.addLineToView(position: .LINE_POSITION_BOTTOM, color: .lightGray, width: 1)
-    loginField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.strokeColor: UIColor.white])
     passwordField.addLineToView(position: .LINE_POSITION_BOTTOM, color: .lightGray, width: 1)
+        
+    loginField.attributedPlaceholder = NSAttributedString(
+      string: "Username",
+      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
+    
+    passwordField.attributedPlaceholder = NSAttributedString(
+      string: "Password",
+      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
   }
   
   private func setUpLoginButton() {
-    signInButton.backgroundColor = .gray
+    signInButton.backgroundColor = UIColor.black.withAlphaComponent(0.6)
     signInButton.roundCorners(by: signInButton.frame.size.height / 1.5)
     signInButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
     signInButton.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
