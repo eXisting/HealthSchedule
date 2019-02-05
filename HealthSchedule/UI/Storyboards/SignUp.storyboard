@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yNo-Xx-wO0">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sign Up Root View Controller-->
+        <scene sceneID="gLq-8B-KVe">
+            <objects>
+                <viewController storyboardIdentifier="SignUpRoot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yNo-Xx-wO0" customClass="SignUpRootViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V99-xb-hKp" customClass="MainSignUpInfoView" customModule="HealthSchedule" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="trB-fP-oa3">
+                                <rect key="frame" x="47" y="200" width="281" height="267"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FMe-iD-CRR" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="281" height="67"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/user"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vjM-Xa-19I" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="67" width="281" height="66.5"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/email"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="v3x-eX-ZAP" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="133.5" width="281" height="66.5"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/lock"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x6d-Px-G74" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="200" width="281" height="67"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/phone"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wiw-IJ-8b8">
+                                <rect key="frame" x="168" y="605" width="39" height="30"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="NEXT"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="trB-fP-oa3" firstAttribute="height" secondItem="V99-xb-hKp" secondAttribute="height" multiplier="0.4" id="0mr-Of-5tl"/>
+                            <constraint firstItem="trB-fP-oa3" firstAttribute="centerX" secondItem="V99-xb-hKp" secondAttribute="centerX" id="5Fm-Jv-OWl"/>
+                            <constraint firstItem="trB-fP-oa3" firstAttribute="width" secondItem="V99-xb-hKp" secondAttribute="width" multiplier="0.75" id="NTv-Xi-pdf"/>
+                            <constraint firstItem="Wiw-IJ-8b8" firstAttribute="centerX" secondItem="V99-xb-hKp" secondAttribute="centerX" id="SzE-gR-McN"/>
+                            <constraint firstItem="trB-fP-oa3" firstAttribute="centerY" secondItem="V99-xb-hKp" secondAttribute="centerY" id="bGp-bf-woW"/>
+                            <constraint firstItem="h4R-Gh-EVr" firstAttribute="bottom" secondItem="Wiw-IJ-8b8" secondAttribute="bottom" constant="32" id="wVc-ZW-FcH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="h4R-Gh-EVr"/>
+                        <connections>
+                            <outlet property="emailField" destination="vjM-Xa-19I" id="SEa-gr-k2U"/>
+                            <outlet property="nameFIeld" destination="FMe-iD-CRR" id="ZZX-d2-sEz"/>
+                            <outlet property="nextButton" destination="Wiw-IJ-8b8" id="Hoj-wn-jxN"/>
+                            <outlet property="passwordField" destination="v3x-eX-ZAP" id="Xmj-qE-udh"/>
+                            <outlet property="phoneField" destination="x6d-Px-G74" id="mI4-EX-B8c"/>
+                            <outlet property="signUpForm" destination="trB-fP-oa3" id="xsK-zg-1XP"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tGx-VS-Dxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-106" y="122"/>
+        </scene>
+        <!--Additional Info Sign Up Controller-->
+        <scene sceneID="Rlc-57-QWE">
+            <objects>
+                <viewController storyboardIdentifier="AdditionalSignUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NW1-9y-9Vj" customClass="AdditionalInfoSignUpController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y5o-xx-BFL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFM-E3-oZg">
+                                <rect key="frame" x="133" y="295" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YS4-ou-5Gb">
+                                <rect key="frame" x="151" y="445" width="39" height="30"/>
+                                <state key="normal" title="NEXT"/>
+                                <connections>
+                                    <action selector="onNextClick:" destination="NW1-9y-9Vj" eventType="touchUpInside" id="qcH-0Q-HHz"/>
+                                    <segue destination="VHA-al-v6r" kind="show" id="5eZ-N3-IbH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hFM-E3-oZg" firstAttribute="leading" secondItem="j5T-xp-h07" secondAttribute="leading" constant="133" id="8eJ-dQ-YUk"/>
+                            <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" secondItem="YS4-ou-5Gb" secondAttribute="bottom" constant="192" id="Cxe-uY-X89"/>
+                            <constraint firstItem="YS4-ou-5Gb" firstAttribute="leading" secondItem="j5T-xp-h07" secondAttribute="leading" constant="151" id="ORt-Gr-1lj"/>
+                            <constraint firstItem="hFM-E3-oZg" firstAttribute="top" secondItem="j5T-xp-h07" secondAttribute="top" constant="275" id="e9y-NT-wNd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="j5T-xp-h07"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5rI-md-CTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="743" y="122"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wpH-HQ-BsP">
+            <objects>
+                <viewController storyboardIdentifier="SignUpLastStep" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VHA-al-v6r" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h0O-Pj-ZbZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV1-P2-dq5">
+                                <rect key="frame" x="143" y="351" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yV1-P2-dq5" firstAttribute="leading" secondItem="HQy-hA-9ig" secondAttribute="leading" constant="143" id="3rO-Xa-WIN"/>
+                            <constraint firstItem="yV1-P2-dq5" firstAttribute="top" secondItem="HQy-hA-9ig" secondAttribute="top" constant="331" id="PZl-6N-moI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HQy-hA-9ig"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c4n-YR-PHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1591" y="122"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icons/email" width="37.5" height="37.5"/>
+        <image name="Icons/lock" width="75" height="75"/>
+        <image name="Icons/phone" width="75" height="75"/>
+        <image name="Icons/user" width="37.5" height="37.5"/>
+    </resources>
+</document>

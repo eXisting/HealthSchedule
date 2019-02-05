@@ -51,16 +51,11 @@ class DesignableTextField: UITextField {
       let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
       imageView.contentMode = .scaleAspectFit
       imageView.image = image
-      imageView.tintColor = color
+      imageView.changeColor(to: color)
       leftView = imageView
     } else {
       leftViewMode = UITextField.ViewMode.never
       leftView = nil
     }
-    
-    // Placeholder text color
-    attributedPlaceholder = NSAttributedString(
-      string: placeholder != nil ?  placeholder! : "",
-      attributes:[NSAttributedString.Key.foregroundColor: color])
   }
 }

@@ -29,11 +29,14 @@
 		ED1ED02B21FF678A00141CF5 /* AuthProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
 		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
-		ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpViewController.swift */; };
+		ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpRootViewController.swift */; };
 		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
 		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
 		ED34D7F522088F230025BACF /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34D7F422088F230025BACF /* RoundView.swift */; };
 		ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34D7F62209A8480025BACF /* AccountViewController.swift */; };
+		ED34D7F92209B1020025BACF /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED34D7F82209B1020025BACF /* SignUp.storyboard */; };
+		ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34D7FB2209D2000025BACF /* MainSignUpInfoView.swift */; };
+		ED3516FF2209F15E0047CBAA /* AdditionalInfoSignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3516FE2209F15E0047CBAA /* AdditionalInfoSignUpController.swift */; };
 		ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */; };
 		ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
@@ -85,11 +88,14 @@
 		ED1ED02A21FF678A00141CF5 /* AuthProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviding.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
-		ED330C6B21F08536001019FC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		ED330C6B21F08536001019FC /* SignUpRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootViewController.swift; sourceTree = "<group>"; };
 		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
 		ED34D7F422088F230025BACF /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
 		ED34D7F62209A8480025BACF /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		ED34D7F82209B1020025BACF /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		ED34D7FB2209D2000025BACF /* MainSignUpInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSignUpInfoView.swift; sourceTree = "<group>"; };
+		ED3516FE2209F15E0047CBAA /* AdditionalInfoSignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoSignUpController.swift; sourceTree = "<group>"; };
 		ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWithExperienceView.xib; sourceTree = "<group>"; };
 		ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWithExperienceView.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 				ED44831822086D4B00BE8EF0 /* Authentication.storyboard */,
 				ED089A6121E77D48006A8523 /* LaunchScreen.storyboard */,
 				ED089A6221E77D48006A8523 /* Main.storyboard */,
+				ED34D7F82209B1020025BACF /* SignUp.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -243,8 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */,
-				ED330C6B21F08536001019FC /* SignUpViewController.swift */,
+				ED330C6B21F08536001019FC /* SignUpRootViewController.swift */,
 				DBADDE5521F4CD9200C3EA2F /* DetailedSignUpViewController.swift */,
+				ED3516FE2209F15E0047CBAA /* AdditionalInfoSignUpController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -263,6 +271,14 @@
 				ED330C9021F21B35001019FC /* DesignableTextField.swift */,
 			);
 			path = Designable;
+			sourceTree = "<group>";
+		};
+		ED34D7FA2209D1C50025BACF /* Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				ED34D7FB2209D2000025BACF /* MainSignUpInfoView.swift */,
+			);
+			path = "Sign Up";
 			sourceTree = "<group>";
 		};
 		ED4482ED22044EEE00BE8EF0 /* Parser */ = {
@@ -377,6 +393,7 @@
 		ED44831A22086FDD00BE8EF0 /* Authenticatiion */ = {
 			isa = PBXGroup;
 			children = (
+				ED34D7FA2209D1C50025BACF /* Sign Up */,
 				ED44831B22086FF300BE8EF0 /* AuthMainView.swift */,
 			);
 			path = Authenticatiion;
@@ -455,6 +472,7 @@
 				ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */,
 				ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */,
 				ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */,
+				ED34D7F92209B1020025BACF /* SignUp.storyboard in Resources */,
 				ED089A6621E77D48006A8523 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,9 +501,10 @@
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED1ED01C21FF231C00141CF5 /* PrintableObject.swift in Sources */,
+				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
 				ED4483112204AA4400BE8EF0 /* UserManager.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
-				ED330C6C21F08536001019FC /* SignUpViewController.swift in Sources */,
+				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
 				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
@@ -493,6 +512,7 @@
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED1ED02B21FF678A00141CF5 /* AuthProviding.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
+				ED3516FF2209F15E0047CBAA /* AdditionalInfoSignUpController.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,
 				ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* UserCollectionViewCell.swift in Sources */,

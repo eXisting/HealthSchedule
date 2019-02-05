@@ -49,6 +49,9 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignUpClick() {
+    let storyBoard = UIStoryboard(name: "SignUp", bundle: nil)
+    let controller = storyBoard.instantiateViewController(withIdentifier: "SignUpRoot") as! SignUpRootViewController
+    self.navigationController?.pushViewController(controller, animated: true)
 //    let body = [
 //      "email":"johny1234@gmail.com",
 //      "phone":"123453124512",
