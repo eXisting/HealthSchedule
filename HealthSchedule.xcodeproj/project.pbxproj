@@ -33,6 +33,7 @@
 		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
 		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
 		ED34D7F522088F230025BACF /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34D7F422088F230025BACF /* RoundView.swift */; };
+		ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34D7F62209A8480025BACF /* AccountViewController.swift */; };
 		ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */; };
 		ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
@@ -88,6 +89,7 @@
 		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
 		ED34D7F422088F230025BACF /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
+		ED34D7F62209A8480025BACF /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWithExperienceView.xib; sourceTree = "<group>"; };
 		ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWithExperienceView.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		ED330C6421EF8B52001019FC /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */,
 				ED6CBE7C21ECD80600860010 /* CommonProtocols.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
+				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,

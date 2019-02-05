@@ -38,9 +38,13 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    // TODO: wait until data received
-    UserManager.shared.login(login: "kylee69@example.net", password: "secret") { user in
-      print("Perform segue")
+    UserManager.shared.login(login: "kylee69@example.net", password: "secret") { [weak self] user in
+      DispatchQueue.main.async {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateInitialViewController() as! UITabBarController
+        
+        self?.present(controller, animated: true, completion: nil)
+      }
     }
   }
   
