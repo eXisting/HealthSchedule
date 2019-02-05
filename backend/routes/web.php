@@ -11,9 +11,6 @@
 |
 */
 
- Route::get('/home', function () {
-     dd(config('image.image_path'));
-     return 'home';
- });
-
-
+//  Route::get('/', function () {
+//      return 'home';
+//  });

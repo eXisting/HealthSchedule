@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class City
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class City extends Model
 {
-    #region Properties
+    //region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -39,13 +40,13 @@ class City extends Model
         'title' => 'string',
     ];
 
-    #endregion
+    //endregion
 
-    #region Methods
+    //region Methods
 
-    #endregion
+    //endregion
 
-    #region Relationships
+    //region Relationships
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -63,5 +64,27 @@ class City extends Model
         return $this->hasMany(User::class)->where('user_role_id', UserRole::CLIENT);
     }
 
-    #endregion
+    /**
+     * Method returns all services in specific city
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function services()
+    {
+        //select * from services
+        //left join provider_services on provider_services.service_id = services.id
+        //left join users on provider_services.provider_id = users.id
+        //left join cities on users.city_id = cities.id
+        //where cities.id = 1
+        return DB::table('services')
+            ->select('services.id', 'services.name', 'services.title')
+            ->leftJoin('provider_services', 'provider_services.service_id', '=', 'services.id')
+            ->leftJoin('users', 'provider_services.provider_id', '=', 'users.id')
+            ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
+            ->groupBy('services.id')
+            ->where('cities.id', $this->id)
+            ->get();
+    }
+
+    //endregion
 }
