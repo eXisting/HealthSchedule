@@ -15,11 +15,16 @@ class AuthenticationViewController: UIViewController {
 //  @IBOutlet weak var passwordField: UITextField!
   
   var nav: UINavigationController?
+  var mainView: AuthMainView!
   
   override func loadView() {
     super.loadView()
     
-    (view as! AuthMainView).setUpViews()
+    mainView = (view as! AuthMainView)
+    
+    mainView.setUpViews()
+    mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
+    mainView.signUpButton.addTarget(self, action: #selector(onSignUpClick), for: .touchDown)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -32,23 +37,14 @@ class AuthenticationViewController: UIViewController {
     self.navigationController?.setNavigationBarHidden(false, animated: animated)
   }
   
-  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+  @objc func onSignInClick() {
     // TODO: wait until data received
     UserManager.shared.login(login: "kylee69@example.net", password: "secret") { user in
       print("Perform segue")
-      
-      UserManager.shared.saveAddress("Super new address") { text in
-        print(text)
-      }
     }
-    return false
-  }
-    
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // TODO: pass data to next view controller
   }
   
-  func signUp(errorHandler: @escaping (Error?) -> Void) {
+  @objc func onSignUpClick() {
 //    let body = [
 //      "email":"johny1234@gmail.com",
 //      "phone":"123453124512",
