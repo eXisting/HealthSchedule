@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGx-VS-Dxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-106" y="122"/>
+            <point key="canvasLocation" x="-107" y="121"/>
         </scene>
         <!--Additional Info Sign Up Controller-->
         <scene sceneID="Rlc-57-QWE">
@@ -196,27 +196,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rI-md-CTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="743" y="122"/>
+            <point key="canvasLocation" x="736" y="121"/>
         </scene>
-        <!--View Controller-->
+        <!--Provider Sign Up View Controller-->
         <scene sceneID="wpH-HQ-BsP">
             <objects>
-                <viewController storyboardIdentifier="SignUpLastStep" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VHA-al-v6r" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpLastStep" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VHA-al-v6r" customClass="ProviderSignUpViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h0O-Pj-ZbZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV1-P2-dq5">
-                                <rect key="frame" x="143" y="351" width="59" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SC-bN-EaF">
+                                <rect key="frame" x="185.66666666666666" y="673" width="43" height="43"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yV1-P2-dq5" firstAttribute="leading" secondItem="HQy-hA-9ig" secondAttribute="leading" constant="143" id="3rO-Xa-WIN"/>
-                            <constraint firstItem="yV1-P2-dq5" firstAttribute="top" secondItem="HQy-hA-9ig" secondAttribute="top" constant="331" id="PZl-6N-moI"/>
+                            <constraint firstItem="4SC-bN-EaF" firstAttribute="centerX" secondItem="h0O-Pj-ZbZ" secondAttribute="centerX" id="RQK-BE-uOM"/>
+                            <constraint firstAttribute="bottom" secondItem="4SC-bN-EaF" secondAttribute="bottom" constant="20" symbolic="YES" id="VZS-Hc-Tf6"/>
+                            <constraint firstItem="4SC-bN-EaF" firstAttribute="width" secondItem="4SC-bN-EaF" secondAttribute="height" id="wlZ-25-1I8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HQy-hA-9ig"/>
                     </view>

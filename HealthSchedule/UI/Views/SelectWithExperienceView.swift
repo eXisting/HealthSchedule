@@ -8,8 +8,6 @@
 
 import UIKit
 
-typealias ConstraintValues = (multiplier: CGFloat, constant: CGFloat, relation: NSLayoutConstraint.Relation)
-
 class SelectWithExperienceView: UIView {
   @IBOutlet weak var contentStack: UIStackView!
   @IBOutlet weak var experienceTextValue: UILabel!
