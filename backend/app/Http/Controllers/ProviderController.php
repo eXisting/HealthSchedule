@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Models\ProviderSchedule;
 
 /**
  * Class ProviderController
@@ -12,7 +14,6 @@ use App\Models\User;
  */
 class ProviderController extends AuthUserController
 {
-
     /**
      * ProviderController constructor.
      */
@@ -21,4 +22,11 @@ class ProviderController extends AuthUserController
         parent::__construct();
     }
 
+    public function availableDates(Request $request)
+    {
+        $cityId = $request->post('city_id');
+        $serviceId = $request->post('service_id');
+        $workingDates = ProviderSchedule::availableDates($cityId, $serviceId);
+        return response()->json($workingDates);
+    }
 }
