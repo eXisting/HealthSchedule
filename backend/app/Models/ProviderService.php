@@ -81,5 +81,13 @@ class ProviderService extends Model
         return $this->belongsTo(Service::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function requests()
+    {
+        return $this->hasMany(Request::class, 'provider_service_id', 'id');
+    }
+
     #endregion
 }

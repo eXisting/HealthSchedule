@@ -59,8 +59,6 @@ class RequestController extends AuthUserController
 
     public function getDates(\Illuminate\Http\Request $request)
     {
-
-
         $city_id = $request->city_id;
         $service_id = $request->service_id;
 
@@ -70,7 +68,6 @@ class RequestController extends AuthUserController
                 $query->where('city_id', $query->city_id);
             })
             ->where('service_id', $service_id)
-
             ->get();
     }
 }
