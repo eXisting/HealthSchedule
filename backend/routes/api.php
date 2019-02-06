@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/tests', function () {
-    dd(\App\Models\User::query()->find(16));
-});
-
 Route::post('login', 'Auth\LoginController@login');
 
 Route::prefix('register')->group(function () {
@@ -39,20 +35,44 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::put('/password', 'UserController@updatePassword');
 
+        Route::prefix('providers')->group(function () {
+            Route::get('/', 'UserController@providers');
+            Route::get('/{provider}', 'UserController@provider');
+        });
+
         Route::prefix('recommendations')->group(function () {
             Route::get('/', 'UserRecommendationController@recommendations');
             Route::get('/{recommendation_id}', 'UserRecommendationController@recommendation');
             Route::put('/{recommendation}/{recommendation_status}', 'RecommendationController@changeStatus');
+        });
+
+        Route::prefix('requests')->group(function () {
+            Route::get('/', 'UserRequestController@requests');
+            Route::get('/{request_id}', 'UserRequestController@request');
+            Route::post('/', 'UserRequestController@store');
+            Route::put('/{request}', 'UserRequestController@update');
+            Route::put('/{request}/rate', 'UserRequestController@updateRate');
         });
     });
 
     Route::prefix('provider')->group(function () {
         Route::put('/address', 'ProviderAddressController@update');
 
+        Route::prefix('users')->group(function () {
+            Route::get('/', 'ProviderController@users');
+            Route::get('/{user}', 'ProviderController@user');
+        });
+
         Route::prefix('recommendations')->group(function () {
             Route::get('/', 'ProviderRecommendationController@recommendations');
             Route::get('/{recommendation_id}', 'ProviderRecommendationController@recommendation');
             Route::post('/', 'ProviderRecommendationController@store');
+        });
+
+        Route::prefix('requests')->group(function () {
+            Route::get('/', 'ProviderRequestController@requests');
+            Route::get('/{request_id}', 'ProviderRequestController@request');
+            Route::put('/{request}/{request_status}', 'RequestController@changeStatus');
         });
 
         Route::prefix('professions')->group(function () {

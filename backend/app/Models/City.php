@@ -67,7 +67,7 @@ class City extends Model
     /**
      * Method returns all services in specific city
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function services()
     {
