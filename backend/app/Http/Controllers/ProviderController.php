@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ProviderSchedule;
 use DB;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Gate;
 
