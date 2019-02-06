@@ -14,12 +14,13 @@ class DetailedinfoMainView: UIView {
   @IBOutlet weak var birthdayPicker: UIDatePicker!
   
   @IBOutlet weak var nextButton: UIButton!
+  @IBOutlet weak var doneButton: UIButton!
   
   func setupViews() {
     setUpUserPicker()
     setUpBackground()
     setUpTextFields()
-    setUpNextButton()
+    setUpButtons()
   }
   
   private func setUpTextFields() {
@@ -56,8 +57,13 @@ class DetailedinfoMainView: UIView {
     
   }
   
-  private func setUpNextButton() {
+  private func setUpButtons() {
     setNextButtonVisible(false)
+    setDoneButtonVisible(false)
+    
+    doneButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+    doneButton.roundCorners(by: nextButton.frame.size.height / 1.5)
+    
     nextButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
     nextButton.roundCorners(by: nextButton.frame.size.height / 2)
   }
@@ -66,6 +72,10 @@ class DetailedinfoMainView: UIView {
 extension DetailedinfoMainView {
   func setNextButtonVisible(_ value: Bool) {
     nextButton.isHidden = !value
+  }
+  
+  func setDoneButtonVisible(_ value: Bool) {
+    doneButton.isHidden = !value
   }
   
   func isCityFieldEmpty() -> Bool {

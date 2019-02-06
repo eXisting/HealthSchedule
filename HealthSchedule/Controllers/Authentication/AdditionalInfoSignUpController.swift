@@ -29,9 +29,7 @@ class AdditionalInfoSignUpController: UIViewController, UITextFieldDelegate {
     mainView.cityPicker.delegate = self
   }
   
-  @objc func onNextButtonClick() {
-    let userType = UserType(rawValue: mainView.userPicker.selectedSegmentIndex + 1)
-    
+  private func collectData() {
     self.navigationController?.viewControllers.forEach { controller in
       guard let rootSignUpController = controller as? SignUpRootViewController else {
         return
@@ -39,19 +37,58 @@ class AdditionalInfoSignUpController: UIViewController, UITextFieldDelegate {
       
       rootSignUpController.signUpData[UserJsonFields.cityId.rawValue] = String(selectedCityId)
       rootSignUpController.signUpData[UserJsonFields.birthday.rawValue] = DatesManager.shared.dateToString(mainView.birthdayPicker.date)
-      
-      return
     }
-    
-    if userType == .provider {
-      // TODO: Show next controller
-      return
-    }
-    
+  }
+  
+  private func openApplication() {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let controller = storyboard.instantiateInitialViewController() as! UITabBarController
     
     self.present(controller, animated: true, completion: nil)
+  }
+  
+  private func toogleStepButtons() {
+    if selectedCityId != nil {
+      let userType = UserType(rawValue: mainView.userPicker.selectedSegmentIndex + 1)
+      mainView.setDoneButtonVisible(userType == .provider ? false : true)
+      mainView.setNextButtonVisible(userType == .provider ? true : false)
+    }
+  }
+  
+  // MARK: - Selectors
+  
+  @objc func onDoneButtonClick() {
+    collectData()
+    openApplication()
+  }
+  
+  @objc func onNextButtonClick() {
+    collectData()
+    let controller = self.storyboard?.instantiateViewController(withIdentifier: "ProviderSignUp") as! ProviderSignUpViewController
+    
+    self.navigationController?.pushViewController(controller, animated: true)
+  }
+  
+  @objc func onUserChanged() {
+    toogleStepButtons()
+  }
+  
+  @objc func onStartSelectCity(_ sender: Any) {
+    toggleCityPickerSelectAction(enabled: false)
+    
+    guard let _ = citiesPopOver?.values else {
+      RequestManager.getListAsyncFor(type: City.self, from: Endpoints.allCities, nil) { [weak self] cities in
+        self?.citiesPopOver = PopOverViewController(values: cities, onSelect: (self?.onCitySelect)!)
+        
+        DispatchQueue.main.async {
+          self?.presentPopOver()
+        }
+      }
+      
+      return
+    }
+    
+    presentPopOver()
   }
   
   // MARK: - UITextFieldDelegate
@@ -86,33 +123,18 @@ class AdditionalInfoSignUpController: UIViewController, UITextFieldDelegate {
   private func onCitySelect(_ selectedItem: City) {
     mainView.cityPicker.text = selectedItem.title
     selectedCityId = selectedItem.id
-    mainView.setNextButtonVisible(true)
     
+    toogleStepButtons()
+
     self.navigationController?.popViewController(animated: true)
-  }
-  
-  @objc func onStartSelectCity(_ sender: Any) {
-    toggleCityPickerSelectAction(enabled: false)
-    
-    guard let _ = citiesPopOver?.values else {
-      RequestManager.getListAsyncFor(type: City.self, from: Endpoints.allCities, nil) { [weak self] cities in
-        self?.citiesPopOver = PopOverViewController(values: cities, onSelect: (self?.onCitySelect)!)
-        
-        DispatchQueue.main.async {
-          self?.presentPopOver()
-        }
-      }
-      
-      return
-    }
-    
-    presentPopOver()
   }
   
   // MARK: - View setup
   
   private func addTargets() {
     mainView.nextButton.addTarget(self, action: #selector(onNextButtonClick), for: .touchDown)
+    mainView.doneButton.addTarget(self, action: #selector(onDoneButtonClick), for: .touchDown)
+    mainView.userPicker.addTarget(self, action: #selector(onUserChanged), for: .valueChanged)
     toggleCityPickerSelectAction(enabled: true)
   }
   

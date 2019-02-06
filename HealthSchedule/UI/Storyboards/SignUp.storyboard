@@ -170,15 +170,28 @@
                                 <rect key="frame" x="288.66666666666669" y="630.33333333333337" width="73.666666666666686" height="73.666666666666629"/>
                                 <state key="normal" image="Icons/next"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJI-qW-c4c">
+                                <rect key="frame" x="82.666666666666671" y="630.33333333333337" width="248.66666666666663" height="73.666666666666629"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <state key="normal" title="DONE!">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Vfn-6k-DWM" firstAttribute="centerX" secondItem="y5o-xx-BFL" secondAttribute="centerX" id="0Pk-K5-mMg"/>
                             <constraint firstItem="Vfn-6k-DWM" firstAttribute="height" secondItem="y5o-xx-BFL" secondAttribute="height" multiplier="0.55" id="7fE-3G-Fke"/>
+                            <constraint firstItem="rJI-qW-c4c" firstAttribute="height" secondItem="y5o-xx-BFL" secondAttribute="height" multiplier="0.1" id="A60-93-HHP"/>
                             <constraint firstItem="Vfn-6k-DWM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j5T-xp-h07" secondAttribute="top" constant="8" id="BnS-pa-Hup"/>
+                            <constraint firstItem="rJI-qW-c4c" firstAttribute="width" secondItem="Vfn-6k-DWM" secondAttribute="width" multiplier="0.8" id="Jn7-X8-5Wn"/>
                             <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" secondItem="s4y-QC-Yhh" secondAttribute="bottom" priority="750" constant="32" id="Njg-N1-NPZ"/>
+                            <constraint firstItem="rJI-qW-c4c" firstAttribute="centerX" secondItem="y5o-xx-BFL" secondAttribute="centerX" id="Vcx-ce-dfK"/>
                             <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s4y-QC-Yhh" secondAttribute="bottom" constant="8" id="WV7-YC-yEy"/>
+                            <constraint firstItem="rJI-qW-c4c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Vfn-6k-DWM" secondAttribute="bottom" constant="8" id="Zgl-0r-VLr"/>
                             <constraint firstItem="s4y-QC-Yhh" firstAttribute="trailing" secondItem="Vfn-6k-DWM" secondAttribute="trailing" id="aH6-3L-3Rj"/>
+                            <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rJI-qW-c4c" secondAttribute="bottom" constant="8" id="bSk-nh-38R"/>
+                            <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" secondItem="rJI-qW-c4c" secondAttribute="bottom" priority="750" constant="32" id="ik6-gC-s9I"/>
                             <constraint firstItem="Vfn-6k-DWM" firstAttribute="width" secondItem="y5o-xx-BFL" secondAttribute="width" multiplier="0.75" id="izY-BT-cgT"/>
                             <constraint firstItem="s4y-QC-Yhh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Vfn-6k-DWM" secondAttribute="bottom" constant="8" id="j99-kb-gvD"/>
                             <constraint firstItem="Vfn-6k-DWM" firstAttribute="centerY" secondItem="j5T-xp-h07" secondAttribute="centerY" multiplier="0.85" id="khz-ED-hH7"/>
@@ -189,6 +202,7 @@
                         <connections>
                             <outlet property="birthdayPicker" destination="wEa-zn-1hV" id="7HU-37-Ll1"/>
                             <outlet property="cityPicker" destination="PQa-qW-vbJ" id="iJd-YL-FdF"/>
+                            <outlet property="doneButton" destination="rJI-qW-c4c" id="GqV-X4-y53"/>
                             <outlet property="nextButton" destination="s4y-QC-Yhh" id="EuR-x9-phe"/>
                             <outlet property="userPicker" destination="bMn-Sa-2VV" id="yLY-Uu-PVe"/>
                         </connections>
@@ -201,7 +215,7 @@
         <!--Provider Sign Up View Controller-->
         <scene sceneID="wpH-HQ-BsP">
             <objects>
-                <viewController storyboardIdentifier="SignUpLastStep" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VHA-al-v6r" customClass="ProviderSignUpViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProviderSignUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VHA-al-v6r" customClass="ProviderSignUpViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h0O-Pj-ZbZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
