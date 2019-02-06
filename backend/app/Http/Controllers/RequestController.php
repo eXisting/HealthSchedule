@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProviderService;
 use App\Models\Request;
 use App\Models\User;
 use App\Repositories\RequestRepository;
+use Carbon\Carbon;
 use Gate;
+use DB;
+use Illuminate\Database\Query\Builder;
 
 /**
  * Class RequestController
@@ -51,5 +55,22 @@ class RequestController extends AuthUserController
         }
 
         return response()->json(['success' => true]);
+    }
+
+    public function getDates(\Illuminate\Http\Request $request)
+    {
+
+
+        $city_id = $request->city_id;
+        $service_id = $request->service_id;
+
+        (new ProviderService())->query()
+            ->whereHas('provider', function ($query) use ($city_id) {
+                /** @var Builder $query */
+                $query->where('city_id', $query->city_id);
+            })
+            ->where('service_id', $service_id)
+
+            ->get();
     }
 }

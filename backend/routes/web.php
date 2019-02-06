@@ -11,6 +11,18 @@
 |
 */
 
-//  Route::get('/', function () {
-//      return 'home';
-//  });
+  Route::get('/', function (\Illuminate\Http\Request $request) {
+//      dd(\Carbon\Carbon::now()->month);
+      dd(\Carbon\Carbon::now());
+      $city_id = $request->city_id;
+      $service_id = $request->service_id;
+
+      (new ProviderService())->query()
+          ->whereHas('provider', function ($query) use ($city_id) {
+              /** @var Builder $query */
+              $query->where('city_id', $query->city_id);
+          })
+          ->where('service_id', $service_id)
+
+          ->get();
+  });
