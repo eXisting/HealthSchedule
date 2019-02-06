@@ -21,6 +21,7 @@ class MainSignUpInfoView: UIView {
   func setupViews() {
     setUpBackground()
     setUpTextFields()
+    setUpNextButton()
   }
   
   private func setUpTextFields() {
@@ -56,5 +57,35 @@ class MainSignUpInfoView: UIView {
     background.contentMode = .scaleAspectFill
     
     insertSubview(background, at: 0)
+  }
+  
+  private func setUpNextButton() {
+    setNextButtonVisible(false)
+    nextButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+    nextButton.roundCorners(by: nextButton.frame.size.height / 2)
+  }
+}
+
+extension MainSignUpInfoView {
+  func setNextButtonVisible(_ value: Bool) {
+    nextButton.isHidden = !value
+  }
+  
+  func getNamePair() -> (firstName: String, lastName: String)? {
+    guard let name = nameFIeld.text else {
+      return nil
+    }
+    
+    let namePair = name.split(separator: " ", maxSplits: 2)
+    guard let firstName = namePair.first,
+      let lastName = namePair.last else {
+        return nil
+    }
+    
+    if firstName == lastName {
+      return nil
+    }
+    
+    return (String(firstName), String(lastName))
   }
 }

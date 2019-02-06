@@ -57,7 +57,5 @@ class AuthMainView: UIView {
   private func setUpLoginButton() {
     signInButton.backgroundColor = UIColor.black.withAlphaComponent(0.6)
     signInButton.roundCorners(by: signInButton.frame.size.height / 1.5)
-    signInButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
-    signInButton.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
   }
 }

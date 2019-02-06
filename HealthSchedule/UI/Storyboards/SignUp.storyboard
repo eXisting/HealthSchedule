@@ -79,10 +79,13 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wiw-IJ-8b8">
-                                <rect key="frame" x="168" y="605" width="39" height="30"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                <state key="normal" title="NEXT"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wiw-IJ-8b8">
+                                <rect key="frame" x="261.5" y="568.5" width="66.5" height="66.5"/>
+                                <color key="backgroundColor" red="0.045952389846828749" green="0.86086215101522845" blue="0.00028965056731376001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wiw-IJ-8b8" secondAttribute="height" id="CxU-Bm-Qcm"/>
+                                </constraints>
+                                <state key="normal" image="Icons/next"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,8 +93,9 @@
                             <constraint firstItem="trB-fP-oa3" firstAttribute="height" secondItem="V99-xb-hKp" secondAttribute="height" multiplier="0.4" id="0mr-Of-5tl"/>
                             <constraint firstItem="trB-fP-oa3" firstAttribute="centerX" secondItem="V99-xb-hKp" secondAttribute="centerX" id="5Fm-Jv-OWl"/>
                             <constraint firstItem="trB-fP-oa3" firstAttribute="width" secondItem="V99-xb-hKp" secondAttribute="width" multiplier="0.75" id="NTv-Xi-pdf"/>
-                            <constraint firstItem="Wiw-IJ-8b8" firstAttribute="centerX" secondItem="V99-xb-hKp" secondAttribute="centerX" id="SzE-gR-McN"/>
+                            <constraint firstItem="Wiw-IJ-8b8" firstAttribute="trailing" secondItem="trB-fP-oa3" secondAttribute="trailing" id="aQd-8h-kTv"/>
                             <constraint firstItem="trB-fP-oa3" firstAttribute="centerY" secondItem="V99-xb-hKp" secondAttribute="centerY" id="bGp-bf-woW"/>
+                            <constraint firstItem="Wiw-IJ-8b8" firstAttribute="height" secondItem="V99-xb-hKp" secondAttribute="height" multiplier="0.1" id="ft7-u0-pqI"/>
                             <constraint firstItem="h4R-Gh-EVr" firstAttribute="bottom" secondItem="Wiw-IJ-8b8" secondAttribute="bottom" constant="32" id="wVc-ZW-FcH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h4R-Gh-EVr"/>
@@ -177,6 +181,7 @@
     <resources>
         <image name="Icons/email" width="37.5" height="37.5"/>
         <image name="Icons/lock" width="75" height="75"/>
+        <image name="Icons/next" width="45" height="45"/>
         <image name="Icons/phone" width="75" height="75"/>
         <image name="Icons/user" width="37.5" height="37.5"/>
     </resources>

@@ -15,6 +15,7 @@ enum UserJsonFields: String, CodingKey {
   case email
   case role
   case city
+  case password
   
   case firstName = "first_name"
   case lastName = "last_name"
