@@ -24,9 +24,9 @@ class ValidationController {
     let regEx = regex.rawValue
     
     let test = NSPredicate(format:"SELF MATCHES %@", regEx)
-    let res = test.evaluate(with: text)
-    print(res)
-    return res
+//    let res = test.evaluate(with: text)
+//    print(res)
+    return test.evaluate(with: text)
   }
   
   func confirmPassword(_ password: String, _ confirm: String) -> Bool {
