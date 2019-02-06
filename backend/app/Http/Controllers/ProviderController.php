@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use DB;
 use Illuminate\Http\Request;
+use App\Models\ProviderSchedule;
+use DB;
 use Illuminate\Support\Collection;
 use Gate;
 
@@ -16,13 +17,20 @@ use Gate;
  */
 class ProviderController extends AuthUserController
 {
-
     /**
      * ProviderController constructor.
      */
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function availableDates(Request $request)
+    {
+        $cityId = $request->post('city_id');
+        $serviceId = $request->post('service_id');
+        $workingDates = ProviderSchedule::availableDates($cityId, $serviceId);
+        return response()->json($workingDates);
     }
 
     /**
@@ -59,7 +67,7 @@ class ProviderController extends AuthUserController
      */
     public function user(User $user)
     {
-        if(Gate::denies('provider-get-user', $user->id)) {
+        if (Gate::denies('provider-get-user', $user->id)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
