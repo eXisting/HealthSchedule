@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yNo-Xx-wO0">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,14 +15,14 @@
             <objects>
                 <viewController storyboardIdentifier="SignUpRoot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yNo-Xx-wO0" customClass="SignUpRootViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V99-xb-hKp" customClass="MainSignUpInfoView" customModule="HealthSchedule" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="trB-fP-oa3">
-                                <rect key="frame" x="47" y="200" width="281" height="267"/>
+                                <rect key="frame" x="51.666666666666657" y="220.66666666666666" width="310.66666666666674" height="294.66666666666674"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FMe-iD-CRR" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="281" height="67"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="310.66666666666669" height="73.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -36,7 +36,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vjM-Xa-19I" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="67" width="281" height="66.5"/>
+                                        <rect key="frame" x="0.0" y="73.666666666666657" width="310.66666666666669" height="73.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -50,7 +50,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="v3x-eX-ZAP" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="133.5" width="281" height="66.5"/>
+                                        <rect key="frame" x="0.0" y="147.33333333333334" width="310.66666666666669" height="73.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -64,7 +64,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x6d-Px-G74" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="200" width="281" height="67"/>
+                                        <rect key="frame" x="0.0" y="221.00000000000003" width="310.66666666666669" height="73.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -80,8 +80,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wiw-IJ-8b8">
-                                <rect key="frame" x="261.5" y="568.5" width="66.5" height="66.5"/>
-                                <color key="backgroundColor" red="0.045952389846828749" green="0.86086215101522845" blue="0.00028965056731376001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="288.66666666666669" y="630.33333333333337" width="73.666666666666686" height="73.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Wiw-IJ-8b8" secondAttribute="height" id="CxU-Bm-Qcm"/>
                                 </constraints>
@@ -97,6 +96,7 @@
                             <constraint firstItem="trB-fP-oa3" firstAttribute="centerY" secondItem="V99-xb-hKp" secondAttribute="centerY" id="bGp-bf-woW"/>
                             <constraint firstItem="Wiw-IJ-8b8" firstAttribute="height" secondItem="V99-xb-hKp" secondAttribute="height" multiplier="0.1" id="ft7-u0-pqI"/>
                             <constraint firstItem="h4R-Gh-EVr" firstAttribute="bottom" secondItem="Wiw-IJ-8b8" secondAttribute="bottom" constant="32" id="wVc-ZW-FcH"/>
+                            <constraint firstItem="Wiw-IJ-8b8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="trB-fP-oa3" secondAttribute="bottom" constant="8" id="xsL-zX-NEd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h4R-Gh-EVr"/>
                         <connections>
@@ -117,33 +117,81 @@
         <scene sceneID="Rlc-57-QWE">
             <objects>
                 <viewController storyboardIdentifier="AdditionalSignUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NW1-9y-9Vj" customClass="AdditionalInfoSignUpController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="y5o-xx-BFL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" id="y5o-xx-BFL" customClass="DetailedinfoMainView" customModule="HealthSchedule" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFM-E3-oZg">
-                                <rect key="frame" x="133" y="295" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YS4-ou-5Gb">
-                                <rect key="frame" x="151" y="445" width="39" height="30"/>
-                                <state key="normal" title="NEXT"/>
-                                <connections>
-                                    <action selector="onNextClick:" destination="NW1-9y-9Vj" eventType="touchUpInside" id="qcH-0Q-HHz"/>
-                                    <segue destination="VHA-al-v6r" kind="show" id="5eZ-N3-IbH"/>
-                                </connections>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vfn-6k-DWM">
+                                <rect key="frame" x="51.666666666666657" y="119.00000000000003" width="310.66666666666674" height="404.66666666666674"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bMn-Sa-2VV">
+                                        <rect key="frame" x="0.0" y="0.0" width="131" height="41.333333333333336"/>
+                                        <segments>
+                                            <segment title="Client"/>
+                                            <segment title="Provider"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PQa-qW-vbJ" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="60.666666666666657" width="310.66666666666669" height="60.666666666666657"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/city"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <datePicker contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="wEa-zn-1hV">
+                                        <rect key="frame" x="0.0" y="141.66666666666669" width="310.66666666666669" height="263"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="571150585.83311605">
+                                            <!--2019-02-06 12:56:25 +0000-->
+                                        </date>
+                                        <date key="minimumDate" timeIntervalSinceReferenceDate="-2240568000">
+                                            <!--1930-01-01 12:00:00 +0000-->
+                                        </date>
+                                        <date key="maximumDate" timeIntervalSinceReferenceDate="315486000">
+                                            <!--2010-12-31 11:00:00 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bMn-Sa-2VV" firstAttribute="height" secondItem="Vfn-6k-DWM" secondAttribute="height" multiplier="0.1" id="Gsr-wg-rgQ"/>
+                                    <constraint firstItem="PQa-qW-vbJ" firstAttribute="width" secondItem="Vfn-6k-DWM" secondAttribute="width" id="VSj-XF-7Qq"/>
+                                    <constraint firstItem="wEa-zn-1hV" firstAttribute="height" secondItem="Vfn-6k-DWM" secondAttribute="height" multiplier="0.65" id="dZM-aJ-Sdi"/>
+                                    <constraint firstItem="PQa-qW-vbJ" firstAttribute="height" secondItem="Vfn-6k-DWM" secondAttribute="height" multiplier="0.15" id="u9u-Ha-LPk"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4y-QC-Yhh">
+                                <rect key="frame" x="288.66666666666669" y="630.33333333333337" width="73.666666666666686" height="73.666666666666629"/>
+                                <state key="normal" image="Icons/next"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hFM-E3-oZg" firstAttribute="leading" secondItem="j5T-xp-h07" secondAttribute="leading" constant="133" id="8eJ-dQ-YUk"/>
-                            <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" secondItem="YS4-ou-5Gb" secondAttribute="bottom" constant="192" id="Cxe-uY-X89"/>
-                            <constraint firstItem="YS4-ou-5Gb" firstAttribute="leading" secondItem="j5T-xp-h07" secondAttribute="leading" constant="151" id="ORt-Gr-1lj"/>
-                            <constraint firstItem="hFM-E3-oZg" firstAttribute="top" secondItem="j5T-xp-h07" secondAttribute="top" constant="275" id="e9y-NT-wNd"/>
+                            <constraint firstItem="Vfn-6k-DWM" firstAttribute="centerX" secondItem="y5o-xx-BFL" secondAttribute="centerX" id="0Pk-K5-mMg"/>
+                            <constraint firstItem="Vfn-6k-DWM" firstAttribute="height" secondItem="y5o-xx-BFL" secondAttribute="height" multiplier="0.55" id="7fE-3G-Fke"/>
+                            <constraint firstItem="Vfn-6k-DWM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j5T-xp-h07" secondAttribute="top" constant="8" id="BnS-pa-Hup"/>
+                            <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" secondItem="s4y-QC-Yhh" secondAttribute="bottom" priority="750" constant="32" id="Njg-N1-NPZ"/>
+                            <constraint firstItem="j5T-xp-h07" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s4y-QC-Yhh" secondAttribute="bottom" constant="8" id="WV7-YC-yEy"/>
+                            <constraint firstItem="s4y-QC-Yhh" firstAttribute="trailing" secondItem="Vfn-6k-DWM" secondAttribute="trailing" id="aH6-3L-3Rj"/>
+                            <constraint firstItem="Vfn-6k-DWM" firstAttribute="width" secondItem="y5o-xx-BFL" secondAttribute="width" multiplier="0.75" id="izY-BT-cgT"/>
+                            <constraint firstItem="s4y-QC-Yhh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Vfn-6k-DWM" secondAttribute="bottom" constant="8" id="j99-kb-gvD"/>
+                            <constraint firstItem="Vfn-6k-DWM" firstAttribute="centerY" secondItem="j5T-xp-h07" secondAttribute="centerY" multiplier="0.85" id="khz-ED-hH7"/>
+                            <constraint firstItem="s4y-QC-Yhh" firstAttribute="height" secondItem="y5o-xx-BFL" secondAttribute="height" multiplier="0.1" id="oVg-xM-bGl"/>
+                            <constraint firstItem="s4y-QC-Yhh" firstAttribute="width" secondItem="s4y-QC-Yhh" secondAttribute="height" id="rUV-8k-21K"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j5T-xp-h07"/>
+                        <connections>
+                            <outlet property="birthdayPicker" destination="wEa-zn-1hV" id="7HU-37-Ll1"/>
+                            <outlet property="cityPicker" destination="PQa-qW-vbJ" id="iJd-YL-FdF"/>
+                            <outlet property="nextButton" destination="s4y-QC-Yhh" id="EuR-x9-phe"/>
+                            <outlet property="userPicker" destination="bMn-Sa-2VV" id="yLY-Uu-PVe"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rI-md-CTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -155,7 +203,7 @@
             <objects>
                 <viewController storyboardIdentifier="SignUpLastStep" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VHA-al-v6r" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h0O-Pj-ZbZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV1-P2-dq5">
@@ -179,6 +227,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icons/city" width="37.5" height="37.5"/>
         <image name="Icons/email" width="37.5" height="37.5"/>
         <image name="Icons/lock" width="75" height="75"/>
         <image name="Icons/next" width="45" height="45"/>

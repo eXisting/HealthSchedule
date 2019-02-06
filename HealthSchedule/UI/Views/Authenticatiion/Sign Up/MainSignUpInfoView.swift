@@ -28,6 +28,11 @@ class MainSignUpInfoView: UIView {
     let leftPadding = emailField.imageSize + emailField.leftPadding
     let rightPadding = emailField.imageSize
     
+    emailField.borderStyle = .none
+    passwordField.borderStyle = .none
+    nameFIeld.borderStyle = .none
+    phoneField.borderStyle = .none
+
     emailField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
     passwordField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
     nameFIeld.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)

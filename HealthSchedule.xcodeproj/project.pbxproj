@@ -37,6 +37,7 @@
 		ED34D7F92209B1020025BACF /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED34D7F82209B1020025BACF /* SignUp.storyboard */; };
 		ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34D7FB2209D2000025BACF /* MainSignUpInfoView.swift */; };
 		ED3516FF2209F15E0047CBAA /* AdditionalInfoSignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3516FE2209F15E0047CBAA /* AdditionalInfoSignUpController.swift */; };
+		ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A156C220B1B400013BD60 /* DetailedinfoMainView.swift */; };
 		ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */; };
 		ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
@@ -96,6 +97,7 @@
 		ED34D7F82209B1020025BACF /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		ED34D7FB2209D2000025BACF /* MainSignUpInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSignUpInfoView.swift; sourceTree = "<group>"; };
 		ED3516FE2209F15E0047CBAA /* AdditionalInfoSignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoSignUpController.swift; sourceTree = "<group>"; };
+		ED3A156C220B1B400013BD60 /* DetailedinfoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedinfoMainView.swift; sourceTree = "<group>"; };
 		ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWithExperienceView.xib; sourceTree = "<group>"; };
 		ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWithExperienceView.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				ED34D7FB2209D2000025BACF /* MainSignUpInfoView.swift */,
+				ED3A156C220B1B400013BD60 /* DetailedinfoMainView.swift */,
 			);
 			path = "Sign Up";
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
+				ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */,
 				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,

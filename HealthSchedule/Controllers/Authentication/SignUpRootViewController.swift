@@ -10,7 +10,9 @@ import UIKit
 
 class SignUpRootViewController: UIViewController {
   
+  // Data to send in sign up request
   var signUpData: Parser.JsonDictionary = [:]
+  
   var mainView: MainSignUpInfoView!
   
   override func loadView() {
@@ -21,18 +23,20 @@ class SignUpRootViewController: UIViewController {
     mainView.setupViews()
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
     
-    [mainView.emailField, mainView.passwordField, mainView.nameFIeld]
-      .forEach({ $0.addTarget(self, action: #selector(collectData), for: .editingChanged) })
+//    [mainView.emailField, mainView.passwordField, mainView.nameFIeld]
+//      .forEach({ $0.addTarget(self, action: #selector(collectData), for: .editingChanged) })
+    
+    mainView.setNextButtonVisible(true)
   }
   
   @objc func onNextClick() {
-    if validateData() {
+//    if validateData() {
       let additionalController = self.storyboard?.instantiateViewController(withIdentifier: "AdditionalSignUp") as! AdditionalInfoSignUpController
       
       self.navigationController?.pushViewController(additionalController, animated: true)
-    } else {
-      // TODO: Alert error
-    }
+//    } else {
+//      // TODO: Alert error
+//    }
   }
   
   @objc func collectData(_ textField: UITextField) {

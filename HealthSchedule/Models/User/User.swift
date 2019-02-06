@@ -21,6 +21,15 @@ enum UserJsonFields: String, CodingKey {
   case lastName = "last_name"
   case status = "confirmed_status"
   case birthday = "birthday_at"
+  
+  // Sign up fields
+  case cityId = "city_id"
+}
+
+// TODO: Get this on app launch
+enum UserTypeName: String {
+  case client = "Client"
+  case provider = "Provider"
 }
 
 enum UserType: Int, Codable {

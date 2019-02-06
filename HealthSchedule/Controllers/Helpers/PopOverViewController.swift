@@ -12,7 +12,8 @@ class PopOverViewController<Element: PrintableObject>: UITableViewController {
   
   typealias SelectionHandler = (Element) -> Void
   
-  private let values: [Element]
+  let values: [Element]
+
   private let onSelect: SelectionHandler?
   
   init(values: [Element], onSelect: @escaping SelectionHandler) {
