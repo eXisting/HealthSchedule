@@ -24,7 +24,8 @@ class UserManager {
       return
     }
     
-    RequestManager.signIn(userData: data) { [weak self] (user, response) in
+    RequestManager.signIn(userData: data) {
+      [weak self] (user, response) in
       if response.error != nil {
         completion(response.error)
         return
@@ -47,7 +48,8 @@ class UserManager {
       return
     }
     
-    RequestManager.signUp(authType: userType, userData: data) { [weak self] (user, response) in
+    RequestManager.signUp(authType: userType, userData: data) {
+      [weak self] (user, response) in
       if response.error != nil {
         completion(response.error)
         return

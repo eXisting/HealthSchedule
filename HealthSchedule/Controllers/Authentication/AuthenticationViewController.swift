@@ -72,22 +72,15 @@ class AuthenticationViewController: UIViewController {
       "birthday_at":"2019-01-31"
     ]
     
-//    let dateFormatter = DateFormatter()
-//    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//    guard let start = dateFormatter.date(from: "2010-11-11 00:00:00") else {
-//      fatalError("ERROR: Date conversion failed due to mismatched format.")
-//    }
-//    guard let end = dateFormatter.date(from: "2012-11-11 00:00:00") else {
-//      fatalError("ERROR: Date conversion failed due to mismatched format.")
-//    }
+//    let profData = ["id":0, "professionId":2, "city_id":1, "companyName":"SomeCompany", "start_at":"2010-11-11 00:00:00", "end_at":"2012-11-11 00:00:00"] as [String : Any]
 //
-//    let prof = ProviderProfession(id: 0, providerId: 2, professionId: 2, cityId: 1, companyName: "SomeCompany", startAt: start, endAt: end)
-//
-//
+//    let profs = Serializer.getDataFrom(json: profData)
+//    let prf = Serializer.decodeDataInto(type: ProviderProfession.self, profs!)
+
 //    let verifies = ["https://images-na.ssl-images-amazon.com/images/I/81W5nfYYxoL._SX425_.jpg"]
 //
 //    let body = [
-//      "email":"johny1234@gmail.com",
+//      "email":"johnysd1234@gmail.com",
 //      "phone":"123453124512",
 //      "password":"qwerty",
 //      "first_name":"Magic name2",
@@ -96,9 +89,11 @@ class AuthenticationViewController: UIViewController {
 //      "city_id":"2",
 //      "birthday":"1999-11-11 00:00:00",
 //      "address":"cudo street",
-//      "professions":[prof.asJsonObject()],
+//      "professions":prf,
 //      "verifies":""
-//      ] as [String: Any]
+//      ] as [String : Any]
+    
+    //let data = Serializer.getDataFrom(json: body)
 //
 //
     UserManager.shared.register(userType: .client, body) { user in
