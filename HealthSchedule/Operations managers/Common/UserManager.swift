@@ -51,7 +51,7 @@ class UserManager {
   // MARK: - Provider requests
   
   func getProfessions(completion: @escaping (ResponseStatus) -> Void) {
-    RequestManager.getListAsyncFor(type: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { [weak self] (list, status) in
+    RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { [weak self] (list, status) in
       self?.user?.providerData?.professions = list
       
       completion(status)

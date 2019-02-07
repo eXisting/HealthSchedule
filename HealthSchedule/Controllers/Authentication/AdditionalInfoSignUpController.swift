@@ -77,7 +77,7 @@ class AdditionalInfoSignUpController: UIViewController, UITextFieldDelegate {
     toggleCityPickerSelectAction(enabled: false)
     
     guard let _ = citiesPopOver?.values else {
-      RequestManager.getListAsyncFor(type: City.self, from: Endpoints.allCities, nil) { [weak self] (cities, status) in
+      RequestManager.getListAsync(for: City.self, from: Endpoints.allCities, nil) { [weak self] (cities, status) in
         self?.citiesPopOver = PopOverViewController(values: cities, onSelect: (self?.onCitySelect)!)
         
         DispatchQueue.main.async {

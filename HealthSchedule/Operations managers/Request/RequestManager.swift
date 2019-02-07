@@ -17,14 +17,14 @@ class RequestManager {
   
   // MARK: - GET
   
-  class func getListAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ completion: @escaping ([T], ResponseStatus) -> Void) {
+  class func getListAsync<T: Decodable>(for type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ completion: @escaping ([T], ResponseStatus) -> Void) {
     request.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { (json, status) in
       let result = Parser.anyArrayToObjectArray(destination: T.self, json)
       completion(result, status)
     }
   }
   
-  class func getAsyncFor<T: Decodable>(type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ completion: @escaping (T?, ResponseStatus) -> Void) {
+  class func getAsync<T: Decodable>(for type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ completion: @escaping (T?, ResponseStatus) -> Void) {
     request.getAsync(from: buildEndpoint(endpoint.rawValue), params) { (json, status) in
       switch status {
         case .ok:
@@ -57,7 +57,7 @@ class RequestManager {
     postAsync(to: Endpoints.signIn.rawValue, as: .post, userData, nil) { (json, status) in
       rememberToken(from: json)
       
-      getAsyncFor(type: User.self, from: Endpoints.user, sessionToken?.asParams()) { (user, status) in
+      getAsync(for: User.self, from: Endpoints.user, sessionToken?.asParams()) { (user, status) in
         guard let user = user else {
           completion(nil, status)
           return
