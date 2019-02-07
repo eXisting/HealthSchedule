@@ -17,48 +17,17 @@ class UrlSessionHandler {
   
   private init() {}
   
-  func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any, ServerResponse) -> Void) {
-    guard let urlRequest = buildUrlRequest(url, params, RequestType.get.rawValue) else {
+  func startSessionTask(
+    _ url: String,
+    _ type: RequestType = .get,
+    body: Data? = nil,
+    params: Parser.JsonDictionary? = nil,
+    completion: @escaping (Any, ServerResponse) -> Void) {
+    
+    guard let urlRequest = buildUrlRequest(url, type.rawValue, params, body) else {
       completion(emptyJson, ServerResponse(ResponseStatus.cannotProceed.rawValue))
       return
     }
-    
-    let task = defaultSession.dataTask(with: urlRequest) { [weak self]
-      (data, response, error) in
-      
-      if error != nil {
-        completion(self!.emptyJson, ServerResponse(error?.localizedDescription))
-        return
-      }
-      
-      guard let jsonData = data else {
-        completion(self!.emptyJson, ServerResponse(ResponseStatus.serverError.rawValue))
-        return
-      }
-      
-      guard let json = Serializer.encodeWithJsonSerializer(data: jsonData) else {
-        completion(self!.emptyJson, ServerResponse(ResponseStatus.serverError.rawValue))
-        return
-      }
-      
-      guard let serverError = Parser.anyToObject(destination: ServerResponse.self, json) else {
-        completion(json, ServerResponse())
-        return
-      }
-      
-      completion(serverError.error ?? json, serverError)
-    }
-    
-    task.resume()
-  }
-  
-  func postAsync(to url: String, type: RequestType, body: Data?, params: Parser.JsonDictionary?, completion: @escaping (Any, ServerResponse) -> Void) {
-    guard var urlRequest = buildUrlRequest(url, params, type.rawValue) else {
-      completion(emptyJson, ServerResponse(ResponseStatus.cannotProceed.rawValue))
-      return
-    }
-    
-    urlRequest.httpBody = body
     
     let task = defaultSession.dataTask(with: urlRequest) { [weak self]
       (data, response, error) in
@@ -71,7 +40,7 @@ class UrlSessionHandler {
         completion(self!.emptyJson, ServerResponse(ResponseStatus.serverError.rawValue))
         return
       }
-    
+      
       guard let json = Serializer.encodeWithJsonSerializer(data: jsonData) else {
         completion(self!.emptyJson,  ServerResponse(ResponseStatus.serverError.rawValue))
         return
@@ -86,13 +55,18 @@ class UrlSessionHandler {
     }
     
     task.resume()
-  } 
+  }
 }
 
 // MARK: - HELPERS
 
 private extension UrlSessionHandler {
-  func buildUrlRequest(_ url: String, _ params: Parser.JsonDictionary?, _ method: String) -> URLRequest? {
+  private func buildUrlRequest(
+    _ url: String,
+    _ method: String,
+    _ params: Parser.JsonDictionary?,
+    _ data: Data? = nil) -> URLRequest? {
+    
     var parameterString = ""
     
     if let parameters = params {
@@ -108,11 +82,12 @@ private extension UrlSessionHandler {
     
     request.allHTTPHeaderFields = ["Content-Type": "application/json"]
     request.httpMethod = method
+    request.httpBody = data
     
     return request
   }
   
-  static func debugResponse(_ jsonData: Data) {
+  static private func debugResponse(_ jsonData: Data) {
     if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
       print(JSONString)
     }
