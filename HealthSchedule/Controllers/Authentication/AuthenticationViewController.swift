@@ -38,8 +38,18 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    UserManager.shared.login(login: "xcummerata@example.com", password: "secret") { [weak self] responseStatus in
+    UserManager.shared.login(login: "qxcummerata@example.com", password: "secret") { [weak self] error in
       DispatchQueue.main.async {
+        if let error = error {
+          AlertHandler.ShowAlert(
+            for: self!,
+            "Warning",
+            error,
+            .alert)
+          
+          return
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as! UITabBarController
         
@@ -101,7 +111,7 @@ class AuthenticationViewController: UIViewController {
 //      "Validation",
 //      error?.localizedDescription ?? "Either login or password is incorrect!",
 //      .alert)
-//    
+//
 //    emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
 //    passwordField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
 //  }

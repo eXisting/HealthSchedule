@@ -51,6 +51,7 @@
 		ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483142208380E00BE8EF0 /* RequestEnums.swift */; };
 		ED44831922086D4B00BE8EF0 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED44831822086D4B00BE8EF0 /* Authentication.storyboard */; };
 		ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44831B22086FF300BE8EF0 /* AuthMainView.swift */; };
+		ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED52F16D220C6D4000568CBC /* ServerException.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED6CBE7C21ECD80600860010 /* UserManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* UserManagerProtocols.swift */; };
@@ -110,6 +111,7 @@
 		ED4483142208380E00BE8EF0 /* RequestEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEnums.swift; sourceTree = "<group>"; };
 		ED44831822086D4B00BE8EF0 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		ED44831B22086FF300BE8EF0 /* AuthMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainView.swift; sourceTree = "<group>"; };
+		ED52F16D220C6D4000568CBC /* ServerException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerException.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED6CBE7B21ECD80600860010 /* UserManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerProtocols.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */,
 				EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */,
 				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
+				ED52F16D220C6D4000568CBC /* ServerException.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */,
 				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
+				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				ED3516FF2209F15E0047CBAA /* AdditionalInfoSignUpController.swift in Sources */,

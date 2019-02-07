@@ -17,14 +17,19 @@ class UserManager {
   
   // MARK: - Authentication
   
-  func login(login: String, password: String, completion: @escaping (ResponseStatus) -> Void) {
+  func login(login: String, password: String, completion: @escaping (String?) -> Void) {
     let postBody = ["username": login, "password": password]
     guard let data = Serializer.getDataFrom(json: postBody) else {
-      completion(.invalidData)
+      completion(ResponseStatus.invalidData.rawValue)
       return
     }
     
-    RequestManager.signIn(userData: data) { [weak self] (user, status) in
+    RequestManager.signIn(userData: data) { [weak self] (user, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+      
       self?.user = user
       
       // TODO: refactor this
@@ -32,50 +37,55 @@ class UserManager {
         self?.requestProviderData()
       }
       
-      completion(status)
+      completion(nil)
     }
   }
   
-  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (ResponseStatus) -> Void) {
+  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void) {
     guard let data = Serializer.getDataFrom(json: postData) else {
-      completion(.invalidData)
+      completion(ResponseStatus.invalidData.rawValue)
       return
     }
     
-    RequestManager.signUp(authType: userType, userData: data) { [weak self] (user, status) in
+    RequestManager.signUp(authType: userType, userData: data) { [weak self] (user, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+      
       self?.user = user
       
-      completion(status)
+      completion(nil)
     }
   }
   
   // MARK: - Provider requests
   
   func getProfessions(completion: @escaping (ResponseStatus) -> Void) {
-    RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { [weak self] (list, status) in
-      self?.user?.providerData?.professions = list
-      
-      completion(status)
-    }
+//    RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { [weak self] (list, status) in
+//      self?.user?.providerData?.professions = list
+//
+//      completion(status)
+//    }
   }
   
   func saveAddress(_ address: String, completion: @escaping (ResponseStatus) -> Void) {
-    guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
-      completion(.invalidData)
-      return
-    }
-    
-    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) { (address, status) in
-      completion(status)
-    }
+//    guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
+//      completion(.invalidData)
+//      return
+//    }
+//
+//    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) { (address, status) in
+//      completion(status)
+//    }
   }
   
   func removeProfessionWith(id: Int, completion: @escaping (ResponseStatus) -> Void) {
-    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
-    
-    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) { (response, status) in
-      completion(status)
-    }
+//    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
+//    
+//    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) { (response, status) in
+//      completion(status)
+//    }
   }
   
   private func requestProviderData() {

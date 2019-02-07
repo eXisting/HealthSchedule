@@ -17,64 +17,56 @@ class RequestManager {
   
   // MARK: - GET
   
-  class func getListAsync<T: Decodable>(for type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ completion: @escaping ([T], ResponseStatus) -> Void) {
-    request.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { (json, status) in
+  class func getListAsync<T: Decodable>(for type: T.Type, from endpoint: Endpoints, _ headers: Parser.JsonDictionary?, _ completion: @escaping ([T], ServerResponse) -> Void) {
+    request.getAsync(from: buildEndpoint(endpoint.rawValue), headers) { (json, response) in
       let result = Parser.anyArrayToObjectArray(destination: T.self, json)
-      completion(result, status)
+      completion(result, response)
     }
   }
   
-  class func getAsync<T: Decodable>(for type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ completion: @escaping (T?, ResponseStatus) -> Void) {
-    request.getAsync(from: buildEndpoint(endpoint.rawValue), params) { (json, status) in
-      switch status {
-        case .success:
-          guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
-            completion(nil, .applicationError)
-            return
-          }
-          
-          completion(initableObject, .success)
-          return
-        
-        default:
-          completion(nil, status)
-          break
+  class func getAsync<T: Decodable>(for type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ completion: @escaping (T?, ServerResponse) -> Void) {
+    request.getAsync(from: buildEndpoint(endpoint.rawValue), params) { (json, response) in
+      guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
+        completion(nil, response)
+        return
       }
+      
+      completion(initableObject, response)
     }
   }
   
   // MARK: - POST
   
-  class func postAsync(to url: String, as requestType: RequestType, _ data: Data?, _ params: Parser.JsonDictionary?, _ completion: @escaping (Any, ResponseStatus) -> Void) {
-    request.postAsync(to: buildEndpoint(url), type: requestType, body: data, params: params) { (json, status) in
-      completion(json, status)
+  class func postAsync(to url: String, as requestType: RequestType, _ data: Data?, _ params: Parser.JsonDictionary?, _ completion: @escaping (Any, ServerResponse) -> Void) {
+    request.postAsync(to: buildEndpoint(url), type: requestType, body: data, params: params) { (json, response) in
+      completion(json, response)
     }
   }
   
   // MARK: - AUTHENTICATION
   
-  class func signIn(userData: Data, _ completion: @escaping (User?, ResponseStatus) -> Void) {
-    postAsync(to: Endpoints.signIn.rawValue, as: .post, userData, nil) { (json, status) in
-      rememberToken(from: json)
+  class func signIn(userData: Data, _ completion: @escaping (User?, ServerResponse) -> Void) {
+    postAsync(to: Endpoints.signIn.rawValue, as: .post, userData, nil) { (tokenJson, tokenResponse) in
+      if tokenResponse.error != nil {
+        completion(nil, tokenResponse)
+        return
+      }
       
-      getAsync(for: User.self, from: Endpoints.user, sessionToken?.asParams()) { (user, status) in
-        guard let user = user else {
-          completion(nil, status)
-          return
-        }
-        
-        completion(user, .success)
+      rememberToken(from: tokenJson)
+      
+      getAsync(for: User.self, from: Endpoints.user, sessionToken?.asParams()) { (user, response) in
+        completion(user, response)
       }
     }
   }
   
-  class func signUp(authType: UserType, userData: Data, _ completion: @escaping (User?, ResponseStatus) -> Void) {
+  class func signUp(authType: UserType, userData: Data, _ completion: @escaping (User?, ServerResponse) -> Void) {
     let isClientSignUp = authType == .client
     
     let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
     
-    postAsync(to: endpoint.rawValue, as: .post, userData, nil) { (json, status) in
-      print(status)
+    postAsync(to: endpoint.rawValue, as: .post, userData, nil) { (json, response) in
+      print(json)
     }
   }
 }

@@ -34,10 +34,3 @@ enum RequestType: String {
   case put = "PUT"
   case delete = "DELETE"
 }
-
-enum ResponseStatus: String {
-  case success
-  case invalidData = "Passed data is invalid!"
-  case applicationError = "Applicaton error! Contact developer"
-  case serverError = "Server error!"
-}
