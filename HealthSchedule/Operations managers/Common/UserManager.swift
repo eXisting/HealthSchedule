@@ -61,31 +61,49 @@ class UserManager {
   
   // MARK: - Provider requests
   
-  func getProfessions(completion: @escaping (ResponseStatus) -> Void) {
-//    RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { [weak self] (list, status) in
-//      self?.user?.providerData?.professions = list
-//
-//      completion(status)
-//    }
+  func getProfessions(completion: @escaping (String?) -> Void) {
+    RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
+      [weak self] (list, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+        
+      self?.user?.providerData?.professions = list
+      
+      completion(nil)
+    }
   }
   
-  func saveAddress(_ address: String, completion: @escaping (ResponseStatus) -> Void) {
-//    guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
-//      completion(.invalidData)
-//      return
-//    }
-//
-//    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) { (address, status) in
-//      completion(status)
-//    }
+  func saveAddress(_ address: String, completion: @escaping (String?) -> Void) {
+    guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
+      completion(ResponseStatus.invalidData.rawValue)
+      return
+    }
+    
+    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) {
+      (address, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+      
+      completion(nil)
+    }
   }
   
-  func removeProfessionWith(id: Int, completion: @escaping (ResponseStatus) -> Void) {
-//    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
-//    
-//    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) { (response, status) in
-//      completion(status)
-//    }
+  func removeProfession(with id: Int, completion: @escaping (String?) -> Void) {
+    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
+    
+    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) {
+      (serverMessage, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+
+      completion(nil)
+    }
   }
   
   private func requestProviderData() {

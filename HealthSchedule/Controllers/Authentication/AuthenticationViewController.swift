@@ -38,7 +38,8 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    UserManager.shared.login(login: "xcsummerata@example.com", password: "secret") { [weak self] error in
+    UserManager.shared.login(login: "xcummerata@example.com", password: "secret") {
+      [weak self] error in
       DispatchQueue.main.async {
         if let error = error {
           AlertHandler.ShowAlert(
