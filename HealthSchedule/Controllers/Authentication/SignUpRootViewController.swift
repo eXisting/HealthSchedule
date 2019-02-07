@@ -13,37 +13,73 @@ class SignUpRootViewController: UIViewController {
   // Data to send in sign up request
   var signUpData: Parser.JsonDictionary = [:]
   
-  var mainView: MainSignUpInfoView!
+  private var mainView: MainSignUpInfoView!
+  private var datePicker: UIDatePicker?
   
   override func loadView() {
     super.loadView()
-    self.navigationController?.title = "SIGN UP"
     
     mainView = (view as! MainSignUpInfoView)
     mainView.setupViews()
+    
+    mainView.datePickerField.addTarget(self, action: #selector(showDatePicker), for: .touchDown)
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
     
-//    [mainView.emailField, mainView.passwordField, mainView.nameFIeld]
-//      .forEach({ $0.addTarget(self, action: #selector(collectData), for: .editingChanged) })
-    
-    mainView.setNextButtonVisible(true)
+    [mainView.emailField, mainView.passwordField, mainView.nameFIeld]
+      .forEach({ $0.addTarget(self, action: #selector(collectData), for: .editingChanged) })
   }
   
+  // MARK: - Callbacks
+  
   @objc func onNextClick() {
-//    if validateData() {
+    if validateData() {
       let additionalController = self.storyboard?.instantiateViewController(withIdentifier: "AdditionalSignUp") as! AdditionalInfoSignUpController
       
       self.navigationController?.pushViewController(additionalController, animated: true)
-//    } else {
-//      // TODO: Alert error
-//    }
+    } else {
+      // TODO: Alert error
+    }
+  }
+  
+  @objc func showDatePicker() {
+    if datePicker != nil {
+      mainView.datePickerField.inputView = datePicker
+      return
+    }
+    
+    datePicker = UIDatePicker()
+    datePicker!.datePickerMode = .date
+    
+    let datesRange = DatesManager.shared.getAvailableDateRange()
+    datePicker?.maximumDate = datesRange.max
+    datePicker?.minimumDate = datesRange.min
+    
+    let toolbar = UIToolbar();
+    toolbar.sizeToFit()
+    let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
+    let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+    let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+    
+    toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+    
+    mainView.datePickerField.inputAccessoryView = toolbar
+    mainView.datePickerField.inputView = datePicker
+  }
+  
+  @objc func donedatePicker(){
+    mainView.datePickerField.text = DatesManager.shared.dateToString(datePicker!.date)
+    self.view.endEditing(true)
+  }
+  
+  @objc func cancelDatePicker(){
+    self.view.endEditing(true)
   }
   
   @objc func collectData(_ textField: UITextField) {
     guard let namePair = mainView.getNamePair() else { return }
     guard let email = mainView.emailField.text else { return }
     guard let password = mainView.passwordField.text else { return }
-    
+
     if namePair.firstName.isEmpty || namePair.lastName.isEmpty ||
       email.isEmpty || password.isEmpty {
       mainView.setNextButtonVisible(false)
@@ -61,6 +97,8 @@ class SignUpRootViewController: UIViewController {
     
     mainView.setNextButtonVisible(true)
   }
+  
+  // MARK: - Validation
   
   private func validateData() -> Bool {
     let isValid = ValidationController.shared.validate(signUpData[UserJsonFields.firstName.rawValue]!, ofType: .name) &&

@@ -10,15 +10,18 @@ import UIKit
 
 class MainSignUpInfoView: UIView {
   @IBOutlet weak var signUpForm: UIStackView!
-  
+ 
+  @IBOutlet weak var userPicker: UISegmentedControl!
   @IBOutlet weak var emailField: DesignableTextField!
   @IBOutlet weak var passwordField: DesignableTextField!
   @IBOutlet weak var nameFIeld: DesignableTextField!
   @IBOutlet weak var phoneField: DesignableTextField!
-
+  @IBOutlet weak var datePickerField: UITextField!
+  
   @IBOutlet weak var nextButton: UIButton!
   
   func setupViews() {
+    setUpUserPicker()
     setUpBackground()
     setUpTextFields()
     setUpNextButton()
@@ -32,12 +35,16 @@ class MainSignUpInfoView: UIView {
     passwordField.borderStyle = .none
     nameFIeld.borderStyle = .none
     phoneField.borderStyle = .none
+    datePickerField.borderStyle = .none
 
     emailField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
     passwordField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
     nameFIeld.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
     phoneField.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding, rightPadding)
     
+    let dateMargins = datePickerField.frame.width / 5
+    datePickerField.addLineToView(position: .bottom, color: .lightGray, width: 1, dateMargins, dateMargins)
+
     emailField.attributedPlaceholder = NSAttributedString(
       string: "E-mail",
       attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
@@ -52,6 +59,10 @@ class MainSignUpInfoView: UIView {
     
     phoneField.attributedPlaceholder = NSAttributedString(
       string: "Phone",
+      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
+    
+    datePickerField.attributedPlaceholder = NSAttributedString(
+      string: "Birthday",
       attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
   }
   
@@ -68,6 +79,18 @@ class MainSignUpInfoView: UIView {
     setNextButtonVisible(false)
     nextButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
     nextButton.roundCorners(by: nextButton.frame.size.height / 2)
+  }
+  
+  private func setUpUserPicker() {
+    userPicker.tintColor = UIColor.black.withAlphaComponent(0.8)
+    
+    let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+    userPicker.setTitleTextAttributes(titleTextAttributes, for: .selected)
+    
+    userPicker.setTitle(UserTypeName.client.rawValue, forSegmentAt: UserType.client.rawValue - 1)
+    userPicker.setTitle(UserTypeName.provider.rawValue, forSegmentAt: UserType.provider.rawValue - 1)
+    
+    userPicker.selectedSegmentIndex = UserType.client.rawValue - 1
   }
 }
 

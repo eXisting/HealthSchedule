@@ -27,8 +27,20 @@ class DatesManager {
     return dateFormatter.string(from: date)
   }
   
+  func getAvailableDateRange() -> (min: Date, max: Date) {
+    let currentDate = Date()
+    var dateComponents = DateComponents()
+    let calendar = Calendar.init(identifier: .gregorian)
+    dateComponents.year = -80
+    let minDate = calendar.date(byAdding: dateComponents, to: currentDate)
+    dateComponents.year = -13
+    let maxDate = calendar.date(byAdding: dateComponents, to: currentDate)
+    
+    return (minDate!, maxDate!)
+  }
+  
   private init() {
-    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    defaultDate = dateFormatter.date(from: "2000-01-01 01:01:01")
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    defaultDate = dateFormatter.date(from: "2000-01-01")
   }
 }
