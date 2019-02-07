@@ -10,84 +10,73 @@ import UIKit
 
 class UrlSessionHandler {
   
-  typealias PostCompletion = ((Data, Error?) -> Void)
-  typealias Usercompletion = (((User, UserMessage?, Error?)) -> Void)
-
   static let shared = UrlSessionHandler()
   
   private let defaultSession = URLSession(configuration: .default)
+  private let emptyJson: Parser.JsonDictionary = [:]
   
   private init() {}
   
-  private func getJsonAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
+  func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any, ResponseStatus) -> Void) {
     guard let urlRequest = buildUrlRequest(url, params, RequestType.get.rawValue) else {
+      completion(emptyJson, .serverError)
       return
     }
     
-    let task = defaultSession.dataTask(with: urlRequest) {
+    let task = defaultSession.dataTask(with: urlRequest) { [weak self]
       (data, response, error) in
       
-      guard error == nil else {
-        print(error!)
+      if error != nil {
+        completion(self!.emptyJson, .serverError)
         return
       }
       
       guard let jsonData = data else {
-        print("Error: did not receive data")
+        completion(self!.emptyJson, .serverError)
         return
       }
       
       guard let json = Serializer.encodeWithJsonSerializer(data: jsonData) else {
+        completion(self!.emptyJson, .serverError)
         return
       }
       
-      completion(json)
+      completion(json, .ok)
     }
     
     task.resume()
   }
   
-  private func postDataAsync(to url: String, type: RequestType, body: Data?, params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
-    // TODO: Return error in tuple    
+  func postAsync(to url: String, type: RequestType, body: Data?, params: Parser.JsonDictionary?, completion: @escaping (Any, ResponseStatus) -> Void) {
     guard var urlRequest = buildUrlRequest(url, params, type.rawValue) else {
+      completion(emptyJson, .serverError)
       return
     }
     
     urlRequest.httpBody = body
     
-    let task = defaultSession.dataTask(with: urlRequest) { (data, response, error) in
-      guard error == nil else {
+    let task = defaultSession.dataTask(with: urlRequest) { [weak self]
+      (data, response, error) in
+      if error != nil {
+        completion(self!.emptyJson, .serverError)
         return
       }
-    
+      
       guard let jsonData = data else {
-        print("no readable data received in response")
+        completion(self!.emptyJson, .serverError)
         return
       }
     
-      completion(jsonData, nil)
+      guard let json = Serializer.encodeWithJsonSerializer(data: jsonData) else {
+        completion(self!.emptyJson, .serverError)
+        return
+      }
+    
+      completion(json, .ok)
     }
     
     task.resume()
   } 
-}
-
-// MARK: - EXTENSIONS
-
-extension UrlSessionHandler: AuthProviding {
-  func getToken(from url: String, body: Data, completion: @escaping PostCompletion) {
-    postDataAsync(to: url, type: .post, body: body, params: nil, completion: completion)
-  }
-}
-
-extension UrlSessionHandler: Requesting {
-  func postAsync(to url: String, as type: RequestType, _ body: Data?, _ params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
-    postDataAsync(to: url, type: type, body: body, params: params, completion: completion)
-  }
-  
-  func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
-    getJsonAsync(from: url, params, completion: completion)
-  }
 }
 
 // MARK: - HELPERS

@@ -38,7 +38,7 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    UserManager.shared.login(login: "kylee69@example.net", password: "secret") { [weak self] user in
+    UserManager.shared.login(login: "xcummerata@example.com", password: "secret") { [weak self] user in
       DispatchQueue.main.async {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as! UITabBarController
@@ -49,19 +49,17 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignUpClick() {
-    let storyBoard = UIStoryboard(name: "SignUp", bundle: nil)
-    let controller = storyBoard.instantiateViewController(withIdentifier: "SignUpRoot") as! SignUpRootViewController
-    self.navigationController?.pushViewController(controller, animated: true)
-//    let body = [
-//      "email":"johny1234@gmail.com",
-//      "phone":"123453124512",
-//      "password":"qwerty",
-//      "first_name":"Magic name2",
-//      "last_name":"hehdasdase",
-//      "photo":"",
-//      "city_id":"2",
-//      "birthday":"1999-11-11 00:00:00"
-//    ]
+//    let storyBoard = UIStoryboard(name: "SignUp", bundle: nil)
+//    let controller = storyBoard.instantiateViewController(withIdentifier: "SignUpRoot") as! SignUpRootViewController
+//    self.navigationController?.pushViewController(controller, animated: true)
+    let body = [
+      "email":"somemail@gmail.com",
+      "phone":"380507136841",
+      "password":"qwerty123",
+      "first_name":"Magic name2",
+      "last_name":"hehdasdase",
+      "birthday_at":"2019-01-31"
+    ]
     
 //    let dateFormatter = DateFormatter()
 //    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -92,15 +90,9 @@ class AuthenticationViewController: UIViewController {
 //      ] as [String: Any]
 //
 //
-//    RequestManager.signUp(authType: .provider, body: body) { [weak self] (userData, error) in
-//      // TODO: store it and pass to another controlelr in case when error is nil
-//      guard let user = userData as? User else {
-//        errorHandler(error)
-//        return
-//      }
-//
-//      print(user)
-//    }
+    UserManager.shared.register(userType: .client, body) { user in
+      print(user)
+    }
   }
   
 //  private func validatonAlert(_ error: Error?) {

@@ -35,7 +35,12 @@ enum RequestType: String {
   case delete = "DELETE"
 }
 
-enum Status {
+enum ResponseStatus: Error {
   case ok
-  case failure
+  
+  case userMessage(message: String)
+  case invalidData(message: String)
+  
+  case applicationError
+  case serverError
 }
