@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Auth\Register;
 use App\Http\Interfaces\RegisterInterface;
 use App\Http\Requests\Auth\ProviderRegisterRequest;
 use App\Models\UserRole;
-use App\Repositories\AddressRepository;
 use App\Repositories\ProviderRepository;
 use App\Repositories\ProviderVerifyRepository;
-use App\Repositories\UserImageRepository;
 use Carbon\Carbon;
 use Validator;
 use JWTAuth;
@@ -21,19 +19,9 @@ class ProviderRegisterController extends RegisterController implements RegisterI
     public $request;
 
     /**
-     * @var AddressRepository
-     */
-    public $address;
-
-    /**
      * @var ProviderRepository
      */
     public $provider;
-
-    /**
-     * @var UserImageRepository
-     */
-    public $image;
 
     /**
      * @var ProviderVerifyRepository
@@ -47,9 +35,7 @@ class ProviderRegisterController extends RegisterController implements RegisterI
     public function __construct(ProviderRegisterRequest $request)
     {
         $this->request = $request;
-        $this->address = new AddressRepository();
         $this->provider = new ProviderRepository();
-        $this->image = new UserImageRepository();
         $this->verify = new ProviderVerifyRepository();
     }
 
@@ -58,11 +44,8 @@ class ProviderRegisterController extends RegisterController implements RegisterI
      */
     public function register()
     {
-        $address = $this->address->findOrCreate($this->request->address);
-
         $providerData = array_merge($this->request->all(), [
             'user_role_id' => UserRole::PROVIDER,
-            'address_id' => $address->id,
             'confirmed_status' => 0,
             'password' => bcrypt($this->request->password),
             'birthday_at' => Carbon::parse($this->request->birthday)->toDateTimeString()
@@ -72,16 +55,6 @@ class ProviderRegisterController extends RegisterController implements RegisterI
 
         if(!$provider) {
             return response()->json(['message' => 'Provider did not create']);
-        }
-
-        if(count($this->request->professions)) {
-            collect($this->request->professions)->each(function ($data) use ($provider) {
-                $this->provider->saveProfession($provider->id, $data);
-            });
-        }
-
-        if($this->request->hasFile('photo')) {
-            $this->image->save($this->request->file('photo'), 'user_photo', $provider->id);
         }
 
         if($this->request->hasFile('verifies')) {
