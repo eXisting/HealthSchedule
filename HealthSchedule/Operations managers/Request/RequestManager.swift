@@ -27,13 +27,13 @@ class RequestManager {
   class func getAsync<T: Decodable>(for type: T.Type, from endpoint: Endpoints, _ params: Parser.JsonDictionary?, _ completion: @escaping (T?, ResponseStatus) -> Void) {
     request.getAsync(from: buildEndpoint(endpoint.rawValue), params) { (json, status) in
       switch status {
-        case .ok:
+        case .success:
           guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
             completion(nil, .applicationError)
             return
           }
           
-          completion(initableObject, .ok)
+          completion(initableObject, .success)
           return
         
         default:
@@ -63,7 +63,7 @@ class RequestManager {
           return
         }
         
-        completion(user, .ok)
+        completion(user, .success)
       }
     }
   }

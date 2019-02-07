@@ -38,7 +38,7 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    UserManager.shared.login(login: "xcummerata@example.com", password: "secret") { [weak self] user in
+    UserManager.shared.login(login: "xcummerata@example.com", password: "secret") { [weak self] responseStatus in
       DispatchQueue.main.async {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as! UITabBarController

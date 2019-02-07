@@ -20,6 +20,7 @@ class UserManager {
   func login(login: String, password: String, completion: @escaping (ResponseStatus) -> Void) {
     let postBody = ["username": login, "password": password]
     guard let data = Serializer.getDataFrom(json: postBody) else {
+      completion(.invalidData)
       return
     }
     
@@ -37,7 +38,7 @@ class UserManager {
   
   func register(userType: UserType, _ postData: [String: Any], completion: @escaping (ResponseStatus) -> Void) {
     guard let data = Serializer.getDataFrom(json: postData) else {
-      completion(.invalidData(message: "Data is invalid!"))
+      completion(.invalidData)
       return
     }
     
@@ -60,7 +61,7 @@ class UserManager {
   
   func saveAddress(_ address: String, completion: @escaping (ResponseStatus) -> Void) {
     guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
-      completion(.invalidData(message: "Data is invalid!"))
+      completion(.invalidData)
       return
     }
     

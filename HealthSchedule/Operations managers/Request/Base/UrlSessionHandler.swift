@@ -19,7 +19,7 @@ class UrlSessionHandler {
   
   func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any, ResponseStatus) -> Void) {
     guard let urlRequest = buildUrlRequest(url, params, RequestType.get.rawValue) else {
-      completion(emptyJson, .serverError)
+      completion(emptyJson, .applicationError)
       return
     }
     
@@ -41,7 +41,7 @@ class UrlSessionHandler {
         return
       }
       
-      completion(json, .ok)
+      completion(json, .success)
     }
     
     task.resume()
@@ -49,7 +49,7 @@ class UrlSessionHandler {
   
   func postAsync(to url: String, type: RequestType, body: Data?, params: Parser.JsonDictionary?, completion: @escaping (Any, ResponseStatus) -> Void) {
     guard var urlRequest = buildUrlRequest(url, params, type.rawValue) else {
-      completion(emptyJson, .serverError)
+      completion(emptyJson, .applicationError)
       return
     }
     
@@ -72,7 +72,7 @@ class UrlSessionHandler {
         return
       }
     
-      completion(json, .ok)
+      completion(json, .success)
     }
     
     task.resume()
