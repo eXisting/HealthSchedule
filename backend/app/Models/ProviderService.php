@@ -49,6 +49,13 @@ class ProviderService extends Model
         'interval' => 'time',
     ];
 
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'interval'
+    ];
+
     #endregion
 
     #region Methods
