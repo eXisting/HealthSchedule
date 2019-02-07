@@ -44,8 +44,6 @@ class UserRegisterRequest extends FormRequest
             'password' => 'required|string|min:6',
             'first_name' => 'required|string|max:64',
             'last_name' => 'required|string|max:64',
-            'photo' => 'nullable|image|mimes:jpeg,jpg,png',
-            'city_id' => 'required|integer|exists:cities,id',
             'birthday_at' => 'required|date|date_format:"Y-m-d"',
         ];
     }

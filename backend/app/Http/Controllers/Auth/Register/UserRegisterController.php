@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth\Register;
 use App\Http\Interfaces\RegisterInterface;
 use App\Http\Requests\Auth\UserRegisterRequest;
 use App\Models\UserRole;
-use App\Repositories\UserImageRepository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use JWTAuth;
@@ -23,12 +22,6 @@ class UserRegisterController extends RegisterController implements RegisterInter
     public $user;
 
     /**
-     * @var UserImageRepository
-     */
-    public $image;
-
-
-    /**
      * ProviderRegisterController constructor.
      * @param UserRegisterRequest $request
      */
@@ -36,7 +29,6 @@ class UserRegisterController extends RegisterController implements RegisterInter
     {
         $this->request = $request;
         $this->user = new UserRepository();
-        $this->image = new UserImageRepository();
     }
 
     /**
@@ -55,10 +47,6 @@ class UserRegisterController extends RegisterController implements RegisterInter
 
         if(!$user) {
             return response()->json(['message' => 'User did not create']);
-        }
-
-        if($this->request->hasFile('photo')) {
-            $this->image->save($this->request->file('photo'), 'user_photo', $user->id);
         }
 
         $success = true;
