@@ -38,8 +38,8 @@ class RequestManager {
   
   // MARK: - POST
   
-  class func postAsync(to url: String, as type: RequestType, _ data: Data?, _ params: Parser.JsonDictionary?, _ completion: @escaping (Status) -> Void) {
-    request.postAsync(to: buildEndpoint(url), as: type, data, params) { (data, error) in
+  class func postAsync(to url: String, as requestType: RequestType, _ data: Data?, _ params: Parser.JsonDictionary?, _ completion: @escaping (Status) -> Void) {
+    request.postAsync(to: buildEndpoint(url), as: requestType, data, params) { (json, error) in
       completion(error == nil ? .ok : .failure)
     }
   }
@@ -59,10 +59,8 @@ class RequestManager {
     
     let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
     
-    authRequests.getToken(from: buildEndpoint(endpoint.rawValue), body: userData) { (data, error) in
-      getAsyncFor(type: User.self, from: .user, rememberTokenFrom(data).asParams()) { user in
-        completion((user, !isClientSignUp ? .accountModeration : nil, nil))
-      }
+    postAsync(to: endpoint.rawValue, as: .post, userData, nil) { status in
+      print(status)
     }
   }
 }
