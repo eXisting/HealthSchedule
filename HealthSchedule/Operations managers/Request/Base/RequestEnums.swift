@@ -34,8 +34,3 @@ enum RequestType: String {
   case put = "PUT"
   case delete = "DELETE"
 }
-
-enum Status {
-  case ok
-  case failure
-}

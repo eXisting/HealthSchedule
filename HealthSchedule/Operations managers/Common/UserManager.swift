@@ -17,81 +17,94 @@ class UserManager {
   
   // MARK: - Authentication
   
-  func login(login: String, password: String, completion: @escaping (User) -> Void) {
+  func login(login: String, password: String, completion: @escaping (String?) -> Void) {
     let postBody = ["username": login, "password": password]
     guard let data = Serializer.getDataFrom(json: postBody) else {
+      completion(ResponseStatus.invalidData.rawValue)
       return
     }
     
-    RequestManager.signIn(userData: data) { [weak self] (user, info, error) in
-      if let _ = info {
+    RequestManager.signIn(userData: data) {
+      [weak self] (user, response) in
+      if response.error != nil {
+        completion(response.error)
         return
       }
       
       self?.user = user
       
       // TODO: refactor this
-      if user.role.name == "provider" {
+      if user!.role.name == "provider" {
         self?.requestProviderData()
-        
-        completion(user)
-        return
       }
       
-      completion(user)
+      completion(nil)
     }
   }
   
-  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (User?) -> Void) {
+  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void) {
     guard let data = Serializer.getDataFrom(json: postData) else {
+      completion(ResponseStatus.invalidData.rawValue)
       return
     }
     
-    RequestManager.signUp(authType: userType, userData: data) { [weak self] (user, info, error) in
-      if let _ = info {
+    RequestManager.signUp(authType: userType, userData: data) {
+      [weak self] (user, response) in
+      if response.error != nil {
+        completion(response.error)
         return
       }
       
       self?.user = user
       
-      completion(user)
+      completion(nil)
     }
   }
   
   // MARK: - Provider requests
   
-  func getProfessions(completion: @escaping ([ProviderProfession]) -> Void) {
-    RequestManager.getListAsyncFor(type: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) { [weak self] list in
+  func getProfessions(completion: @escaping (String?) -> Void) {
+    RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
+      [weak self] (list, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+        
       self?.user?.providerData?.professions = list
       
-      completion(list)
+      completion(nil)
     }
   }
   
-  func saveAddress(_ address: String, completion: @escaping (String) -> Void) {
+  func saveAddress(_ address: String, completion: @escaping (String?) -> Void) {
     guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
-      completion("Cannot encode in save professions")
+      completion(ResponseStatus.invalidData.rawValue)
       return
     }
     
-    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) { status in
-      if status == .ok {
-        completion("New address saved successfuly!")
-      } else {
-        completion("Server error!")
+    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) {
+      (address, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
       }
+      
+      completion(nil)
     }
   }
   
-  func removeProfessionWith(id: Int, completion: @escaping (String) -> Void) {
+  func removeProfession(with id: Int, completion: @escaping (String?) -> Void) {
     let url = Endpoints.providerProfessions.rawValue + "/\(id)"
     
-    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) { status in
-      if status == .ok {
-        completion("Deleted successfuly!")
-      } else {
-        completion("Server error!")
+    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) {
+      (serverMessage, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
       }
+
+      completion(nil)
     }
   }
   

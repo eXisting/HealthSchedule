@@ -10,90 +10,63 @@ import UIKit
 
 class UrlSessionHandler {
   
-  typealias PostCompletion = ((Data, Error?) -> Void)
-  typealias Usercompletion = (((User, UserMessage?, Error?)) -> Void)
-
   static let shared = UrlSessionHandler()
   
   private let defaultSession = URLSession(configuration: .default)
+  private let emptyJson: Parser.JsonDictionary = [:]
   
   private init() {}
   
-  private func getJsonAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
-    guard let urlRequest = buildUrlRequest(url, params, RequestType.get.rawValue) else {
+  func startSessionTask(
+    _ url: String,
+    _ type: RequestType = .get,
+    body: Data? = nil,
+    params: Parser.JsonDictionary? = nil,
+    completion: @escaping (Any, ServerResponse) -> Void) {
+    
+    guard let urlRequest = buildUrlRequest(url, type.rawValue, params, body) else {
+      completion(emptyJson, ServerResponse(ResponseStatus.cannotProceed.rawValue))
       return
     }
     
-    let task = defaultSession.dataTask(with: urlRequest) {
+    let task = defaultSession.dataTask(with: urlRequest) { [weak self]
       (data, response, error) in
-      
-      guard error == nil else {
-        print(error!)
+      if error != nil {
+        completion(self!.emptyJson, ServerResponse(error?.localizedDescription))
         return
       }
       
       guard let jsonData = data else {
-        print("Error: did not receive data")
+        completion(self!.emptyJson, ServerResponse(ResponseStatus.serverError.rawValue))
         return
       }
       
       guard let json = Serializer.encodeWithJsonSerializer(data: jsonData) else {
+        completion(self!.emptyJson,  ServerResponse(ResponseStatus.serverError.rawValue))
         return
       }
       
-      completion(json)
+      guard let serverError = Parser.anyToObject(destination: ServerResponse.self, json) else {
+        completion(json, ServerResponse())
+        return
+      }
+      
+      completion(serverError.error ?? json, serverError)
     }
     
     task.resume()
-  }
-  
-  private func postDataAsync(to url: String, type: RequestType, body: Data?, params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
-    // TODO: Return error in tuple    
-    guard var urlRequest = buildUrlRequest(url, params, type.rawValue) else {
-      return
-    }
-    
-    urlRequest.httpBody = body
-    
-    let task = defaultSession.dataTask(with: urlRequest) { (data, response, error) in
-      guard error == nil else {
-        return
-      }
-    
-      guard let jsonData = data else {
-        print("no readable data received in response")
-        return
-      }
-    
-      completion(jsonData, nil)
-    }
-    
-    task.resume()
-  } 
-}
-
-// MARK: - EXTENSIONS
-
-extension UrlSessionHandler: AuthProviding {
-  func getToken(from url: String, body: Data, completion: @escaping PostCompletion) {
-    postDataAsync(to: url, type: .post, body: body, params: nil, completion: completion)
-  }
-}
-
-extension UrlSessionHandler: Requesting {
-  func postAsync(to url: String, as type: RequestType, _ body: Data?, _ params: Parser.JsonDictionary?, completion: @escaping PostCompletion) {
-    postDataAsync(to: url, type: type, body: body, params: params, completion: completion)
-  }
-  
-  func getAsync(from url: String, _ params: Parser.JsonDictionary?, completion: @escaping (Any) -> Void) {
-    getJsonAsync(from: url, params, completion: completion)
   }
 }
 
 // MARK: - HELPERS
 
 private extension UrlSessionHandler {
-  func buildUrlRequest(_ url: String, _ params: Parser.JsonDictionary?, _ method: String) -> URLRequest? {
+  private func buildUrlRequest(
+    _ url: String,
+    _ method: String,
+    _ params: Parser.JsonDictionary?,
+    _ data: Data? = nil) -> URLRequest? {
+    
     var parameterString = ""
     
     if let parameters = params {
@@ -109,11 +82,12 @@ private extension UrlSessionHandler {
     
     request.allHTTPHeaderFields = ["Content-Type": "application/json"]
     request.httpMethod = method
+    request.httpBody = data
     
     return request
   }
   
-  static func debugResponse(_ jsonData: Data) {
+  static private func debugResponse(_ jsonData: Data) {
     if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
       print(JSONString)
     }
