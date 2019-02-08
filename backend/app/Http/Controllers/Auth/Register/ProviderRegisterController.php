@@ -57,11 +57,11 @@ class ProviderRegisterController extends RegisterController implements RegisterI
             return response()->json(['message' => 'Provider did not create']);
         }
 
-        // if($this->request->hasFile('verifies')) {
-        //     collect($this->request->file('verifies'))->each(function ($verify) use ($provider) {
-        //         $this->verify->save($verify, 'provider_verify', $provider->id);
-        //     });
-        // }
+        if($this->request->hasFile('verify')) {
+            collect($this->request->file('verifies'))->each(function ($verify) use ($provider) {
+                $this->verify->save($verify, 'provider_verify', $provider->id);
+            });
+        }
 
         $success = true;
 
