@@ -62,7 +62,32 @@ class RequestManager {
   // MARK: - AUTHENTICATION
   
   class func signIn(userData: Data, _ completion: @escaping (User?, ServerResponse) -> Void) {
-    postAsync(to: Endpoints.signIn.rawValue, as: .post, userData, nil) { (tokenJson, tokenResponse) in
+    authorize(to: Endpoints.signIn.rawValue, userData, completion)
+  }
+  
+  class func signUp(
+    authType: UserType,
+    userData: Data,
+    _ completion: @escaping (User?, ServerResponse) -> Void) {
+    
+    let isClientSignUp = authType == .client
+    let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
+    
+    authorize(to: endpoint.rawValue, userData, completion)
+  }
+}
+
+// MARK: - HELPERS
+
+extension RequestManager {
+  
+  private class func authorize(
+    to url: String,
+    _ data: Data?,
+    _ completion: @escaping (User?, ServerResponse) -> Void) {
+    
+    postAsync(to: url, as: .post, data, nil) {
+      (tokenJson, tokenResponse) in
       if tokenResponse.error != nil {
         completion(nil, tokenResponse)
         return
@@ -74,26 +99,6 @@ class RequestManager {
     }
   }
   
-  class func signUp(
-    authType: UserType,
-    userData: Data,
-    _ completion: @escaping (User?, ServerResponse) -> Void) {
-    
-    let isClientSignUp = authType == .client
-    
-    let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
-    
-    postAsync(to: endpoint.rawValue, as: .post, userData, nil) {
-      (json, response) in
-      // TODO
-      print(json)
-    }
-  }
-}
-
-// MARK: - HELPERS
-
-extension RequestManager {
   private class func buildEndpoint(_ route: String) -> String {
     return rootEndpoint + route
   }

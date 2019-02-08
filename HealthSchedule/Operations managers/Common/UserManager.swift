@@ -57,6 +57,10 @@ class UserManager {
       
       self?.user = user
       
+      if userType == .provider {
+        self?.requestProviderData()
+      }
+      
       completion(nil)
     }
   }

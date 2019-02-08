@@ -26,10 +26,15 @@ class Serializer {
   }
   
   class func getDataFrom(json: Any) -> Data? {
+    if (!JSONSerialization.isValidJSONObject(json)) {
+      print("getDataFrom throws")
+      return nil
+    }
+    
     return try? JSONSerialization.data(withJSONObject: json)
   }
   
-  class func encodeWithJsonSerializer(data: Data) -> Any? {
+  class func encodeWithJsonSerializer(data: Data) -> Any? {    
     return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
   }
 }
