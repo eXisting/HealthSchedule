@@ -10,6 +10,7 @@ import UIKit
 
 class ProviderSignUpViewController: UIViewController {
   
+  private var root: SignUpRootViewController!
   private var mainView: ProviderInfoView!
   
   override func loadView() {
@@ -20,26 +21,24 @@ class ProviderSignUpViewController: UIViewController {
     
     // TODO: Add image choose action
     
+    root = (self.navigationController?.viewControllers[1] as! SignUpRootViewController)
     mainView.nextButton.addTarget(self, action: #selector(signUp), for: .touchDown)
   }
   
   @objc func signUp() {
-    // TODO: NOT WORKING WITHOUT multipart upload 
-    
-//    let root = self.navigationController?.viewControllers[1] as! SignUpRootViewController
-
-//    UserManager.shared.register(userType: .provider, root.signUpData) {
-//      [weak self] error in
-//      DispatchQueue.main.async {
-//        if let error = error {
-//          self!.showAlert("Warning", error)
-//          return
-//        }
-//
-//        self!.showAlert("Success", UserMessage.accountModeration.rawValue)
-//        self!.navigationController?.popToRootViewController(animated: true)
-//      }
-//    }
+    // TODO: NOT WORKING WITH VERIFY WITHOUT multipart upload
+    UserManager.shared.register(userType: .provider, root.signUpData) {
+      [weak self] error in
+      DispatchQueue.main.async {
+        if let error = error {
+          self!.showAlert("Warning", error)
+          return
+        }
+        
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
+        self!.present(controller, animated: true)
+      }
+    }
   }
   
   private func showAlert(_ title: String, _ message: String) {
