@@ -18,53 +18,24 @@ class Serializer {
   private static let encoder = JSONEncoder()
   
   class func decodeDataInto<T: Decodable>(type: T.Type, _ data: Data) -> T? {
-    var result: T?
-    
-    do {
-      result = try decoder.decode(type, from: data)
-    }
-    catch {
-      print("DecodeDataInto throws error!")
-    }
-    
-    return result
+    return try? decoder.decode(type, from: data)
   }
   
   class func encodeDataFrom<T: Encodable>(object: T) -> Data? {
-    var result: Data?
-    
-    do {
-      result = try encoder.encode(object)
-    }
-    catch {
-      print("encodeDataFrom throws error!")
-    }
-    
-    return result
+    return try? encoder.encode(object)
   }
   
   class func getDataFrom(json: Any) -> Data? {
-    var result: Data?
-    
-    do {
-      result = try JSONSerialization.data(withJSONObject: json)
-    } catch {
-      print("Cannot either serialize or encode body data")
+    if (!JSONSerialization.isValidJSONObject(json)) {
+      print("getDataFrom throws")
+      return nil
     }
     
-    return result
+    return try? JSONSerialization.data(withJSONObject: json)
   }
   
-  class func encodeWithJsonSerializer(data: Data) -> Any? {
-    var result: Any?
-    
-    do {
-      result = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-    } catch {
-      print("Cannot either serialize or encode body data")
-    }
-    
-    return result
+  class func encodeWithJsonSerializer(data: Data) -> Any? {    
+    return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
   }
 }
 

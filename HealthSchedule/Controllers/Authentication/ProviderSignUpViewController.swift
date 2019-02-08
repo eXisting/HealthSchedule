@@ -10,19 +10,42 @@ import UIKit
 
 class ProviderSignUpViewController: UIViewController {
   
-  private let experienceMaxCount = 3
+  private var root: SignUpRootViewController!
+  private var mainView: ProviderInfoView!
   
-  private var experienceBlocks = [SelectWithExperienceView]()
-    
   override func loadView() {
     super.loadView()
-    loadViewsFromXib()
+    
+    mainView = (view as! ProviderInfoView)
+    mainView.setupViews()
+    
+    // TODO: Add image choose action
+    
+    root = (self.navigationController?.viewControllers[1] as! SignUpRootViewController)
+    mainView.nextButton.addTarget(self, action: #selector(signUp), for: .touchDown)
   }
   
-  func loadViewsFromXib() {
-    for _ in 0..<experienceMaxCount {
-      let section: SelectWithExperienceView = UIView.instanceFromNib("SelectWithExperienceView")
-      experienceBlocks.append(section)
+  @objc func signUp() {
+    // TODO: NOT WORKING WITH VERIFY WITHOUT multipart upload
+    UserManager.shared.register(userType: .provider, root.signUpData) {
+      [weak self] error in
+      DispatchQueue.main.async {
+        if let error = error {
+          self!.showAlert("Warning", error)
+          return
+        }
+        
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
+        self!.present(controller, animated: true)
+      }
     }
+  }
+  
+  private func showAlert(_ title: String, _ message: String) {
+    AlertHandler.ShowAlert(
+      for: self,
+      title,
+      message,
+      .alert)
   }
 }

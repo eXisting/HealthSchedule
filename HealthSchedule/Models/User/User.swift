@@ -22,7 +22,7 @@ enum UserJsonFields: String, CodingKey {
   case status = "confirmed_status"
   case birthday = "birthday_at"
   
-  // Sign up fields
+  // Edit fields
   case cityId = "city_id"
 }
 
@@ -42,12 +42,12 @@ struct User {
   var firstName: String
   var lastName: String
   var email: String
-  var phone: String
+  var phone: String?
   var status: Bool
   var birthday: Date
   
   var role: Role
-  var city: City
+  var city: City?
   var photo: ProfileImage?
   
   var providerData: ProviderData?
@@ -77,7 +77,7 @@ extension User: Codable {
     email = try container.decode(String.self, forKey: .email)
     phone = try container.decode(String.self, forKey: .phone)
     status = try container.decode(Bool.self, forKey: .status)
-    city = try container.decode(City.self, forKey: .city)
+    city = try? container.decode(City.self, forKey: .city)
     role = try container.decode(Role.self, forKey: .role)
     photo = try? container.decode(ProfileImage.self, forKey: .image)
 

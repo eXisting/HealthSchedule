@@ -9,12 +9,6 @@
 import UIKit
 
 class AuthenticationViewController: UIViewController {
-    
-//  @IBOutlet weak var backgroundImage: UIImageView!
-//  @IBOutlet weak var emailField: UITextField!
-//  @IBOutlet weak var passwordField: UITextField!
-  
-  var nav: UINavigationController?
   var mainView: AuthMainView!
   
   override func loadView() {
@@ -38,8 +32,21 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    UserManager.shared.login(login: "kylee69@example.net", password: "secret") { [weak self] user in
+    let login = mainView.loginField.text!
+    let password = mainView.passwordField.text!
+    UserManager.shared.login(login: login, password: password) {
+      [weak self] error in
       DispatchQueue.main.async {
+        if let error = error {
+          AlertHandler.ShowAlert(
+            for: self!,
+            "Warning",
+            error,
+            .alert)
+          
+          return
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as! UITabBarController
         
@@ -49,68 +56,8 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignUpClick() {
-    let storyBoard = UIStoryboard(name: "SignUp", bundle: nil)
-    let controller = storyBoard.instantiateViewController(withIdentifier: "SignUpRoot") as! SignUpRootViewController
-    self.navigationController?.pushViewController(controller, animated: true)
-//    let body = [
-//      "email":"johny1234@gmail.com",
-//      "phone":"123453124512",
-//      "password":"qwerty",
-//      "first_name":"Magic name2",
-//      "last_name":"hehdasdase",
-//      "photo":"",
-//      "city_id":"2",
-//      "birthday":"1999-11-11 00:00:00"
-//    ]
-    
-//    let dateFormatter = DateFormatter()
-//    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//    guard let start = dateFormatter.date(from: "2010-11-11 00:00:00") else {
-//      fatalError("ERROR: Date conversion failed due to mismatched format.")
-//    }
-//    guard let end = dateFormatter.date(from: "2012-11-11 00:00:00") else {
-//      fatalError("ERROR: Date conversion failed due to mismatched format.")
-//    }
-//
-//    let prof = ProviderProfession(id: 0, providerId: 2, professionId: 2, cityId: 1, companyName: "SomeCompany", startAt: start, endAt: end)
-//
-//
-//    let verifies = ["https://images-na.ssl-images-amazon.com/images/I/81W5nfYYxoL._SX425_.jpg"]
-//
-//    let body = [
-//      "email":"johny1234@gmail.com",
-//      "phone":"123453124512",
-//      "password":"qwerty",
-//      "first_name":"Magic name2",
-//      "last_name":"hehdasdase",
-//      "photo":"",
-//      "city_id":"2",
-//      "birthday":"1999-11-11 00:00:00",
-//      "address":"cudo street",
-//      "professions":[prof.asJsonObject()],
-//      "verifies":""
-//      ] as [String: Any]
-//
-//
-//    RequestManager.signUp(authType: .provider, body: body) { [weak self] (userData, error) in
-//      // TODO: store it and pass to another controlelr in case when error is nil
-//      guard let user = userData as? User else {
-//        errorHandler(error)
-//        return
-//      }
-//
-//      print(user)
-//    }
+    let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+    let controller = storyboard.instantiateInitialViewController() as! SignUpRootViewController
+    self.navigationController?.pushViewController(controller, animated: false)
   }
-  
-//  private func validatonAlert(_ error: Error?) {
-//    AlertHandler.ShowAlert(
-//      for: self,
-//      "Validation",
-//      error?.localizedDescription ?? "Either login or password is incorrect!",
-//      .alert)
-//    
-//    emailField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
-//    passwordField.backgroundColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 0.5)
-//  }
 }

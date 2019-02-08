@@ -8,31 +8,29 @@
 
 import UIKit
 
-class DetailedinfoMainView: UIView {
-  @IBOutlet weak var userPicker: UISegmentedControl!
-  @IBOutlet weak var cityPicker: DesignableTextField!
-  @IBOutlet weak var birthdayPicker: UIDatePicker!
+class ProviderInfoView: UIView {
   
+  @IBOutlet weak var textInfo: UITextView!
+  @IBOutlet weak var verifyImage: UIImageView!
   @IBOutlet weak var nextButton: UIButton!
-  @IBOutlet weak var doneButton: UIButton!
   
   func setupViews() {
-    setUpUserPicker()
     setUpBackground()
     setUpTextFields()
+    setUpImageViews()
     setUpButtons()
   }
   
+  func setNextButtonVisible(_ value: Bool) {
+    nextButton.isHidden = !value
+  }
+  
   private func setUpTextFields() {
-    let leftPadding = cityPicker.imageSize + cityPicker.leftPadding
-    
-    cityPicker.borderStyle = .none
-    
-    cityPicker.addLineToView(position: .bottom, color: .lightGray, width: 1, leftPadding)
-    
-    cityPicker.attributedPlaceholder = NSAttributedString(
-      string: "City",
-      attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
+    textInfo.setContentOffset(CGPoint.zero, animated: false)
+  }
+  
+  private func setUpImageViews() {
+    verifyImage.image = UIImage(named: "Icons/diploma")
   }
   
   private func setUpBackground() {
@@ -44,45 +42,10 @@ class DetailedinfoMainView: UIView {
     insertSubview(background, at: 0)
   }
   
-  private func setUpUserPicker() {
-    userPicker.tintColor = UIColor.black.withAlphaComponent(0.8)
-    
-    let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-    userPicker.setTitleTextAttributes(titleTextAttributes, for: .selected)
-    
-    userPicker.setTitle(UserTypeName.client.rawValue, forSegmentAt: UserType.client.rawValue - 1)
-    userPicker.setTitle(UserTypeName.provider.rawValue, forSegmentAt: UserType.provider.rawValue - 1)
-    
-    userPicker.selectedSegmentIndex = UserType.client.rawValue - 1
-    
-  }
-  
   private func setUpButtons() {
-    setNextButtonVisible(false)
-    setDoneButtonVisible(false)
-    
-    doneButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
-    doneButton.roundCorners(by: nextButton.frame.size.height / 1.5)
+    //setNextButtonVisible(false)
     
     nextButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
     nextButton.roundCorners(by: nextButton.frame.size.height / 2)
-  }
-}
-
-extension DetailedinfoMainView {
-  func setNextButtonVisible(_ value: Bool) {
-    nextButton.isHidden = !value
-  }
-  
-  func setDoneButtonVisible(_ value: Bool) {
-    doneButton.isHidden = !value
-  }
-  
-  func isCityFieldEmpty() -> Bool {
-    guard let _ = cityPicker.text?.isEmpty else {
-      return false
-    }
-    
-    return true
   }
 }
