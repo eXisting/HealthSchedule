@@ -48,8 +48,8 @@ class ProviderRegisterRequest extends FormRequest
             'first_name' => 'required|string|max:64',
             'last_name' => 'required|string|max:64',
             'birthday_at' => 'required|date|date_format:"Y-m-d"',
-            'verifies' => 'required',
-            'verifies.*' => 'required|image|mimes:jpeg,jpg,png'
+            // 'verifies' => 'required',
+            // 'verifies.*' => 'required|image|mimes:jpeg,jpg,png'
         ];
     }
 }
