@@ -25,7 +25,6 @@ Route::middleware('jwt.auth')->group(function () {
     });
 
     Route::prefix('user')->group(function () {
-
         Route::get('/', 'AuthUserController@get');
 
         Route::put('/info', 'UserController@update');
@@ -55,6 +54,9 @@ Route::middleware('jwt.auth')->group(function () {
     });
 
     Route::prefix('provider')->group(function () {
+        Route::post('/by-ids', 'ProviderController@getByIds');
+
+        Route::get('/available-times', 'ProviderController@getDateTimes');
 
         Route::put('/address', 'ProviderAddressController@update');
 

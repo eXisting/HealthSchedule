@@ -45,6 +45,13 @@ class ProviderExceptionSchedule extends Model
         'working' => 'boolean',
     ];
 
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'exception_at'
+    ];
+
     #endregion
 
     #region Methods
