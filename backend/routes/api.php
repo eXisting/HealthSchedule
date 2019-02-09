@@ -54,7 +54,7 @@ Route::middleware('jwt.auth')->group(function () {
     });
 
     Route::prefix('provider')->group(function () {
-        Route::get('/', 'ProviderController@getByIds');
+        Route::post('/by-ids', 'ProviderController@getByIds');
 
         Route::get('/available-times', 'ProviderController@getDateTimes');
 

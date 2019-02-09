@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Provider\GetProvidersByIdsRequest;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -76,10 +77,10 @@ class ProviderController extends AuthUserController
     }
 
     /**
-     * @param Request $request
+     * @param GetProvidersByIdsRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getByIds(Request $request)
+    public function getByIds(GetProvidersByIdsRequest $request)
     {
         $providers = User::query()
             ->where('user_role_id', UserRole::PROVIDER)
