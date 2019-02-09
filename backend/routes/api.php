@@ -19,11 +19,9 @@ Route::prefix('register')->group(function () {
 });
 
 Route::middleware('jwt.auth')->group(function () {
+
     Route::prefix('services')->group(function () {
         Route::get('/', 'ServiceController@all');
-    });
-    Route::prefix('providers')->group(function () {
-        Route::get('/date', 'ProviderController@availableDates');
     });
 
     Route::prefix('user')->group(function () {
@@ -56,6 +54,10 @@ Route::middleware('jwt.auth')->group(function () {
     });
 
     Route::prefix('provider')->group(function () {
+        Route::post('/by-ids', 'ProviderController@getByIds');
+
+        Route::get('/available-times', 'ProviderController@getDateTimes');
+
         Route::put('/address', 'ProviderAddressController@update');
 
         Route::prefix('users')->group(function () {

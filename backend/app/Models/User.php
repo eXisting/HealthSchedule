@@ -65,6 +65,10 @@ class User extends Authenticatable implements JWTSubject
         'birthday_at',
     ];
 
+    protected $dates = [
+        'birthday_at'
+    ];
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -93,6 +97,10 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    protected $appends = [
+        'age'
+    ];
+
     #endregion
 
     #region Methods
@@ -111,6 +119,14 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * @return int
+     */
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->birthday_at)->age;
     }
 
     #endregion

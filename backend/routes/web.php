@@ -1,5 +1,6 @@
 <?php
 
+//use DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +12,6 @@
 |
 */
 
-//  Route::get('/', function () {
-//      return 'home';
-//  });
+  Route::get('/', function (\Illuminate\Http\Request $request) {
+
+  });

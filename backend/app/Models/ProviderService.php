@@ -49,6 +49,13 @@ class ProviderService extends Model
         'interval' => 'time',
     ];
 
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'interval'
+    ];
+
     #endregion
 
     #region Methods
@@ -79,6 +86,14 @@ class ProviderService extends Model
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function requests()
+    {
+        return $this->hasMany(Request::class, 'provider_service_id', 'id');
     }
 
     #endregion

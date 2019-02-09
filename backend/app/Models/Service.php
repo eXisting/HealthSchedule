@@ -65,5 +65,13 @@ class Service extends Model
         return $this->hasMany(ProviderService::class, 'service_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function requests()
+    {
+        return $this->hasManyThrough(Request::class, ProviderService::class, 'service_id', 'provider_service_id', 'id', 'id');
+    }
+
     #endregion
 }

@@ -8,6 +8,7 @@ use App\Models\User;
 use Hash;
 use DB;
 use Gate;
+use Illuminate\Http\Request;
 
 /**
  * Class UserController
@@ -91,4 +92,5 @@ class UserController extends AuthUserController
 
         return response()->json(['success' => $result]);
     }
+
 }
