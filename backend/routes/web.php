@@ -53,7 +53,9 @@
               }])
           ->get();
 
-      $providerServices->each(function ($providerService) use ($arrDateWithDayOfWeek) {
+      $schedulesArr = collect([]);
+
+      $providerServices->each(function ($providerService) use ($arrDateWithDayOfWeek, &$schedulesArr) {
           /** @var \App\Models\ProviderService $providerService */
           $providerService->schedules = collect([]);
 
@@ -128,8 +130,41 @@
               });
           });
 
+          $schedules = $providerService->schedules;
+
+
+
+          $schedules = $schedules->map(function ($data) use ($providerService) {
+              $data['times_by_interval'] = $data['times_by_interval']->map(function ($time, $key) use ($providerService) {
+                  return ['time' => $time, 'provider_ids' => collect([$providerService->provider_id])];
+              });
+
+              return $data;
+          });
+
+          $schedulesArr = $schedulesArr->merge($schedules);
       });
 
-      dd($providerServices);
+      $schedulesArr = $schedulesArr->groupBy('date')->map(function ($items, $date) {
+          $times = collect([]);
 
+          $items->each(function ($data) use (&$times) {
+              $times = $times->merge($data['times_by_interval']);
+          });
+
+          $times = $times->groupBy('time')->map(function ($time, $key) {
+
+              $provider_ids = collect([]);
+
+              $time->each(function ($item) use (&$provider_ids) {
+                  $provider_ids = $provider_ids->merge($item['provider_ids']);
+              });
+
+              return $provider_ids;
+          });
+
+          return ['date' => $date, 'times' => $times ];
+      });
+    dd($schedulesArr->pluck('date'));
+      return response()->json($schedulesArr);
   });
