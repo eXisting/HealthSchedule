@@ -97,6 +97,7 @@ class ProviderController extends AuthUserController
     {
         $city_id = $request->city_id;
         $service_id = $request->service_id;
+        $provider_service_id = $request->provider_service_id;
         $from = $request->get('date_from') ? \Carbon\Carbon::parse($request->date_from) : \Carbon\Carbon::now();
         $to = $request->get('date_to') ? \Carbon\Carbon::parse($request->date_to) : new \Carbon\Carbon('last day of this month');
 
@@ -111,27 +112,59 @@ class ProviderController extends AuthUserController
             }
         }
 
-        $providerServices = (new \App\Models\ProviderService())->query()
-            ->whereHas('provider', function ($query) use ($city_id) {
+//        $providerServices = (new \App\Models\ProviderService())->query()
+//            ->whereHas('provider', function ($query) use ($city_id) {
+//                /** @var \Illuminate\Database\Query\Builder $query */
+//                $query->where('city_id', $city_id);
+//            })
+//            ->where('service_id', $service_id)
+//            ->with([
+//                'requests' => function ($query) use ($from, $to) {
+//                    /** @var \Illuminate\Database\Query\Builder $query */
+//                    $query->where(function ($query) use ($from, $to) {
+//                        $query->where('status', null)->orWhere('status', 1);
+//                    })->whereBetween('request_at', [$from, $to]);
+//                },
+//                'provider.providerSchedules' => function($query) {
+//                    $query->where('working', 1);
+//                },
+//                'provider.providerExceptionSchedules' => function($query) use ($from, $to) {
+//                    $query->whereBetween('exception_at', array($from->toDateString(), $to->toDateString()))
+//                        ->where('working', 1);
+//                }])
+//            ->get();
+
+        $query = (new \App\Models\ProviderService())->query();
+
+        if($city_id) {
+            $query->whereHas('provider', function ($query) use ($city_id) {
                 /** @var \Illuminate\Database\Query\Builder $query */
                 $query->where('city_id', $city_id);
-            })
-            ->where('service_id', $service_id)
-            ->with([
-                'requests' => function ($query) use ($from, $to) {
-                    /** @var \Illuminate\Database\Query\Builder $query */
-                    $query->where(function ($query) use ($from, $to) {
-                        $query->where('status', null)->orWhere('status', 1);
-                    })->whereBetween('request_at', [$from, $to]);
-                },
-                'provider.providerSchedules' => function($query) {
-                    $query->where('working', 1);
-                },
-                'provider.providerExceptionSchedules' => function($query) use ($from, $to) {
-                    $query->whereBetween('exception_at', array($from->toDateString(), $to->toDateString()))
-                        ->where('working', 1);
-                }])
-            ->get();
+            });
+        }
+
+        if($service_id) {
+            $query->where('service_id', $service_id);
+        }
+
+        if($provider_service_id) {
+            $query->where('id', $provider_service_id);
+        }
+
+        $providerServices = $query->with([
+            'requests' => function ($query) use ($from, $to) {
+                /** @var \Illuminate\Database\Query\Builder $query */
+                $query->where(function ($query) use ($from, $to) {
+                    $query->where('status', null)->orWhere('status', 1);
+                })->whereBetween('request_at', [$from, $to]);
+            },
+            'provider.providerSchedules' => function($query) {
+                $query->where('working', 1);
+            },
+            'provider.providerExceptionSchedules' => function($query) use ($from, $to) {
+                $query->whereBetween('exception_at', array($from->toDateString(), $to->toDateString()))
+                    ->where('working', 1);
+            }])->get();
 
         $schedulesArr = collect([]);
 
@@ -243,7 +276,12 @@ class ProviderController extends AuthUserController
                 return $provider_ids;
             });
 
-            return ['date' => $date, 'times' => $times ];
+            if($times->count()) {
+                return ['date' => $date, 'times' => $times];
+            }
+        })->filter(function ($item, $date) {
+
+            return $item != null;
         });
 
         return response()->json($schedulesArr);
