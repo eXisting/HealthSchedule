@@ -134,7 +134,6 @@
 		ED089A3E21E77D12006A8523 = {
 			isa = PBXGroup;
 			children = (
-				EDCFB44F222806E900A6B56F /* Assets */,
 				ED089A4921E77D12006A8523 /* HealthSchedule */,
 				ED089A4821E77D12006A8523 /* Products */,
 			);
@@ -152,10 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				EDCFB44C222806BB00A6B56F /* Application */,
-				ED089A6E21E78751006A8523 /* Controllers */,
-				ED089A8421E899D9006A8523 /* Managers */,
-				ED4482FA22045E2B00BE8EF0 /* Tools */,
-				ED089A5E21E77D48006A8523 /* UI */,
+				EDCFB44F222806E900A6B56F /* Assets */,
 			);
 			path = HealthSchedule;
 			sourceTree = "<group>";
@@ -408,8 +404,12 @@
 		EDCFB44C222806BB00A6B56F /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				ED089A6E21E78751006A8523 /* Controllers */,
 				EDCFB44E222806DE00A6B56F /* CoreData */,
 				EDCFB44D222806D000A6B56F /* Main */,
+				ED089A8421E899D9006A8523 /* Managers */,
+				ED4482FA22045E2B00BE8EF0 /* Tools */,
+				ED089A5E21E77D48006A8523 /* UI */,
 			);
 			path = Application;
 			sourceTree = "<group>";
