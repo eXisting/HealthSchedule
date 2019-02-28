@@ -62,6 +62,6 @@ class AuthenticationViewController: UIViewController {
   @objc func onSignUpClick() {
     let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
     let controller = storyboard.instantiateInitialViewController() as! SignUpRootViewController
-    self.navigationController?.pushViewController(controller, animated: false)
+    self.navigationController?.pushViewController(controller, animated: true)
   }
 }
