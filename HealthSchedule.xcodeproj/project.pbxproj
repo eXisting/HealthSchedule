@@ -12,7 +12,6 @@
 		DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */; };
 		DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBADDE5521F4CD9200C3EA2F /* ProviderSignUpViewController.swift */; };
 		ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A4A21E77D12006A8523 /* AppDelegate.swift */; };
-		ED089A6621E77D48006A8523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED089A6221E77D48006A8523 /* Main.storyboard */; };
 		ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */; };
 		ED089A8C21E8EF1A006A8523 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */; };
 		ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */; };
@@ -56,6 +55,9 @@
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
 		EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45422280D2100A6B56F /* DatePickerView.swift */; };
+		EDCFB458222819B800A6B56F /* HomeTabBarContrtoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB457222819B800A6B56F /* HomeTabBarContrtoller.swift */; };
+		EDCFB45A222819ED00A6B56F /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB459222819ED00A6B56F /* HomeNavigationController.swift */; };
+		EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45B22281E2F00A6B56F /* RootNavigationController.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -72,7 +74,6 @@
 		ED089A4A21E77D12006A8523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED089A5321E77D13006A8523 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED089A5821E77D13006A8523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED089A6221E77D48006A8523 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionHandler.swift; sourceTree = "<group>"; };
 		ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
@@ -115,6 +116,9 @@
 		ED6CBE7B21ECD80600860010 /* UserManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerProtocols.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		EDCFB457222819B800A6B56F /* HomeTabBarContrtoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarContrtoller.swift; sourceTree = "<group>"; };
+		EDCFB459222819ED00A6B56F /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
+		EDCFB45B22281E2F00A6B56F /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -174,7 +178,6 @@
 			children = (
 				ED44831822086D4B00BE8EF0 /* Authentication.storyboard */,
 				EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */,
-				ED089A6221E77D48006A8523 /* Main.storyboard */,
 				ED34D7F82209B1020025BACF /* SignUp.storyboard */,
 			);
 			path = Storyboards;
@@ -186,6 +189,7 @@
 				ED330C6121EF878C001019FC /* Authentication */,
 				ED1ED02721FF5C1100141CF5 /* Helpers */,
 				ED330C6421EF8B52001019FC /* Main */,
+				EDCFB45B22281E2F00A6B56F /* RootNavigationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -256,6 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
+				EDCFB457222819B800A6B56F /* HomeTabBarContrtoller.swift */,
+				EDCFB459222819ED00A6B56F /* HomeNavigationController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -532,7 +538,6 @@
 				ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */,
 				ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */,
 				ED34D7F92209B1020025BACF /* SignUp.storyboard in Resources */,
-				ED089A6621E77D48006A8523 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,9 +570,11 @@
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,
+				EDCFB45A222819ED00A6B56F /* HomeNavigationController.swift in Sources */,
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
 				ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */,
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
+				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,
 				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
@@ -578,6 +585,7 @@
 				ED089A8C21E8EF1A006A8523 /* UserCollectionViewCell.swift in Sources */,
 				ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */,
 				ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */,
+				EDCFB458222819B800A6B56F /* HomeTabBarContrtoller.swift in Sources */,
 				ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,

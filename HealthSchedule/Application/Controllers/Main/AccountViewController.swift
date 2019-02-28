@@ -9,5 +9,19 @@
 import UIKit
 
 class AccountViewController: UIViewController {
+  private let titleName = "Account"
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    tabBarController?.title = titleName
+    title = titleName
+    
+    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/account")
+    tabBarItem.image = UIImage(named: "TabBarIcons/account")
+    view.backgroundColor = .white
+  }
+  
+  func populate() {
+    print("Populating..")
+  }
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 class AuthenticationViewController: UIViewController {
+  private var rootNavigation: RootNavigationController?
   private var mainView: AuthMainView!
   
   override func loadView() {
@@ -19,6 +20,8 @@ class AuthenticationViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    rootNavigation = (self.navigationController as? RootNavigationController)
     
     mainView.setUpViews()
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
@@ -47,21 +50,16 @@ class AuthenticationViewController: UIViewController {
             "Warning",
             error,
             .alert)
-          
+
           return
         }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as! UITabBarController
-        
-        self?.present(controller, animated: true, completion: nil)
+
+        self?.rootNavigation?.presentHome()
       }
     }
   }
   
   @objc func onSignUpClick() {
-    let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-    let controller = storyboard.instantiateInitialViewController() as! SignUpRootViewController
-    self.navigationController?.pushViewController(controller, animated: true)
+    rootNavigation?.presentSignUpController()
   }
 }

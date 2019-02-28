@@ -12,7 +12,8 @@ class SignUpRootViewController: UIViewController {
   
   // test data
   //var signUpData: Parser.JsonDictionary = ["email":"johnsmit@gmail.com", "password":"qwerty123", "first_name":"Ann", "last_name":"Yan", "birthday_at":"2019-01-31", "phone":""]
-    
+  private var rootNavigation: RootNavigationController?
+  
   var mainView: MainSignUpInfoView!
   
   override func loadView() {
@@ -23,14 +24,14 @@ class SignUpRootViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    rootNavigation = (self.navigationController as? RootNavigationController)
     
     mainView.setupViews()
     mainView.addTargets()
-    
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
   }
   
-  func signUp(doneWithProvider: Bool = false) {
+  func signUp() {
     if mainView.validateData() {
       UserManager.shared.register(userType: mainView.userType, mainView.data) {
         [weak self] error in
@@ -40,7 +41,7 @@ class SignUpRootViewController: UIViewController {
             return
           }
           
-          self!.performTransaction(doneWithProvider)
+          self?.rootNavigation?.presentHome()
         }
       }
     } else {
@@ -52,26 +53,11 @@ class SignUpRootViewController: UIViewController {
   
   @objc func onNextClick() {
     if mainView.userType == .provider {
-      performTransaction()
+      rootNavigation?.presentProviderDetailsController()
       return
     }
     
     signUp()
-  }
-  
-  // MARK: - Helpers
-  
-  private func performTransaction(_ doneWithProvider: Bool = false) {
-    var controller: UIViewController
-    
-    if mainView.userType == .provider && !doneWithProvider {
-      controller = self.storyboard?.instantiateViewController(withIdentifier: "ProviderSignUp") as! ProviderSignUpViewController
-      self.navigationController?.pushViewController(controller, animated: true)
-    } else {
-      controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
-      
-      self.present(controller, animated: true)
-    }
   }
   
   private func showAlert(_ message: String) {

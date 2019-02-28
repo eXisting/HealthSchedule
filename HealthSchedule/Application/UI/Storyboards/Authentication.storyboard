@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Root Navigation Controller-->
         <scene sceneID="NID-xN-nW0">
             <objects>
-                <navigationController id="mIo-oR-Uua" sceneMemberID="viewController">
+                <navigationController id="mIo-oR-Uua" customClass="RootNavigationController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tlW-fk-6Yw">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
