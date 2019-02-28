@@ -9,12 +9,16 @@
 import UIKit
 
 class AuthenticationViewController: UIViewController {
-  var mainView: AuthMainView!
+  private var mainView: AuthMainView!
   
   override func loadView() {
     super.loadView()
     
     mainView = (view as! AuthMainView)
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
     mainView.setUpViews()
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
@@ -22,12 +26,12 @@ class AuthenticationViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    
     self.navigationController?.setNavigationBarHidden(false, animated: animated)
   }
   
