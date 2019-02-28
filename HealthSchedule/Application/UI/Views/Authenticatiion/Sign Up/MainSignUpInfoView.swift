@@ -20,11 +20,70 @@ class MainSignUpInfoView: UIView {
   
   @IBOutlet weak var nextButton: UIButton!
   
+  private var datePicker: DatePickerView!
+  
+  var userType: UserType = .client
+  var data: [String: Any] = [:]
+  
+  func addTargets() {
+    [emailField, passwordField, nameFIeld]
+      .forEach({ $0.addTarget(self, action: #selector(collectData), for: .editingChanged) })
+    
+    userPicker.addTarget(self, action: #selector(userTypeSwitch), for: .valueChanged)
+  }
+  
   func setupViews() {
     setUpUserPicker()
     setUpBackground()
     setUpTextFields()
     setUpNextButton()
+    setupDatePicker()
+  }
+  
+  func validateData() -> Bool {
+    let isValid = ValidationController.shared.validate(data[UserJsonFields.firstName.rawValue]! as! String, ofType: .name) &&
+      ValidationController.shared.validate(data[UserJsonFields.lastName.rawValue]! as! String, ofType: .name) &&
+      ValidationController.shared.validate(data[UserJsonFields.email.rawValue]! as! String, ofType: .email) &&
+      ValidationController.shared.validate(data[UserJsonFields.password.rawValue]! as! String, ofType: .password)
+    
+    guard let phone = data[UserJsonFields.phone.rawValue] else {
+      return isValid
+    }
+    
+    if (phone as! String).isEmpty {
+      return isValid
+    }
+    
+    return isValid && ValidationController.shared.validate(phone as! String, ofType: .phone)
+  }
+  
+  @objc func collectData(_ textField: UITextField) {
+    guard let namePair = getNamePair() else { return }
+    guard let email = emailField.text else { return }
+    guard let password = passwordField.text else { return }
+    guard let dateText = datePickerField.text else { return }
+    
+    if namePair.firstName.isEmpty || namePair.lastName.isEmpty ||
+      email.isEmpty || password.isEmpty || dateText.isEmpty {
+      activateNextButton(false)
+      return
+    }
+    
+    data[UserJsonFields.firstName.rawValue] = namePair.firstName
+    data[UserJsonFields.lastName.rawValue] = namePair.lastName
+    data[UserJsonFields.email.rawValue] = email
+    data[UserJsonFields.password.rawValue] = password
+    data[UserJsonFields.birthday.rawValue] = dateText
+    
+    if let phone = phoneField.text {
+      data[UserJsonFields.phone.rawValue] = phone
+    }
+    
+    activateNextButton(true)
+  }
+  
+  @objc func userTypeSwitch() {
+    userType = userType == .client ? .provider : .client
   }
   
   private func setUpTextFields() {
@@ -76,7 +135,7 @@ class MainSignUpInfoView: UIView {
   }
   
   private func setUpNextButton() {
-    setNextButtonVisible(false)
+    activateNextButton(false)
     nextButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
     nextButton.roundCorners(by: nextButton.frame.size.height / 2)
   }
@@ -92,11 +151,18 @@ class MainSignUpInfoView: UIView {
     
     userPicker.selectedSegmentIndex = UserType.client.rawValue - 1
   }
+  
+  private func setupDatePicker() {
+    datePicker = DatePickerView()
+    datePicker.setup(target: datePickerField)
+  }
 }
 
 extension MainSignUpInfoView {
-  func setNextButtonVisible(_ value: Bool) {
-    nextButton.isHidden = !value
+  func activateNextButton(_ value: Bool) {
+    nextButton.alpha = value ? 1 : 0.4
+    
+    nextButton.isUserInteractionEnabled = value
   }
   
   func getNamePair() -> (firstName: String, lastName: String)? {

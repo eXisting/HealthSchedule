@@ -31,26 +31,20 @@ class ProviderSignUpViewController: UIViewController {
   }
   
   @objc func signUp() {
+    root.performTransaction(doneWithProvider: true)
+    
     // TODO: NOT WORKING WITH VERIFY WITHOUT multipart upload - mock image selection until it will be fixed
-    UserManager.shared.register(userType: .provider, root.signUpData) {
-      [weak self] error in
-      DispatchQueue.main.async {
-        if let error = error {
-          self!.showAlert("Warning", error)
-          return
-        }
-        
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
-        self!.present(controller, animated: true)
-      }
-    }
-  }
-  
-  private func showAlert(_ title: String, _ message: String) {
-    AlertHandler.ShowAlert(
-      for: self,
-      title,
-      message,
-      .alert)
+//    UserManager.shared.register(userType: .provider, root.mainView.data) {
+//      [weak self] error in
+//      DispatchQueue.main.async {
+//        if let error = error {
+//          self!.showAlert("Warning", error)
+//          return
+//        }
+//
+//        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
+//        self!.present(controller, animated: true)
+//      }
+//    }
   }
 }
