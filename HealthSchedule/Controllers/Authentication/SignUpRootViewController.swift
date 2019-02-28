@@ -83,7 +83,7 @@ class SignUpRootViewController: UIViewController {
     datePicker = UIDatePicker()
     datePicker!.datePickerMode = .date
     
-    let datesRange = DatesManager.shared.getAvailableDateRange()
+    let datesRange = DateManager.shared.getAvailableDateRange()
     datePicker?.maximumDate = datesRange.max
     datePicker?.minimumDate = datesRange.min
     
@@ -100,7 +100,7 @@ class SignUpRootViewController: UIViewController {
   }
   
   @objc func donedatePicker(){
-    mainView.datePickerField.text = DatesManager.shared.dateToString(datePicker!.date)
+    mainView.datePickerField.text = DateManager.shared.dateToString(datePicker!.date)
     self.view.endEditing(true)
   }
   

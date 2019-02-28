@@ -65,7 +65,7 @@ extension User: Codable {
     try container.encode(role, forKey: .role)
     try container.encode(city, forKey: .city)
 
-    let birthdayString = DatesManager.shared.dateToString(birthday)
+    let birthdayString = DateManager.shared.dateToString(birthday)
     try container.encode(birthdayString, forKey: .birthday)
   }
   
@@ -82,7 +82,7 @@ extension User: Codable {
     photo = try? container.decode(ProfileImage.self, forKey: .image)
 
     let birthdayString = try container.decode(String.self, forKey: .birthday)
-    birthday = DatesManager.shared.stringToDate(birthdayString)
+    birthday = DateManager.shared.stringToDate(birthdayString)
     
     providerData = ProviderData()
   }

@@ -39,7 +39,7 @@ extension ProviderProfession: Codable {
     try container.encode(cityId, forKey: .cityId)
     try container.encode(companyName, forKey: .companyName)
     
-    let startDateString = DatesManager.shared.dateToString(startAt)
+    let startDateString = DateManager.shared.dateToString(startAt)
     try container.encode(startDateString, forKey: .startAt)
     
     guard let endDate = endAt else {
@@ -47,7 +47,7 @@ extension ProviderProfession: Codable {
       return
     }
     
-    let endDateString = DatesManager.shared.dateToString(endDate)
+    let endDateString = DateManager.shared.dateToString(endDate)
     try container.encode(endDateString, forKey: .endAt)
   }
   
@@ -60,7 +60,7 @@ extension ProviderProfession: Codable {
     companyName = try container.decode(String.self, forKey: .companyName)
     
     let startDateString = try container.decode(String.self, forKey: .startAt)
-    startAt = DatesManager.shared.stringToDate(startDateString)
+    startAt = DateManager.shared.stringToDate(startDateString)
     
     let endDateString = try? container.decode(String.self, forKey: .endAt)
     guard let endAtString = endDateString else {
@@ -68,6 +68,6 @@ extension ProviderProfession: Codable {
       return
     }
     
-    endAt = DatesManager.shared.stringToDate(endAtString)
+    endAt = DateManager.shared.stringToDate(endAtString)
   }
 }

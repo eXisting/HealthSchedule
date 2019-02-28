@@ -59,7 +59,7 @@
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
 		EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */; };
-		EDD3CD2D220304DA00E38879 /* DatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2C220304DA00E38879 /* DatesManager.swift */; };
+		EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2C220304DA00E38879 /* DateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,7 +117,7 @@
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
 		EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateException.swift; sourceTree = "<group>"; };
-		EDD3CD2C220304DA00E38879 /* DatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesManager.swift; sourceTree = "<group>"; };
+		EDD3CD2C220304DA00E38879 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +134,7 @@
 		ED089A3E21E77D12006A8523 = {
 			isa = PBXGroup;
 			children = (
+				EDCFB44F222806E900A6B56F /* Assets */,
 				ED089A4921E77D12006A8523 /* HealthSchedule */,
 				ED089A4821E77D12006A8523 /* Products */,
 			);
@@ -150,14 +151,10 @@
 		ED089A4921E77D12006A8523 /* HealthSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
-				ED089A5321E77D13006A8523 /* Assets.xcassets */,
+				EDCFB44C222806BB00A6B56F /* Application */,
 				ED089A6E21E78751006A8523 /* Controllers */,
-				ED089A5821E77D13006A8523 /* Info.plist */,
-				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
-				ED6CBE7D21EDDDE900860010 /* Models */,
-				ED089A8421E899D9006A8523 /* Operations managers */,
-				ED4482FA22045E2B00BE8EF0 /* SystemExtensions */,
+				ED089A8421E899D9006A8523 /* Managers */,
+				ED4482FA22045E2B00BE8EF0 /* Tools */,
 				ED089A5E21E77D48006A8523 /* UI */,
 			);
 			path = HealthSchedule;
@@ -216,16 +213,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		ED089A8421E899D9006A8523 /* Operations managers */ = {
+		ED089A8421E899D9006A8523 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				ED4483122204AA4700BE8EF0 /* Common */,
 				ED4482ED22044EEE00BE8EF0 /* Parser */,
 				ED4482F622045D4E00BE8EF0 /* Request */,
-				ED330C6721F0748B001019FC /* AlertHandler.swift */,
-				ED330C9221F223AE001019FC /* BlurHandler.swift */,
+				EDCFB450222807CE00A6B56F /* UI */,
 			);
-			path = "Operations managers";
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		ED089A8D21E8EF53006A8523 /* Xibs */ = {
@@ -293,18 +289,19 @@
 		ED4482F622045D4E00BE8EF0 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				ED6CBE7D21EDDDE900860010 /* Models */,
 				ED4482FF220466D800BE8EF0 /* Base */,
 				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
 		};
-		ED4482FA22045E2B00BE8EF0 /* SystemExtensions */ = {
+		ED4482FA22045E2B00BE8EF0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
 				ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */,
 			);
-			path = SystemExtensions;
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		ED4482FF220466D800BE8EF0 /* Base */ = {
@@ -362,20 +359,20 @@
 		ED4483122204AA4700BE8EF0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				ED4483132204B95F00BE8EF0 /* Abstracts */,
-				EDD3CD2C220304DA00E38879 /* DatesManager.swift */,
+				ED4483132204B95F00BE8EF0 /* Protocols */,
+				EDD3CD2C220304DA00E38879 /* DateManager.swift */,
 				ED4483102204AA4400BE8EF0 /* UserManager.swift */,
 				ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		ED4483132204B95F00BE8EF0 /* Abstracts */ = {
+		ED4483132204B95F00BE8EF0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				ED6CBE7B21ECD80600860010 /* UserManagerProtocols.swift */,
 			);
-			path = Abstracts;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		ED4483162208622B00BE8EF0 /* Extensions */ = {
@@ -406,6 +403,49 @@
 				ED448304220477A800BE8EF0 /* User */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EDCFB44C222806BB00A6B56F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				EDCFB44E222806DE00A6B56F /* CoreData */,
+				EDCFB44D222806D000A6B56F /* Main */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		EDCFB44D222806D000A6B56F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				ED089A5821E77D13006A8523 /* Info.plist */,
+				ED089A4A21E77D12006A8523 /* AppDelegate.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		EDCFB44E222806DE00A6B56F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		EDCFB44F222806E900A6B56F /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				ED089A5321E77D13006A8523 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		EDCFB450222807CE00A6B56F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ED330C6721F0748B001019FC /* AlertHandler.swift */,
+				ED330C9221F223AE001019FC /* BlurHandler.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,7 +566,7 @@
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
-				EDD3CD2D220304DA00E38879 /* DatesManager.swift in Sources */,
+				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
 			);
@@ -657,7 +697,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A3P55P4RYT;
-				INFOPLIST_FILE = HealthSchedule/Info.plist;
+				INFOPLIST_FILE = HealthSchedule/Application/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -675,7 +715,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A3P55P4RYT;
-				INFOPLIST_FILE = HealthSchedule/Info.plist;
+				INFOPLIST_FILE = HealthSchedule/Application/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

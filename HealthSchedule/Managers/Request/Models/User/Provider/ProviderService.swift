@@ -40,7 +40,7 @@ extension ProviderService: Codable {
     try container.encode(price, forKey: .price)
     try container.encode(description, forKey: .description)
 
-    let intervalDateString = DatesManager.shared.dateToString(interval)
+    let intervalDateString = DateManager.shared.dateToString(interval)
     try container.encode(intervalDateString, forKey: .interval)
   }
   
@@ -55,6 +55,6 @@ extension ProviderService: Codable {
 
     let dateString = try container.decode(String.self, forKey: .interval)
     
-    interval = DatesManager.shared.stringToDate(dateString)
+    interval = DateManager.shared.stringToDate(dateString)
   }
 }

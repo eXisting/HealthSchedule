@@ -8,8 +8,8 @@
 
 import UIKit
 
-class DatesManager {
-  static let shared = DatesManager()
+class DateManager {
+  static let shared = DateManager()
   
   let dateFormatter = DateFormatter()
   
