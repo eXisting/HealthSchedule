@@ -30,16 +30,21 @@ class SignUpRootViewController: UIViewController {
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
   }
   
-  func performTransaction(doneWithProvider: Bool = false) {
-    var controller: UIViewController
-    
-    if mainView.userType == .provider && !doneWithProvider {
-      controller = self.storyboard?.instantiateViewController(withIdentifier: "ProviderSignUp") as! ProviderSignUpViewController
-      self.navigationController?.pushViewController(controller, animated: true)
+  func signUp(doneWithProvider: Bool = false) {
+    if mainView.validateData() {
+      UserManager.shared.register(userType: mainView.userType, mainView.data) {
+        [weak self] error in
+        DispatchQueue.main.async {
+          if let error = error {
+            self!.showAlert(error)
+            return
+          }
+          
+          self!.performTransaction(doneWithProvider)
+        }
+      }
     } else {
-      controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
-      
-      self.present(controller, animated: true)
+      showAlert(ResponseStatus.invalidData.rawValue)
     }
   }
   
@@ -51,24 +56,23 @@ class SignUpRootViewController: UIViewController {
       return
     }
     
-    if mainView.validateData() {
-      UserManager.shared.register(userType: mainView.userType, mainView.data) {
-        [weak self] error in
-        DispatchQueue.main.async {
-          if let error = error {
-            self!.showAlert(error)
-            return
-          }
-          
-          self!.performTransaction()
-        }
-      }
-    } else {
-      showAlert(ResponseStatus.invalidData.rawValue)
-    }
+    signUp()
   }
   
   // MARK: - Helpers
+  
+  private func performTransaction(_ doneWithProvider: Bool = false) {
+    var controller: UIViewController
+    
+    if mainView.userType == .provider && !doneWithProvider {
+      controller = self.storyboard?.instantiateViewController(withIdentifier: "ProviderSignUp") as! ProviderSignUpViewController
+      self.navigationController?.pushViewController(controller, animated: true)
+    } else {
+      controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
+      
+      self.present(controller, animated: true)
+    }
+  }
   
   private func showAlert(_ message: String) {
     AlertHandler.ShowAlert(

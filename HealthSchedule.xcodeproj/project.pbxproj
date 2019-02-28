@@ -215,6 +215,7 @@
 		ED089A8421E899D9006A8523 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				EDCFB4562228169100A6B56F /* Users */,
 				ED4483122204AA4700BE8EF0 /* Common */,
 				ED4482ED22044EEE00BE8EF0 /* Parser */,
 				ED4482F622045D4E00BE8EF0 /* Request */,
@@ -358,9 +359,7 @@
 		ED4483122204AA4700BE8EF0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				ED4483132204B95F00BE8EF0 /* Protocols */,
 				EDD3CD2C220304DA00E38879 /* DateManager.swift */,
-				ED4483102204AA4400BE8EF0 /* UserManager.swift */,
 				ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */,
 			);
 			path = Common;
@@ -457,6 +456,15 @@
 				EDCFB45422280D2100A6B56F /* DatePickerView.swift */,
 			);
 			path = "Date picker";
+			sourceTree = "<group>";
+		};
+		EDCFB4562228169100A6B56F /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				ED4483132204B95F00BE8EF0 /* Protocols */,
+				ED4483102204AA4400BE8EF0 /* UserManager.swift */,
+			);
+			path = Users;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -31,7 +31,7 @@ class ProviderSignUpViewController: UIViewController {
   }
   
   @objc func signUp() {
-    root.performTransaction(doneWithProvider: true)
+    root.signUp(doneWithProvider: true)
     
     // TODO: NOT WORKING WITH VERIFY WITHOUT multipart upload - mock image selection until it will be fixed
 //    UserManager.shared.register(userType: .provider, root.mainView.data) {
