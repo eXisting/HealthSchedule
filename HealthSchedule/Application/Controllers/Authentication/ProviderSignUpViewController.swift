@@ -17,6 +17,11 @@ class ProviderSignUpViewController: UIViewController {
     super.loadView()
     
     mainView = (view as! ProviderInfoView)
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
     mainView.setupViews()
     
     // TODO: Add image choose action
@@ -26,7 +31,7 @@ class ProviderSignUpViewController: UIViewController {
   }
   
   @objc func signUp() {
-    // TODO: NOT WORKING WITH VERIFY WITHOUT multipart upload
+    // TODO: NOT WORKING WITH VERIFY WITHOUT multipart upload - mock image selection until it will be fixed
     UserManager.shared.register(userType: .provider, root.signUpData) {
       [weak self] error in
       DispatchQueue.main.async {
