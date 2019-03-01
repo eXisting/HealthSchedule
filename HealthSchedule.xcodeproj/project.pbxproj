@@ -280,8 +280,8 @@
 		ED4482F622045D4E00BE8EF0 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				ED6CBE7D21EDDDE900860010 /* Models */,
 				ED4482FF220466D800BE8EF0 /* Base */,
+				ED6CBE7D21EDDDE900860010 /* Models */,
 				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
 			);
 			path = Request;
@@ -298,8 +298,8 @@
 		ED4482FF220466D800BE8EF0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */,
 				ED4483142208380E00BE8EF0 /* RequestEnums.swift */,
+				ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
