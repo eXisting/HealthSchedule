@@ -28,6 +28,7 @@ class SignUpRootViewController: UIViewController {
     
     mainView.setupViews()
     mainView.addTargets()
+    
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
   }
   

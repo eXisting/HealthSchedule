@@ -9,47 +9,53 @@
 import UIKit
 
 class DatePickerView: UIView {
-  
   private weak var target: UITextField?
-  private var datePicker: UIDatePicker?
   
-  func setup(target: UITextField) {
+  private var datePicker: UIDatePicker!
+  private var datesRange: (min: Date, max: Date)?
+  
+  private var toolbar: UIToolbar!
+  
+  private var doneButton: UIBarButtonItem!
+  private var spaceButton: UIBarButtonItem!
+  private var cancelButton: UIBarButtonItem!
+
+  func setup(target: UITextField, isBirthdayPicker: Bool = false) {
+    datePicker = UIDatePicker()
+    
     self.target = target
+    datePicker.datePickerMode = .date
+    
+    if isBirthdayPicker {
+      datesRange = DateManager.shared.getAvailableBirthdayRange()
+      datePicker.maximumDate = datesRange?.max
+      datePicker.minimumDate = datesRange?.min
+    }
+    
+    toolbar = UIToolbar()
+    toolbar!.sizeToFit()
+    
+    doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onDoneClick));
+    spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+    cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onCancelClick));
+    
     target.addTarget(self, action: #selector(showDatePicker), for: .touchDown)
   }
   
   @objc func showDatePicker() {
-    if datePicker != nil {
-      target?.inputView = datePicker
-      return
-    }
-    
-    datePicker = UIDatePicker()
-    datePicker!.datePickerMode = .date
-    
-    let datesRange = DateManager.shared.getAvailableDateRange()
-    datePicker?.maximumDate = datesRange.max
-    datePicker?.minimumDate = datesRange.min
-    
-    let toolbar = UIToolbar()
-    toolbar.sizeToFit()
-    
-    let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
-    let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-    let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
-    
-    toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-    
+    target?.inputView = datePicker
     target?.inputAccessoryView = toolbar
     target?.inputView = datePicker
+    
+    toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
   }
   
-  @objc func donedatePicker(){
+  @objc func onDoneClick(){
     target?.text = DateManager.shared.dateToString(datePicker!.date)
     target?.endEditing(true)
   }
   
-  @objc func cancelDatePicker(){
+  @objc func onCancelClick(){
     target?.endEditing(true)
   }
 }

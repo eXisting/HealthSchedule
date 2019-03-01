@@ -17,7 +17,6 @@
 		ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */; };
 		ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9821EC831C006A8523 /* ProfileView.xib */; };
 		ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9E21EC8848006A8523 /* ProfileView.swift */; };
-		ED1ED01621FF04EC00141CF5 /* PopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01521FF04EC00141CF5 /* PopOverViewController.swift */; };
 		ED1ED01A21FF199100141CF5 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01921FF199100141CF5 /* City.swift */; };
 		ED1ED01C21FF231C00141CF5 /* PrintableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01B21FF231C00141CF5 /* PrintableObject.swift */; };
 		ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */; };
@@ -79,7 +78,6 @@
 		ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
 		ED089A9821EC831C006A8523 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		ED089A9E21EC8848006A8523 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		ED1ED01521FF04EC00141CF5 /* PopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverViewController.swift; sourceTree = "<group>"; };
 		ED1ED01921FF199100141CF5 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		ED1ED01B21FF231C00141CF5 /* PrintableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintableObject.swift; sourceTree = "<group>"; };
 		ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibLoad.swift; sourceTree = "<group>"; };
@@ -187,8 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				ED330C6121EF878C001019FC /* Authentication */,
-				ED1ED02721FF5C1100141CF5 /* Helpers */,
-				ED330C6421EF8B52001019FC /* Main */,
+				ED330C6421EF8B52001019FC /* Home */,
 				EDCFB45B22281E2F00A6B56F /* RootNavigationController.swift */,
 			);
 			path = Controllers;
@@ -238,14 +235,6 @@
 			path = Xibs;
 			sourceTree = "<group>";
 		};
-		ED1ED02721FF5C1100141CF5 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				ED1ED01521FF04EC00141CF5 /* PopOverViewController.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		ED330C6121EF878C001019FC /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,14 +245,14 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		ED330C6421EF8B52001019FC /* Main */ = {
+		ED330C6421EF8B52001019FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
+				EDCFB45D22282C6100A6B56F /* TabControllers */,
 				EDCFB457222819B800A6B56F /* HomeTabBarContrtoller.swift */,
 				EDCFB459222819ED00A6B56F /* HomeNavigationController.swift */,
 			);
-			path = Main;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		ED330C8F21F21B0C001019FC /* Designable */ = {
@@ -473,6 +462,14 @@
 			path = Users;
 			sourceTree = "<group>";
 		};
+		EDCFB45D22282C6100A6B56F /* TabControllers */ = {
+			isa = PBXGroup;
+			children = (
+				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
+			);
+			path = TabControllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -559,7 +556,6 @@
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
-				ED1ED01621FF04EC00141CF5 /* PopOverViewController.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,

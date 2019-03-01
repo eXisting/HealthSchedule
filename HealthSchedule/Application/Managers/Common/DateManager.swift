@@ -27,7 +27,7 @@ class DateManager {
     return dateFormatter.string(from: date)
   }
   
-  func getAvailableDateRange() -> (min: Date, max: Date) {
+  func getAvailableBirthdayRange() -> (min: Date, max: Date) {
     let currentDate = Date()
     var dateComponents = DateComponents()
     let calendar = Calendar.init(identifier: .gregorian)

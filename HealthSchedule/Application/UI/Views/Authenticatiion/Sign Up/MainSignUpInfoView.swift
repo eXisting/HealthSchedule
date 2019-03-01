@@ -154,7 +154,7 @@ class MainSignUpInfoView: UIView {
   
   private func setupDatePicker() {
     datePicker = DatePickerView()
-    datePicker.setup(target: datePickerField)
+    datePicker.setup(target: datePickerField, isBirthdayPicker: true)
   }
 }
 
