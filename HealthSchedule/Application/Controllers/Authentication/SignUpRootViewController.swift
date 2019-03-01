@@ -14,7 +14,8 @@ class SignUpRootViewController: UIViewController {
   //var signUpData: Parser.JsonDictionary = ["email":"johnsmit@gmail.com", "password":"qwerty123", "first_name":"Ann", "last_name":"Yan", "birthday_at":"2019-01-31", "phone":""]
   private var rootNavigation: RootNavigationController?
   
-  var mainView: MainSignUpInfoView!
+  private var mainView: MainSignUpInfoView!
+  private let model = UserMainModel()
   
   override func loadView() {
     super.loadView()
@@ -33,20 +34,20 @@ class SignUpRootViewController: UIViewController {
   }
   
   func signUp() {
-    if mainView.validateData() {
-      UserManager.shared.register(userType: mainView.userType, mainView.data) {
-        [weak self] error in
-        DispatchQueue.main.async {
-          if let error = error {
-            self!.showAlert(error)
-            return
-          }
-          
-          self?.rootNavigation?.presentHome()
-        }
-      }
-    } else {
+    if !model.validateSignUpData(mainView.collectedData) {
       showAlert(ResponseStatus.invalidData.rawValue)
+    }
+    
+    model.register(userType: mainView.userType, mainView.collectedData) {
+      [weak self] error in
+      DispatchQueue.main.async {
+        if let error = error {
+          self!.showAlert(error)
+          return
+        }
+          
+        self?.rootNavigation?.presentHome()
+      }
     }
   }
   

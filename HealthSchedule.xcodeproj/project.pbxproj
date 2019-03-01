@@ -41,14 +41,13 @@
 		ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448305220477B900BE8EF0 /* ProviderData.swift */; };
 		ED44830C2204A23400BE8EF0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830B2204A23400BE8EF0 /* Address.swift */; };
 		ED44830E2204A52500BE8EF0 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830D2204A52500BE8EF0 /* Role.swift */; };
-		ED4483112204AA4400BE8EF0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483102204AA4400BE8EF0 /* UserManager.swift */; };
+		ED4483112204AA4400BE8EF0 /* UserMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483102204AA4400BE8EF0 /* UserMainModel.swift */; };
 		ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483142208380E00BE8EF0 /* RequestEnums.swift */; };
 		ED44831922086D4B00BE8EF0 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED44831822086D4B00BE8EF0 /* Authentication.storyboard */; };
 		ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44831B22086FF300BE8EF0 /* AuthMainView.swift */; };
 		ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED52F16D220C6D4000568CBC /* ServerException.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
-		ED6CBE7C21ECD80600860010 /* UserManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7B21ECD80600860010 /* UserManagerProtocols.swift */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
 		EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45422280D2100A6B56F /* DatePickerView.swift */; };
@@ -100,14 +99,13 @@
 		ED448305220477B900BE8EF0 /* ProviderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderData.swift; sourceTree = "<group>"; };
 		ED44830B2204A23400BE8EF0 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		ED44830D2204A52500BE8EF0 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
-		ED4483102204AA4400BE8EF0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		ED4483102204AA4400BE8EF0 /* UserMainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMainModel.swift; sourceTree = "<group>"; };
 		ED4483142208380E00BE8EF0 /* RequestEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEnums.swift; sourceTree = "<group>"; };
 		ED44831822086D4B00BE8EF0 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		ED44831B22086FF300BE8EF0 /* AuthMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainView.swift; sourceTree = "<group>"; };
 		ED52F16D220C6D4000568CBC /* ServerException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerException.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
-		ED6CBE7B21ECD80600860010 /* UserManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerProtocols.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		EDCFB457222819B800A6B56F /* HomeTabBarContrtoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarContrtoller.swift; sourceTree = "<group>"; };
@@ -191,8 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				EDCFB46322294F0F00A6B56F /* Account */,
-				EDCFB45322280D0800A6B56F /* Date picker */,
 				ED44831A22086FDD00BE8EF0 /* Authenticatiion */,
+				EDCFB45322280D0800A6B56F /* Date picker */,
 				ED330C8F21F21B0C001019FC /* Designable */,
 				ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */,
 				ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */,
@@ -203,7 +201,6 @@
 		ED089A8421E899D9006A8523 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				EDCFB4562228169100A6B56F /* Users */,
 				ED4483122204AA4700BE8EF0 /* Common */,
 				ED4482ED22044EEE00BE8EF0 /* Parser */,
 				ED4482F622045D4E00BE8EF0 /* Request */,
@@ -346,14 +343,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		ED4483132204B95F00BE8EF0 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				ED6CBE7B21ECD80600860010 /* UserManagerProtocols.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		ED4483162208622B00BE8EF0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +376,7 @@
 		EDCFB44C222806BB00A6B56F /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EDCFB46522294FED00A6B56F /* Models */,
 				ED089A6E21E78751006A8523 /* Controllers */,
 				EDCFB44E222806DE00A6B56F /* CoreData */,
 				EDCFB44D222806D000A6B56F /* Main */,
@@ -439,15 +429,6 @@
 			path = "Date picker";
 			sourceTree = "<group>";
 		};
-		EDCFB4562228169100A6B56F /* Users */ = {
-			isa = PBXGroup;
-			children = (
-				ED4483132204B95F00BE8EF0 /* Protocols */,
-				ED4483102204AA4400BE8EF0 /* UserManager.swift */,
-			);
-			path = Users;
-			sourceTree = "<group>";
-		};
 		EDCFB45D22282C6100A6B56F /* TabControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +443,14 @@
 				ED089A9E21EC8848006A8523 /* ProfileView.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		EDCFB46522294FED00A6B56F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ED4483102204AA4400BE8EF0 /* UserMainModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -542,7 +531,6 @@
 				ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
 				DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */,
-				ED6CBE7C21ECD80600860010 /* UserManagerProtocols.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
@@ -554,7 +542,7 @@
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
-				ED4483112204AA4400BE8EF0 /* UserManager.swift in Sources */,
+				ED4483112204AA4400BE8EF0 /* UserMainModel.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,

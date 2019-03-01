@@ -8,12 +8,8 @@
 
 import UIKit
 
-class UserManager {
-  static let shared = UserManager()
-  
+class UserMainModel {
   private(set) var user: User?
-  
-  private init() {}
   
   // MARK: - Authentication
   
@@ -63,6 +59,23 @@ class UserManager {
       
       completion(nil)
     }
+  }
+  
+  func validateSignUpData(_ data: [String: Any]) -> Bool {
+    let isValid = ValidationController.shared.validate(data[UserJsonFields.firstName.rawValue]! as! String, ofType: .name) &&
+      ValidationController.shared.validate(data[UserJsonFields.lastName.rawValue]! as! String, ofType: .name) &&
+      ValidationController.shared.validate(data[UserJsonFields.email.rawValue]! as! String, ofType: .email) &&
+      ValidationController.shared.validate(data[UserJsonFields.password.rawValue]! as! String, ofType: .password)
+    
+    guard let phone = data[UserJsonFields.phone.rawValue] else {
+      return isValid
+    }
+    
+    if (phone as! String).isEmpty {
+      return isValid
+    }
+    
+    return isValid && ValidationController.shared.validate(phone as! String, ofType: .phone)
   }
   
   // MARK: - Provider requests

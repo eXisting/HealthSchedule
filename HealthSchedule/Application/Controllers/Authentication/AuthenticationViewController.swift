@@ -10,7 +10,9 @@ import UIKit
 
 class AuthenticationViewController: UIViewController {
   private var rootNavigation: RootNavigationController?
+  
   private var mainView: AuthMainView!
+  private let model = UserMainModel()
   
   override func loadView() {
     super.loadView()
@@ -39,18 +41,16 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    let login = mainView.loginField.text!
-    let password = mainView.passwordField.text!
-    UserManager.shared.login(login: login, password: password) {
+    guard let formData = mainView.getFormData() else {
+      showWarningAlert(message: "Either login or password are not filled!")
+      return
+    }
+    
+    model.login(login: formData.login, password: formData.password) {
       [weak self] error in
       DispatchQueue.main.async {
         if let error = error {
-          AlertHandler.ShowAlert(
-            for: self!,
-            "Warning",
-            error,
-            .alert)
-
+          self?.showWarningAlert(message: error)
           return
         }
 
@@ -61,5 +61,13 @@ class AuthenticationViewController: UIViewController {
   
   @objc func onSignUpClick() {
     rootNavigation?.presentSignUpController()
+  }
+  
+  private func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(
+      for: self,
+      "Warning",
+      message,
+      .alert)
   }
 }
