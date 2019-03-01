@@ -16,9 +16,3 @@ struct Category {
 }
 
 extension Category: Codable {}
-
-extension Category: PrintableObject {
-  func getViewableString() -> String {
-    return title
-  }
-}
