@@ -15,7 +15,6 @@
 		ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */; };
 		ED089A8C21E8EF1A006A8523 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */; };
 		ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */; };
-		ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED089A9821EC831C006A8523 /* ProfileView.xib */; };
 		ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9E21EC8848006A8523 /* ProfileView.swift */; };
 		ED1ED01A21FF199100141CF5 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01921FF199100141CF5 /* City.swift */; };
 		ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */; };
@@ -75,7 +74,6 @@
 		ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionHandler.swift; sourceTree = "<group>"; };
 		ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
-		ED089A9821EC831C006A8523 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		ED089A9E21EC8848006A8523 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ED1ED01921FF199100141CF5 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibLoad.swift; sourceTree = "<group>"; };
@@ -192,10 +190,10 @@
 		ED089A7321E7902D006A8523 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EDCFB46322294F0F00A6B56F /* Account */,
 				EDCFB45322280D0800A6B56F /* Date picker */,
 				ED44831A22086FDD00BE8EF0 /* Authenticatiion */,
 				ED330C8F21F21B0C001019FC /* Designable */,
-				ED089A9E21EC8848006A8523 /* ProfileView.swift */,
 				ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */,
 				ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */,
 			);
@@ -218,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				ED089A9021E8EFB6006A8523 /* ContentViewCell.xib */,
-				ED089A9821EC831C006A8523 /* ProfileView.xib */,
 				ED3D233921F5F98C00BCADE9 /* SelectWithExperienceView.xib */,
 			);
 			path = Xibs;
@@ -459,6 +456,14 @@
 			path = TabControllers;
 			sourceTree = "<group>";
 		};
+		EDCFB46322294F0F00A6B56F /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				ED089A9E21EC8848006A8523 /* ProfileView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -522,7 +527,6 @@
 				ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */,
 				ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */,
 				ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */,
-				ED089A9921EC831C006A8523 /* ProfileView.xib in Resources */,
 				ED34D7F92209B1020025BACF /* SignUp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

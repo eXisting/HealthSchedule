@@ -11,10 +11,21 @@ import UIKit
 class AccountViewController: UIViewController {
   private let titleName = "Account"
   
+  private var mainView: ProfileView!
+  
+  override func loadView() {
+    super.loadView()
+    
+    mainView = ProfileView()
+    view = mainView
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     tabBarController?.title = titleName
     title = titleName
+    
+    mainView.setup()
     
     tabBarItem.selectedImage = UIImage(named: "TabBarIcons/account")
     tabBarItem.image = UIImage(named: "TabBarIcons/account")
