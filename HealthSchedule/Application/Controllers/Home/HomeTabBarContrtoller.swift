@@ -8,14 +8,24 @@
 
 import UIKit
 
+protocol SetupableTabBarItem {
+  func setupTabBarItem()
+}
+
 class HomeTabBarContrtoller: UITabBarController {
+  private let homeController = HomeViewController()
+  private let accountController = AccountViewController()
+  private let historyController = HistoryViewController()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let homeController = HomeViewController()
-    let accountController = AccountViewController()
+    let tabBarItems = [homeController, historyController, accountController]
+    tabBarItems.forEach { item in
+      (item as! SetupableTabBarItem).setupTabBarItem()
+    }
     
-    setViewControllers([homeController, accountController], animated: true)
+    setViewControllers(tabBarItems, animated: true)
     
     view.backgroundColor = .white
   }

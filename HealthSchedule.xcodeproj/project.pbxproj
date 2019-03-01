@@ -23,6 +23,8 @@
 		ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */; };
 		ED231B2122295A1700A80FC9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2022295A1700A80FC9 /* HomeViewController.swift */; };
 		ED231B24222960FC00A80FC9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B23222960FC00A80FC9 /* HomeView.swift */; };
+		ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2522297C6900A80FC9 /* HistoryViewController.swift */; };
+		ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
 		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
 		ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpRootViewController.swift */; };
@@ -83,6 +85,8 @@
 		ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		ED231B2022295A1700A80FC9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED231B23222960FC00A80FC9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ED231B2522297C6900A80FC9 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHoverHeaderView.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		ED330C6B21F08536001019FC /* SignUpRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 				ED330C8F21F21B0C001019FC /* Designable */,
 				ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */,
 				ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */,
+				ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 			children = (
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
 				ED231B2022295A1700A80FC9 /* HomeViewController.swift */,
+				ED231B2522297C6900A80FC9 /* HistoryViewController.swift */,
 			);
 			path = TabControllers;
 			sourceTree = "<group>";
@@ -546,6 +552,7 @@
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
 				DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
+				ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
@@ -582,6 +589,7 @@
 				ED231B2122295A1700A80FC9 /* HomeViewController.swift in Sources */,
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
+				ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,

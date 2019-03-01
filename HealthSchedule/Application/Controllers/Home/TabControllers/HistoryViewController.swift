@@ -1,5 +1,5 @@
 //
-//  FeedViewController.swift
+//  HistoryViewController.swift
 //  HealthSchedule
 //
 //  Created by sys-246 on 3/1/19.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, SetupableTabBarItem {
-  private let titleName = "Home"
+class HistoryViewController: UIViewController, SetupableTabBarItem {
+  private let titleName = "History"
   
   private let mainView = HomeView()
   
@@ -27,9 +27,9 @@ class HomeViewController: UIViewController, SetupableTabBarItem {
   }
   
   func setupTabBarItem() {
-    tabBarItem.title = titleName
+    tabBarItem.title  = titleName
     
-    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/home")
-    tabBarItem.image = UIImage(named: "TabBarIcons/home")
+    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/history")
+    tabBarItem.image = UIImage(named: "TabBarIcons/history")
   }
 }

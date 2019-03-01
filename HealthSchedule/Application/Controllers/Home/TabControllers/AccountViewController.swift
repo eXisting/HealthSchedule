@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: UIViewController {
+class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
   private let mainView = ProfileView()
@@ -26,14 +26,12 @@ class AccountViewController: UIViewController {
     
     mainView.setup()
     mainView.populateFields(with: model.user)
+  }
+
+  func setupTabBarItem() {
+    tabBarItem.title = titleName
     
     tabBarItem.selectedImage = UIImage(named: "TabBarIcons/account")
     tabBarItem.image = UIImage(named: "TabBarIcons/account")
-    view.backgroundColor = .white
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    tabBarController?.title = titleName
   }
 }
