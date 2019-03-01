@@ -22,7 +22,13 @@ protocol ProviderHandlingModel {
 
 class UserMainModel {
   
-  private(set) var user: User?
+  private static var user: User?
+  
+  var user: User? {
+    get {
+      return UserMainModel.user
+    }
+  }
   
   private func requestProviderData() {
     getProfessions() { list in print("Professions obtained!") }
@@ -45,7 +51,7 @@ extension UserMainModel: AuthenticationingModel {
         return
       }
       
-      self?.user = user
+      UserMainModel.user = user
       
       // TODO: refactor this
       if user!.role.name == "provider" {
@@ -69,7 +75,7 @@ extension UserMainModel: AuthenticationingModel {
         return
       }
       
-      self?.user = user
+      UserMainModel.user = user
       
       if userType == .provider {
         self?.requestProviderData()
@@ -100,13 +106,13 @@ extension UserMainModel: AuthenticationingModel {
 extension UserMainModel: ProviderHandlingModel {
   func getProfessions(completion: @escaping (String?) -> Void) {
     RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
-      [weak self] (list, response) in
+      (list, response) in
       if response.error != nil {
         completion(response.error)
         return
       }
       
-      self?.user?.providerData?.professions = list
+      UserMainModel.user?.providerData?.professions = list
       
       completion(nil)
     }

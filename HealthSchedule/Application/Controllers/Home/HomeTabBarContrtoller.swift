@@ -10,7 +10,13 @@ import UIKit
 
 class HomeTabBarContrtoller: UITabBarController {
   override func viewDidLoad() {
-    super.viewDidLoad()    
+    super.viewDidLoad()
+    
+    let homeController = HomeViewController()
+    let accountController = AccountViewController()
+    
+    setViewControllers([homeController, accountController], animated: true)
+    
     view.backgroundColor = .white
   }
 }

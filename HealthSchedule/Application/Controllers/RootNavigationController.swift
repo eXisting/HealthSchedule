@@ -18,13 +18,7 @@ class RootNavigationController: UINavigationController {
   
   func presentHome() {
     let tabController = HomeTabBarContrtoller()
-    let navigationController = HomeNavigationController.init(rootViewController: tabController)
-    let accountController = AccountViewController()
-    
-    // TODO: Add more controller tabs
-    
-    tabController.setViewControllers([accountController], animated: true)
-    
+    let navigationController = HomeNavigationController.init(rootViewController: tabController)    
     present(navigationController, animated: true, completion: nil)
   }
   

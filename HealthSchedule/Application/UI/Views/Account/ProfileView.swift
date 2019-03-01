@@ -23,6 +23,17 @@ class ProfileView: UIView {
     customizeViews()
   }
   
+  func populateFields(with userData: User?) {
+    guard let user = userData else {
+      print("Nothing has been sent from server")
+      return
+    }
+    
+    fullNameField.text = user.firstName + " " + user.lastName
+    cityField.text = user.city?.name
+    birthday.text = DateManager.shared.dateToString(user.birthday)
+  }
+  
   func setEditingStateTo(_ state: Bool) {
     fullNameField.isUserInteractionEnabled = state
     cityField.isUserInteractionEnabled = state

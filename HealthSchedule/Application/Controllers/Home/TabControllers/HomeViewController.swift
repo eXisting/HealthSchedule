@@ -1,18 +1,17 @@
 //
-//  AccountViewController.swift
+//  FeedViewController.swift
 //  HealthSchedule
 //
-//  Created by sys-246 on 2/5/19.
+//  Created by sys-246 on 3/1/19.
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
 import UIKit
 
-class AccountViewController: UIViewController {
-  private let titleName = "Account"
+class HomeViewController: UIViewController {
+  private let titleName = "Home"
   
-  private let mainView = ProfileView()
-  private let model = UserMainModel()
+  private let mainView = HomeView()
   
   override func loadView() {
     super.loadView()
@@ -25,10 +24,9 @@ class AccountViewController: UIViewController {
     title = titleName
     
     mainView.setup()
-    mainView.populateFields(with: model.user)
     
-    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/account")
-    tabBarItem.image = UIImage(named: "TabBarIcons/account")
+    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/home")
+    tabBarItem.image = UIImage(named: "TabBarIcons/home")
     view.backgroundColor = .white
   }
   
