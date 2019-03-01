@@ -8,11 +8,29 @@
 
 import UIKit
 
+protocol AuthenticationingModel {
+  func login(login: String, password: String, completion: @escaping (String?) -> Void)
+  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void)
+  func validateSignUpData(_ data: [String: Any]) -> Bool
+}
+
+protocol ProviderHandlingModel {
+  func getProfessions(completion: @escaping (String?) -> Void)
+  func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
+  func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
+}
+
 class UserMainModel {
+  
   private(set) var user: User?
   
-  // MARK: - Authentication
-  
+  private func requestProviderData() {
+    getProfessions() { list in print("Professions obtained!") }
+    // TODO: Load rest data here
+  }
+}
+
+extension UserMainModel: AuthenticationingModel {
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
     let postBody = ["username": login, "password": password]
     guard let data = Serializer.getDataFrom(json: postBody) else {
@@ -77,9 +95,9 @@ class UserMainModel {
     
     return isValid && ValidationController.shared.validate(phone as! String, ofType: .phone)
   }
-  
-  // MARK: - Provider requests
-  
+}
+
+extension UserMainModel: ProviderHandlingModel {
   func getProfessions(completion: @escaping (String?) -> Void) {
     RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
       [weak self] (list, response) in
@@ -87,7 +105,7 @@ class UserMainModel {
         completion(response.error)
         return
       }
-        
+      
       self?.user?.providerData?.professions = list
       
       completion(nil)
@@ -120,13 +138,8 @@ class UserMainModel {
         completion(response.error)
         return
       }
-
+      
       completion(nil)
     }
-  }
-  
-  private func requestProviderData() {
-    getProfessions() { list in print("Professions obtained!") }
-    // TODO: Load rest data here
   }
 }

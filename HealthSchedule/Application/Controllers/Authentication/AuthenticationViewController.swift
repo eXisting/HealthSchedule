@@ -12,7 +12,7 @@ class AuthenticationViewController: UIViewController {
   private var rootNavigation: RootNavigationController?
   
   private var mainView: AuthMainView!
-  private let model = UserMainModel()
+  private let model: AuthenticationingModel = UserMainModel()
   
   override func loadView() {
     super.loadView()
