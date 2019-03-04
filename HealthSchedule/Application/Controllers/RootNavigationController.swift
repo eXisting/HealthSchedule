@@ -17,9 +17,8 @@ class RootNavigationController: UINavigationController {
   }
   
   func presentHome() {
-    let tabController = HomeTabBarContrtoller()
-    let navigationController = HomeNavigationController.init(rootViewController: tabController)    
-    present(navigationController, animated: true, completion: nil)
+    let tabController = MainTabBarController()
+    present(tabController, animated: true, completion: nil)
   }
   
   func presentSignUpController() {
