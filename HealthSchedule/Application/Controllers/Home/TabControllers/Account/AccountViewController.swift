@@ -13,8 +13,6 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   
   private let mainView = ProfileView()
   private let model = UserMainModel()
-
-  private let sections = ["Name", "City", "Birthday", "Email", "Password"]
   
   override func loadView() {
     super.loadView()
@@ -46,7 +44,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return sections.count
+    return model.userData?.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,13 +53,25 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountTableView.sectionIdentifier) as! AccountSection
-    header.setup(title: sections[section])
+    
+    guard let tuple = model.userData?[section] else {
+      return header
+    }
+    
+    header.setup(title: tuple.section)
+    
     return header
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableView.cellIdentifier, for: indexPath) as! AccountRow
-    cell.value = "From section #\(indexPath.section)"
+    
+    guard let tuple = model.userData?[indexPath.section] else {
+      return cell
+    }
+    
+    cell.value = tuple.row
+    
     return cell
   }
 }

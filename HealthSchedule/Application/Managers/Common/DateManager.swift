@@ -41,6 +41,6 @@ class DateManager {
   
   private init() {
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    defaultDate = dateFormatter.date(from: "2000-01-01")
+    defaultDate = dateFormatter.date(from: "1000-01-01")
   }
 }

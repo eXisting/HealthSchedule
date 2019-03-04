@@ -29,10 +29,6 @@ class AccountRow: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func setUserInteraction(state: Bool) {
-    editableField.isUserInteractionEnabled = state
-  }
-  
   private func laidOutViews() {
     addSubview(editableField)
     editableField.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +44,5 @@ class AccountRow: UITableViewCell {
     editableField.textAlignment = .left
     editableField.adjustsFontSizeToFitWidth = true
     editableField.clearButtonMode = .whileEditing
-    
-    setUserInteraction(state: false)
   }
 }

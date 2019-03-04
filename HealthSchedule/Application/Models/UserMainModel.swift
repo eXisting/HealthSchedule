@@ -30,6 +30,21 @@ class UserMainModel {
     }
   }
   
+  lazy var userData: [Int: (section: String, row: String)]? = {
+    guard let currentUser = user else {
+      // return all from core data
+      return nil
+    }
+    
+    return [
+      0: ("Full name", currentUser.firstName + " " + currentUser.lastName),
+      1: ("City", currentUser.city!.name),
+      2: ("Birthday", DateManager.shared.dateToString(currentUser.birthday)),
+      3: ("E-mail", currentUser.email),
+      4: ("Phone", currentUser.phone ?? "")
+    ]
+  }()
+  
   private func requestProviderData() {
     getProfessions() { list in print("Professions obtained!") }
     // TODO: Load rest data here

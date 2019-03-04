@@ -41,8 +41,6 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    rootNavigation?.presentHome()
-    return
     guard let formData = mainView.getFormData() else {
       showWarningAlert(message: "Either login or password are not filled!")
       return
