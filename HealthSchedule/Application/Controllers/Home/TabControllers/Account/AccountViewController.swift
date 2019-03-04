@@ -23,7 +23,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainView.setup(delegate: self, dataSource: self)
+    mainView.setup(delegate: self, dataSource: self, imageUrl: model.user?.photo?.url)
   }
 
   func setupTabBarItem() {

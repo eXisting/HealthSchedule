@@ -56,6 +56,23 @@ class UrlSessionHandler {
     
     task.resume()
   }
+  
+  func getData(from url: URL, completion: @escaping (Data?) -> ()) {
+    defaultSession.dataTask(with: url) {
+      (data, response, error) in
+      if error != nil {
+        completion(nil)
+        return
+      }
+      
+      guard let objectData = data else {
+        completion(nil)
+        return
+      }
+      
+      completion(objectData)
+    }.resume()
+  }
 }
 
 // MARK: - HELPERS

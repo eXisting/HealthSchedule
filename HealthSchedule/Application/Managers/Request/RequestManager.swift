@@ -47,6 +47,15 @@ class RequestManager {
     }
   }
   
+  class func getDataAsync(from url: String, _ completion: @escaping (Data?) -> Void) {
+    guard let urlObject = URL(string: url) else {
+      completion(nil)
+      return
+    }
+    
+    request.getData(from: urlObject, completion: completion)
+  }
+  
   // MARK: - POST
   
   class func postAsync(

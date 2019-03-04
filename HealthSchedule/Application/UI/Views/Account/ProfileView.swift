@@ -18,7 +18,9 @@ class ProfileView: UIView {
   private let cityField = UITextField()
   private let birthday = UITextField()
   
-  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, imageUrl: String?) {
+    startLoadProfileImage(imageUrl: imageUrl)
+
     laidOutViews()
     customizeViews()
     
@@ -45,5 +47,22 @@ class ProfileView: UIView {
   
   private func customizeViews() {
     profileImageView.image = UIImage(named: "Pictures/chooseProfile")
+  }
+  
+  private func startLoadProfileImage(imageUrl: String?) {
+    guard let url = imageUrl else {
+      return
+    }
+    
+    RequestManager.getDataAsync(from: url) {
+      [weak self] (data) in
+      guard let imageData = data else {
+        return
+      }
+      
+      DispatchQueue.main.async {
+        self?.profileImageView.image = UIImage(data: imageData)
+      }
+    }
   }
 }
