@@ -11,19 +11,12 @@ import UIKit
 class HistoryViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "History"
   
-  private let mainView = HomeView()
-  
   override func loadView() {
     super.loadView()
-    
-    view = mainView
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = titleName
-    
-    mainView.setup()
   }
   
   func setupTabBarItem() {

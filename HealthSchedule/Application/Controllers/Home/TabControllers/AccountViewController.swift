@@ -22,7 +22,6 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = titleName
     
     mainView.setup()
     mainView.populateFields(with: model.user)

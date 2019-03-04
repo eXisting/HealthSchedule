@@ -22,7 +22,6 @@
 		ED1ED02421FF353400141CF5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02321FF353400141CF5 /* Category.swift */; };
 		ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */; };
 		ED231B2122295A1700A80FC9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2022295A1700A80FC9 /* HomeViewController.swift */; };
-		ED231B24222960FC00A80FC9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B23222960FC00A80FC9 /* HomeView.swift */; };
 		ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2522297C6900A80FC9 /* HistoryViewController.swift */; };
 		ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
@@ -84,7 +83,6 @@
 		ED1ED02321FF353400141CF5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		ED231B2022295A1700A80FC9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		ED231B23222960FC00A80FC9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ED231B2522297C6900A80FC9 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHoverHeaderView.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -231,7 +229,6 @@
 		ED231B22222960E100A80FC9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				ED231B23222960FC00A80FC9 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -594,7 +591,6 @@
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
-				ED231B24222960FC00A80FC9 /* HomeView.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
 			);

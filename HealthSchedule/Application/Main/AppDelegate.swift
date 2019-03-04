@@ -26,15 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Set translucent. (Default value is already true, so this can be removed if desired.)
     UINavigationBar.appearance().isTranslucent = true
     
-    if #available(iOS 11.0, *) {
-      //To change iOS 11 navigationBar largeTitle color
-      UINavigationBar.appearance().prefersLargeTitles = true
-      UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-    } else {
-      // for default navigation bar title color
-      UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-    }
-    
     return true
   }
 

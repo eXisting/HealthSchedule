@@ -11,19 +11,12 @@ import UIKit
 class HomeViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Home"
   
-  private let mainView = HomeView()
-  
   override func loadView() {
     super.loadView()
-    
-    view = mainView
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = titleName
-    
-    mainView.setup()
   }
   
   func setupTabBarItem() {
