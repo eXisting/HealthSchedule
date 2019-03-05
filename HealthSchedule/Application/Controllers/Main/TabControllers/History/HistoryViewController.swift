@@ -8,17 +8,25 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController, SetupableTabBarItem {
+class HistoryViewController: UIViewController {
   private let titleName = "History"
+  
+  private let mainView = HistoryTableView()
   
   override func loadView() {
     super.loadView()
+    
+    view = mainView
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
   }
-  
+}
+
+// MARK: -Extensions
+
+extension HistoryViewController: SetupableTabBarItem {
   func setupTabBarItem() {
     tabBarItem.title  = titleName
     
