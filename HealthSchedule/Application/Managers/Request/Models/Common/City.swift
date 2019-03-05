@@ -15,9 +15,3 @@ struct City {
 }
 
 extension City: Codable {}
-
-extension City: PrintableObject {
-  func getViewableString() -> String {
-    return title
-  }
-}

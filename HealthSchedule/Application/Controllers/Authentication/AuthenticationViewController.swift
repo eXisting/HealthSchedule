@@ -9,7 +9,10 @@
 import UIKit
 
 class AuthenticationViewController: UIViewController {
+  private var rootNavigation: RootNavigationController?
+  
   private var mainView: AuthMainView!
+  private let model: AuthenticationingModel = UserMainModel()
   
   override func loadView() {
     super.loadView()
@@ -19,6 +22,8 @@ class AuthenticationViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    rootNavigation = (self.navigationController as? RootNavigationController)
     
     mainView.setUpViews()
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
@@ -36,32 +41,33 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc func onSignInClick() {
-    let login = mainView.loginField.text!
-    let password = mainView.passwordField.text!
-    UserManager.shared.login(login: login, password: password) {
+    guard let formData = mainView.getFormData() else {
+      showWarningAlert(message: "Either login or password are not filled!")
+      return
+    }
+    
+    model.login(login: formData.login, password: formData.password) {
       [weak self] error in
       DispatchQueue.main.async {
         if let error = error {
-          AlertHandler.ShowAlert(
-            for: self!,
-            "Warning",
-            error,
-            .alert)
-          
+          self?.showWarningAlert(message: error)
           return
         }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as! UITabBarController
-        
-        self?.present(controller, animated: true, completion: nil)
+
+        self?.rootNavigation?.presentHome()
       }
     }
   }
   
   @objc func onSignUpClick() {
-    let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-    let controller = storyboard.instantiateInitialViewController() as! SignUpRootViewController
-    self.navigationController?.pushViewController(controller, animated: true)
+    rootNavigation?.presentSignUpController()
+  }
+  
+  private func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(
+      for: self,
+      "Warning",
+      message,
+      .alert)
   }
 }

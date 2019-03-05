@@ -25,6 +25,15 @@ class AuthMainView: UIView {
     setUpLoginButton()
   }
   
+  func getFormData() -> (login: String, password: String)? {
+    guard let login = loginField.text,
+      let password = passwordField.text else {
+        return nil
+    }
+    
+    return (login, password)
+  }
+  
   private func setUpBackground() {
     let background = UIImageView(image: UIImage(named: "Backgrounds/auth"))
     

@@ -12,8 +12,10 @@ class SignUpRootViewController: UIViewController {
   
   // test data
   //var signUpData: Parser.JsonDictionary = ["email":"johnsmit@gmail.com", "password":"qwerty123", "first_name":"Ann", "last_name":"Yan", "birthday_at":"2019-01-31", "phone":""]
-    
-  var mainView: MainSignUpInfoView!
+  private var rootNavigation: RootNavigationController?
+  
+  private var mainView: MainSignUpInfoView!
+  private let model: AuthenticationingModel = UserMainModel()
   
   override func loadView() {
     super.loadView()
@@ -23,6 +25,7 @@ class SignUpRootViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    rootNavigation = (self.navigationController as? RootNavigationController)
     
     mainView.setupViews()
     mainView.addTargets()
@@ -30,21 +33,21 @@ class SignUpRootViewController: UIViewController {
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
   }
   
-  func signUp(doneWithProvider: Bool = false) {
-    if mainView.validateData() {
-      UserManager.shared.register(userType: mainView.userType, mainView.data) {
-        [weak self] error in
-        DispatchQueue.main.async {
-          if let error = error {
-            self!.showAlert(error)
-            return
-          }
-          
-          self!.performTransaction(doneWithProvider)
-        }
-      }
-    } else {
+  func signUp() {
+    if !model.validateSignUpData(mainView.collectedData) {
       showAlert(ResponseStatus.invalidData.rawValue)
+    }
+    
+    model.register(userType: mainView.userType, mainView.collectedData) {
+      [weak self] error in
+      DispatchQueue.main.async {
+        if let error = error {
+          self!.showAlert(error)
+          return
+        }
+          
+        self?.rootNavigation?.presentHome()
+      }
     }
   }
   
@@ -52,26 +55,11 @@ class SignUpRootViewController: UIViewController {
   
   @objc func onNextClick() {
     if mainView.userType == .provider {
-      performTransaction()
+      rootNavigation?.presentProviderDetailsController()
       return
     }
     
     signUp()
-  }
-  
-  // MARK: - Helpers
-  
-  private func performTransaction(_ doneWithProvider: Bool = false) {
-    var controller: UIViewController
-    
-    if mainView.userType == .provider && !doneWithProvider {
-      controller = self.storyboard?.instantiateViewController(withIdentifier: "ProviderSignUp") as! ProviderSignUpViewController
-      self.navigationController?.pushViewController(controller, animated: true)
-    } else {
-      controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
-      
-      self.present(controller, animated: true)
-    }
   }
   
   private func showAlert(_ message: String) {
