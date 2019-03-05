@@ -8,9 +8,9 @@
 
 import UIKit
 
-class AccountSection: UITableViewHeaderFooterView {
-  func setup(title: String) {
-    contentView.backgroundColor = .white
+class CommonSection: UITableViewHeaderFooterView {
+  func setup(title: String, backgroundColor: UIColor) {
+    contentView.backgroundColor = backgroundColor
     textLabel?.text = title
   }
 }

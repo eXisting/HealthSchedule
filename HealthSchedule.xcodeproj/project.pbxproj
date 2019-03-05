@@ -24,14 +24,17 @@
 		ED231B2122295A1700A80FC9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2022295A1700A80FC9 /* HomeViewController.swift */; };
 		ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2522297C6900A80FC9 /* HistoryViewController.swift */; };
 		ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */; };
-		ED231B2F222D486600A80FC9 /* AccountSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2E222D486600A80FC9 /* AccountSection.swift */; };
+		ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2E222D486600A80FC9 /* CommonSection.swift */; };
 		ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B30222D48FF00A80FC9 /* AccountTableView.swift */; };
 		ED231B33222D498800A80FC9 /* AccountRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B32222D498800A80FC9 /* AccountRow.swift */; };
 		ED231B3B222D7C2600A80FC9 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3A222D7C2600A80FC9 /* HomeNavigationController.swift */; };
 		ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3C222D7C3600A80FC9 /* HistoryNavigatonController.swift */; };
 		ED231B40222E6EC600A80FC9 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3F222E6EC600A80FC9 /* RequestViewController.swift */; };
 		ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B41222E6EE000A80FC9 /* RequestNavigationController.swift */; };
-		ED231B45222E756E00A80FC9 /* HistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B44222E756E00A80FC9 /* HistoryTableView.swift */; };
+		ED231B45222E756E00A80FC9 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B44222E756E00A80FC9 /* HistoryView.swift */; };
+		ED231B48222E78AC00A80FC9 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B47222E78AC00A80FC9 /* NoDataView.swift */; };
+		ED231B4B222E7A2A00A80FC9 /* HistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4A222E7A2A00A80FC9 /* HistoryTableView.swift */; };
+		ED231B4D222E850300A80FC9 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4C222E850300A80FC9 /* HistoryRow.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
 		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
 		ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpRootViewController.swift */; };
@@ -92,14 +95,17 @@
 		ED231B2022295A1700A80FC9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED231B2522297C6900A80FC9 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHoverHeaderView.swift; sourceTree = "<group>"; };
-		ED231B2E222D486600A80FC9 /* AccountSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSection.swift; sourceTree = "<group>"; };
+		ED231B2E222D486600A80FC9 /* CommonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSection.swift; sourceTree = "<group>"; };
 		ED231B30222D48FF00A80FC9 /* AccountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableView.swift; sourceTree = "<group>"; };
 		ED231B32222D498800A80FC9 /* AccountRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRow.swift; sourceTree = "<group>"; };
 		ED231B3A222D7C2600A80FC9 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		ED231B3C222D7C3600A80FC9 /* HistoryNavigatonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryNavigatonController.swift; sourceTree = "<group>"; };
 		ED231B3F222E6EC600A80FC9 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		ED231B41222E6EE000A80FC9 /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
-		ED231B44222E756E00A80FC9 /* HistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableView.swift; sourceTree = "<group>"; };
+		ED231B44222E756E00A80FC9 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		ED231B47222E78AC00A80FC9 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		ED231B4A222E7A2A00A80FC9 /* HistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableView.swift; sourceTree = "<group>"; };
+		ED231B4C222E850300A80FC9 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		ED330C6B21F08536001019FC /* SignUpRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 		ED089A7321E7902D006A8523 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ED231B46222E787400A80FC9 /* Common */,
 				ED231B43222E755400A80FC9 /* History */,
 				EDCFB46322294F0F00A6B56F /* Account */,
 				ED44831A22086FDD00BE8EF0 /* Authenticatiion */,
@@ -251,7 +258,6 @@
 		ED231B2D222D482200A80FC9 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				ED231B2E222D486600A80FC9 /* AccountSection.swift */,
 				ED231B30222D48FF00A80FC9 /* AccountTableView.swift */,
 				ED231B32222D498800A80FC9 /* AccountRow.swift */,
 			);
@@ -288,9 +294,36 @@
 		ED231B43222E755400A80FC9 /* History */ = {
 			isa = PBXGroup;
 			children = (
-				ED231B44222E756E00A80FC9 /* HistoryTableView.swift */,
+				ED231B49222E7A1C00A80FC9 /* TableView */,
+				ED231B44222E756E00A80FC9 /* HistoryView.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		ED231B46222E787400A80FC9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ED231B4E222E8FB000A80FC9 /* TableView */,
+				ED231B47222E78AC00A80FC9 /* NoDataView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ED231B49222E7A1C00A80FC9 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				ED231B4A222E7A2A00A80FC9 /* HistoryTableView.swift */,
+				ED231B4C222E850300A80FC9 /* HistoryRow.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		ED231B4E222E8FB000A80FC9 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				ED231B2E222D486600A80FC9 /* CommonSection.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		ED330C6121EF878C001019FC /* Authentication */ = {
@@ -613,9 +646,11 @@
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
+				ED231B4B222E7A2A00A80FC9 /* HistoryTableView.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
+				ED231B4D222E850300A80FC9 /* HistoryRow.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
@@ -625,7 +660,7 @@
 				ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
 				ED4483112204AA4400BE8EF0 /* UserMainModel.swift in Sources */,
-				ED231B2F222D486600A80FC9 /* AccountSection.swift in Sources */,
+				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
 				ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				ED231B33222D498800A80FC9 /* AccountRow.swift in Sources */,
@@ -636,6 +671,7 @@
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
 				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,
 				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
+				ED231B48222E78AC00A80FC9 /* NoDataView.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* HomeNavigationController.swift in Sources */,
@@ -654,7 +690,7 @@
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */,
-				ED231B45222E756E00A80FC9 /* HistoryTableView.swift in Sources */,
+				ED231B45222E756E00A80FC9 /* HistoryView.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,

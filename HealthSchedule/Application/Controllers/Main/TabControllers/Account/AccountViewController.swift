@@ -58,13 +58,13 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountTableView.sectionIdentifier) as! AccountSection
+    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountTableView.sectionIdentifier) as! CommonSection
     
     guard let tuple = model.userData?[section] else {
       return header
     }
     
-    header.setup(title: tuple.sectionName)
+    header.setup(title: tuple.sectionName, backgroundColor: self.view.backgroundColor ?? .white)
     
     return header
   }

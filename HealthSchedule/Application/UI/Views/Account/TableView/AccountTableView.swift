@@ -20,7 +20,7 @@ class AccountTableView: UITableView {
     showsVerticalScrollIndicator = true
     
     register(AccountRow.self, forCellReuseIdentifier: AccountTableView.cellIdentifier)
-    register(AccountSection.self, forHeaderFooterViewReuseIdentifier: AccountTableView.sectionIdentifier)
+    register(CommonSection.self, forHeaderFooterViewReuseIdentifier: AccountTableView.sectionIdentifier)
     
     // Remove last underline in table view
     tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 1))
