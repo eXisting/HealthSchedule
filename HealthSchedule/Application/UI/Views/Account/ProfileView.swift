@@ -14,10 +14,6 @@ class ProfileView: UIView {
   
   private let tableView = AccountTableView()
   
-  private let fullNameField = UITextField()
-  private let cityField = UITextField()
-  private let birthday = UITextField()
-  
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, imageUrl: String?) {
     startLoadProfileImage(imageUrl: imageUrl)
 
