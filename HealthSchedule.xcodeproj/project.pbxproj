@@ -220,7 +220,6 @@
 				ED44831A22086FDD00BE8EF0 /* Authenticatiion */,
 				EDCFB45322280D0800A6B56F /* Date picker */,
 				ED330C8F21F21B0C001019FC /* Designable */,
-				ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */,
 				ED3D233D21F617A600BCADE9 /* SelectWithExperienceView.swift */,
 				ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */,
 			);
@@ -304,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				ED231B4E222E8FB000A80FC9 /* TableView */,
+				ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */,
 				ED231B47222E78AC00A80FC9 /* NoDataView.swift */,
 			);
 			path = Common;
