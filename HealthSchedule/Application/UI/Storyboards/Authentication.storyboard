@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mIo-oR-Uua">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Root Navigation Controller-->
+        <scene sceneID="NID-xN-nW0">
+            <objects>
+                <navigationController id="mIo-oR-Uua" customClass="RootNavigationController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tlW-fk-6Yw">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="r5o-kW-ZAr" kind="relationship" relationship="rootViewController" id="lWl-Cn-8WR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eR1-uh-MCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1068" y="205"/>
+        </scene>
+        <!--Authentication View Controller-->
+        <scene sceneID="hQ4-KR-HEc">
+            <objects>
+                <viewController id="r5o-kW-ZAr" customClass="AuthenticationViewController" customModule="HealthSchedule" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zus-dx-uaL" customClass="AuthMainView" customModule="HealthSchedule" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons/check" translatesAutoresizingMaskIntoConstraints="NO" id="PUM-Cr-6hS">
+                                <rect key="frame" x="100.66666666666667" y="95.999999999999986" width="212.66666666666663" height="212.66666666666663"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="Rjh-xQ-el4"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Sh3-cN-IOn"/>
+                                    <constraint firstAttribute="width" secondItem="PUM-Cr-6hS" secondAttribute="height" multiplier="1:1" id="rWv-Uj-Atq"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ur7-Qo-TJj" userLabel="Login Form">
+                                <rect key="frame" x="62" y="375.33333333333331" width="290" height="132.66666666666669"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="kathleen.kshlerin@example.org" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0Pz-kf-LGf" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="290" height="66.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="username"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/user"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="secret" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="60c-th-Yrk" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="66.333333333333371" width="290" height="66.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/key"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="0Pz-kf-LGf" firstAttribute="height" secondItem="ur7-Qo-TJj" secondAttribute="height" multiplier="0.5" id="2iA-P0-Cs5"/>
+                                    <constraint firstItem="60c-th-Yrk" firstAttribute="height" secondItem="0Pz-kf-LGf" secondAttribute="height" id="CFN-AP-m6u"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEz-vG-unf">
+                                <rect key="frame" x="84.000000000000014" y="540" width="246.33333333333337" height="43"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pED-oV-n2i" userLabel="SignUp Stack">
+                                <rect key="frame" x="114.33333333333333" y="690" width="185.33333333333337" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOA-Vg-0zN">
+                                        <rect key="frame" x="0.0" y="0.0" width="122.33333333333333" height="30"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="756-xS-ewN">
+                                        <rect key="frame" x="130.33333333333331" y="0.0" width="55" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" red="0.48054494390000002" green="0.18267327629999999" blue="0.60903791240000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PUM-Cr-6hS" firstAttribute="top" secondItem="PVb-99-Yjb" secondAttribute="top" constant="32" id="0ul-uT-a0V"/>
+                            <constraint firstItem="ur7-Qo-TJj" firstAttribute="centerY" secondItem="zus-dx-uaL" secondAttribute="centerY" multiplier="1.2" id="1sa-rx-WJo"/>
+                            <constraint firstItem="pED-oV-n2i" firstAttribute="centerX" secondItem="zus-dx-uaL" secondAttribute="centerX" id="70Q-KO-hpZ"/>
+                            <constraint firstItem="PUM-Cr-6hS" firstAttribute="centerY" secondItem="zus-dx-uaL" secondAttribute="centerY" multiplier="0.55" priority="750" id="76N-0J-Tsz"/>
+                            <constraint firstItem="aEz-vG-unf" firstAttribute="centerX" secondItem="zus-dx-uaL" secondAttribute="centerX" id="9En-Fc-1uX"/>
+                            <constraint firstItem="ur7-Qo-TJj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PUM-Cr-6hS" secondAttribute="bottom" constant="8" id="Kfn-Yx-WDK"/>
+                            <constraint firstItem="ur7-Qo-TJj" firstAttribute="width" secondItem="zus-dx-uaL" secondAttribute="width" multiplier="0.7" id="NV4-jX-XHJ"/>
+                            <constraint firstItem="aEz-vG-unf" firstAttribute="height" secondItem="60c-th-Yrk" secondAttribute="height" multiplier="0.65" id="Ohp-CZ-uwl"/>
+                            <constraint firstItem="PVb-99-Yjb" firstAttribute="bottom" secondItem="pED-oV-n2i" secondAttribute="bottom" constant="16" id="SI2-qf-yZT"/>
+                            <constraint firstItem="aEz-vG-unf" firstAttribute="top" secondItem="ur7-Qo-TJj" secondAttribute="bottom" constant="32" id="Scx-yH-eRb"/>
+                            <constraint firstItem="PUM-Cr-6hS" firstAttribute="centerX" secondItem="zus-dx-uaL" secondAttribute="centerX" id="bsY-rU-sSt"/>
+                            <constraint firstItem="ur7-Qo-TJj" firstAttribute="centerX" secondItem="zus-dx-uaL" secondAttribute="centerX" id="jPv-uj-c8i"/>
+                            <constraint firstItem="aEz-vG-unf" firstAttribute="width" secondItem="ur7-Qo-TJj" secondAttribute="width" multiplier="0.85" id="ngs-OK-Svu"/>
+                            <constraint firstItem="ur7-Qo-TJj" firstAttribute="height" secondItem="zus-dx-uaL" secondAttribute="height" multiplier="0.18" id="xDr-Ku-xll"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PVb-99-Yjb"/>
+                        <connections>
+                            <outlet property="loginField" destination="0Pz-kf-LGf" id="Ykp-cW-5Uc"/>
+                            <outlet property="loginForm" destination="ur7-Qo-TJj" id="AE5-cL-52z"/>
+                            <outlet property="logo" destination="PUM-Cr-6hS" id="xQb-ur-z6U"/>
+                            <outlet property="passwordField" destination="60c-th-Yrk" id="7S8-qn-9zh"/>
+                            <outlet property="signInButton" destination="aEz-vG-unf" id="Alz-eq-GGB"/>
+                            <outlet property="signUpButton" destination="756-xS-ewN" id="cls-b4-S4r"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="OKU-KG-3MY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a94-Z8-I6U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-263" y="206"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icons/check" width="179.06735229492188" height="179.06735229492188"/>
+        <image name="Icons/key" width="37.5" height="37.5"/>
+        <image name="Icons/user" width="37.5" height="37.5"/>
+    </resources>
+</document>
