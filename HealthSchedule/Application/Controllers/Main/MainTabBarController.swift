@@ -15,8 +15,10 @@ protocol SetupableTabBarItem {
 class MainTabBarController: UITabBarController {
   private var homeNavigationController: HomeNavigationController!
   private var historyNavigationController: HistoryNavigationController!
-  
+  private var requestNavigationController: RequestNavigationController!
+
   private let homeTab = HomeViewController()
+  private let requestTab = RequestViewController()
   private let historyTab = HistoryViewController()
   private let accountTab = AccountViewController()
   
@@ -25,8 +27,14 @@ class MainTabBarController: UITabBarController {
 
     homeNavigationController = HomeNavigationController(rootViewController: homeTab)
     historyNavigationController = HistoryNavigationController(rootViewController: historyTab)
-    
-    let tabBarItems = [homeNavigationController, historyNavigationController, accountTab]
+    requestNavigationController = RequestNavigationController(rootViewController: requestTab)
+
+    let tabBarItems = [
+      homeNavigationController,
+      requestNavigationController,
+      historyNavigationController,
+      accountTab
+    ]
 
     tabBarItems.forEach { item in
       guard let navigationController = item as? UINavigationController else {
