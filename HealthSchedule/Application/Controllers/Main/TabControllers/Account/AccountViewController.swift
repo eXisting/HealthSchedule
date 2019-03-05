@@ -64,7 +64,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
       return header
     }
     
-    header.setup(title: tuple.section)
+    header.setup(title: tuple.sectionName)
     
     return header
   }
@@ -76,7 +76,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
       return cell
     }
     
-    cell.value = tuple.row
+    cell.value = tuple.rowValue
     
     return cell
   }

@@ -30,19 +30,24 @@ class UserMainModel {
     }
   }
   
-  lazy var userData: [Int: (section: String, row: String)]? = {
+  lazy var userData: [(sectionName: String, rowValue: String)]? = {
     guard let currentUser = user else {
       // return all from core data
       return nil
     }
     
-    return [
-      0: ("Full name", currentUser.firstName + " " + currentUser.lastName),
-      1: ("City", currentUser.city!.name),
-      2: ("Birthday", DateManager.shared.dateToString(currentUser.birthday)),
-      3: ("E-mail", currentUser.email),
-      4: ("Phone", currentUser.phone ?? "")
-    ]
+    var result: [(sectionName: String, rowValue: String)] = []
+    result.append(("Full name", currentUser.firstName + " " + currentUser.lastName))
+    result.append(("City", currentUser.city!.name))
+    result.append(("Birthday", DateManager.shared.dateToString(currentUser.birthday)))
+    result.append(("E-mail", currentUser.email))
+    result.append(("Phone", currentUser.phone ?? ""))
+
+    if let providerData = currentUser.providerData {
+      // TODO: - return provider data
+    }
+    
+    return result
   }()
   
   private func requestProviderData() {
