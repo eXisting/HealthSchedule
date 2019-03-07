@@ -22,9 +22,9 @@ protocol ProviderHandlingModel {
 
 class UserMainModel {
   
-  private static var user: User?
+  private static var user: RemoteUser?
   
-  var user: User? {
+  var user: RemoteUser? {
     get {
       return UserMainModel.user
     }
@@ -125,7 +125,7 @@ extension UserMainModel: AuthenticationingModel {
 
 extension UserMainModel: ProviderHandlingModel {
   func getProfessions(completion: @escaping (String?) -> Void) {
-    RequestManager.getListAsync(for: ProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
+    RequestManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
       (list, response) in
       if response.error != nil {
         completion(response.error)

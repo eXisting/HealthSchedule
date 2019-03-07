@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ScheduleWeekDay {
+struct RemoteScheduleWeekDay {
   var id: Int
   var providerId: Int
   var weekDay: Int
@@ -18,7 +18,7 @@ struct ScheduleWeekDay {
   var endTime: Date
 }
 
-extension ScheduleWeekDay: Codable {
+extension RemoteScheduleWeekDay: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: ScheduleJsonFields.self)
     try container.encode(id, forKey: .id)

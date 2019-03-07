@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct Address {
+struct RemoteAddress {
   var id: Int
   var address: String
 }
 
-extension Address: Codable {}
+extension RemoteAddress: Codable {}

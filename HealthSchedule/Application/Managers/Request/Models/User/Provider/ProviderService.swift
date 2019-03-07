@@ -19,7 +19,7 @@ enum ProviderServiceJsonFields: String, CodingKey {
   case addressId = "address_id"
 }
 
-struct ProviderService {
+struct RemoteProviderService {
   var id: Int
   var providerId: Int
   var serviceId: Int
@@ -30,7 +30,7 @@ struct ProviderService {
   var interval: Date
 }
 
-extension ProviderService: Codable {
+extension RemoteProviderService: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: ProviderServiceJsonFields.self)
     try container.encode(id, forKey: .id)

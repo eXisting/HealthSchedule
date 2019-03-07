@@ -20,7 +20,7 @@ enum ScheduleJsonFields: String, CodingKey {
   case endTime = "end_time"
 }
 
-struct ScheduleDateException {
+struct RemoteScheduleDateException {
   var id: Int
   var providerId: Int
   var workingStatus: Int
@@ -30,7 +30,7 @@ struct ScheduleDateException {
   var endTime: Date
 }
 
-extension ScheduleDateException: Codable {
+extension RemoteScheduleDateException: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: ScheduleJsonFields.self)
     try container.encode(id, forKey: .id)

@@ -37,7 +37,7 @@ enum UserType: Int, Codable {
   case client = 2
 }
 
-struct User { 
+struct RemoteUser {
   var id: Int
   var firstName: String
   var lastName: String
@@ -46,14 +46,14 @@ struct User {
   var status: Bool
   var birthday: Date
   
-  var role: Role
-  var city: City?
+  var role: RemoteRole
+  var city: RemoteCity?
   var photo: ProfileImage?
   
   var providerData: ProviderData?
 }
 
-extension User: Codable {
+extension RemoteUser: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: UserJsonFields.self)
     try container.encode(id, forKey: .id)
@@ -77,8 +77,8 @@ extension User: Codable {
     email = try container.decode(String.self, forKey: .email)
     phone = try container.decode(String.self, forKey: .phone)
     status = try container.decode(Bool.self, forKey: .status)
-    city = try? container.decode(City.self, forKey: .city)
-    role = try container.decode(Role.self, forKey: .role)
+    city = try? container.decode(RemoteCity.self, forKey: .city)
+    role = try container.decode(RemoteRole.self, forKey: .role)
     photo = try? container.decode(ProfileImage.self, forKey: .image)
 
     let birthdayString = try container.decode(String.self, forKey: .birthday)

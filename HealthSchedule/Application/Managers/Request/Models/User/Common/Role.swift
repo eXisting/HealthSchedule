@@ -8,10 +8,10 @@
 
 import UIKit
 
-struct Role {
+struct RemoteRole {
   var id: Int
   var name: String
   var title: String
 }
 
-extension Role: Codable {}
+extension RemoteRole: Codable {}

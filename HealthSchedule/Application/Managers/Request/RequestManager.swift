@@ -70,14 +70,14 @@ class RequestManager {
   
   // MARK: - AUTHENTICATION
   
-  class func signIn(userData: Data, _ completion: @escaping (User?, ServerResponse) -> Void) {
+  class func signIn(userData: Data, _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
     authorize(to: Endpoints.signIn.rawValue, userData, completion)
   }
   
   class func signUp(
     authType: UserType,
     userData: Data,
-    _ completion: @escaping (User?, ServerResponse) -> Void) {
+    _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
     
     let isClientSignUp = authType == .client
     let endpoint = isClientSignUp ? Endpoints.signUpAsUser : Endpoints.signUpAsProvider
@@ -93,7 +93,7 @@ extension RequestManager {
   private class func authorize(
     to url: String,
     _ data: Data?,
-    _ completion: @escaping (User?, ServerResponse) -> Void) {
+    _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
     
     postAsync(to: url, as: .post, data, nil) {
       (tokenJson, tokenResponse) in
@@ -104,7 +104,7 @@ extension RequestManager {
       
       rememberToken(from: tokenJson)
       
-      getAsync(for: User.self, from: Endpoints.user, sessionToken?.asParams(), completion)
+      getAsync(for: RemoteUser.self, from: Endpoints.user, sessionToken?.asParams(), completion)
     }
   }
   

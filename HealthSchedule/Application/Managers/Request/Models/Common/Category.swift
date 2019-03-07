@@ -8,11 +8,11 @@
 
 import UIKit
 
-struct Category {
+struct RemoteCategory {
   var id: Int
   var categoryId: Int
   var name: String
   var title: String
 }
 
-extension Category: Codable {}
+extension RemoteCategory: Codable {}

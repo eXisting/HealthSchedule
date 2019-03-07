@@ -13,13 +13,13 @@ enum ProviderDataJsonFields: String, CodingKey {
 }
 
 struct ProviderData {
-  var professions: [ProviderProfession] = []
+  var professions: [RemoteProviderProfession] = []
   var certificates: [ProfileImage] = []
-  var services: [ProviderService] = []
+  var services: [RemoteProviderService] = []
   
-  var scheduleTemplate: [ScheduleWeekDay] = []
-  var scheduleExceptions: [ScheduleDateException] = []
-  var address: Address?
+  var scheduleTemplate: [RemoteScheduleWeekDay] = []
+  var scheduleExceptions: [RemoteScheduleDateException] = []
+  var address: RemoteAddress?
   
   init() {}
 }
