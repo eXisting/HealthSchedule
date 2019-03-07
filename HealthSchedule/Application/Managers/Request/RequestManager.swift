@@ -116,7 +116,7 @@ extension RequestManager {
     guard let token = Parser.anyToObject(destination: Token.self, json) else {
       return
     }
-    
+    print(token.token)
     sessionToken = token
   }
 }

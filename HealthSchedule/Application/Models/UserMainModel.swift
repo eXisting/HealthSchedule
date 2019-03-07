@@ -20,6 +20,12 @@ protocol ProviderHandlingModel {
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
 }
 
+protocol CommonDataRequesting {
+  func getRequests(completion: @escaping () -> Void)
+  func getCities(completion: @escaping () -> Void)
+  func getRecomendations()
+}
+
 class UserMainModel {
   
   private static var user: RemoteUser?
@@ -56,6 +62,23 @@ class UserMainModel {
   }
 }
 
+extension UserMainModel: CommonDataRequesting {
+  func getRequests(completion: @escaping () -> Void) {
+    RequestManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken?.asParams()) {
+      (list, response) in
+      print(list)
+    }
+  }
+  
+  func getCities(completion: @escaping () -> Void) {
+    
+  }
+  
+  func getRecomendations() {
+    
+  }
+}
+
 extension UserMainModel: AuthenticationingModel {
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
     let postBody = ["username": login, "password": password]
@@ -66,15 +89,20 @@ extension UserMainModel: AuthenticationingModel {
     
     RequestManager.signIn(userData: data) {
       [weak self] (user, response) in
+      guard let remoteUser = user else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
       if response.error != nil {
         completion(response.error)
         return
       }
       
-      UserMainModel.user = user
+      UserMainModel.user = remoteUser
       
       // TODO: refactor this
-      if user!.role.name == "provider" {
+      if remoteUser.role.name == "provider" {
         self?.requestProviderData()
       }
       
@@ -90,12 +118,17 @@ extension UserMainModel: AuthenticationingModel {
     
     RequestManager.signUp(authType: userType, userData: data) {
       [weak self] (user, response) in
+      guard let remoteUser = user else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
       if response.error != nil {
         completion(response.error)
         return
       }
       
-      UserMainModel.user = user
+      UserMainModel.user = remoteUser
       
       if userType == .provider {
         self?.requestProviderData()
