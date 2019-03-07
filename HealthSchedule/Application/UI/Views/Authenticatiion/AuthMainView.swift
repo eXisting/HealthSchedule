@@ -18,10 +18,10 @@ class AuthMainView: UIView {
   @IBOutlet weak var signInButton: UIButton!
   @IBOutlet weak var signUpButton: UIButton!
   
-  func setUpViews() {
+  func setUpViews(textFieldsDelegate: UITextFieldDelegate) {
     setUpLogo()
     setUpBackground()
-    setUpTextFields()
+    setUpTextFields(textFieldsDelegate: textFieldsDelegate)
     setUpLoginButton()
   }
   
@@ -47,7 +47,7 @@ class AuthMainView: UIView {
     logo.changeColor(to: .black)
   }
   
-  private func setUpTextFields() {
+  private func setUpTextFields(textFieldsDelegate: UITextFieldDelegate) {
     let leftPadding = loginField.imageSize + loginField.leftPadding
     let rightPadding = loginField.imageSize
     
@@ -61,6 +61,12 @@ class AuthMainView: UIView {
     passwordField.attributedPlaceholder = NSAttributedString(
       string: "Password",
       attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
+    
+    loginField.returnKeyType = .continue
+    passwordField.returnKeyType = .done
+    
+    loginField.delegate = textFieldsDelegate
+    passwordField.delegate = textFieldsDelegate
   }
   
   private func setUpLoginButton() {

@@ -25,7 +25,7 @@ class AuthenticationViewController: UIViewController {
     
     rootNavigation = (self.navigationController as? RootNavigationController)
     
-    mainView.setUpViews()
+    mainView.setUpViews(textFieldsDelegate: self)
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
     mainView.signUpButton.addTarget(self, action: #selector(onSignUpClick), for: .touchDown)
   }
@@ -40,7 +40,9 @@ class AuthenticationViewController: UIViewController {
     self.navigationController?.setNavigationBarHidden(false, animated: animated)
   }
   
-  @objc func onSignInClick() {
+  @objc private func onSignInClick() {
+    mainView.signInButton.isUserInteractionEnabled = false
+    
     guard let formData = mainView.getFormData() else {
       showWarningAlert(message: "Either login or password are not filled!")
       return
@@ -50,6 +52,7 @@ class AuthenticationViewController: UIViewController {
       [weak self] error in
       DispatchQueue.main.async {
         if let error = error {
+          self?.mainView.signInButton.isUserInteractionEnabled = true
           self?.showWarningAlert(message: error)
           return
         }
@@ -59,7 +62,7 @@ class AuthenticationViewController: UIViewController {
     }
   }
   
-  @objc func onSignUpClick() {
+  @objc private func onSignUpClick() {
     rootNavigation?.presentSignUpController()
   }
   
@@ -69,5 +72,41 @@ class AuthenticationViewController: UIViewController {
       "Warning",
       message,
       .alert)
+  }
+}
+
+extension AuthenticationViewController: UITextFieldDelegate {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    performScreenScroll(up: true)
+  }
+  
+  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    performScreenScroll(up: false)
+    return true
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    switch textField {
+    case mainView.loginField:
+      mainView.passwordField.becomeFirstResponder()
+    case mainView.passwordField:
+      textField.resignFirstResponder()
+      onSignInClick()
+    default:
+      textField.resignFirstResponder()
+    }
+    
+    return false
+  }
+  
+  private func performScreenScroll(up: Bool) {
+    UIView.beginAnimations(nil, context: nil)
+    UIView.setAnimationDuration(0.35)
+    var frame = self.view.frame
+    let yValue = frame.origin.y + (up ? -1 : 1) * frame.height * 0.2
+    
+    frame.origin.y = yValue
+    self.view.frame = frame
+    UIView.commitAnimations()
   }
 }
