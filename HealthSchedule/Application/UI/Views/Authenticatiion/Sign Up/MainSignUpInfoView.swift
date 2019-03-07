@@ -32,10 +32,10 @@ class MainSignUpInfoView: UIView {
     userPicker.addTarget(self, action: #selector(userTypeSwitch), for: .valueChanged)
   }
   
-  func setupViews() {
+  func setupViews(textFieldsDelegate: UITextFieldDelegate) {
     setUpUserPicker()
     setUpBackground()
-    setUpTextFields()
+    setUpTextFields(textFieldsDelegate: textFieldsDelegate)
     setUpNextButton()
     setupDatePicker()
   }
@@ -93,7 +93,7 @@ class MainSignUpInfoView: UIView {
     userType = userType == .client ? .provider : .client
   }
   
-  private func setUpTextFields() {
+  private func setUpTextFields(textFieldsDelegate: UITextFieldDelegate) {
     let leftPadding = emailField.imageSize + emailField.leftPadding
     let rightPadding = emailField.imageSize
     
@@ -130,6 +130,11 @@ class MainSignUpInfoView: UIView {
     datePickerField.attributedPlaceholder = NSAttributedString(
       string: "Birthday",
       attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
+    
+    nameFIeld.delegate = textFieldsDelegate
+    emailField.delegate = textFieldsDelegate
+    passwordField.delegate = textFieldsDelegate
+    phoneField.delegate = textFieldsDelegate
   }
   
   private func setUpBackground() {

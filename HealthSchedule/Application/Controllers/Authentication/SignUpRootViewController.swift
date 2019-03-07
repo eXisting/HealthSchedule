@@ -27,7 +27,7 @@ class SignUpRootViewController: UIViewController {
     super.viewDidLoad()
     rootNavigation = (self.navigationController as? RootNavigationController)
     
-    mainView.setupViews()
+    mainView.setupViews(textFieldsDelegate: self)
     mainView.addTargets()
     
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
@@ -53,7 +53,7 @@ class SignUpRootViewController: UIViewController {
   
   // MARK: - Callbacks
   
-  @objc func onNextClick() {
+  @objc private func onNextClick() {
     if mainView.userType == .provider {
       rootNavigation?.presentProviderDetailsController()
       return
@@ -68,5 +68,44 @@ class SignUpRootViewController: UIViewController {
       "Warning",
       message,
       .alert)
+  }
+}
+
+extension SignUpRootViewController: UITextFieldDelegate {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    performScreenScroll(up: true)
+  }
+  
+  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    performScreenScroll(up: false)
+    return true
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    switch textField {
+    case mainView.nameFIeld:
+      mainView.emailField.becomeFirstResponder()
+    case mainView.emailField:
+      mainView.passwordField.becomeFirstResponder()
+    case mainView.passwordField:
+      mainView.phoneField.becomeFirstResponder()
+    case mainView.phoneField:
+      textField.resignFirstResponder()
+    default:
+      textField.resignFirstResponder()
+    }
+    
+    return false
+  }
+  
+  private func performScreenScroll(up: Bool) {
+    UIView.beginAnimations(nil, context: nil)
+    UIView.setAnimationDuration(0.35)
+    var frame = self.view.frame
+    let yValue = frame.origin.y + (up ? -1 : 1) * frame.height * 0.1
+    
+    frame.origin.y = yValue
+    self.view.frame = frame
+    UIView.commitAnimations()
   }
 }
