@@ -9,10 +9,10 @@
 import UIKit
 
 class AuthenticationViewController: UIViewController {
-  private var rootNavigation: RootNavigationController?
+  private var rootNavigation: RootNavigationPresentable!
   
   private var mainView: AuthMainView!
-  private let model: AuthenticationProviding = UserDataRequest()
+  private var model: SignInModel!
   
   override func loadView() {
     super.loadView()
@@ -23,7 +23,8 @@ class AuthenticationViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    rootNavigation = (self.navigationController as? RootNavigationController)
+    rootNavigation = (self.navigationController as! RootNavigationController)
+    model = SignInModel(presentResponsible: rootNavigation, errorShowable: self)
     
     mainView.setUpViews(textFieldsDelegate: self)
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
@@ -41,32 +42,16 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc private func onSignInClick() {
-    mainView.signInButton.isUserInteractionEnabled = false
-    
-    guard let formData = mainView.getFormData() else {
-      showWarningAlert(message: "Either login or password are not filled!")
-      return
-    }
-    
-    model.login(login: formData.login, password: formData.password) {
-      [weak self] error in
-      DispatchQueue.main.async {
-        if let error = error {
-          self?.mainView.signInButton.isUserInteractionEnabled = true
-          self?.showWarningAlert(message: error)
-          return
-        }
-
-        self?.rootNavigation?.presentHome()
-      }
-    }
+    model.signIn(formData: mainView.getFormData(), mainView.signInButton)
   }
   
   @objc private func onSignUpClick() {
-    rootNavigation?.presentSignUpController()
+    rootNavigation.presentSignUpController()
   }
-  
-  private func showWarningAlert(message: String) {
+}
+
+extension AuthenticationViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
     AlertHandler.ShowAlert(
       for: self,
       "Warning",

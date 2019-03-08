@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB6C1C082232F3EC0083DAD3 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6C1C072232F3EC0083DAD3 /* SignInModel.swift */; };
 		DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8519372208CC0E00CCF452 /* ViewLines.swift */; };
 		DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8519392208EECB00CCF452 /* StackViewBackground.swift */; };
 		DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB6C1C072232F3EC0083DAD3 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		DB8519372208CC0E00CCF452 /* ViewLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLines.swift; sourceTree = "<group>"; };
 		DB8519392208EECB00CCF452 /* StackViewBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewBackground.swift; sourceTree = "<group>"; };
 		DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewColorChange.swift; sourceTree = "<group>"; };
@@ -157,6 +159,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB6C1C062232F3CD0083DAD3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				DB6C1C072232F3EC0083DAD3 /* SignInModel.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		ED089A3E21E77D12006A8523 = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +573,7 @@
 		EDCFB46522294FED00A6B56F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DB6C1C062232F3CD0083DAD3 /* Authentication */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -679,6 +690,7 @@
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* HomeNavigationController.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
+				DB6C1C082232F3EC0083DAD3 /* SignInModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,

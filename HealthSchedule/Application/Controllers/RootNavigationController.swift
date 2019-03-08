@@ -8,7 +8,17 @@
 
 import UIKit
 
-class RootNavigationController: UINavigationController {
+protocol ErrorShowable {
+  func showWarningAlert(message: String)
+}
+
+protocol RootNavigationPresentable {
+  func presentHome()
+  func presentSignUpController()
+  func presentProviderDetailsController()
+}
+
+class RootNavigationController: UINavigationController, RootNavigationPresentable {
   private(set) var signUpStoryboard: UIStoryboard!
   
   override func viewDidLoad() {
