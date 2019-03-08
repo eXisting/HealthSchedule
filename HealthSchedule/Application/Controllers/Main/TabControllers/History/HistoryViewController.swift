@@ -12,7 +12,7 @@ class HistoryViewController: UIViewController {
   private let titleName = "History"
   
   private let mainView = HistoryView()
-  private let model = UserMainModel()
+  private let model = UserDataRequest()
     
   override func loadView() {
     super.loadView()

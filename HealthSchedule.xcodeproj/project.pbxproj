@@ -55,7 +55,7 @@
 		ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED448305220477B900BE8EF0 /* ProviderData.swift */; };
 		ED44830C2204A23400BE8EF0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830B2204A23400BE8EF0 /* Address.swift */; };
 		ED44830E2204A52500BE8EF0 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44830D2204A52500BE8EF0 /* Role.swift */; };
-		ED4483112204AA4400BE8EF0 /* UserMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483102204AA4400BE8EF0 /* UserMainModel.swift */; };
+		ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483102204AA4400BE8EF0 /* UserDataRequest.swift */; };
 		ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4483142208380E00BE8EF0 /* RequestEnums.swift */; };
 		ED44831922086D4B00BE8EF0 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED44831822086D4B00BE8EF0 /* Authentication.storyboard */; };
 		ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44831B22086FF300BE8EF0 /* AuthMainView.swift */; };
@@ -127,7 +127,7 @@
 		ED448305220477B900BE8EF0 /* ProviderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderData.swift; sourceTree = "<group>"; };
 		ED44830B2204A23400BE8EF0 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		ED44830D2204A52500BE8EF0 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
-		ED4483102204AA4400BE8EF0 /* UserMainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMainModel.swift; sourceTree = "<group>"; };
+		ED4483102204AA4400BE8EF0 /* UserDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataRequest.swift; sourceTree = "<group>"; };
 		ED4483142208380E00BE8EF0 /* RequestEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEnums.swift; sourceTree = "<group>"; };
 		ED44831822086D4B00BE8EF0 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		ED44831B22086FF300BE8EF0 /* AuthMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainView.swift; sourceTree = "<group>"; };
@@ -379,6 +379,7 @@
 				ED4482FF220466D800BE8EF0 /* Base */,
 				ED6CBE7D21EDDDE900860010 /* Models */,
 				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
+				ED4483102204AA4400BE8EF0 /* UserDataRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -562,7 +563,6 @@
 		EDCFB46522294FED00A6B56F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ED4483102204AA4400BE8EF0 /* UserMainModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -662,7 +662,7 @@
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
-				ED4483112204AA4400BE8EF0 /* UserMainModel.swift in Sources */,
+				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
 				ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,

@@ -12,7 +12,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
   private let mainView = ProfileView()
-  private let model = UserMainModel()
+  private let model = UserDataRequest()
   
   override func loadView() {
     super.loadView()

@@ -15,7 +15,7 @@ class SignUpRootViewController: UIViewController {
   private var rootNavigation: RootNavigationController?
   
   private var mainView: MainSignUpInfoView!
-  private let model: AuthenticationingModel = UserMainModel()
+  private let model: AuthenticationProviding = UserDataRequest()
   
   override func loadView() {
     super.loadView()

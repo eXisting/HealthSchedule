@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol AuthenticationingModel {
+protocol AuthenticationProviding {
   func login(login: String, password: String, completion: @escaping (String?) -> Void)
   func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void)
   func validateSignUpData(_ data: [String: Any]) -> Bool
 }
 
-protocol ProviderHandlingModel {
+protocol ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
@@ -78,7 +78,7 @@ extension UserDataRequest: CommonDataRequesting {
   }
 }
 
-extension UserDataRequest: AuthenticationingModel {
+extension UserDataRequest: AuthenticationProviding {
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
     let postBody = ["username": login, "password": password]
     guard let data = Serializer.getDataFrom(json: postBody) else {
@@ -155,7 +155,7 @@ extension UserDataRequest: AuthenticationingModel {
   }
 }
 
-extension UserDataRequest: ProviderHandlingModel {
+extension UserDataRequest: ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void) {
     RequestManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
       (list, response) in
