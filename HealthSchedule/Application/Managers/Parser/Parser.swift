@@ -16,6 +16,7 @@ class Parser {
     
     guard let elementsList = data as? [Any] else {
       print("Cannot cast to [Any] in anyToObjectArray")
+      print(data)
       return []
     }
     

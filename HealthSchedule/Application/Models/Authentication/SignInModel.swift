@@ -9,11 +9,11 @@
 import UIKit
 
 class SignInModel {
-  private let model: AuthenticationProviding = UserDataRequest()
+  private let userRequestController: AuthenticationProviding = UserDataRequest()
   
   private var errorShowable: ErrorShowable
   private var presentResponsible: RootNavigationPresentable
-
+  
   init(presentResponsible: RootNavigationPresentable, errorShowable: ErrorShowable) {
     self.errorShowable = errorShowable
     self.presentResponsible = presentResponsible
@@ -27,7 +27,7 @@ class SignInModel {
       return
     }
     
-    model.login(login: formData.login, password: formData.password) {
+    userRequestController.login(login: formData.login, password: formData.password) {
       [weak self] error in
       DispatchQueue.main.async {
         if let error = error {

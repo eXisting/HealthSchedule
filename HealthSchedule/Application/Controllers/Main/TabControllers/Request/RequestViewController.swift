@@ -11,12 +11,19 @@ import UIKit
 class RequestViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Requests"
   
+  private var model: RequestsModel!
+  
   override func loadView() {
     super.loadView()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    model = RequestsModel()
+    model.getRequests {
+      
+    }
   }
   
   func setupTabBarItem() {

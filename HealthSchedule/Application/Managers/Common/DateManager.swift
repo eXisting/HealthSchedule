@@ -8,15 +8,30 @@
 
 import UIKit
 
+enum DateFormatType: String {
+  case date = "yyyy-MM-dd"
+  case dateTime = "yyyy-MM-dd HH:mm:ss"
+}
+
 class DateManager {
   static let shared = DateManager()
   
-  let dateFormatter = DateFormatter()
+  private let dateFormatter = DateFormatter()
+  private let dynamicFormatter = DateFormatter()
   
   private var defaultDate: Date!
   
   func stringToDate(_ dateString: String) -> Date {
     guard let date = dateFormatter.date(from: dateString) else {
+      return defaultDate
+    }
+    
+    return date
+  }
+  
+  func stringToDate(_ dateString: String, format: DateFormatType) -> Date {
+    dynamicFormatter.dateFormat = format.rawValue
+    guard let date = dynamicFormatter.date(from: dateString) else {
       return defaultDate
     }
     
@@ -40,7 +55,7 @@ class DateManager {
   }
   
   private init() {
-    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.dateFormat = DateFormatType.date.rawValue
     defaultDate = dateFormatter.date(from: "1000-01-01")
   }
 }

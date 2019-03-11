@@ -54,6 +54,6 @@ extension RemoteRequest: Codable {
     description = try container.decode(String.self, forKey: .description)
 
     let dateString = try container.decode(String.self, forKey: .requestAt)
-    requestAt = DateManager.shared.stringToDate(dateString)
+    requestAt = DateManager.shared.stringToDate(dateString, format: .dateTime)
   }
 }
