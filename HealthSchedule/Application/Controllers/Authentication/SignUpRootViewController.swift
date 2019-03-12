@@ -15,7 +15,7 @@ class SignUpRootViewController: UIViewController {
   private var rootNavigation: RootNavigationController?
   
   private var mainView: MainSignUpInfoView!
-  private let model: AuthenticationProviding = UserDataRequest()
+  private var model: AuthenticationModel!
   
   override func loadView() {
     super.loadView()
@@ -25,7 +25,8 @@ class SignUpRootViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    rootNavigation = (self.navigationController as? RootNavigationController)
+    rootNavigation = (self.navigationController as! RootNavigationController)
+    model = AuthenticationModel(presentResponsible: rootNavigation!, errorShowable: self)
     
     mainView.setupViews(textFieldsDelegate: self)
     mainView.addTargets()
@@ -34,21 +35,7 @@ class SignUpRootViewController: UIViewController {
   }
   
   func signUp() {
-    if !model.validateSignUpData(mainView.collectedData) {
-      showAlert(ResponseStatus.invalidData.rawValue)
-    }
-    
-    model.register(userType: mainView.userType, mainView.collectedData) {
-      [weak self] error in
-      DispatchQueue.main.async {
-        if let error = error {
-          self!.showAlert(error)
-          return
-        }
-          
-        self?.rootNavigation?.presentHome()
-      }
-    }
+    model.signUp(data: mainView.collectedData, userType: mainView.userType)
   }
   
   // MARK: - Callbacks
@@ -61,8 +48,10 @@ class SignUpRootViewController: UIViewController {
     
     signUp()
   }
-  
-  private func showAlert(_ message: String) {
+}
+
+extension SignUpRootViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
     AlertHandler.ShowAlert(
       for: self,
       "Warning",

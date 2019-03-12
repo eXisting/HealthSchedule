@@ -12,7 +12,6 @@ protocol AuthenticationProviding {
   func refreshToken(completion: @escaping () -> Void)
   func login(login: String, password: String, completion: @escaping (String?) -> Void)
   func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void)
-  func validateSignUpData(_ data: [String: Any]) -> Bool
 }
 
 protocol ProviderInfoRequesting {
@@ -129,23 +128,6 @@ extension UserDataRequest: AuthenticationProviding {
       
       completion(nil)
     }
-  }
-  
-  func validateSignUpData(_ data: [String: Any]) -> Bool {
-    let isValid = ValidationController.shared.validate(data[UserJsonFields.firstName.rawValue]! as! String, ofType: .name) &&
-      ValidationController.shared.validate(data[UserJsonFields.lastName.rawValue]! as! String, ofType: .name) &&
-      ValidationController.shared.validate(data[UserJsonFields.email.rawValue]! as! String, ofType: .email) &&
-      ValidationController.shared.validate(data[UserJsonFields.password.rawValue]! as! String, ofType: .password)
-    
-    guard let phone = data[UserJsonFields.phone.rawValue] else {
-      return isValid
-    }
-    
-    if (phone as! String).isEmpty {
-      return isValid
-    }
-    
-    return isValid && ValidationController.shared.validate(phone as! String, ofType: .phone)
   }
 }
 

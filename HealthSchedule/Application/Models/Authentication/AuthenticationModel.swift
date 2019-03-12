@@ -50,4 +50,39 @@ class AuthenticationModel {
       }
     }
   }
+  
+  func signUp(data: [String: Any], userType: UserType) {
+    if !validateSignUpData(data) {
+      errorShowable.showWarningAlert(message: ResponseStatus.invalidData.rawValue)
+    }
+    
+    userRequestController.register(userType: userType, data) {
+      [weak self] error in
+      DispatchQueue.main.async {
+        if let error = error {
+          self?.errorShowable.showWarningAlert(message: error)
+          return
+        }
+        
+        self?.presentResponsible.presentHome()
+      }
+    }
+  }
+  
+  private func validateSignUpData(_ data: [String: Any]) -> Bool {
+    let isValid = ValidationController.shared.validate(data[UserJsonFields.firstName.rawValue]! as! String, ofType: .name) &&
+      ValidationController.shared.validate(data[UserJsonFields.lastName.rawValue]! as! String, ofType: .name) &&
+      ValidationController.shared.validate(data[UserJsonFields.email.rawValue]! as! String, ofType: .email) &&
+      ValidationController.shared.validate(data[UserJsonFields.password.rawValue]! as! String, ofType: .password)
+    
+    guard let phone = data[UserJsonFields.phone.rawValue] else {
+      return isValid
+    }
+    
+    if (phone as! String).isEmpty {
+      return isValid
+    }
+    
+    return isValid && ValidationController.shared.validate(phone as! String, ofType: .phone)
+  }
 }
