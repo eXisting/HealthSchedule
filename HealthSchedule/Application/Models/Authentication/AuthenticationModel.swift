@@ -8,6 +8,15 @@
 
 import UIKit
 
+protocol SigningIn {
+  func autoLogin(_ completion: @escaping () -> Void)
+  func signIn(formData: (login: String, password: String)?, _ sender: UIButton?)
+}
+
+protocol SigningUp {
+  func signUp(data: [String: Any], userType: UserType)
+}
+
 class AuthenticationModel {
   private let userRequestController: AuthenticationProviding = UserDataRequest()
   
@@ -18,7 +27,9 @@ class AuthenticationModel {
     self.errorShowable = errorShowable
     self.presentResponsible = presentResponsible
   }
-  
+}
+
+extension AuthenticationModel: SigningIn {
   func autoLogin(_ completion: @escaping () -> Void) {
     if Token.isValid() {
       // TODO: Get data from keychain and auto login
@@ -50,7 +61,9 @@ class AuthenticationModel {
       }
     }
   }
-  
+}
+
+extension AuthenticationModel: SigningUp {
   func signUp(data: [String: Any], userType: UserType) {
     if !validateSignUpData(data) {
       errorShowable.showWarningAlert(message: ResponseStatus.invalidData.rawValue)

@@ -12,7 +12,7 @@ class AuthenticationViewController: UIViewController {
   private var rootNavigation: RootNavigationPresentable!
   
   private var mainView: AuthMainView!
-  private var model: AuthenticationModel!
+  private var model: SigningIn!
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
