@@ -59,10 +59,12 @@ class DataBaseManager: NSObject {
   
   // MARK: - Core Data Saving support
   
+  func clearUntilCache() {
+    // TODO: Call it at app start and clear all data except 10-20 records
+  }
+  
   func saveData() {
     saveContext(persistentContainer.viewContext)
-    
-    // TODO: -Remove all except cached 10-20 records for next launch fetch
   }
   
   private func saveContext(_ context: NSManagedObjectContext) {

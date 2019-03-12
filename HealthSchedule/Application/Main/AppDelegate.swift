@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     window = UIWindow(frame: UIScreen.main.bounds)
     
+    DataBaseManager.shared.clearUntilCache()
+    
     // Sets background to a blank/empty image
     UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
     // Sets shadow (line below the bar) to a blank image
