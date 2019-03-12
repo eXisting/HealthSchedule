@@ -127,7 +127,7 @@ extension RequestManager {
     let expireDate = DateManager.shared.getExpirationDate(expires: token.expires!)
     UserDefaults.standard.set(token.token, forKey: UserDefaultsKeys.sessionToken.rawValue)
     UserDefaults.standard.set(expireDate, forKey: UserDefaultsKeys.sessionExpires.rawValue)
-
+    print(token.token)
     RequestManager.sessionToken = token
   }
 }

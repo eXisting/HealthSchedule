@@ -73,6 +73,9 @@
 		EDD2A82F22368FDB00B52E68 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */; };
 		EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8302237B22300B52E68 /* UserDefaultsKeys.swift */; };
 		EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8322237CC7100B52E68 /* AccountModel.swift */; };
+		EDD2A8372238026C00B52E68 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8362238026C00B52E68 /* HomeView.swift */; };
+		EDD2A8392238029C00B52E68 /* HomeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8382238029C00B52E68 /* HomeTableView.swift */; };
+		EDD2A83C2238042E00B52E68 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A83B2238042E00B52E68 /* HomeModel.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -149,6 +152,9 @@
 		EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		EDD2A8302237B22300B52E68 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		EDD2A8322237CC7100B52E68 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		EDD2A8362238026C00B52E68 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EDD2A8382238029C00B52E68 /* HomeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableView.swift; sourceTree = "<group>"; };
+		EDD2A83B2238042E00B52E68 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -235,8 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				ED231B46222E787400A80FC9 /* Common */,
-				ED231B43222E755400A80FC9 /* History */,
-				EDCFB46322294F0F00A6B56F /* Account */,
+				EDD2A8352238022D00B52E68 /* Main */,
 				ED44831A22086FDD00BE8EF0 /* Authenticatiion */,
 				EDCFB45322280D0800A6B56F /* Date picker */,
 				ED330C8F21F21B0C001019FC /* Designable */,
@@ -594,8 +599,36 @@
 			children = (
 				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
+				EDD2A83B2238042E00B52E68 /* HomeModel.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		EDD2A8342238021F00B52E68 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A83A2238029F00B52E68 /* TableView */,
+				EDD2A8362238026C00B52E68 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EDD2A8352238022D00B52E68 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EDCFB46322294F0F00A6B56F /* Account */,
+				ED231B43222E755400A80FC9 /* History */,
+				EDD2A8342238021F00B52E68 /* Home */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		EDD2A83A2238029F00B52E68 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A8382238029C00B52E68 /* HomeTableView.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -685,6 +718,7 @@
 				ED231B4B222E7A2A00A80FC9 /* HistoryTableView.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
+				EDD2A8392238029C00B52E68 /* HomeTableView.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				ED231B4D222E850300A80FC9 /* HistoryRow.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
@@ -699,6 +733,7 @@
 				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
 				ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */,
+				EDD2A8372238026C00B52E68 /* HomeView.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				ED231B33222D498800A80FC9 /* AccountRow.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
@@ -730,6 +765,7 @@
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */,
+				EDD2A83C2238042E00B52E68 /* HomeModel.swift in Sources */,
 				ED231B45222E756E00A80FC9 /* HistoryView.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,

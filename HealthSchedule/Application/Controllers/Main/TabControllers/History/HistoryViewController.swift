@@ -13,15 +13,18 @@ class HistoryViewController: UIViewController {
   
   private let mainView = HistoryView()
   private let model = UserDataRequest()
+  private let searchBar = UISearchBar()
     
   override func loadView() {
     super.loadView()
-    
     view = mainView
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationItem.titleView = searchBar
+    searchBar.sizeToFit()
+    searchBar.placeholder = "Search..."
     
     mainView.setup(delegate: self, dataSource: self)
 //    TODO: Get all completed requests
