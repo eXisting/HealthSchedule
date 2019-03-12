@@ -12,13 +12,13 @@ class AuthenticationViewController: UIViewController {
   private var rootNavigation: RootNavigationPresentable!
   
   private var mainView: AuthMainView!
-  private var model: SignInModel!
+  private var model: AuthenticationModel!
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
     rootNavigation = (self.navigationController as! RootNavigationController)
-    model = SignInModel(presentResponsible: rootNavigation, errorShowable: self)
+    model = AuthenticationModel(presentResponsible: rootNavigation, errorShowable: self)
   }
   
   override func loadView() {

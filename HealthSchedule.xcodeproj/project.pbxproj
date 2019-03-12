@@ -68,7 +68,7 @@
 		EDCFB458222819B800A6B56F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB457222819B800A6B56F /* MainTabBarController.swift */; };
 		EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45B22281E2F00A6B56F /* RootNavigationController.swift */; };
 		EDD2A82622314CE800B52E68 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A82522314CE800B52E68 /* Request.swift */; };
-		EDD2A82A22367AF000B52E68 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A82922367AF000B52E68 /* SignInModel.swift */; };
+		EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A82922367AF000B52E68 /* AuthenticationModel.swift */; };
 		EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A82C22367C2800B52E68 /* RequestsModel.swift */; };
 		EDD2A82F22368FDB00B52E68 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */; };
 		EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8302237B22300B52E68 /* UserDefaultsKeys.swift */; };
@@ -144,7 +144,7 @@
 		EDCFB457222819B800A6B56F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		EDCFB45B22281E2F00A6B56F /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
 		EDD2A82522314CE800B52E68 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		EDD2A82922367AF000B52E68 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		EDD2A82922367AF000B52E68 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		EDD2A82C22367C2800B52E68 /* RequestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsModel.swift; sourceTree = "<group>"; };
 		EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		EDD2A8302237B22300B52E68 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 		DB6C1C062232F3CD0083DAD3 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				EDD2A82922367AF000B52E68 /* SignInModel.swift */,
+				EDD2A82922367AF000B52E68 /* AuthenticationModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -714,7 +714,7 @@
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* HomeNavigationController.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
-				EDD2A82A22367AF000B52E68 /* SignInModel.swift in Sources */,
+				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,

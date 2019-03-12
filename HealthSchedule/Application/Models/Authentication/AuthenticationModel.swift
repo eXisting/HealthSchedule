@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInModel {
+class AuthenticationModel {
   private let userRequestController: AuthenticationProviding = UserDataRequest()
   
   private var errorShowable: ErrorShowable
