@@ -26,7 +26,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     super.viewDidLoad()
     
     mainView.setup(delegate: self, dataSource: self)
-    model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()!.image!.url!, setImageForView)
+    model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()?.image?.url, setImageForView)
   }
 
   private func setImageForView(_ imageData: Data) {

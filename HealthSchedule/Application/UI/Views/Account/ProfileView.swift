@@ -22,9 +22,7 @@ class ProfileView: UIView {
   }
   
   func setImage(_ image: UIImage) {
-    UIView.animate(withDuration: 1.5) { [weak self] in
-      self?.profileImageView.image = image
-    }
+    profileImageView.image = image
   }
   
   private func laidOutViews() {

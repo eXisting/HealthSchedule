@@ -113,10 +113,14 @@ class DataBaseManager: NSObject {
   // MARK: Fetch requests
   
   func getCurrentUser() -> User? {
+    let currentUserId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.userUniqueId.rawValue)
+    if currentUserId == 0 {
+      return nil
+    }
+    
     let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
     
-    // TODO: refactor id = 3    
-    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(3))")
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(currentUserId))")
     
     do {
       let result = try persistentContainer.viewContext.fetch(fetchRequest)

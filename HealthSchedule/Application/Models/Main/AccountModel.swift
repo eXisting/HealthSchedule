@@ -28,7 +28,11 @@ class AccountModel {
     return result
   }()
   
-  func startLoadImage(from url: String,_ completion: @escaping (Data) -> Void) {
+  func startLoadImage(from url: String?,_ completion: @escaping (Data) -> Void) {
+    guard let url = url else {
+      return
+    }
+    
     userRequestController.getImage(from: url) { data in
       completion(data)
     }
