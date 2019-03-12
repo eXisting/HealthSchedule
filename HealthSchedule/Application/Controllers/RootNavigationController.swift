@@ -18,14 +18,16 @@ protocol RootNavigationPresentable {
   func presentProviderDetailsController()
 }
 
-class RootNavigationController: UINavigationController, RootNavigationPresentable {
+class RootNavigationController: UINavigationController {
   private(set) var signUpStoryboard: UIStoryboard!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     signUpStoryboard = UIStoryboard(name: "SignUp", bundle: nil)
   }
-  
+}
+
+extension RootNavigationController: RootNavigationPresentable {
   func presentHome() {
     let tabController = MainTabBarController()
     present(tabController, animated: true, completion: nil)

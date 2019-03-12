@@ -54,6 +54,15 @@ class DateManager {
     return (minDate!, maxDate!)
   }
   
+  func getExpirationDate(expires: Int) -> Date {
+    let currentDate = Date()
+    var dateComponents = DateComponents()
+    let calendar = Calendar.init(identifier: .gregorian)
+    dateComponents.second = expires
+    
+    return calendar.date(byAdding: dateComponents, to: currentDate)!
+  }
+  
   private init() {
     dateFormatter.dateFormat = DateFormatType.date.rawValue
     defaultDate = dateFormatter.date(from: "1000-01-01")

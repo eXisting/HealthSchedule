@@ -26,6 +26,14 @@ struct Token {
     
     return [TokenJsonFields.token.rawValue: tokenValue]
   }
+  
+  static func isValid() -> Bool {
+    guard let expirationData = UserDefaults.standard.object(forKey: UserDefaultsKeys.sessionExpires.rawValue) as? Date else {
+      return false
+    }
+    
+    return expirationData > Date()
+  }
 }
 
 extension Token: Codable {}

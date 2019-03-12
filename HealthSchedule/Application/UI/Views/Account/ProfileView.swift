@@ -14,13 +14,17 @@ class ProfileView: UIView {
   
   private let tableView = AccountTableView()
   
-  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, imageUrl: String?) {
-    startLoadProfileImage(imageUrl: imageUrl)
-
+  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     laidOutViews()
     customizeViews()
     
     tableView.setup(delegate: delegate, dataSource: dataSource)
+  }
+  
+  func setImage(_ image: UIImage) {
+    UIView.animate(withDuration: 1.5) { [weak self] in
+      self?.profileImageView.image = image
+    }
   }
   
   private func laidOutViews() {
@@ -43,22 +47,5 @@ class ProfileView: UIView {
   
   private func customizeViews() {
     profileImageView.image = UIImage(named: "Pictures/chooseProfile")
-  }
-  
-  private func startLoadProfileImage(imageUrl: String?) {
-    guard let url = imageUrl else {
-      return
-    }
-    
-    RequestManager.getDataAsync(from: url) {
-      [weak self] (data) in
-      guard let imageData = data else {
-        return
-      }
-      
-      DispatchQueue.main.async {
-        self?.profileImageView.image = UIImage(data: imageData)
-      }
-    }
   }
 }

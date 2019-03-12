@@ -12,7 +12,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
   private let mainView = ProfileView()
-  private let model = UserDataRequest()
+  private let model = AccountModel()
   
   override func loadView() {
     super.loadView()
@@ -25,9 +25,20 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainView.setup(delegate: self, dataSource: self, imageUrl: model.user?.photo?.url)
+    mainView.setup(delegate: self, dataSource: self)
+    model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()!.image!.url!, setImageForView)
   }
 
+  private func setImageForView(_ imageData: Data) {
+    DispatchQueue.main.async { [weak self] in
+      guard let image = UIImage(data: imageData) else {
+        return
+      }
+      
+      self?.mainView.setImage(image)
+    }
+  }
+  
   @objc func save() {
     
   }
@@ -63,7 +74,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     guard let tuple = model.userData?[section] else {
       return header
     }
-    
+
     header.setup(title: tuple.sectionName, backgroundColor: self.view.backgroundColor ?? .white)
     
     return header
@@ -75,7 +86,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     guard let tuple = model.userData?[indexPath.section] else {
       return cell
     }
-    
+
     cell.value = tuple.rowValue
     
     return cell

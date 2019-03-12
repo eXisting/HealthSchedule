@@ -9,15 +9,14 @@
 import UIKit
 
 class RequestManager {
-  static let rootEndpoint = "http://127.0.0.1:8000"
+  static private(set) var sessionToken = Token()
   
-  private static let request = UrlSessionHandler.shared
-  
-  static private(set) var sessionToken: Token?
+  private let rootEndpoint = "http://127.0.0.1:8000"
+  private let request = UrlSessionHandler.shared
   
   // MARK: - GET
   
-  class func getListAsync<T: Decodable>(
+  func getListAsync<T: Decodable>(
     for type: T.Type,
     from endpoint: Endpoints,
     _ headers: Parser.JsonDictionary?,
@@ -30,7 +29,7 @@ class RequestManager {
     }
   }
   
-  class func getAsync<T: Decodable>(
+  func getAsync<T: Decodable>(
     for type: T.Type,
     from endpoint: Endpoints,
     _ params: Parser.JsonDictionary?,
@@ -47,7 +46,7 @@ class RequestManager {
     }
   }
   
-  class func getDataAsync(from url: String, _ completion: @escaping (Data?) -> Void) {
+  func getDataAsync(from url: String, _ completion: @escaping (Data?) -> Void) {
     guard let urlObject = URL(string: url) else {
       completion(nil)
       return
@@ -58,7 +57,7 @@ class RequestManager {
   
   // MARK: - POST
   
-  class func postAsync(
+  func postAsync(
     to url: String,
     as requestType: RequestType,
     _ data: Data?,
@@ -70,11 +69,11 @@ class RequestManager {
   
   // MARK: - AUTHENTICATION
   
-  class func signIn(userData: Data, _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
+  func signIn(userData: Data, _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
     authorize(to: Endpoints.signIn.rawValue, userData, completion)
   }
   
-  class func signUp(
+  func signUp(
     authType: UserType,
     userData: Data,
     _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
@@ -90,33 +89,45 @@ class RequestManager {
 
 extension RequestManager {
   
-  private class func authorize(
+  private func authorize(
     to url: String,
     _ data: Data?,
     _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
     
     postAsync(to: url, as: .post, data, nil) {
-      (tokenJson, tokenResponse) in
+      [weak self] (tokenJson, tokenResponse) in
       if tokenResponse.error != nil {
         completion(nil, tokenResponse)
         return
       }
       
-      rememberToken(from: tokenJson)
+      self?.rememberToken(from: tokenJson)
       
-      getAsync(for: RemoteUser.self, from: Endpoints.user, sessionToken?.asParams(), completion)
+      self?.getAsync(for: RemoteUser.self, from: Endpoints.user, RequestManager.sessionToken.asParams()) {
+        (userObject, serverResponse) in
+        
+        if let user = userObject {
+          UserDefaults.standard.set(user.id, forKey: UserDefaultsKeys.userUniqueId.rawValue)
+        }
+        
+        completion(userObject, serverResponse)
+      }
     }
   }
   
-  private class func buildEndpoint(_ route: String) -> String {
+  private func buildEndpoint(_ route: String) -> String {
     return rootEndpoint + route
   }
   
-  private class func rememberToken(from json: Any) {
+  private func rememberToken(from json: Any) {
     guard let token = Parser.anyToObject(destination: Token.self, json) else {
       return
     }
-    print(token.token)
-    sessionToken = token
+    
+    let expireDate = DateManager.shared.getExpirationDate(expires: token.expires!)
+    UserDefaults.standard.set(token.token, forKey: UserDefaultsKeys.sessionToken.rawValue)
+    UserDefaults.standard.set(expireDate, forKey: UserDefaultsKeys.sessionExpires.rawValue)
+
+    RequestManager.sessionToken = token
   }
 }

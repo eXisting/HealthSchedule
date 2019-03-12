@@ -9,6 +9,7 @@
 import UIKit
 
 protocol AuthenticationProviding {
+  func refreshToken(completion: @escaping () -> Void)
   func login(login: String, password: String, completion: @escaping (String?) -> Void)
   func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void)
   func validateSignUpData(_ data: [String: Any]) -> Bool
@@ -22,6 +23,7 @@ protocol ProviderInfoRequesting {
 
 protocol CommonDataRequesting {
   func getRequests(completion: @escaping () -> Void)
+  func getImage(from url: String, completion: @escaping (Data) -> Void)
   func getRecomendations()
 }
 
@@ -29,32 +31,9 @@ class UserDataRequest {
   
   private static var user: RemoteUser?
   
-  var user: RemoteUser? {
-    get {
-      return UserDataRequest.user
-    }
-  }
-  
-  lazy var userData: [(sectionName: String, rowValue: String)]? = {
-    guard let currentUser = user else {
-      // return all from core data
-      return nil
-    }
+  private let requestsManager = RequestManager()
+  private let databaseManager = DataBaseManager.shared
     
-    var result: [(sectionName: String, rowValue: String)] = []
-    result.append(("Full name", currentUser.firstName + " " + currentUser.lastName))
-    result.append(("City", currentUser.city!.name))
-    result.append(("Birthday", DateManager.shared.dateToString(currentUser.birthday)))
-    result.append(("E-mail", currentUser.email))
-    result.append(("Phone", currentUser.phone ?? ""))
-
-    if let providerData = currentUser.providerData {
-      // TODO: - return provider data
-    }
-    
-    return result
-  }()
-  
   private func requestProviderData() {
     getProfessions() { list in print("Professions obtained!") }
     // TODO: Load rest data here
@@ -62,8 +41,18 @@ class UserDataRequest {
 }
 
 extension UserDataRequest: CommonDataRequesting {
+  func getImage(from url: String, completion: @escaping (Data) -> Void) {
+    requestsManager.getDataAsync(from: url) { (data) in
+      guard let imageData = data else {
+        return
+      }
+      
+      completion(imageData)
+    }
+  }
+  
   func getRequests(completion: @escaping () -> Void) {
-    RequestManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken?.asParams()) {
+    requestsManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken.asParams()) {
       (list, response) in
       print(list)
     }
@@ -79,6 +68,9 @@ extension UserDataRequest: CommonDataRequesting {
 }
 
 extension UserDataRequest: AuthenticationProviding {
+  func refreshToken(completion: @escaping () -> Void) {    
+  }
+  
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
     let postBody = ["username": login, "password": password]
     guard let data = Serializer.getDataFrom(json: postBody) else {
@@ -86,7 +78,7 @@ extension UserDataRequest: AuthenticationProviding {
       return
     }
     
-    RequestManager.signIn(userData: data) {
+    requestsManager.signIn(userData: data) {
       [weak self] (user, response) in
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
@@ -98,7 +90,9 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      UserDataRequest.user = remoteUser
+      if self?.databaseManager.getCurrentUser() == nil {
+        self?.databaseManager.insertUsers(from: [remoteUser])
+      }
       
       // TODO: refactor this
       if remoteUser.role.name == "provider" {
@@ -115,7 +109,7 @@ extension UserDataRequest: AuthenticationProviding {
       return
     }
     
-    RequestManager.signUp(authType: userType, userData: data) {
+    requestsManager.signUp(authType: userType, userData: data) {
       [weak self] (user, response) in
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
@@ -157,7 +151,7 @@ extension UserDataRequest: AuthenticationProviding {
 
 extension UserDataRequest: ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void) {
-    RequestManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken?.asParams()) {
+    requestsManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken.asParams()) {
       (list, response) in
       if response.error != nil {
         completion(response.error)
@@ -176,7 +170,7 @@ extension UserDataRequest: ProviderInfoRequesting {
       return
     }
     
-    RequestManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken?.asParams()) {
+    requestsManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
       (address, response) in
       if response.error != nil {
         completion(response.error)
@@ -190,7 +184,7 @@ extension UserDataRequest: ProviderInfoRequesting {
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void) {
     let url = Endpoints.providerProfessions.rawValue + "/\(id)"
     
-    RequestManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken?.asParams()) {
+    requestsManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken.asParams()) {
       (serverMessage, response) in
       if response.error != nil {
         completion(response.error)

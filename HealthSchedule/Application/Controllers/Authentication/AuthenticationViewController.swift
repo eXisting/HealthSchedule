@@ -14,6 +14,13 @@ class AuthenticationViewController: UIViewController {
   private var mainView: AuthMainView!
   private var model: SignInModel!
   
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    
+    rootNavigation = (self.navigationController as! RootNavigationController)
+    model = SignInModel(presentResponsible: rootNavigation, errorShowable: self)
+  }
+  
   override func loadView() {
     super.loadView()
     
@@ -23,9 +30,6 @@ class AuthenticationViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    rootNavigation = (self.navigationController as! RootNavigationController)
-    model = SignInModel(presentResponsible: rootNavigation, errorShowable: self)
-    
     mainView.setUpViews(textFieldsDelegate: self)
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
     mainView.signUpButton.addTarget(self, action: #selector(onSignUpClick), for: .touchDown)
@@ -34,6 +38,14 @@ class AuthenticationViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    // TODO: Come up with solution
+//    model.autoLogin { [weak self] in
+//      self?.rootNavigation.presentHome()
+//    }
   }
   
   override func viewWillDisappear(_ animated: Bool) {

@@ -19,8 +19,17 @@ class SignInModel {
     self.presentResponsible = presentResponsible
   }
   
-  func signIn(formData: (login: String, password: String)?, _ sender: UIButton) {
-    sender.isUserInteractionEnabled = false
+  func autoLogin(_ completion: @escaping () -> Void) {
+    if Token.isValid() {
+      // TODO: Get data from keychain and auto login
+      
+      // mock - just show next window
+      completion()
+    }
+  }
+  
+  func signIn(formData: (login: String, password: String)?, _ sender: UIButton?) {
+    sender?.isUserInteractionEnabled = false
     
     guard let formData = formData else {
       errorShowable.showWarningAlert(message: "Either login or password are not filled!")
@@ -31,7 +40,7 @@ class SignInModel {
       [weak self] error in
       DispatchQueue.main.async {
         if let error = error {
-          sender.isUserInteractionEnabled = true
+          sender?.isUserInteractionEnabled = true
           
           self?.errorShowable.showWarningAlert(message: error)
           return
