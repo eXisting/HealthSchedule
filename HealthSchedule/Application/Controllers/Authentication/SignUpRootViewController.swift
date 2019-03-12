@@ -12,7 +12,7 @@ class SignUpRootViewController: UIViewController {
   
   // test data
   //var signUpData: Parser.JsonDictionary = ["email":"johnsmit@gmail.com", "password":"qwerty123", "first_name":"Ann", "last_name":"Yan", "birthday_at":"2019-01-31", "phone":""]
-  private var rootNavigation: RootNavigationController?
+  private var rootNavigation: RootNavigationPresentable!
   
   private var mainView: MainSignUpInfoView!
   private var model: AuthenticationModel!
@@ -26,7 +26,7 @@ class SignUpRootViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     rootNavigation = (self.navigationController as! RootNavigationController)
-    model = AuthenticationModel(presentResponsible: rootNavigation!, errorShowable: self)
+    model = AuthenticationModel(presentResponsible: rootNavigation, errorShowable: self)
     
     mainView.setupViews(textFieldsDelegate: self)
     mainView.addTargets()
