@@ -6,4 +6,9 @@
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class HomeModel {
+  private let userRequestController: CommonDataRequesting = UserDataRequest()
+  private let databaseManager = DataBaseManager.shared
+}
