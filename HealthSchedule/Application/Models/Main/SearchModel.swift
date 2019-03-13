@@ -16,6 +16,7 @@ enum SearchOptionKey: String {
 
 class SearchModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
+  private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
   
   var searchOptions = [

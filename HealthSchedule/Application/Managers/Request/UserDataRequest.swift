@@ -57,12 +57,8 @@ extension UserDataRequest: CommonDataRequesting {
     }
   }
   
-  func getCities(completion: @escaping () -> Void) {
-    
-  }
-  
   func getRecomendations() {
-    
+    // TODO: - Optional for now
   }
 }
 

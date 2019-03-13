@@ -80,6 +80,8 @@
 		EDD2A84322390AB300B52E68 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84222390AB300B52E68 /* ServicesViewController.swift */; };
 		EDD2A845223918CC00B52E68 /* ProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A844223918CC00B52E68 /* ProviderViewController.swift */; };
 		EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8462239191E00B52E68 /* TimetableViewController.swift */; };
+		EDD2A84922391E8E00B52E68 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84822391E8E00B52E68 /* Service.swift */; };
+		EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -163,6 +165,8 @@
 		EDD2A84222390AB300B52E68 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		EDD2A844223918CC00B52E68 /* ProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewController.swift; sourceTree = "<group>"; };
 		EDD2A8462239191E00B52E68 /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
+		EDD2A84822391E8E00B52E68 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataRequest.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -410,8 +414,8 @@
 			children = (
 				ED4482FF220466D800BE8EF0 /* Base */,
 				ED6CBE7D21EDDDE900860010 /* Models */,
-				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
 				ED4483102204AA4400BE8EF0 /* UserDataRequest.swift */,
+				EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -429,6 +433,7 @@
 			isa = PBXGroup;
 			children = (
 				ED4483142208380E00BE8EF0 /* RequestEnums.swift */,
+				ED1ED02121FF34B700141CF5 /* RequestManager.swift */,
 				ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */,
 			);
 			path = Base;
@@ -464,6 +469,7 @@
 				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
 				ED52F16D220C6D4000568CBC /* ServerException.swift */,
 				EDD2A82522314CE800B52E68 /* Request.swift */,
+				EDD2A84822391E8E00B52E68 /* Service.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -730,6 +736,7 @@
 				ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
 				DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */,
+				EDD2A84922391E8E00B52E68 /* Service.swift in Sources */,
 				EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */,
@@ -784,6 +791,7 @@
 				ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
+				EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */,
 				ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */,
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,

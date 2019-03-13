@@ -43,9 +43,9 @@ class AuthenticationViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
     // TODO: Come up with solution
-    model.autoLogin { [weak self] in
-      self?.rootNavigation.presentHome()
-    }
+//    model.autoLogin { [weak self] in
+//      self?.rootNavigation.presentHome()
+//    }
   }
   
   override func viewWillDisappear(_ animated: Bool) {
