@@ -1,0 +1,6 @@
+framework module Pods_HealthSchedule {
+  umbrella header "Pods-HealthSchedule-umbrella.h"
+
+  export *
+  module * { export * }
+}
