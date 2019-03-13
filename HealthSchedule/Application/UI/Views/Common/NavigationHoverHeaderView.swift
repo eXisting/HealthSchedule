@@ -16,7 +16,7 @@ class NavigationHoverHeaderView: UIView {
     customizeViews()
   }
   
-  func laidOutViews() {
+  private func laidOutViews() {
     addSubview(headerView)
     headerView.translatesAutoresizingMaskIntoConstraints = false
     

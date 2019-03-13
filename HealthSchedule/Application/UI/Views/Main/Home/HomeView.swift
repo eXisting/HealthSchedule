@@ -12,11 +12,14 @@ class HomeView: UIView {
   private let tableView = HomeTableView()
   private let noDataView = NoDataView()
   
+  private let headerView = NavigationHoverHeaderView()
+  
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     laidOutViews()
     customizeViews()
     
-    noDataView.setup("Sections should be here")
+    headerView.setup()
+    noDataView.setup("There is nothng to display...")
     tableView.setup(delegate: delegate, dataSource: dataSource)
   }
   
@@ -28,7 +31,9 @@ class HomeView: UIView {
   private func laidOutViews() {
     addSubview(tableView)
     addSubview(noDataView)
+    addSubview(headerView)
     
+    headerView.translatesAutoresizingMaskIntoConstraints = false
     tableView.translatesAutoresizingMaskIntoConstraints = false
     noDataView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -41,6 +46,11 @@ class HomeView: UIView {
     NSLayoutConstraint(item: noDataView, attribute: .bottom, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: noDataView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: noDataView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+    
+    NSLayoutConstraint(item: headerView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0).isActive = true
+    NSLayoutConstraint(item: headerView, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1, constant: 0).isActive = true
+    NSLayoutConstraint(item: headerView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0).isActive = true
+    NSLayoutConstraint(item: headerView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
   }
   
   private func customizeViews() {

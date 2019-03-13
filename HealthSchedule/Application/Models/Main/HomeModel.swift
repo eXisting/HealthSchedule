@@ -11,4 +11,12 @@ import UIKit
 class HomeModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let databaseManager = DataBaseManager.shared
+  
+  var searchOptions = [
+    "Service",
+    "Date and time",
+    "Specialist"
+  ]
+  
+  
 }

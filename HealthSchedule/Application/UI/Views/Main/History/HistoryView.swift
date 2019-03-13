@@ -16,7 +16,7 @@ class HistoryView: UIView {
     laidOutViews()
     customizeViews()
     
-    noDataView.setup("There is no history yet...")
+    noDataView.setup("There is nothng to display...")
     tableView.setup(delegate: delegate, dataSource: dataSource)
   }
   

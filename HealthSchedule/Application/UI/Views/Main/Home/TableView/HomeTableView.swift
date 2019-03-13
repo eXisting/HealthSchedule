@@ -10,7 +10,7 @@ import UIKit
 
 class HomeTableView: UITableView {
   static let cellIdentifier = "HomeRow"
-  
+
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     self.delegate = delegate
     self.dataSource = dataSource
@@ -18,8 +18,8 @@ class HomeTableView: UITableView {
     alwaysBounceVertical = false
     showsVerticalScrollIndicator = true
     
-    register(HistoryRow.self, forCellReuseIdentifier: HomeTableView.cellIdentifier)
-    
+    register(SearchOptionRow.self, forCellReuseIdentifier: HomeTableView.cellIdentifier)
+
     // Remove last underline in table view
     tableFooterView = UIView(frame: .zero)
   }

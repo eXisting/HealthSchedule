@@ -76,6 +76,7 @@
 		EDD2A8372238026C00B52E68 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8362238026C00B52E68 /* HomeView.swift */; };
 		EDD2A8392238029C00B52E68 /* HomeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8382238029C00B52E68 /* HomeTableView.swift */; };
 		EDD2A83C2238042E00B52E68 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A83B2238042E00B52E68 /* HomeModel.swift */; };
+		EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A83F2239059A00B52E68 /* SearchOptionRow.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -155,6 +156,7 @@
 		EDD2A8362238026C00B52E68 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EDD2A8382238029C00B52E68 /* HomeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableView.swift; sourceTree = "<group>"; };
 		EDD2A83B2238042E00B52E68 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		EDD2A83F2239059A00B52E68 /* SearchOptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptionRow.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -627,6 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD2A8382238029C00B52E68 /* HomeTableView.swift */,
+				EDD2A83F2239059A00B52E68 /* SearchOptionRow.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				ED231B48222E78AC00A80FC9 /* NoDataView.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
+				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* HomeNavigationController.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
 				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
