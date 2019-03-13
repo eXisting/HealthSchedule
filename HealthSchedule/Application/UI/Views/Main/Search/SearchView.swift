@@ -8,8 +8,8 @@
 
 import UIKit
 
-class HomeView: UIView {
-  private let tableView = HomeTableView()
+class SearchView: UIView {
+  private let tableView = SearchTableView()
   private let noDataView = NoDataView()
   
   private let headerView = NavigationHoverHeaderView()

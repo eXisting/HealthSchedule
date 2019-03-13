@@ -13,11 +13,11 @@ protocol SetupableTabBarItem {
 }
 
 class MainTabBarController: UITabBarController {
-  private var homeNavigationController: HomeNavigationController!
+  private var homeNavigationController: SearchNavigationController!
   private var historyNavigationController: HistoryNavigationController!
   private var requestNavigationController: RequestNavigationController!
 
-  private let homeTab = HomeViewController()
+  private let homeTab = SearchViewController()
   private let requestTab = RequestViewController()
   private let historyTab = HistoryViewController()
   private let accountTab = AccountViewController()
@@ -25,7 +25,7 @@ class MainTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    homeNavigationController = HomeNavigationController(rootViewController: homeTab)
+    homeNavigationController = SearchNavigationController(rootViewController: homeTab)
     historyNavigationController = HistoryNavigationController(rootViewController: historyTab)
     requestNavigationController = RequestNavigationController(rootViewController: requestTab)
 

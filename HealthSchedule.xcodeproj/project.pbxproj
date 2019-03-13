@@ -21,13 +21,13 @@
 		ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02121FF34B700141CF5 /* RequestManager.swift */; };
 		ED1ED02421FF353400141CF5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02321FF353400141CF5 /* Category.swift */; };
 		ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */; };
-		ED231B2122295A1700A80FC9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2022295A1700A80FC9 /* HomeViewController.swift */; };
+		ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2022295A1700A80FC9 /* SearchViewController.swift */; };
 		ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2522297C6900A80FC9 /* HistoryViewController.swift */; };
 		ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */; };
 		ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2E222D486600A80FC9 /* CommonSection.swift */; };
 		ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B30222D48FF00A80FC9 /* AccountTableView.swift */; };
 		ED231B33222D498800A80FC9 /* AccountRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B32222D498800A80FC9 /* AccountRow.swift */; };
-		ED231B3B222D7C2600A80FC9 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3A222D7C2600A80FC9 /* HomeNavigationController.swift */; };
+		ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */; };
 		ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3C222D7C3600A80FC9 /* HistoryNavigatonController.swift */; };
 		ED231B40222E6EC600A80FC9 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3F222E6EC600A80FC9 /* RequestViewController.swift */; };
 		ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B41222E6EE000A80FC9 /* RequestNavigationController.swift */; };
@@ -73,10 +73,13 @@
 		EDD2A82F22368FDB00B52E68 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */; };
 		EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8302237B22300B52E68 /* UserDefaultsKeys.swift */; };
 		EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8322237CC7100B52E68 /* AccountModel.swift */; };
-		EDD2A8372238026C00B52E68 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8362238026C00B52E68 /* HomeView.swift */; };
-		EDD2A8392238029C00B52E68 /* HomeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8382238029C00B52E68 /* HomeTableView.swift */; };
-		EDD2A83C2238042E00B52E68 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A83B2238042E00B52E68 /* HomeModel.swift */; };
+		EDD2A8372238026C00B52E68 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8362238026C00B52E68 /* SearchView.swift */; };
+		EDD2A8392238029C00B52E68 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8382238029C00B52E68 /* SearchTableView.swift */; };
+		EDD2A83C2238042E00B52E68 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A83B2238042E00B52E68 /* SearchModel.swift */; };
 		EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A83F2239059A00B52E68 /* SearchOptionRow.swift */; };
+		EDD2A84322390AB300B52E68 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84222390AB300B52E68 /* ServicesViewController.swift */; };
+		EDD2A845223918CC00B52E68 /* ProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A844223918CC00B52E68 /* ProviderViewController.swift */; };
+		EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8462239191E00B52E68 /* TimetableViewController.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -102,13 +105,13 @@
 		ED1ED02121FF34B700141CF5 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		ED1ED02321FF353400141CF5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
-		ED231B2022295A1700A80FC9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		ED231B2022295A1700A80FC9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		ED231B2522297C6900A80FC9 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHoverHeaderView.swift; sourceTree = "<group>"; };
 		ED231B2E222D486600A80FC9 /* CommonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSection.swift; sourceTree = "<group>"; };
 		ED231B30222D48FF00A80FC9 /* AccountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableView.swift; sourceTree = "<group>"; };
 		ED231B32222D498800A80FC9 /* AccountRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRow.swift; sourceTree = "<group>"; };
-		ED231B3A222D7C2600A80FC9 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
+		ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		ED231B3C222D7C3600A80FC9 /* HistoryNavigatonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryNavigatonController.swift; sourceTree = "<group>"; };
 		ED231B3F222E6EC600A80FC9 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		ED231B41222E6EE000A80FC9 /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
@@ -153,10 +156,13 @@
 		EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		EDD2A8302237B22300B52E68 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		EDD2A8322237CC7100B52E68 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
-		EDD2A8362238026C00B52E68 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		EDD2A8382238029C00B52E68 /* HomeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableView.swift; sourceTree = "<group>"; };
-		EDD2A83B2238042E00B52E68 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		EDD2A8362238026C00B52E68 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		EDD2A8382238029C00B52E68 /* SearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
+		EDD2A83B2238042E00B52E68 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		EDD2A83F2239059A00B52E68 /* SearchOptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptionRow.swift; sourceTree = "<group>"; };
+		EDD2A84222390AB300B52E68 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
+		EDD2A844223918CC00B52E68 /* ProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewController.swift; sourceTree = "<group>"; };
+		EDD2A8462239191E00B52E68 /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -290,13 +296,14 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
-		ED231B38222D7BFA00A80FC9 /* Home */ = {
+		ED231B38222D7BFA00A80FC9 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				ED231B2022295A1700A80FC9 /* HomeViewController.swift */,
-				ED231B3A222D7C2600A80FC9 /* HomeNavigationController.swift */,
+				EDD2A84122390A8B00B52E68 /* OptionsControllers */,
+				ED231B2022295A1700A80FC9 /* SearchViewController.swift */,
+				ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */,
 			);
-			path = Home;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		ED231B39222D7C0100A80FC9 /* History */ = {
@@ -572,7 +579,7 @@
 			children = (
 				ED231B3E222E6EA100A80FC9 /* Request */,
 				ED231B39222D7C0100A80FC9 /* History */,
-				ED231B38222D7BFA00A80FC9 /* Home */,
+				ED231B38222D7BFA00A80FC9 /* Search */,
 				ED231B2A222D3B1600A80FC9 /* Account */,
 			);
 			path = TabControllers;
@@ -601,18 +608,18 @@
 			children = (
 				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
-				EDD2A83B2238042E00B52E68 /* HomeModel.swift */,
+				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
 		};
-		EDD2A8342238021F00B52E68 /* Home */ = {
+		EDD2A8342238021F00B52E68 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				EDD2A83A2238029F00B52E68 /* TableView */,
-				EDD2A8362238026C00B52E68 /* HomeView.swift */,
+				EDD2A8362238026C00B52E68 /* SearchView.swift */,
 			);
-			path = Home;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		EDD2A8352238022D00B52E68 /* Main */ = {
@@ -620,7 +627,7 @@
 			children = (
 				EDCFB46322294F0F00A6B56F /* Account */,
 				ED231B43222E755400A80FC9 /* History */,
-				EDD2A8342238021F00B52E68 /* Home */,
+				EDD2A8342238021F00B52E68 /* Search */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -628,10 +635,20 @@
 		EDD2A83A2238029F00B52E68 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				EDD2A8382238029C00B52E68 /* HomeTableView.swift */,
+				EDD2A8382238029C00B52E68 /* SearchTableView.swift */,
 				EDD2A83F2239059A00B52E68 /* SearchOptionRow.swift */,
 			);
 			path = TableView;
+			sourceTree = "<group>";
+		};
+		EDD2A84122390A8B00B52E68 /* OptionsControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A84222390AB300B52E68 /* ServicesViewController.swift */,
+				EDD2A844223918CC00B52E68 /* ProviderViewController.swift */,
+				EDD2A8462239191E00B52E68 /* TimetableViewController.swift */,
+			);
+			path = OptionsControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -716,12 +733,13 @@
 				EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */,
+				EDD2A84322390AB300B52E68 /* ServicesViewController.swift in Sources */,
 				ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
 				ED231B4B222E7A2A00A80FC9 /* HistoryTableView.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
-				EDD2A8392238029C00B52E68 /* HomeTableView.swift in Sources */,
+				EDD2A8392238029C00B52E68 /* SearchTableView.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				ED231B4D222E850300A80FC9 /* HistoryRow.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
@@ -729,6 +747,7 @@
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
 				ED231B40222E6EC600A80FC9 /* RequestViewController.swift in Sources */,
+				EDD2A845223918CC00B52E68 /* ProviderViewController.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */,
@@ -736,7 +755,7 @@
 				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
 				ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */,
-				EDD2A8372238026C00B52E68 /* HomeView.swift in Sources */,
+				EDD2A8372238026C00B52E68 /* SearchView.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				ED231B33222D498800A80FC9 /* AccountRow.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
@@ -751,7 +770,7 @@
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,
-				ED231B3B222D7C2600A80FC9 /* HomeNavigationController.swift in Sources */,
+				ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
 				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
@@ -765,17 +784,18 @@
 				ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
-				ED231B2122295A1700A80FC9 /* HomeViewController.swift in Sources */,
+				ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */,
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */,
-				EDD2A83C2238042E00B52E68 /* HomeModel.swift in Sources */,
+				EDD2A83C2238042E00B52E68 /* SearchModel.swift in Sources */,
 				ED231B45222E756E00A80FC9 /* HistoryView.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
+				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,
 				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

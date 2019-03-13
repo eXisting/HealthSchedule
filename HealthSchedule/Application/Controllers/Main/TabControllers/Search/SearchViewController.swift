@@ -8,11 +8,13 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
-  private let titleName = "Home"
+class SearchViewController: UIViewController {
+  private let titleName = "Booking"
   
-  private let mainView = HomeView()
-  private let model = HomeModel()
+  private var rootNavigation: SearchNavigationController!
+  
+  private let mainView = SearchView()
+  private let model = SearchModel()
   
   override func loadView() {
     super.loadView()
@@ -22,21 +24,25 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    rootNavigation = (navigationController as! SearchNavigationController)
+    
+    navigationItem.title = titleName
+    
     mainView.setup(delegate: self, dataSource: self)
     mainView.toggleViews(isDataPresent: model.searchOptions.count > 0)
   }
 }
 
-extension HomeViewController: SetupableTabBarItem {
+extension SearchViewController: SetupableTabBarItem {
   func setupTabBarItem() {
     tabBarItem.title = titleName
     
-    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/home")
-    tabBarItem.image = UIImage(named: "TabBarIcons/home")
+    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/search")
+    tabBarItem.image = UIImage(named: "TabBarIcons/search")
   }
 }
 
-extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return model.searchOptions.count
   }
@@ -46,12 +52,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableView.cellIdentifier, for: indexPath)
-    cell.textLabel?.text = model.searchOptions[indexPath.row]
+    let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableView.cellIdentifier, for: indexPath)
+    cell.textLabel?.text = model.searchOptions[indexPath.row].rawValue
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print(indexPath.row)
+    rootNavigation.pushController(for: model.searchOptions[indexPath.row])
   }
 }

@@ -8,15 +8,19 @@
 
 import UIKit
 
-class HomeModel {
+enum SearchOptionKey: String {
+  case service = "Service"
+  case dateTime = "Date and Time"
+  case provider = "Specialist"
+}
+
+class SearchModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let databaseManager = DataBaseManager.shared
   
   var searchOptions = [
-    "Service",
-    "Date and time",
-    "Specialist"
+    SearchOptionKey.service,
+    SearchOptionKey.dateTime,
+    SearchOptionKey.provider
   ]
-  
-  
 }

@@ -9,5 +9,9 @@
 import UIKit
 
 class SearchOptionRow: UITableViewCell {
+  // TODO: RemoteService object
   
+  func setChosenValue(value: String) {
+    self.textLabel?.text?.append(" - (\(value))")
+  }
 }
