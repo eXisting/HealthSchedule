@@ -12,14 +12,18 @@ import FSCalendar
 class TimetableViewController: UIViewController {
   private let titleName = "Date and Time"
   
+  private let mainView = TimetableView()
+  
+  override func loadView() {
+    super.loadView()
+    view = mainView
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = titleName
     
-    let calendar = FSCalendar(frame: CGRect(x: 30, y: 300, width: self.view.frame.width * 0.9, height: 300))
-    calendar.dataSource = self
-    calendar.delegate = self
-    view.addSubview(calendar)
+    mainView.setup(delegate: self, dataSource: self)
+    navigationItem.title = titleName
   }
 }
 
