@@ -30,12 +30,17 @@ class TimetableViewController: UIViewController {
     
     navigationItem.title = titleName
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDone))
+    mainView.chooseTimeButton.addTarget(self, action: #selector(onChooseTimeClick), for: .touchDown)
   }
   
   @objc private func onDone() {
     let collector = parentNavigationController.getCollector()
     collector.storeDate(mainView.getChosenDate())
     parentNavigationController.popViewController(animated: true)
+  }
+  
+  @objc private func onChooseTimeClick() {
+    // TODO
   }
 }
 
