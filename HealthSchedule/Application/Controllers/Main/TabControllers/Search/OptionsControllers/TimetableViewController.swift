@@ -12,6 +12,9 @@ import FSCalendar
 class TimetableViewController: UIViewController {
   private let titleName = "Date and Time"
   
+  private var parentNavigationController: SearchNavigationController!
+  
+  private let model = TimetableModel()
   private let mainView = TimetableView()
   
   override func loadView() {
@@ -22,11 +25,22 @@ class TimetableViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainView.setup(delegate: self, dataSource: self)
+    parentNavigationController = (navigationController as? SearchNavigationController)
+    mainView.setup(delegate: self, dataSource: model.dataSourceHandler)
+    
     navigationItem.title = titleName
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDone))
+  }
+  
+  @objc private func onDone() {
+    let collector = parentNavigationController.getCollector()
+    collector.storeDate(mainView.getChosenDate())
+    parentNavigationController.popViewController(animated: true)
   }
 }
 
-extension TimetableViewController: FSCalendarDelegate, FSCalendarDataSource {
-  
+extension TimetableViewController: FSCalendarDelegate {
+  func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    print(DateManager.shared.dateToString(date))
+  }
 }

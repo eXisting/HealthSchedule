@@ -83,6 +83,7 @@
 		EDD2A84922391E8E00B52E68 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84822391E8E00B52E68 /* Service.swift */; };
 		EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */; };
 		EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84E2239535100B52E68 /* TimetableView.swift */; };
+		EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8502239567700B52E68 /* TimetableModel.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -173,6 +174,7 @@
 		EDD2A84822391E8E00B52E68 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataRequest.swift; sourceTree = "<group>"; };
 		EDD2A84E2239535100B52E68 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
+		EDD2A8502239567700B52E68 /* TimetableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableModel.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
 				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
+				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
 				EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */,
+				EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,

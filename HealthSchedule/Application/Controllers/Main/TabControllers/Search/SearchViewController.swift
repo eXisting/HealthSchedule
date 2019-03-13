@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol OptionsCollectioning {
+  func storeDate(_ date: Date)
+  func storeService(_ id: Int)
+}
+
 class SearchViewController: UIViewController {
   private let titleName = "Booking"
   
@@ -30,6 +35,16 @@ class SearchViewController: UIViewController {
     
     mainView.setup(delegate: self, dataSource: self)
     mainView.toggleViews(isDataPresent: model.searchOptions.count > 0)
+  }
+}
+
+extension SearchViewController: OptionsCollectioning {
+  func storeDate(_ date: Date) {
+    model.date = date
+  }
+  
+  func storeService(_ id: Int) {
+    model.serviceId = id
   }
 }
 

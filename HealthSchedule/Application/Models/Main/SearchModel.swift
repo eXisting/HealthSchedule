@@ -19,9 +19,12 @@ class SearchModel {
   private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
   
+  var date: Date?
+  var serviceId: Int?
+  var providerId: Int?
+  
   var searchOptions = [
     SearchOptionKey.service,
-    SearchOptionKey.dateTime,
-    SearchOptionKey.provider
+    SearchOptionKey.dateTime
   ]
 }

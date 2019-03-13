@@ -24,6 +24,10 @@ class SearchNavigationController: UINavigationController {
     }
   }
   
+  func getCollector() -> OptionsCollectioning {
+    return viewControllers[0] as! OptionsCollectioning
+  }
+  
   private func pushServiceController() {
     pushViewController(servicesController, animated: true)
   }

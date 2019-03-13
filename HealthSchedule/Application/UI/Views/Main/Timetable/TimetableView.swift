@@ -19,6 +19,10 @@ class TimetableView: UIView {
     calendar.delegate = delegate
   }
   
+  func getChosenDate() -> Date {
+    return calendar.selectedDate ?? calendar.today ?? Date()
+  }
+  
   private func laidOutViews() {
     addSubview(calendar)
     
