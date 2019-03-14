@@ -24,39 +24,49 @@ enum AccountSectionIdexes: Int {
   case security = 3
 }
 
+enum AccountFieldType: String {
+  case name = "Full name"
+  case city = "City"
+  case birthday = "DoB"
+  case email = "E-mail"
+  case phone = "Phone"
+  
+  case none = ""
+}
+
 class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let databaseManager = DataBaseManager.shared
   
-  lazy var userData: [AccountSectionNames: [String]] = {
+  lazy var userData: [AccountSectionNames: [(AccountFieldType, value: String)]] = {
     guard let currentUser = databaseManager.getCurrentUser() else {
       // No user
       return [:]
     }
     
-    var result: [AccountSectionNames: [String]] = [:]
+    var result: [AccountSectionNames: [(AccountFieldType, value: String)]] = [:]
     
     result[.general] = [
-       currentUser.name ?? "No_name",
-       currentUser.city?.name ?? "No_city",
-       DateManager.shared.dateToString(currentUser.birthday!)
+       (.name, currentUser.name ?? "No_name"),
+       (.city, currentUser.city?.name ?? "No_city"),
+       (.birthday, DateManager.shared.dateToString(currentUser.birthday!))
     ]
     
     result[.security] = [
-      currentUser.email ?? "No_email",
-      currentUser.phone ?? "",
-      "Change password"
+      (.email, currentUser.email ?? "No_email"),
+      (.phone, currentUser.phone ?? ""),
+      (.none, "Change password")
     ]
     
     //if currentUser.role?.name == UserTypeName.provider.rawValue {
       result[.providerData] = [
-        "Professions",
-        "Services",
-        "Address",
+        (.none, "Professions"),
+        (.none, "Services"),
+        (.none, "Address"),
       ]
       
       result[.timetable] = [
-        "Schedule"
+        (.none, "Schedule")
       ]
 //    }
 

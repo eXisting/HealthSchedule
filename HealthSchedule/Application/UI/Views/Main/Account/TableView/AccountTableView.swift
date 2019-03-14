@@ -9,7 +9,8 @@
 import UIKit
 
 class AccountTableView: UITableView {
-  static let cellIdentifier = "AccountRow"
+  static let placemarkCellIdentifier = "AccountCommonRow"
+  static let disclosureCellIdentifier = "AccountDisclosureRow"
   static let sectionIdentifier = "AccountSection"
 
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
@@ -19,7 +20,8 @@ class AccountTableView: UITableView {
     alwaysBounceVertical = false
     showsVerticalScrollIndicator = true
     
-    register(AccountRow.self, forCellReuseIdentifier: AccountTableView.cellIdentifier)
+    register(AccountDisclosureCell.self, forCellReuseIdentifier: AccountTableView.disclosureCellIdentifier)
+    register(AccountPlacemarkCell.self, forCellReuseIdentifier: AccountTableView.placemarkCellIdentifier)
     register(CommonSection.self, forHeaderFooterViewReuseIdentifier: AccountTableView.sectionIdentifier)
     
     // Remove last underline in table view

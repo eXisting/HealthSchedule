@@ -80,15 +80,31 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableView.cellIdentifier, for: indexPath) as! AccountRow
-    
     let sectionName = model.getUserDataKey(by: indexPath.section)
-    guard let rowValue = model.userData[sectionName]?[indexPath.row] else {
-      return cell
+    guard let tuple = model.userData[sectionName]?[indexPath.row] else {
+      fatalError("Cannot get user data for indexPath!")
     }
     
-    cell.value = rowValue
+    if tuple.0 != .none {
+      guard let placemarkCell = tableView.dequeueReusableCell(
+        withIdentifier: AccountTableView.placemarkCellIdentifier,
+        for: indexPath) as? AccountPlacemarkCell else {
+        fatalError("Cannot get user data for indexPath!")
+      }
+      
+      placemarkCell.value = tuple.value
+      placemarkCell.setPlaceholderWithText(tuple.0)
+      return placemarkCell
+    }
     
-    return cell
+    guard let disclosureCell = tableView.dequeueReusableCell(
+      withIdentifier: AccountTableView.disclosureCellIdentifier,
+      for: indexPath) as? AccountDisclosureCell else {
+        fatalError("Cannot get user data for indexPath!")
+    }
+    
+    disclosureCell.value = tuple.value
+    
+    return disclosureCell
   }
 }
