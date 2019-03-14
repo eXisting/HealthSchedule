@@ -11,6 +11,12 @@ import UIKit
 enum DateFormatType: String {
   case date = "yyyy-MM-dd"
   case dateTime = "yyyy-MM-dd HH:mm:ss"
+  case time = "HH:mm"
+}
+
+enum DateTimeLocale {
+  case hour24
+  case none
 }
 
 class DateManager {
@@ -29,8 +35,9 @@ class DateManager {
     return date
   }
   
-  func stringToDate(_ dateString: String, format: DateFormatType) -> Date {
+  func stringToDate(_ dateString: String, format: DateFormatType, _ locale: DateTimeLocale = .none) -> Date {
     dynamicFormatter.dateFormat = format.rawValue
+    dynamicFormatter.locale = getLocale(locale)
     guard let date = dynamicFormatter.date(from: dateString) else {
       return defaultDate
     }
@@ -61,6 +68,15 @@ class DateManager {
     dateComponents.second = expires
     
     return calendar.date(byAdding: dateComponents, to: currentDate)!
+  }
+  
+  func getLocale(_ locale: DateTimeLocale = .none) -> Locale {
+    switch locale {
+    case .hour24:
+      return NSLocale(localeIdentifier: "en_GB") as Locale
+    case .none:
+      return NSLocale.current
+    }
   }
   
   private init() {

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol OptionsCollectioning {
-  func storeDate(_ date: Date)
+  func storeDate(_ date: (day: Date, start: Date, end: Date))
   func storeService(_ id: Int)
 }
 
@@ -39,8 +39,8 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: OptionsCollectioning {
-  func storeDate(_ date: Date) {
-    model.date = date
+  func storeDate(_ date: (day: Date, start: Date, end: Date)) {
+    model.dateTimeInterval = date
   }
   
   func storeService(_ id: Int) {

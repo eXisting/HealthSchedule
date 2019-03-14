@@ -19,7 +19,7 @@ class SearchModel {
   private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
   
-  var date: Date?
+  var dateTimeInterval: (day: Date, start: Date, end: Date)?
   var serviceId: Int?
   var providerId: Int?
   

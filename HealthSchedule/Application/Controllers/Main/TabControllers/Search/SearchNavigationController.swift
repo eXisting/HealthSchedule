@@ -28,6 +28,16 @@ class SearchNavigationController: UINavigationController {
     return viewControllers[0] as! OptionsCollectioning
   }
   
+  // MARK: Timetable navigation
+  
+  func popFromTimetable(_ chosenDateTime: (day: Date, start: Date, end: Date)) {
+    let collector = getCollector()
+    collector.storeDate(chosenDateTime)
+    popViewController(animated: true)
+  }
+  
+  // MARK: Main navigation
+  
   private func pushServiceController() {
     pushViewController(servicesController, animated: true)
   }
