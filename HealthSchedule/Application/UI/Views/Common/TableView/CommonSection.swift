@@ -9,8 +9,11 @@
 import UIKit
 
 class CommonSection: UITableViewHeaderFooterView {
+  static let lightSectionColor = UIColor.gray.withAlphaComponent(0.005)
+  
   func setup(title: String, backgroundColor: UIColor) {
     contentView.backgroundColor = backgroundColor
     textLabel?.text = title
+    textLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
   }
 }

@@ -75,7 +75,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
       return header
     }
 
-    header.setup(title: tuple.sectionName, backgroundColor: self.view.backgroundColor ?? .white)
+    header.setup(title: tuple.sectionName, backgroundColor: CommonSection.lightSectionColor)
     
     return header
   }
