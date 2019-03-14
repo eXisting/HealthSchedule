@@ -18,8 +18,6 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     super.loadView()
     
     view = mainView
-    
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(save))
   }
   
   override func viewDidLoad() {
@@ -27,6 +25,8 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     
     mainView.setup(delegate: self, dataSource: self)
     model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()?.image?.url, setImageForView)
+    
+    navigationItem.title = titleName
   }
 
   private func setImageForView(_ imageData: Data) {
@@ -37,10 +37,6 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
       
       self?.mainView.setImage(image)
     }
-  }
-  
-  @objc func save() {
-    
   }
   
   func setupTabBarItem() {

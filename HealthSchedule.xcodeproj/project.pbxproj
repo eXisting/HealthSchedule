@@ -84,6 +84,7 @@
 		EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */; };
 		EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84E2239535100B52E68 /* TimetableView.swift */; };
 		EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8502239567700B52E68 /* TimetableModel.swift */; };
+		EDD2A855223A74BB00B52E68 /* AccountNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -175,6 +176,7 @@
 		EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataRequest.swift; sourceTree = "<group>"; };
 		EDD2A84E2239535100B52E68 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		EDD2A8502239567700B52E68 /* TimetableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableModel.swift; sourceTree = "<group>"; };
+		EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationController.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
+				EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
 				ED231B40222E6EC600A80FC9 /* RequestViewController.swift in Sources */,
 				EDD2A845223918CC00B52E68 /* ProviderViewController.swift in Sources */,
+				EDD2A855223A74BB00B52E68 /* AccountNavigationController.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */,

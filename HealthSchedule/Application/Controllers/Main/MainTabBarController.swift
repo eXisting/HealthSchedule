@@ -16,6 +16,7 @@ class MainTabBarController: UITabBarController {
   private var homeNavigationController: SearchNavigationController!
   private var historyNavigationController: HistoryNavigationController!
   private var requestNavigationController: RequestNavigationController!
+  private var accountNavigationController: AccountNavigationController!
 
   private let homeTab = SearchViewController()
   private let requestTab = RequestViewController()
@@ -28,21 +29,17 @@ class MainTabBarController: UITabBarController {
     homeNavigationController = SearchNavigationController(rootViewController: homeTab)
     historyNavigationController = HistoryNavigationController(rootViewController: historyTab)
     requestNavigationController = RequestNavigationController(rootViewController: requestTab)
+    accountNavigationController = AccountNavigationController(rootViewController: accountTab)
 
     let tabBarItems = [
       homeNavigationController,
       requestNavigationController,
       historyNavigationController,
-      accountTab
+      accountNavigationController
     ]
 
     tabBarItems.forEach { item in
-      guard let navigationController = item as? UINavigationController else {
-        (item as! SetupableTabBarItem).setupTabBarItem()
-        return
-      }
-
-      (navigationController.viewControllers.first as! SetupableTabBarItem).setupTabBarItem()
+      (item?.viewControllers.first as! SetupableTabBarItem).setupTabBarItem()
     }
 
     setViewControllers((tabBarItems as! [UIViewController]), animated: true)
