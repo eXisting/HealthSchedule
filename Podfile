@@ -8,6 +8,5 @@ target 'HealthSchedule' do
 
   use_frameworks!
   pod 'FSCalendar'
-  pod 'LFTimePicker'
 
 end

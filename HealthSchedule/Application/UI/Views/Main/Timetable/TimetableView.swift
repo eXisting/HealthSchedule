@@ -48,16 +48,13 @@ class TimetableView: UIView {
     NSLayoutConstraint(item: chooseTimeButton, attribute: .top, relatedBy: .equal, toItem: timeLabel, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
     NSLayoutConstraint(item: chooseTimeButton, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: chooseTimeButton, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.05, constant: 0).isActive = true
-    NSLayoutConstraint(item: chooseTimeButton, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.5, constant: 0).isActive = true
+    NSLayoutConstraint(item: chooseTimeButton, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.6, constant: 0).isActive = true
     NSLayoutConstraint(item: chooseTimeButton, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: self.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
   }
   
   private func customizeViews() {
-    chooseTimeButton.setTitle("CHOOSE", for: .normal)
-    chooseTimeButton.backgroundColor = .clear
-    chooseTimeButton.tintColor = .lightGray
-    chooseTimeButton.layer.cornerRadius = 15
-    chooseTimeButton.layer.borderWidth = 1
+    chooseTimeButton.roundBorder()
+    chooseTimeButton.setTitle("CHOOSE TIME INTERVAL", for: .normal)
     chooseTimeButton.layer.borderColor = UIColor.black.cgColor
     chooseTimeButton.setTitleColor(.black, for: .normal)
     

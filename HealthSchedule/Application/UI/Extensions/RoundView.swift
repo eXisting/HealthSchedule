@@ -14,3 +14,12 @@ extension UIView {
     clipsToBounds = true
   }
 }
+
+extension UIButton {
+  func roundBorder() {
+    backgroundColor = .clear
+    tintColor = .lightGray
+    layer.cornerRadius = 15
+    layer.borderWidth = 1
+  }
+}

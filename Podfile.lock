@@ -1,20 +1,16 @@
 PODS:
   - FSCalendar (2.8.0)
-  - LFTimePicker (0.4)
 
 DEPENDENCIES:
   - FSCalendar
-  - LFTimePicker
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - FSCalendar
-    - LFTimePicker
 
 SPEC CHECKSUMS:
   FSCalendar: 3a5ed3636e2ba1b83ebebfcf0c2603105a6f5efe
-  LFTimePicker: 8e57af31e376af25f57c7b54f98bdf04391ad131
 
-PODFILE CHECKSUM: e1c39a4e7c099d4bb0b0f43d244b8c5929eed36f
+PODFILE CHECKSUM: 5f33dcbf72b32b4492623879601dce68151572fb
 
 COCOAPODS: 1.6.0
