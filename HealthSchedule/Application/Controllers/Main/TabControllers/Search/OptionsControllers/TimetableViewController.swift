@@ -33,6 +33,23 @@ class TimetableViewController: UIViewController {
   }
   
   @objc private func onDone() {
-    parentNavigationController.popFromTimetable(mainView.getChosenDateTimeInterval())
+    let dateTimeInterval = mainView.getChosenDateTimeInterval()
+    if dateTimeInterval.end < dateTimeInterval.start {
+      showWarningAlert(message: "End time cannot be grater then start time!")
+      return
+    }
+    
+    parentNavigationController.popFromTimetable(dateTimeInterval)
+  }
+}
+
+
+extension TimetableViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(
+      for: self,
+      "Warning",
+      message,
+      .alert)
   }
 }
