@@ -53,9 +53,8 @@ class AccountPlacemarkCell: UITableViewCell {
     
     NSLayoutConstraint(item: editableField, attribute: .bottom, relatedBy: .equal, toItem: placemark, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: editableField, attribute: .top, relatedBy: .equal, toItem: placemark, attribute: .top, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: editableField, attribute: .left, relatedBy: .equal, toItem: placemark, attribute: .right, multiplier: 1, constant: 0).isActive = true
+    NSLayoutConstraint(item: editableField, attribute: .left, relatedBy: .equal, toItem: placemark, attribute: .right, multiplier: 1, constant: -16).isActive = true
     NSLayoutConstraint(item: editableField, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.75, constant: 0).isActive = true
-    
     
     NSLayoutConstraint(item: placemark, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: placemark, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0).isActive = true

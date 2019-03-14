@@ -11,6 +11,8 @@ import UIKit
 class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
+  private var rootNavigation: AccountNavigationController!
+  
   private let mainView = ProfileView()
   private let model = AccountModel()
   
@@ -25,6 +27,8 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     
     mainView.setup(delegate: self, dataSource: self)
     model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()?.image?.url, setImageForView)
+    
+    rootNavigation = (navigationController as! AccountNavigationController)
     
     navigationItem.title = titleName
   }
@@ -44,6 +48,10 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     
     tabBarItem.selectedImage = UIImage(named: "TabBarIcons/account")
     tabBarItem.image = UIImage(named: "TabBarIcons/account")
+  }
+  
+  func testCallback(_ message: String) {
+    print(message)
   }
 }
 
@@ -79,6 +87,15 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     return header
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let sectionName = model.getUserDataKey(by: indexPath.section)
+    guard let tuple = model.userData[sectionName]?[indexPath.row] else {
+      fatalError("Cannot get user data for indexPath!")
+    }
+    
+    rootNavigation.pushController(for: model.getClosureType(by: tuple.value))
+  }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let sectionName = model.getUserDataKey(by: indexPath.section)
     guard let tuple = model.userData[sectionName]?[indexPath.row] else {
@@ -89,7 +106,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
       guard let placemarkCell = tableView.dequeueReusableCell(
         withIdentifier: AccountTableView.placemarkCellIdentifier,
         for: indexPath) as? AccountPlacemarkCell else {
-        fatalError("Cannot get user data for indexPath!")
+        fatalError("Cannot cast to AccountPlacemarkCell!")
       }
       
       placemarkCell.value = tuple.value
@@ -100,9 +117,10 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     guard let disclosureCell = tableView.dequeueReusableCell(
       withIdentifier: AccountTableView.disclosureCellIdentifier,
       for: indexPath) as? AccountDisclosureCell else {
-        fatalError("Cannot get user data for indexPath!")
+        fatalError("Cannot cast to AccountDisclosureCell!")
     }
     
+    disclosureCell.disclosureType = model.getClosureType(by: tuple.value)
     disclosureCell.value = tuple.value
     
     return disclosureCell

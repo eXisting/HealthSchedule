@@ -34,6 +34,17 @@ enum AccountFieldType: String {
   case none = ""
 }
 
+enum DisclosureFieldType: String {  
+  case profession = "Professions"
+  case service = "Services"
+  case address = "Address"
+  case schedule = "Schedule"
+  
+  case password = "Password"
+  
+  case none
+}
+
 class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let databaseManager = DataBaseManager.shared
@@ -55,18 +66,18 @@ class AccountModel {
     result[.security] = [
       (.email, currentUser.email ?? "No_email"),
       (.phone, currentUser.phone ?? ""),
-      (.none, "Change password")
+      (.none, DisclosureFieldType.password.rawValue)
     ]
     
     //if currentUser.role?.name == UserTypeName.provider.rawValue {
       result[.providerData] = [
-        (.none, "Professions"),
-        (.none, "Services"),
-        (.none, "Address"),
+        (.none, DisclosureFieldType.profession.rawValue),
+        (.none, DisclosureFieldType.service.rawValue),
+        (.none, DisclosureFieldType.address.rawValue),
       ]
       
       result[.timetable] = [
-        (.none, "Schedule")
+        (.none, DisclosureFieldType.schedule.rawValue)
       ]
 //    }
 
@@ -88,6 +99,14 @@ class AccountModel {
       case .security:
         return .security
     }
+  }
+  
+  func getClosureType(by value: String) -> DisclosureFieldType {
+    guard let type = DisclosureFieldType(rawValue: value) else {
+      return .none
+    }
+    
+    return type
   }
   
   func startLoadImage(from url: String?,_ completion: @escaping (Data) -> Void) {
