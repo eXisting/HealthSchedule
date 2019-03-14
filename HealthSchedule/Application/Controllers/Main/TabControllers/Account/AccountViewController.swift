@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol AccountHandleDelegating {
+  func logout()
+  func edit()
+  func save()
+}
+
 class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
@@ -15,6 +21,18 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   
   private let mainView = ProfileView()
   private let model = AccountModel()
+  
+  private var customNavigationItem: AccountNavigationItem?
+  
+  override var navigationItem: UINavigationItem {
+    get {
+      if customNavigationItem == nil {
+        customNavigationItem = AccountNavigationItem(title: titleName, delegate: self)
+      }
+      
+      return customNavigationItem!
+    }
+  }
   
   override func loadView() {
     super.loadView()
@@ -29,8 +47,6 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()?.image?.url, setImageForView)
     
     rootNavigation = (navigationController as! AccountNavigationController)
-    
-    navigationItem.title = titleName
   }
 
   private func setImageForView(_ imageData: Data) {
@@ -53,6 +69,20 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   func testCallback(_ message: String) {
     print(message)
   }
+}
+
+extension AccountViewController: AccountHandleDelegating {
+  func logout() {
+    NotificationCenter.default.post(name: .TokenDidExpired, object: nil)
+  }
+  
+  func edit() {
+    
+  }
+  
+  func save() {
+    model.handleSave()
+  } 
 }
 
 extension AccountViewController: UITableViewDataSource, UITableViewDelegate {

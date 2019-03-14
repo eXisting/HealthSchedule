@@ -31,7 +31,7 @@ class AuthMainView: UIView {
         return nil
     }
     
-    return (login, password)
+    return ("pvon@example.net", password)
   }
   
   private func setUpBackground() {

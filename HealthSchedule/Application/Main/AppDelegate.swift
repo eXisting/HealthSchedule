@@ -29,10 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Set translucent. (Default value is already true, so this can be removed if desired.)
     UINavigationBar.appearance().isTranslucent = true
     
-    let controller = UIStoryboard(name: "Authentication", bundle: nil).instantiateInitialViewController()
+    let controller = UIStoryboard(name: "Authentication", bundle: nil).instantiateInitialViewController() as! RootNavigationController
     window?.rootViewController = controller
     window?.makeKeyAndVisible()
-        
+    
+    NotificationCenter.default.addObserver(controller, selector: #selector(controller.popNavigationStackOnLogout), name: .TokenDidExpired, object: nil)
+    
     return true
   }
 

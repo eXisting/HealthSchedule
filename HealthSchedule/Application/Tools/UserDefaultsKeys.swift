@@ -13,3 +13,7 @@ enum UserDefaultsKeys: String {
   case sessionExpires = "SessionExpires"
   case userUniqueId = "UserUniqueId"
 }
+
+extension Notification.Name {
+  static let TokenDidExpired = Notification.Name(rawValue: "TokenExpired")
+}

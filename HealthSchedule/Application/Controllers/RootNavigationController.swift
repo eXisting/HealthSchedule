@@ -25,6 +25,15 @@ class RootNavigationController: UINavigationController {
     super.viewDidLoad()
     signUpStoryboard = UIStoryboard(name: "SignUp", bundle: nil)
   }
+  
+  @objc func popNavigationStackOnLogout() {
+    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.sessionToken.rawValue)
+    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.sessionExpires.rawValue)
+    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userUniqueId.rawValue)
+    
+    popToRootViewController(animated: true)
+    dismiss(animated: true)
+  }
 }
 
 extension RootNavigationController: RootNavigationPresentable {

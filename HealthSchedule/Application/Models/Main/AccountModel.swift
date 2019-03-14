@@ -118,4 +118,8 @@ class AccountModel {
       completion(data)
     }
   }
+  
+  func handleSave() {
+    print("Saving...")
+  }
 }
