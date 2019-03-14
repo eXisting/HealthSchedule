@@ -8,25 +8,77 @@
 
 import UIKit
 
+enum AccountSectionNames: String {
+  case general = "General"
+  case security = "Security"
+  case providerData = "Provider data"
+  case timetable = "Timetable"
+  
+  case none = ""
+}
+
+enum AccountSectionIdexes: Int {
+  case general = 0
+  case provider = 1
+  case timetable = 2
+  case security = 3
+}
+
 class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let databaseManager = DataBaseManager.shared
   
-  lazy var userData: [(sectionName: String, rowValue: String)]? = {
+  lazy var userData: [AccountSectionNames: [String]] = {
     guard let currentUser = databaseManager.getCurrentUser() else {
-      // return all from core data
-      return nil
+      // No user
+      return [:]
     }
     
-    var result: [(sectionName: String, rowValue: String)] = []
-    result.append(("Full name", currentUser.name ?? "No_name"))
-    result.append(("City", currentUser.city?.name ?? "No_city"))
-    result.append(("Birthday", DateManager.shared.dateToString(currentUser.birthday!)))
-    result.append(("E-mail", currentUser.email ?? "No_email"))
-    result.append(("Phone", currentUser.phone ?? ""))
+    var result: [AccountSectionNames: [String]] = [:]
     
+    result[.general] = [
+       currentUser.name ?? "No_name",
+       currentUser.city?.name ?? "No_city",
+       DateManager.shared.dateToString(currentUser.birthday!)
+    ]
+    
+    result[.security] = [
+      currentUser.email ?? "No_email",
+      currentUser.phone ?? "",
+      "Change password"
+    ]
+    
+    //if currentUser.role?.name == UserTypeName.provider.rawValue {
+      result[.providerData] = [
+        "Professions",
+        "Services",
+        "Address",
+      ]
+      
+      result[.timetable] = [
+        "Schedule"
+      ]
+//    }
+
     return result
   }()
+  
+  func getUserDataKey(by sectionIndex: Int) -> AccountSectionNames {
+    guard let index = AccountSectionIdexes(rawValue: sectionIndex) else {
+      return .none
+    }
+    
+    switch index {
+      case .general:
+        return .general
+      case .provider:
+        return .providerData
+      case .timetable:
+        return .timetable
+      case .security:
+        return .security
+    }
+  }
   
   func startLoadImage(from url: String?,_ completion: @escaping (Data) -> Void) {
     guard let url = url else {

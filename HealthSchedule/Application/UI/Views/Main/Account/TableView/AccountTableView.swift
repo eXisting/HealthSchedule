@@ -23,6 +23,6 @@ class AccountTableView: UITableView {
     register(CommonSection.self, forHeaderFooterViewReuseIdentifier: AccountTableView.sectionIdentifier)
     
     // Remove last underline in table view
-    tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 1))
+    tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0))
   }
 }

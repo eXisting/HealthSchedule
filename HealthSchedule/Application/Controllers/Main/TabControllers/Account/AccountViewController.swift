@@ -53,37 +53,41 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 35
+    return 40
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return model.userData?.count ?? 0
+    return model.userData.count
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    let sectionName = model.getUserDataKey(by: section)
+    
+    guard let count = model.userData[sectionName]?.count else {
+      return 0
+    }
+    
+    return count
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountTableView.sectionIdentifier) as! CommonSection
     
-    guard let tuple = model.userData?[section] else {
-      return header
-    }
+    let sectionName = model.getUserDataKey(by: section)
 
-    header.setup(title: tuple.sectionName, backgroundColor: CommonSection.lightSectionColor)
-    
+    header.setup(title: sectionName.rawValue, backgroundColor: sectionName == .none ? .white : CommonSection.lightSectionColor)
     return header
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableView.cellIdentifier, for: indexPath) as! AccountRow
     
-    guard let tuple = model.userData?[indexPath.section] else {
+    let sectionName = model.getUserDataKey(by: indexPath.section)
+    guard let rowValue = model.userData[sectionName]?[indexPath.row] else {
       return cell
     }
-
-    cell.value = tuple.rowValue
+    
+    cell.value = rowValue
     
     return cell
   }

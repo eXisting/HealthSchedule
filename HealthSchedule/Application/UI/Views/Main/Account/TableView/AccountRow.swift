@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum AccountCellType {
+  case common
+  case disclosure
+}
+
 class AccountRow: UITableViewCell {
   var value: String? {
     get {
