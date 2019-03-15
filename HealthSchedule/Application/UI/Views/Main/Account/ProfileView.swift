@@ -25,6 +25,10 @@ class ProfileView: UIView {
     profileImageView.image = image
   }
   
+  func setRefreshDelegate(delegate: RefreshingUserTableView) {
+    tableView.refreshDelegate = delegate
+  }
+  
   private func laidOutViews() {
     addSubview(profileImageView)
     addSubview(tableView)

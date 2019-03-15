@@ -45,7 +45,24 @@ extension UserDataRequest: CommonDataRequesting {
     requestsManager.getAsync(for: RemoteUser.self, from: .user, RequestManager.sessionToken.asParams()) {
       [weak self] (user, response) in
       
+      guard let remoteUser = user else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
       
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      // TODO: Update user in core data
+      
+      // TODO: refactor this
+      if remoteUser.role.name == "provider" {
+        self?.requestProviderData()
+      }
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
   

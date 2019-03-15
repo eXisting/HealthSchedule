@@ -15,6 +15,8 @@ class AccountTableView: UITableView {
 
   private let customRefreshControl = UIRefreshControl()
   
+  var refreshDelegate: RefreshingUserTableView?
+  
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     self.delegate = delegate
     self.dataSource = dataSource
@@ -36,7 +38,15 @@ class AccountTableView: UITableView {
   }
   
   @objc private func refresh(_ sender: Any) {
-    
+    refreshDelegate?.refreshUser {
+      [weak self] responseStatus in
+      DispatchQueue.main.async {
+        if responseStatus == ResponseStatus.success.rawValue {
+          self?.reloadData()
+          self?.refreshControl?.endRefreshing()
+        }
+      }
+    }
   }
   
   private func customize() {

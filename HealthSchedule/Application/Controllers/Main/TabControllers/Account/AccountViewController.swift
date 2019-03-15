@@ -15,7 +15,7 @@ protocol AccountHandleDelegating {
 }
 
 protocol RefreshingUserTableView {
-  func refreshUser(_ completion: @escaping (User) -> Void)
+  func refreshUser(_ completion: @escaping (String) -> Void)
 }
 
 class AccountViewController: UIViewController, SetupableTabBarItem {
@@ -48,6 +48,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     super.viewDidLoad()
     
     mainView.setup(delegate: self, dataSource: self)
+    mainView.setRefreshDelegate(delegate: self)
     model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()?.image?.url, setImageForView)
     
     rootNavigation = (navigationController as! AccountNavigationController)
@@ -90,7 +91,7 @@ extension AccountViewController: AccountHandleDelegating {
 }
 
 extension AccountViewController: RefreshingUserTableView {
-  func refreshUser(_ completion: @escaping (User) -> Void) {
+  func refreshUser(_ completion: @escaping (String) -> Void) {
     model.reloadRemoteUser(completion)
   }
 }

@@ -88,8 +88,8 @@ class AccountModel {
     }
   }
   
-  func reloadRemoteUser(_ completion: @escaping (User) -> Void) {
-    userRequestController
+  func reloadRemoteUser(_ completion: @escaping (String) -> Void) {
+    userRequestController.getUser(completion)
   }
   
   private func getUserDataFromCoreData() -> [AccountSectionNames: [(AccountFieldType, value: String)]] {
@@ -125,5 +125,9 @@ class AccountModel {
     //    }
     
     return result
+  }
+  
+  func handleSave() {
+    print("Saving..")
   }
 }

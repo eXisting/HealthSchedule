@@ -58,6 +58,7 @@ extension AuthenticationModel: SigningIn {
         }
         
         self?.presentResponsible.presentHome()
+        sender?.isUserInteractionEnabled = true
       }
     }
   }
