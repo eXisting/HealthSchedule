@@ -50,38 +50,7 @@ class AccountModel {
   private let databaseManager = DataBaseManager.shared
   
   lazy var userData: [AccountSectionNames: [(AccountFieldType, value: String)]] = {
-    guard let currentUser = databaseManager.getCurrentUser() else {
-      // No user
-      return [:]
-    }
-    
-    var result: [AccountSectionNames: [(AccountFieldType, value: String)]] = [:]
-    
-    result[.general] = [
-       (.name, currentUser.name ?? "No_name"),
-       (.city, currentUser.city?.name ?? "No_city"),
-       (.birthday, DateManager.shared.dateToString(currentUser.birthday!))
-    ]
-    
-    result[.security] = [
-      (.email, currentUser.email ?? "No_email"),
-      (.phone, currentUser.phone ?? ""),
-      (.none, DisclosureFieldType.password.rawValue)
-    ]
-    
-    //if currentUser.role?.name == UserTypeName.provider.rawValue {
-      result[.providerData] = [
-        (.none, DisclosureFieldType.profession.rawValue),
-        (.none, DisclosureFieldType.service.rawValue),
-        (.none, DisclosureFieldType.address.rawValue),
-      ]
-      
-      result[.timetable] = [
-        (.none, DisclosureFieldType.schedule.rawValue)
-      ]
-//    }
-
-    return result
+    return getUserDataFromCoreData()
   }()
   
   func getUserDataKey(by sectionIndex: Int) -> AccountSectionNames {
@@ -119,7 +88,42 @@ class AccountModel {
     }
   }
   
-  func handleSave() {
-    print("Saving...")
+  func reloadRemoteUser(_ completion: @escaping (User) -> Void) {
+    userRequestController
+  }
+  
+  private func getUserDataFromCoreData() -> [AccountSectionNames: [(AccountFieldType, value: String)]] {
+    guard let currentUser = databaseManager.getCurrentUser() else {
+      // No user
+      return [:]
+    }
+    
+    var result: [AccountSectionNames: [(AccountFieldType, value: String)]] = [:]
+    
+    result[.general] = [
+      (.name, currentUser.name ?? "No_name"),
+      (.city, currentUser.city?.name ?? "No_city"),
+      (.birthday, DateManager.shared.dateToString(currentUser.birthday!))
+    ]
+    
+    result[.security] = [
+      (.email, currentUser.email ?? "No_email"),
+      (.phone, currentUser.phone ?? ""),
+      (.none, DisclosureFieldType.password.rawValue)
+    ]
+    
+    //if currentUser.role?.name == UserTypeName.provider.rawValue {
+    result[.providerData] = [
+      (.none, DisclosureFieldType.profession.rawValue),
+      (.none, DisclosureFieldType.service.rawValue),
+      (.none, DisclosureFieldType.address.rawValue),
+    ]
+    
+    result[.timetable] = [
+      (.none, DisclosureFieldType.schedule.rawValue)
+    ]
+    //    }
+    
+    return result
   }
 }

@@ -14,6 +14,10 @@ protocol AccountHandleDelegating {
   func save()
 }
 
+protocol RefreshingUserTableView {
+  func refreshUser(_ completion: @escaping (User) -> Void)
+}
+
 class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
@@ -82,7 +86,13 @@ extension AccountViewController: AccountHandleDelegating {
   
   func save() {
     model.handleSave()
-  } 
+  }
+}
+
+extension AccountViewController: RefreshingUserTableView {
+  func refreshUser(_ completion: @escaping (User) -> Void) {
+    model.reloadRemoteUser(completion)
+  }
 }
 
 extension AccountViewController: UITableViewDataSource, UITableViewDelegate {

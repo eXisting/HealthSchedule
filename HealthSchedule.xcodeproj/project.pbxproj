@@ -320,6 +320,7 @@
 		ED231B2A222D3B1600A80FC9 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				EDD2A858223AAA2800B52E68 /* ChildControllers */,
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
 				EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */,
 			);
@@ -702,6 +703,13 @@
 				EDD2A84E2239535100B52E68 /* TimetableView.swift */,
 			);
 			path = Timetable;
+			sourceTree = "<group>";
+		};
+		EDD2A858223AAA2800B52E68 /* ChildControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChildControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
