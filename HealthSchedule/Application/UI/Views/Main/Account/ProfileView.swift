@@ -23,6 +23,7 @@ class ProfileView: UIView {
   
   func setImage(_ image: UIImage) {
     profileImageView.image = image
+    profileImageView.roundCorners(by: profileImageView.frame.height / 2)
   }
   
   func setRefreshDelegate(delegate: RefreshingUserTableView) {
