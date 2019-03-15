@@ -11,7 +11,6 @@ import UIKit
 enum SearchOptionKey: String {
   case service = "Service"
   case dateTime = "Date and Time"
-  case provider = "Specialist"
 }
 
 class SearchModel {

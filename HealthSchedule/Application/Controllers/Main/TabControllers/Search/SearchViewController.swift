@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SearchResponsible {
+  func startSearch()
+}
+
 protocol OptionsCollectioning {
   func storeDate(_ date: (day: Date, start: Date, end: Date))
   func storeService(_ id: Int)
@@ -35,6 +39,14 @@ class SearchViewController: UIViewController {
     
     mainView.setup(delegate: self, dataSource: self)
     mainView.toggleViews(isDataPresent: model.searchOptions.count > 0)
+    mainView.searchDelegate = self
+  }
+}
+
+extension SearchViewController: SearchResponsible {
+  func startSearch() {
+    // TDOO: collect and pass data
+    rootNavigation.presentResultController()
   }
 }
 

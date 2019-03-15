@@ -8,11 +8,9 @@
 
 import UIKit
 
-class ProviderViewController: UIViewController {
-  private let titleName = "Specialists"
-  
+class ResultViewController: UIViewController {  
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = titleName
+    view.backgroundColor = .white
   }
 }

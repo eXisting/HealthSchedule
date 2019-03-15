@@ -10,7 +10,6 @@ import UIKit
 
 class SearchNavigationController: UINavigationController {
   private let servicesController = ServicesViewController()
-  private let providerController = ProviderViewController()
   private let timetableController = TimetableViewController()
 
   func pushController(for searchOption: SearchOptionKey) {
@@ -19,8 +18,6 @@ class SearchNavigationController: UINavigationController {
         pushServiceController()
       case .dateTime:
         pushTimetableController()
-      case .provider:
-        pushProviderController()
     }
   }
   
@@ -36,14 +33,16 @@ class SearchNavigationController: UINavigationController {
     popViewController(animated: true)
   }
   
+  func presentResultController() {
+    let controller = ResultViewController()
+    
+    present(controller, animated: true)
+  }
+  
   // MARK: Main navigation
   
   private func pushServiceController() {
     pushViewController(servicesController, animated: true)
-  }
-  
-  private func pushProviderController() {
-    pushViewController(providerController, animated: true)
   }
   
   private func pushTimetableController() {
