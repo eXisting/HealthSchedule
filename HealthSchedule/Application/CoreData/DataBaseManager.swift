@@ -172,7 +172,7 @@ class DataBaseManager: NSObject {
 
 extension DataBaseManager {
   private func buildBasicUserFields(for user: User, _ remoteUser: RemoteUser) {
-    user.name = remoteUser.firstName + remoteUser.lastName
+    user.name = "\(remoteUser.firstName) \(remoteUser.lastName)"
     user.email = remoteUser.email
     user.phone = remoteUser.phone
     user.birthday = remoteUser.birthday
