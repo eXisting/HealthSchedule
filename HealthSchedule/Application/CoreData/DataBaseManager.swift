@@ -18,11 +18,12 @@ class DataBaseManager: NSObject {
   
   // MARK: Fields
   
-  let modelName = "MainCoreDataContainer"
+  private let modelName = "MainCoreDataContainer"
   
-  let userEntity = "User"
-  let userImageEntity = "UserImage"
-  let cityEntity = "City"
+  private let userEntity = "User"
+  private let userImageEntity = "UserImage"
+  private let cityEntity = "City"
+  private let serviceEntity = "Service"
 
   private lazy var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "MainCoreDataContainer")
@@ -146,6 +147,19 @@ class DataBaseManager: NSObject {
     }
   }
   
+  func getServices() -> [Service] {
+    let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    
+    do {
+      let result = try persistentContainer.viewContext.fetch(fetchRequest)
+      return result
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+
   // MARK: Actions
   
   func insertUsers(from remoteUsers: [RemoteUser]) {
@@ -179,10 +193,10 @@ class DataBaseManager: NSObject {
       }
       
       backgroundContext.insert(user)
-      backgroundContext.processPendingChanges()
-      
-      saveContext(backgroundContext)
     }
+    
+    backgroundContext.processPendingChanges()
+    saveContext(backgroundContext)
   }
   
   func insertCities(from cityList: [RemoteCity]) {
@@ -195,10 +209,26 @@ class DataBaseManager: NSObject {
       build(city: city, remoteCity)
       
       backgroundContext.insert(city)
-      backgroundContext.processPendingChanges()
-      
-      saveContext(backgroundContext)
     }
+    
+    backgroundContext.processPendingChanges()
+    saveContext(backgroundContext)
+  }
+  
+  func insertServices(from serviceList: [RemoteService]) {
+    let backgroundContext = persistentContainer.newBackgroundContext()
+    let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: backgroundContext)
+    
+    for remoteService in serviceList {
+      let service = NSManagedObject(entity: serviceEntityObject!, insertInto: backgroundContext) as! Service
+      
+      build(service: service, remoteService)
+      
+      backgroundContext.insert(service)
+    }
+    
+    backgroundContext.processPendingChanges()
+    saveContext(backgroundContext)
   }
 }
 
@@ -222,6 +252,11 @@ extension DataBaseManager {
   
   private func build(city: City, _ remoteCity: RemoteCity) {
     city.id = Int16(remoteCity.id)
-    city.name = remoteCity.name
+    city.name = remoteCity.title
+  }
+  
+  private func build(service: Service, _ remoteService: RemoteService) {
+    service.id = Int16(remoteService.id)
+    service.name = remoteService.title
   }
 }

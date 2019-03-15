@@ -10,7 +10,7 @@ import UIKit
 import Presentr
 
 protocol CityPickHandling {
-  func picked(id: Int)
+  func picked(id: Int, title: String)
 }
 
 class ServicesViewController: UIViewController {
@@ -62,12 +62,13 @@ class ServicesViewController: UIViewController {
 
 extension ServicesViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 0
+    return model.services.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    let cell = tableView.dequeueReusableCell(withIdentifier: "")
-    return UITableViewCell()
+    let cell = UITableViewCell()
+    cell.textLabel?.text = model.services[indexPath.row].name
+    return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -94,9 +95,14 @@ extension ServicesViewController: UISearchBarDelegate {
 }
 
 extension ServicesViewController: CityPickHandling {
-  func picked(id: Int) {
+  func picked(id: Int, title: String) {
     model.cityId = id
-    
-    // TODO: Fetch services
+    searchBar.text = title
+    model.startLoadServices {
+      [weak self] in
+      DispatchQueue.main.async {
+        self!.mainView.toggleViews(isDataPresent: self!.model.services.count > 0)
+      }
+    }
   }
 }

@@ -10,10 +10,13 @@ enum Endpoints: String {
   // GET
   case user = "/api/user"
   case provider = "/api/provider"
-  case allCities = "/api/cities"
-  case allProfessions = "/api/category/doctors/professions"
   case requests = "/api/user/requests"
 
+  // GET COMMON
+  case allCities = "/api/cities"
+  case allProfessions = "/api/category/doctors/professions"
+  case allServices = "/api/services"
+  
   // POST
   case signUpAsUser = "/api/register/user"
   case signUpAsProvider = "/api/register/provider"

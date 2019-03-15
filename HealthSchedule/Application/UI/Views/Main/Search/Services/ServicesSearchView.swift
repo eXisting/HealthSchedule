@@ -28,6 +28,10 @@ class ServicesSearchView: UIView {
     tableView.isHidden = !isDataPresent
   }
   
+  func reloadTableView() {
+    tableView.reloadData()
+  }
+  
   private func laidOutViews() {
     addSubview(tableView)
     addSubview(noDataView)

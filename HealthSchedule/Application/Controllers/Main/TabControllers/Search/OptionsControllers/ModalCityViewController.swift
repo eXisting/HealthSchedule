@@ -18,7 +18,8 @@ class ModalCityViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    storeDelegate.picked(id: Int(cititesList[indexPath.row].id))
+    let city = cititesList[indexPath.row]
+    storeDelegate.picked(id: Int(city.id), title: city.name!)
     dismiss(animated: true)
   }
   
