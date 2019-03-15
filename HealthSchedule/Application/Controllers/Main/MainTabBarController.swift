@@ -46,4 +46,10 @@ class MainTabBarController: UITabBarController {
     
     view.backgroundColor = .white
   }
+  
+  override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    viewControllers?.forEach {
+      controller in (controller as? UINavigationController)?.popToRootViewController(animated: false)
+    }
+  }
 }
