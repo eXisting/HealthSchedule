@@ -11,6 +11,8 @@ import UIKit
 class ServicesViewController: UIViewController {
   private let titleName = "Services"
   
+  private var rootNavigation: SearchNavigationController!
+  
   private let model = ServicesModel()
   private let mainView = ServicesSearchView()
   private let searchBar = UISearchBar()
@@ -27,9 +29,11 @@ class ServicesViewController: UIViewController {
     
     searchBar.sizeToFit()
     searchBar.placeholder = "Location..."
+    searchBar.delegate = self
 
     mainView.setup(delegate: self, dataSource: self)
     
+    rootNavigation = (navigationController as! SearchNavigationController)
     navigationItem.title = titleName
   }
 }
@@ -42,5 +46,12 @@ extension ServicesViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //    let cell = tableView.dequeueReusableCell(withIdentifier: "")
     return UITableViewCell()
+  }
+}
+
+extension ServicesViewController: UISearchBarDelegate {
+  func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    rootNavigation.presentResultController()
+    return false
   }
 }
