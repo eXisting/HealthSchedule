@@ -8,9 +8,8 @@
 
 import UIKit
 
-protocol AccountHandleDelegating {
+protocol AccountHandlableDelegate {
   func logout()
-  func edit()
   func save()
 }
 
@@ -76,13 +75,9 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   }
 }
 
-extension AccountViewController: AccountHandleDelegating {
+extension AccountViewController: AccountHandlableDelegate {
   func logout() {
     NotificationCenter.default.post(name: .LogoutCalled, object: nil)
-  }
-  
-  func edit() {
-    
   }
   
   func save() {

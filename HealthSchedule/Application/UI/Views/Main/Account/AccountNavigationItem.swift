@@ -11,14 +11,15 @@ import UIKit
 
 
 class AccountNavigationItem: UINavigationItem {
-  var delegate: AccountHandleDelegating
+  var delegate: AccountHandlableDelegate
   
-  init(title: String, delegate: AccountHandleDelegating) {
+  init(title: String, delegate: AccountHandlableDelegate) {
     self.delegate = delegate
     
     super.init(title: title)
     
     leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogoutClick))
+    rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(onSaveClick))
   }
   
   required init?(coder: NSCoder) {
@@ -27,5 +28,9 @@ class AccountNavigationItem: UINavigationItem {
   
   @objc private func onLogoutClick() {
     delegate.logout()
+  }
+  
+  @objc private func onSaveClick() {
+    delegate.save()
   }
 }
