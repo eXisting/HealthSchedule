@@ -16,4 +16,5 @@ enum UserDefaultsKeys: String {
 
 extension Notification.Name {
   static let TokenDidExpired = Notification.Name(rawValue: "TokenExpired")
+  static let LogoutCalled = Notification.Name(rawValue: "LogoutCalled")
 }

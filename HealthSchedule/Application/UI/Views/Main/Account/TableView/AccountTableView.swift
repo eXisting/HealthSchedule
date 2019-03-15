@@ -43,8 +43,9 @@ class AccountTableView: UITableView {
       DispatchQueue.main.async {
         if responseStatus == ResponseStatus.success.rawValue {
           self?.reloadData()
-          self?.refreshControl?.endRefreshing()
         }
+        
+        self?.refreshControl?.endRefreshing()
       }
     }
   }

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = controller
     window?.makeKeyAndVisible()
     
-    NotificationCenter.default.addObserver(controller, selector: #selector(controller.popNavigationStackOnLogout), name: .TokenDidExpired, object: nil)
+    NotificationCenter.default.addObserver(controller, selector: #selector(controller.popNavigationStackOnLogout), name: .LogoutCalled, object: nil)
     
     return true
   }

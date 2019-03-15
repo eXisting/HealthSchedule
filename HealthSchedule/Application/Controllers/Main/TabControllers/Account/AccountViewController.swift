@@ -78,7 +78,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
 
 extension AccountViewController: AccountHandleDelegating {
   func logout() {
-    NotificationCenter.default.post(name: .TokenDidExpired, object: nil)
+    NotificationCenter.default.post(name: .LogoutCalled, object: nil)
   }
   
   func edit() {
