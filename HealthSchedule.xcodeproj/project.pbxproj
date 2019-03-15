@@ -89,6 +89,7 @@
 		EDD2A857223A90AB00B52E68 /* AccountPlacemarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */; };
 		EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A85D223BC79900B52E68 /* ServicesModel.swift */; };
 		EDD2A861223BCF1C00B52E68 /* ServicesSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */; };
+		EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -185,6 +186,7 @@
 		EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPlacemarkCell.swift; sourceTree = "<group>"; };
 		EDD2A85D223BC79900B52E68 /* ServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesModel.swift; sourceTree = "<group>"; };
 		EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSearchView.swift; sourceTree = "<group>"; };
+		EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCityViewController.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -698,6 +700,7 @@
 			children = (
 				EDD2A84222390AB300B52E68 /* ServicesViewController.swift */,
 				EDD2A8462239191E00B52E68 /* TimetableViewController.swift */,
+				EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */,
 			);
 			path = OptionsControllers;
 			sourceTree = "<group>";
@@ -846,12 +849,16 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HealthSchedule/Pods-HealthSchedule-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/UIEmptyState/UIEmptyState.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIEmptyState.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -894,6 +901,7 @@
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */,
+				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
 				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,

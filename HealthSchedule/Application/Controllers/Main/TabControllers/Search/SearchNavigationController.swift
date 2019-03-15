@@ -25,6 +25,12 @@ class SearchNavigationController: UINavigationController {
     return viewControllers[0] as! OptionsCollectioning
   }
   
+  func presentResultController() {
+    let controller = ResultViewController()
+    
+    present(controller, animated: true)
+  }
+  
   // MARK: Timetable navigation
   
   func popFromTimetable(_ chosenDateTime: (day: Date, start: Date, end: Date)) {
@@ -33,10 +39,10 @@ class SearchNavigationController: UINavigationController {
     popViewController(animated: true)
   }
   
-  func presentResultController() {
-    let controller = ResultViewController()
-    
-    present(controller, animated: true)
+  func popFromService(_ chosenServiceId: Int) {
+    let collector = getCollector()
+    collector.storeService(chosenServiceId)
+    popViewController(animated: true)
   }
   
   // MARK: Main navigation

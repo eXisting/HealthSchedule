@@ -7,33 +7,55 @@
 //
 
 import UIKit
+import Presentr
+
+protocol CityPickHandling {
+  func picked(id: Int)
+}
 
 class ServicesViewController: UIViewController {
   private let titleName = "Services"
   
-  private var rootNavigation: SearchNavigationController!
+  private var parentNavigationController: SearchNavigationController!
+  
+  let presenter: Presentr = {
+    let customType = PresentationType.popup
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .coverVerticalFromTop
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    return customPresenter
+  }()
   
   private let model = ServicesModel()
   private let mainView = ServicesSearchView()
   private let searchBar = UISearchBar()
   
   override func loadView() {
-    super.loadView()
-    
+    super.loadView()    
     view = mainView
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setupTopBar()
+
+    mainView.setup(delegate: self, dataSource: self)
+    
+    parentNavigationController = (navigationController as! SearchNavigationController)
+  }
+  
+  private func setupTopBar() {
     navigationItem.titleView = searchBar
     
     searchBar.sizeToFit()
     searchBar.placeholder = "Location..."
     searchBar.delegate = self
-
-    mainView.setup(delegate: self, dataSource: self)
     
-    rootNavigation = (navigationController as! SearchNavigationController)
     navigationItem.title = titleName
   }
 }
@@ -47,11 +69,34 @@ extension ServicesViewController: UITableViewDelegate, UITableViewDataSource {
 //    let cell = tableView.dequeueReusableCell(withIdentifier: "")
     return UITableViewCell()
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    parentNavigationController.popFromService(model.serviceId!)
+  }
 }
 
 extension ServicesViewController: UISearchBarDelegate {
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-    rootNavigation.presentResultController()
+    model.getCities {
+      [weak self] cities in
+      DispatchQueue.main.async {
+        let controller = ModalCityViewController()
+        controller.storeDelegate = self
+        controller.cititesList = cities
+        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
+      }
+    }
+    
+    // TODO: Present preloader
+    
     return false
+  }
+}
+
+extension ServicesViewController: CityPickHandling {
+  func picked(id: Int) {
+    model.cityId = id
+    
+    // TODO: Fetch services
   }
 }
