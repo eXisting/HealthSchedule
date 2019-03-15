@@ -49,9 +49,9 @@ class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let databaseManager = DataBaseManager.shared
   
-  lazy var userData: [AccountSectionNames: [(AccountFieldType, value: String)]] = {
+  var userData: [AccountSectionNames: [(AccountFieldType, value: String)]] {
     return getUserDataFromCoreData()
-  }()
+  }
   
   func getUserDataKey(by sectionIndex: Int) -> AccountSectionNames {
     guard let index = AccountSectionIdexes(rawValue: sectionIndex) else {
