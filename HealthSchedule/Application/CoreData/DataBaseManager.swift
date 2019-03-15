@@ -133,6 +133,19 @@ class DataBaseManager: NSObject {
     }
   }
   
+  func getCties() -> [City] {
+    let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    
+    do {
+      let result = try persistentContainer.viewContext.fetch(fetchRequest)
+      return result
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
   // MARK: Actions
   
   func insertUsers(from remoteUsers: [RemoteUser]) {
@@ -159,10 +172,29 @@ class DataBaseManager: NSObject {
         let userCityEntity = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
         let userCity = NSManagedObject(entity: userCityEntity!, insertInto: backgroundContext) as! City
         
-        build(city: userCity, with: user, remoteCity)
+        build(city: userCity, remoteCity)
+        
+        userCity.addToUser(user)
+        user.city = userCity
       }
       
       backgroundContext.insert(user)
+      backgroundContext.processPendingChanges()
+      
+      saveContext(backgroundContext)
+    }
+  }
+  
+  func insertCities(from cityList: [RemoteCity]) {
+    let backgroundContext = persistentContainer.newBackgroundContext()
+    let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
+    
+    for remoteCity in cityList {
+      let city = NSManagedObject(entity: cityEntityObject!, insertInto: backgroundContext) as! City
+      
+      build(city: city, remoteCity)
+      
+      backgroundContext.insert(city)
       backgroundContext.processPendingChanges()
       
       saveContext(backgroundContext)
@@ -188,11 +220,8 @@ extension DataBaseManager {
     image.userId = userId
   }
   
-  private func build(city: City, with user: User, _ remoteCity: RemoteCity) {
+  private func build(city: City, _ remoteCity: RemoteCity) {
     city.id = Int16(remoteCity.id)
     city.name = remoteCity.name
-    
-    city.addToUser(user)
-    user.city = city
   }
 }

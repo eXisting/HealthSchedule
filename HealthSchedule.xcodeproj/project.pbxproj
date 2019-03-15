@@ -87,6 +87,8 @@
 		EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8502239567700B52E68 /* TimetableModel.swift */; };
 		EDD2A855223A74BB00B52E68 /* AccountNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */; };
 		EDD2A857223A90AB00B52E68 /* AccountPlacemarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */; };
+		EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A85D223BC79900B52E68 /* ServicesModel.swift */; };
+		EDD2A861223BCF1C00B52E68 /* ServicesSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
@@ -181,6 +183,8 @@
 		EDD2A8502239567700B52E68 /* TimetableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableModel.swift; sourceTree = "<group>"; };
 		EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationController.swift; sourceTree = "<group>"; };
 		EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPlacemarkCell.swift; sourceTree = "<group>"; };
+		EDD2A85D223BC79900B52E68 /* ServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesModel.swift; sourceTree = "<group>"; };
+		EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSearchView.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
@@ -651,9 +655,9 @@
 		EDD2A82B22367BF200B52E68 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				EDD2A85C223BC77300B52E68 /* SearchTab */,
 				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
-				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
 				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
 			);
 			path = Main;
@@ -662,6 +666,7 @@
 		EDD2A8342238021F00B52E68 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				EDD2A85F223BCF0500B52E68 /* Services */,
 				EDD2A83A2238029F00B52E68 /* TableView */,
 				EDD2A8362238026C00B52E68 /* SearchView.swift */,
 			);
@@ -718,6 +723,23 @@
 				EDD2A844223918CC00B52E68 /* ResultViewController.swift */,
 			);
 			path = Result;
+			sourceTree = "<group>";
+		};
+		EDD2A85C223BC77300B52E68 /* SearchTab */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
+				EDD2A85D223BC79900B52E68 /* ServicesModel.swift */,
+			);
+			path = SearchTab;
+			sourceTree = "<group>";
+		};
+		EDD2A85F223BCF0500B52E68 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -894,6 +916,7 @@
 				ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
 				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
+				EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,
@@ -906,6 +929,7 @@
 				ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
+				EDD2A861223BCF1C00B52E68 /* ServicesSearchView.swift in Sources */,
 				EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */,
 				ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */,
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
