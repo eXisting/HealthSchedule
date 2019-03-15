@@ -19,7 +19,7 @@ class AccountNavigationItem: UINavigationItem {
     super.init(title: title)
     
     leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogoutClick))
-    rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(onSaveClick))
+    rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSaveClick))
   }
   
   required init?(coder: NSCoder) {
