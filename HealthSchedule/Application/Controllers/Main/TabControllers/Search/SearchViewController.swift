@@ -25,6 +25,10 @@ class SearchViewController: UIViewController {
   private let mainView = SearchView()
   private let model = SearchModel()
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   override func loadView() {
     super.loadView()
     view = mainView
@@ -35,6 +39,8 @@ class SearchViewController: UIViewController {
     
     rootNavigation = (navigationController as! SearchNavigationController)
     
+    let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+    navigationController?.navigationBar.titleTextAttributes = textAttributes
     navigationItem.title = titleName
     
     mainView.setup(delegate: self, dataSource: self)

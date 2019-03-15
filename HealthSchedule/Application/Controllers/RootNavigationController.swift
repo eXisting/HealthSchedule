@@ -52,3 +52,9 @@ extension RootNavigationController: RootNavigationPresentable {
     pushViewController(controller, animated: true)
   }
 }
+
+extension UINavigationController {
+  open override var preferredStatusBarStyle: UIStatusBarStyle {
+    return topViewController?.preferredStatusBarStyle ?? .default
+  }
+}
