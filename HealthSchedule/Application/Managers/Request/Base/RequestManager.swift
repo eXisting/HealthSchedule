@@ -11,7 +11,11 @@ import UIKit
 class RequestManager {
   static private(set) var sessionToken = Token()
   
-  private let rootEndpoint = "http://127.0.0.1:8000"
+  // private let rootEndpoint = "http://127.0.0.1:8000"
+  
+  // C9 server endpoint
+  private let rootEndpoint = "https://schedule-exist228.c9users.io"
+  
   private let request = UrlSessionHandler.shared
   
   // MARK: - GET
