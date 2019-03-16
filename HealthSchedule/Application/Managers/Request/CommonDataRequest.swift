@@ -41,9 +41,7 @@ class CommonDataRequest {
         return
       }
       
-      if self?.databaseManager.getCties().count == 0 {
-        self?.databaseManager.insertCities(from: cities)
-      }
+      self?.databaseManager.insertUpdateCities(from: cities)
       
       completion(ResponseStatus.success.rawValue)
     }

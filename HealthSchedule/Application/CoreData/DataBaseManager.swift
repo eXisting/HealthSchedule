@@ -135,8 +135,14 @@ class DataBaseManager: NSObject {
   }
   
   func getCties() -> [City] {
+    guard let currentUser = getCurrentUser() else {
+      return []
+    }
+    
     let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    
+    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(currentUser.id))")
     
     do {
       let result = try persistentContainer.viewContext.fetch(fetchRequest)
@@ -199,16 +205,31 @@ class DataBaseManager: NSObject {
     saveContext(backgroundContext)
   }
   
-  func insertCities(from cityList: [RemoteCity]) {
+  func insertUpdateCities(from cityList: [RemoteCity]) {
     let backgroundContext = persistentContainer.newBackgroundContext()
     let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
     
     for remoteCity in cityList {
-      let city = NSManagedObject(entity: cityEntityObject!, insertInto: backgroundContext) as! City
+      let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteCity.id))")
       
-      build(city: city, remoteCity)
-      
-      backgroundContext.insert(city)
+      do {
+        let result = try backgroundContext.fetch(fetchRequest)
+        
+        // Update
+        if result.count > 0 {
+          result.first?.name = remoteCity.title
+        }
+        // Insert
+        else {
+          let city = NSManagedObject(entity: cityEntityObject!, insertInto: backgroundContext) as! City
+          build(city: city, remoteCity)
+          backgroundContext.insert(city)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
     }
     
     backgroundContext.processPendingChanges()
