@@ -8,12 +8,13 @@
 
 import UIKit
 import Presentr
+import UIEmptyState
 
 protocol CityPickHandling {
   func picked(id: Int, title: String)
 }
 
-class ServicesViewController: UIViewController {
+class ServicesViewController: UITableViewController {
   private let titleName = "Services"
   
   private var parentNavigationController: SearchNavigationController!
@@ -31,47 +32,50 @@ class ServicesViewController: UIViewController {
   }()
   
   private let model = ServicesModel()
-  private let mainView = ServicesSearchView()
   private let searchBar = UISearchBar()
   
   override func loadView() {
-    super.loadView()    
-    view = mainView
+    super.loadView()
+    navigationItem.titleView = searchBar
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setupTopBar()
-
-    mainView.setup(delegate: self, dataSource: self)
+    
+    self.emptyStateDataSource = self
+    self.emptyStateDelegate = self
     
     parentNavigationController = (navigationController as! SearchNavigationController)
+    
+    // Remove seperator lines from empty cells
+    self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.reloadEmptyState()
   }
   
   private func setupTopBar() {
-    navigationItem.titleView = searchBar
-    
     searchBar.sizeToFit()
     searchBar.placeholder = "Location..."
     searchBar.delegate = self
     
     navigationItem.title = titleName
   }
-}
-
-extension ServicesViewController: UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return model.services.count
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UITableViewCell()
     cell.textLabel?.text = model.services[indexPath.row].name
     return cell
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     parentNavigationController.popFromService(model.serviceId!)
   }
 }
@@ -101,8 +105,22 @@ extension ServicesViewController: CityPickHandling {
     model.startLoadServices {
       [weak self] in
       DispatchQueue.main.async {
-        self!.mainView.toggleViews(isDataPresent: self!.model.services.count > 0)
+        
       }
     }
+  }
+}
+
+extension ServicesViewController: UIEmptyStateDataSource, UIEmptyStateDelegate {
+  // MARK: - Empty State Data Source
+  
+  var emptyStateImage: UIImage? {
+    return UIImage(named: "Pictures/services")
+  }
+  
+  var emptyStateTitle: NSAttributedString {
+    let attrs = [NSAttributedString.Key.foregroundColor: UIColor(red: 0.882, green: 0.890, blue: 0.859, alpha: 1.00),
+                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22)]
+    return NSAttributedString(string: "Choose location to find services!", attributes: attrs)
   }
 }
