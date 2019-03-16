@@ -48,6 +48,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     
     mainView.setup(delegate: self, dataSource: self)
     mainView.setRefreshDelegate(delegate: self)
+    
     model.startLoadImage(from: DataBaseManager.shared.getCurrentUser()?.image?.url, setImageForView)
     
     rootNavigation = (navigationController as! AccountNavigationController)
@@ -147,6 +148,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
       
       placemarkCell.value = tuple.value
       placemarkCell.setPlaceholderWithText(tuple.0)
+      placemarkCell.delegate = self
       return placemarkCell
     }
     
@@ -160,5 +162,12 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     disclosureCell.value = tuple.value
     
     return disclosureCell
+  }
+}
+
+extension AccountViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }

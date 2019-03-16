@@ -21,6 +21,12 @@ class AccountPlacemarkCell: UITableViewCell {
     }
   }
   
+  var delegate: UITextFieldDelegate? {
+    didSet {
+      editableField.delegate = delegate
+    }
+  }
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     laidOutViews()
