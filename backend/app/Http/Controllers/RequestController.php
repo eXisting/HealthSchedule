@@ -6,9 +6,7 @@ use App\Models\ProviderService;
 use App\Models\Request;
 use App\Models\User;
 use App\Repositories\RequestRepository;
-use Carbon\Carbon;
 use Gate;
-use DB;
 use Illuminate\Database\Query\Builder;
 
 /**
@@ -34,7 +32,6 @@ class RequestController extends AuthUserController
         $this->request = new RequestRepository();
     }
 
-
     /**
      * @param Request $request
      * @param string $status
@@ -42,14 +39,14 @@ class RequestController extends AuthUserController
      */
     public function changeStatus(Request $request, $status)
     {
-        if(Gate::denies('provider-change-status-request', $request)) {
+        if (Gate::denies('provider-change-status-request', $request)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
-        if($status == 'active') {
-            $request->update([ 'status' => 1 ]);
+        if ($status == 'active') {
+            $request->update(['status' => 1]);
         } elseif ($status == 'inactive') {
-            $request->update([ 'status' => 0 ]);
+            $request->update(['status' => 0]);
         } else {
             return response()->json(['message' => ' {Status} parameter is missing or bad']);
         }

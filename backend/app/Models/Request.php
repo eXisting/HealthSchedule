@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Request extends Model
 {
-    #region Properties
+    //region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -48,13 +48,22 @@ class Request extends Model
         'request_at' => 'datetime',
     ];
 
-    #endregion
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'request_at'
+    ];
 
-    #region Methods
+    //endregion
 
-    #endregion
+    //region Methods
 
-    #region Relationships
+    //endregion
+
+    //region Relationships
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -72,5 +81,5 @@ class Request extends Model
         return $this->belongsTo(ProviderService::class);
     }
 
-    #endregion
+    //endregion
 }

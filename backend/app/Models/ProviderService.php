@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProviderService extends Model
 {
-    #region Properties
+    //region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -53,16 +53,16 @@ class ProviderService extends Model
      * @var array
      */
     protected $dates = [
-        'interval'
+        // 'interval'
     ];
 
-    #endregion
+    //endregion
 
-    #region Methods
+    //region Methods
 
-    #endregion
+    //endregion
 
-    #region Relationships
+    //region Relationships
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -96,5 +96,5 @@ class ProviderService extends Model
         return $this->hasMany(Request::class, 'provider_service_id', 'id');
     }
 
-    #endregion
+    //endregion
 }

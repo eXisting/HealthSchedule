@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -44,7 +43,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    #region Properties
+    //region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -66,7 +65,8 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $dates = [
-        'birthday_at'
+        'birthday_at',
+        'email_verified_at'
     ];
 
     /**
@@ -101,9 +101,9 @@ class User extends Authenticatable implements JWTSubject
         'age'
     ];
 
-    #endregion
+    //endregion
 
-    #region Methods
+    //region Methods
 
     /**
      * @return mixed
@@ -129,9 +129,9 @@ class User extends Authenticatable implements JWTSubject
         return Carbon::parse($this->birthday_at)->age;
     }
 
-    #endregion
+    //endregion
 
-    #region Relationships
+    //region Relationships
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -237,6 +237,5 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Recommendation::class, 'provider_id', 'id');
     }
 
-    #endregion
-
+    //endregion
 }

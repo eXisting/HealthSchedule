@@ -7,7 +7,6 @@ use App\Http\Requests\User\UpdateUserInfoRequest;
 use App\Models\User;
 use Hash;
 use DB;
-use Gate;
 use Illuminate\Http\Request;
 
 /**
@@ -18,7 +17,6 @@ use Illuminate\Http\Request;
  */
 class UserController extends AuthUserController
 {
-
     /**
      * UserController constructor.
      */
@@ -47,7 +45,7 @@ class UserController extends AuthUserController
             ->where('user.id', $this->authUser->id)
             ->get();
 
-        if(count($providers)) {
+        if (count($providers)) {
             $providers = collect($providers)->unique('provider_id')->groupBy('profession_title');
         }
 
@@ -82,8 +80,8 @@ class UserController extends AuthUserController
     {
         $result = false;
 
-        if(Hash::check($request->old_password, $this->authUser->password)) {
-            if(Hash::check($request->new_password, $this->authUser->password)) {
+        if (Hash::check($request->old_password, $this->authUser->password)) {
+            if (Hash::check($request->new_password, $this->authUser->password)) {
                 $result = true;
             } else {
                 $result = $this->authUser->update(['password' => bcrypt($request->new_password)]);
@@ -92,5 +90,4 @@ class UserController extends AuthUserController
 
         return response()->json(['success' => $result]);
     }
-
 }

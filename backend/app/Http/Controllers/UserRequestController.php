@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Recommendation\RecommendationRequest;
 use App\Http\Requests\User\Request\UpdateUserRequestRateRequest;
 use App\Http\Requests\User\Request\CreateUserRequestRequest;
 use App\Http\Requests\User\Request\UpdateUserRequestRequest;
@@ -36,9 +35,12 @@ class UserRequestController extends RequestController
     {
         /** @var Request $requests */
         $requests = $this->authUser->userRequests()
-            ->with('providerService.address', 'providerService.provider', 'providerService.service')
+            ->with(
+                'providerService.address',
+                'providerService.provider',
+                'providerService.service'
+            )
             ->get();
-
         return response()->json($requests);
     }
 
@@ -50,11 +52,11 @@ class UserRequestController extends RequestController
     {
         $request = $this->request->getRequestWithProviderService($request_id);
 
-        if(!$request) {
+        if (!$request) {
             return response(['message' => 'Request not found'], 404);
         }
 
-        if(Gate::denies('user-get-request', $request)) {
+        if (Gate::denies('user-get-request', $request)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
@@ -72,7 +74,7 @@ class UserRequestController extends RequestController
             ->where('service_id', $request->service_id)
             ->first();
 
-        if(!$providerService) {
+        if (!$providerService) {
             return response(['success' => false], 404);
         }
 
@@ -90,7 +92,7 @@ class UserRequestController extends RequestController
      */
     public function update(UpdateUserRequestRequest $updateRequest, Request $request)
     {
-        if(Gate::denies('user-update-request', $request)) {
+        if (Gate::denies('user-update-request', $request)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
@@ -104,11 +106,10 @@ class UserRequestController extends RequestController
      */
     public function updateRate(UpdateUserRequestRateRequest $rateRequest, Request $request)
     {
-        if(Gate::denies('user-update-rate-request', $request)) {
+        if (Gate::denies('user-update-rate-request', $request)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
         return response()->json(['success' => $request->update($rateRequest->all())]);
     }
-
 }
