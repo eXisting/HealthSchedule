@@ -44,7 +44,6 @@ class SearchViewController: UIViewController {
     navigationItem.title = titleName
     
     mainView.setup(delegate: self, dataSource: self)
-    mainView.toggleViews(isDataPresent: model.searchOptions.count > 0)
     mainView.searchDelegate = self
   }
 }

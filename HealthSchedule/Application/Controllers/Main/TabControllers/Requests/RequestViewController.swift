@@ -11,7 +11,7 @@ import UIKit
 class RequestViewController: UIViewController {
   private let titleName = "Requests"
   
-  private let mainView = RequestListView()
+  private let mainView = RequestListTableView()
   private let model = UserDataRequest()
   private let searchBar = UISearchBar()
     
@@ -28,12 +28,7 @@ class RequestViewController: UIViewController {
     
     mainView.setup(delegate: self, dataSource: self)
 //    TODO: Get all completed requests
-    model.getProfessions() {
-      [weak self] result in
-      DispatchQueue.main.async {
-        self?.mainView.toggleViews(isDataPresent: true)
-      }
-    }
+    
   }
 }
 
@@ -66,13 +61,13 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HistoryTableView.sectionIdentifier) as! CommonSection
+    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: RequestListTableView.sectionIdentifier) as! CommonSection
     header.setup(title: "John Smith", backgroundColor: UIColor.blue.withAlphaComponent(0.1))
     return header
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableView.cellIdentifier) as! HistoryRow
+    let cell = tableView.dequeueReusableCell(withIdentifier: RequestListTableView.cellIdentifier) as! RequestListRow
     cell.populateCell(serviceName: "Super mega service", price: "$99.99", visitedDate: "12.02.2019")
     return cell
   }

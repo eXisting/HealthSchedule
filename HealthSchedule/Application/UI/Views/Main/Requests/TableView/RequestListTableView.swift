@@ -8,9 +8,9 @@
 
 import UIKit
 
-class HistoryTableView: UITableView {
-  static let cellIdentifier = "HistoryRow"
-  static let sectionIdentifier = "HistorySection"
+class RequestListTableView: UITableView {
+  static let cellIdentifier = "RequestRow"
+  static let sectionIdentifier = "RequestListSection"
 
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     self.delegate = delegate
@@ -19,8 +19,8 @@ class HistoryTableView: UITableView {
     alwaysBounceVertical = false
     showsVerticalScrollIndicator = true
     
-    register(HistoryRow.self, forCellReuseIdentifier: HistoryTableView.cellIdentifier)
-    register(CommonSection.self, forHeaderFooterViewReuseIdentifier: HistoryTableView.sectionIdentifier)
+    register(RequestListRow.self, forCellReuseIdentifier: RequestListTableView.cellIdentifier)
+    register(CommonSection.self, forHeaderFooterViewReuseIdentifier: RequestListTableView.sectionIdentifier)
 
     // Remove last underline in table view
     tableFooterView = UIView(frame: .zero)

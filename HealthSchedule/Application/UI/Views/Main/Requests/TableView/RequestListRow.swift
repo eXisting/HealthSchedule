@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryRow: UITableViewCell {
+class RequestListRow: UITableViewCell {
   private let serviceName = UILabel()
   private let price = UILabel()
   private let visitedDate = UILabel()

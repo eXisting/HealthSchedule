@@ -10,7 +10,6 @@ import UIKit
 
 class SearchView: UIView {
   private let tableView = SearchTableView()
-  private let noDataView = NoDataView()
   
   private let headerView = NavigationHoverHeaderView()
   private let searchButton = UIButton()
@@ -22,15 +21,9 @@ class SearchView: UIView {
     customizeViews()
     
     headerView.setup()
-    noDataView.setup("There is nothng to display...")
     tableView.setup(delegate: delegate, dataSource: dataSource)
     
     searchButton.addTarget(self, action: #selector(onSearchButtonClick), for: .touchDown)
-  }
-  
-  func toggleViews(isDataPresent: Bool) {
-    noDataView.isHidden = isDataPresent
-    tableView.isHidden = !isDataPresent
   }
   
   @objc private func onSearchButtonClick() {
@@ -39,13 +32,11 @@ class SearchView: UIView {
   
   private func laidOutViews() {
     addSubview(tableView)
-    addSubview(noDataView)
     addSubview(headerView)
     addSubview(searchButton)
 
     headerView.translatesAutoresizingMaskIntoConstraints = false
     tableView.translatesAutoresizingMaskIntoConstraints = false
-    noDataView.translatesAutoresizingMaskIntoConstraints = false
     searchButton.translatesAutoresizingMaskIntoConstraints = false
 
     NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
@@ -57,11 +48,6 @@ class SearchView: UIView {
     NSLayoutConstraint(item: searchButton, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.65, constant: 0).isActive = true
     NSLayoutConstraint(item: searchButton, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: searchButton, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.05, constant: 0).isActive = true
-
-    NSLayoutConstraint(item: noDataView, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: noDataView, attribute: .bottom, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: noDataView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: noDataView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
     
     NSLayoutConstraint(item: headerView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: headerView, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1, constant: 0).isActive = true
@@ -69,9 +55,7 @@ class SearchView: UIView {
     NSLayoutConstraint(item: headerView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
   }
   
-  private func customizeViews() {
-    tableView.isHidden = true
-    
+  private func customizeViews() {    
     searchButton.roundBorder()
     searchButton.setTitle("SEARCH", for: .normal)
     searchButton.backgroundColor = .clear
