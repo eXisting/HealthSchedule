@@ -65,6 +65,7 @@
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
+		EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE60B9223FB41200734FBC /* SearchResultView.swift */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
 		EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45422280D2100A6B56F /* DatePickerView.swift */; };
 		EDCFB458222819B800A6B56F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB457222819B800A6B56F /* MainTabBarController.swift */; };
@@ -160,6 +161,7 @@
 		ED52F16D220C6D4000568CBC /* ServerException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerException.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
+		EDCE60B9223FB41200734FBC /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		EDCFB457222819B800A6B56F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 			children = (
 				EDD2A83A2238029F00B52E68 /* TableView */,
 				EDD2A8362238026C00B52E68 /* SearchView.swift */,
+				EDCE60B9223FB41200734FBC /* SearchResultView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
+				EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,
 				ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */,
 				ED089A8C21E8EF1A006A8523 /* UserCollectionViewCell.swift in Sources */,

@@ -8,9 +8,27 @@
 
 import UIKit
 
-class ResultViewController: UIViewController {  
+protocol DismissableController {
+  func dismiss()
+}
+
+class ResultViewController: UIViewController {
+  private let mainView = SearchResultView()
+  
+  override func loadView() {
+    super.loadView()
+    view = mainView
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
+    mainView.setup()
+    mainView.dismissDelegate = self
+  }
+}
+
+extension ResultViewController: DismissableController {
+  func dismiss() {
+    dismiss(animated: true)
   }
 }
