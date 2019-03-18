@@ -98,14 +98,26 @@ $factory->define(App\Models\Recommendation::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\Request::class, function (Faker $faker) {
+    $status = $faker->boolean;
+    switch (rand(1, 3)) {
+        case 1:
+            $status = true;
+            break;
+        case 2:
+            $status = false;
+            break;
+        case 3:
+            $status = null;
+            break;
+    }
     return [
         'user_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::CLIENT)->inRandomOrder()->first()->id,
         'provider_service_id' => \App\Models\ProviderService::query()->inRandomOrder()->first()->id,
         // 'status_id' => \App\Models\RequestStatus::query()->inRandomOrder()->first()->id,
-        'status' => $faker->boolean,
-        'rate' => rand(1, 5),
+        'status' => $status,
+        'rate' => $status ? rand(1, 5) : null,
         'description' => $faker->text,
-        'request_at' => rand(0, 1) ? \Carbon\Carbon::now()->addDays(rand(-10, -1))->toDateTimeString() : \Carbon\Carbon::now()->addDays(rand(5, 60))->toDateTimeString(),
+        'request_at' => $status ? \Carbon\Carbon::now()->addDays(rand(-10, -1))->toDateTimeString() : \Carbon\Carbon::now()->addDays(rand(5, 60))->toDateTimeString(),
     ];
 });
 

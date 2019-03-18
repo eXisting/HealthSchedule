@@ -34,7 +34,6 @@ class ProviderRequestController extends RequestController
     {
         /** @var Request $requests */
         $requests = $this->authUser->providerRequests()->get();
-
         return response()->json($requests);
     }
 
