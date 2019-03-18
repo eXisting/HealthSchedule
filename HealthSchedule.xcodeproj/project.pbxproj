@@ -24,16 +24,14 @@
 		ED1ED02421FF353400141CF5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02321FF353400141CF5 /* Category.swift */; };
 		ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */; };
 		ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2022295A1700A80FC9 /* SearchViewController.swift */; };
-		ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2522297C6900A80FC9 /* HistoryViewController.swift */; };
+		ED231B2622297C6900A80FC9 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2522297C6900A80FC9 /* RequestViewController.swift */; };
 		ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */; };
 		ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B2E222D486600A80FC9 /* CommonSection.swift */; };
 		ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B30222D48FF00A80FC9 /* AccountTableView.swift */; };
 		ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B32222D498800A80FC9 /* AccountDisclosureCell.swift */; };
 		ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */; };
-		ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3C222D7C3600A80FC9 /* HistoryNavigatonController.swift */; };
-		ED231B40222E6EC600A80FC9 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3F222E6EC600A80FC9 /* RequestViewController.swift */; };
-		ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B41222E6EE000A80FC9 /* RequestNavigationController.swift */; };
-		ED231B45222E756E00A80FC9 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B44222E756E00A80FC9 /* HistoryView.swift */; };
+		ED231B3D222D7C3600A80FC9 /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3C222D7C3600A80FC9 /* RequestNavigationController.swift */; };
+		ED231B45222E756E00A80FC9 /* RequestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B44222E756E00A80FC9 /* RequestListView.swift */; };
 		ED231B48222E78AC00A80FC9 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B47222E78AC00A80FC9 /* NoDataView.swift */; };
 		ED231B4B222E7A2A00A80FC9 /* HistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4A222E7A2A00A80FC9 /* HistoryTableView.swift */; };
 		ED231B4D222E850300A80FC9 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4C222E850300A80FC9 /* HistoryRow.swift */; };
@@ -121,16 +119,14 @@
 		ED1ED02321FF353400141CF5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		ED231B2022295A1700A80FC9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		ED231B2522297C6900A80FC9 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		ED231B2522297C6900A80FC9 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHoverHeaderView.swift; sourceTree = "<group>"; };
 		ED231B2E222D486600A80FC9 /* CommonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSection.swift; sourceTree = "<group>"; };
 		ED231B30222D48FF00A80FC9 /* AccountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableView.swift; sourceTree = "<group>"; };
 		ED231B32222D498800A80FC9 /* AccountDisclosureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDisclosureCell.swift; sourceTree = "<group>"; };
 		ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
-		ED231B3C222D7C3600A80FC9 /* HistoryNavigatonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryNavigatonController.swift; sourceTree = "<group>"; };
-		ED231B3F222E6EC600A80FC9 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
-		ED231B41222E6EE000A80FC9 /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
-		ED231B44222E756E00A80FC9 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		ED231B3C222D7C3600A80FC9 /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
+		ED231B44222E756E00A80FC9 /* RequestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListView.swift; sourceTree = "<group>"; };
 		ED231B47222E78AC00A80FC9 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		ED231B4A222E7A2A00A80FC9 /* HistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableView.swift; sourceTree = "<group>"; };
 		ED231B4C222E850300A80FC9 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
@@ -354,29 +350,20 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		ED231B39222D7C0100A80FC9 /* History */ = {
+		ED231B39222D7C0100A80FC9 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				ED231B2522297C6900A80FC9 /* HistoryViewController.swift */,
-				ED231B3C222D7C3600A80FC9 /* HistoryNavigatonController.swift */,
+				ED231B2522297C6900A80FC9 /* RequestViewController.swift */,
+				ED231B3C222D7C3600A80FC9 /* RequestNavigationController.swift */,
 			);
-			path = History;
-			sourceTree = "<group>";
-		};
-		ED231B3E222E6EA100A80FC9 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				ED231B3F222E6EC600A80FC9 /* RequestViewController.swift */,
-				ED231B41222E6EE000A80FC9 /* RequestNavigationController.swift */,
-			);
-			path = Request;
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		ED231B43222E755400A80FC9 /* History */ = {
 			isa = PBXGroup;
 			children = (
 				ED231B49222E7A1C00A80FC9 /* TableView */,
-				ED231B44222E756E00A80FC9 /* HistoryView.swift */,
+				ED231B44222E756E00A80FC9 /* RequestListView.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -627,8 +614,7 @@
 		EDCFB45D22282C6100A6B56F /* TabControllers */ = {
 			isa = PBXGroup;
 			children = (
-				ED231B3E222E6EA100A80FC9 /* Request */,
-				ED231B39222D7C0100A80FC9 /* History */,
+				ED231B39222D7C0100A80FC9 /* Requests */,
 				ED231B38222D7BFA00A80FC9 /* Search */,
 				ED231B2A222D3B1600A80FC9 /* Account */,
 			);
@@ -874,7 +860,7 @@
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */,
 				EDD2A84322390AB300B52E68 /* ServicesViewController.swift in Sources */,
-				ED231B2622297C6900A80FC9 /* HistoryViewController.swift in Sources */,
+				ED231B2622297C6900A80FC9 /* RequestViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
 				ED231B4B222E7A2A00A80FC9 /* HistoryTableView.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
@@ -886,18 +872,16 @@
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
-				ED231B40222E6EC600A80FC9 /* RequestViewController.swift in Sources */,
 				EDD2A845223918CC00B52E68 /* ResultViewController.swift in Sources */,
 				EDD2A855223A74BB00B52E68 /* AccountNavigationController.swift in Sources */,
 				DBE4886F223AD2560096F7D7 /* AccountNavigationItem.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
-				ED231B42222E6EE000A80FC9 /* RequestNavigationController.swift in Sources */,
 				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
 				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
-				ED231B3D222D7C3600A80FC9 /* HistoryNavigatonController.swift in Sources */,
+				ED231B3D222D7C3600A80FC9 /* RequestNavigationController.swift in Sources */,
 				EDD2A8372238026C00B52E68 /* SearchView.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */,
@@ -936,7 +920,7 @@
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */,
 				EDD2A83C2238042E00B52E68 /* SearchModel.swift in Sources */,
-				ED231B45222E756E00A80FC9 /* HistoryView.swift in Sources */,
+				ED231B45222E756E00A80FC9 /* RequestListView.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryNavigationController: UINavigationController {
+class RequestNavigationController: UINavigationController {
   override init(rootViewController: UIViewController) {
     super.init(rootViewController: rootViewController)
   }

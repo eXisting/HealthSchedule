@@ -8,10 +8,10 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
-  private let titleName = "History"
+class RequestViewController: UIViewController {
+  private let titleName = "Requests"
   
-  private let mainView = HistoryView()
+  private let mainView = RequestListView()
   private let model = UserDataRequest()
   private let searchBar = UISearchBar()
     
@@ -39,16 +39,16 @@ class HistoryViewController: UIViewController {
 
 // MARK: -Extensions
 
-extension HistoryViewController: SetupableTabBarItem {
+extension RequestViewController: SetupableTabBarItem {
   func setupTabBarItem() {
     tabBarItem.title  = titleName
     
-    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/history")
-    tabBarItem.image = UIImage(named: "TabBarIcons/history")
+    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/requests")
+    tabBarItem.image = UIImage(named: "TabBarIcons/requests")
   }
 }
 
-extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }

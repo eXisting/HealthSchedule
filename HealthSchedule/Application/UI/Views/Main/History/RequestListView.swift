@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryView: UIView {
+class RequestListView: UIView {
   private let tableView = HistoryTableView()
   private let noDataView = NoDataView()
   
