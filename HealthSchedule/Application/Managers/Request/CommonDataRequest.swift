@@ -12,23 +12,19 @@ class CommonDataRequest {
   private let requestsManager = RequestManager()
   private let databaseManager = DataBaseManager.shared
   
-  func getServices(for cityId: Int, _ completion: @escaping (String) -> Void) {
+  func getServices(for cityId: Int, _ completion: @escaping ([RemoteService]) -> Void) {
     var params = RequestManager.sessionToken.asParams()
     params[UserJsonFields.cityId.rawValue] = String(cityId)
     
     requestsManager.getListAsync(for: RemoteService.self, from: .allServices, params) {
-      [weak self] (services, response) in
+      (services, response) in
       
-      if let error = response.error {
-        completion(error)
+      if let _ = response.error {
+        completion([])
         return
       }
       
-      if self?.databaseManager.getServices().count == 0 {
-        self?.databaseManager.insertServices(from: services)
-      }
-      
-      completion(ResponseStatus.success.rawValue)
+      completion(services)
     }
   }
   

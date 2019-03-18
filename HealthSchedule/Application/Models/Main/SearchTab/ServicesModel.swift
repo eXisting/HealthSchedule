@@ -15,7 +15,7 @@ class ServicesModel {
   var serviceId: Int?
   var cityId: Int?
   
-  var services: [Service] = []
+  var services: [RemoteService] = []
   
   // TODO:
   // LOAD FROM DB FIRST AND ONLY IN CASE WHEN THERE WILL BE EMPTY RESULT RELOAD FROM NETWORK
@@ -35,11 +35,9 @@ class ServicesModel {
     }
     
     commonDataRequestController.getServices(for: id) {
-      [weak self] status in
-      if status == ResponseStatus.success.rawValue {
-        self!.services = self!.databaseManager.getServices()
-        completion()
-      }
+      [weak self] services in
+      self!.services = services
+      completion()
     }
   }
 }

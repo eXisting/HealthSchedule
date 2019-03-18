@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3811A0C0E01A53172EC50BF4 /* Pods_HealthSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EED57729135C1F40BED6AB /* Pods_HealthSchedule.framework */; };
 		DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8519372208CC0E00CCF452 /* ViewLines.swift */; };
 		DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8519392208EECB00CCF452 /* StackViewBackground.swift */; };
 		DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */; };
@@ -88,7 +89,6 @@
 		EDD2A855223A74BB00B52E68 /* AccountNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */; };
 		EDD2A857223A90AB00B52E68 /* AccountPlacemarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */; };
 		EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A85D223BC79900B52E68 /* ServicesModel.swift */; };
-		EDD2A861223BCF1C00B52E68 /* ServicesSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */; };
 		EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
@@ -98,6 +98,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58EED57729135C1F40BED6AB /* Pods_HealthSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2B1A00C90F74E779846C746 /* Pods-HealthSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthSchedule.debug.xcconfig"; path = "Target Support Files/Pods-HealthSchedule/Pods-HealthSchedule.debug.xcconfig"; sourceTree = "<group>"; };
+		AE0D3CBA7A34C5D15437BE84 /* Pods-HealthSchedule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthSchedule.release.xcconfig"; path = "Target Support Files/Pods-HealthSchedule/Pods-HealthSchedule.release.xcconfig"; sourceTree = "<group>"; };
 		DB8519372208CC0E00CCF452 /* ViewLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLines.swift; sourceTree = "<group>"; };
 		DB8519392208EECB00CCF452 /* StackViewBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewBackground.swift; sourceTree = "<group>"; };
 		DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewColorChange.swift; sourceTree = "<group>"; };
@@ -181,7 +184,6 @@
 		EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationController.swift; sourceTree = "<group>"; };
 		EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPlacemarkCell.swift; sourceTree = "<group>"; };
 		EDD2A85D223BC79900B52E68 /* ServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesModel.swift; sourceTree = "<group>"; };
-		EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSearchView.swift; sourceTree = "<group>"; };
 		EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCityViewController.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
@@ -195,12 +197,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3811A0C0E01A53172EC50BF4 /* Pods_HealthSchedule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2431C66BF45B2E9D32EBFCFE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2B1A00C90F74E779846C746 /* Pods-HealthSchedule.debug.xcconfig */,
+				AE0D3CBA7A34C5D15437BE84 /* Pods-HealthSchedule.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CB13D162BBCF7C91D818D3DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58EED57729135C1F40BED6AB /* Pods_HealthSchedule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DB6C1C062232F3CD0083DAD3 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +234,8 @@
 			children = (
 				ED089A4921E77D12006A8523 /* HealthSchedule */,
 				ED089A4821E77D12006A8523 /* Products */,
+				2431C66BF45B2E9D32EBFCFE /* Pods */,
+				CB13D162BBCF7C91D818D3DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -644,7 +666,6 @@
 		EDD2A8342238021F00B52E68 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				EDD2A85F223BCF0500B52E68 /* Services */,
 				EDD2A83A2238029F00B52E68 /* TableView */,
 				EDD2A8362238026C00B52E68 /* SearchView.swift */,
 			);
@@ -711,14 +732,6 @@
 				EDD2A85D223BC79900B52E68 /* ServicesModel.swift */,
 			);
 			path = SearchTab;
-			sourceTree = "<group>";
-		};
-		EDD2A85F223BCF0500B52E68 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				EDD2A860223BCF1C00B52E68 /* ServicesSearchView.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -913,7 +926,6 @@
 				ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
-				EDD2A861223BCF1C00B52E68 /* ServicesSearchView.swift in Sources */,
 				EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */,
 				ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */,
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
@@ -1054,6 +1066,7 @@
 		};
 		ED089A5C21E77D13006A8523 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2B1A00C90F74E779846C746 /* Pods-HealthSchedule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -1073,6 +1086,7 @@
 		};
 		ED089A5D21E77D13006A8523 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE0D3CBA7A34C5D15437BE84 /* Pods-HealthSchedule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
