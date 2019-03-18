@@ -71,11 +71,12 @@ class ServicesViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UITableViewCell()
-    cell.textLabel?.text = model.services[indexPath.row].name
+    cell.textLabel?.text = model.services[indexPath.row].title
     return cell
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    model.serviceId = model.services[indexPath.row].id
     parentNavigationController.popFromService(model.serviceId!)
   }
 }
@@ -105,7 +106,8 @@ extension ServicesViewController: CityPickHandling {
     model.startLoadServices {
       [weak self] in
       DispatchQueue.main.async {
-        
+        self?.tableView.reloadData()
+        self?.reloadEmptyState()
       }
     }
   }
@@ -121,6 +123,6 @@ extension ServicesViewController: UIEmptyStateDataSource, UIEmptyStateDelegate {
   var emptyStateTitle: NSAttributedString {
     let attrs = [NSAttributedString.Key.foregroundColor: UIColor(red: 0.882, green: 0.890, blue: 0.859, alpha: 1.00),
                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22)]
-    return NSAttributedString(string: "Choose location to find services!", attributes: attrs)
+    return NSAttributedString(string: "Nothing here!", attributes: attrs)
   }
 }

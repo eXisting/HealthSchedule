@@ -52,6 +52,12 @@ class SearchViewController: UIViewController {
 extension SearchViewController: SearchResponsible {
   func startSearch() {
     // TDOO: collect and pass data
+    let searchData = model.getSearchOptions()
+    if let warningMessage = searchData.errorMessage {
+      showWarningAlert(message: warningMessage)
+      return
+    }
+    
     rootNavigation.presentResultController()
   }
 }
@@ -92,5 +98,15 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     rootNavigation.pushController(for: model.searchOptions[indexPath.row])
+  }
+}
+
+extension SearchViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(
+      for: self,
+      "Warning",
+      message,
+      .alert)
   }
 }
