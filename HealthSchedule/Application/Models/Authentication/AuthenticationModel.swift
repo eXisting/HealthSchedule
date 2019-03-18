@@ -31,6 +31,8 @@ class AuthenticationModel {
 
 extension AuthenticationModel: SigningIn {
   func autoLogin(_ completion: @escaping () -> Void) {
+    RequestManager.rememberTokenFromUserDefualts()
+    
     if Token.isValid() {
       // TODO: Get data from keychain and auto login
       

@@ -119,6 +119,10 @@ extension RequestManager {
     }
   }
   
+  static func rememberTokenFromUserDefualts() {
+    RequestManager.sessionToken.token = UserDefaults.standard.string(forKey: UserDefaultsKeys.sessionToken.rawValue)
+  }
+  
   private func buildEndpoint(_ route: String) -> String {
     return rootEndpoint + route
   }
