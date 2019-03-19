@@ -21,7 +21,7 @@ protocol ProviderInfoRequesting {
 }
 
 protocol CommonDataRequesting {
-  func getRequests(completion: @escaping () -> Void)
+  func getRequests(completion: @escaping ([RemoteRequest]) -> Void)
   func getUser(_ completion: @escaping (String) -> Void)
   func getImage(from url: String, completion: @escaping (Data) -> Void)
   func getRecomendations()
@@ -76,10 +76,16 @@ extension UserDataRequest: CommonDataRequesting {
     }
   }
   
-  func getRequests(completion: @escaping () -> Void) {
+  func getRequests(completion: @escaping ([RemoteRequest]) -> Void) {
     requestsManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken.asParams()) {
       (list, response) in
-      print(list)
+      if let error = response.error {
+        print(error)
+        completion([])
+        return
+      }
+      
+      completion(list)
     }
   }
   
@@ -89,7 +95,8 @@ extension UserDataRequest: CommonDataRequesting {
 }
 
 extension UserDataRequest: AuthenticationProviding {
-  func refreshToken(completion: @escaping () -> Void) {    
+  func refreshToken(completion: @escaping () -> Void) {
+    // TODO
   }
   
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {

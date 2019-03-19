@@ -7,28 +7,34 @@
 //
 
 import UIKit
+import Presentr
 
 class RequestViewController: UIViewController {
   private let titleName = "Requests"
   
   private let mainView = RequestListTableView()
-  private let model = UserDataRequest()
+  private let model = RequestsModel()
   private let searchBar = UISearchBar()
-    
+  
   override func loadView() {
     super.loadView()
     view = mainView
+    navigationItem.titleView = searchBar
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.titleView = searchBar
     searchBar.sizeToFit()
     searchBar.placeholder = "Search..."
     
     mainView.setup(delegate: self, dataSource: self)
-//    TODO: Get all completed requests
-    
+    model.loadRequests(onRequestsLoaded)
+  }
+  
+  private func onRequestsLoaded() {
+    DispatchQueue.main.async {
+      self.mainView.reloadData()
+    }
   }
 }
 
@@ -44,31 +50,17 @@ extension RequestViewController: SetupableTabBarItem {
 }
 
 extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 80
+    return model.requests.count
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 70
-  }
-  
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: RequestListTableView.sectionIdentifier) as! CommonSection
-    header.setup(title: "John Smith", backgroundColor: UIColor.blue.withAlphaComponent(0.1))
-    return header
+    return view.frame.height * 0.1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: RequestListTableView.cellIdentifier) as! RequestListRow
-    cell.populateCell(serviceName: "Super mega service", price: "$99.99", visitedDate: "12.02.2019")
+    let cell = UITableViewCell()
+    cell.textLabel?.text = model.requests[indexPath.row].description
     return cell
   }
 }

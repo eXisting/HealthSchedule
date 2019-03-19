@@ -41,17 +41,11 @@
         <attribute name="requestDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="requestedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="serviceId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="statusId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="providerService" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProviderService" inverseName="request" inverseEntity="ProviderService" syncable="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="request" inverseEntity="Service" syncable="YES"/>
-        <relationship name="status" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RequestStatus" inverseName="request" inverseEntity="RequestStatus" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="request" inverseEntity="User" syncable="YES"/>
-    </entity>
-    <entity name="RequestStatus" representedClassName="RequestStatus" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Request" inverseName="status" inverseEntity="Request" syncable="YES"/>
     </entity>
     <entity name="Role" representedClassName="Role" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -94,8 +88,7 @@
         <element name="City" positionX="-859.96484375" positionY="-180.12890625" width="128" height="88"/>
         <element name="Profession" positionX="-106.28125" positionY="32.203125" width="128" height="120"/>
         <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="193"/>
-        <element name="Request" positionX="-464.71875" positionY="-172.3515625" width="128" height="210"/>
-        <element name="RequestStatus" positionX="-485.19921875" positionY="85.296875" width="128" height="90"/>
+        <element name="Request" positionX="-464.71875" positionY="-172.3515625" width="128" height="195"/>
         <element name="Role" positionX="-712.4140625" positionY="-619.92578125" width="128" height="88"/>
         <element name="Service" positionX="-288.98828125" positionY="126.453125" width="128" height="133"/>
         <element name="User" positionX="-706.875" positionY="-452.6953125" width="128" height="253"/>

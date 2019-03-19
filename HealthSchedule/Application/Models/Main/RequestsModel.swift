@@ -10,9 +10,13 @@ import UIKit
 
 class RequestsModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
+  
+  var requests: [RemoteRequest] = []
     
-  func getRequests(_ callback: @escaping () -> Void) {
+  func loadRequests(_ callback: @escaping () -> Void) {
     userRequestController.getRequests {
+      [weak self] list in
+      self?.requests = list
       callback()
     }
   }

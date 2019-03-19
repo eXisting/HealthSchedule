@@ -11,8 +11,8 @@ import UIKit
 enum RequestJsonFields: String, CodingKey {
   case id
   case userId = "user_id"
-  case providerServiceId = "provider_service_id"
-  case statusId = "status_id"
+  case providerService = "provider_service"
+  case status
   
   case description
   case rate
@@ -22,12 +22,13 @@ enum RequestJsonFields: String, CodingKey {
 struct RemoteRequest {
   var id: Int
   var userId: Int
-  var providerServiceId: Int
-  var statusId: Int
   
-  var rate: Int
+  var rate: Int?
   var description: String
   var requestAt: Date
+  
+  var status: ReqeustStatus
+  var providerService: RemoteProviderService
 }
 
 extension RemoteRequest: Codable {
@@ -35,8 +36,8 @@ extension RemoteRequest: Codable {
     var container = encoder.container(keyedBy: RequestJsonFields.self)
     try container.encode(id, forKey: .id)
     try container.encode(userId, forKey: .userId)
-    try container.encode(providerServiceId, forKey: .providerServiceId)
-    try container.encode(statusId, forKey: .statusId)
+    try container.encode(providerService, forKey: .providerService)
+    try container.encode(status.bool, forKey: .status)
     try container.encode(rate, forKey: .rate)
     try container.encode(description, forKey: .description)
 
@@ -48,12 +49,40 @@ extension RemoteRequest: Codable {
     let container = try decoder.container(keyedBy: RequestJsonFields.self)
     id = try container.decode(Int.self, forKey: .id)
     userId = try container.decode(Int.self, forKey: .userId)
-    providerServiceId = try container.decode(Int.self, forKey: .providerServiceId)
-    statusId = try container.decode(Int.self, forKey: .statusId)
+    providerService = try container.decode(RemoteProviderService.self, forKey: .providerService)
     rate = try container.decode(Int.self, forKey: .rate)
     description = try container.decode(String.self, forKey: .description)
 
     let dateString = try container.decode(String.self, forKey: .requestAt)
     requestAt = DateManager.shared.stringToDate(dateString, format: .dateTime)
+    
+    // TODO - not casting right
+    
+    let statusBool: Bool? = try? container.decode(Bool.self, forKey: .status)
+    status = ReqeustStatus(statusBool)
+  }
+}
+
+struct ReqeustStatus {
+  var bool: Bool?
+  var value: Int
+  var title: String
+  
+  init(_ status: Bool?) {
+    bool = status
+    
+    if bool == nil {
+      value = 3
+      title = "Pending"
+      return
+    }
+    
+    if bool! {
+      value = 1
+      title = "Done"
+    } else {
+      value = 2
+      title = "Rejected"
+    }
   }
 }
