@@ -61,8 +61,11 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell()
-    cell.textLabel?.text = model.requests[indexPath.row].description
+    let cell = tableView.dequeueReusableCell(withIdentifier: RequestListTableView.cellIdentifier, for: indexPath) as! RequestListRow
+    let request = model.requests[indexPath.row]
+    
+    cell.populateCell(serviceName: request.providerService.service.title, price: String(request.providerService.price), visitedDate: DateManager.shared.dateToString(request.requestAt), status: request.status.title)
+    
     return cell
   }
 }
