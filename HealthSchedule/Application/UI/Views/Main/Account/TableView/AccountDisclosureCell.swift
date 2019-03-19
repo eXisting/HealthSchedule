@@ -18,7 +18,7 @@ class AccountDisclosureCell: UITableViewCell {
     }
   }
   
-  var disclosureType: DisclosureFieldType!
+  var disclosureType: AccountRowType!
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)

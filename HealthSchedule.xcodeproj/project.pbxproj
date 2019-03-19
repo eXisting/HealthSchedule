@@ -61,6 +61,8 @@
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FE72241008600456D0F /* RequestCardViewController.swift */; };
+		ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */; };
+		ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE60B9223FB41200734FBC /* SearchResultView.swift */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
@@ -84,7 +86,6 @@
 		EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */; };
 		EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A84E2239535100B52E68 /* TimetableView.swift */; };
 		EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A8502239567700B52E68 /* TimetableModel.swift */; };
-		EDD2A855223A74BB00B52E68 /* AccountNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */; };
 		EDD2A857223A90AB00B52E68 /* AccountPlacemarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */; };
 		EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A85D223BC79900B52E68 /* ServicesModel.swift */; };
 		EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */; };
@@ -155,6 +156,8 @@
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED825FE72241008600456D0F /* RequestCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardViewController.swift; sourceTree = "<group>"; };
+		ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionInfoModel.swift; sourceTree = "<group>"; };
+		ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowInfoModel.swift; sourceTree = "<group>"; };
 		EDCE60B9223FB41200734FBC /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -177,7 +180,6 @@
 		EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataRequest.swift; sourceTree = "<group>"; };
 		EDD2A84E2239535100B52E68 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		EDD2A8502239567700B52E68 /* TimetableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableModel.swift; sourceTree = "<group>"; };
-		EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationController.swift; sourceTree = "<group>"; };
 		EDD2A856223A90AB00B52E68 /* AccountPlacemarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPlacemarkCell.swift; sourceTree = "<group>"; };
 		EDD2A85D223BC79900B52E68 /* ServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesModel.swift; sourceTree = "<group>"; };
 		EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCityViewController.swift; sourceTree = "<group>"; };
@@ -322,7 +324,6 @@
 			children = (
 				EDD2A858223AAA2800B52E68 /* ChildControllers */,
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
-				EDD2A854223A74BB00B52E68 /* AccountNavigationController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -551,6 +552,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		ED825FEA2241481600456D0F /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
+				ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */,
+				ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		EDCFB44C222806BB00A6B56F /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,9 +651,9 @@
 		EDD2A82B22367BF200B52E68 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				ED825FEA2241481600456D0F /* Account */,
 				EDD2A85C223BC77300B52E68 /* SearchTab */,
 				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
-				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
 				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
 			);
 			path = Main;
@@ -870,7 +881,6 @@
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
 				EDD2A845223918CC00B52E68 /* ResultViewController.swift in Sources */,
-				EDD2A855223A74BB00B52E68 /* AccountNavigationController.swift in Sources */,
 				DBE4886F223AD2560096F7D7 /* AccountNavigationItem.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
@@ -886,6 +896,7 @@
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
+				ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */,
 				ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */,
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
 				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,
@@ -899,6 +910,7 @@
 				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
 				EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
+				ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,

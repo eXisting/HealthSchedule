@@ -41,13 +41,9 @@ class AccountPlacemarkCell: UITableViewCell {
     editableField.isUserInteractionEnabled = value
   }
   
-  func setPlaceholderWithText(_ option: AccountFieldType) {
-    if option == .none {
-      return
-    }
-    
-    editableField.placeholder = option.rawValue
-    placemark.text = "\(option.rawValue):"
+  func setPlaceholderWithText(_ text: String) {
+    editableField.placeholder = text
+    placemark.text = text
   }
   
   private func laidOutViews() {
