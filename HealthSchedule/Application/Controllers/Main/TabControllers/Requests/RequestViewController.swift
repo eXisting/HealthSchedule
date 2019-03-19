@@ -12,20 +12,20 @@ import Presentr
 class RequestViewController: UIViewController {
   private let titleName = "Requests"
   
+  private var rootNavigation: RequestNavigationController!
+  
   private let mainView = RequestListTableView()
   private let model = RequestsModel()
-  private let searchBar = UISearchBar()
   
   override func loadView() {
     super.loadView()
     view = mainView
-    navigationItem.titleView = searchBar
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    searchBar.sizeToFit()
-    searchBar.placeholder = "Search..."
+    
+    rootNavigation = (navigationController as! RequestNavigationController)
     
     mainView.setup(delegate: self, dataSource: self)
     mainView.refreshDelegate = self
@@ -67,6 +67,10 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     cell.populateCell(serviceName: request.providerService.service.title, price: String(request.providerService.price), visitedDate: DateManager.shared.dateToString(request.requestAt), status: request.status.title)
     
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    rootNavigation.pushRequestDetail(model.requests[indexPath.row])
   }
 }
 

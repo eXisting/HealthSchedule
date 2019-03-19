@@ -60,6 +60,7 @@
 		ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED52F16D220C6D4000568CBC /* ServerException.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
+		ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FE72241008600456D0F /* RequestCardViewController.swift */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE60B9223FB41200734FBC /* SearchResultView.swift */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
@@ -153,6 +154,7 @@
 		ED52F16D220C6D4000568CBC /* ServerException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerException.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
+		ED825FE72241008600456D0F /* RequestCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardViewController.swift; sourceTree = "<group>"; };
 		EDCE60B9223FB41200734FBC /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 			children = (
 				ED231B2522297C6900A80FC9 /* RequestViewController.swift */,
 				ED231B3C222D7C3600A80FC9 /* RequestNavigationController.swift */,
+				ED825FE72241008600456D0F /* RequestCardViewController.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
+				ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
 				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
