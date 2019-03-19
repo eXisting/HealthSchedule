@@ -26,7 +26,7 @@ class ProfileView: UIView {
     profileImageView.roundCorners(by: profileImageView.frame.height / 2)
   }
   
-  func setRefreshDelegate(delegate: RefreshingUserTableView) {
+  func setRefreshDelegate(delegate: RefreshingTableView) {
     tableView.refreshDelegate = delegate
   }
   

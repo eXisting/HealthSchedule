@@ -12,6 +12,10 @@ protocol SetupableTabBarItem {
   func setupTabBarItem()
 }
 
+protocol RefreshingTableView {
+  func refresh(_ completion: @escaping (String) -> Void)
+}
+
 class MainTabBarController: UITabBarController {
   private var homeNavigationController: SearchNavigationController!
   private var requestNavigationController: RequestNavigationController!

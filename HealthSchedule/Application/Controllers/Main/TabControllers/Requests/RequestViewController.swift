@@ -28,6 +28,8 @@ class RequestViewController: UIViewController {
     searchBar.placeholder = "Search..."
     
     mainView.setup(delegate: self, dataSource: self)
+    mainView.refreshDelegate = self
+    
     model.loadRequests(onRequestsLoaded)
   }
   
@@ -62,5 +64,13 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     let cell = UITableViewCell()
     cell.textLabel?.text = model.requests[indexPath.row].description
     return cell
+  }
+}
+
+extension RequestViewController: RefreshingTableView {
+  func refresh(_ completion: @escaping (String) -> Void) {
+    model.loadRequests {
+      completion(ResponseStatus.success.rawValue)
+    }
   }
 }
