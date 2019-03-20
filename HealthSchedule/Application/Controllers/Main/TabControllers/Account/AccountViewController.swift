@@ -113,4 +113,13 @@ extension AccountViewController: UITextFieldDelegate {
     textField.resignFirstResponder()
     return true
   }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    guard let identifyingTextField = textField as? IdentifyingTextField,
+      let identifier = identifyingTextField.identifier else {
+      return
+    }
+    
+    model.changeText(by: identifier, with: identifyingTextField.text)
+  }
 }

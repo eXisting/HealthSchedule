@@ -10,7 +10,12 @@ import UIKit
 
 class AccountPlacemarkCell: UITableViewCell {
   private let placemark = UILabel()
-  private let editableField = UITextField()
+  private let editableField = IdentifyingTextField()
+  
+  var identifier: IndexPath? {
+    set { editableField.identifier = newValue }
+    get { return editableField.identifier }
+  }
   
   var value: String? {
     get {

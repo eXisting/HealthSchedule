@@ -41,6 +41,10 @@ class AccountModel {
     }
   }
   
+  func changeText(by indexPath: IndexPath, with text: String?) {
+    dataSource.data[indexPath.section].set(data: text, for: indexPath.row)
+  }
+  
   func handleSave() {
     // TODO
   }
@@ -83,6 +87,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
       placemarkCell.setPlaceholderWithText(rowData.title)
       placemarkCell.value = rowData.data
       placemarkCell.delegate = textFieldDelegate
+      placemarkCell.identifier = indexPath
       return placemarkCell
     }
     

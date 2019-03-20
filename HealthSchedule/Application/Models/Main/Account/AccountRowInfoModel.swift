@@ -19,7 +19,7 @@ enum AccountRowType {
 }
 
 protocol AccountRowDataContaining {
-  var data: String? { get }
+  var data: String? { get set }
   var title: String { get }
   var type: AccountRowType { get }
 }

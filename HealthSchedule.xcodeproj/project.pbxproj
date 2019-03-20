@@ -59,6 +59,7 @@
 		ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44831B22086FF300BE8EF0 /* AuthMainView.swift */; };
 		ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED52F16D220C6D4000568CBC /* ServerException.swift */; };
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
+		ED6B131922422F1D00938ACA /* IdentifyingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FE72241008600456D0F /* RequestCardViewController.swift */; };
 		ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */; };
@@ -154,6 +155,7 @@
 		ED44831B22086FF300BE8EF0 /* AuthMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainView.swift; sourceTree = "<group>"; };
 		ED52F16D220C6D4000568CBC /* ServerException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerException.swift; sourceTree = "<group>"; };
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyingTextField.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED825FE72241008600456D0F /* RequestCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardViewController.swift; sourceTree = "<group>"; };
 		ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionInfoModel.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			children = (
 				ED231B4E222E8FB000A80FC9 /* TableView */,
 				ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */,
+				ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 				EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */,
+				ED6B131922422F1D00938ACA /* IdentifyingTextField.swift in Sources */,
 				EDD2A84322390AB300B52E68 /* ServicesViewController.swift in Sources */,
 				ED231B2622297C6900A80FC9 /* RequestViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,

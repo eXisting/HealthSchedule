@@ -12,6 +12,7 @@ protocol AccountSectionDataContaining {
   var numberOfRows: Int { get }
   var sectionName: String { get }
   subscript(forRowIndex: Int) -> AccountRowDataContaining { get }
+  func set(data: String?, for rowAtIndex: Int)
 }
 
 class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
@@ -24,7 +25,7 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
     return rows[forRowIndex]
   }
   
-  private let rows: [AccountRowDataContaining]
+  private var rows: [AccountRowDataContaining]
   
   init(user: User) {
     rows = [
@@ -35,6 +36,10 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
     
     sectionName = "General"
     numberOfRows = rows.count
+  }
+  
+  func set(data: String?, for rowAtIndex: Int) {
+    rows[rowAtIndex].data = data
   }
 }
 
@@ -48,7 +53,7 @@ class ProviderInfoAccountSectionModel: AccountSectionDataContaining {
     return rows[forRowIndex]
   }
   
-  private let rows: [AccountRowDataContaining]
+  private var rows: [AccountRowDataContaining]
   
   init(user: User) {
     rows = [
@@ -61,6 +66,8 @@ class ProviderInfoAccountSectionModel: AccountSectionDataContaining {
     sectionName = "Provider data"
     numberOfRows = rows.count
   }
+  
+  func set(data: String?, for rowAtIndex: Int) {}
 }
 
 class SecureInfoAccountSectionModel: AccountSectionDataContaining {
@@ -72,7 +79,7 @@ class SecureInfoAccountSectionModel: AccountSectionDataContaining {
     return rows[forRowIndex]
   }
   
-  private let rows: [AccountRowDataContaining]
+  private var rows: [AccountRowDataContaining]
   
   init(user: User) {
     rows = [
@@ -83,6 +90,10 @@ class SecureInfoAccountSectionModel: AccountSectionDataContaining {
     
     sectionName = "Security"
     numberOfRows = rows.count
+  }
+  
+  func set(data: String?, for rowAtIndex: Int) {
+    rows[rowAtIndex].data = data
   }
 }
 
