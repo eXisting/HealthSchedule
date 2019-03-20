@@ -47,8 +47,21 @@ class UserDataRequest {
 }
 
 extension UserDataRequest: UserDataUpdating {
-  func updateInfo(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
-    completion(ResponseStatus.success.rawValue)
+  func updateInfo(with collecedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    guard let data = Serializer.getDataFrom(json: collecedData) else {
+      completion(ResponseStatus.invalidData.rawValue)
+      return
+    }
+    print(collecedData)
+    requestsManager.postAsync(
+      to: Endpoints.updateUserInfo.rawValue,
+      as: .put, data, RequestManager.sessionToken.asParams()) {
+      [weak self] serverData, response in
+      
+      // TODO
+      
+      completion(ResponseStatus.success.rawValue)
+    }
   }
   
   func updatePassword(with newPassword: String, _ completion: @escaping (String) -> Void) {

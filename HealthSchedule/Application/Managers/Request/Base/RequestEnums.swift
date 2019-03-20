@@ -25,6 +25,7 @@ enum Endpoints: String {
   
   // PUT
   case providerAddress = "/api/provider/address"
+  case updateUserInfo = "/api/user/info"
   
   // GET / POST / DELETE ( /{id} )
   case providerProfessions = "/api/provider/professions"
