@@ -31,10 +31,15 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
   private var rows: [AccountRowDataContaining]
   
   init(user: User) {
+    guard let city = user.city,
+      let birthday = user.birthday else {
+      fatalError("User cannot exist without city or birthday date")
+    }
+    
     rows = [
       BaseCellInfo(title: "Full name:", type: .general, keyName: "fullName", data: user.name),
-      BaseCellInfo(title: "City:", type: .general, subtype: .cityPicker, keyName: "city_id", data: user.city?.name),
-      BaseCellInfo(title: "Birthday:", type: .general, subtype: .datePicker, keyName: "birthday_at", data: DateManager.shared.dateToString(user.birthday!))
+      BaseCellInfo(title: "City:", type: .general, subtype: .cityPicker, keyName: "city_id", data: user.city!.name, id: Int(city.id)),
+      BaseCellInfo(title: "Birthday:", type: .general, subtype: .datePicker, keyName: "birthday_at", data: DateManager.shared.dateToString(birthday))
     ]
     
     sectionName = "General"
