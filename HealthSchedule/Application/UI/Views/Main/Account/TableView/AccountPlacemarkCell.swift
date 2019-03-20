@@ -17,6 +17,11 @@ class AccountPlacemarkCell: UITableViewCell {
     get { return editableField.identifier }
   }
   
+  var fieldSubtype: AccountRowSubtype {
+    set { editableField.subType = newValue }
+    get { return editableField.subType }
+  }
+  
   var value: String? {
     get {
       return editableField.text

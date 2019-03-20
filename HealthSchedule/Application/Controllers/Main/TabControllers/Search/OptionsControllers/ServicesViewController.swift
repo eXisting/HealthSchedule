@@ -10,10 +10,6 @@ import UIKit
 import Presentr
 import UIEmptyState
 
-protocol CityPickHandling {
-  func picked(id: Int, title: String)
-}
-
 class ServicesViewController: UITableViewController {
   private let titleName = "Services"
   

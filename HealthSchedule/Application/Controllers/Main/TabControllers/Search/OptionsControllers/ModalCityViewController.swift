@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol CityPickHandling {
+  func picked(id: Int, title: String)
+}
 
 class ModalCityViewController: UITableViewController {
   var storeDelegate: CityPickHandling!

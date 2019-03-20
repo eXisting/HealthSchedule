@@ -18,23 +18,38 @@ enum AccountRowType {
   case general
 }
 
+enum AccountRowSubtype {
+  case datePicker
+  case cityPicker
+  
+  case none
+}
+
 protocol AccountRowDataContaining {
+  var id: Int? { get set }
   var data: String? { get set }
   var title: String { get }
   var type: AccountRowType { get }
+  var subtype: AccountRowSubtype { get }
 }
 
 class BaseCellInfo: AccountRowDataContaining {
+  var id: Int?
+  
   var data: String?
   
   var title: String
   
   var type: AccountRowType
   
-  init(title: String, type: AccountRowType, data: String? = nil) {
+  var subtype: AccountRowSubtype
+
+  init(title: String, type: AccountRowType, subtype: AccountRowSubtype = .none, data: String? = nil, id: Int? = nil) {
+    self.id = id
     self.data = data
     self.title = title
     self.type = type
+    self.subtype = subtype
   }
 }
 

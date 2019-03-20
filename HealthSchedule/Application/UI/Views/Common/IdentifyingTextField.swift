@@ -10,6 +10,7 @@ import UIKit
 
 class IdentifyingTextField: UITextField {
   var identifier: IndexPath?
+  var subType: AccountRowSubtype = .none
   
   override var delegate: UITextFieldDelegate? {
     get { return super.delegate }

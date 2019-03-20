@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 protocol AccountHandlableDelegate {
   func logout()
@@ -30,6 +31,18 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
       return customNavigationItem!
     }
   }
+  
+  let presenter: Presentr = {
+    let customType = PresentationType.popup
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .coverVerticalFromTop
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    return customPresenter
+  }()
   
   override func loadView() {
     super.loadView()
@@ -69,6 +82,19 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
       return
     }
   }
+  
+  private func presentCityPicker(with identifier: IndexPath) {
+    model.getCities {
+      [weak self] cities in
+      DispatchQueue.main.async {
+        let controller = ModalCityViewController()
+        controller.storeDelegate = self
+        controller.cititesList = cities
+        self!.model.presentedIdetifier = identifier
+        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
+      }
+    }
+  }
 }
 
 extension AccountViewController: AccountHandlableDelegate {
@@ -84,6 +110,18 @@ extension AccountViewController: AccountHandlableDelegate {
 extension AccountViewController: RefreshingTableView {
   func refresh(_ completion: @escaping (String) -> Void) {
     model.reloadRemoteUser(completion)
+  }
+}
+
+extension AccountViewController: CityPickHandling {
+  func picked(id: Int, title: String) {
+    guard let identifier = model.presentedIdetifier else {
+      return
+    }
+    
+    model.changeText(by: identifier, with: title)
+    model.changeStoredId(by: identifier, newId: id)
+    mainView.reloadRows(at: [identifier])
   }
 }
 
@@ -112,6 +150,23 @@ extension AccountViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
+  }
+  
+  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    guard let identifyingTextField = textField as? IdentifyingTextField,
+      let identifier = identifyingTextField.identifier else {
+        return true
+    }
+    
+    switch identifyingTextField.subType {
+      case .datePicker:
+        return false
+      case .cityPicker:
+        presentCityPicker(with: identifier)
+        return false
+      case .none:
+        return true
+    }
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {

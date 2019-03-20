@@ -10,9 +10,12 @@ import UIKit
 
 class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
+  private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
   
   let dataSource = AccountDataSource()
+  
+  var presentedIdetifier: IndexPath?
   
   init() {
     guard let user = databaseManager.getCurrentUser() else {
@@ -41,8 +44,21 @@ class AccountModel {
     }
   }
   
+  func getCities(_ completion: @escaping ([City]) -> Void) {
+    commonDataRequestController.getCities {
+      [weak self] status in
+      if status == ResponseStatus.success.rawValue {
+        completion(self!.databaseManager.getCties())
+      }
+    }
+  }
+  
   func changeText(by indexPath: IndexPath, with text: String?) {
     dataSource.data[indexPath.section].set(data: text, for: indexPath.row)
+  }
+  
+  func changeStoredId(by indexPath: IndexPath, newId: Int) {
+    dataSource.data[indexPath.section].set(id: newId, for: indexPath.row)
   }
   
   func handleSave() {
@@ -88,6 +104,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
       placemarkCell.value = rowData.data
       placemarkCell.delegate = textFieldDelegate
       placemarkCell.identifier = indexPath
+      placemarkCell.fieldSubtype = rowData.subtype
       return placemarkCell
     }
     

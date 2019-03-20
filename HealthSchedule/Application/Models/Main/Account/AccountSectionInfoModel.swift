@@ -13,10 +13,10 @@ protocol AccountSectionDataContaining {
   var sectionName: String { get }
   subscript(forRowIndex: Int) -> AccountRowDataContaining { get }
   func set(data: String?, for rowAtIndex: Int)
+  func set(id: Int, for rowAtIndex: Int)
 }
 
 class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
-  
   var sectionName: String
   
   var numberOfRows: Int
@@ -30,8 +30,8 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
   init(user: User) {
     rows = [
       BaseCellInfo(title: "Full name:", type: .general, data: user.name),
-      BaseCellInfo(title: "City:", type: .general, data: user.city?.name),
-      BaseCellInfo(title: "Birthday:", type: .general, data: DateManager.shared.dateToString(user.birthday!))
+      BaseCellInfo(title: "City:", type: .general, subtype: .cityPicker, data: user.city?.name),
+      BaseCellInfo(title: "Birthday:", type: .general, subtype: .datePicker, data: DateManager.shared.dateToString(user.birthday!))
     ]
     
     sectionName = "General"
@@ -40,6 +40,10 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
   
   func set(data: String?, for rowAtIndex: Int) {
     rows[rowAtIndex].data = data
+  }
+  
+  func set(id: Int, for rowAtIndex: Int) {
+    rows[rowAtIndex].id = id
   }
 }
 
@@ -68,6 +72,7 @@ class ProviderInfoAccountSectionModel: AccountSectionDataContaining {
   }
   
   func set(data: String?, for rowAtIndex: Int) {}
+  func set(id: Int, for rowAtIndex: Int) {}
 }
 
 class SecureInfoAccountSectionModel: AccountSectionDataContaining {
@@ -95,5 +100,7 @@ class SecureInfoAccountSectionModel: AccountSectionDataContaining {
   func set(data: String?, for rowAtIndex: Int) {
     rows[rowAtIndex].data = data
   }
+  
+  func set(id: Int, for rowAtIndex: Int) {}
 }
 

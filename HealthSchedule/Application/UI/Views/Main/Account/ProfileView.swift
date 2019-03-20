@@ -30,6 +30,10 @@ class ProfileView: UIView {
     tableView.refreshDelegate = delegate
   }
   
+  func reloadRows(at indexPath: [IndexPath]) {
+    tableView.reloadRows(at: indexPath, with: .fade)
+  }
+  
   private func laidOutViews() {
     addSubview(profileImageView)
     addSubview(tableView)
