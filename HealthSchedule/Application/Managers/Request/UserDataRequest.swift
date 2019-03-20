@@ -27,6 +27,12 @@ protocol CommonDataRequesting {
   func getRecomendations()
 }
 
+protocol UserDataUpdating {
+  func updateInfo(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
+  func updatePassword(with newPassword: String, _ completion: @escaping (String) -> Void)
+  func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void)
+}
+
 class UserDataRequest {
   
   private static var user: RemoteUser?
@@ -37,6 +43,20 @@ class UserDataRequest {
   private func requestProviderData() {
     getProfessions() { list in print("Professions obtained!") }
     // TODO: Load rest data here
+  }
+}
+
+extension UserDataRequest: UserDataUpdating {
+  func updateInfo(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    completion(ResponseStatus.success.rawValue)
+  }
+  
+  func updatePassword(with newPassword: String, _ completion: @escaping (String) -> Void) {
+    
+  }
+  
+  func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void) {
+    
   }
 }
 

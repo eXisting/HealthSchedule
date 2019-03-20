@@ -11,9 +11,12 @@ import UIKit
 protocol AccountSectionDataContaining {
   var numberOfRows: Int { get }
   var sectionName: String { get }
-  subscript(forRowIndex: Int) -> AccountRowDataContaining { get }
+  
   func set(data: String?, for rowAtIndex: Int)
   func set(id: Int, for rowAtIndex: Int)
+  func asJson() -> Parser.JsonDictionary
+  
+  subscript(forRowIndex: Int) -> AccountRowDataContaining { get }
 }
 
 class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
@@ -29,9 +32,9 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
   
   init(user: User) {
     rows = [
-      BaseCellInfo(title: "Full name:", type: .general, data: user.name),
-      BaseCellInfo(title: "City:", type: .general, subtype: .cityPicker, data: user.city?.name),
-      BaseCellInfo(title: "Birthday:", type: .general, subtype: .datePicker, data: DateManager.shared.dateToString(user.birthday!))
+      BaseCellInfo(title: "Full name:", type: .general, keyName: "fullName", data: user.name),
+      BaseCellInfo(title: "City:", type: .general, subtype: .cityPicker, keyName: "city_id", data: user.city?.name),
+      BaseCellInfo(title: "Birthday:", type: .general, subtype: .datePicker, keyName: "birthday_at", data: DateManager.shared.dateToString(user.birthday!))
     ]
     
     sectionName = "General"
@@ -44,6 +47,17 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
   
   func set(id: Int, for rowAtIndex: Int) {
     rows[rowAtIndex].id = id
+  }
+  
+  func asJson() -> Parser.JsonDictionary {
+    var result: Parser.JsonDictionary = [:]
+    
+    rows.forEach { row in
+      let rowJson = row.asKeyValuePair()
+      result[rowJson.key] = rowJson.value
+    }
+    
+    return result
   }
 }
 
@@ -71,6 +85,7 @@ class ProviderInfoAccountSectionModel: AccountSectionDataContaining {
     numberOfRows = rows.count
   }
   
+  func asJson() -> Parser.JsonDictionary { return [:] }
   func set(data: String?, for rowAtIndex: Int) {}
   func set(id: Int, for rowAtIndex: Int) {}
 }
@@ -88,8 +103,8 @@ class SecureInfoAccountSectionModel: AccountSectionDataContaining {
   
   init(user: User) {
     rows = [
-      BaseCellInfo(title: "Email:", type: .general, data: user.email),
-      BaseCellInfo(title: "Phone:", type: .general, data: user.phone),
+      BaseCellInfo(title: "Email:", type: .general, keyName: "email", data: user.email),
+      BaseCellInfo(title: "Phone:", type: .general, keyName: "phone", data: user.phone),
       BaseCellInfo(title: "Password", type: .password)
     ]
     
@@ -99,6 +114,19 @@ class SecureInfoAccountSectionModel: AccountSectionDataContaining {
   
   func set(data: String?, for rowAtIndex: Int) {
     rows[rowAtIndex].data = data
+  }
+  
+  func asJson() -> Parser.JsonDictionary {
+    var result: Parser.JsonDictionary = [:]
+    
+    rows.forEach { row in
+      let rowJson = row.asKeyValuePair()
+      if !rowJson.key.isEmpty {
+        result[rowJson.key] = rowJson.value
+      }     
+    }
+    
+    return result
   }
   
   func set(id: Int, for rowAtIndex: Int) {}

@@ -14,7 +14,6 @@ class AccountModel {
   private let databaseManager = DataBaseManager.shared
   
   let dataSource = AccountDataSource()
-  
   var presentedIdetifier: IndexPath?
   
   init() {
@@ -62,7 +61,26 @@ class AccountModel {
   }
   
   func handleSave() {
-    // TODO
+    var collectedData: Parser.JsonDictionary = [:]
+    
+    dataSource.data.forEach { item in
+      var sectionJson = item.asJson()
+      
+      if let fullName = sectionJson["fullName"] {
+        var fullNameArr = fullName.components(separatedBy: " ")
+        sectionJson.removeValue(forKey: "fullName")
+        sectionJson["first_name"] = fullNameArr[0]
+        sectionJson["last_name"] = fullNameArr[1]
+      }
+      
+      collectedData.merge(sectionJson, uniquingKeysWith: { thisKey, insertedKey in
+        return thisKey
+      })
+    }
+    
+    (userRequestController as? UserDataUpdating)?.updateInfo(with: collectedData) {
+      response in print(response)
+    }
   }
 }
 
