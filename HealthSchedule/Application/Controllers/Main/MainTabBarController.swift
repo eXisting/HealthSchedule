@@ -18,7 +18,7 @@ protocol RefreshingTableView {
 
 class MainTabBarController: UITabBarController {
   private var homeNavigationController: SearchNavigationController!
-  private var requestNavigationController: RequestNavigationController!
+  private var requestNavigationController: UINavigationController!
   private var accountNavigationController: UINavigationController!
 
   private let homeTab = SearchViewController()
@@ -29,7 +29,7 @@ class MainTabBarController: UITabBarController {
     super.viewDidLoad()
 
     homeNavigationController = SearchNavigationController(rootViewController: homeTab)
-    requestNavigationController = RequestNavigationController(rootViewController: requestTab)
+    requestNavigationController = UINavigationController(rootViewController: requestTab)
     accountNavigationController = UINavigationController(rootViewController: accountTab)
 
     let tabBarItems = [

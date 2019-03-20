@@ -8,10 +8,12 @@
 
 import UIKit
 
-protocol AccountSectionDataContaining {
+protocol CommonSectionDataContaining {
   var numberOfRows: Int { get }
   var sectionName: String { get }
-  
+}
+
+protocol AccountSectionDataContaining: CommonSectionDataContaining {
   func set(data: String?, for rowAtIndex: Int)
   func set(id: Int, for rowAtIndex: Int)
   func asJson() -> Parser.JsonDictionary
@@ -136,4 +138,3 @@ class SecureInfoAccountSectionModel: AccountSectionDataContaining {
   
   func set(id: Int, for rowAtIndex: Int) {}
 }
-

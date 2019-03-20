@@ -30,7 +30,6 @@
 		ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B30222D48FF00A80FC9 /* AccountTableView.swift */; };
 		ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B32222D498800A80FC9 /* AccountDisclosureCell.swift */; };
 		ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */; };
-		ED231B3D222D7C3600A80FC9 /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3C222D7C3600A80FC9 /* RequestNavigationController.swift */; };
 		ED231B4B222E7A2A00A80FC9 /* RequestListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4A222E7A2A00A80FC9 /* RequestListTableView.swift */; };
 		ED231B4D222E850300A80FC9 /* RequestListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4C222E850300A80FC9 /* RequestListRow.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
@@ -65,6 +64,10 @@
 		ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */; };
 		ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */; };
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
+		ED98CE3C2242856500B95696 /* RequestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE3B2242856500B95696 /* RequestCardView.swift */; };
+		ED98CE3F2242861400B95696 /* RequestCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE3E2242861400B95696 /* RequestCardModel.swift */; };
+		ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */; };
+		ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE422242891100B95696 /* RequestCardRowModel.swift */; };
 		EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE60B9223FB41200734FBC /* SearchResultView.swift */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
 		EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45422280D2100A6B56F /* DatePickerView.swift */; };
@@ -126,7 +129,6 @@
 		ED231B30222D48FF00A80FC9 /* AccountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableView.swift; sourceTree = "<group>"; };
 		ED231B32222D498800A80FC9 /* AccountDisclosureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDisclosureCell.swift; sourceTree = "<group>"; };
 		ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
-		ED231B3C222D7C3600A80FC9 /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
 		ED231B4A222E7A2A00A80FC9 /* RequestListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListTableView.swift; sourceTree = "<group>"; };
 		ED231B4C222E850300A80FC9 /* RequestListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListRow.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,10 @@
 		ED825FE72241008600456D0F /* RequestCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardViewController.swift; sourceTree = "<group>"; };
 		ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionInfoModel.swift; sourceTree = "<group>"; };
 		ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowInfoModel.swift; sourceTree = "<group>"; };
+		ED98CE3B2242856500B95696 /* RequestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardView.swift; sourceTree = "<group>"; };
+		ED98CE3E2242861400B95696 /* RequestCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardModel.swift; sourceTree = "<group>"; };
+		ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardSectionModel.swift; sourceTree = "<group>"; };
+		ED98CE422242891100B95696 /* RequestCardRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardRowModel.swift; sourceTree = "<group>"; };
 		EDCE60B9223FB41200734FBC /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -355,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				ED231B2522297C6900A80FC9 /* RequestViewController.swift */,
-				ED231B3C222D7C3600A80FC9 /* RequestNavigationController.swift */,
 				ED825FE72241008600456D0F /* RequestCardViewController.swift */,
 			);
 			path = Requests;
@@ -365,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				ED231B49222E7A1C00A80FC9 /* TableView */,
+				ED98CE3B2242856500B95696 /* RequestCardView.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 		ED330C6421EF8B52001019FC /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				ED98CE382242767100B95696 /* Common */,
 				EDCFB45D22282C6100A6B56F /* TabControllers */,
 				EDCFB457222819B800A6B56F /* MainTabBarController.swift */,
 			);
@@ -555,14 +562,33 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		ED825FEA2241481600456D0F /* Account */ = {
+		ED825FEA2241481600456D0F /* AccountTab */ = {
 			isa = PBXGroup;
 			children = (
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
 				ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */,
 				ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */,
 			);
-			path = Account;
+			path = AccountTab;
+			sourceTree = "<group>";
+		};
+		ED98CE382242767100B95696 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ED98CE3D224285E700B95696 /* RequestTab */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
+				ED98CE3E2242861400B95696 /* RequestCardModel.swift */,
+				ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */,
+				ED98CE422242891100B95696 /* RequestCardRowModel.swift */,
+			);
+			path = RequestTab;
 			sourceTree = "<group>";
 		};
 		EDCFB44C222806BB00A6B56F /* Application */ = {
@@ -654,9 +680,9 @@
 		EDD2A82B22367BF200B52E68 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				ED825FEA2241481600456D0F /* Account */,
+				ED98CE3D224285E700B95696 /* RequestTab */,
+				ED825FEA2241481600456D0F /* AccountTab */,
 				EDD2A85C223BC77300B52E68 /* SearchTab */,
-				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
 				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
 			);
 			path = Main;
@@ -697,7 +723,6 @@
 			children = (
 				EDD2A84222390AB300B52E68 /* ServicesViewController.swift */,
 				EDD2A8462239191E00B52E68 /* TimetableViewController.swift */,
-				EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */,
 			);
 			path = OptionsControllers;
 			sourceTree = "<group>";
@@ -870,7 +895,9 @@
 				EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */,
+				ED98CE3C2242856500B95696 /* RequestCardView.swift in Sources */,
 				ED6B131922422F1D00938ACA /* IdentifyingTextField.swift in Sources */,
+				ED98CE3F2242861400B95696 /* RequestCardModel.swift in Sources */,
 				EDD2A84322390AB300B52E68 /* ServicesViewController.swift in Sources */,
 				ED231B2622297C6900A80FC9 /* RequestViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
@@ -893,7 +920,6 @@
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
 				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
-				ED231B3D222D7C3600A80FC9 /* RequestNavigationController.swift in Sources */,
 				EDD2A8372238026C00B52E68 /* SearchView.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */,
@@ -910,11 +936,13 @@
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */,
+				ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
 				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
 				EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */,
+				ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,

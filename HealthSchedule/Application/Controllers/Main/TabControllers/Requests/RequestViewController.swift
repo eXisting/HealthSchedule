@@ -12,8 +12,6 @@ import Presentr
 class RequestViewController: UIViewController {
   private let titleName = "Requests"
   
-  private var rootNavigation: RequestNavigationController!
-  
   private let mainView = RequestListTableView()
   private let model = RequestsModel()
   
@@ -24,8 +22,6 @@ class RequestViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    rootNavigation = (navigationController as! RequestNavigationController)
     
     mainView.setup(delegate: self, dataSource: self)
     mainView.refreshDelegate = self
@@ -64,13 +60,20 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: RequestListTableView.cellIdentifier, for: indexPath) as! RequestListRow
     let request = model.requests[indexPath.row]
     
-    cell.populateCell(serviceName: request.providerService.service.title, price: String(request.providerService.price), visitedDate: DateManager.shared.dateToString(request.requestAt), status: request.status.title)
+    cell.populateCell(
+      serviceName: request.providerService.service.title,
+      price: String(request.providerService.price),
+      visitedDate: DateManager.shared.dateToString(request.requestAt),
+      status: request.status.title
+    )
     
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    rootNavigation.pushRequestDetail(model.requests[indexPath.row])
+    let controller = RequestCardViewController()
+    controller.set(model.requests[indexPath.row])
+    navigationController?.pushViewController(controller, animated: true)
   }
 }
 
