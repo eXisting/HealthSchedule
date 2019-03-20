@@ -35,13 +35,17 @@ extension Dictionary where Key == String, Value == String {
   // Shortcut for parsing dictionary as params string
   
   func asParamsString() -> String {
+    return "?\(self.asDataString())"
+  }
+  
+  func asDataString() -> String {
     let parameterArray = map { key, value -> String in
       let percentEscapedKey = key.addingPercentEncodingForURLQueryValue()!
       let percentEscapedValue = value.addingPercentEncodingForURLQueryValue()!
       return "\(percentEscapedKey)=\(percentEscapedValue)"
     }
     
-    return "?" + parameterArray.joined(separator: "&")
+    return parameterArray.joined(separator: "&")
   }
 }
 

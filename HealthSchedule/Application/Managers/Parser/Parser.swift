@@ -42,4 +42,17 @@ class Parser {
     
     return result
   }
+  
+  class func processGeneralUserData(_ userData: Parser.JsonDictionary) -> Parser.JsonDictionary {
+    var processedData = userData
+    if let fullName = userData["fullName"] {
+      var fullNameArr = fullName.components(separatedBy: " ")
+      processedData.removeValue(forKey: "fullName")
+      processedData["first_name"] = fullNameArr[0]
+      processedData["last_name"] = fullNameArr[1]
+    }
+    
+    processedData["phone"] = processedData["phone"]?.filter("01234567890.".contains)
+    return processedData
+  }
 }

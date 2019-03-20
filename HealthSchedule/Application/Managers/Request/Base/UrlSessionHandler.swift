@@ -20,7 +20,7 @@ class UrlSessionHandler {
   func startSessionTask(
     _ url: String,
     _ type: RequestType = .get,
-    body: Data? = nil,
+    body: Parser.JsonDictionary? = nil,
     params: Parser.JsonDictionary? = nil,
     completion: @escaping (Any, ServerResponse) -> Void) {
     
@@ -82,7 +82,7 @@ private extension UrlSessionHandler {
     _ url: String,
     _ method: String,
     _ params: Parser.JsonDictionary?,
-    _ data: Data? = nil) -> URLRequest? {
+    _ body: Parser.JsonDictionary? = nil) -> URLRequest? {
     
     var parameterString = ""
     
@@ -97,8 +97,16 @@ private extension UrlSessionHandler {
     
     var request = URLRequest(url: url)
     
-    request.allHTTPHeaderFields = ["Content-Type": "application/json"]
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
     request.httpMethod = method
+    
+    request.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
+    
+    guard let data = body?.asDataString().data(using: .ascii) else {
+      return request
+    }
+    
     request.httpBody = data
     
     return request

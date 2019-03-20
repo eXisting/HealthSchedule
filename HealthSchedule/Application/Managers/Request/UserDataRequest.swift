@@ -48,20 +48,22 @@ class UserDataRequest {
 
 extension UserDataRequest: UserDataUpdating {
   func updateInfo(with collecedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
-    guard let data = Serializer.getDataFrom(json: collecedData) else {
-      completion(ResponseStatus.invalidData.rawValue)
-      return
-    }
-    print(collecedData)
+    let data = Parser.processGeneralUserData(collecedData)
+    
     requestsManager.postAsync(
       to: Endpoints.updateUserInfo.rawValue,
       as: .put, data, RequestManager.sessionToken.asParams()) {
-      [weak self] serverData, response in
+        serverData, response in
       
-      // TODO
-      
-      completion(ResponseStatus.success.rawValue)
-    }
+        if let error = response.error {
+          completion(error)
+          return
+        }
+        
+        // TODO - save to core data
+        
+        completion(ResponseStatus.success.rawValue)
+      }
   }
   
   func updatePassword(with newPassword: String, _ completion: @escaping (String) -> Void) {
@@ -134,12 +136,7 @@ extension UserDataRequest: AuthenticationProviding {
   
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
     let postBody = ["username": login, "password": password]
-    guard let data = Serializer.getDataFrom(json: postBody) else {
-      completion(ResponseStatus.invalidData.rawValue)
-      return
-    }
-    
-    requestsManager.signIn(userData: data) {
+    requestsManager.signIn(userData: postBody) {
       [weak self] (user, response) in
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
@@ -165,7 +162,7 @@ extension UserDataRequest: AuthenticationProviding {
   }
   
   func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void) {
-    guard let data = Serializer.getDataFrom(json: postData) else {
+    guard let data = postData as? Parser.JsonDictionary else {
       completion(ResponseStatus.invalidData.rawValue)
       return
     }
@@ -209,11 +206,7 @@ extension UserDataRequest: ProviderInfoRequesting {
   }
   
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void) {
-    guard let data = Serializer.encodeDataFrom(object: ["address": address]) else {
-      completion(ResponseStatus.invalidData.rawValue)
-      return
-    }
-    
+    let data = ["address": address]
     requestsManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
       (address, response) in
       if response.error != nil {
