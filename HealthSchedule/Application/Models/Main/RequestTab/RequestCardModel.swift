@@ -41,7 +41,6 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
     
     if let providerRowData = rowData as? RequestCardProviderRowModel {
       let cell = tableView.dequeueReusableCell(withIdentifier: RequestCardTableView.cellIdentifier, for: indexPath) as! RequestCardImageRow
-      
       cell.populateCell(name: providerRowData.data)
       
       loadImage(by: providerRowData.imageUrl) { image in
@@ -55,6 +54,7 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
     
     let cell = UITableViewCell()
     cell.textLabel?.text = "\(rowData.title): \(rowData.data)"
+    cell.selectionStyle = .none
     return cell
   }
   

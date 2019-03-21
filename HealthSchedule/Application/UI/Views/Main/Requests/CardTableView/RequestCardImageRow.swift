@@ -69,5 +69,6 @@ class RequestCardImageRow: UITableViewCell {
     nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
     
     photo.roundCorners(by: photo.frame.height / 2)
+    selectionStyle = .none
   }
 }
