@@ -8,24 +8,20 @@
 
 import UIKit
 
-class RequestCardModel {
-  let dataSource = RequestCardDataSource()
+class RequestCardModel: NSObject, UITableViewDataSource {
+  private let commmonDataRequestController = CommonDataRequest()
+  private var data: [RequestSectionDataContaining] = []
+  
+  subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
+    return data[forSectionIndex]
+  }
   
   func procceedRequest(_ request: RemoteRequest) {
-    dataSource.data = [
+    data = [
       RequestCardProviderSectionModel(request: request),
       RequestCardScheduleSectionModel(request: request),
       RequestCardInfoSectionModel(request: request)
     ]
-  }
-}
-
-class RequestCardDataSource: NSObject, UITableViewDataSource {
-  fileprivate let commmonDataRequestController = CommonDataRequest()
-  fileprivate var data: [RequestSectionDataContaining] = []
-  
-  subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
-    return data[forSectionIndex]
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,14 +54,12 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
     return cell
   }
   
-  fileprivate func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
+  private func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
     guard let url = url else {
       return
     }
     
-    commmonDataRequestController.getImage(from: url) {
-      data in
-      
+    commmonDataRequestController.getImage(from: url) { data in
       guard let image = UIImage(data: data) else {
         return
       }

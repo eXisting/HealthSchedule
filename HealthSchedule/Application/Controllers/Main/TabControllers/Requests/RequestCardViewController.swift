@@ -19,7 +19,7 @@ class RequestCardViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mainView.setup(delegate: self, dataSource: model.dataSource)
+    mainView.setup(delegate: self, dataSource: model)
   }
   
   func set(_ request: RemoteRequest) {
@@ -30,11 +30,11 @@ class RequestCardViewController: UIViewController {
 
 extension RequestCardViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return model.dataSource[section].sectionHeight
+    return model[section].sectionHeight
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return model.dataSource[indexPath.section][indexPath.row].rowHeight
+    return model[indexPath.section][indexPath.row].rowHeight
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

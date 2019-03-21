@@ -40,7 +40,7 @@ class RequestViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainView.setup(delegate: self, dataSource: self)
+    mainView.setup(delegate: self, dataSource: model)
     mainView.refreshDelegate = self
     
     model.loadRequests(onRequestsLoaded)
@@ -64,32 +64,14 @@ extension RequestViewController: SetupableTabBarItem {
   }
 }
 
-extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return model.requests.count
-  }
-  
+extension RequestViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return view.frame.height * 0.1
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: RequestListTableView.cellIdentifier, for: indexPath) as! RequestListRow
-    let request = model.requests[indexPath.row]
-    
-    cell.populateCell(
-      serviceName: request.providerService.service.title,
-      price: String(request.providerService.price),
-      visitedDate: DateManager.shared.dateToString(request.requestAt),
-      status: request.status.title
-    )
-    
-    return cell
-  }
-  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let controller = RequestCardViewController()
-    controller.set(model.requests[indexPath.row])
+    controller.set(model[indexPath.row])
     customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }
