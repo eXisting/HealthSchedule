@@ -15,8 +15,12 @@ class RequestViewController: UIViewController {
   private let mainView = RequestListTableView()
   private let model = RequestsModel()
   
-  private let presenter: Presentr = {
-    let customType = PresentationType.popup
+  private lazy var presenter: Presentr = {
+    let customType = PresentationType.custom(
+      width: .fluid(percentage: 0.8),
+      height: .fluid(percentage: 0.5),
+      center: .center
+    )
     
     let customPresenter = Presentr(presentationType: customType)
     customPresenter.transitionType = .crossDissolve
