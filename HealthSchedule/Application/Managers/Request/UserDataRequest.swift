@@ -23,7 +23,6 @@ protocol ProviderInfoRequesting {
 protocol CommonDataRequesting {
   func getRequests(completion: @escaping ([RemoteRequest]) -> Void)
   func getUser(_ completion: @escaping (String) -> Void)
-  func getImage(from url: String, completion: @escaping (Data) -> Void)
   func getRecomendations()
 }
 
@@ -93,21 +92,11 @@ extension UserDataRequest: CommonDataRequesting {
       // TODO: Update user in core data
       
       // TODO: refactor this
-      if remoteUser.role.name == "provider" {
+      if remoteUser.role?.name == "provider" {
         self?.requestProviderData()
       }
       
       completion(ResponseStatus.success.rawValue)
-    }
-  }
-  
-  func getImage(from url: String, completion: @escaping (Data) -> Void) {
-    requestsManager.getDataAsync(from: url) { (data) in
-      guard let imageData = data else {
-        return
-      }
-      
-      completion(imageData)
     }
   }
   
@@ -153,7 +142,7 @@ extension UserDataRequest: AuthenticationProviding {
       }
       
       // TODO: refactor this
-      if remoteUser.role.name == "provider" {
+      if remoteUser.role?.name == "provider" {
         self?.requestProviderData()
       }
       

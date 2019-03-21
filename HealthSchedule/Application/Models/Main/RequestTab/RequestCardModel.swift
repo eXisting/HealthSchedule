@@ -21,7 +21,12 @@ class RequestCardModel {
 }
 
 class RequestCardDataSource: NSObject, UITableViewDataSource {
+  fileprivate let commmonDataRequestController = CommonDataRequest()
   fileprivate var data: [RequestSectionDataContaining] = []
+  
+  subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
+    return data[forSectionIndex]
+  }
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return data.count
@@ -32,12 +37,40 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let rowData = data[indexPath.section][indexPath.row]
+    
+    if let providerRowData = rowData as? RequestCardProviderRowModel {
+      let cell = tableView.dequeueReusableCell(withIdentifier: RequestCardTableView.cellIdentifier, for: indexPath) as! RequestCardImageRow
+      
+      cell.populateCell(name: providerRowData.data)
+      
+      loadImage(by: providerRowData.imageUrl) { image in
+        DispatchQueue.main.async {
+          cell.photoImage = image
+        }
+      }
+      
+      return cell
+    }
+    
     let cell = UITableViewCell()
-    cell.textLabel?.text = data[indexPath.section][indexPath.row].title
+    cell.textLabel?.text = "\(rowData.title): \(rowData.data)"
     return cell
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Section"
+  fileprivate func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
+    guard let url = url else {
+      return
+    }
+    
+    commmonDataRequestController.getImage(from: url) {
+      data in
+      
+      guard let image = UIImage(data: data) else {
+        return
+      }
+      
+      completion(image)
+    }
   }
 }

@@ -46,11 +46,15 @@ struct RemoteUser {
   var status: Bool
   var birthday: Date
   
-  var role: RemoteRole
+  var role: RemoteRole?
   var city: RemoteCity?
   var photo: ProfileImage?
   
   var providerData: ProviderData?
+  
+  func getFullName() -> String {
+    return "\(firstName) \(lastName)"
+  }
 }
 
 extension RemoteUser: Codable {
@@ -78,7 +82,7 @@ extension RemoteUser: Codable {
     phone = try container.decode(String.self, forKey: .phone)
     status = try container.decode(Bool.self, forKey: .status)
     city = try? container.decode(RemoteCity.self, forKey: .city)
-    role = try container.decode(RemoteRole.self, forKey: .role)
+    role = try? container.decode(RemoteRole.self, forKey: .role)
     photo = try? container.decode(ProfileImage.self, forKey: .image)
 
     let birthdayString = try container.decode(String.self, forKey: .birthday)

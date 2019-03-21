@@ -11,6 +11,7 @@ import UIKit
 protocol CommonSectionDataContaining {
   var numberOfRows: Int { get }
   var sectionName: String { get }
+  var sectionHeight: CGFloat { get }
 }
 
 protocol AccountSectionDataContaining: CommonSectionDataContaining {
@@ -23,7 +24,7 @@ protocol AccountSectionDataContaining: CommonSectionDataContaining {
 
 class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
   var sectionName: String
-  
+  var sectionHeight: CGFloat = 55
   var numberOfRows: Int
   
   subscript(forRowIndex: Int) -> AccountRowDataContaining {
@@ -71,7 +72,7 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
 
 class ProviderInfoAccountSectionModel: AccountSectionDataContaining {
   var sectionName: String
-  
+  var sectionHeight: CGFloat = 55
   var numberOfRows: Int
   
   subscript(forRowIndex: Int) -> AccountRowDataContaining {
@@ -99,7 +100,7 @@ class ProviderInfoAccountSectionModel: AccountSectionDataContaining {
 
 class SecureInfoAccountSectionModel: AccountSectionDataContaining {
   var sectionName: String
-  
+  var sectionHeight: CGFloat = 55
   var numberOfRows: Int
   
   subscript(forRowIndex: Int) -> AccountRowDataContaining {

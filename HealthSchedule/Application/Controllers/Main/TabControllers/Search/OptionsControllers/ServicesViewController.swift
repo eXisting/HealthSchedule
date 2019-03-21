@@ -15,7 +15,7 @@ class ServicesViewController: UITableViewController {
   
   private var parentNavigationController: SearchNavigationController!
   
-  let presenter: Presentr = {
+  private let presenter: Presentr = {
     let customType = PresentationType.popup
     
     let customPresenter = Presentr(presentationType: customType)

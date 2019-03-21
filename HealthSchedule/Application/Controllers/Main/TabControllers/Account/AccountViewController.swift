@@ -127,7 +127,7 @@ extension AccountViewController: CityPickHandling {
 
 extension AccountViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 55
+    return model.dataSource[section].sectionHeight
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

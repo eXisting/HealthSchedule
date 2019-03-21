@@ -15,6 +15,19 @@ class RequestViewController: UIViewController {
   private let mainView = RequestListTableView()
   private let model = RequestsModel()
   
+  private let presenter: Presentr = {
+    let customType = PresentationType.popup
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .crossDissolve
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    customPresenter.cornerRadius = 10
+    return customPresenter
+  }()
+  
   override func loadView() {
     super.loadView()
     view = mainView
@@ -73,7 +86,7 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let controller = RequestCardViewController()
     controller.set(model.requests[indexPath.row])
-    navigationController?.pushViewController(controller, animated: true)
+    customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }
 

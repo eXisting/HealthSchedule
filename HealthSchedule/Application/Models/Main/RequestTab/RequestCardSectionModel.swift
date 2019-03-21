@@ -16,13 +16,14 @@ protocol RequestSectionDataContaining: CommonSectionDataContaining {
 
 class RequestCardProviderSectionModel: RequestSectionDataContaining {
   var numberOfRows: Int
+  var sectionHeight: CGFloat = 10
   var sectionName: String = ""
   
   var rows: [RequestRowDataContaining]
   
   init(request: RemoteRequest) {
     rows = [
-      RequestCardProviderRowModel()
+      RequestCardProviderRowModel(request: request)
     ]
     
     numberOfRows = rows.count
@@ -35,14 +36,15 @@ class RequestCardProviderSectionModel: RequestSectionDataContaining {
 
 class RequestCardScheduleSectionModel: RequestSectionDataContaining {
   var numberOfRows: Int
+  var sectionHeight: CGFloat = 10
   var sectionName: String = ""
   
   var rows: [RequestRowDataContaining]
   
   init(request: RemoteRequest) {
     rows = [
-      RequestCardTextRowModel(),
-      RequestCardTextRowModel()
+      RequestCardTextRowModel(title: "Address", data: request.providerService.address.address),
+      RequestCardTextRowModel(title: "Date", data: DateManager.shared.dateToString(request.requestAt))
     ]
     
     numberOfRows = rows.count
@@ -55,15 +57,17 @@ class RequestCardScheduleSectionModel: RequestSectionDataContaining {
 
 class RequestCardInfoSectionModel: RequestSectionDataContaining {
   var numberOfRows: Int
+  var sectionHeight: CGFloat = 10
   var sectionName: String = ""
   
   var rows: [RequestRowDataContaining]
   
   init(request: RemoteRequest) {
     rows = [
-      RequestCardTextRowModel(),
-      RequestCardTextRowModel(),
-      RequestCardTextRowModel()
+      RequestCardTextRowModel(title: "Service", data: request.providerService.service.title),
+      RequestCardTextRowModel(title: "Price", data: String(request.providerService.price)),
+      RequestCardTextRowModel(title: "Duration", data: DateManager.shared.dateToString(request.providerService.interval)),
+      RequestCardTextRowModel(title: "Description", data: request.description)
     ]
     
     numberOfRows = rows.count

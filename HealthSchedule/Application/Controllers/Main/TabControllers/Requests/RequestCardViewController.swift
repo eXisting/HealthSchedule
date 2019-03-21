@@ -9,7 +9,7 @@
 import UIKit
 
 class RequestCardViewController: UIViewController {
-  private let mainView = RequestCardView()
+  private let mainView = RequestCardTableView()
   private let model = RequestCardModel()
   
   override func loadView() {
@@ -30,6 +30,18 @@ class RequestCardViewController: UIViewController {
 
 extension RequestCardViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 55
+    return model.dataSource[section].sectionHeight
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return model.dataSource[indexPath.section][indexPath.row].rowHeight
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    return UIView()
+  }
+  
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return CGFloat.leastNormalMagnitude
   }
 }

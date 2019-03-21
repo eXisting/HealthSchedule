@@ -8,19 +8,19 @@
 
 import UIKit
 
-class RequestCardView: UITableView {
-  static let cellIdentifier = "RequestCardRow"
+class RequestCardTableView: UITableView {
+  static let cellIdentifier = "RequestCardProviderRow"
   static let sectionIdentifier = "RequestCardSection"
   
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     self.delegate = delegate
     self.dataSource = dataSource
     
+    register(RequestCardImageRow.self, forCellReuseIdentifier: RequestCardTableView.cellIdentifier)
+    register(CommonSection.self, forHeaderFooterViewReuseIdentifier: RequestCardTableView.sectionIdentifier)
+    
     alwaysBounceVertical = false
     showsVerticalScrollIndicator = true
-    
-    register(RequestListRow.self, forCellReuseIdentifier: RequestCardView.cellIdentifier)
-    register(CommonSection.self, forHeaderFooterViewReuseIdentifier: RequestCardView.sectionIdentifier)
     
     // Remove last underline in table view
     tableFooterView = UIView(frame: .zero)

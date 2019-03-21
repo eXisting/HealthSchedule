@@ -12,6 +12,16 @@ class CommonDataRequest {
   private let requestsManager = RequestManager()
   private let databaseManager = DataBaseManager.shared
   
+  func getImage(from url: String, completion: @escaping (Data) -> Void) {
+    requestsManager.getDataAsync(from: url) { (data) in
+      guard let imageData = data else {
+        return
+      }
+      
+      completion(imageData)
+    }
+  }
+  
   func getServices(for cityId: Int, _ completion: @escaping ([RemoteService]) -> Void) {
     var params = RequestManager.sessionToken.asParams()
     params[UserJsonFields.cityId.rawValue] = String(cityId)

@@ -261,7 +261,7 @@ extension DataBaseManager {
     user.birthday = remoteUser.birthday
     
     user.id = Int32(remoteUser.id)
-    user.roleId = Int16(remoteUser.role.id)
+    user.roleId = Int16(remoteUser.role!.id)
     user.cityId = Int16(remoteUser.city!.id)
   }
   
