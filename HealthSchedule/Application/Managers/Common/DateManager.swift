@@ -11,11 +11,14 @@ import UIKit
 enum DateFormatType: String {
   case date = "yyyy-MM-dd"
   case dateTime = "yyyy-MM-dd HH:mm:ss"
+  case humanDateTime = "MMM d, hh:mm"
   case time = "HH:mm"
+  case fullTime = "HH:mm:ss"
 }
 
 enum DateTimeLocale {
   case hour24
+  case posix
   case none
 }
 
@@ -49,6 +52,12 @@ class DateManager {
     return dateFormatter.string(from: date)
   }
   
+  func date2String(with format: DateFormatType, _ date: Date, _ locale: DateTimeLocale = .none) -> String {
+    dynamicFormatter.dateFormat = format.rawValue
+    dynamicFormatter.locale = getLocale(locale)
+    return dynamicFormatter.string(from: date)
+  }
+  
   func getAvailableBirthdayRange() -> (min: Date, max: Date) {
     let currentDate = Date()
     var dateComponents = DateComponents()
@@ -74,6 +83,8 @@ class DateManager {
     switch locale {
     case .hour24:
       return NSLocale(localeIdentifier: "en_GB") as Locale
+    case .posix:
+      return NSLocale(localeIdentifier: "en_US_POSIX") as Locale
     case .none:
       return NSLocale.current
     }

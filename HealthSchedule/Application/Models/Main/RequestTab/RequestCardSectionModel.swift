@@ -44,7 +44,7 @@ class RequestCardScheduleSectionModel: RequestSectionDataContaining {
   init(request: RemoteRequest) {
     rows = [
       RequestCardTextRowModel(title: "Address", data: request.providerService.address.address),
-      RequestCardTextRowModel(title: "Date", data: DateManager.shared.dateToString(request.requestAt))
+      RequestCardTextRowModel(title: "Date", data: DateManager.shared.date2String(with: .humanDateTime, request.requestAt, .hour24))
     ]
     
     numberOfRows = rows.count
@@ -66,7 +66,7 @@ class RequestCardInfoSectionModel: RequestSectionDataContaining {
     rows = [
       RequestCardTextRowModel(title: "Service", data: request.providerService.service.title),
       RequestCardTextRowModel(title: "Price", data: String(request.providerService.price)),
-      RequestCardTextRowModel(title: "Duration", data: DateManager.shared.dateToString(request.providerService.interval)),
+      RequestCardTextRowModel(title: "Duration", data:  DateManager.shared.date2String(with: .time, request.providerService.interval, .hour24)),
       RequestCardTextRowModel(title: "Description", data: request.description)
     ]
     

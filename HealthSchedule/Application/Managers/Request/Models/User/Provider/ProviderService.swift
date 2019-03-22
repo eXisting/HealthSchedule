@@ -47,7 +47,7 @@ extension RemoteProviderService: Codable {
       try container.encode(provider, forKey: .provider)
     }
     
-    let intervalDateString = DateManager.shared.dateToString(interval)
+    let intervalDateString = DateManager.shared.date2String(with: .time, interval, .hour24)
     try container.encode(intervalDateString, forKey: .interval)
   }
   
@@ -63,6 +63,6 @@ extension RemoteProviderService: Codable {
 
     let dateString = try container.decode(String.self, forKey: .interval)
     
-    interval = DateManager.shared.stringToDate(dateString)
+    interval = DateManager.shared.stringToDate(dateString, format: .fullTime, .none)
   }
 }
