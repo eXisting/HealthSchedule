@@ -33,9 +33,6 @@ protocol UserDataUpdating {
 }
 
 class UserDataRequest {
-  
-  private static var user: RemoteUser?
-  
   private let requestsManager = RequestManager()
   private let databaseManager = DataBaseManager.shared
     
@@ -89,7 +86,6 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      // TODO: Update user in core data
       self?.databaseManager.insertUpdateUsers(from: [remoteUser])
       
       // TODO: refactor this
@@ -167,7 +163,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      UserDataRequest.user = remoteUser
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
       
       if userType == .provider {
         self?.requestProviderData()
@@ -187,7 +183,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      UserDataRequest.user?.providerData?.professions = list
+      // TODO: Insert into core data
       
       completion(nil)
     }
