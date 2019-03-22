@@ -24,7 +24,9 @@ class DataBaseManager: NSObject {
   private let userImageEntity = "UserImage"
   private let cityEntity = "City"
   private let serviceEntity = "Service"
-
+  private let requestEntity = "Request"
+  private let providerServiceEntity = "ProviderService"
+  
   private lazy var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "MainCoreDataContainer")
     
@@ -92,7 +94,11 @@ class DataBaseManager: NSObject {
   lazy var resultController: NSFetchedResultsController<Request> = {
     let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
     
-    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    fetchRequest.sortDescriptors = [
+      NSSortDescriptor(key: "status", ascending: true),
+      NSSortDescriptor(key: "requestedAt", ascending: true)
+    ]
+    
     fetchRequest.returnsObjectsAsFaults = false
     //    fetchRequest.relationshipKeyPathsForPrefetching = ["department"]
     fetchRequest.fetchBatchSize = 20
@@ -160,6 +166,45 @@ class DataBaseManager: NSObject {
     do {
       let result = try persistentContainer.viewContext.fetch(fetchRequest)
       return result
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
+  func getService(by id: Int, context: NSManagedObjectContext) -> Service? {
+    let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(id))")
+    
+    do {
+      let result = try context.fetch(fetchRequest)
+      return result.first
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
+  func getProviderServices() -> [ProviderService] {
+    let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "price", ascending: true)]
+    
+    do {
+      let result = try persistentContainer.viewContext.fetch(fetchRequest)
+      return result
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
+  func getProviderService(by id: Int, context: NSManagedObjectContext) -> ProviderService? {
+    let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(id))")
+    
+    do {
+      let result = try context.fetch(fetchRequest)
+      return result.first
     } catch {
       print("Unexpected error: \(error.localizedDescription)")
       abort()
@@ -283,6 +328,70 @@ class DataBaseManager: NSObject {
     backgroundContext.processPendingChanges()
     saveContext(backgroundContext)
   }
+  
+  func insertUpdateProviderServices(from list: [RemoteProviderService]) {
+    let backgroundContext = persistentContainer.newBackgroundContext()
+    let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: backgroundContext)
+    
+    for service in list {
+      let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(service.id))")
+      
+      do {
+        let result = try backgroundContext.fetch(fetchRequest)
+        
+        // Update
+        if result.count > 0 {
+          build(providerService: result.first!, service, context: backgroundContext)
+        }
+        // Insert
+        else {
+          let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: backgroundContext) as! ProviderService
+          build(providerService: providerService, service, context: backgroundContext)
+          backgroundContext.insert(providerService)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
+    }
+    
+    backgroundContext.processPendingChanges()
+    saveContext(backgroundContext)
+  }
+  
+  func insertUpdateRequests(from requestList: [RemoteRequest]) {
+    let backgroundContext = persistentContainer.newBackgroundContext()
+    let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: backgroundContext)
+    
+    for remoteRequest in requestList {
+      let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteRequest.id))")
+      
+      do {
+        let result = try backgroundContext.fetch(fetchRequest)
+        
+        // Update
+        if result.count > 0 {
+          build(request: result.first!, remoteRequest, context: backgroundContext)
+        }
+        // Insert
+        else {
+          let request = NSManagedObject(entity: requestEntityObject!, insertInto: backgroundContext) as! Request
+          insertUpdateServices(from: [remoteRequest.providerService.service])
+          insertUpdateProviderServices(from: [remoteRequest.providerService])
+          build(request: request, remoteRequest, context: backgroundContext)
+          backgroundContext.insert(request)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
+    }
+    
+    backgroundContext.processPendingChanges()
+    saveContext(backgroundContext)
+  }
 }
 
 extension DataBaseManager {
@@ -311,5 +420,31 @@ extension DataBaseManager {
   private func build(service: Service, _ remoteService: RemoteService) {
     service.id = Int16(remoteService.id)
     service.name = remoteService.title
+  }
+  
+  private func build(request: Request, _ remote: RemoteRequest, context: NSManagedObjectContext) {
+    request.id = Int16(remote.id)
+    request.requestDescription = remote.description
+    request.requestedAt = remote.requestAt
+    request.status = Int16(remote.status.value)
+    request.userId = Int16(remote.userId)
+    request.serviceId = Int16(remote.providerService.service.id)
+    
+    request.service = getService(by: remote.providerService.service.id, context: context)
+    
+    if let rate = remote.rate {
+      request.rate = Int16(rate)
+    }
+  }
+  
+  private func build(providerService: ProviderService, _ remote: RemoteProviderService, context: NSManagedObjectContext) {
+    providerService.id = Int16(remote.id)
+    providerService.addressId = Int16(remote.address.id)
+    providerService.providerId = Int16(remote.providerId)
+    providerService.serviceId = Int16(remote.service.id)
+    providerService.price = remote.price
+    providerService.serviceDescription = remote.description
+
+    providerService.service = getService(by: remote.service.id, context: context)
   }
 }

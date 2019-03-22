@@ -99,12 +99,14 @@ extension UserDataRequest: CommonDataRequesting {
   
   func getRequests(completion: @escaping ([RemoteRequest]) -> Void) {
     requestsManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken.asParams()) {
-      (list, response) in
+      [weak self] (list, response) in
       if let error = response.error {
         print(error)
         completion([])
         return
       }
+      
+      self?.databaseManager.insertUpdateRequests(from: list)
       
       completion(list)
     }
