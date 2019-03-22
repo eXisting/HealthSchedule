@@ -44,6 +44,12 @@ class AccountModel {
   }
   
   func getCities(_ completion: @escaping ([City]) -> Void) {
+    let cachedCities = databaseManager.getCties()
+    if  !cachedCities.isEmpty {
+      completion(cachedCities)
+      return
+    }
+    
     commonDataRequestController.getCities {
       [weak self] status in
       if status == ResponseStatus.success.rawValue {

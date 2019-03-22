@@ -89,8 +89,8 @@ class DataBaseManager: NSObject {
     }
   }
   
-  lazy var resultController: NSFetchedResultsController<User> = {
-    let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+  lazy var resultController: NSFetchedResultsController<Request> = {
+    let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
     
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     fetchRequest.returnsObjectsAsFaults = false
@@ -168,37 +168,54 @@ class DataBaseManager: NSObject {
 
   // MARK: Actions
   
-  func insertUsers(from remoteUsers: [RemoteUser]) {
+  func insertUpdateUsers(from remoteUsers: [RemoteUser]) {
     let backgroundContext = persistentContainer.newBackgroundContext()
     
     let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: backgroundContext)
     
     for remoteUser in remoteUsers {
-      let user = NSManagedObject(entity: userEntityObject!, insertInto: backgroundContext) as! User
+      let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteUser.id))")
       
-      buildBasicUserFields(for: user, remoteUser)
-      
-      if let remoteImage = remoteUser.photo {
-        let photoEntity = NSEntityDescription.entity(forEntityName: userImageEntity, in: backgroundContext)
-        let userImage = NSManagedObject(entity: photoEntity!, insertInto: backgroundContext) as! UserImage
+      do {
+        let result = try backgroundContext.fetch(fetchRequest)
         
-        buildBasicFields(for: userImage, with: user.id, remoteImage)
-        
-        user.image = userImage
-        userImage.user = user
+        // Update
+        if result.count > 0 {
+          buildBasicUserFields(for: result.first!, remoteUser)
+        }
+        // Insert
+        else {
+          let user = NSManagedObject(entity: userEntityObject!, insertInto: backgroundContext) as! User
+          
+          buildBasicUserFields(for: user, remoteUser)
+          
+          if let remoteImage = remoteUser.photo {
+            let photoEntity = NSEntityDescription.entity(forEntityName: userImageEntity, in: backgroundContext)
+            let userImage = NSManagedObject(entity: photoEntity!, insertInto: backgroundContext) as! UserImage
+            
+            buildBasicFields(for: userImage, with: user.id, remoteImage)
+            
+            user.image = userImage
+            userImage.user = user
+          }
+          
+          if let remoteCity = remoteUser.city {
+            let userCityEntity = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
+            let userCity = NSManagedObject(entity: userCityEntity!, insertInto: backgroundContext) as! City
+            
+            build(city: userCity, remoteCity)
+            
+            userCity.addToUser(user)
+            user.city = userCity
+          }
+          
+          backgroundContext.insert(user)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
       }
-      
-      if let remoteCity = remoteUser.city {
-        let userCityEntity = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
-        let userCity = NSManagedObject(entity: userCityEntity!, insertInto: backgroundContext) as! City
-        
-        build(city: userCity, remoteCity)
-        
-        userCity.addToUser(user)
-        user.city = userCity
-      }
-      
-      backgroundContext.insert(user)
     }
     
     backgroundContext.processPendingChanges()
@@ -236,16 +253,31 @@ class DataBaseManager: NSObject {
     saveContext(backgroundContext)
   }
   
-  func insertServices(from serviceList: [RemoteService]) {
+  func insertUpdateServices(from serviceList: [RemoteService]) {
     let backgroundContext = persistentContainer.newBackgroundContext()
     let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: backgroundContext)
     
     for remoteService in serviceList {
-      let service = NSManagedObject(entity: serviceEntityObject!, insertInto: backgroundContext) as! Service
+      let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteService.id))")
       
-      build(service: service, remoteService)
-      
-      backgroundContext.insert(service)
+      do {
+        let result = try backgroundContext.fetch(fetchRequest)
+        
+        // Update
+        if result.count > 0 {
+          build(service: result.first!, remoteService)
+        }
+          // Insert
+        else {
+          let service = NSManagedObject(entity: serviceEntityObject!, insertInto: backgroundContext) as! Service
+          build(service: service, remoteService)
+          backgroundContext.insert(service)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
     }
     
     backgroundContext.processPendingChanges()

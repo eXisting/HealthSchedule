@@ -90,6 +90,7 @@ extension UserDataRequest: CommonDataRequesting {
       }
       
       // TODO: Update user in core data
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
       
       // TODO: refactor this
       if remoteUser.role?.name == "provider" {
@@ -137,9 +138,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      if self?.databaseManager.getCurrentUser() == nil {
-        self?.databaseManager.insertUsers(from: [remoteUser])
-      }
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
       
       // TODO: refactor this
       if remoteUser.role?.name == "provider" {
