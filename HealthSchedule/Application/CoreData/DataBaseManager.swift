@@ -60,6 +60,14 @@ class DataBaseManager: NSObject {
     return container
   }()
   
+  lazy var fetchRequestsHandler: FetchRequestsHandler = {
+    return FetchRequestsHandler(container: persistentContainer)
+  }()
+  
+  private lazy var builder = {
+    return InternalObjectsBuilder(handler: fetchRequestsHandler)
+  }()
+  
   // MARK: - Core Data Saving support
   
   func clearUntilCache() {
@@ -119,98 +127,6 @@ class DataBaseManager: NSObject {
     return controller
   }()
   
-  // MARK: Fetch requests
-  
-  func getCurrentUser() -> User? {
-    let currentUserId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.userUniqueId.rawValue)
-    if currentUserId == 0 {
-      return nil
-    }
-    
-    let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-    
-    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(currentUserId))")
-    
-    do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
-      return result.first
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
-    }
-  }
-  
-  func getCties() -> [City] {
-    guard let currentUser = getCurrentUser() else {
-      return []
-    }
-    
-    let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
-    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-    
-    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(currentUser.id))")
-    
-    do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
-      return result
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
-    }
-  }
-  
-  func getServices() -> [Service] {
-    let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
-    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-    
-    do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
-      return result
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
-    }
-  }
-  
-  func getService(by id: Int, context: NSManagedObjectContext) -> Service? {
-    let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(id))")
-    
-    do {
-      let result = try context.fetch(fetchRequest)
-      return result.first
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
-    }
-  }
-  
-  func getProviderServices() -> [ProviderService] {
-    let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
-    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "price", ascending: true)]
-    
-    do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
-      return result
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
-    }
-  }
-  
-  func getProviderService(by id: Int, context: NSManagedObjectContext) -> ProviderService? {
-    let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(id))")
-    
-    do {
-      let result = try context.fetch(fetchRequest)
-      return result.first
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
-    }
-  }
-
   // MARK: Actions
   
   func insertUpdateUsers(from remoteUsers: [RemoteUser]) {
@@ -227,19 +143,19 @@ class DataBaseManager: NSObject {
         
         // Update
         if result.count > 0 {
-          buildBasicUserFields(for: result.first!, remoteUser)
+          builder.buildBasicUserFields(for: result.first!, remoteUser)
         }
         // Insert
         else {
           let user = NSManagedObject(entity: userEntityObject!, insertInto: backgroundContext) as! User
           
-          buildBasicUserFields(for: user, remoteUser)
+          builder.buildBasicUserFields(for: user, remoteUser)
           
           if let remoteImage = remoteUser.photo {
             let photoEntity = NSEntityDescription.entity(forEntityName: userImageEntity, in: backgroundContext)
             let userImage = NSManagedObject(entity: photoEntity!, insertInto: backgroundContext) as! UserImage
             
-            buildBasicFields(for: userImage, with: user.id, remoteImage)
+            builder.buildBasicFields(for: userImage, with: user.id, remoteImage)
             
             user.image = userImage
             userImage.user = user
@@ -249,7 +165,7 @@ class DataBaseManager: NSObject {
             let userCityEntity = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
             let userCity = NSManagedObject(entity: userCityEntity!, insertInto: backgroundContext) as! City
             
-            build(city: userCity, remoteCity)
+            builder.build(city: userCity, remoteCity)
             
             userCity.addToUser(user)
             user.city = userCity
@@ -285,7 +201,7 @@ class DataBaseManager: NSObject {
         // Insert
         else {
           let city = NSManagedObject(entity: cityEntityObject!, insertInto: backgroundContext) as! City
-          build(city: city, remoteCity)
+          builder.build(city: city, remoteCity)
           backgroundContext.insert(city)
         }
       } catch {
@@ -311,12 +227,12 @@ class DataBaseManager: NSObject {
         
         // Update
         if result.count > 0 {
-          build(service: result.first!, remoteService)
+          builder.build(service: result.first!, remoteService)
         }
           // Insert
         else {
           let service = NSManagedObject(entity: serviceEntityObject!, insertInto: backgroundContext) as! Service
-          build(service: service, remoteService)
+          builder.build(service: service, remoteService)
           backgroundContext.insert(service)
         }
       } catch {
@@ -342,12 +258,12 @@ class DataBaseManager: NSObject {
         
         // Update
         if result.count > 0 {
-          build(providerService: result.first!, service, context: backgroundContext)
+          builder.build(providerService: result.first!, service, context: backgroundContext)
         }
         // Insert
         else {
           let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: backgroundContext) as! ProviderService
-          build(providerService: providerService, service, context: backgroundContext)
+          builder.build(providerService: providerService, service, context: backgroundContext)
           backgroundContext.insert(providerService)
         }
       } catch {
@@ -374,14 +290,14 @@ class DataBaseManager: NSObject {
         
         // Update
         if result.count > 0 {
-          build(request: result.first!, remoteRequest, context: backgroundContext)
+          builder.build(request: result.first!, remoteRequest, context: backgroundContext)
         }
         // Insert
         else {
           let request = NSManagedObject(entity: requestEntityObject!, insertInto: backgroundContext) as! Request
           insertUpdateServices(from: [remoteRequest.providerService.service])
           insertUpdateProviderServices(from: [remoteRequest.providerService])
-          build(request: request, remoteRequest, context: backgroundContext)
+          builder.build(request: request, remoteRequest, context: backgroundContext)
           backgroundContext.insert(request)
         }
       } catch {
@@ -392,60 +308,5 @@ class DataBaseManager: NSObject {
     
     backgroundContext.processPendingChanges()
     saveContext(backgroundContext)
-  }
-}
-
-extension DataBaseManager {
-  private func buildBasicUserFields(for user: User, _ remoteUser: RemoteUser) {
-    user.name = "\(remoteUser.firstName) \(remoteUser.lastName)"
-    user.email = remoteUser.email
-    user.phone = remoteUser.phone
-    user.birthday = remoteUser.birthday
-    
-    user.id = Int32(remoteUser.id)
-    user.roleId = Int16(remoteUser.role!.id)
-    user.cityId = Int16(remoteUser.city!.id)
-  }
-  
-  private func buildBasicFields(for image: UserImage, with userId: Int32, _ remoteImage: ProfileImage) {
-    image.id = Int32(remoteImage.id)
-    image.url = remoteImage.url
-    image.userId = userId
-  }
-  
-  private func build(city: City, _ remoteCity: RemoteCity) {
-    city.id = Int16(remoteCity.id)
-    city.name = remoteCity.title
-  }
-  
-  private func build(service: Service, _ remoteService: RemoteService) {
-    service.id = Int16(remoteService.id)
-    service.name = remoteService.title
-  }
-  
-  private func build(request: Request, _ remote: RemoteRequest, context: NSManagedObjectContext) {
-    request.id = Int16(remote.id)
-    request.requestDescription = remote.description
-    request.requestedAt = remote.requestAt
-    request.status = Int16(remote.status.value)
-    request.userId = Int16(remote.userId)
-    request.serviceId = Int16(remote.providerService.service.id)
-    
-    request.service = getService(by: remote.providerService.service.id, context: context)
-    
-    if let rate = remote.rate {
-      request.rate = Int16(rate)
-    }
-  }
-  
-  private func build(providerService: ProviderService, _ remote: RemoteProviderService, context: NSManagedObjectContext) {
-    providerService.id = Int16(remote.id)
-    providerService.addressId = Int16(remote.address.id)
-    providerService.providerId = Int16(remote.providerId)
-    providerService.serviceId = Int16(remote.service.id)
-    providerService.price = remote.price
-    providerService.serviceDescription = remote.description
-
-    providerService.service = getService(by: remote.service.id, context: context)
   }
 }

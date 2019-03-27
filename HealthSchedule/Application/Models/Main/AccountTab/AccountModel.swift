@@ -17,7 +17,7 @@ class AccountModel {
   var presentedIdetifier: IndexPath?
   
   init() {
-    guard let user = databaseManager.getCurrentUser() else {
+    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser() else {
       print("AccountModel failed!")
       return
     }
@@ -33,7 +33,7 @@ class AccountModel {
         return
       }
       
-      guard let user = self?.databaseManager.getCurrentUser() else {
+      guard let user = self?.databaseManager.fetchRequestsHandler.getCurrentUser() else {
         completion(ResponseStatus.applicationError.rawValue)
         return
       }
@@ -44,7 +44,7 @@ class AccountModel {
   }
   
   func getCities(_ completion: @escaping ([City]) -> Void) {
-    let cachedCities = databaseManager.getCties()
+    let cachedCities = databaseManager.fetchRequestsHandler.getCties()
     if  !cachedCities.isEmpty {
       completion(cachedCities)
       return
@@ -53,7 +53,7 @@ class AccountModel {
     commonDataRequestController.getCities {
       [weak self] status in
       if status == ResponseStatus.success.rawValue {
-        completion(self!.databaseManager.getCties())
+        completion(self!.databaseManager.fetchRequestsHandler.getCties())
       }
     }
   }

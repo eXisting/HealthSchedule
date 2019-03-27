@@ -32,6 +32,8 @@
 		ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */; };
 		ED231B4B222E7A2A00A80FC9 /* RequestListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4A222E7A2A00A80FC9 /* RequestListTableView.swift */; };
 		ED231B4D222E850300A80FC9 /* RequestListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED231B4C222E850300A80FC9 /* RequestListRow.swift */; };
+		ED2AC3F1224B8B2100AB6D9F /* InternalObjectsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */; };
+		ED2AC3F3224B8BD600AB6D9F /* FetchRequestsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
 		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
 		ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpRootViewController.swift */; };
@@ -132,6 +134,8 @@
 		ED231B3A222D7C2600A80FC9 /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		ED231B4A222E7A2A00A80FC9 /* RequestListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListTableView.swift; sourceTree = "<group>"; };
 		ED231B4C222E850300A80FC9 /* RequestListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListRow.swift; sourceTree = "<group>"; };
+		ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalObjectsBuilder.swift; sourceTree = "<group>"; };
+		ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestsHandler.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		ED330C6B21F08536001019FC /* SignUpRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootViewController.swift; sourceTree = "<group>"; };
@@ -404,6 +408,15 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		ED2AC3EF224B8AFA00AB6D9F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */,
+				ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		ED330C6121EF878C001019FC /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +641,7 @@
 		EDCFB44E222806DE00A6B56F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				ED2AC3EF224B8AFA00AB6D9F /* Helpers */,
 				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
 				EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */,
 			);
@@ -900,6 +914,7 @@
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
 				ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */,
 				ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */,
+				ED2AC3F1224B8B2100AB6D9F /* InternalObjectsBuilder.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
 				DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */,
 				EDD2A84922391E8E00B52E68 /* Service.swift in Sources */,
@@ -950,6 +965,7 @@
 				ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */,
 				ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
+				ED2AC3F3224B8BD600AB6D9F /* FetchRequestsHandler.swift in Sources */,
 				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
 				EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
