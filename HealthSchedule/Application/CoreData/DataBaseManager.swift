@@ -363,6 +363,7 @@ class DataBaseManager: NSObject {
   func insertUpdateRequests(from requestList: [RemoteRequest]) {
     let backgroundContext = persistentContainer.newBackgroundContext()
     let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: backgroundContext)
+    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
     
     for remoteRequest in requestList {
       let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
