@@ -14,6 +14,11 @@ class CommonSection: UITableViewHeaderFooterView {
   func setup(title: String, backgroundColor: UIColor) {
     contentView.backgroundColor = backgroundColor
     textLabel?.text = title
-    textLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+    
+    if #available(iOS 11.0, *) {
+      textLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+    } else {
+      // Fallback on earlier versions
+    }
   }
 }

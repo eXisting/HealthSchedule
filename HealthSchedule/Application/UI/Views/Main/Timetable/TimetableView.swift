@@ -47,7 +47,7 @@ class TimetableView: UIView {
     startPicker.translatesAutoresizingMaskIntoConstraints = false
     endPicker.translatesAutoresizingMaskIntoConstraints = false
 
-    NSLayoutConstraint(item: calendar, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
+    NSLayoutConstraint(item: calendar, attribute: .top, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
     NSLayoutConstraint(item: calendar, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: calendar, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.4, constant: 0).isActive = true
     NSLayoutConstraint(item: calendar, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.95, constant: 0).isActive = true
@@ -64,12 +64,12 @@ class TimetableView: UIView {
     
     NSLayoutConstraint(item: startPicker, attribute: .top, relatedBy: .equal, toItem: startLabel, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: startPicker, attribute: .left, relatedBy: .equal, toItem: startLabel, attribute: .left, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: startPicker, attribute: .bottom, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
+    NSLayoutConstraint(item: startPicker, attribute: .bottom, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
     NSLayoutConstraint(item: startPicker, attribute: .width, relatedBy: .equal, toItem: startLabel, attribute: .width, multiplier: 1, constant: 0).isActive = true
     
     NSLayoutConstraint(item: endPicker, attribute: .top, relatedBy: .equal, toItem: endLabel, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: endPicker, attribute: .right, relatedBy: .equal, toItem: endLabel, attribute: .right, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: endPicker, attribute: .bottom, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
+    NSLayoutConstraint(item: endPicker, attribute: .bottom, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -16).isActive = true
     NSLayoutConstraint(item: endPicker, attribute: .width, relatedBy: .equal, toItem: endLabel, attribute: .width, multiplier: 1, constant: 0).isActive = true
   }
   
