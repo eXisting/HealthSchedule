@@ -8,21 +8,46 @@
 
 import UIKit
 
-class RequestCardModel: NSObject, UITableViewDataSource {
+class RequestCardModel {
   private let commmonDataRequestController = CommonDataRequest()
-  private var data: [RequestSectionDataContaining] = []
+  let dataSource = RequestCardDataSource()
   
-  subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
-    return data[forSectionIndex]
+  init() {
+    dataSource.imageProcessing = loadImage
   }
   
-  func procceedRequest(_ request: RemoteRequest) {
-    data = [
+  subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
+    return dataSource.data[forSectionIndex]
+  }
+  
+  func procceedRequest(_ request: Request) {
+    dataSource.data = [
       RequestCardProviderSectionModel(request: request),
       RequestCardScheduleSectionModel(request: request),
       RequestCardInfoSectionModel(request: request)
     ]
   }
+  
+  private func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
+    guard let url = url else {
+      return
+    }
+    
+    commmonDataRequestController.getImage(from: url) { data in
+      guard let image = UIImage(data: data) else {
+        return
+      }
+      
+      completion(image)
+    }
+  }
+}
+
+class RequestCardDataSource: NSObject, UITableViewDataSource {
+  fileprivate typealias ProcessingFunction = (String?, @escaping (UIImage) -> Void) -> Void
+  
+  fileprivate var data: [RequestSectionDataContaining] = []
+  fileprivate var imageProcessing: ProcessingFunction!
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return data.count
@@ -38,8 +63,8 @@ class RequestCardModel: NSObject, UITableViewDataSource {
     if let providerRowData = rowData as? RequestCardProviderRowModel {
       let cell = tableView.dequeueReusableCell(withIdentifier: RequestCardTableView.cellIdentifier, for: indexPath) as! RequestCardImageRow
       cell.populateCell(name: providerRowData.data)
-      
-      loadImage(by: providerRowData.imageUrl) { image in
+
+      imageProcessing(providerRowData.imageUrl) { image in
         DispatchQueue.main.async {
           cell.photoImage = image
         }
@@ -52,19 +77,5 @@ class RequestCardModel: NSObject, UITableViewDataSource {
     cell.textLabel?.text = "\(rowData.title): \(rowData.data)"
     cell.selectionStyle = .none
     return cell
-  }
-  
-  private func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
-    guard let url = url else {
-      return
-    }
-    
-    commmonDataRequestController.getImage(from: url) { data in
-      guard let image = UIImage(data: data) else {
-        return
-      }
-      
-      completion(image)
-    }
   }
 }

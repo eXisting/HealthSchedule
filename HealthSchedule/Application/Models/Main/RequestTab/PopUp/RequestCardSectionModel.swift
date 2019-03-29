@@ -21,7 +21,7 @@ class RequestCardProviderSectionModel: RequestSectionDataContaining {
   
   var rows: [RequestRowDataContaining]
   
-  init(request: RemoteRequest) {
+  init(request: Request) {
     rows = [
       RequestCardProviderRowModel(request: request)
     ]
@@ -41,10 +41,10 @@ class RequestCardScheduleSectionModel: RequestSectionDataContaining {
   
   var rows: [RequestRowDataContaining]
   
-  init(request: RemoteRequest) {
+  init(request: Request) {
     rows = [
-      RequestCardTextRowModel(title: "Address", data: request.providerService.address.address),
-      RequestCardTextRowModel(title: "Date", data: DateManager.shared.date2String(with: .humanDateTime, request.requestAt, .hour24))
+      RequestCardTextRowModel(title: "Address", data: request.providerService?.address?.address ?? "Address unknown"),
+      RequestCardTextRowModel(title: "Date", data: DateManager.shared.date2String(with: .humanDateTime, request.requestedAt!, .hour24))
     ]
     
     numberOfRows = rows.count
@@ -62,12 +62,12 @@ class RequestCardInfoSectionModel: RequestSectionDataContaining {
   
   var rows: [RequestRowDataContaining]
   
-  init(request: RemoteRequest) {
+  init(request: Request) {
     rows = [
-      RequestCardTextRowModel(title: "Service", data: request.providerService.service.title),
-      RequestCardTextRowModel(title: "Price", data: String(request.providerService.price)),
-      RequestCardTextRowModel(title: "Duration", data:  DateManager.shared.date2String(with: .time, request.providerService.interval, .hour24)),
-      RequestCardTextRowModel(title: "Description", data: request.description)
+      RequestCardTextRowModel(title: "Service", data: request.providerService?.service?.name ?? "Title unknown"),
+      RequestCardTextRowModel(title: "Price", data: String(request.providerService?.price ?? 0.0)),
+      RequestCardTextRowModel(title: "Duration", data:  DateManager.shared.date2String(with: .time, request.providerService?.duration ?? Date(), .hour24)),
+      RequestCardTextRowModel(title: "Description", data: request.requestDescription ?? "No description")
     ]
     
     numberOfRows = rows.count

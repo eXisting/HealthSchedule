@@ -19,11 +19,11 @@ class RequestCardViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mainView.setup(delegate: self, dataSource: model)
+    mainView.setup(delegate: self, dataSource: model.dataSource)
   }
   
-  func set(_ request: RemoteRequest) {
-    title = request.providerService.service.title
+  func set(_ request: Request) {
+    title = request.providerService?.service?.name
     model.procceedRequest(request)
   }
 }

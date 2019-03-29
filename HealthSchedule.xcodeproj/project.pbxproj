@@ -417,6 +417,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		ED2AC3F8224E39E000AB6D9F /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				ED98CE3E2242861400B95696 /* RequestCardModel.swift */,
+				ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */,
+				ED98CE422242891100B95696 /* RequestCardRowModel.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		ED330C6121EF878C001019FC /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,10 +608,8 @@
 		ED98CE3D224285E700B95696 /* RequestTab */ = {
 			isa = PBXGroup;
 			children = (
+				ED2AC3F8224E39E000AB6D9F /* PopUp */,
 				EDD2A82C22367C2800B52E68 /* RequestsModel.swift */,
-				ED98CE3E2242861400B95696 /* RequestCardModel.swift */,
-				ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */,
-				ED98CE422242891100B95696 /* RequestCardRowModel.swift */,
 			);
 			path = RequestTab;
 			sourceTree = "<group>";

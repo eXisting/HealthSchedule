@@ -8,12 +8,12 @@
 
 import UIKit
 
-class RequestsModel: NSObject {
+class RequestsModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
-  private var data: [Request] = []
-    
+  let dataSource = RequestsDataSource()
+  
   subscript(forRowIndex: Int) -> Request {
-    return data[forRowIndex]
+    return dataSource.data[forRowIndex]
   }
   
   func loadRequests(_ callback: @escaping (String) -> Void) {
@@ -24,7 +24,7 @@ class RequestsModel: NSObject {
         return
       }
       
-      self?.data = requests
+      self?.dataSource.data = requests
       
       callback(response)
     }
@@ -33,13 +33,15 @@ class RequestsModel: NSObject {
   func getStoredRequests(_ callback: @escaping (String) -> Void) {
     guard let requests = DataBaseManager.shared.resultController.fetchedObjects else { return }
     
-    data = requests
+    dataSource.data = requests
     
     callback(ResponseStatus.success.rawValue)
   }
 }
 
-extension RequestsModel: UITableViewDataSource {
+class RequestsDataSource: NSObject, UITableViewDataSource {
+  fileprivate var data: [Request] = []
+  
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }

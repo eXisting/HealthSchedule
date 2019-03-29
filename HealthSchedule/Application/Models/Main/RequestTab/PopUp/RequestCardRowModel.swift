@@ -22,6 +22,10 @@ class RequestCardTextRowModel: RequestRowDataContaining {
   init(title: String, data: String) {
     self.title = title
     self.data = data
+    
+//    if data.count > 50 {
+//      rowHeight = 300
+//    }
   }
 }
 
@@ -32,9 +36,9 @@ class RequestCardProviderRowModel: RequestRowDataContaining {
   var imageUrl: String?
   var rowHeight: CGFloat = 90
   
-  init(request: RemoteRequest) {
-    data = request.providerService.provider?.getFullName() ?? "Unknown name"
-    additionalData = request.providerService.provider?.phone
+  init(request: Request) {
+    data = "Unknown name"
+    additionalData = "Unknown phone" //request.providerService.provider?.phone
     imageUrl = "https://www.icpdas-usa.com/icons/login-icon.png" // TODO: rewrite request cause it does not send photo //request.providerService.provider?.photo?.url
   }
 }
