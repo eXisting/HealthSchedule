@@ -15,8 +15,11 @@ class AccountModel {
   
   let dataSource = AccountDataSource()
   var presentedIdetifier: IndexPath?
+  var accountHandlingDelegate: AccountHandlableDelegate
   
-  init() {
+  init(handlingDelegate: AccountHandlableDelegate) {
+    accountHandlingDelegate = handlingDelegate
+
     guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
       print("AccountModel failed!")
       return
@@ -38,6 +41,9 @@ class AccountModel {
         return
       }
       
+      // urlsession Error code 1002
+      //self?.initializeUserImage(from: user.image?.url)
+      
       self?.dataSource.refresheData(from: user)
       completion(ResponseStatus.success.rawValue)
     }
@@ -56,6 +62,12 @@ class AccountModel {
         completion(self!.databaseManager.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext))
       }
     }
+  }
+  
+  func initializeUserImage(from url: String?) {
+    guard let url = url else { return }
+    
+    commonDataRequestController.getImage(from: url, completion: accountHandlingDelegate.loadUserPhoto)
   }
   
   func changeText(by indexPath: IndexPath, with text: String?) {

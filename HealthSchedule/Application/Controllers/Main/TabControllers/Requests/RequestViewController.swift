@@ -78,7 +78,7 @@ extension RequestViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let controller = RequestCardViewController()
-    controller.set(model[indexPath.row])
+    controller.set(DataBaseManager.shared.resultController.object(at: indexPath))
     customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }
@@ -98,46 +98,48 @@ extension RequestViewController: ErrorShowable {
 extension RequestViewController: NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     mainView.beginUpdates()
-    print("Begin update")
   }
   
-  func controller(
-    _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-    didChange sectionInfo: NSFetchedResultsSectionInfo,
-    atSectionIndex sectionIndex: Int,
-    for type: NSFetchedResultsChangeType) {
-//    switch type {
-//      case .insert:
-//        mainView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-//      case .delete:
-//        mainView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-//      case .move:
-//        break
-//      case .update:
-//        break
-//    }
-  }
-  
-  func controller(
-    _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-    didChange anObject: Any,
-    at indexPath: IndexPath?,
-    for type: NSFetchedResultsChangeType,
-    newIndexPath: IndexPath?) {
-//    switch type {
-//      case .insert:
-//        mainView.insertRows(at: [newIndexPath!], with: .fade)
-//      case .delete:
-//        mainView.deleteRows(at: [indexPath!], with: .fade)
-//      case .update:
-//        mainView.reloadRows(at: [indexPath!], with: .fade)
-//      case .move:
-//        mainView.moveRow(at: indexPath!, to: newIndexPath!)
-//    }
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    switch (type) {
+    case .insert:
+      if let indexPath = newIndexPath {
+        mainView.insertRows(at: [indexPath], with: .fade)
+      }
+      break;
+    case .delete:
+      if let indexPath = indexPath {
+        mainView.deleteRows(at: [indexPath], with: .fade)
+      }
+      break;
+    case .update:
+      if let indexPath = indexPath {
+        guard let cell = mainView.cellForRow(at: indexPath) as? RequestListRow,
+          let requestObject = anObject as? Request else { return }
+        
+        cell.populateCell(
+          serviceName: requestObject.service?.name ?? "Unkown name",
+          price: String(requestObject.providerService?.price ?? 0.0),
+          visitedDate: DateManager.shared.dateToString(requestObject.requestedAt),
+          status: String(requestObject.status)
+        )
+      }
+      break;
+      
+    case .move:
+      if let indexPath = indexPath {
+        mainView.deleteRows(at: [indexPath], with: .fade)
+      }
+      
+      if let newIndexPath = newIndexPath {
+        mainView.insertRows(at: [newIndexPath], with: .fade)
+      }
+      break;
+      
+    }
   }
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     mainView.endUpdates()
-    print("Ended update")
   }
 }

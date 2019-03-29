@@ -12,13 +12,14 @@ import Presentr
 protocol AccountHandlableDelegate {
   func logout()
   func save()
+  func loadUserPhoto(imageData: Data)
 }
 
 class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
   private let mainView = ProfileView()
-  private let model = AccountModel()
+  private var model: AccountModel!
   
   private var customNavigationItem: AccountNavigationItem?
   
@@ -52,6 +53,8 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    model = AccountModel(handlingDelegate: self)
+    
     model.dataSource.textFieldDelegate = self
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
@@ -98,6 +101,14 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
 }
 
 extension AccountViewController: AccountHandlableDelegate {
+  func loadUserPhoto(imageData: Data) {
+    guard let image = UIImage(data: imageData) else { return }
+    
+    DispatchQueue.main.async {
+      self.mainView.setImage(image)
+    }
+  }
+  
   func logout() {
     NotificationCenter.default.post(name: .LogoutCalled, object: nil)
   }

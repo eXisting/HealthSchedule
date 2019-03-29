@@ -38,6 +38,23 @@ class FetchRequestsHandler {
     }
   }
   
+  func getUser(byId id: Int, context: NSManagedObjectContext? = nil) -> User? {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+    
+    fetchRequest.predicate = NSPredicate(format: "id == \(id)")
+    fetchRequest.fetchLimit = 1
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      return result.first
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
   func getCties(context: NSManagedObjectContext? = nil) -> [City] {
     let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     

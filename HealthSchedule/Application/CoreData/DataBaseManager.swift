@@ -116,7 +116,7 @@ class DataBaseManager: NSObject {
     ]
     
     fetchRequest.returnsObjectsAsFaults = false
-//    fetchRequest.relationshipKeyPathsForPrefetching = ["providerService", "service"]
+    fetchRequest.relationshipKeyPathsForPrefetching = ["providerService", "service"]
     fetchRequest.fetchBatchSize = 20
     
     let controller = NSFetchedResultsController(
@@ -139,7 +139,7 @@ class DataBaseManager: NSObject {
   
   // MARK: Actions
   
-  func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
+  func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: workingContext)
@@ -158,6 +158,9 @@ class DataBaseManager: NSObject {
         }
         // Insert
         else {
+          
+          // Required relations
+          
           if let remoteCity = remoteUser.city {
             insertUpdateCities(from: [remoteCity], context: workingContext)
           }
@@ -165,16 +168,10 @@ class DataBaseManager: NSObject {
           let user = NSManagedObject(entity: userEntityObject!, insertInto: workingContext) as! User
           builder.build(user: user, remoteUser, context: workingContext)
           
-          // TODO: refactor image
+          // Optional relations
           
           if let remoteImage = remoteUser.photo {
-            let photoEntity = NSEntityDescription.entity(forEntityName: userImageEntity, in: workingContext)
-            let userImage = NSManagedObject(entity: photoEntity!, insertInto: workingContext) as! UserImage
-            
-            builder.build(image: userImage, with: user.id, remoteImage)
-            
-            user.image = userImage
-            userImage.user = user
+            insertUpdateUserImage(from: remoteImage, context: workingContext)
           }
         }
       } catch {
@@ -183,13 +180,41 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if shouldSave {
-      workingContext.processPendingChanges()
-      saveContext(workingContext)
-    }
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
   }
   
-  func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
+  func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext? = nil) {
+    let workingContext = provideWorkingContext(basedOn: context)
+    
+    let profileImageEntityObject = NSEntityDescription.entity(forEntityName: userImageEntity, in: workingContext)
+    
+      let fetchRequest: NSFetchRequest<UserImage> = UserImage.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(photo.id))")
+      fetchRequest.fetchLimit = 1
+      
+      do {
+        let result = try workingContext.fetch(fetchRequest)
+        
+        // Update
+        if result.count > 0 {
+          builder.build(image: result.first!, with: Int(result.first!.userId), photo, context: workingContext)
+        }
+          // Insert
+        else {
+          let userImage = NSManagedObject(entity: profileImageEntityObject!, insertInto: workingContext) as! UserImage
+          builder.build(image: userImage, with: photo.userId, photo, context: workingContext)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
+    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+  }
+  
+  func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: workingContext)
@@ -217,13 +242,11 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if shouldSave {
-      workingContext.processPendingChanges()
-      saveContext(workingContext)
-    }
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
   }
   
-  func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
+  func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext? = nil) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: workingContext)
@@ -251,13 +274,11 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if shouldSave {
-      workingContext.processPendingChanges()
-      saveContext(workingContext)
-    }
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
   }
   
-  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
+  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: workingContext)
@@ -285,13 +306,11 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if shouldSave {
-      workingContext.processPendingChanges()
-      saveContext(workingContext)
-    }
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
   }
   
-  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
+  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: workingContext)
@@ -310,10 +329,10 @@ class DataBaseManager: NSObject {
         }
         // Insert
         else {
-          let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
-          insertUpdateServices(from: [remoteRequest.providerService.service], context: workingContext, shouldSave: false)
-          insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext, shouldSave: false)
+          insertUpdateServices(from: [remoteRequest.providerService.service], context: workingContext)
+          insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
           
+          let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
           builder.build(request: request, remoteRequest, context: workingContext)
         }
       } catch {
@@ -322,10 +341,8 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if shouldSave {
-      workingContext.processPendingChanges()
-      saveContext(workingContext)
-    }
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
   }
 }
 

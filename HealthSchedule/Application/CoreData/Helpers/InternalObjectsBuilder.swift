@@ -28,12 +28,17 @@ class InternalObjectsBuilder {
     let city = fetchHandler.getCtiy(byId: Int(user.cityId), context: context)
     city?.addToUser(user)
     user.city = city
+    print(user)
   }
   
-  func build(image: UserImage, with userId: Int32, _ remoteImage: ProfileImage) {
+  func build(image: UserImage, with userId: Int, _ remoteImage: ProfileImage, context: NSManagedObjectContext) {
     image.id = Int32(remoteImage.id)
     image.url = remoteImage.url
-    image.userId = userId
+    image.userId = Int32(userId)
+    
+    let user = fetchHandler.getUser(byId: userId, context: context)
+    user?.image = image
+    image.user = user
   }
   
   func build(city: City, _ remoteCity: RemoteCity) {
@@ -60,12 +65,15 @@ class InternalObjectsBuilder {
     
     let providerService = fetchHandler.getProviderService(by: remote.providerService.id, context: context)
     let generalService = fetchHandler.getService(by: remote.providerService.service.id, context: context)
+    let attachedUser = fetchHandler.getUser(byId: remote.userId, context: context)
 
     request.providerService = providerService
     request.service = generalService
-    
+    request.user = attachedUser
+
     providerService?.addToRequest(request)
     generalService?.addToRequest(request)
+    attachedUser?.addToRequest(request)
   }
   
   func build(providerService: ProviderService, _ remote: RemoteProviderService, context: NSManagedObjectContext) {
@@ -77,9 +85,12 @@ class InternalObjectsBuilder {
     providerService.serviceDescription = remote.description
     
     let generalService = fetchHandler.getService(by: remote.service.id, context: context)
+    let provider = fetchHandler.getUser(byId: Int(providerService.providerId))
     
     providerService.service = generalService
+    providerService.provider = provider
     
     generalService?.addToProviderService(providerService)
+    provider?.addToProviderService(providerService)
   }
 }

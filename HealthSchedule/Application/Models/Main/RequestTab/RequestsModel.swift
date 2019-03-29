@@ -12,47 +12,28 @@ class RequestsModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   let dataSource = RequestsDataSource()
   
-  subscript(forRowIndex: Int) -> Request {
-    return dataSource.data[forRowIndex]
-  }
-  
   func loadRequests(_ callback: @escaping (String) -> Void) {
-    userRequestController.getRequests {
-      [weak self] response in
-      guard let requests = DataBaseManager.shared.resultController.fetchedObjects else {
-        callback(ResponseStatus.applicationError.rawValue)
-        return
-      }
-      
-      self?.dataSource.data = requests
-      
-      callback(response)
-    }
+    userRequestController.getRequests(completion: callback)
   }
   
   func getStoredRequests(_ callback: @escaping (String) -> Void) {
-    guard let requests = DataBaseManager.shared.resultController.fetchedObjects else { return }
-    
-    dataSource.data = requests
-    
+    guard let _ = DataBaseManager.shared.resultController.fetchedObjects else { return }
     callback(ResponseStatus.success.rawValue)
   }
 }
 
 class RequestsDataSource: NSObject, UITableViewDataSource {
-  fileprivate var data: [Request] = []
-  
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
+    return DataBaseManager.shared.resultController.sections?.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return data.count
+    return DataBaseManager.shared.resultController.fetchedObjects?.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RequestListTableView.cellIdentifier, for: indexPath) as! RequestListRow
-    let request = data[indexPath.row]
+    let request = DataBaseManager.shared.resultController.object(at: indexPath)
     
     cell.populateCell(
       serviceName: request.service?.name ?? "Unkown name",

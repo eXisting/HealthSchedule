@@ -105,7 +105,7 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      self?.databaseManager.insertUpdateRequests(from: list, context: DataBaseManager.shared.mainContext)
+      self?.databaseManager.insertUpdateRequests(from: list)
       
       completion(ResponseStatus.success.rawValue)
     }
