@@ -11,6 +11,7 @@
 		DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8519372208CC0E00CCF452 /* ViewLines.swift */; };
 		DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8519392208EECB00CCF452 /* StackViewBackground.swift */; };
 		DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */; };
+		DB93D97E224EB31E00A541BD /* CoreDataBaseRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB93D97D224EB31E00A541BD /* CoreDataBaseRequests.swift */; };
 		DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBADDE5521F4CD9200C3EA2F /* ProviderSignUpViewController.swift */; };
 		DBE4886F223AD2560096F7D7 /* AccountNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4886E223AD2560096F7D7 /* AccountNavigationItem.swift */; };
 		ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A4A21E77D12006A8523 /* AppDelegate.swift */; };
@@ -110,6 +111,7 @@
 		DB8519372208CC0E00CCF452 /* ViewLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLines.swift; sourceTree = "<group>"; };
 		DB8519392208EECB00CCF452 /* StackViewBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewBackground.swift; sourceTree = "<group>"; };
 		DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewColorChange.swift; sourceTree = "<group>"; };
+		DB93D97D224EB31E00A541BD /* CoreDataBaseRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBaseRequests.swift; sourceTree = "<group>"; };
 		DBADDE5521F4CD9200C3EA2F /* ProviderSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSignUpViewController.swift; sourceTree = "<group>"; };
 		DBE4886E223AD2560096F7D7 /* AccountNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationItem.swift; sourceTree = "<group>"; };
 		ED089A4721E77D12006A8523 /* HealthSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -413,6 +415,7 @@
 			children = (
 				ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */,
 				ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */,
+				DB93D97D224EB31E00A541BD /* CoreDataBaseRequests.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1006,6 +1009,7 @@
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,
 				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
+				DB93D97E224EB31E00A541BD /* CoreDataBaseRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

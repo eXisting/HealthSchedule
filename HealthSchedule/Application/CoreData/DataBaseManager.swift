@@ -9,11 +9,6 @@
 import Foundation
 import CoreData
 
-protocol ContextsProviding: class {
-  var mainContext: NSManagedObjectContext { get }
-  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext
-}
-
 class DataBaseManager: NSObject {
   
   // MARK: Singleton
@@ -23,14 +18,11 @@ class DataBaseManager: NSObject {
   
   // MARK: Fields
   
-  private let modelName = "MainCoreDataContainer"
+  var fetchRequestsHandler: FetchRequestsHandler {
+    return executer.fetchRequestsHandler
+  }
   
-  private let userEntity = "User"
-  private let userImageEntity = "UserImage"
-  private let cityEntity = "City"
-  private let serviceEntity = "Service"
-  private let requestEntity = "Request"
-  private let providerServiceEntity = "ProviderService"
+  private let modelName = "MainCoreDataContainer"
   
   private lazy var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: modelName)
@@ -64,12 +56,8 @@ class DataBaseManager: NSObject {
     return container
   }()
   
-  lazy var fetchRequestsHandler: FetchRequestsHandler = {
-    return FetchRequestsHandler(provider: self)
-  }()
-  
-  private lazy var builder = {
-    return InternalObjectsBuilder(handler: fetchRequestsHandler)
+  private lazy var executer: CoreDataRequestsBase = {
+    return CoreDataRequestsBase(provider: self)
   }()
   
   // MARK: - Core Data Saving support
@@ -79,28 +67,7 @@ class DataBaseManager: NSObject {
   }
   
   func saveData() {
-    saveContext(persistentContainer.viewContext)
-  }
-  
-  private func saveContext(_ context: NSManagedObjectContext) {
-    if !context.hasChanges {
-      return
-    }
-    
-    let strongContext = context
-    strongContext.performAndWait {
-      do {
-        try strongContext.save()
-      } catch {
-        print(error.localizedDescription)
-      }
-      
-      if let parentContext = strongContext.parent {
-        parentContext.performAndWait {
-          saveContext(parentContext)
-        }
-      }
-    }
+    executer.saveContext(persistentContainer.viewContext)
   }
   
   // MARK: - Fetch result controller stack
@@ -140,216 +107,33 @@ class DataBaseManager: NSObject {
   // MARK: Actions
   
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {
-    let workingContext = provideWorkingContext(basedOn: context)
-    
-    let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: workingContext)
-    
-    for remoteUser in remoteUsers {
-      let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteUser.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(user: result.first!, remoteUser, context: workingContext)
-        }
-        // Insert
-        else {
-          
-          // Required relations
-          
-          if let remoteCity = remoteUser.city {
-            insertUpdateCities(from: [remoteCity], context: workingContext)
-          }
-          
-          let user = NSManagedObject(entity: userEntityObject!, insertInto: workingContext) as! User
-          builder.build(user: user, remoteUser, context: workingContext)
-          
-          // Optional relations
-          
-          if let remoteImage = remoteUser.photo {
-            insertUpdateUserImage(from: remoteImage, context: workingContext)
-          }
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
-      }
-    }
-    
-    workingContext.processPendingChanges()
-    saveContext(workingContext)
+    executer.insertUpdateUsers(from: remoteUsers, context: context)
   }
   
   func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext? = nil) {
-    let workingContext = provideWorkingContext(basedOn: context)
-    
-    let profileImageEntityObject = NSEntityDescription.entity(forEntityName: userImageEntity, in: workingContext)
-    
-      let fetchRequest: NSFetchRequest<UserImage> = UserImage.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(photo.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(image: result.first!, with: Int(result.first!.userId), photo, context: workingContext)
-        }
-          // Insert
-        else {
-          let userImage = NSManagedObject(entity: profileImageEntityObject!, insertInto: workingContext) as! UserImage
-          builder.build(image: userImage, with: photo.userId, photo, context: workingContext)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
-      }
-    
-    workingContext.processPendingChanges()
-    saveContext(workingContext)
+    executer.insertUpdateUserImage(from: photo, context: context)
   }
   
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil) {
-    let workingContext = provideWorkingContext(basedOn: context)
-    
-    let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: workingContext)
-    
-    for remoteCity in cityList {
-      let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteCity.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          result.first?.name = remoteCity.title
-        }
-        // Insert
-        else {
-          let city = NSManagedObject(entity: cityEntityObject!, insertInto: workingContext) as! City
-          builder.build(city: city, remoteCity)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
-      }
-    }
-    
-    workingContext.processPendingChanges()
-    saveContext(workingContext)
+    executer.insertUpdateCities(from: cityList, context: context)
   }
   
   func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext? = nil) {
-    let workingContext = provideWorkingContext(basedOn: context)
-    
-    let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: workingContext)
-    
-    for remoteService in serviceList {
-      let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteService.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(service: result.first!, remoteService)
-        }
-        // Insert
-        else {
-          let service = NSManagedObject(entity: serviceEntityObject!, insertInto: workingContext) as! Service
-          builder.build(service: service, remoteService)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
-      }
-    }
-    
-    workingContext.processPendingChanges()
-    saveContext(workingContext)
+    executer.insertUpdateServices(from: serviceList, context: context)
   }
   
   func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil) {
-    let workingContext = provideWorkingContext(basedOn: context)
-    
-    let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: workingContext)
-    
-    for service in list {
-      let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(service.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(providerService: result.first!, service, context: workingContext)
-        }
-        // Insert
-        else {
-          // Required fields
-          
-          if let remoteUser = service.provider {
-            insertUpdateUsers(from: [remoteUser], context: workingContext)
-          }
-          
-          let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: workingContext) as! ProviderService
-          builder.build(providerService: providerService, service, context: workingContext)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
-      }
-    }
-    
-    workingContext.processPendingChanges()
-    saveContext(workingContext)
+    executer.insertUpdateProviderServices(from: list, context: context)
   }
   
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
-    let workingContext = provideWorkingContext(basedOn: context)
-    
-    let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: workingContext)
-    
-    for remoteRequest in requestList {
-      let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteRequest.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(request: result.first!, remoteRequest, context: workingContext)
-        }
-        // Insert
-        else {
-          insertUpdateServices(from: [remoteRequest.providerService.service], context: workingContext)
-          insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
-          
-          let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
-          builder.build(request: request, remoteRequest, context: workingContext)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
-      }
-    }
-    
-    workingContext.processPendingChanges()
-    saveContext(workingContext)
+    executer.insertUpdateRequests(from: requestList, context: context)
   }
+}
+
+protocol ContextsProviding: class {
+  var mainContext: NSManagedObjectContext { get }
+  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext
 }
 
 extension DataBaseManager: ContextsProviding {
