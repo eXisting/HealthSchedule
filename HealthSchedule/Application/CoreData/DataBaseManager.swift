@@ -139,7 +139,7 @@ class DataBaseManager: NSObject {
   
   // MARK: Actions
   
-  func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {
+  func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: workingContext)
@@ -183,13 +183,13 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if context == nil {
+    if shouldSave {
       workingContext.processPendingChanges()
       saveContext(workingContext)
     }
   }
   
-  func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil) {
+  func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: workingContext)
@@ -217,13 +217,13 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if context == nil {
+    if shouldSave {
       workingContext.processPendingChanges()
       saveContext(workingContext)
     }
   }
   
-  func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext? = nil) {
+  func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: workingContext)
@@ -251,13 +251,13 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if context == nil {
+    if shouldSave {
       workingContext.processPendingChanges()
       saveContext(workingContext)
     }
   }
   
-  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil) {
+  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: workingContext)
@@ -285,13 +285,13 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if context == nil {
+    if shouldSave {
       workingContext.processPendingChanges()
       saveContext(workingContext)
     }
   }
   
-  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
+  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil, shouldSave: Bool = true) {
     let workingContext = provideWorkingContext(basedOn: context)
     
     let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: workingContext)
@@ -311,8 +311,8 @@ class DataBaseManager: NSObject {
         // Insert
         else {
           let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
-          insertUpdateServices(from: [remoteRequest.providerService.service], context: workingContext)
-          insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
+          insertUpdateServices(from: [remoteRequest.providerService.service], context: workingContext, shouldSave: false)
+          insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext, shouldSave: false)
           
           builder.build(request: request, remoteRequest, context: workingContext)
         }
@@ -322,7 +322,7 @@ class DataBaseManager: NSObject {
       }
     }
     
-    if context == nil {
+    if shouldSave {
       workingContext.processPendingChanges()
       saveContext(workingContext)
     }
