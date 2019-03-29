@@ -86,7 +86,7 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       // TODO: refactor this
       if remoteUser.role?.name == "provider" {
@@ -105,7 +105,7 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      self?.databaseManager.insertUpdateRequests(from: list)
+      self?.databaseManager.insertUpdateRequests(from: list, context: DataBaseManager.shared.mainContext)
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -135,7 +135,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       // TODO: refactor this
       if remoteUser.role?.name == "provider" {
@@ -164,7 +164,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       if userType == .provider {
         self?.requestProviderData()

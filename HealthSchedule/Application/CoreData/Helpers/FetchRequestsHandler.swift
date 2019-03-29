@@ -9,10 +9,10 @@
 import CoreData
 
 class FetchRequestsHandler {
-  private unowned var persistentContainer: NSPersistentContainer
+  private unowned var contextsProviding: ContextsProviding
   
-  init(container: NSPersistentContainer) {
-    persistentContainer = container
+  init(provider: ContextsProviding) {
+    contextsProviding = provider
   }
   
   func getCurrentUser(context: NSManagedObjectContext? = nil) -> User? {
@@ -21,17 +21,13 @@ class FetchRequestsHandler {
       return nil
     }
     
-    var workingContext: NSManagedObjectContext!
-    if context != nil {
-      workingContext = context
-    } else {
-      workingContext = persistentContainer.viewContext
-    }
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
     
     fetchRequest.predicate = NSPredicate(format: "id == \(Int16(currentUserId))")
     fetchRequest.fetchLimit = 1
+    fetchRequest.relationshipKeyPathsForPrefetching = ["city"]
     
     do {
       let result = try workingContext.fetch(fetchRequest)
@@ -43,12 +39,7 @@ class FetchRequestsHandler {
   }
   
   func getCties(context: NSManagedObjectContext? = nil) -> [City] {
-    var workingContext: NSManagedObjectContext!
-    if context != nil {
-      workingContext = context
-    } else {
-      workingContext = persistentContainer.viewContext
-    }
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -62,13 +53,24 @@ class FetchRequestsHandler {
     }
   }
   
-  func getServices(context: NSManagedObjectContext? = nil) -> [Service] {
-    var workingContext: NSManagedObjectContext!
-    if context != nil {
-      workingContext = context
-    } else {
-      workingContext = persistentContainer.viewContext
+  func getCtiy(byId id: Int, context: NSManagedObjectContext? = nil) -> City? {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")
+    fetchRequest.fetchLimit = 1
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      return result.first
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
     }
+  }
+  
+  func getServices(context: NSManagedObjectContext? = nil) -> [Service] {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -83,12 +85,7 @@ class FetchRequestsHandler {
   }
   
   func getService(by id: Int, context: NSManagedObjectContext? = nil) -> Service? {
-    var workingContext: NSManagedObjectContext!
-    if context != nil {
-      workingContext = context
-    } else {
-      workingContext = persistentContainer.viewContext
-    }
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")
@@ -104,12 +101,7 @@ class FetchRequestsHandler {
   }
   
   func getProviderServices(context: NSManagedObjectContext? = nil) -> [ProviderService] {
-    var workingContext: NSManagedObjectContext!
-    if context != nil {
-      workingContext = context
-    } else {
-      workingContext = persistentContainer.viewContext
-    }
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "price", ascending: true)]
@@ -124,12 +116,7 @@ class FetchRequestsHandler {
   }
   
   func getProviderService(by id: Int, context: NSManagedObjectContext? = nil) -> ProviderService? {
-    var workingContext: NSManagedObjectContext!
-    if context != nil {
-      workingContext = context
-    } else {
-      workingContext = persistentContainer.viewContext
-    }
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")

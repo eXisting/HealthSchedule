@@ -41,7 +41,7 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
     
     rows = [
       BaseCellInfo(title: "Full name:", type: .general, keyName: "fullName", data: user.name),
-      BaseCellInfo(title: "City:", type: .general, subtype: .cityPicker, keyName: "city_id", data: user.city!.name, id: Int(city.id)),
+      BaseCellInfo(title: "City:", type: .general, subtype: .cityPicker, keyName: "city_id", data: city.name, id: Int(city.id)),
       BaseCellInfo(title: "Birthday:", type: .general, subtype: .datePicker, keyName: "birthday_at", data: DateManager.shared.dateToString(birthday))
     ]
     

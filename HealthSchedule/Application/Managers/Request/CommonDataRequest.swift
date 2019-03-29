@@ -49,7 +49,7 @@ class CommonDataRequest {
         return
       }
       
-      self?.databaseManager.insertUpdateCities(from: cities)
+      self?.databaseManager.insertUpdateCities(from: cities, context: DataBaseManager.shared.mainContext)
       
       completion(ResponseStatus.success.rawValue)
     }

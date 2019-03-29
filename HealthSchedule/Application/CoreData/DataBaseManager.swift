@@ -9,6 +9,11 @@
 import Foundation
 import CoreData
 
+protocol ContextsProviding: class {
+  var mainContext: NSManagedObjectContext { get }
+  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext
+}
+
 class DataBaseManager: NSObject {
   
   // MARK: Singleton
@@ -60,7 +65,7 @@ class DataBaseManager: NSObject {
   }()
   
   lazy var fetchRequestsHandler: FetchRequestsHandler = {
-    return FetchRequestsHandler(container: persistentContainer)
+    return FetchRequestsHandler(provider: self)
   }()
   
   private lazy var builder = {
@@ -135,14 +140,9 @@ class DataBaseManager: NSObject {
   // MARK: Actions
   
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {
-    var backgroundContext : NSManagedObjectContext!
-    if context != nil {
-      backgroundContext = context
-    } else {
-      backgroundContext = persistentContainer.newBackgroundContext()
-    }
+    let workingContext = provideWorkingContext(basedOn: context)
     
-    let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: backgroundContext)
+    let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: workingContext)
     
     for remoteUser in remoteUsers {
       let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -150,39 +150,32 @@ class DataBaseManager: NSObject {
       fetchRequest.fetchLimit = 1
       
       do {
-        let result = try backgroundContext.fetch(fetchRequest)
+        let result = try workingContext.fetch(fetchRequest)
         
         // Update
         if result.count > 0 {
-          builder.buildBasicUserFields(for: result.first!, remoteUser)
+          builder.build(user: result.first!, remoteUser, context: workingContext)
         }
         // Insert
         else {
-          let user = NSManagedObject(entity: userEntityObject!, insertInto: backgroundContext) as! User
+          if let remoteCity = remoteUser.city {
+            insertUpdateCities(from: [remoteCity], context: workingContext)
+          }
           
-          builder.buildBasicUserFields(for: user, remoteUser)
+          let user = NSManagedObject(entity: userEntityObject!, insertInto: workingContext) as! User
+          builder.build(user: user, remoteUser, context: workingContext)
+          
+          // TODO: refactor image
           
           if let remoteImage = remoteUser.photo {
-            let photoEntity = NSEntityDescription.entity(forEntityName: userImageEntity, in: backgroundContext)
-            let userImage = NSManagedObject(entity: photoEntity!, insertInto: backgroundContext) as! UserImage
+            let photoEntity = NSEntityDescription.entity(forEntityName: userImageEntity, in: workingContext)
+            let userImage = NSManagedObject(entity: photoEntity!, insertInto: workingContext) as! UserImage
             
-            builder.buildBasicFields(for: userImage, with: user.id, remoteImage)
+            builder.build(image: userImage, with: user.id, remoteImage)
             
             user.image = userImage
             userImage.user = user
           }
-          
-          if let remoteCity = remoteUser.city {
-            let userCityEntity = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
-            let userCity = NSManagedObject(entity: userCityEntity!, insertInto: backgroundContext) as! City
-            
-            builder.build(city: userCity, remoteCity)
-            
-            userCity.addToUser(user)
-            user.city = userCity
-          }
-          
-          backgroundContext.insert(user)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -191,21 +184,15 @@ class DataBaseManager: NSObject {
     }
     
     if context == nil {
-      backgroundContext.processPendingChanges()
-      saveContext(backgroundContext)
+      workingContext.processPendingChanges()
+      saveContext(workingContext)
     }
   }
   
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil) {
-    var backgroundContext : NSManagedObjectContext!
-    if context != nil {
-      backgroundContext = context
-    } else {
-      backgroundContext = persistentContainer.newBackgroundContext()
-    }
+    let workingContext = provideWorkingContext(basedOn: context)
     
-    let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
-    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
+    let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: workingContext)
     
     for remoteCity in cityList {
       let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
@@ -213,7 +200,7 @@ class DataBaseManager: NSObject {
       fetchRequest.fetchLimit = 1
       
       do {
-        let result = try backgroundContext.fetch(fetchRequest)
+        let result = try workingContext.fetch(fetchRequest)
         
         // Update
         if result.count > 0 {
@@ -221,9 +208,8 @@ class DataBaseManager: NSObject {
         }
         // Insert
         else {
-          let city = NSManagedObject(entity: cityEntityObject!, insertInto: backgroundContext) as! City
+          let city = NSManagedObject(entity: cityEntityObject!, insertInto: workingContext) as! City
           builder.build(city: city, remoteCity)
-          backgroundContext.insert(city)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -232,21 +218,15 @@ class DataBaseManager: NSObject {
     }
     
     if context == nil {
-      backgroundContext.processPendingChanges()
-      saveContext(backgroundContext)
+      workingContext.processPendingChanges()
+      saveContext(workingContext)
     }
   }
   
   func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext? = nil) {
-    var backgroundContext : NSManagedObjectContext!
-    if context != nil {
-      backgroundContext = context
-    } else {
-      backgroundContext = persistentContainer.newBackgroundContext()
-    }
+    let workingContext = provideWorkingContext(basedOn: context)
     
-    let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: backgroundContext)
-    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
+    let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: workingContext)
     
     for remoteService in serviceList {
       let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
@@ -254,7 +234,7 @@ class DataBaseManager: NSObject {
       fetchRequest.fetchLimit = 1
       
       do {
-        let result = try backgroundContext.fetch(fetchRequest)
+        let result = try workingContext.fetch(fetchRequest)
         
         // Update
         if result.count > 0 {
@@ -262,9 +242,8 @@ class DataBaseManager: NSObject {
         }
         // Insert
         else {
-          let service = NSManagedObject(entity: serviceEntityObject!, insertInto: backgroundContext) as! Service
+          let service = NSManagedObject(entity: serviceEntityObject!, insertInto: workingContext) as! Service
           builder.build(service: service, remoteService)
-          backgroundContext.insert(service)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -273,21 +252,15 @@ class DataBaseManager: NSObject {
     }
     
     if context == nil {
-      backgroundContext.processPendingChanges()
-      saveContext(backgroundContext)
+      workingContext.processPendingChanges()
+      saveContext(workingContext)
     }
   }
   
   func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil) {
-    var backgroundContext : NSManagedObjectContext!
-    if context != nil {
-      backgroundContext = context
-    } else {
-      backgroundContext = persistentContainer.newBackgroundContext()
-    }
+    let workingContext = provideWorkingContext(basedOn: context)
     
-    let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: backgroundContext)
-    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
+    let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: workingContext)
     
     for service in list {
       let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
@@ -295,17 +268,16 @@ class DataBaseManager: NSObject {
       fetchRequest.fetchLimit = 1
       
       do {
-        let result = try backgroundContext.fetch(fetchRequest)
+        let result = try workingContext.fetch(fetchRequest)
         
         // Update
         if result.count > 0 {
-          builder.build(providerService: result.first!, service, context: backgroundContext)
+          builder.build(providerService: result.first!, service, context: workingContext)
         }
         // Insert
         else {
-          let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: backgroundContext) as! ProviderService
-          builder.build(providerService: providerService, service, context: backgroundContext)
-          backgroundContext.insert(providerService)
+          let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: workingContext) as! ProviderService
+          builder.build(providerService: providerService, service, context: workingContext)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -314,21 +286,15 @@ class DataBaseManager: NSObject {
     }
     
     if context == nil {
-      backgroundContext.processPendingChanges()
-      saveContext(backgroundContext)
+      workingContext.processPendingChanges()
+      saveContext(workingContext)
     }
   }
   
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
-    var backgroundContext : NSManagedObjectContext!
-    if context != nil {
-      backgroundContext = context
-    } else {
-      backgroundContext = persistentContainer.newBackgroundContext()
-    }
+    let workingContext = provideWorkingContext(basedOn: context)
     
-    let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: backgroundContext)
-    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
+    let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: workingContext)
     
     for remoteRequest in requestList {
       let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
@@ -336,20 +302,19 @@ class DataBaseManager: NSObject {
       fetchRequest.fetchLimit = 1
       
       do {
-        let result = try backgroundContext.fetch(fetchRequest)
+        let result = try workingContext.fetch(fetchRequest)
         
         // Update
         if result.count > 0 {
-          builder.build(request: result.first!, remoteRequest, context: backgroundContext)
+          builder.build(request: result.first!, remoteRequest, context: workingContext)
         }
         // Insert
         else {
-          let request = NSManagedObject(entity: requestEntityObject!, insertInto: backgroundContext) as! Request
-          insertUpdateServices(from: [remoteRequest.providerService.service], context: backgroundContext)
-          insertUpdateProviderServices(from: [remoteRequest.providerService], context: backgroundContext)
+          let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
+          insertUpdateServices(from: [remoteRequest.providerService.service], context: workingContext)
+          insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
           
-          builder.build(request: request, remoteRequest, context: backgroundContext)
-          backgroundContext.insert(request)
+          builder.build(request: request, remoteRequest, context: workingContext)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -358,8 +323,26 @@ class DataBaseManager: NSObject {
     }
     
     if context == nil {
-      backgroundContext.processPendingChanges()
-      saveContext(backgroundContext)
+      workingContext.processPendingChanges()
+      saveContext(workingContext)
     }
+  }
+}
+
+extension DataBaseManager: ContextsProviding {
+  var mainContext: NSManagedObjectContext {
+    return persistentContainer.viewContext
+  }
+  
+  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext {
+    var workingContext : NSManagedObjectContext!
+    if passedContext != nil {
+      workingContext = passedContext
+    } else {
+      workingContext = persistentContainer.newBackgroundContext()
+    }
+    
+    workingContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
+    return workingContext
   }
 }

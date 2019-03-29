@@ -24,7 +24,7 @@ class ServicesModel {
     commonDataRequestController.getCities {
       [weak self] status in
       if status == ResponseStatus.success.rawValue {
-        completion(self!.databaseManager.fetchRequestsHandler.getCties())
+        completion(self!.databaseManager.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext))
       }
     }
   }

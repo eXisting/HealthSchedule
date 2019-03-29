@@ -15,7 +15,7 @@ class InternalObjectsBuilder {
     fetchHandler = handler
   }
   
-  func buildBasicUserFields(for user: User, _ remoteUser: RemoteUser) {
+  func build(user: User, _ remoteUser: RemoteUser, context: NSManagedObjectContext) {
     user.name = "\(remoteUser.firstName) \(remoteUser.lastName)"
     user.email = remoteUser.email
     user.phone = remoteUser.phone
@@ -24,9 +24,13 @@ class InternalObjectsBuilder {
     user.id = Int32(remoteUser.id)
     user.roleId = Int16(remoteUser.role!.id)
     user.cityId = Int16(remoteUser.city!.id)
+    
+    let city = fetchHandler.getCtiy(byId: Int(user.cityId), context: context)
+    city?.addToUser(user)
+    user.city = city
   }
   
-  func buildBasicFields(for image: UserImage, with userId: Int32, _ remoteImage: ProfileImage) {
+  func build(image: UserImage, with userId: Int32, _ remoteImage: ProfileImage) {
     image.id = Int32(remoteImage.id)
     image.url = remoteImage.url
     image.userId = userId
