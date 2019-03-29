@@ -37,8 +37,8 @@ class RequestCardProviderRowModel: RequestRowDataContaining {
   var rowHeight: CGFloat = 90
   
   init(request: Request) {
-    data = "Unknown name"
-    additionalData = "Unknown phone" //request.providerService.provider?.phone
-    imageUrl = "https://www.icpdas-usa.com/icons/login-icon.png" // TODO: rewrite request cause it does not send photo //request.providerService.provider?.photo?.url
+    data = request.providerService?.provider?.name ?? "Unknown name"
+    additionalData = request.providerService?.provider?.phone
+    imageUrl = request.providerService?.provider?.image?.url
   }
 }
