@@ -10,13 +10,9 @@ import UIKit
 
 class UrlSessionHandler {
   
-  static let shared = UrlSessionHandler()
-  
   private let defaultSession = URLSession(configuration: .default)
   private let emptyJson: Parser.JsonDictionary = [:]
-  
-  private init() {}
-  
+    
   func startSessionTask(
     _ url: String,
     _ type: RequestType = .get,
@@ -42,11 +38,14 @@ class UrlSessionHandler {
       }
       
       guard let json = Serializer.encodeWithJsonSerializer(data: jsonData) else {
-        completion(self!.emptyJson,  ServerResponse(ResponseStatus.serverError.rawValue))
+        completion(self!.emptyJson, ServerResponse(ResponseStatus.serverError.rawValue))
         return
       }
       
+      // TODO: only 14 requests parsed from json but response is full - 23
+      
       guard let serverError = Parser.anyToObject(destination: ServerResponse.self, json) else {
+        // if object has been casted - return without exception
         completion(json, ServerResponse())
         return
       }
@@ -100,8 +99,6 @@ private extension UrlSessionHandler {
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     request.setValue("application/json", forHTTPHeaderField: "Accept")
     request.httpMethod = method
-    
-    request.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
     
     guard let data = body?.asDataString().data(using: .ascii) else {
       return request

@@ -48,7 +48,9 @@ class DateManager {
     return date
   }
   
-  func dateToString(_ date: Date) -> String {
+  func dateToString(_ date: Date?) -> String {
+    guard let date = date else { return "no date" }
+    
     return dateFormatter.string(from: date)
   }
   

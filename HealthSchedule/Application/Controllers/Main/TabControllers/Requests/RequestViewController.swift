@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import Presentr
 
 class RequestViewController: UIViewController {
@@ -40,13 +41,19 @@ class RequestViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    DataBaseManager.shared.frcDelegate = self
+    
     mainView.setup(delegate: self, dataSource: model)
     mainView.refreshDelegate = self
     
-    model.loadRequests(onRequestsLoaded)
+    model.getStoredRequests(onRequestsLoaded)
   }
   
-  private func onRequestsLoaded() {
+  private func onRequestsLoaded(response: String) {
+    if response != ResponseStatus.success.rawValue {
+      showWarningAlert(message: response)
+    }
+    
     DispatchQueue.main.async {
       self.mainView.reloadData()
     }
@@ -71,15 +78,66 @@ extension RequestViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let controller = RequestCardViewController()
-    controller.set(model[indexPath.row])
+    //controller.set(model[indexPath.row])
     customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }
 
 extension RequestViewController: RefreshingTableView {
   func refresh(_ completion: @escaping (String) -> Void) {
-    model.loadRequests {
-      completion(ResponseStatus.success.rawValue)
-    }
+    model.loadRequests(completion)
+  }
+}
+
+extension RequestViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(for: self, "Warning", message, .alert)
+  }
+}
+
+extension RequestViewController: NSFetchedResultsControllerDelegate {
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    mainView.beginUpdates()
+    print("Begin update")
+  }
+  
+  func controller(
+    _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+    didChange sectionInfo: NSFetchedResultsSectionInfo,
+    atSectionIndex sectionIndex: Int,
+    for type: NSFetchedResultsChangeType) {
+//    switch type {
+//      case .insert:
+//        mainView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+//      case .delete:
+//        mainView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+//      case .move:
+//        break
+//      case .update:
+//        break
+//    }
+  }
+  
+  func controller(
+    _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+    didChange anObject: Any,
+    at indexPath: IndexPath?,
+    for type: NSFetchedResultsChangeType,
+    newIndexPath: IndexPath?) {
+//    switch type {
+//      case .insert:
+//        mainView.insertRows(at: [newIndexPath!], with: .fade)
+//      case .delete:
+//        mainView.deleteRows(at: [indexPath!], with: .fade)
+//      case .update:
+//        mainView.reloadRows(at: [indexPath!], with: .fade)
+//      case .move:
+//        mainView.moveRow(at: indexPath!, to: newIndexPath!)
+//    }
+  }
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    mainView.endUpdates()
+    print("Ended update")
   }
 }

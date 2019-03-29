@@ -8,22 +8,38 @@
 
 import UIKit
 
-class RequestsModel: NSObject, UITableViewDataSource {
+class RequestsModel: NSObject {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
-  private var data: [RemoteRequest] = []
-  
-  subscript(forSectionIndex: Int) -> RemoteRequest {
-    return data[forSectionIndex]
+  private var data: [Request] = []
+    
+  subscript(forRowIndex: Int) -> Request {
+    return data[forRowIndex]
   }
   
-  func loadRequests(_ callback: @escaping () -> Void) {
+  func loadRequests(_ callback: @escaping (String) -> Void) {
     userRequestController.getRequests {
-      [weak self] list in
-      self?.data = list
-      callback()
+      [weak self] response in
+      guard let requests = DataBaseManager.shared.resultController.fetchedObjects else {
+        callback(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
+      self?.data = requests
+      
+      callback(response)
     }
   }
   
+  func getStoredRequests(_ callback: @escaping (String) -> Void) {
+    guard let requests = DataBaseManager.shared.resultController.fetchedObjects else { return }
+    
+    data = requests
+    
+    callback(ResponseStatus.success.rawValue)
+  }
+}
+
+extension RequestsModel: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
@@ -37,10 +53,10 @@ class RequestsModel: NSObject, UITableViewDataSource {
     let request = data[indexPath.row]
     
     cell.populateCell(
-      serviceName: request.providerService.service.title,
-      price: String(request.providerService.price),
-      visitedDate: DateManager.shared.dateToString(request.requestAt),
-      status: request.status.title
+      serviceName: request.service?.name ?? "Unkown name",
+      price: String(request.providerService?.price ?? 0.0),
+      visitedDate: DateManager.shared.dateToString(request.requestedAt),
+      status: String(request.status)
     )
     
     return cell

@@ -9,24 +9,32 @@
 import CoreData
 
 class FetchRequestsHandler {
-  unowned var persistentContainer: NSPersistentContainer
+  private unowned var persistentContainer: NSPersistentContainer
   
   init(container: NSPersistentContainer) {
     persistentContainer = container
   }
   
-  func getCurrentUser() -> User? {
+  func getCurrentUser(context: NSManagedObjectContext? = nil) -> User? {
     let currentUserId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.userUniqueId.rawValue)
     if currentUserId == 0 {
       return nil
     }
     
+    var workingContext: NSManagedObjectContext!
+    if context != nil {
+      workingContext = context
+    } else {
+      workingContext = persistentContainer.viewContext
+    }
+    
     let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
     
     fetchRequest.predicate = NSPredicate(format: "id == \(Int16(currentUserId))")
+    fetchRequest.fetchLimit = 1
     
     do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
+      let result = try workingContext.fetch(fetchRequest)
       return result.first
     } catch {
       print("Unexpected error: \(error.localizedDescription)")
@@ -34,18 +42,19 @@ class FetchRequestsHandler {
     }
   }
   
-  func getCties() -> [City] {
-    guard let currentUser = getCurrentUser() else {
-      return []
+  func getCties(context: NSManagedObjectContext? = nil) -> [City] {
+    var workingContext: NSManagedObjectContext!
+    if context != nil {
+      workingContext = context
+    } else {
+      workingContext = persistentContainer.viewContext
     }
     
     let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     
-    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(currentUser.id))")
-    
     do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
+      let result = try workingContext.fetch(fetchRequest)
       return result
     } catch {
       print("Unexpected error: \(error.localizedDescription)")
@@ -53,12 +62,19 @@ class FetchRequestsHandler {
     }
   }
   
-  func getServices() -> [Service] {
+  func getServices(context: NSManagedObjectContext? = nil) -> [Service] {
+    var workingContext: NSManagedObjectContext!
+    if context != nil {
+      workingContext = context
+    } else {
+      workingContext = persistentContainer.viewContext
+    }
+    
     let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     
     do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
+      let result = try workingContext.fetch(fetchRequest)
       return result
     } catch {
       print("Unexpected error: \(error.localizedDescription)")
@@ -66,12 +82,20 @@ class FetchRequestsHandler {
     }
   }
   
-  func getService(by id: Int, context: NSManagedObjectContext) -> Service? {
+  func getService(by id: Int, context: NSManagedObjectContext? = nil) -> Service? {
+    var workingContext: NSManagedObjectContext!
+    if context != nil {
+      workingContext = context
+    } else {
+      workingContext = persistentContainer.viewContext
+    }
+    
     let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(id))")
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")
+    fetchRequest.fetchLimit = 1
     
     do {
-      let result = try context.fetch(fetchRequest)
+      let result = try workingContext.fetch(fetchRequest)
       return result.first
     } catch {
       print("Unexpected error: \(error.localizedDescription)")
@@ -79,12 +103,19 @@ class FetchRequestsHandler {
     }
   }
   
-  func getProviderServices() -> [ProviderService] {
+  func getProviderServices(context: NSManagedObjectContext? = nil) -> [ProviderService] {
+    var workingContext: NSManagedObjectContext!
+    if context != nil {
+      workingContext = context
+    } else {
+      workingContext = persistentContainer.viewContext
+    }
+    
     let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "price", ascending: true)]
     
     do {
-      let result = try persistentContainer.viewContext.fetch(fetchRequest)
+      let result = try workingContext.fetch(fetchRequest)
       return result
     } catch {
       print("Unexpected error: \(error.localizedDescription)")
@@ -92,12 +123,20 @@ class FetchRequestsHandler {
     }
   }
   
-  func getProviderService(by id: Int, context: NSManagedObjectContext) -> ProviderService? {
+  func getProviderService(by id: Int, context: NSManagedObjectContext? = nil) -> ProviderService? {
+    var workingContext: NSManagedObjectContext!
+    if context != nil {
+      workingContext = context
+    } else {
+      workingContext = persistentContainer.viewContext
+    }
+    
     let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id != \(Int16(id))")
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")
+    fetchRequest.fetchLimit = 1
     
     do {
-      let result = try context.fetch(fetchRequest)
+      let result = try workingContext.fetch(fetchRequest)
       return result.first
     } catch {
       print("Unexpected error: \(error.localizedDescription)")

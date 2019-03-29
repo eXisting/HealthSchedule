@@ -21,7 +21,7 @@ protocol ProviderInfoRequesting {
 }
 
 protocol CommonDataRequesting {
-  func getRequests(completion: @escaping ([RemoteRequest]) -> Void)
+  func getRequests(completion: @escaping (String) -> Void)
   func getUser(_ completion: @escaping (String) -> Void)
   func getRecomendations()
 }
@@ -97,18 +97,17 @@ extension UserDataRequest: CommonDataRequesting {
     }
   }
   
-  func getRequests(completion: @escaping ([RemoteRequest]) -> Void) {
+  func getRequests(completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken.asParams()) {
       [weak self] (list, response) in
       if let error = response.error {
-        print(error)
-        completion([])
+        completion(error)
         return
       }
       
       self?.databaseManager.insertUpdateRequests(from: list)
       
-      completion(list)
+      completion(ResponseStatus.success.rawValue)
     }
   }
   

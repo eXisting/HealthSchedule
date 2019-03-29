@@ -16,7 +16,7 @@ class RequestManager {
   // C9 server endpoint
   private let rootEndpoint = "https://schedule-exist228.c9users.io"
   
-  private let request = UrlSessionHandler.shared
+  private let sessionHandler = UrlSessionHandler()
   
   // MARK: - GET
   
@@ -26,7 +26,7 @@ class RequestManager {
     _ headers: Parser.JsonDictionary?,
     _ completion: @escaping ([T], ServerResponse) -> Void) {
     
-    request.startSessionTask(buildEndpoint(endpoint.rawValue), params: headers) {
+    sessionHandler.startSessionTask(buildEndpoint(endpoint.rawValue), params: headers) {
       (json, response) in
       let result = Parser.anyArrayToObjectArray(destination: T.self, json)
       completion(result, response)
@@ -39,7 +39,7 @@ class RequestManager {
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (T?, ServerResponse) -> Void) {
     
-    request.startSessionTask(buildEndpoint(endpoint.rawValue), params: params) {
+    sessionHandler.startSessionTask(buildEndpoint(endpoint.rawValue), params: params) {
       (json, response) in
       guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
         completion(nil, response)
@@ -56,7 +56,7 @@ class RequestManager {
       return
     }
     
-    request.getData(from: urlObject, completion: completion)
+    sessionHandler.getData(from: urlObject, completion: completion)
   }
   
   // MARK: - POST
@@ -68,7 +68,7 @@ class RequestManager {
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (Any, ServerResponse) -> Void) {
     
-    request.startSessionTask(buildEndpoint(url), requestType, body: data, params: params, completion: completion)
+    sessionHandler.startSessionTask(buildEndpoint(url), requestType, body: data, params: params, completion: completion)
   }
   
   // MARK: - AUTHENTICATION

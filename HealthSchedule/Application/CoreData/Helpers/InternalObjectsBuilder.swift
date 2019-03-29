@@ -50,11 +50,18 @@ class InternalObjectsBuilder {
     request.userId = Int16(remote.userId)
     request.serviceId = Int16(remote.providerService.service.id)
     
-    request.service = fetchHandler.getService(by: remote.providerService.service.id, context: context)
-    
     if let rate = remote.rate {
       request.rate = Int16(rate)
     }
+    
+    let providerService = fetchHandler.getProviderService(by: remote.providerService.id, context: context)
+    let generalService = fetchHandler.getService(by: remote.providerService.service.id, context: context)
+
+    request.providerService = providerService
+    request.service = generalService
+    
+    providerService?.addToRequest(request)
+    generalService?.addToRequest(request)
   }
   
   func build(providerService: ProviderService, _ remote: RemoteProviderService, context: NSManagedObjectContext) {
@@ -65,6 +72,10 @@ class InternalObjectsBuilder {
     providerService.price = remote.price
     providerService.serviceDescription = remote.description
     
-    providerService.service = fetchHandler.getService(by: remote.service.id, context: context)
+    let generalService = fetchHandler.getService(by: remote.service.id, context: context)
+    
+    providerService.service = generalService
+    
+    generalService?.addToProviderService(providerService)
   }
 }

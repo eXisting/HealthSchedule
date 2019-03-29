@@ -28,7 +28,7 @@ class DataBaseManager: NSObject {
   private let providerServiceEntity = "ProviderService"
   
   private lazy var persistentContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "MainCoreDataContainer")
+    let container = NSPersistentContainer(name: modelName)
     
     let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     let persistentStoreURL = documentsDirectoryURL.appendingPathComponent("\(self.modelName).sqlite")
@@ -39,7 +39,6 @@ class DataBaseManager: NSObject {
         NSInferMappingModelAutomaticallyOption : true
       ]
       
-      // Add Persistent Store
       try container.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
                                                         configurationName: nil,
                                                         at: persistentStoreURL,
@@ -99,6 +98,10 @@ class DataBaseManager: NSObject {
     }
   }
   
+  // MARK: - Fetch result controller stack
+  
+  weak var frcDelegate: NSFetchedResultsControllerDelegate?
+  
   lazy var resultController: NSFetchedResultsController<Request> = {
     let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
     
@@ -108,7 +111,7 @@ class DataBaseManager: NSObject {
     ]
     
     fetchRequest.returnsObjectsAsFaults = false
-    //    fetchRequest.relationshipKeyPathsForPrefetching = ["department"]
+//    fetchRequest.relationshipKeyPathsForPrefetching = ["providerService", "service"]
     fetchRequest.fetchBatchSize = 20
     
     let controller = NSFetchedResultsController(
@@ -116,6 +119,8 @@ class DataBaseManager: NSObject {
       managedObjectContext: persistentContainer.viewContext,
       sectionNameKeyPath: nil,
       cacheName: nil)
+    
+    controller.delegate = frcDelegate
     
     do {
       let _ = try controller.performFetch()
@@ -129,14 +134,20 @@ class DataBaseManager: NSObject {
   
   // MARK: Actions
   
-  func insertUpdateUsers(from remoteUsers: [RemoteUser]) {
-    let backgroundContext = persistentContainer.newBackgroundContext()
+  func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {
+    var backgroundContext : NSManagedObjectContext!
+    if context != nil {
+      backgroundContext = context
+    } else {
+      backgroundContext = persistentContainer.newBackgroundContext()
+    }
     
     let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: backgroundContext)
     
     for remoteUser in remoteUsers {
       let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
       fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteUser.id))")
+      fetchRequest.fetchLimit = 1
       
       do {
         let result = try backgroundContext.fetch(fetchRequest)
@@ -179,17 +190,27 @@ class DataBaseManager: NSObject {
       }
     }
     
-    backgroundContext.processPendingChanges()
-    saveContext(backgroundContext)
+    if context == nil {
+      backgroundContext.processPendingChanges()
+      saveContext(backgroundContext)
+    }
   }
   
-  func insertUpdateCities(from cityList: [RemoteCity]) {
-    let backgroundContext = persistentContainer.newBackgroundContext()
+  func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil) {
+    var backgroundContext : NSManagedObjectContext!
+    if context != nil {
+      backgroundContext = context
+    } else {
+      backgroundContext = persistentContainer.newBackgroundContext()
+    }
+    
     let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: backgroundContext)
+    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
     
     for remoteCity in cityList {
       let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
       fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteCity.id))")
+      fetchRequest.fetchLimit = 1
       
       do {
         let result = try backgroundContext.fetch(fetchRequest)
@@ -210,17 +231,27 @@ class DataBaseManager: NSObject {
       }
     }
     
-    backgroundContext.processPendingChanges()
-    saveContext(backgroundContext)
+    if context == nil {
+      backgroundContext.processPendingChanges()
+      saveContext(backgroundContext)
+    }
   }
   
-  func insertUpdateServices(from serviceList: [RemoteService]) {
-    let backgroundContext = persistentContainer.newBackgroundContext()
+  func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext? = nil) {
+    var backgroundContext : NSManagedObjectContext!
+    if context != nil {
+      backgroundContext = context
+    } else {
+      backgroundContext = persistentContainer.newBackgroundContext()
+    }
+    
     let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: backgroundContext)
+    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
     
     for remoteService in serviceList {
       let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
       fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteService.id))")
+      fetchRequest.fetchLimit = 1
       
       do {
         let result = try backgroundContext.fetch(fetchRequest)
@@ -229,7 +260,7 @@ class DataBaseManager: NSObject {
         if result.count > 0 {
           builder.build(service: result.first!, remoteService)
         }
-          // Insert
+        // Insert
         else {
           let service = NSManagedObject(entity: serviceEntityObject!, insertInto: backgroundContext) as! Service
           builder.build(service: service, remoteService)
@@ -241,17 +272,27 @@ class DataBaseManager: NSObject {
       }
     }
     
-    backgroundContext.processPendingChanges()
-    saveContext(backgroundContext)
+    if context == nil {
+      backgroundContext.processPendingChanges()
+      saveContext(backgroundContext)
+    }
   }
   
-  func insertUpdateProviderServices(from list: [RemoteProviderService]) {
-    let backgroundContext = persistentContainer.newBackgroundContext()
+  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil) {
+    var backgroundContext : NSManagedObjectContext!
+    if context != nil {
+      backgroundContext = context
+    } else {
+      backgroundContext = persistentContainer.newBackgroundContext()
+    }
+    
     let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: backgroundContext)
+    backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
     
     for service in list {
       let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
       fetchRequest.predicate = NSPredicate(format: "id == \(Int16(service.id))")
+      fetchRequest.fetchLimit = 1
       
       do {
         let result = try backgroundContext.fetch(fetchRequest)
@@ -272,18 +313,27 @@ class DataBaseManager: NSObject {
       }
     }
     
-    backgroundContext.processPendingChanges()
-    saveContext(backgroundContext)
+    if context == nil {
+      backgroundContext.processPendingChanges()
+      saveContext(backgroundContext)
+    }
   }
   
-  func insertUpdateRequests(from requestList: [RemoteRequest]) {
-    let backgroundContext = persistentContainer.newBackgroundContext()
+  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
+    var backgroundContext : NSManagedObjectContext!
+    if context != nil {
+      backgroundContext = context
+    } else {
+      backgroundContext = persistentContainer.newBackgroundContext()
+    }
+    
     let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: backgroundContext)
     backgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
     
     for remoteRequest in requestList {
       let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
       fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteRequest.id))")
+      fetchRequest.fetchLimit = 1
       
       do {
         let result = try backgroundContext.fetch(fetchRequest)
@@ -295,8 +345,9 @@ class DataBaseManager: NSObject {
         // Insert
         else {
           let request = NSManagedObject(entity: requestEntityObject!, insertInto: backgroundContext) as! Request
-          insertUpdateServices(from: [remoteRequest.providerService.service])
-          insertUpdateProviderServices(from: [remoteRequest.providerService])
+          insertUpdateServices(from: [remoteRequest.providerService.service], context: backgroundContext)
+          insertUpdateProviderServices(from: [remoteRequest.providerService], context: backgroundContext)
+          
           builder.build(request: request, remoteRequest, context: backgroundContext)
           backgroundContext.insert(request)
         }
@@ -306,7 +357,9 @@ class DataBaseManager: NSObject {
       }
     }
     
-    backgroundContext.processPendingChanges()
-    saveContext(backgroundContext)
+    if context == nil {
+      backgroundContext.processPendingChanges()
+      saveContext(backgroundContext)
+    }
   }
 }
