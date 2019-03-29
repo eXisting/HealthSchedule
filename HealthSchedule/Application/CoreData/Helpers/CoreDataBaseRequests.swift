@@ -9,6 +9,8 @@
 import CoreData
 
 protocol CoreDataRequestsPerformable {
+  // Update / insert
+  
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext?)
   func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext?)
   
@@ -17,13 +19,21 @@ protocol CoreDataRequestsPerformable {
   func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext?)
   func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext?)
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext?)
+  
+  // Delete
+  
+  func delete(with id: NSManagedObjectID, context: NSManagedObjectContext?)
 }
 
 class CoreDataRequestsBase: CoreDataRequestsPerformable {
+  // MARK: -Fields
+  
   var fetchRequestsHandler: FetchRequestsHandler
 
   private var builder: InternalObjectsBuilder
   private unowned var provider: ContextsProviding
+  
+  // MARK: -Entities names constants
   
   private let userEntity = "User"
   private let userImageEntity = "UserImage"
@@ -37,6 +47,8 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     fetchRequestsHandler = FetchRequestsHandler(provider: provider)
     builder = InternalObjectsBuilder(handler: fetchRequestsHandler)
   }
+  
+  // MARK: -Update / insert
   
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
@@ -249,6 +261,20 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     workingContext.processPendingChanges()
     saveContext(workingContext)
   }
+  
+  // MARK: -Delete
+  
+  func delete(with id: NSManagedObjectID, context: NSManagedObjectContext?) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let managedObject = workingContext.object(with: id)
+    workingContext.delete(managedObject)
+    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+  }
+  
+  // MARK: -Contexts merging using recoursive functions
   
   func saveContext(_ context: NSManagedObjectContext) {
     if !context.hasChanges {

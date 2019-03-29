@@ -103,9 +103,33 @@ class DataBaseManager: NSObject {
     
     return controller
   }()
+}
+
+protocol ContextsProviding: class {
+  var mainContext: NSManagedObjectContext { get }
+  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext
+}
+
+extension DataBaseManager: ContextsProviding {
+  var mainContext: NSManagedObjectContext {
+    return persistentContainer.viewContext
+  }
   
-  // MARK: Actions
-  
+  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext {
+    var workingContext : NSManagedObjectContext!
+    if passedContext != nil {
+      workingContext = passedContext
+    } else {
+      workingContext = persistentContainer.newBackgroundContext()
+    }
+    
+    workingContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
+    return workingContext
+  }
+}
+
+
+extension DataBaseManager: CoreDataRequestsPerformable {
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {
     executer.insertUpdateUsers(from: remoteUsers, context: context)
   }
@@ -129,27 +153,8 @@ class DataBaseManager: NSObject {
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
     executer.insertUpdateRequests(from: requestList, context: context)
   }
-}
-
-protocol ContextsProviding: class {
-  var mainContext: NSManagedObjectContext { get }
-  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext
-}
-
-extension DataBaseManager: ContextsProviding {
-  var mainContext: NSManagedObjectContext {
-    return persistentContainer.viewContext
-  }
   
-  func provideWorkingContext(basedOn passedContext: NSManagedObjectContext?) -> NSManagedObjectContext {
-    var workingContext : NSManagedObjectContext!
-    if passedContext != nil {
-      workingContext = passedContext
-    } else {
-      workingContext = persistentContainer.newBackgroundContext()
-    }
-    
-    workingContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
-    return workingContext
+  func delete(with id: NSManagedObjectID, context: NSManagedObjectContext? = nil) {
+    executer.delete(with: id, context: context)
   }
 }
