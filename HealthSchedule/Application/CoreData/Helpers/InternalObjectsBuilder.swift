@@ -22,13 +22,20 @@ class InternalObjectsBuilder {
     user.birthday = remoteUser.birthday
     
     user.id = Int32(remoteUser.id)
-    user.roleId = Int16(remoteUser.role!.id)
-    user.cityId = Int16(remoteUser.city!.id)
     
-    let city = fetchHandler.getCtiy(byId: Int(user.cityId), context: context)
-    city?.addToUser(user)
-    user.city = city
-    print(user)
+    if let city = remoteUser.city {
+      user.cityId = Int16(city.id)
+      
+      let city = fetchHandler.getCtiy(byId: Int(user.cityId), context: context)
+      city?.addToUser(user)
+      user.city = city
+    }
+    
+    if let role = remoteUser.role {
+      user.roleId = Int16(role.id)
+    } else {
+      user.roleId = Int16(4) // magic number
+    }
   }
   
   func build(image: UserImage, with userId: Int, _ remoteImage: ProfileImage, context: NSManagedObjectContext) {
@@ -83,9 +90,10 @@ class InternalObjectsBuilder {
     providerService.serviceId = Int16(remote.service.id)
     providerService.price = remote.price
     providerService.serviceDescription = remote.description
+    providerService.duration = remote.interval
     
     let generalService = fetchHandler.getService(by: remote.service.id, context: context)
-    let provider = fetchHandler.getUser(byId: Int(providerService.providerId))
+    let provider = fetchHandler.getUser(byId: Int(providerService.providerId), context: context)
     
     providerService.service = generalService
     providerService.provider = provider

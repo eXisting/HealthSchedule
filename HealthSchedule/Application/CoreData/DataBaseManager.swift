@@ -297,6 +297,12 @@ class DataBaseManager: NSObject {
         }
         // Insert
         else {
+          // Required fields
+          
+          if let remoteUser = service.provider {
+            insertUpdateUsers(from: [remoteUser], context: workingContext)
+          }
+          
           let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: workingContext) as! ProviderService
           builder.build(providerService: providerService, service, context: workingContext)
         }
