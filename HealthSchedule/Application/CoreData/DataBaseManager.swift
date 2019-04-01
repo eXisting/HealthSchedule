@@ -63,7 +63,7 @@ class DataBaseManager: NSObject {
   // MARK: - Core Data Saving support
   
   func clearUntilCache() {
-    // TODO: Call it at app start and clear all data except 10-20 records
+    executer.deleteAllRecords(context: persistentContainer.viewContext)
   }
   
   func saveData() {

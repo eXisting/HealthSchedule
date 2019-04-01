@@ -719,7 +719,6 @@
 				ED98CE3D224285E700B95696 /* RequestTab */,
 				ED825FEA2241481600456D0F /* AccountTab */,
 				EDD2A85C223BC77300B52E68 /* SearchTab */,
-				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -789,6 +788,7 @@
 		EDD2A85C223BC77300B52E68 /* SearchTab */ = {
 			isa = PBXGroup;
 			children = (
+				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
 				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
 				EDD2A85D223BC79900B52E68 /* ServicesModel.swift */,
 			);
