@@ -19,7 +19,7 @@ class RequestCardViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mainView.setup(hasActions: true, userType: .provider)
+    mainView.setup(hasActions: true, role: model.getCurrentUserRole())
     mainView.tableView.setup(delegate: self, dataSource: model.dataSource)
     mainView.setup(acceptHandler: onAccept, declineHandler: onDecline)
   }

@@ -21,8 +21,8 @@ class RequestCardContainerView: UIView {
   private var onAcceptClickHandler: (() -> Void)?
   private var onDeclineClickHandler: (() -> Void)?
 
-  func setup(hasActions: Bool, userType: UserType) {
-    buildHierachy(hasActions, userType)
+  func setup(hasActions: Bool, role: Role) {
+    buildHierachy(hasActions, role)
     customizeViews()
   }
   
@@ -50,7 +50,7 @@ class RequestCardContainerView: UIView {
     onDeclineClickHandler?()
   }
 
-  private func buildHierachy(_ hasActions: Bool, _ userType: UserType) {
+  private func buildHierachy(_ hasActions: Bool, _ role: Role) {
     addSubview(container)
     
     container.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,7 @@ class RequestCardContainerView: UIView {
       declineButton = UIButton(type: UIButton.ButtonType.roundedRect)
       actionsBlock!.addArrangedSubview(declineButton!)
       
-      processUserType(userType)
+      processUserType(role)
       
       actionsBackground.backgroundColor = .white
       actionsBlock?.addBackgroundView(actionsBackground)
@@ -97,8 +97,8 @@ class RequestCardContainerView: UIView {
     declineButton?.setTitleColor(.black, for: .normal)
   }
   
-  private func processUserType(_ userType: UserType) {
-    if userType == .provider {
+  private func processUserType(_ role: Role) {
+    if role.role2UserTypeName() == .provider {
       acceptButton = UIButton(type: UIButton.ButtonType.roundedRect)
       actionsBlock!.addArrangedSubview(acceptButton!)
     }

@@ -16,6 +16,16 @@ class RequestCardModel {
     dataSource.imageProcessing = loadImage
   }
   
+  func getCurrentUserRole() -> Role {
+    guard let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+      fatalError("Cannot get user from Core Data while being logged in...")
+    }
+    
+    guard let role = user.role else { fatalError("App user must have a role attached to him!") }
+    
+    return role
+  }
+  
   subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
     return dataSource.data[forSectionIndex]
   }

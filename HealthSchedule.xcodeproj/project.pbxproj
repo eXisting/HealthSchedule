@@ -103,6 +103,7 @@
 		EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */; };
 		EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2C220304DA00E38879 /* DateManager.swift */; };
 		EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */; };
+		EDE03ED42252394000DBAA0F /* RoleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED32252394000DBAA0F /* RoleExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +207,7 @@
 		EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateException.swift; sourceTree = "<group>"; };
 		EDD3CD2C220304DA00E38879 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardContainerView.swift; sourceTree = "<group>"; };
+		EDE03ED32252394000DBAA0F /* RoleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -654,6 +656,7 @@
 		EDCFB44E222806DE00A6B56F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				EDE03ED22252392E00DBAA0F /* Extensions */,
 				ED2AC3EF224B8AFA00AB6D9F /* Helpers */,
 				ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */,
 				EDD2A82E22368FDB00B52E68 /* DataBaseManager.swift */,
@@ -806,6 +809,14 @@
 			path = Card;
 			sourceTree = "<group>";
 		};
+		EDE03ED22252392E00DBAA0F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EDE03ED32252394000DBAA0F /* RoleExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -950,6 +961,7 @@
 				ED231B2622297C6900A80FC9 /* RequestViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
 				ED231B4B222E7A2A00A80FC9 /* RequestListTableView.swift in Sources */,
+				EDE03ED42252394000DBAA0F /* RoleExtensions.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
 				EDD2A8392238029C00B52E68 /* SearchTableView.swift in Sources */,
