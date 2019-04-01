@@ -51,7 +51,7 @@ class AccountModel {
   
   func getCities(_ completion: @escaping ([City]) -> Void) {
     let cachedCities = databaseManager.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext)
-    if  !cachedCities.isEmpty {
+    if cachedCities.count > 1 {
       completion(cachedCities)
       return
     }
