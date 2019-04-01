@@ -19,7 +19,7 @@ class RequestViewController: UIViewController {
   private lazy var presenter: Presentr = {
     let customType = PresentationType.custom(
       width: .fluid(percentage: 0.8),
-      height: .fluid(percentage: 0.5),
+      height: .fluid(percentage: 0.55),
       center: .center
     )
     
@@ -100,7 +100,13 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
     mainView.beginUpdates()
   }
   
-  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+  func controller(
+    _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+    didChange anObject: Any,
+    at indexPath: IndexPath?,
+    for type: NSFetchedResultsChangeType,
+    newIndexPath: IndexPath?) {
+    
     switch (type) {
     case .insert:
       if let indexPath = newIndexPath {

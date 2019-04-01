@@ -9,7 +9,7 @@
 import UIKit
 
 class RequestCardViewController: UIViewController {
-  private let mainView = RequestCardTableView()
+  private let mainView = RequestCardContainerView()
   private let model = RequestCardModel()
   
   override func loadView() {
@@ -19,12 +19,27 @@ class RequestCardViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mainView.setup(delegate: self, dataSource: model.dataSource)
+    mainView.setup(hasActions: true, userType: .provider)
+    mainView.tableView.setup(delegate: self, dataSource: model.dataSource)
+    mainView.setup(acceptHandler: onAccept, declineHandler: onDecline)
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    mainView.laidOutViews()
   }
   
   func set(_ request: Request) {
     title = request.providerService?.service?.name
     model.procceedRequest(request)
+  }
+  
+  @objc func onAccept() {
+    print("accept")
+  }
+  
+  @objc func onDecline() {
+    print("Decline")
   }
 }
 
@@ -46,9 +61,9 @@ extension RequestCardViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let cell = tableView.cellForRow(at: indexPath) else {
-      return
-    }
+//    guard let cell = tableView.cellForRow(at: indexPath) else {
+//      return
+//    }
     
     // TODO: present provider view on first row click
   }
