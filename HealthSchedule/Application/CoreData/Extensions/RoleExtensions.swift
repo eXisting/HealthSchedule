@@ -12,9 +12,9 @@ extension Role {
   func role2UserTypeName() -> UserTypeName {
     switch self.id {
     case 1:
-      return UserTypeName.client
-    case 2:
       return UserTypeName.provider
+    case 2:
+      return UserTypeName.client
     default:
       return UserTypeName.unknown
     }
