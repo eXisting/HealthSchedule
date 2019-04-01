@@ -41,7 +41,8 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   private let serviceEntity = "Service"
   private let requestEntity = "Request"
   private let providerServiceEntity = "ProviderService"
-  
+  private let roleEntity = "Role"
+
   init(provider: ContextsProviding) {
     self.provider = provider
     fetchRequestsHandler = FetchRequestsHandler(provider: provider)
@@ -217,6 +218,36 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
+  func insertUpdateRoles(from remoteRole: RemoteRole, for user: User, context: NSManagedObjectContext? = nil) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let roleEntityObject = NSEntityDescription.entity(forEntityName: roleEntity, in: workingContext)
+    
+    let fetchRequest: NSFetchRequest<Role> = Role.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteRole.id))")
+    fetchRequest.fetchLimit = 1
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      
+      // Update
+      if result.count > 0 {
+        builder.build(role: result.first!, attachedUser: user, remoteRole, context: workingContext)
+      }
+      // Insert
+      else {
+        let role = NSManagedObject(entity: roleEntityObject!, insertInto: workingContext) as! Role
+        builder.build(role: role, attachedUser: user, remoteRole, context: workingContext)
+      }
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+  }
+  
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
@@ -251,6 +282,10 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
           if let remoteImage = remoteUser.photo {
             insertUpdateUserImage(from: remoteImage, context: workingContext)
           }
+          
+          if let remoteRole = remoteUser.role {
+            insertUpdateRoles(from: remoteRole, for: user, context: workingContext)
+          }
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -280,16 +315,21 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     var fetchRequests: [NSFetchRequest<NSFetchRequestResult>] = [
       Service.fetchRequest(),
       ProviderService.fetchRequest(),
-      Role.fetchRequest(),
       Request.fetchRequest()
     ]
     
     if let existingUser = fetchRequestsHandler.getCurrentUser(context: workingContext) {
       let cityRequest: NSFetchRequest<NSFetchRequestResult> = City.fetchRequest()
       cityRequest.predicate = NSPredicate(format: "id != \(existingUser.cityId)")
-      
+      cityRequest.fetchLimit = 1
+
       let usersRequest: NSFetchRequest<NSFetchRequestResult> = User.fetchRequest()
       usersRequest.predicate = NSPredicate(format: "id != \(existingUser.id)")
+      usersRequest.fetchLimit = 1
+
+      let userRoleRequest: NSFetchRequest<NSFetchRequestResult> = Role.fetchRequest()
+      userRoleRequest.predicate = NSPredicate(format: "id != \(existingUser.roleId)")
+      userRoleRequest.fetchLimit = 1
       
       if let image = existingUser.image {
         let userImageRequest: NSFetchRequest<NSFetchRequestResult> = UserImage.fetchRequest()
@@ -300,6 +340,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       
       fetchRequests.append(cityRequest)
       fetchRequests.append(usersRequest)
+      fetchRequests.append(userRoleRequest)
     }
     
     for deleteRequest in fetchRequests {

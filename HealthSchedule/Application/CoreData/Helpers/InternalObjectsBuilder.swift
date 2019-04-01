@@ -38,6 +38,23 @@ class InternalObjectsBuilder {
     }
   }
   
+  func build(role: Role, attachedUser: User, _ remoteRole: RemoteRole, context: NSManagedObjectContext) {
+    role.id = Int16(remoteRole.id)
+    role.name = remoteRole.title
+    
+    role.addToUser(attachedUser)
+
+    guard let roleUsers = role.user else { return }
+    
+    for element in roleUsers {
+      guard let user = (element as? User) else { continue }
+      
+      user.role = role
+      user.roleId = role.id
+      role.addToUser(user)
+    }
+  }
+  
   func build(image: UserImage, with userId: Int, _ remoteImage: ProfileImage, context: NSManagedObjectContext) {
     image.id = Int32(remoteImage.id)
     image.url = remoteImage.url
