@@ -38,8 +38,16 @@ class RequestManager {
     from endpoint: Endpoints,
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (T?, ServerResponse) -> Void) {
+    getAsync(for: type, from: endpoint.rawValue, params, completion)
+  }
+  
+  func getAsync<T: Decodable>(
+    for type: T.Type,
+    from endpoint: String,
+    _ params: Parser.JsonDictionary?,
+    _ completion: @escaping (T?, ServerResponse) -> Void) {
     
-    sessionHandler.startSessionTask(buildEndpoint(endpoint.rawValue), params: params) {
+    sessionHandler.startSessionTask(buildEndpoint(endpoint), params: params) {
       (json, response) in
       guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
         completion(nil, response)

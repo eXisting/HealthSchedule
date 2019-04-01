@@ -77,8 +77,7 @@ extension RequestViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let controller = RequestCardViewController()
-    controller.set(DataBaseManager.shared.resultController.object(at: indexPath))
+    let controller = RequestCardViewController(DataBaseManager.shared.resultController.object(at: indexPath))
     customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }

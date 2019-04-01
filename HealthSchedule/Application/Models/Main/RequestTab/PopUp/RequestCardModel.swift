@@ -10,10 +10,16 @@ import UIKit
 
 class RequestCardModel {
   private let commmonDataRequestController = CommonDataRequest()
+  private let requestManager: UserDataUpdating = UserDataRequest()
+  private var request: Request
+  
   let dataSource = RequestCardDataSource()
   
-  init() {
+  init(request: Request) {
+    self.request = request
     dataSource.imageProcessing = loadImage
+    
+    procceedRequest()
   }
   
   func getCurrentUserRole() -> Role {
@@ -26,11 +32,25 @@ class RequestCardModel {
     return role
   }
   
+  func updateRequest(status: RequestStatusName) {
+    let postData: Parser.JsonDictionary = [
+      RequestJsonFields.status.rawValue: String(ReqeustStatus.statusName2RValue(value: status))
+    ]
+    
+    requestManager.updateRequest(id: Int(request.id), with: postData) { response in
+      // THE GIVEN DATA WAS INVALID
+      
+      // TODO: Call reload cell
+      
+      print(response)
+    }
+  }
+  
   subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
     return dataSource.data[forSectionIndex]
   }
   
-  func procceedRequest(_ request: Request) {
+  private func procceedRequest() {
     dataSource.data = [
       RequestCardProviderSectionModel(request: request),
       RequestCardScheduleSectionModel(request: request),

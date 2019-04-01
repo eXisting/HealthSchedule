@@ -65,6 +65,7 @@ enum RequestStatusName: String {
   case done = "Done"
   case pending = "Pending"
   case rejected = "Rejected"
+  case accepted = "Accepted"
   
   case unknown = "Unknown status"
 }
@@ -86,19 +87,32 @@ struct ReqeustStatus {
   }
   
   static func statusValue2RequestStatusName(value: Int) -> RequestStatusName {
-    var title: RequestStatusName
-    
     switch value {
     case 1:
-      title = .rejected
+      return .rejected
     case 2:
-      title = .done
+      return .done
     case 3:
-      title = .pending
+      return .pending
+    case 4:
+      return .accepted
     default:
-      title = .unknown
+      return .unknown
     }
-    
-    return title
+  }
+  
+  static func statusName2RValue(value: RequestStatusName) -> Int {
+    switch value {
+    case .rejected:
+      return 2
+    case .done:
+      return 4
+    case .pending:
+      return 3
+    case .accepted:
+      return 1
+    default:
+      return 5
+    }
   }
 }

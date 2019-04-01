@@ -10,11 +10,16 @@ import UIKit
 
 class RequestCardViewController: UIViewController {
   private let mainView = RequestCardContainerView()
-  private let model = RequestCardModel()
+  private var model: RequestCardModel!
   
   override func loadView() {
     super.loadView()
     view = mainView
+  }
+  
+  convenience init(_ request: Request) {
+    self.init()
+    model = RequestCardModel(request: request)
   }
   
   override func viewDidLoad() {
@@ -29,17 +34,12 @@ class RequestCardViewController: UIViewController {
     mainView.laidOutViews()
   }
   
-  func set(_ request: Request) {
-    title = request.providerService?.service?.name
-    model.procceedRequest(request)
-  }
-  
   @objc func onAccept() {
-    print("accept")
+    model.updateRequest(status: .accepted)
   }
   
   @objc func onDecline() {
-    print("Decline")
+    model.updateRequest(status: .rejected)
   }
 }
 

@@ -36,11 +36,13 @@ class RequestListRow: UITableViewCell {
     
     switch status {
     case .done:
-      statusColor = .green
+      statusColor = .black
     case .pending:
       statusColor = .blue
     case .rejected:
       statusColor = .red
+    case .accepted:
+      statusColor = .green
     case .unknown:
       statusColor = .gray
     }
