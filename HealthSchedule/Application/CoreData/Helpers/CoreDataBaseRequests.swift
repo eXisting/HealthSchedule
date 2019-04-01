@@ -278,10 +278,10 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     var fetchRequests: [NSFetchRequest<NSFetchRequestResult>] = [
-        Service.fetchRequest(),
-        Request.fetchRequest(),
-        ProviderService.fetchRequest(),
-        Role.fetchRequest()
+      Service.fetchRequest(),
+      ProviderService.fetchRequest(),
+      Role.fetchRequest(),
+      Request.fetchRequest()
     ]
     
     if let existingUser = fetchRequestsHandler.getCurrentUser(context: workingContext) {
