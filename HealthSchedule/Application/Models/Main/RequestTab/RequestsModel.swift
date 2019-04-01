@@ -39,7 +39,7 @@ class RequestsDataSource: NSObject, UITableViewDataSource {
       serviceName: request.service?.name ?? "Unkown name",
       price: String(request.providerService?.price ?? 0.0),
       visitedDate: DateManager.shared.dateToString(request.requestedAt),
-      status: String(request.status)
+      status: request.status2RequestStatusName()
     )
     
     return cell

@@ -127,7 +127,7 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
           serviceName: requestObject.service?.name ?? "Unkown name",
           price: String(requestObject.providerService?.price ?? 0.0),
           visitedDate: DateManager.shared.dateToString(requestObject.requestedAt),
-          status: String(requestObject.status)
+          status: requestObject.status2RequestStatusName()
         )
       }
       break;

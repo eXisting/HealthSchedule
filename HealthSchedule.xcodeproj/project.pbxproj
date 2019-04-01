@@ -104,6 +104,7 @@
 		EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2C220304DA00E38879 /* DateManager.swift */; };
 		EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */; };
 		EDE03ED42252394000DBAA0F /* RoleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED32252394000DBAA0F /* RoleExtensions.swift */; };
+		EDE03ED62252494500DBAA0F /* RequestStatusExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED52252494500DBAA0F /* RequestStatusExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -208,6 +209,7 @@
 		EDD3CD2C220304DA00E38879 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardContainerView.swift; sourceTree = "<group>"; };
 		EDE03ED32252394000DBAA0F /* RoleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleExtensions.swift; sourceTree = "<group>"; };
+		EDE03ED52252494500DBAA0F /* RequestStatusExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -813,6 +815,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE03ED32252394000DBAA0F /* RoleExtensions.swift */,
+				EDE03ED52252494500DBAA0F /* RequestStatusExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1032,6 +1035,7 @@
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,
+				EDE03ED62252494500DBAA0F /* RequestStatusExtension.swift in Sources */,
 				EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */,
 				DB93D97E224EB31E00A541BD /* CoreDataBaseRequests.swift in Sources */,
 			);
