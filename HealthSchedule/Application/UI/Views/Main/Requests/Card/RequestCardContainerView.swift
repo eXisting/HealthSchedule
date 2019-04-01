@@ -38,8 +38,8 @@ class RequestCardContainerView: UIView {
   }
   
   func laidOutViews() {
-    actionsBackground.addBorder(side: .top, thickness: 1, color: .lightGray)
-    actionsBackground.addBorder(side: .bottom, thickness: 1, color: .lightGray)
+    actionsBackground.addBorder(side: .top, thickness: 2, color: .lightGray)
+    actionsBackground.addBorder(side: .bottom, thickness: 2, color: .lightGray)
   }
   
   @objc private func onAcceptClick() {
