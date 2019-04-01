@@ -18,6 +18,8 @@ class RequestListRow: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     laidOutViews()
     customizeViews()
+    
+    selectionStyle = .none
   }
   
   required init?(coder aDecoder: NSCoder) {

@@ -78,7 +78,7 @@ class DataBaseManager: NSObject {
     let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
     
     fetchRequest.sortDescriptors = [
-      NSSortDescriptor(key: "status", ascending: true),
+      NSSortDescriptor(key: "status", ascending: false),
       NSSortDescriptor(key: "requestedAt", ascending: true)
     ]
     

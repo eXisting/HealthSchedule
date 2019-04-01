@@ -90,9 +90,9 @@ struct ReqeustStatus {
     
     switch value {
     case 1:
-      title = .done
-    case 2:
       title = .rejected
+    case 2:
+      title = .done
     case 3:
       title = .pending
     default:
