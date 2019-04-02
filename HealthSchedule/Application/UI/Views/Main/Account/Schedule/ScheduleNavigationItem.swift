@@ -1,31 +1,26 @@
 //
-//  AccountNavigationBar.swift
+//  ScheduleNavigationItem.swift
 //  HealthSchedule
 //
-//  Created by Andrey Popazov on 3/14/19.
+//  Created by sys-246 on 4/2/19.
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
 import UIKit
 
-class AccountNavigationItem: UINavigationItem {
-  var delegate: AccountHandlableDelegate
+class ScheduleNavigationItem: UINavigationItem {
+  var delegate: ScheduleNavigationItemDelegate
   
-  init(title: String, delegate: AccountHandlableDelegate) {
+  init(title: String, delegate: ScheduleNavigationItemDelegate) {
     self.delegate = delegate
     
     super.init(title: title)
     
-    leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogoutClick))
     rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSaveClick))
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  @objc private func onLogoutClick() {
-    delegate.logout()
   }
   
   @objc private func onSaveClick() {

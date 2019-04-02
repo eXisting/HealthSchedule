@@ -108,6 +108,8 @@
 		EDE03ED82253543000DBAA0F /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED72253543000DBAA0F /* ScheduleViewController.swift */; };
 		EDE03EDB2253550D00DBAA0F /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EDA2253550D00DBAA0F /* ScheduleModel.swift */; };
 		EDE03EDE2253554A00DBAA0F /* ScheduleMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EDD2253554A00DBAA0F /* ScheduleMainView.swift */; };
+		EDE03EE92253754000DBAA0F /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EE82253754000DBAA0F /* DateExtension.swift */; };
+		EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -216,6 +218,8 @@
 		EDE03ED72253543000DBAA0F /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		EDE03EDA2253550D00DBAA0F /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		EDE03EDD2253554A00DBAA0F /* ScheduleMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMainView.swift; sourceTree = "<group>"; };
+		EDE03EE82253754000DBAA0F /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigationItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -568,6 +572,7 @@
 			children = (
 				EDD3CD2C220304DA00E38879 /* DateManager.swift */,
 				ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */,
+				EDE03EE82253754000DBAA0F /* DateExtension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -731,8 +736,8 @@
 		EDD2A82B22367BF200B52E68 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				ED98CE3D224285E700B95696 /* RequestTab */,
 				ED825FEA2241481600456D0F /* AccountTab */,
+				ED98CE3D224285E700B95696 /* RequestTab */,
 				EDD2A85C223BC77300B52E68 /* SearchTab */,
 			);
 			path = Main;
@@ -841,6 +846,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE03EDD2253554A00DBAA0F /* ScheduleMainView.swift */,
+				EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -1007,6 +1013,7 @@
 				EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
+				EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */,
 				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
 				ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
@@ -1053,6 +1060,7 @@
 				ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */,
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
+				EDE03EE92253754000DBAA0F /* DateExtension.swift in Sources */,
 				ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */,
 				EDD2A83C2238042E00B52E68 /* SearchModel.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,

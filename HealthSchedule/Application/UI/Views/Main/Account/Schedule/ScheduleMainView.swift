@@ -7,7 +7,27 @@
 //
 
 import UIKit
+import FSCalendar
 
 class ScheduleMainView: UIView {
+  private let timetableView = TimetableView()
+    
+  func setup(timeViewDataSource: FSCalendarDataSource, timeViewDelegate: FSCalendarDelegate) {
+    timetableView.setup(dataSource: timeViewDataSource)
+    timetableView.calendar.delegate = timeViewDelegate
+    laidOutViews()
+  }
   
+  private func laidOutViews() {
+    addSubview(timetableView)
+    
+    timetableView.translatesAutoresizingMaskIntoConstraints = false
+    timetableView.pin(to: self)
+    
+    timetableView.calendar.scope = .week
+    timetableView.calendar.firstWeekday = 2
+    timetableView.calendar.allowsMultipleSelection = true
+    timetableView.calendar.headerHeight = 0
+    timetableView.calendar.scrollEnabled = false
+  }
 }
