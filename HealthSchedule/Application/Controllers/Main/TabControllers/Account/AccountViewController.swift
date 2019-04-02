@@ -9,7 +9,7 @@
 import UIKit
 import Presentr
 
-protocol AccountHandlableDelegate {
+protocol AccountHandlableDelegate: class {
   func logout()
   func save()
   func loadUserPhoto(imageData: Data)
@@ -53,7 +53,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    model = AccountModel(handlingDelegate: self)
+    model = AccountModel(accountHandlingDelegate: self)
     
     model.dataSource.textFieldDelegate = self
     
