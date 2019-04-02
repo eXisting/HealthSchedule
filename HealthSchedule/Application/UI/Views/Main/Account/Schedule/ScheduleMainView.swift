@@ -15,6 +15,9 @@ class ScheduleMainView: UIView {
   func setup(timeViewDataSource: FSCalendarDataSource, timeViewDelegate: FSCalendarDelegate) {
     timetableView.setup(dataSource: timeViewDataSource)
     timetableView.calendar.delegate = timeViewDelegate
+    
+    timetableView.calendar.register(ScheduleTemplateDayCell.self, forCellReuseIdentifier: "cell")
+    
     laidOutViews()
   }
   

@@ -15,7 +15,9 @@ class ScheduleModel {
   
   func loadProviderScheduleTemplate(_ completion: @escaping () -> Void) {
     requestManager.getScheduleTemplate { response in
-      
+      if response == ResponseStatus.success.rawValue {
+        
+      }
     }
   }
   
@@ -28,8 +30,18 @@ class ScheduleModel {
   }
 }
 
-class ScheduleTemplateDataSource: NSObject, FSCalendarDataSource {  
+class ScheduleTemplateDataSource: NSObject, FSCalendarDataSource {
+  fileprivate var data: [ScheduleDayTemplate] = []
+  
   func minimumDate(for calendar: FSCalendar) -> Date {
     return Date.today().next(.monday)
+  }
+  
+  func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+    guard let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position) as? ScheduleTemplateDayCell else {
+      fatalError("Register cell for Calendar!")
+    }
+        
+    return cell
   }
 }

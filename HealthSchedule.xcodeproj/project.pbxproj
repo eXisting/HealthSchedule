@@ -110,6 +110,7 @@
 		EDE03EE92253754000DBAA0F /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EE82253754000DBAA0F /* DateExtension.swift */; };
 		EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */; };
 		EDE03EED2253808800DBAA0F /* ScheduleTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EEC2253808800DBAA0F /* ScheduleTemplate.swift */; };
+		EDE03EF12253BA3700DBAA0F /* ScheduleTemplateDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EF02253BA3700DBAA0F /* ScheduleTemplateDayCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +221,7 @@
 		EDE03EE82253754000DBAA0F /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigationItem.swift; sourceTree = "<group>"; };
 		EDE03EEC2253808800DBAA0F /* ScheduleTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTemplate.swift; sourceTree = "<group>"; };
+		EDE03EF02253BA3700DBAA0F /* ScheduleTemplateDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTemplateDayCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -847,6 +849,7 @@
 			children = (
 				EDE03EDD2253554A00DBAA0F /* ScheduleMainView.swift */,
 				EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */,
+				EDE03EF02253BA3700DBAA0F /* ScheduleTemplateDayCell.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -1055,6 +1058,7 @@
 				EDCFB458222819B800A6B56F /* MainTabBarController.swift in Sources */,
 				ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */,
 				ED089A4B21E77D12006A8523 /* AppDelegate.swift in Sources */,
+				EDE03EF12253BA3700DBAA0F /* ScheduleTemplateDayCell.swift in Sources */,
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
 				EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */,
 				ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */,
