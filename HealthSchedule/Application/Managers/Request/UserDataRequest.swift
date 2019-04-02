@@ -209,13 +209,13 @@ extension UserDataRequest: AuthenticationProviding {
 extension UserDataRequest: ProviderInfoRequesting {
   func getScheduleTemplate(completion: @escaping (String?) -> Void) {
     requestsManager.getListAsync(for: RemoteScheduleTemplateDay.self, from: Endpoints.scheduleTemplate, RequestManager.sessionToken.asParams()) {
-      list, response in
+      [weak self] list, response in
       if response.error != nil {
         completion(response.error)
         return
       }
       
-      // TODO: insert into core data
+      self?.databaseManager.insertUpdateScheduleDayTemplate(from: list, context: DataBaseManager.shared.mainContext)
       
       completion(ResponseStatus.success.rawValue)
     }

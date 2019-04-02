@@ -13,6 +13,7 @@ protocol CoreDataRequestsPerformable {
   
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext?)
   func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext?)
+  func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext?)
   
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext?)
   
@@ -42,6 +43,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   private let requestEntity = "Request"
   private let providerServiceEntity = "ProviderService"
   private let roleEntity = "Role"
+  private let scheduleDayTemplateEntity = "ScheduleDayTemplate"
 
   init(provider: ContextsProviding) {
     self.provider = provider
@@ -297,6 +299,42 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
+  func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext?) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let dayEntityObject = NSEntityDescription.entity(forEntityName: scheduleDayTemplateEntity, in: workingContext)
+    
+    for day in days {
+      let fetchRequest: NSFetchRequest<ScheduleDayTemplate> = ScheduleDayTemplate.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(day.id))")
+      fetchRequest.fetchLimit = 1
+      
+      guard let currentProvider = fetchRequestsHandler.getCurrentUser(context: workingContext) else {
+        fatalError("User must exist here!")
+      }
+      
+      do {
+        let result = try workingContext.fetch(fetchRequest)
+        
+        // Update
+        if result.count > 0 {
+          builder.build(day: result.first!, attachedUser: currentProvider, day, context: workingContext)
+        }
+          // Insert
+        else {
+          let role = NSManagedObject(entity: dayEntityObject!, insertInto: workingContext) as! ScheduleDayTemplate
+          builder.build(day: role, attachedUser: currentProvider, day, context: workingContext)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
+    }
+    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+  }
+  
   // MARK: -Delete
   
   func delete(with id: NSManagedObjectID, context: NSManagedObjectContext? = nil) {
@@ -315,7 +353,8 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     var fetchRequests: [NSFetchRequest<NSFetchRequestResult>] = [
       Service.fetchRequest(),
       ProviderService.fetchRequest(),
-      Request.fetchRequest()
+      Request.fetchRequest(),
+      ScheduleDayTemplate.fetchRequest()
     ]
     
     if let existingUser = fetchRequestsHandler.getCurrentUser(context: workingContext) {

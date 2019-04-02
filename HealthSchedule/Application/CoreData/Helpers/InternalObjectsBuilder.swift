@@ -55,6 +55,16 @@ class InternalObjectsBuilder {
     }
   }
   
+  func build(day: ScheduleDayTemplate, attachedUser: User, _ remote: RemoteScheduleTemplateDay, context: NSManagedObjectContext) {
+    day.id = Int16(remote.id)
+    day.working = remote.working
+    day.start = remote.startTime
+    day.end = remote.endTime
+    
+    day.provider = attachedUser
+    attachedUser.addToScheduleDayTemplate(day)
+  }
+  
   func build(image: UserImage, with userId: Int, _ remoteImage: ProfileImage, context: NSManagedObjectContext) {
     image.id = Int32(remoteImage.id)
     image.url = remoteImage.url
