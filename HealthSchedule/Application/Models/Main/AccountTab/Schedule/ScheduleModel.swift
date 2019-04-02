@@ -10,7 +10,14 @@ import UIKit
 import FSCalendar
 
 class ScheduleModel {
+  private let requestManager: ProviderInfoRequesting = UserDataRequest()
   let timetableDataSource = ScheduleTemplateDataSource()
+  
+  func loadProviderScheduleTemplate(_ completion: @escaping () -> Void) {
+    requestManager.getScheduleTemplate { response in
+      
+    }
+  }
   
   func onDatePicked(date: Date) {
     

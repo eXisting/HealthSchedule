@@ -27,6 +27,7 @@ class ScheduleViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     mainView.setup(timeViewDataSource: model.timetableDataSource, timeViewDelegate: self)
+    
     title = titleName
   }
   
@@ -56,6 +57,8 @@ extension ScheduleViewController: FSCalendarDelegate {
 
 extension ScheduleViewController: ScheduleNavigationItemDelegate {
   func save() {
-    
+    model.loadProviderScheduleTemplate {
+      
+    }
   }
 }

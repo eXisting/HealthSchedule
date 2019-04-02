@@ -31,6 +31,7 @@ enum Endpoints: String {
   case providerProfessions = "/api/provider/professions"
   
   // GET / PUT
+  case scheduleTemplate = "/api/provider/schedules"
 }
 
 enum RequestType: String {

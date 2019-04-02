@@ -99,7 +99,6 @@
 		EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */; };
 		EDD3CD252201E7A400E38879 /* ProviderProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD242201E7A400E38879 /* ProviderProfession.swift */; };
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
-		EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */; };
 		EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */; };
 		EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2C220304DA00E38879 /* DateManager.swift */; };
 		EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */; };
@@ -110,6 +109,7 @@
 		EDE03EDE2253554A00DBAA0F /* ScheduleMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EDD2253554A00DBAA0F /* ScheduleMainView.swift */; };
 		EDE03EE92253754000DBAA0F /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EE82253754000DBAA0F /* DateExtension.swift */; };
 		EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */; };
+		EDE03EED2253808800DBAA0F /* ScheduleTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03EEC2253808800DBAA0F /* ScheduleTemplate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -209,7 +209,6 @@
 		EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCityViewController.swift; sourceTree = "<group>"; };
 		EDD3CD242201E7A400E38879 /* ProviderProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfession.swift; sourceTree = "<group>"; };
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
-		EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekDay.swift; sourceTree = "<group>"; };
 		EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateException.swift; sourceTree = "<group>"; };
 		EDD3CD2C220304DA00E38879 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardContainerView.swift; sourceTree = "<group>"; };
@@ -220,6 +219,7 @@
 		EDE03EDD2253554A00DBAA0F /* ScheduleMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMainView.swift; sourceTree = "<group>"; };
 		EDE03EE82253754000DBAA0F /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigationItem.swift; sourceTree = "<group>"; };
+		EDE03EEC2253808800DBAA0F /* ScheduleTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTemplate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -538,6 +538,7 @@
 				ED448305220477B900BE8EF0 /* ProviderData.swift */,
 				EDD3CD242201E7A400E38879 /* ProviderProfession.swift */,
 				EDD3CD262201F21700E38879 /* ProviderService.swift */,
+				EDE03EEC2253808800DBAA0F /* ScheduleTemplate.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -548,7 +549,6 @@
 				ED1ED02321FF353400141CF5 /* Category.swift */,
 				ED1ED01921FF199100141CF5 /* City.swift */,
 				EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */,
-				EDD3CD282201F33700E38879 /* ScheduleWeekDay.swift */,
 				ED4482EB22044B4A00BE8EF0 /* Token.swift */,
 				ED52F16D220C6D4000568CBC /* ServerException.swift */,
 				EDD2A82522314CE800B52E68 /* Request.swift */,
@@ -996,6 +996,7 @@
 				EDD2A84322390AB300B52E68 /* ServicesViewController.swift in Sources */,
 				ED231B2622297C6900A80FC9 /* RequestViewController.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
+				EDE03EED2253808800DBAA0F /* ScheduleTemplate.swift in Sources */,
 				ED231B4B222E7A2A00A80FC9 /* RequestListTableView.swift in Sources */,
 				EDE03ED42252394000DBAA0F /* RoleExtensions.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
@@ -1030,7 +1031,6 @@
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
 				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,
 				EDD2A82F22368FDB00B52E68 /* DataBaseManager.swift in Sources */,
-				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,

@@ -18,6 +18,7 @@ protocol ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
+  func getScheduleTemplate(completion: @escaping (String?) -> Void)
 }
 
 protocol CommonDataRequesting {
@@ -152,7 +153,7 @@ extension UserDataRequest: AuthenticationProviding {
   }
   
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
-    let postBody = ["username": login, "password": password]
+    let postBody = ["username": "provider@example.org", "password": password]
     requestsManager.signIn(userData: postBody) {
       [weak self] (user, response) in
       guard let remoteUser = user else {
@@ -206,6 +207,20 @@ extension UserDataRequest: AuthenticationProviding {
 }
 
 extension UserDataRequest: ProviderInfoRequesting {
+  func getScheduleTemplate(completion: @escaping (String?) -> Void) {
+    requestsManager.getListAsync(for: RemoteScheduleTemplateDay.self, from: Endpoints.scheduleTemplate, RequestManager.sessionToken.asParams()) {
+      list, response in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+      
+      // TODO: insert into core data
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
   func getProfessions(completion: @escaping (String?) -> Void) {
     requestsManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken.asParams()) {
       (list, response) in

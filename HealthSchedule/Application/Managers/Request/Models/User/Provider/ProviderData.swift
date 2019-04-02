@@ -17,7 +17,7 @@ struct ProviderData {
   var certificates: [ProfileImage] = []
   var services: [RemoteProviderService] = []
   
-  var scheduleTemplate: [RemoteScheduleWeekDay] = []
+  var scheduleTemplate: [RemoteScheduleTemplateDay] = []
   var scheduleExceptions: [RemoteScheduleDateException] = []
   var address: RemoteAddress?
   
