@@ -90,11 +90,11 @@ class RequestCardContainerView: UIView {
     actionsBlock?.distribution = .fillEqually
     actionsBlock?.alignment = .fill
     
-    acceptButton?.setTitle("Accept", for: .normal)
-    declineButton?.setTitle("Decline", for: .normal)
+    acceptButton?.setTitle("ACCEPT", for: .normal)
+    declineButton?.setTitle("DECLINE", for: .normal)
     
-    acceptButton?.setTitleColor(.black, for: .normal)
-    declineButton?.setTitleColor(.black, for: .normal)
+    acceptButton?.setTitleColor(.green, for: .normal)
+    declineButton?.setTitleColor(.red, for: .normal)
   }
   
   private func processUserType(_ role: Role) {

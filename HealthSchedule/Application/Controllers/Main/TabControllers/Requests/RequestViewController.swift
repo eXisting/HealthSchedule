@@ -19,7 +19,7 @@ class RequestViewController: UIViewController {
   private lazy var presenter: Presentr = {
     let customType = PresentationType.custom(
       width: .fluid(percentage: 0.8),
-      height: .fluid(percentage: 0.55),
+      height: .fluid(percentage: 0.5),
       center: .center
     )
     

@@ -22,6 +22,11 @@ class RequestCardModel {
     procceedRequest()
   }
   
+  func isRequestHasActions() -> Bool {
+    let requestStatus = ReqeustStatus.statusValue2RequestStatusName(value: Int(request.status))
+    return requestStatus == .pending || requestStatus == .accepted
+  }
+  
   func getCurrentUserRole() -> Role {
     guard let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
       fatalError("Cannot get user from Core Data while being logged in...")
@@ -105,6 +110,8 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
     
     let cell = UITableViewCell()
     cell.textLabel?.text = "\(rowData.title): \(rowData.data)"
+    cell.textLabel?.numberOfLines = 10
+    cell.textLabel?.lineBreakMode = .byWordWrapping
     cell.selectionStyle = .none
     return cell
   }
