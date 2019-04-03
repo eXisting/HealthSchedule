@@ -66,6 +66,7 @@
 		ED7359022254B2A0006C318C /* ProviderServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359012254B2A0006C318C /* ProviderServicesController.swift */; };
 		ED7359052254B335006C318C /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359042254B335006C318C /* NavigationItem.swift */; };
 		ED7359082254B8D6006C318C /* ProviderServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359072254B8D6006C318C /* ProviderServicesModel.swift */; };
+		ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */; };
 		ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FE72241008600456D0F /* RequestCardViewController.swift */; };
 		ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */; };
 		ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */; };
@@ -175,6 +176,7 @@
 		ED7359012254B2A0006C318C /* ProviderServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesController.swift; sourceTree = "<group>"; };
 		ED7359042254B335006C318C /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 		ED7359072254B8D6006C318C /* ProviderServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesModel.swift; sourceTree = "<group>"; };
+		ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResultControllersComposer.swift; sourceTree = "<group>"; };
 		ED825FE72241008600456D0F /* RequestCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardViewController.swift; sourceTree = "<group>"; };
 		ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionInfoModel.swift; sourceTree = "<group>"; };
 		ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowInfoModel.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */,
 				ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */,
 				DB93D97D224EB31E00A541BD /* CoreDataBaseRequests.swift */,
+				ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -997,6 +1000,7 @@
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				ED231B4D222E850300A80FC9 /* RequestListRow.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
+				ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,

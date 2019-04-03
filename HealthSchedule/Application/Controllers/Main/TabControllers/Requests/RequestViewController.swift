@@ -41,7 +41,7 @@ class RequestViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    DataBaseManager.shared.frcDelegate = self
+    DataBaseManager.shared.setFrcDelegate(for: .request, delegate: self)
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
@@ -77,7 +77,7 @@ extension RequestViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let controller = RequestCardViewController(DataBaseManager.shared.resultController.object(at: indexPath))
+    let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath))
     customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }

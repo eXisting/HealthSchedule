@@ -18,10 +18,6 @@ class DataBaseManager: NSObject {
   
   // MARK: Fields
   
-  var fetchRequestsHandler: FetchRequestsHandler {
-    return executer.fetchRequestsHandler
-  }
-  
   private let modelName = "MainCoreDataContainer"
   
   private lazy var persistentContainer: NSPersistentContainer = {
@@ -60,6 +56,28 @@ class DataBaseManager: NSObject {
     return CoreDataRequestsBase(provider: self)
   }()
   
+  var fetchRequestsHandler: FetchRequestsHandler {
+    return executer.fetchRequestsHandler
+  }
+  
+  // MARK: - Fetch result controller composer
+  
+  private lazy var frcComposer = {
+    return FetchResultControllersComposer()
+  }()
+  
+  var requestsResultController: NSFetchedResultsController<Request> {
+    return frcComposer.requestsFetchResultController
+  }
+  
+  var providerServicesFrc: NSFetchedResultsController<ProviderService> {
+    return frcComposer.providerServicesFetchResultController
+  }
+  
+  func setFrcDelegate(for frcType: FrcDelegateType, delegate: NSFetchedResultsControllerDelegate?) {
+    frcComposer.setDelegate(for: frcType, delegate: delegate)
+  }
+  
   // MARK: - Core Data Saving support
   
   func clearUntilCache() {
@@ -69,40 +87,6 @@ class DataBaseManager: NSObject {
   func saveData() {
     executer.saveContext(persistentContainer.viewContext)
   }
-  
-  // MARK: - Fetch result controller stack
-  
-  weak var frcDelegate: NSFetchedResultsControllerDelegate?
-  
-  lazy var resultController: NSFetchedResultsController<Request> = {
-    let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
-    
-    fetchRequest.sortDescriptors = [
-      NSSortDescriptor(key: "status", ascending: false),
-      NSSortDescriptor(key: "requestedAt", ascending: true)
-    ]
-    
-    fetchRequest.returnsObjectsAsFaults = false
-    fetchRequest.relationshipKeyPathsForPrefetching = ["providerService", "service"]
-    fetchRequest.fetchBatchSize = 20
-    
-    let controller = NSFetchedResultsController(
-      fetchRequest: fetchRequest,
-      managedObjectContext: persistentContainer.viewContext,
-      sectionNameKeyPath: nil,
-      cacheName: nil)
-    
-    controller.delegate = frcDelegate
-    
-    do {
-      let _ = try controller.performFetch()
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
-    }
-    
-    return controller
-  }()
 }
 
 protocol ContextsProviding: class {
