@@ -18,6 +18,7 @@ protocol ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
+  func getProviderServices(completion: @escaping (String?) -> Void)
 }
 
 protocol CommonDataRequesting {
@@ -152,7 +153,7 @@ extension UserDataRequest: AuthenticationProviding {
   }
   
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
-    let postBody = ["username": login, "password": password]
+    let postBody = ["username": "provider@example.org", "password": password]
     requestsManager.signIn(userData: postBody) {
       [weak self] (user, response) in
       guard let remoteUser = user else {
@@ -244,6 +245,14 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       completion(nil)
+    }
+  }
+  
+  func getProviderServices(completion: @escaping (String?) -> Void) {
+    requestsManager.getListAsync(for: RemoteProviderService.self, from: .providerServices, RequestManager.sessionToken.asParams()) {
+      list, response in
+      
+      print(list)
     }
   }
 }

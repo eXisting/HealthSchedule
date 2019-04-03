@@ -63,6 +63,9 @@
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6B131922422F1D00938ACA /* IdentifyingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
+		ED7359022254B2A0006C318C /* ProviderServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359012254B2A0006C318C /* ProviderServicesController.swift */; };
+		ED7359052254B335006C318C /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359042254B335006C318C /* NavigationItem.swift */; };
+		ED7359082254B8D6006C318C /* ProviderServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359072254B8D6006C318C /* ProviderServicesModel.swift */; };
 		ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FE72241008600456D0F /* RequestCardViewController.swift */; };
 		ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */; };
 		ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */; };
@@ -169,6 +172,9 @@
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyingTextField.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
+		ED7359012254B2A0006C318C /* ProviderServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesController.swift; sourceTree = "<group>"; };
+		ED7359042254B335006C318C /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
+		ED7359072254B8D6006C318C /* ProviderServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesModel.swift; sourceTree = "<group>"; };
 		ED825FE72241008600456D0F /* RequestCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardViewController.swift; sourceTree = "<group>"; };
 		ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionInfoModel.swift; sourceTree = "<group>"; };
 		ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowInfoModel.swift; sourceTree = "<group>"; };
@@ -344,7 +350,7 @@
 		ED231B2A222D3B1600A80FC9 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				EDD2A858223AAA2800B52E68 /* ChildControllers */,
+				ED7359002254B289006C318C /* ProviderServices */,
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
 			);
 			path = Account;
@@ -596,9 +602,34 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		ED7359002254B289006C318C /* ProviderServices */ = {
+			isa = PBXGroup;
+			children = (
+				ED7359012254B2A0006C318C /* ProviderServicesController.swift */,
+			);
+			path = ProviderServices;
+			sourceTree = "<group>";
+		};
+		ED7359032254B322006C318C /* ProviderServices */ = {
+			isa = PBXGroup;
+			children = (
+				ED7359042254B335006C318C /* NavigationItem.swift */,
+			);
+			path = ProviderServices;
+			sourceTree = "<group>";
+		};
+		ED7359062254B8C5006C318C /* ProviderServices */ = {
+			isa = PBXGroup;
+			children = (
+				ED7359072254B8D6006C318C /* ProviderServicesModel.swift */,
+			);
+			path = ProviderServices;
+			sourceTree = "<group>";
+		};
 		ED825FEA2241481600456D0F /* AccountTab */ = {
 			isa = PBXGroup;
 			children = (
+				ED7359062254B8C5006C318C /* ProviderServices */,
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
 				ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */,
 				ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */,
@@ -704,6 +735,7 @@
 		EDCFB46322294F0F00A6B56F /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				ED7359032254B322006C318C /* ProviderServices */,
 				ED231B2D222D482200A80FC9 /* TableView */,
 				ED089A9E21EC8848006A8523 /* ProfileView.swift */,
 				DBE4886E223AD2560096F7D7 /* AccountNavigationItem.swift */,
@@ -775,13 +807,6 @@
 				EDD2A84E2239535100B52E68 /* TimetableView.swift */,
 			);
 			path = Timetable;
-			sourceTree = "<group>";
-		};
-		EDD2A858223AAA2800B52E68 /* ChildControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ChildControllers;
 			sourceTree = "<group>";
 		};
 		EDD2A85B223BBE3B00B52E68 /* Result */ = {
@@ -947,6 +972,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7359052254B335006C318C /* NavigationItem.swift in Sources */,
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
 				ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */,
 				ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */,
@@ -995,10 +1021,12 @@
 				ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */,
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
 				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,
+				ED7359022254B2A0006C318C /* ProviderServicesController.swift in Sources */,
 				EDD2A82F22368FDB00B52E68 /* DataBaseManager.swift in Sources */,
 				EDD3CD292201F33700E38879 /* ScheduleWeekDay.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
+				ED7359082254B8D6006C318C /* ProviderServicesModel.swift in Sources */,
 				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */,
 				ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */,

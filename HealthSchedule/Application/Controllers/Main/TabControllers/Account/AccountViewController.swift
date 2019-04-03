@@ -73,7 +73,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     case .profession:
       navigationController?.pushViewController(UIViewController(), animated: true)
     case .service:
-      navigationController?.pushViewController(UIViewController(), animated: true)
+      navigationController?.pushViewController(ProviderServicesController(), animated: true)
     case .address:
       navigationController?.pushViewController(UIViewController(), animated: true)
     case .schedule:
