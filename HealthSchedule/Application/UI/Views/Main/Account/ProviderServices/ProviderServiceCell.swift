@@ -27,9 +27,9 @@ class ProviderServiceCell: UITableViewCell {
   }
   
   func setupData(id: Int, price: Double, duration: Date?) {
-    idLabel.text = String(id)
-    priceLabel.text = String(price)
-    self.duration.text = duration != nil ? DateManager.shared.date2String(with: .time, duration!, .hour24) : "no_duration"
+    idLabel.text = "ID: \(String(id))"
+    priceLabel.text = "Price: \(String(price))"
+    self.duration.text = "Duration \(duration != nil ? DateManager.shared.date2String(with: .time, duration!, .hour24) : "no_duration")"
   }
   
   private func laidOutViews() {
@@ -42,18 +42,20 @@ class ProviderServiceCell: UITableViewCell {
     container.translatesAutoresizingMaskIntoConstraints = false
     idLabel.translatesAutoresizingMaskIntoConstraints = false
     
-    NSLayoutConstraint(item: container, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 0.9, constant: 0).isActive = true
+    NSLayoutConstraint(item: container, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 0.8, constant: 0).isActive = true
     NSLayoutConstraint(item: container, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 0.9, constant: 0).isActive = true
     NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 0.9, constant: 0).isActive = true
-    NSLayoutConstraint(item: container, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 0.7, constant: 0).isActive = true
+    NSLayoutConstraint(item: container, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 0.5, constant: 0).isActive = true
     
     NSLayoutConstraint(item: idLabel, attribute: .left, relatedBy: .equal, toItem: container, attribute: .right, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: idLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: idLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.4, constant: 0).isActive = true
-    NSLayoutConstraint(item: idLabel, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 0.9, constant: 0).isActive = true
+    NSLayoutConstraint(item: idLabel, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 0.95, constant: 0).isActive = true
   }
   
   private func customizeViews() {
-    
+    container.alignment = .leading
+    container.distribution = .fillEqually
+    container.axis = .vertical
   }
 }
