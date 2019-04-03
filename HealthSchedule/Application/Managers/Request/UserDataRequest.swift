@@ -18,7 +18,7 @@ protocol ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
-  func getProviderServices(completion: @escaping (String?) -> Void)
+  func getProviderServices(completion: @escaping (String) -> Void)
 }
 
 protocol CommonDataRequesting {
@@ -248,11 +248,18 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
-  func getProviderServices(completion: @escaping (String?) -> Void) {
+  func getProviderServices(completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteProviderService.self, from: .providerServices, RequestManager.sessionToken.asParams()) {
-      list, response in
+      [weak self] list, response in
       
-      print(list)
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      self?.databaseManager.insertUpdateProviderServices(from: list, context: DataBaseManager.shared.mainContext)
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
 }

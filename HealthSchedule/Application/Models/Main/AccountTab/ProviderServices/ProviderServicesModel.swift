@@ -10,10 +10,14 @@ import UIKit
 
 class ProviderServicesModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
+  var dataSource = ProviderServicesDataSource()
   
-  func loadServices(_ completion: @escaping () -> Void) {
-    requestManager.getProviderServices { response in
-      completion()
-    }
+  func getStoredServices(_ callback: @escaping (String) -> Void) {
+    guard let _ = DataBaseManager.shared.providerServicesFrc.fetchedObjects else { return }
+    callback(ResponseStatus.success.rawValue)
+  }
+  
+  func loadServices(_ completion: @escaping (String) -> Void) {
+    requestManager.getProviderServices(completion: completion)
   }
 }
