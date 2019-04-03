@@ -50,8 +50,12 @@ class FetchResultControllersComposer {
   lazy var providerServicesFetchResultController: NSFetchedResultsController<ProviderService> = {
     let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
     
+//    let secondarySortDescriptor = NSSortDescriptor(key: "service.name", ascending: true)
+    let primarySortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+
     fetchRequest.sortDescriptors = [
-      NSSortDescriptor(key: "id", ascending: false)
+//      secondarySortDescriptor,
+      primarySortDescriptor
     ]
     
     fetchRequest.returnsObjectsAsFaults = false
@@ -61,7 +65,7 @@ class FetchResultControllersComposer {
     let controller = NSFetchedResultsController(
       fetchRequest: fetchRequest,
       managedObjectContext: DataBaseManager.shared.mainContext,
-      sectionNameKeyPath: nil,
+      sectionNameKeyPath: nil,//"service.name",
       cacheName: nil)
     
     controller.delegate = providerServicesFrcDelegate

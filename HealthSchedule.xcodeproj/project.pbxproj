@@ -624,6 +624,7 @@
 		ED7359032254B322006C318C /* ProviderServices */ = {
 			isa = PBXGroup;
 			children = (
+				ED7359132254FD3E006C318C /* Card */,
 				ED7359042254B335006C318C /* NavigationItem.swift */,
 				ED73590B2254C28A006C318C /* ProviderServicesTableView.swift */,
 				ED73590F2254C48A006C318C /* ProviderServiceHeader.swift */,
@@ -639,6 +640,13 @@
 				ED73590D2254C2BE006C318C /* ProviderServicesDataSource.swift */,
 			);
 			path = ProviderServices;
+			sourceTree = "<group>";
+		};
+		ED7359132254FD3E006C318C /* Card */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		ED825FEA2241481600456D0F /* AccountTab */ = {

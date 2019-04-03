@@ -10,11 +10,20 @@ import UIKit
 
 class ProviderServicesDataSource: NSObject, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
-    return DataBaseManager.shared.providerServicesFrc.sections?.count ?? 0
+//    if let sections = DataBaseManager.shared.providerServicesFrc.sections {
+//      return sections.count
+//    }
+    
+    return 1
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return DataBaseManager.shared.providerServicesFrc.fetchedObjects?.count ?? 9
+//    if let sections = DataBaseManager.shared.providerServicesFrc.sections {
+//      let currentSection = sections[section]
+//      return currentSection.numberOfObjects
+//    }
+    
+    return DataBaseManager.shared.providerServicesFrc.fetchedObjects?.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
