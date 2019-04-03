@@ -59,7 +59,9 @@ extension ProviderServicesController: RefreshingTableView {
 }
 
 extension ProviderServicesController: UITableViewDelegate {
-  // TODO
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 60
+  }
 }
 
 extension ProviderServicesController: NSFetchedResultsControllerDelegate {
