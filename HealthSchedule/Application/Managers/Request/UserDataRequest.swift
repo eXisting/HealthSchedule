@@ -18,7 +18,9 @@ protocol ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
+  
   func getProviderServices(completion: @escaping (String) -> Void)
+  func createProviderService(with data: Parser.JsonDictionary, completion: @escaping (String) -> Void)
 }
 
 protocol CommonDataRequesting {
@@ -258,6 +260,18 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       self?.databaseManager.insertUpdateProviderServices(from: list, context: DataBaseManager.shared.mainContext)
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func createProviderService(with data: Parser.JsonDictionary, completion: @escaping (String) -> Void) {
+    requestsManager.postAsync(to: Endpoints.providerServices.rawValue, as: .post, data, RequestManager.sessionToken.asParams()) {
+      serverMessage, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
       
       completion(ResponseStatus.success.rawValue)
     }

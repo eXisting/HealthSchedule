@@ -19,7 +19,7 @@ class ProviderServicesController: UIViewController {
   override var navigationItem: UINavigationItem {
     get {
       if customNavigationItem == nil {
-        customNavigationItem = ProviderServicesNavigationItem(title: titleName, delegate: self)
+        customNavigationItem = ProviderServicesNavigationItem(title: titleName, delegate: self, type: .create)
       }
       
       return customNavigationItem!
@@ -115,11 +115,11 @@ extension ProviderServicesController: NSFetchedResultsControllerDelegate {
 }
 
 extension ProviderServicesController: ProviderServiceHandling {
-  func save() {
-    print("save")
+  func back() {    
+    navigationController?.popViewController(animated: true)
   }
   
-  func create() {
-    print("create")
+  func main() {
+    navigationController?.pushViewController(ProviderServiceAddController(), animated: true)
   }
 }

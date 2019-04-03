@@ -9,19 +9,24 @@
 import UIKit
 
 protocol ProviderServiceHandling {
-  func save()
-  func create()
+  func back()
+  func main()
+}
+
+enum ProviderServicesNavigationItemType {
+  case save
+  case create
 }
 
 class ProviderServicesNavigationItem: UINavigationItem {
   var delegate: ProviderServiceHandling
   
-  init(title: String, delegate: ProviderServiceHandling) {
+  init(title: String, delegate: ProviderServiceHandling, type: ProviderServicesNavigationItemType) {
     self.delegate = delegate
     
     super.init(title: title)
     
-    rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onCreateClick))
+    rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: (type == .create ? .add : .save), target: self, action: #selector(onDynamicItemClick))
     leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onSaveClick))
   }
   
@@ -30,11 +35,11 @@ class ProviderServicesNavigationItem: UINavigationItem {
   }
   
   @objc private func onSaveClick() {
-    delegate.save()
+    delegate.back()
   }
   
-  @objc private func onCreateClick() {
-    delegate.create()
+  @objc private func onDynamicItemClick() {
+    delegate.main()
   }
 }
 
