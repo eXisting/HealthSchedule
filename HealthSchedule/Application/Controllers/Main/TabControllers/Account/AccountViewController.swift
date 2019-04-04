@@ -77,7 +77,10 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     case .address:
       navigationController?.pushViewController(UIViewController(), animated: true)
     case .schedule:
-      let viewController = ScheduleViewController()
+      let story = UIStoryboard.init(name: "Main", bundle: nil)
+      guard let viewController = story.instantiateInitialViewController() else {
+        return
+      }
       navigationController?.pushViewController(viewController, animated: true)
     case .password:
       navigationController?.pushViewController(UIViewController(), animated: true)
