@@ -44,7 +44,7 @@ class LongPressViewController: UIViewController {
         // LongPress delegate, datasorce and type setup
         calendarWeekView.longPressDelegate = self
         calendarWeekView.longPressDataSource = self
-        calendarWeekView.longPressTypes = [.addNew, .move]
+        calendarWeekView.longPressTypes = [.addNew, .custom]
         
         // Optional
         calendarWeekView.addNewDurationMins = 120
@@ -94,6 +94,10 @@ extension LongPressViewController: JZLongPressViewDelegate, JZLongPressViewDataS
         viewModel.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: viewModel.events)
         weekView.forceReload(reloadEvents: viewModel.eventsByDate)
     }
+  
+  func weekView(_ weekView: JZLongPressWeekView, didBeginLongPressOn cell: JZLongPressEventCell) {
+    AlertHandler.ShowAlert(for: self, "Yohooo", "Worked", .alert)
+  }
     
     func weekView(_ weekView: JZLongPressWeekView, viewForAddNewLongPressAt startDate: Date) -> UIView {
         let view = UINib(nibName: EventCell.className, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EventCell
