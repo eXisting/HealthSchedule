@@ -12,7 +12,8 @@ class ProviderServiceAddController: UIViewController {
   private let titleName = "Add new service"
   
   private let model = CreateProviderServiceModel()
-  
+  private let mainView = ProviderCreateTableView()
+
   private var customNavigationItem: ProviderServicesNavigationItem?
   
   override var navigationItem: UINavigationItem {
@@ -23,6 +24,27 @@ class ProviderServiceAddController: UIViewController {
       
       return customNavigationItem!
     }
+  }
+  
+  override func loadView() {
+    super.loadView()
+    view = mainView
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    mainView.setup(delegate: self, dataSource: model.dataSource)
+    model.procceed()
+  }
+}
+
+extension ProviderServiceAddController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return model[indexPath.section][indexPath.row].rowHeight
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return model[section].sectionHeight
   }
 }
 

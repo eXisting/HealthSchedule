@@ -22,10 +22,6 @@ class RequestCardTextRowModel: RequestRowDataContaining {
   init(title: String, data: String) {
     self.title = title
     self.data = data
-    
-//    if data.count > 50 {
-//      rowHeight = 300
-//    }
   }
 }
 
