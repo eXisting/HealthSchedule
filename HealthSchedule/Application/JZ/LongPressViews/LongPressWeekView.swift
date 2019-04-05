@@ -13,9 +13,9 @@ import JZCalendarWeekView
 class LongPressWeekView: JZLongPressWeekView {
     
     override func registerViewClasses() {
-        super.registerViewClasses()
-        
-        self.collectionView.register(UINib(nibName: LongPressEventCell.className, bundle: nil), forCellWithReuseIdentifier: LongPressEventCell.className)
+      super.registerViewClasses()
+      
+      self.collectionView.register(UINib(nibName: LongPressEventCell.className, bundle: nil), forCellWithReuseIdentifier: LongPressEventCell.className)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

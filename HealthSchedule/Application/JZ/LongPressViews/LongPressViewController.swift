@@ -34,11 +34,15 @@ class LongPressViewController: UIViewController {
             // For example only
             setupCalendarViewWithSelectedData()
         } else {
-            calendarWeekView.setupCalendar(numOfDays: 3,
+          let monday = Date.today().previous(.monday)
+          let saturday = Date.today().next(.saturday)
+          let scrollableRange: (Date?, Date?) = (startDate: monday, endDate: saturday)
+          
+            calendarWeekView.setupCalendar(numOfDays: 7,
                                            setDate: Date(),
                                            allEvents: viewModel.eventsByDate,
                                            scrollType: .pageScroll,
-                                           scrollableRange: (nil, nil))
+                                           scrollableRange: scrollableRange)
         }
         
         // LongPress delegate, datasorce and type setup
