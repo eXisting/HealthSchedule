@@ -13,7 +13,7 @@ class ProviderServiceCardController: UIViewController {
   private let titleName = "Add new service"
   
   private var model: ProviderServiceModel!
-  private let mainView = ProviderCreateTableView()
+  private let mainView = ProviderServiceGeneralTableView()
 
   private var customNavigationItem: ProviderServicesNavigationItem?
   

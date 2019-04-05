@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ProviderCreateTableView: UITableView {
+class ProviderServiceGeneralTableView: UITableView {
   static let cellIdentifier = "ProviderCreateRowCell"
   
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     self.delegate = delegate
     self.dataSource = dataSource
     
-    register(ProviderServiceCreateRow.self, forCellReuseIdentifier: ProviderCreateTableView.cellIdentifier)
+    register(ProviderServiceRow.self, forCellReuseIdentifier: ProviderServiceGeneralTableView.cellIdentifier)
     
     showsVerticalScrollIndicator = false
     

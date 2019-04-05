@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProviderServiceCreateRow: UITableViewCell {
+class ProviderServiceRow: UITableViewCell {
   private let container = UIStackView()
   
   private let editableField = IdentifyingTextField()

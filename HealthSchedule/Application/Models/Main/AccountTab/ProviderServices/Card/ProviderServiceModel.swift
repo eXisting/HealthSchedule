@@ -29,8 +29,9 @@ class ProviderServiceModel {
   }
   
   func postService(_ completion: @escaping (String) -> Void) {
-    let data = collectData()
-    
+    var data = collectData()
+    //mock
+    data["address"] = "Something"
     requestManager.createUpdateProviderService(with: data, isCreate: existingService == nil, completion: completion)
   }
   
@@ -97,7 +98,7 @@ class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let rowData = data[indexPath.section][indexPath.row]
-    let cell = tableView.dequeueReusableCell(withIdentifier: ProviderCreateTableView.cellIdentifier, for: indexPath) as! ProviderServiceCreateRow
+    let cell = tableView.dequeueReusableCell(withIdentifier: ProviderServiceGeneralTableView.cellIdentifier, for: indexPath) as! ProviderServiceRow
       
     cell.configureIdentity(identifier: indexPath, subType: rowData.subtype)
     cell.configureCell(key: rowData.title, value: rowData.data, delegate: textFieldDelegate)
