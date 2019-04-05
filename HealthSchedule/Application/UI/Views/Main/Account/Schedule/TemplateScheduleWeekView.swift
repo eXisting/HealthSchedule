@@ -1,16 +1,15 @@
 //
-//  LongPressWeekView.swift
-//  JZCalendarWeekViewExample
+//  TemplateScheduleWeekView.swift
+//  HealthSchedule
 //
-//  Created by Jeff Zhang on 30/4/18.
-//  Copyright © 2018 Jeff Zhang. All rights reserved.
+//  Created by sys-246 on 4/2/19.
+//  Copyright © 2019 sys-246. All rights reserved.
 //
 
 import UIKit
 import JZCalendarWeekView
 
-/// All-Day & Long Press
-class LongPressWeekView: JZLongPressWeekView {
+class TemplateScheduleWeekView: JZLongPressWeekView {
     
     override func registerViewClasses() {
       super.registerViewClasses()
@@ -20,34 +19,21 @@ class LongPressWeekView: JZLongPressWeekView {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LongPressEventCell.className, for: indexPath) as! LongPressEventCell
-        cell.configureCell(event: getCurrentEvent(with: indexPath) as! AllDayEvent)
+        cell.configureCell(event: getCurrentEvent(with: indexPath) as! DefaultEvent)
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == JZSupplementaryViewKinds.allDayHeader {
             let alldayHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kind, for: indexPath) as! JZAllDayHeader
-            let date = flowLayout.dateForColumnHeader(at: indexPath)
-            let events = allDayEventsBySection[date]
-            let views = getAllDayHeaderViews(allDayEvents: events as? [AllDayEvent] ?? [])
-            alldayHeader.updateView(views: views)
+          
             return alldayHeader
         }
         return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
     }
     
-    private func getAllDayHeaderViews(allDayEvents: [AllDayEvent]) -> [UIView] {
-        var allDayViews = [UIView]()
-        for event in allDayEvents {
-            let view = UINib(nibName: LongPressEventCell.className, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! LongPressEventCell
-            view.configureCell(event: event, isAllDay: true)
-            allDayViews.append(view)
-        }
-        return allDayViews
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedEvent = getCurrentEvent(with: indexPath) as! AllDayEvent
+        let selectedEvent = getCurrentEvent(with: indexPath) as! DefaultEvent
         ToastUtil.toastMessageInTheMiddle(message: selectedEvent.title)
     }
 }

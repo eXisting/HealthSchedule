@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import FSCalendar
+import JZCalendarWeekView
 
 class ScheduleModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
-  let timetableDataSource = ScheduleTemplateDataSource()
   
   func loadProviderScheduleTemplate(_ completion: @escaping () -> Void) {
     requestManager.getScheduleTemplate { response in
@@ -28,20 +27,8 @@ class ScheduleModel {
   func onDateDeselected(date: Date) {
     
   }
-}
-
-class ScheduleTemplateDataSource: NSObject, FSCalendarDataSource {
-  fileprivate var data: [ScheduleDayTemplate] = []
   
-  func minimumDate(for calendar: FSCalendar) -> Date {
-    return Date.today().next(.monday)
-  }
+  var events: [DefaultEvent] = []
   
-  func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
-    guard let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position) as? ScheduleTemplateDayCell else {
-      fatalError("Register cell for Calendar!")
-    }
-        
-    return cell
-  }
+  lazy var eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
 }

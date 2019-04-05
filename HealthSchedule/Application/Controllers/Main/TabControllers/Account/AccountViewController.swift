@@ -77,9 +77,9 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     case .address:
       navigationController?.pushViewController(UIViewController(), animated: true)
     case .schedule:
-      let story = UIStoryboard.init(name: "Main", bundle: nil)
+      let story = UIStoryboard.init(name: "JZCalendar", bundle: nil)
       guard let viewController = story.instantiateInitialViewController() else {
-        return
+        fatalError("Initial view controller has not been set!")
       }
       navigationController?.pushViewController(viewController, animated: true)
     case .password:
