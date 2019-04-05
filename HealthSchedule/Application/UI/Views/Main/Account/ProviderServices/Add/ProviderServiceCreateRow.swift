@@ -13,6 +13,7 @@ class ProviderServiceCreateRow: UITableViewCell {
   
   private let editableField = IdentifyingTextField()
   private let nameLabel = UILabel()
+  private var datePicker: DatePickerView?
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,6 +29,13 @@ class ProviderServiceCreateRow: UITableViewCell {
     nameLabel.text = name
     editableField.placeholder = name
     editableField.delegate = delegate
+    
+    if editableField.subType == .datePicker {
+      datePicker = DatePickerView()
+      datePicker?.setup(target: editableField)
+      datePicker?.setCustomPickerMode(mode: .time, interval: 20)
+      editableField.aciton = datePicker?.showDatePicker
+    }
   }
   
   func configureIdentity(identifier: IndexPath, subType: AccountRowSubtype) {
@@ -46,7 +54,7 @@ class ProviderServiceCreateRow: UITableViewCell {
     NSLayoutConstraint(item: editableField, attribute: .width, relatedBy: .equal, toItem: container, attribute: .width, multiplier: 0.7, constant: 0).isActive = true
     
     NSLayoutConstraint(item: container, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 16).isActive = true
-    NSLayoutConstraint(item: container, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 16).isActive = true
+    NSLayoutConstraint(item: container, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: -16).isActive = true
     NSLayoutConstraint(item: container, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 0.95, constant: 0).isActive = true
     NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 0.95, constant: 0).isActive = true
   }

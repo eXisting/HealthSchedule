@@ -20,7 +20,7 @@ class DatePickerView: UIView {
   private var spaceButton: UIBarButtonItem!
   private var cancelButton: UIBarButtonItem!
 
-  func setup(target: UITextField, isBirthdayPicker: Bool = false) {
+  func setup(target: UITextField, shouldAddTarget: Bool = true, isBirthdayPicker: Bool = false) {
     datePicker = UIDatePicker()
     
     self.target = target
@@ -39,7 +39,18 @@ class DatePickerView: UIView {
     spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
     cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onCancelClick));
     
-    target.addTarget(self, action: #selector(showDatePicker), for: .touchDown)
+    if shouldAddTarget {
+      target.addTarget(self, action: #selector(showDatePicker), for: .touchDown)
+    }
+  }
+  
+  func setCustomPickerMode(mode: UIDatePicker.Mode, interval: Int) {
+    datePicker.datePickerMode = mode
+    datePicker.minuteInterval = interval
+    
+    if mode == .time {      
+      datePicker.locale = DateManager.shared.getLocale(.hour24)
+    }    
   }
   
   @objc func showDatePicker() {
@@ -51,7 +62,12 @@ class DatePickerView: UIView {
   }
   
   @objc func onDoneClick(){
-    target?.text = DateManager.shared.dateToString(datePicker!.date)
+    if datePicker.datePickerMode == .time {
+      target?.text = DateManager.shared.date2String(with: .time, datePicker.date, .hour24)
+    } else {
+      target?.text = DateManager.shared.dateToString(datePicker.date)
+    }
+    
     target?.endEditing(true)
   }
   

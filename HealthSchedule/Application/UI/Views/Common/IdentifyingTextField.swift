@@ -11,9 +11,17 @@ import UIKit
 class IdentifyingTextField: UITextField {
   var identifier: IndexPath?
   var subType: AccountRowSubtype = .none
+  var aciton: (() -> Void)?
   
   override var delegate: UITextFieldDelegate? {
     get { return super.delegate }
     set { super.delegate = newValue }
+  }
+  
+  override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    if subType == .datePicker && action == #selector(UIResponderStandardEditActions.paste(_:)) {
+      return false
+    }
+    return super.canPerformAction(action, withSender: sender)
   }
 }

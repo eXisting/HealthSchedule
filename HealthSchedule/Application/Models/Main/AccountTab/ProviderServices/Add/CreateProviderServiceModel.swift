@@ -52,8 +52,8 @@ class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {
     let rowData = data[indexPath.section][indexPath.row]
     let cell = tableView.dequeueReusableCell(withIdentifier: ProviderCreateTableView.cellIdentifier, for: indexPath) as! ProviderServiceCreateRow
       
-    cell.configureCell(name: rowData.title, delegate: textFieldDelegate)
     cell.configureIdentity(identifier: indexPath, subType: rowData.subtype)
+    cell.configureCell(name: rowData.title, delegate: textFieldDelegate)
     
     return cell
   }

@@ -72,6 +72,13 @@ class DateManager {
     return (minDate!, maxDate!)
   }
   
+  func getAvailableServiceTimeRange() -> (min: Date, max: Date) {
+    let minDate = DateManager.shared.stringToDate("06:00", format: .time, .hour24)
+    let maxDate = DateManager.shared.stringToDate("23:00", format: .time, .hour24)
+
+    return (minDate, maxDate)
+  }
+  
   func getExpirationDate(expires: Int) -> Date {
     let currentDate = Date()
     var dateComponents = DateComponents()

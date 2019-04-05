@@ -81,7 +81,8 @@ extension ProviderServiceAddController: UITextFieldDelegate {
     
     switch identifyingTextField.subType {
     case .datePicker:
-      return false
+      (textField as? IdentifyingTextField)?.aciton?()
+      return true
     case .servicePicker:
       return false
     case .cityPicker, .none:
