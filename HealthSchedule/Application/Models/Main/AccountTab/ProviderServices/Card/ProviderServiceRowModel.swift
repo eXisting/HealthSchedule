@@ -84,11 +84,11 @@ class ProviderServiceDateRowModel: ProviderServiceRowDataContaining {
       return (key: "", value: "")
     }
     
-    guard let chosenId = id else {
-      return (key: key, value: data!)
+    guard let date = data else {
+      return (key: key, value: "")
     }
     
-    return (key: key, value: String(chosenId))
+    return (key: key, value: date)
   }
 }
 

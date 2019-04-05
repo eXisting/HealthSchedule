@@ -21,8 +21,17 @@ class ProviderServiceModel {
     existingService = service
   }
   
+  func instantiateData() {
+    dataSource.data = [
+      ProviderServiceGeneralSectionModel(service: existingService),
+      ProviderServiceDurationSectionModel(service: existingService)
+    ]
+  }
+  
   func postService(_ completion: @escaping (String) -> Void) {
-    requestManager.createUpdateProviderService(with: [:], isCreate: existingService == nil, completion: completion)
+    let data = collectData()
+    
+    requestManager.createUpdateProviderService(with: data, isCreate: existingService == nil, completion: completion)
   }
   
   func loadServices(_ completion: @escaping ([Service]) -> Void) {
@@ -48,15 +57,25 @@ class ProviderServiceModel {
     return dataSource.data[forSectionIndex]
   }
   
-  func procceed() {
-    dataSource.data = [
-      ProviderServiceGeneralSectionModel(service: existingService),
-      ProviderServiceDurationSectionModel(service: existingService)
-    ]
-  }
-  
   func changeText(by indexPath: IndexPath, with text: String?) {
     dataSource.data[indexPath.section].set(data: text, for: indexPath.row)
+  }
+  
+  private func collectData() -> Parser.JsonDictionary {
+    var result: Parser.JsonDictionary = [:]
+    
+    dataSource.data.forEach { item in
+      let sectionJson = item.asJson()
+      result.merge(sectionJson, uniquingKeysWith: { thisKey, insertedKey in
+        return thisKey
+      })
+    }
+    
+    if let service = existingService {
+      result["id"] = String(service.id)
+    }
+    
+    return result
   }
 }
 

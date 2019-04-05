@@ -55,7 +55,7 @@ class ProviderServiceCardController: UIViewController {
     model.dataSource.textFieldDelegate = self
     mainView.setup(delegate: self, dataSource: model.dataSource)
     
-    model.procceed()
+    model.instantiateData()
   }
   
   private func presentServicePicker(with identifier: IndexPath) {

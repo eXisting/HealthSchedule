@@ -22,26 +22,26 @@ class ProviderServiceGeneralSectionModel: ProviderServiceSectionDataContaining {
   init(service: ProviderService?) {
     rows = [
       ProviderServiceTextRowModel(
-        id: service != nil ? Int(service!.id) : nil,
+        id: service != nil ? Int(service!.serviceId) : nil,
         data: service?.service?.name,
         title: "Service:",
         type: .general,
         subtype: .servicePicker,
-        keyName: ProviderServiceJsonFields.interval.rawValue
+        keyName: ProviderServiceJsonFields.serviceId.rawValue
       ),
       ProviderServiceTextRowModel(
         data: service != nil ? String(service!.price) : nil,
         title: "Price:",
         type: .general,
         subtype: .none,
-        keyName: ProviderServiceJsonFields.interval.rawValue
+        keyName: ProviderServiceJsonFields.price.rawValue
       ),
       ProviderServiceTextRowModel(
         data: service?.serviceDescription,
         title: "Description:",
         type: .general,
         subtype: .none,
-        keyName: ProviderServiceJsonFields.interval.rawValue
+        keyName: ProviderServiceJsonFields.description.rawValue
       )
     ]
     
