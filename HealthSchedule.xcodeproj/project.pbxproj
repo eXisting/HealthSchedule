@@ -693,7 +693,7 @@
 		ED7359002254B289006C318C /* ProviderServices */ = {
 			isa = PBXGroup;
 			children = (
-				ED7359162254FD99006C318C /* Add */,
+				ED7359162254FD99006C318C /* Card */,
 				ED7359012254B2A0006C318C /* ProviderServicesController.swift */,
 			);
 			path = ProviderServices;
@@ -714,28 +714,28 @@
 		ED7359062254B8C5006C318C /* ProviderServices */ = {
 			isa = PBXGroup;
 			children = (
-				ED73591B225502C5006C318C /* Add */,
+				ED73591B225502C5006C318C /* Card */,
 				ED7359072254B8D6006C318C /* ProviderServicesModel.swift */,
 			);
 			path = ProviderServices;
 			sourceTree = "<group>";
 		};
-		ED7359162254FD99006C318C /* Add */ = {
+		ED7359162254FD99006C318C /* Card */ = {
 			isa = PBXGroup;
 			children = (
 				ED7359172254FDAD006C318C /* ProviderServiceAddController.swift */,
 			);
-			path = Add;
+			path = Card;
 			sourceTree = "<group>";
 		};
-		ED73591B225502C5006C318C /* Add */ = {
+		ED73591B225502C5006C318C /* Card */ = {
 			isa = PBXGroup;
 			children = (
 				ED7359192255002E006C318C /* CreateProviderServiceModel.swift */,
 				ED7359202255071E006C318C /* ProviderServiceRowModel.swift */,
 				ED7359212255071E006C318C /* ProviderServiceSectionModel.swift */,
 			);
-			path = Add;
+			path = Card;
 			sourceTree = "<group>";
 		};
 		ED73592622550890006C318C /* Add */ = {

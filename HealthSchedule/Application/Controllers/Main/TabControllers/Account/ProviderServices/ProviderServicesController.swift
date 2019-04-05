@@ -68,6 +68,11 @@ extension ProviderServicesController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 90
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let providerService = DataBaseManager.shared.providerServicesFrc.object(at: indexPath)
+    navigationController?.pushViewController(ProviderServiceCardController(service: providerService), animated: true)
+  }
 }
 
 extension ProviderServicesController: NSFetchedResultsControllerDelegate {
@@ -126,6 +131,6 @@ extension ProviderServicesController: ProviderServiceHandling {
   }
   
   func main() {
-    navigationController?.pushViewController(ProviderServiceAddController(), animated: true)
+    navigationController?.pushViewController(ProviderServiceCardController(service: nil), animated: true)
   }
 }

@@ -25,9 +25,10 @@ class ProviderServiceCreateRow: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configureCell(name: String, delegate: UITextFieldDelegate) {
-    nameLabel.text = name
-    editableField.placeholder = name
+  func configureCell(key: String, value: String?, delegate: UITextFieldDelegate) {
+    nameLabel.text = key
+    editableField.placeholder = key
+    editableField.text = value
     editableField.delegate = delegate
     
     if editableField.subType == .datePicker {

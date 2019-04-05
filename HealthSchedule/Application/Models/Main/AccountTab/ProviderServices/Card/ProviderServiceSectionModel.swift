@@ -19,21 +19,25 @@ class ProviderServiceGeneralSectionModel: ProviderServiceSectionDataContaining {
   
   private var rows: [ProviderServiceRowDataContaining]
   
-  init() {
+  init(service: ProviderService?) {
     rows = [
       ProviderServiceTextRowModel(
+        id: service != nil ? Int(service!.id) : nil,
+        data: service?.service?.name,
         title: "Service:",
         type: .general,
         subtype: .servicePicker,
         keyName: ProviderServiceJsonFields.interval.rawValue
       ),
       ProviderServiceTextRowModel(
+        data: service != nil ? String(service!.price) : nil,
         title: "Price:",
         type: .general,
         subtype: .none,
         keyName: ProviderServiceJsonFields.interval.rawValue
       ),
       ProviderServiceTextRowModel(
+        data: service?.serviceDescription,
         title: "Description:",
         type: .general,
         subtype: .none,
@@ -79,13 +83,14 @@ class ProviderServiceDurationSectionModel: ProviderServiceSectionDataContaining 
   
   private var rows: [ProviderServiceRowDataContaining]
   
-  init() {
+  init(service: ProviderService?) {
     rows = [
       ProviderServiceDateRowModel(
         title: "Duration:",
         type: .general,
         subtype: .datePicker,
-        keyName: ProviderServiceJsonFields.interval.rawValue
+        keyName: ProviderServiceJsonFields.interval.rawValue,
+        date: service?.duration
       )
     ]
     

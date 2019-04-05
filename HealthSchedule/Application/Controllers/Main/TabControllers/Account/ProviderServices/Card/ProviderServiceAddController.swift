@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ProviderServiceAddController: UIViewController {
+class ProviderServiceCardController: UIViewController {
   private let titleName = "Add new service"
   
-  private let model = CreateProviderServiceModel()
+  private var model: ProviderServiceModel!
   private let mainView = ProviderCreateTableView()
 
   private var customNavigationItem: ProviderServicesNavigationItem?
@@ -24,6 +24,11 @@ class ProviderServiceAddController: UIViewController {
       
       return customNavigationItem!
     }
+  }
+  
+  convenience init(service: ProviderService?) {
+    self.init()
+    model = ProviderServiceModel(service: service)
   }
   
   override func loadView() {
@@ -58,7 +63,7 @@ class ProviderServiceAddController: UIViewController {
   }
 }
 
-extension ProviderServiceAddController: UITableViewDelegate {
+extension ProviderServiceCardController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return model[indexPath.section][indexPath.row].rowHeight
   }
@@ -68,7 +73,7 @@ extension ProviderServiceAddController: UITableViewDelegate {
   }
 }
 
-extension ProviderServiceAddController: UITextFieldDelegate {
+extension ProviderServiceCardController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
@@ -100,13 +105,13 @@ extension ProviderServiceAddController: UITextFieldDelegate {
   }
 }
 
-extension ProviderServiceAddController: ProviderServiceHandling {
+extension ProviderServiceCardController: ProviderServiceHandling {
   func back() {
     navigationController?.popViewController(animated: true)
   }
   
   func main() {
-    model.createRequest { status in
+    model.postService { status in
       if status == ResponseStatus.success.rawValue {
         // TODO
       }

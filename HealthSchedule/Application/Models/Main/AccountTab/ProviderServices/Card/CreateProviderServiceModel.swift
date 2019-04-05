@@ -8,12 +8,18 @@
 
 import UIKit
 
-class CreateProviderServiceModel {
+class ProviderServiceModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
+  private var existingService: ProviderService?
+  
   let dataSource = ProviderServiceCardDataSource()
   
-  func createRequest(_ completion: @escaping (String) -> Void) {
-    requestManager.createProviderService(with: [:], completion: completion)
+  init(service: ProviderService?) {
+    existingService = service
+  }
+  
+  func postService(_ completion: @escaping (String) -> Void) {
+    requestManager.createUpdateProviderService(with: [:], isCreate: existingService == nil, completion: completion)
   }
   
   subscript(forSectionIndex: Int) -> ProviderServiceSectionDataContaining {
@@ -22,8 +28,8 @@ class CreateProviderServiceModel {
   
   func procceed() {
     dataSource.data = [
-      ProviderServiceGeneralSectionModel(),
-      ProviderServiceDurationSectionModel()
+      ProviderServiceGeneralSectionModel(service: existingService),
+      ProviderServiceDurationSectionModel(service: existingService)
     ]
   }
   
@@ -53,7 +59,7 @@ class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: ProviderCreateTableView.cellIdentifier, for: indexPath) as! ProviderServiceCreateRow
       
     cell.configureIdentity(identifier: indexPath, subType: rowData.subtype)
-    cell.configureCell(name: rowData.title, delegate: textFieldDelegate)
+    cell.configureCell(key: rowData.title, value: rowData.data, delegate: textFieldDelegate)
     
     return cell
   }

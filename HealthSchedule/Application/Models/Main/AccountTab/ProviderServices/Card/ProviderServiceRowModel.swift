@@ -22,6 +22,8 @@ class ProviderServiceTextRowModel: ProviderServiceRowDataContaining {
   var rowHeight: CGFloat = 65
   
   init(
+    id: Int? = nil,
+    data: String? = nil,
     title: String,
     type: AccountRowType,
     subtype: AccountRowSubtype = .none,
@@ -31,6 +33,9 @@ class ProviderServiceTextRowModel: ProviderServiceRowDataContaining {
     self.keyName = keyName
     self.type = type
     self.subtype = subtype
+    
+    self.id = id
+    self.data = data
   }
   
   func asKeyValuePair() -> (key: String, value: String) {
@@ -67,6 +72,11 @@ class ProviderServiceDateRowModel: ProviderServiceRowDataContaining {
     self.keyName = keyName
     self.type = type
     self.subtype = subtype
+    
+    self.id = id
+    if let serviceDate = date {
+      self.data = DateManager.shared.date2String(with: .time, serviceDate, .hour24)
+    }
   }
   
   func asKeyValuePair() -> (key: String, value: String) {

@@ -22,7 +22,7 @@ protocol ProviderInfoRequesting {
   func getScheduleTemplate(completion: @escaping (String?) -> Void)
 
   func getProviderServices(completion: @escaping (String) -> Void)
-  func createProviderService(with data: Parser.JsonDictionary, completion: @escaping (String) -> Void)
+  func createUpdateProviderService(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
 }
 
 protocol CommonDataRequesting {
@@ -281,8 +281,18 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
-  func createProviderService(with data: Parser.JsonDictionary, completion: @escaping (String) -> Void) {
-    requestsManager.postAsync(to: Endpoints.providerServices.rawValue, as: .post, data, RequestManager.sessionToken.asParams()) {
+  func createUpdateProviderService(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void) {
+    var endpoint = Endpoints.providerServices.rawValue
+    var requestType: RequestType = .post
+    
+    if !isCreate {
+      endpoint.append("/")
+      endpoint.append(data[ProviderServiceJsonFields.id.rawValue]!)
+      
+      requestType = .put
+    }
+    
+    requestsManager.postAsync(to: endpoint, as: requestType, data, RequestManager.sessionToken.asParams()) {
       serverMessage, response in
       if let error = response.error {
         completion(error)
