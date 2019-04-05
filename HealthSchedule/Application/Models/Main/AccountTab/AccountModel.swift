@@ -12,14 +12,15 @@ class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
+
+  private unowned var accountHandlingDelegate: AccountHandlableDelegate
   
   let dataSource = AccountDataSource()
   var presentedIdetifier: IndexPath?
-  var accountHandlingDelegate: AccountHandlableDelegate
   
-  init(handlingDelegate: AccountHandlableDelegate) {
-    accountHandlingDelegate = handlingDelegate
-
+  init(accountHandlingDelegate: AccountHandlableDelegate) {
+    self.accountHandlingDelegate = accountHandlingDelegate
+    
     guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
       print("AccountModel failed!")
       return

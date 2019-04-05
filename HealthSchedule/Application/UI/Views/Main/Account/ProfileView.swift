@@ -11,8 +11,9 @@ import UIKit
 class ProfileView: UIView {
   
   private let profileImageView = UIImageView()
-  
   private let tableView = AccountTableView()
+  
+  let datepickerView = DatePickerView()
   
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     laidOutViews()

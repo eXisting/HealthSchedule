@@ -76,6 +76,15 @@
 		ED5DBCB6220066E3006070E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DBCB5220066E3006070E0 /* User.swift */; };
 		ED6B131922422F1D00938ACA /* IdentifyingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
+		ED7359022254B2A0006C318C /* ProviderServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359012254B2A0006C318C /* ProviderServicesController.swift */; };
+		ED7359052254B335006C318C /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359042254B335006C318C /* NavigationItem.swift */; };
+		ED7359082254B8D6006C318C /* ProviderServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359072254B8D6006C318C /* ProviderServicesModel.swift */; };
+		ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */; };
+		ED73590C2254C28A006C318C /* ProviderServicesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED73590B2254C28A006C318C /* ProviderServicesTableView.swift */; };
+		ED7359102254C48A006C318C /* ProviderServiceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED73590F2254C48A006C318C /* ProviderServiceHeader.swift */; };
+		ED7359122254C4D7006C318C /* ProviderServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359112254C4D7006C318C /* ProviderServiceCell.swift */; };
+		ED7359182254FDAD006C318C /* ProviderServiceAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359172254FDAD006C318C /* ProviderServiceAddController.swift */; };
+		ED73591A2255002E006C318C /* CreateProviderServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359192255002E006C318C /* CreateProviderServiceModel.swift */; };
 		ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FE72241008600456D0F /* RequestCardViewController.swift */; };
 		ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */; };
 		ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */; };
@@ -198,6 +207,15 @@
 		ED5DBCB5220066E3006070E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyingTextField.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
+		ED7359012254B2A0006C318C /* ProviderServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesController.swift; sourceTree = "<group>"; };
+		ED7359042254B335006C318C /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
+		ED7359072254B8D6006C318C /* ProviderServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesModel.swift; sourceTree = "<group>"; };
+		ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResultControllersComposer.swift; sourceTree = "<group>"; };
+		ED73590B2254C28A006C318C /* ProviderServicesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesTableView.swift; sourceTree = "<group>"; };
+		ED73590F2254C48A006C318C /* ProviderServiceHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceHeader.swift; sourceTree = "<group>"; };
+		ED7359112254C4D7006C318C /* ProviderServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceCell.swift; sourceTree = "<group>"; };
+		ED7359172254FDAD006C318C /* ProviderServiceAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceAddController.swift; sourceTree = "<group>"; };
+		ED7359192255002E006C318C /* CreateProviderServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProviderServiceModel.swift; sourceTree = "<group>"; };
 		ED825FE72241008600456D0F /* RequestCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardViewController.swift; sourceTree = "<group>"; };
 		ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionInfoModel.swift; sourceTree = "<group>"; };
 		ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowInfoModel.swift; sourceTree = "<group>"; };
@@ -271,13 +289,6 @@
 				58EED57729135C1F40BED6AB /* Pods_HealthSchedule.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DB0B7C42225644E10035C593 /* JZ */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = JZ;
 			sourceTree = "<group>";
 		};
 		DB0B7C57225644F00035C593 /* JZUtils */ = {
@@ -404,6 +415,7 @@
 		ED231B2A222D3B1600A80FC9 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				ED7359002254B289006C318C /* ProviderServices */,
 				EDD2A858223AAA2800B52E68 /* ChildControllers */,
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
 			);
@@ -483,6 +495,7 @@
 				ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */,
 				ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */,
 				DB93D97D224EB31E00A541BD /* CoreDataBaseRequests.swift */,
+				ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -669,10 +682,48 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		ED7359002254B289006C318C /* ProviderServices */ = {
+			isa = PBXGroup;
+			children = (
+				ED7359162254FD99006C318C /* Add */,
+				ED7359012254B2A0006C318C /* ProviderServicesController.swift */,
+			);
+			path = ProviderServices;
+			sourceTree = "<group>";
+		};
+		ED7359032254B322006C318C /* ProviderServices */ = {
+			isa = PBXGroup;
+			children = (
+				ED7359042254B335006C318C /* NavigationItem.swift */,
+				ED73590B2254C28A006C318C /* ProviderServicesTableView.swift */,
+				ED73590F2254C48A006C318C /* ProviderServiceHeader.swift */,
+				ED7359112254C4D7006C318C /* ProviderServiceCell.swift */,
+			);
+			path = ProviderServices;
+			sourceTree = "<group>";
+		};
+		ED7359062254B8C5006C318C /* ProviderServices */ = {
+			isa = PBXGroup;
+			children = (
+				ED7359072254B8D6006C318C /* ProviderServicesModel.swift */,
+				ED7359192255002E006C318C /* CreateProviderServiceModel.swift */,
+			);
+			path = ProviderServices;
+			sourceTree = "<group>";
+		};
+		ED7359162254FD99006C318C /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				ED7359172254FDAD006C318C /* ProviderServiceAddController.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
 		ED825FEA2241481600456D0F /* AccountTab */ = {
 			isa = PBXGroup;
 			children = (
 				EDE03ED9225354FD00DBAA0F /* Schedule */,
+				ED7359062254B8C5006C318C /* ProviderServices */,
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
 				ED825FEB2241485100456D0F /* AccountSectionInfoModel.swift */,
 				ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */,
@@ -709,7 +760,6 @@
 		EDCFB44C222806BB00A6B56F /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				DB0B7C42225644E10035C593 /* JZ */,
 				EDCFB46522294FED00A6B56F /* Models */,
 				ED089A6E21E78751006A8523 /* Controllers */,
 				EDCFB44E222806DE00A6B56F /* CoreData */,
@@ -780,6 +830,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE03EDC2253553600DBAA0F /* Schedule */,
+				ED7359032254B322006C318C /* ProviderServices */,
 				ED231B2D222D482200A80FC9 /* TableView */,
 				ED089A9E21EC8848006A8523 /* ProfileView.swift */,
 				DBE4886E223AD2560096F7D7 /* AccountNavigationItem.swift */,
@@ -1046,6 +1097,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED73591A2255002E006C318C /* CreateProviderServiceModel.swift in Sources */,
+				ED7359052254B335006C318C /* NavigationItem.swift in Sources */,
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
 				DB0B7C66225644F10035C593 /* LongPressEventCell.swift in Sources */,
 				ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */,
@@ -1073,10 +1126,12 @@
 				DB0B7C7A225644F10035C593 /* BlackGridLine.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,
+				ED7359182254FDAD006C318C /* ProviderServiceAddController.swift in Sources */,
 				EDD2A8392238029C00B52E68 /* SearchTableView.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				ED231B4D222E850300A80FC9 /* RequestListRow.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
+				ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
@@ -1086,6 +1141,7 @@
 				DB0B7C77225644F10035C593 /* HourRowHeader.swift in Sources */,
 				EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
+				ED7359102254C48A006C318C /* ProviderServiceHeader.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */,
 				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
@@ -1098,15 +1154,18 @@
 				ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */,
 				DB0B7C79225644F10035C593 /* CustomWeekView.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
+				ED73590C2254C28A006C318C /* ProviderServicesTableView.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
 				ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */,
 				ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */,
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
 				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,
+				ED7359022254B2A0006C318C /* ProviderServicesController.swift in Sources */,
 				EDD2A82F22368FDB00B52E68 /* DataBaseManager.swift in Sources */,
 				ED3D233E21F617A600BCADE9 /* SelectWithExperienceView.swift in Sources */,
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
+				ED7359082254B8D6006C318C /* ProviderServicesModel.swift in Sources */,
 				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */,
 				ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */,
@@ -1146,6 +1205,7 @@
 				EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */,
 				EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
+				ED7359122254C4D7006C318C /* ProviderServiceCell.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				DB0B7C68225644F10035C593 /* ScheduleViewController.swift in Sources */,
 				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,

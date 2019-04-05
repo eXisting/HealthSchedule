@@ -72,7 +72,6 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
         }
           // Insert
         else {
-          insertUpdateServices(from: [remoteRequest.providerService.service], context: workingContext)
           insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
           
           let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
@@ -172,6 +171,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
           // Insert
         else {
           // Required fields
+          insertUpdateServices(from: [service.service], context: workingContext)
           
           if let remoteUser = service.provider {
             insertUpdateUsers(from: [remoteUser], context: workingContext)
