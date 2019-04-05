@@ -25,6 +25,4 @@ class AllDayViewModel: NSObject {
                        AllDayEvent(id: "7", title: "AllDay4", startDate: thirdDate.startOfDay, endDate: thirdDate.startOfDay, location: "Brisbane", isAllDay: true)]
     
     lazy var eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
-    
-    var currentSelectedData: OptionsSelectedData!
 }

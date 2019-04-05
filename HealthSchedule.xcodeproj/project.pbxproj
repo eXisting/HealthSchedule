@@ -14,23 +14,14 @@
 		DB0B7C67225644F10035C593 /* AllDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C47225644EF0035C593 /* AllDayViewModel.swift */; };
 		DB0B7C68225644F10035C593 /* LongPressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C48225644EF0035C593 /* LongPressViewController.swift */; };
 		DB0B7C69225644F10035C593 /* AllDayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C49225644EF0035C593 /* AllDayEvent.swift */; };
-		DB0B7C6A225644F10035C593 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C4A225644EF0035C593 /* DefaultViewController.swift */; };
 		DB0B7C6B225644F10035C593 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB0B7C4C225644EF0035C593 /* Main.storyboard */; };
 		DB0B7C6C225644F10035C593 /* DefaultEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C4E225644F00035C593 /* DefaultEvent.swift */; };
-		DB0B7C6D225644F10035C593 /* OptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C50225644F00035C593 /* OptionsViewModel.swift */; };
-		DB0B7C6E225644F10035C593 /* ExampleOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C51225644F00035C593 /* ExampleOptionsViewController.swift */; };
-		DB0B7C6F225644F10035C593 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C52225644F00035C593 /* OptionsTableViewCell.swift */; };
-		DB0B7C70225644F10035C593 /* OptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB0B7C53225644F00035C593 /* OptionsTableViewCell.xib */; };
-		DB0B7C71225644F10035C593 /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C54225644F00035C593 /* ExpandableHeaderView.swift */; };
-		DB0B7C72225644F10035C593 /* ExpandableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB0B7C55225644F00035C593 /* ExpandableHeaderView.xib */; };
 		DB0B7C74225644F10035C593 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C58225644F00035C593 /* Extensions.swift */; };
 		DB0B7C75225644F10035C593 /* ToastUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C59225644F00035C593 /* ToastUtil.swift */; };
-		DB0B7C76225644F10035C593 /* DefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C5A225644F00035C593 /* DefaultViewModel.swift */; };
 		DB0B7C77225644F10035C593 /* HourRowHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C5C225644F10035C593 /* HourRowHeader.swift */; };
 		DB0B7C78225644F10035C593 /* CurrentTimelineAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C5D225644F10035C593 /* CurrentTimelineAll.swift */; };
 		DB0B7C79225644F10035C593 /* CustomWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C5E225644F10035C593 /* CustomWeekView.swift */; };
 		DB0B7C7A225644F10035C593 /* BlackGridLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C5F225644F10035C593 /* BlackGridLine.swift */; };
-		DB0B7C7B225644F10035C593 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C60225644F10035C593 /* CustomViewController.swift */; };
 		DB0B7C7C225644F10035C593 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C61225644F10035C593 /* EventCell.swift */; };
 		DB0B7C7D225644F10035C593 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB0B7C62225644F10035C593 /* EventCell.xib */; };
 		DB0B7C7E225644F10035C593 /* DefaultWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B7C63225644F10035C593 /* DefaultWeekView.swift */; };
@@ -149,23 +140,14 @@
 		DB0B7C47225644EF0035C593 /* AllDayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllDayViewModel.swift; sourceTree = "<group>"; };
 		DB0B7C48225644EF0035C593 /* LongPressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongPressViewController.swift; sourceTree = "<group>"; };
 		DB0B7C49225644EF0035C593 /* AllDayEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllDayEvent.swift; sourceTree = "<group>"; };
-		DB0B7C4A225644EF0035C593 /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
 		DB0B7C4D225644EF0035C593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		DB0B7C4E225644F00035C593 /* DefaultEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEvent.swift; sourceTree = "<group>"; };
-		DB0B7C50225644F00035C593 /* OptionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewModel.swift; sourceTree = "<group>"; };
-		DB0B7C51225644F00035C593 /* ExampleOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleOptionsViewController.swift; sourceTree = "<group>"; };
-		DB0B7C52225644F00035C593 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
-		DB0B7C53225644F00035C593 /* OptionsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsTableViewCell.xib; sourceTree = "<group>"; };
-		DB0B7C54225644F00035C593 /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
-		DB0B7C55225644F00035C593 /* ExpandableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableHeaderView.xib; sourceTree = "<group>"; };
 		DB0B7C58225644F00035C593 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DB0B7C59225644F00035C593 /* ToastUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastUtil.swift; sourceTree = "<group>"; };
-		DB0B7C5A225644F00035C593 /* DefaultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewModel.swift; sourceTree = "<group>"; };
 		DB0B7C5C225644F10035C593 /* HourRowHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourRowHeader.swift; sourceTree = "<group>"; };
 		DB0B7C5D225644F10035C593 /* CurrentTimelineAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentTimelineAll.swift; sourceTree = "<group>"; };
 		DB0B7C5E225644F10035C593 /* CustomWeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWeekView.swift; sourceTree = "<group>"; };
 		DB0B7C5F225644F10035C593 /* BlackGridLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackGridLine.swift; sourceTree = "<group>"; };
-		DB0B7C60225644F10035C593 /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		DB0B7C61225644F10035C593 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		DB0B7C62225644F10035C593 /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		DB0B7C63225644F10035C593 /* DefaultWeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWeekView.swift; sourceTree = "<group>"; };
@@ -311,12 +293,9 @@
 				DB0B7C4C225644EF0035C593 /* Main.storyboard */,
 				DB0B7C5B225644F10035C593 /* CustomViews */,
 				DB0B7C4E225644F00035C593 /* DefaultEvent.swift */,
-				DB0B7C4A225644EF0035C593 /* DefaultViewController.swift */,
-				DB0B7C5A225644F00035C593 /* DefaultViewModel.swift */,
 				DB0B7C63225644F10035C593 /* DefaultWeekView.swift */,
 				DB0B7C61225644F10035C593 /* EventCell.swift */,
 				DB0B7C62225644F10035C593 /* EventCell.xib */,
-				DB0B7C4F225644F00035C593 /* ExampleOptionsViewController */,
 				DB0B7C43225644EF0035C593 /* LongPressViews */,
 				DB0B7C57225644F00035C593 /* Utils */,
 			);
@@ -336,19 +315,6 @@
 			path = LongPressViews;
 			sourceTree = "<group>";
 		};
-		DB0B7C4F225644F00035C593 /* ExampleOptionsViewController */ = {
-			isa = PBXGroup;
-			children = (
-				DB0B7C50225644F00035C593 /* OptionsViewModel.swift */,
-				DB0B7C51225644F00035C593 /* ExampleOptionsViewController.swift */,
-				DB0B7C52225644F00035C593 /* OptionsTableViewCell.swift */,
-				DB0B7C53225644F00035C593 /* OptionsTableViewCell.xib */,
-				DB0B7C54225644F00035C593 /* ExpandableHeaderView.swift */,
-				DB0B7C55225644F00035C593 /* ExpandableHeaderView.xib */,
-			);
-			path = ExampleOptionsViewController;
-			sourceTree = "<group>";
-		};
 		DB0B7C57225644F00035C593 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,7 +331,6 @@
 				DB0B7C5D225644F10035C593 /* CurrentTimelineAll.swift */,
 				DB0B7C5E225644F10035C593 /* CustomWeekView.swift */,
 				DB0B7C5F225644F10035C593 /* BlackGridLine.swift */,
-				DB0B7C60225644F10035C593 /* CustomViewController.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1036,13 +1001,11 @@
 				DB0B7C7D225644F10035C593 /* EventCell.xib in Resources */,
 				EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */,
 				ED44831922086D4B00BE8EF0 /* Authentication.storyboard in Resources */,
-				DB0B7C72225644F10035C593 /* ExpandableHeaderView.xib in Resources */,
 				DB0B7C6B225644F10035C593 /* Main.storyboard in Resources */,
 				ED089A9121E8EFB6006A8523 /* ContentViewCell.xib in Resources */,
 				ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */,
 				ED3D233A21F5F98C00BCADE9 /* SelectWithExperienceView.xib in Resources */,
 				ED34D7F92209B1020025BACF /* SignUp.storyboard in Resources */,
-				DB0B7C70225644F10035C593 /* OptionsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,13 +1071,11 @@
 			files = (
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
 				DB0B7C66225644F10035C593 /* LongPressEventCell.swift in Sources */,
-				DB0B7C6E225644F10035C593 /* ExampleOptionsViewController.swift in Sources */,
 				ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */,
 				ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */,
 				ED2AC3F1224B8B2100AB6D9F /* InternalObjectsBuilder.swift in Sources */,
 				ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */,
 				DB85193A2208EECB00CCF452 /* StackViewBackground.swift in Sources */,
-				DB0B7C6D225644F10035C593 /* OptionsViewModel.swift in Sources */,
 				EDD2A84922391E8E00B52E68 /* Service.swift in Sources */,
 				EDE03ED82253543000DBAA0F /* ScheduleViewController.swift in Sources */,
 				EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */,
@@ -1132,7 +1093,6 @@
 				DB0B7C6C225644F10035C593 /* DefaultEvent.swift in Sources */,
 				ED34D7F72209A8480025BACF /* AccountViewController.swift in Sources */,
 				DB0B7C7E225644F10035C593 /* DefaultWeekView.swift in Sources */,
-				DB0B7C6A225644F10035C593 /* DefaultViewController.swift in Sources */,
 				EDE03EED2253808800DBAA0F /* ScheduleTemplate.swift in Sources */,
 				ED231B4B222E7A2A00A80FC9 /* RequestListTableView.swift in Sources */,
 				EDE03ED42252394000DBAA0F /* RoleExtensions.swift in Sources */,
@@ -1152,7 +1112,6 @@
 				DB0B7C77225644F10035C593 /* HourRowHeader.swift in Sources */,
 				EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,
-				DB0B7C7B225644F10035C593 /* CustomViewController.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */,
 				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
@@ -1177,7 +1136,6 @@
 				ED52F16E220C6D4000568CBC /* ServerException.swift in Sources */,
 				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,
 				ED231B3B222D7C2600A80FC9 /* SearchNavigationController.swift in Sources */,
-				DB0B7C76225644F10035C593 /* DefaultViewModel.swift in Sources */,
 				ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
 				ED2AC3F3224B8BD600AB6D9F /* FetchRequestsHandler.swift in Sources */,
@@ -1186,7 +1144,6 @@
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */,
 				ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */,
-				DB0B7C71225644F10035C593 /* ExpandableHeaderView.swift in Sources */,
 				DB0B7C74225644F10035C593 /* Extensions.swift in Sources */,
 				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */,
@@ -1217,7 +1174,6 @@
 				EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */,
 				EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
-				DB0B7C6F225644F10035C593 /* OptionsTableViewCell.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
 				DB0B7C68225644F10035C593 /* LongPressViewController.swift in Sources */,
 				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,
