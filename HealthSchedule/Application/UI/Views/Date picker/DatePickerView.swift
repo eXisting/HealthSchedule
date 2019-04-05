@@ -53,6 +53,12 @@ class DatePickerView: UIView {
     }    
   }
   
+  func setupInitialTime(data: String?) {
+    if let data = data {
+      datePicker.date = DateManager.shared.stringToDate(data, format: .time, .hour24)      
+    }
+  }
+  
   @objc func showDatePicker() {
     target?.inputView = datePicker
     target?.inputAccessoryView = toolbar

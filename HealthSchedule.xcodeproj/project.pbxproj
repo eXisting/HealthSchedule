@@ -84,7 +84,7 @@
 		ED7359102254C48A006C318C /* ProviderServiceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED73590F2254C48A006C318C /* ProviderServiceHeader.swift */; };
 		ED7359122254C4D7006C318C /* ProviderServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359112254C4D7006C318C /* ProviderServiceCell.swift */; };
 		ED7359182254FDAD006C318C /* ProviderServiceAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359172254FDAD006C318C /* ProviderServiceAddController.swift */; };
-		ED73591A2255002E006C318C /* CreateProviderServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359192255002E006C318C /* CreateProviderServiceModel.swift */; };
+		ED73591A2255002E006C318C /* ProviderServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359192255002E006C318C /* ProviderServiceModel.swift */; };
 		ED7359222255071E006C318C /* ProviderServiceRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359202255071E006C318C /* ProviderServiceRowModel.swift */; };
 		ED7359232255071E006C318C /* ProviderServiceSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359212255071E006C318C /* ProviderServiceSectionModel.swift */; };
 		ED73592522550860006C318C /* ProviderCreateTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED73592422550860006C318C /* ProviderCreateTableView.swift */; };
@@ -98,6 +98,7 @@
 		ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */; };
 		ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE422242891100B95696 /* RequestCardRowModel.swift */; };
 		ED98CE462243997600B95696 /* RequestCardImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE452243997600B95696 /* RequestCardImageRow.swift */; };
+		EDB6B443225797AE00B8EA8B /* ModalServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */; };
 		EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE60B9223FB41200734FBC /* SearchResultView.swift */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
 		EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45422280D2100A6B56F /* DatePickerView.swift */; };
@@ -219,7 +220,7 @@
 		ED73590F2254C48A006C318C /* ProviderServiceHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceHeader.swift; sourceTree = "<group>"; };
 		ED7359112254C4D7006C318C /* ProviderServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceCell.swift; sourceTree = "<group>"; };
 		ED7359172254FDAD006C318C /* ProviderServiceAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceAddController.swift; sourceTree = "<group>"; };
-		ED7359192255002E006C318C /* CreateProviderServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProviderServiceModel.swift; sourceTree = "<group>"; };
+		ED7359192255002E006C318C /* ProviderServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceModel.swift; sourceTree = "<group>"; };
 		ED7359202255071E006C318C /* ProviderServiceRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderServiceRowModel.swift; sourceTree = "<group>"; };
 		ED7359212255071E006C318C /* ProviderServiceSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderServiceSectionModel.swift; sourceTree = "<group>"; };
 		ED73592422550860006C318C /* ProviderCreateTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderCreateTableView.swift; sourceTree = "<group>"; };
@@ -232,6 +233,7 @@
 		ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardSectionModel.swift; sourceTree = "<group>"; };
 		ED98CE422242891100B95696 /* RequestCardRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardRowModel.swift; sourceTree = "<group>"; };
 		ED98CE452243997600B95696 /* RequestCardImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardImageRow.swift; sourceTree = "<group>"; };
+		EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalServicesViewController.swift; sourceTree = "<group>"; };
 		EDCE60B9223FB41200734FBC /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -731,7 +733,7 @@
 		ED73591B225502C5006C318C /* Card */ = {
 			isa = PBXGroup;
 			children = (
-				ED7359192255002E006C318C /* CreateProviderServiceModel.swift */,
+				ED7359192255002E006C318C /* ProviderServiceModel.swift */,
 				ED7359202255071E006C318C /* ProviderServiceRowModel.swift */,
 				ED7359212255071E006C318C /* ProviderServiceSectionModel.swift */,
 			);
@@ -763,6 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */,
+				EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1125,7 +1128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED73591A2255002E006C318C /* CreateProviderServiceModel.swift in Sources */,
+				ED73591A2255002E006C318C /* ProviderServiceModel.swift in Sources */,
 				ED7359052254B335006C318C /* NavigationItem.swift in Sources */,
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
 				DB0B7C66225644F10035C593 /* LongPressEventCell.swift in Sources */,
@@ -1162,6 +1165,7 @@
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
+				EDB6B443225797AE00B8EA8B /* ModalServicesViewController.swift in Sources */,
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
 				EDD2A845223918CC00B52E68 /* ResultViewController.swift in Sources */,

@@ -35,6 +35,7 @@ class ProviderServiceCreateRow: UITableViewCell {
       datePicker = DatePickerView()
       datePicker?.setup(target: editableField)
       datePicker?.setCustomPickerMode(mode: .time, interval: 20)
+      datePicker?.setupInitialTime(data: editableField.text)
       editableField.aciton = datePicker?.showDatePicker
     }
   }

@@ -40,6 +40,21 @@ class CommonDataRequest {
     }
   }
   
+  func getAllServices(_ completion: @escaping (String) -> Void) {
+    requestsManager.getListAsync(for: RemoteService.self, from: .allServices, RequestManager.sessionToken.asParams()) {
+      (services, response) in
+      
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      // TODO: Come up with caching solution
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
   func getCities(_ completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteCity.self, from: .allCities, nil) {
       [weak self] (cities, response) in

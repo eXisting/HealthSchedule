@@ -128,7 +128,7 @@ extension AccountViewController: RefreshingTableView {
   }
 }
 
-extension AccountViewController: CityPickHandling {
+extension AccountViewController: ModalPickHandling {
   func picked(id: Int, title: String) {
     guard let identifier = model.presentedIdetifier else {
       return

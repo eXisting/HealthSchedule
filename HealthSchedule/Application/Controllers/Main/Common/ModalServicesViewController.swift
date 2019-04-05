@@ -1,34 +1,30 @@
 //
-//  CityViewController.swift
+//  ServicesModalController.swift
 //  HealthSchedule
 //
-//  Created by sys-246 on 3/15/19.
+//  Created by sys-246 on 4/5/19.
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
 import UIKit
 
-protocol ModalPickHandling {
-  func picked(id: Int, title: String)
-}
-
-class ModalCityViewController: UITableViewController {
+class ModalServicesViewController: UITableViewController {
   var storeDelegate: ModalPickHandling!
-  var cititesList: [City] = []
+  var list: [Service] = []
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return cititesList.count
+    return list.count
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let city = cititesList[indexPath.row]
-    storeDelegate.picked(id: Int(city.id), title: city.name!)
+    let service = list[indexPath.row]
+    storeDelegate.picked(id: Int(service.id), title: service.name!)
     dismiss(animated: true)
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UITableViewCell()
-    cell.textLabel?.text = cititesList[indexPath.row].name
+    cell.textLabel?.text = list[indexPath.row].name
     return cell
   }
 }

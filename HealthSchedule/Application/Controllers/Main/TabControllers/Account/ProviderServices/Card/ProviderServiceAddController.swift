@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 class ProviderServiceCardController: UIViewController {
   private let titleName = "Add new service"
@@ -25,6 +26,18 @@ class ProviderServiceCardController: UIViewController {
       return customNavigationItem!
     }
   }
+  
+  private let presenter: Presentr = {
+    let customType = PresentationType.popup
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .crossDissolve
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    return customPresenter
+  }()
   
   convenience init(service: ProviderService?) {
     self.init()
@@ -46,20 +59,28 @@ class ProviderServiceCardController: UIViewController {
   }
   
   private func presentServicePicker(with identifier: IndexPath) {
-//    model.getServices {
-//      [weak self] cities in
-//      DispatchQueue.main.async {
-//        let controller = ModalCityViewController()
-//        controller.storeDelegate = self
-//        controller.cititesList = cities
-//        self!.model.presentedIdetifier = identifier
-//        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
-//      }
-//    }
+    model.loadServices {
+      [weak self] services in
+      DispatchQueue.main.async {
+        let controller = ModalServicesViewController()
+        controller.storeDelegate = self
+        controller.list = services
+        self!.model.serviceIdentifier = identifier
+        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
+      }
+    }
   }
-  
-  private func presentDurationPicker(with identifier: IndexPath) {
+}
+
+extension ProviderServiceCardController: ModalPickHandling {
+  func picked(id: Int, title: String) {
+    guard let path = model.serviceIdentifier else { return }
     
+    model.setPickedService(for: path, serviceId: id, serviceName: title)
+    
+    DispatchQueue.main.async {
+      self.mainView.reloadRows(at: [path], with: .automatic)
+    }
   }
 }
 
@@ -80,15 +101,17 @@ extension ProviderServiceCardController: UITextFieldDelegate {
   }
   
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-    guard let identifyingTextField = textField as? IdentifyingTextField else {
+    guard let identifyingTextField = textField as? IdentifyingTextField,
+      let indexPath = identifyingTextField.identifier else {
         return true
     }
     
     switch identifyingTextField.subType {
     case .datePicker:
-      (textField as? IdentifyingTextField)?.aciton?()
+      identifyingTextField.aciton?()
       return true
     case .servicePicker:
+      presentServicePicker(with: indexPath)
       return false
     case .cityPicker, .none:
       return true

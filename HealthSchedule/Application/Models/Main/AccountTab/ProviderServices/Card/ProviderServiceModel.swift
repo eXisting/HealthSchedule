@@ -10,9 +10,12 @@ import UIKit
 
 class ProviderServiceModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
+  private let commonRequests = CommonDataRequest()
   private var existingService: ProviderService?
   
   let dataSource = ProviderServiceCardDataSource()
+  
+  var serviceIdentifier: IndexPath?
   
   init(service: ProviderService?) {
     existingService = service
@@ -20,6 +23,25 @@ class ProviderServiceModel {
   
   func postService(_ completion: @escaping (String) -> Void) {
     requestManager.createUpdateProviderService(with: [:], isCreate: existingService == nil, completion: completion)
+  }
+  
+  func loadServices(_ completion: @escaping ([Service]) -> Void) {
+    let services = DataBaseManager.shared.fetchRequestsHandler.getServices(context: DataBaseManager.shared.mainContext)
+    if services.count > 1 {
+      completion(services)
+      return
+    }
+
+    commonRequests.getAllServices { status in
+      if status != ResponseStatus.success.rawValue { return }
+      completion(DataBaseManager.shared.fetchRequestsHandler.getServices(context: DataBaseManager.shared.mainContext))
+    }
+  }
+  
+  func setPickedService(for path: IndexPath, serviceId: Int?, serviceName: String?) {    
+    var rowData = dataSource.data[path.section][path.row]
+    rowData.data = serviceName
+    rowData.id = serviceId
   }
   
   subscript(forSectionIndex: Int) -> ProviderServiceSectionDataContaining {
