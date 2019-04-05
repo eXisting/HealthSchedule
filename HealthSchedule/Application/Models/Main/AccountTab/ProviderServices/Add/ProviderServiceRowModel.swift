@@ -8,26 +8,77 @@
 
 import UIKit
 
-protocol ProviderServiceRowDataContaining {
-  var data: String { get }
-  var title: String { get }
+protocol ProviderServiceRowDataContaining: CommonRowDataContaining {
   var rowHeight: CGFloat { get }
 }
 
 class ProviderServiceTextRowModel: ProviderServiceRowDataContaining {
-  var data: String = ""
+  var id: Int?
+  var data: String?
+  var keyName: String?
   var title: String
+  var type: AccountRowType
+  var subtype: AccountRowSubtype
   var rowHeight: CGFloat = 65
   
-  init(title: String) {
+  init(
+    title: String,
+    type: AccountRowType,
+    subtype: AccountRowSubtype = .none,
+    keyName: String? = nil
+    ) {
     self.title = title
+    self.keyName = keyName
+    self.type = type
+    self.subtype = subtype
+  }
+  
+  func asKeyValuePair() -> (key: String, value: String) {
+    guard let key = keyName else {
+      return (key: "", value: "")
+    }
+    
+    guard let chosenId = id else {
+      return (key: key, value: data!)
+    }
+    
+    return (key: key, value: String(chosenId))
   }
 }
 
 class ProviderServiceDateRowModel: ProviderServiceRowDataContaining {
-  var data: String = ""
-  var title: String = "Duration:"
-  var imageUrl: String?
+  var id: Int?
+  var data: String?
+  var keyName: String?
+  var title: String
+  var type: AccountRowType
+  var subtype: AccountRowSubtype
   var rowHeight: CGFloat = 65
+  
+  init(
+    title: String,
+    type: AccountRowType,
+    subtype: AccountRowSubtype = .none,
+    keyName: String? = nil,
+    date: Date? = nil,
+    id: Int? = nil
+    ) {
+    self.title = title
+    self.keyName = keyName
+    self.type = type
+    self.subtype = subtype
+  }
+  
+  func asKeyValuePair() -> (key: String, value: String) {
+    guard let key = keyName else {
+      return (key: "", value: "")
+    }
+    
+    guard let chosenId = id else {
+      return (key: key, value: data!)
+    }
+    
+    return (key: key, value: String(chosenId))
+  }
 }
 

@@ -150,7 +150,7 @@ extension AccountViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let rowData = model.dataSource[indexPath.section][indexPath.row]
+    let rowData: CommonRowDataContaining = model.dataSource[indexPath.section][indexPath.row]
     pushController(for: rowData.type)
   }
   
@@ -179,7 +179,7 @@ extension AccountViewController: UITextFieldDelegate {
       case .cityPicker:
         presentCityPicker(with: identifier)
         return false
-      case .none:
+      case .servicePicker, .none:
         return true
     }
   }

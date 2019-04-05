@@ -8,9 +8,7 @@
 
 import UIKit
 
-protocol ProviderServiceSectionDataContaining: CommonSectionDataContaining {
-  var rows: [ProviderServiceRowDataContaining] { get }
-  
+protocol ProviderServiceSectionDataContaining: CommonSectionDataContaining, CommonSectionDataActionsHandling {
   subscript(forRowIndex: Int) -> ProviderServiceRowDataContaining { get }
 }
 
@@ -19,13 +17,28 @@ class ProviderServiceGeneralSectionModel: ProviderServiceSectionDataContaining {
   var numberOfRows: Int
   var sectionHeight: CGFloat = 60
   
-  var rows: [ProviderServiceRowDataContaining]
+  private var rows: [ProviderServiceRowDataContaining]
   
   init() {
     rows = [
-      ProviderServiceTextRowModel(title: "Service:"),
-      ProviderServiceTextRowModel(title: "Price:"),
-      ProviderServiceTextRowModel(title: "Description:")
+      ProviderServiceTextRowModel(
+        title: "Service:",
+        type: .general,
+        subtype: .servicePicker,
+        keyName: ProviderServiceJsonFields.interval.rawValue
+      ),
+      ProviderServiceTextRowModel(
+        title: "Price:",
+        type: .general,
+        subtype: .none,
+        keyName: ProviderServiceJsonFields.interval.rawValue
+      ),
+      ProviderServiceTextRowModel(
+        title: "Description:",
+        type: .general,
+        subtype: .none,
+        keyName: ProviderServiceJsonFields.interval.rawValue
+      )
     ]
     
     numberOfRows = rows.count
@@ -35,6 +48,27 @@ class ProviderServiceGeneralSectionModel: ProviderServiceSectionDataContaining {
   subscript(forRowIndex: Int) -> ProviderServiceRowDataContaining {
     return rows[forRowIndex]
   }
+  
+  func set(data: String?, for rowAtIndex: Int) {
+    rows[rowAtIndex].data = data
+  }
+  
+  func set(id: Int, for rowAtIndex: Int) {
+    rows[rowAtIndex].id = id
+  }
+  
+  func asJson() -> Parser.JsonDictionary {
+    var result: Parser.JsonDictionary = [:]
+    
+    rows.forEach { row in
+      let rowJson = row.asKeyValuePair()
+      if !rowJson.key.isEmpty {
+        result[rowJson.key] = rowJson.value
+      }
+    }
+    
+    return result
+  }
 }
 
 class ProviderServiceDurationSectionModel: ProviderServiceSectionDataContaining {
@@ -43,11 +77,16 @@ class ProviderServiceDurationSectionModel: ProviderServiceSectionDataContaining 
   var numberOfRows: Int
   var sectionHeight: CGFloat = 60
   
-  var rows: [ProviderServiceRowDataContaining]
+  private var rows: [ProviderServiceRowDataContaining]
   
   init() {
     rows = [
-      ProviderServiceDateRowModel()
+      ProviderServiceDateRowModel(
+        title: "Duration:",
+        type: .general,
+        subtype: .datePicker,
+        keyName: ProviderServiceJsonFields.interval.rawValue
+      )
     ]
     
     numberOfRows = rows.count
@@ -56,5 +95,26 @@ class ProviderServiceDurationSectionModel: ProviderServiceSectionDataContaining 
   
   subscript(forRowIndex: Int) -> ProviderServiceRowDataContaining {
     return rows[forRowIndex]
+  }
+  
+  func set(data: String?, for rowAtIndex: Int) {
+    rows[rowAtIndex].data = data
+  }
+  
+  func set(id: Int, for rowAtIndex: Int) {
+    rows[rowAtIndex].id = id
+  }
+  
+  func asJson() -> Parser.JsonDictionary {
+    var result: Parser.JsonDictionary = [:]
+    
+    rows.forEach { row in
+      let rowJson = row.asKeyValuePair()
+      if !rowJson.key.isEmpty {
+        result[rowJson.key] = rowJson.value
+      }
+    }
+    
+    return result
   }
 }

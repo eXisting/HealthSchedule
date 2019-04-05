@@ -26,9 +26,14 @@ class CreateProviderServiceModel {
       ProviderServiceDurationSectionModel()
     ]
   }
+  
+  func changeText(by indexPath: IndexPath, with text: String?) {
+    dataSource.data[indexPath.section].set(data: text, for: indexPath.row)
+  }
 }
 
-class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {  
+class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {
+  var textFieldDelegate: UITextFieldDelegate!
   fileprivate var data: [ProviderServiceSectionDataContaining] = []
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,7 +52,7 @@ class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {
     let rowData = data[indexPath.section][indexPath.row]
     let cell = tableView.dequeueReusableCell(withIdentifier: ProviderCreateTableView.cellIdentifier, for: indexPath) as! ProviderServiceCreateRow
       
-    cell.populateCell(name: rowData.title)
+    cell.configureCell(name: rowData.title, delegate: textFieldDelegate)
             
     return cell
   }

@@ -11,7 +11,7 @@ import UIKit
 class ProviderServiceCreateRow: UITableViewCell {
   private let container = UIStackView()
   
-  private let editableField = UITextField()
+  private let editableField = IdentifyingTextField()
   private let nameLabel = UILabel()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -24,9 +24,10 @@ class ProviderServiceCreateRow: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func populateCell(name: String) {
+  func configureCell(name: String, delegate: UITextFieldDelegate) {
     nameLabel.text = name
     editableField.placeholder = name
+    editableField.delegate = delegate
   }
   
   private func laidOutViews() {

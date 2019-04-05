@@ -33,7 +33,10 @@ class ProviderServiceAddController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    model.dataSource.textFieldDelegate = self
     mainView.setup(delegate: self, dataSource: model.dataSource)
+    
     model.procceed()
   }
 }
@@ -45,6 +48,38 @@ extension ProviderServiceAddController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return model[section].sectionHeight
+  }
+}
+
+extension ProviderServiceAddController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
+  
+  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    guard let identifyingTextField = textField as? IdentifyingTextField,
+      let identifier = identifyingTextField.identifier else {
+        return true
+    }
+    
+    switch identifyingTextField.subType {
+    case .datePicker:
+      return false
+    case .servicePicker:
+      return false
+    case .cityPicker, .none:
+      return true
+    }
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    guard let identifyingTextField = textField as? IdentifyingTextField,
+      let identifier = identifyingTextField.identifier else {
+        return
+    }
+    
+    model.changeText(by: identifier, with: identifyingTextField.text)
   }
 }
 

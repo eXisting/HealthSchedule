@@ -14,12 +14,14 @@ protocol CommonSectionDataContaining {
   var sectionHeight: CGFloat { get }
 }
 
-protocol AccountSectionDataContaining: CommonSectionDataContaining {
+protocol CommonSectionDataActionsHandling {
   func set(data: String?, for rowAtIndex: Int)
   func set(id: Int, for rowAtIndex: Int)
   func asJson() -> Parser.JsonDictionary
-  
-  subscript(forRowIndex: Int) -> AccountRowDataContaining { get }
+}
+
+protocol AccountSectionDataContaining: CommonSectionDataContaining, CommonSectionDataActionsHandling {
+  subscript(forRowIndex: Int) -> CommonRowDataContaining { get }
 }
 
 class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
@@ -27,11 +29,11 @@ class GeneralInfoAccountSectionModel: AccountSectionDataContaining {
   var sectionHeight: CGFloat = 55
   var numberOfRows: Int
   
-  subscript(forRowIndex: Int) -> AccountRowDataContaining {
+  subscript(forRowIndex: Int) -> CommonRowDataContaining {
     return rows[forRowIndex]
   }
   
-  private var rows: [AccountRowDataContaining]
+  private var rows: [CommonRowDataContaining]
   
   init(user: User) {
     guard let city = user.city,
@@ -75,11 +77,11 @@ class ProviderInfoAccountSectionModel: AccountSectionDataContaining {
   var sectionHeight: CGFloat = 55
   var numberOfRows: Int
   
-  subscript(forRowIndex: Int) -> AccountRowDataContaining {
+  subscript(forRowIndex: Int) -> CommonRowDataContaining {
     return rows[forRowIndex]
   }
   
-  private var rows: [AccountRowDataContaining]
+  private var rows: [CommonRowDataContaining]
   
   init(user: User) {
     rows = [
@@ -103,11 +105,11 @@ class SecureInfoAccountSectionModel: AccountSectionDataContaining {
   var sectionHeight: CGFloat = 55
   var numberOfRows: Int
   
-  subscript(forRowIndex: Int) -> AccountRowDataContaining {
+  subscript(forRowIndex: Int) -> CommonRowDataContaining {
     return rows[forRowIndex]
   }
   
-  private var rows: [AccountRowDataContaining]
+  private var rows: [CommonRowDataContaining]
   
   init(user: User) {
     rows = [
