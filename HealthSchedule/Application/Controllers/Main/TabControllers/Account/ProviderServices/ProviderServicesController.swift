@@ -37,8 +37,14 @@ class ProviderServicesController: UIViewController {
 
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
-   
+    setupNavigationBarAppearance()
+
     model.getStoredServices(onServicesLoaded)
+  }
+  
+  private func setupNavigationBarAppearance() {
+    navigationController?.navigationBar.isTranslucent = false
+    navigationController?.navigationBar.backgroundColor = .gray
   }
   
   private func onServicesLoaded(response: String) {
