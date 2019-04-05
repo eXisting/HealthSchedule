@@ -39,6 +39,23 @@ class ProviderServiceAddController: UIViewController {
     
     model.procceed()
   }
+  
+  private func presentServicePicker(with identifier: IndexPath) {
+//    model.getServices {
+//      [weak self] cities in
+//      DispatchQueue.main.async {
+//        let controller = ModalCityViewController()
+//        controller.storeDelegate = self
+//        controller.cititesList = cities
+//        self!.model.presentedIdetifier = identifier
+//        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
+//      }
+//    }
+  }
+  
+  private func presentDurationPicker(with identifier: IndexPath) {
+    
+  }
 }
 
 extension ProviderServiceAddController: UITableViewDelegate {
@@ -58,8 +75,7 @@ extension ProviderServiceAddController: UITextFieldDelegate {
   }
   
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-    guard let identifyingTextField = textField as? IdentifyingTextField,
-      let identifier = identifyingTextField.identifier else {
+    guard let identifyingTextField = textField as? IdentifyingTextField else {
         return true
     }
     

@@ -30,6 +30,11 @@ class ProviderServiceCreateRow: UITableViewCell {
     editableField.delegate = delegate
   }
   
+  func configureIdentity(identifier: IndexPath, subType: AccountRowSubtype) {
+    editableField.identifier = identifier
+    editableField.subType = subType
+  }
+  
   private func laidOutViews() {
     addSubview(container)
     container.addArrangedSubview(nameLabel)
