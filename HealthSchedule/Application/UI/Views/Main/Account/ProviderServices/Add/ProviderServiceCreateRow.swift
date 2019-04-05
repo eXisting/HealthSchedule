@@ -37,12 +37,12 @@ class ProviderServiceCreateRow: UITableViewCell {
     container.translatesAutoresizingMaskIntoConstraints = false
     editableField.translatesAutoresizingMaskIntoConstraints = false
 
-    NSLayoutConstraint(item: editableField, attribute: .width, relatedBy: .equal, toItem: container, attribute: .width, multiplier: 0.65, constant: 0).isActive = true
+    NSLayoutConstraint(item: editableField, attribute: .width, relatedBy: .equal, toItem: container, attribute: .width, multiplier: 0.7, constant: 0).isActive = true
     
-    NSLayoutConstraint(item: container, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 0.95, constant: 0).isActive = true
-    NSLayoutConstraint(item: container, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 0.95, constant: 0).isActive = true
-    NSLayoutConstraint(item: container, attribute: .top, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .top, multiplier: 0.95, constant: 0).isActive = true
-    NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .bottom, multiplier: 0.95, constant: 0).isActive = true
+    NSLayoutConstraint(item: container, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 16).isActive = true
+    NSLayoutConstraint(item: container, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 16).isActive = true
+    NSLayoutConstraint(item: container, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 0.95, constant: 0).isActive = true
+    NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 0.95, constant: 0).isActive = true
   }
   
   private func customizeViews() {
