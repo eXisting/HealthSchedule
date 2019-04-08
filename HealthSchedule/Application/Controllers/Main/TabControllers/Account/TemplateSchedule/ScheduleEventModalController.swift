@@ -15,7 +15,7 @@ protocol TableViewMasteringDelegate {
 }
 
 class ScheduleEventModalController: UIViewController {
-  private let mainView = ScheduleEventTableView()
+  private let mainView = ScheduleEventModalView()
   private var model: ScheduleModalDayModel!
   
   convenience init(startDate: Date, delegate: ScheduleNavigationItemDelegate) {
@@ -30,21 +30,41 @@ class ScheduleEventModalController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    mainView.setup(delegate: model.dataSource, dataSource: model.dataSource)
+    mainView.setup(acceptHandler: onSaveClickHandle, declineHandler: onCancelClickHandle)
+    mainView.tableView.setup(delegate: model.dataSource, dataSource: model.dataSource)
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    mainView.addBordersTosButtons()
+  }
+  
+  private func onSaveClickHandle() {
+    model.save(errorCall: showWarningAlert, onSuccess: { dismiss(animated: true, completion: nil) })
+  }
+  
+  private func onCancelClickHandle() {
+    dismiss(animated: true, completion: nil)
   }
 }
 
 extension ScheduleEventModalController: TableViewMasteringDelegate {
   func dequeueReusableHeader(identifier: String) -> UITableViewHeaderFooterView? {
-    return mainView.dequeueReusableHeaderFooterView(withIdentifier: identifier)
+    return mainView.tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier)
   }
   
   func dequeueReusableCell(identifier: String, for indexPath: IndexPath) -> UITableViewCell {
-    return mainView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+    return mainView.tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
   }
   
   func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation) {
-    mainView.reloadSections(path, with: animation)
+    mainView.tableView.reloadSections(path, with: animation)
+  }
+}
+
+
+extension ScheduleEventModalController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(for: self, "Error", message, .alert)
   }
 }

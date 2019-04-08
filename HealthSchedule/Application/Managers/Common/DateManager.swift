@@ -22,6 +22,12 @@ enum DateTimeLocale {
   case none
 }
 
+enum ComparasionState {
+  case equal
+  case grater
+  case less
+}
+
 class DateManager {
   static let shared = DateManager()
   
@@ -114,6 +120,17 @@ class DateManager {
     mergedComponments.second = timeComponents.second!
     
     return calendar.date(from: mergedComponments)
+  }
+  
+  func compareDates(start: String, end: String, format: DateFormatType, locale: DateTimeLocale) -> ComparasionState {
+    let start = DateManager.shared.stringToDate(start, format: format, locale)
+    let end = DateManager.shared.stringToDate(end, format: format, locale)
+    
+    if start == end {
+      return .equal
+    }
+    
+    return start > end ? .grater : .less
   }
   
   private init() {

@@ -21,7 +21,7 @@ class ScheduleViewController: UIViewController {
   private let model = ScheduleModel()
   
   let presenter: Presentr = {
-    let customType = PresentationType.bottomHalf
+    let customType = PresentationType.popup
     
     let customPresenter = Presentr(presentationType: customType)
     customPresenter.transitionType = .crossDissolve
