@@ -11,6 +11,9 @@ import JZCalendarWeekView
 
 class ScheduleModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
+
+  lazy var eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
+  var events: [DefaultEvent] = []
   
   func loadProviderScheduleTemplate(_ completion: @escaping () -> Void) {
     requestManager.getScheduleTemplate { response in
@@ -20,15 +23,15 @@ class ScheduleModel {
     }
   }
   
-  func onDatePicked(date: Date) {
-    
+  private func saveTemplate(_ completion: @escaping (String) -> Void) {
+    completion(ResponseStatus.success.rawValue)
   }
-  
-  func onDateDeselected(date: Date) {
-    
+}
+
+extension ScheduleModel: ScheduleNavigationItemDelegate {
+  func save() {
+    saveTemplate { status in
+      print(status)
+    }
   }
-  
-  var events: [DefaultEvent] = []
-  
-  lazy var eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
 }

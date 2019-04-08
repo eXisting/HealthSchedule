@@ -99,6 +99,12 @@
 		ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE422242891100B95696 /* RequestCardRowModel.swift */; };
 		ED98CE462243997600B95696 /* RequestCardImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE452243997600B95696 /* RequestCardImageRow.swift */; };
 		EDB6B443225797AE00B8EA8B /* ModalServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */; };
+		EDB6B447225B415700B8EA8B /* ScheduleEventModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B446225B415700B8EA8B /* ScheduleEventModalController.swift */; };
+		EDB6B449225B42E100B8EA8B /* ScheduleEventTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B448225B42E100B8EA8B /* ScheduleEventTableView.swift */; };
+		EDB6B44C225B453300B8EA8B /* ScheduleModalDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */; };
+		EDB6B44E225B4BA200B8EA8B /* ScheduleModalTableViewHader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B44D225B4BA200B8EA8B /* ScheduleModalTableViewHader.swift */; };
+		EDB6B451225B4E3A00B8EA8B /* ExpandableSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B450225B4E3A00B8EA8B /* ExpandableSectionData.swift */; };
+		EDB6B453225B5B7C00B8EA8B /* ScheduleModalTableViewRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B452225B5B7C00B8EA8B /* ScheduleModalTableViewRows.swift */; };
 		EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE60B9223FB41200734FBC /* SearchResultView.swift */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
 		EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45422280D2100A6B56F /* DatePickerView.swift */; };
@@ -234,6 +240,12 @@
 		ED98CE422242891100B95696 /* RequestCardRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardRowModel.swift; sourceTree = "<group>"; };
 		ED98CE452243997600B95696 /* RequestCardImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardImageRow.swift; sourceTree = "<group>"; };
 		EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalServicesViewController.swift; sourceTree = "<group>"; };
+		EDB6B446225B415700B8EA8B /* ScheduleEventModalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEventModalController.swift; sourceTree = "<group>"; };
+		EDB6B448225B42E100B8EA8B /* ScheduleEventTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEventTableView.swift; sourceTree = "<group>"; };
+		EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModalDayModel.swift; sourceTree = "<group>"; };
+		EDB6B44D225B4BA200B8EA8B /* ScheduleModalTableViewHader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModalTableViewHader.swift; sourceTree = "<group>"; };
+		EDB6B450225B4E3A00B8EA8B /* ExpandableSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSectionData.swift; sourceTree = "<group>"; };
+		EDB6B452225B5B7C00B8EA8B /* ScheduleModalTableViewRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModalTableViewRows.swift; sourceTree = "<group>"; };
 		EDCE60B9223FB41200734FBC /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -426,7 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				ED7359002254B289006C318C /* ProviderServices */,
-				EDD2A858223AAA2800B52E68 /* ChildControllers */,
+				EDD2A858223AAA2800B52E68 /* TemplateSchedule */,
 				ED34D7F62209A8480025BACF /* AccountViewController.swift */,
 			);
 			path = Account;
@@ -788,6 +800,24 @@
 			path = CardTableView;
 			sourceTree = "<group>";
 		};
+		EDB6B44A225B44B100B8EA8B /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				EDB6B448225B42E100B8EA8B /* ScheduleEventTableView.swift */,
+				EDB6B44D225B4BA200B8EA8B /* ScheduleModalTableViewHader.swift */,
+				EDB6B452225B5B7C00B8EA8B /* ScheduleModalTableViewRows.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
+		EDB6B44F225B4E2D00B8EA8B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EDB6B450225B4E3A00B8EA8B /* ExpandableSectionData.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		EDCFB44C222806BB00A6B56F /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,6 +902,7 @@
 		EDCFB46522294FED00A6B56F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EDB6B44F225B4E2D00B8EA8B /* Common */,
 				EDD2A82B22367BF200B52E68 /* Main */,
 				DB6C1C062232F3CD0083DAD3 /* Authentication */,
 			);
@@ -935,12 +966,13 @@
 			path = Timetable;
 			sourceTree = "<group>";
 		};
-		EDD2A858223AAA2800B52E68 /* ChildControllers */ = {
+		EDD2A858223AAA2800B52E68 /* TemplateSchedule */ = {
 			isa = PBXGroup;
 			children = (
 				DB0B7C48225644EF0035C593 /* ScheduleViewController.swift */,
+				EDB6B446225B415700B8EA8B /* ScheduleEventModalController.swift */,
 			);
-			path = ChildControllers;
+			path = TemplateSchedule;
 			sourceTree = "<group>";
 		};
 		EDD2A85B223BBE3B00B52E68 /* Result */ = {
@@ -984,6 +1016,7 @@
 			children = (
 				DB0B7C4E225644F00035C593 /* DefaultEvent.swift */,
 				EDE03EDA2253550D00DBAA0F /* ScheduleModel.swift */,
+				EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -991,6 +1024,7 @@
 		EDE03EDC2253553600DBAA0F /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				EDB6B44A225B44B100B8EA8B /* Card */,
 				DB0B7C44225644EF0035C593 /* TemplateScheduleWeekView.swift */,
 				DB0B7C46225644EF0035C593 /* LongPressEventCell.swift */,
 				EDE03EEA22537D3200DBAA0F /* ScheduleNavigationItem.swift */,
@@ -1128,6 +1162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDB6B447225B415700B8EA8B /* ScheduleEventModalController.swift in Sources */,
 				ED73591A2255002E006C318C /* ProviderServiceModel.swift in Sources */,
 				ED7359052254B335006C318C /* NavigationItem.swift in Sources */,
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
@@ -1177,6 +1212,7 @@
 				ED7359102254C48A006C318C /* ProviderServiceHeader.swift in Sources */,
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */,
+				EDB6B451225B4E3A00B8EA8B /* ExpandableSectionData.swift in Sources */,
 				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
 				ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */,
 				ED73592522550860006C318C /* ProviderServiceGeneralTableView.swift in Sources */,
@@ -1188,6 +1224,7 @@
 				ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */,
 				DB0B7C79225644F10035C593 /* CustomWeekView.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
+				EDB6B44C225B453300B8EA8B /* ScheduleModalDayModel.swift in Sources */,
 				ED73590C2254C28A006C318C /* ProviderServicesTableView.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
@@ -1235,11 +1272,14 @@
 				ED73592822550925006C318C /* ProviderServiceRow.swift in Sources */,
 				ED231B282229840600A80FC9 /* NavigationHoverHeaderView.swift in Sources */,
 				EDD2A83C2238042E00B52E68 /* SearchModel.swift in Sources */,
+				EDB6B453225B5B7C00B8EA8B /* ScheduleModalTableViewRows.swift in Sources */,
 				ED448303220473BD00BE8EF0 /* ProfileImage.swift in Sources */,
 				DB85193C2208F1B900CCF452 /* ImageViewColorChange.swift in Sources */,
 				ED5DBCB6220066E3006070E0 /* User.swift in Sources */,
 				EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */,
 				EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */,
+				EDB6B449225B42E100B8EA8B /* ScheduleEventTableView.swift in Sources */,
+				EDB6B44E225B4BA200B8EA8B /* ScheduleModalTableViewHader.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
 				ED7359122254C4D7006C318C /* ProviderServiceCell.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
