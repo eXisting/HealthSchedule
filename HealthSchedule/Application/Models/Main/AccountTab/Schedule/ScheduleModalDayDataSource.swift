@@ -14,29 +14,55 @@ enum ScheduleModalDaySectionsIdentifiers: Int {
   case status = 2
 }
 
+enum WorkingStatus: Int {
+  case working
+  case off
+}
+
 class ScheduleModalDayDataSource: NSObject {
-  private var tableViewMasterDelegate: TableViewMasteringDelegate
-  private var sectionsInfo: [ExpandableSectionData]
+  private var tableViewMasterDelegate: TableViewMasteringDelegate!
+  private var sectionsInfo: [ExpandableSectionData]!
+  private var rowsInfo: [SelectableRowsData]!
+  
+  private lazy var timeRange = DateManager.shared.getAvailableServiceTimeRange()
   
   subscript(index: Int) -> ExpandableSectionData {
     return sectionsInfo[index]
   }
   
-  init(_ startDate: Date, tableViewMasterDelegate: TableViewMasteringDelegate) {
+  init(_ startDate: Date, tableViewMasterDelegate: TableViewMasteringDelegate, _ endDate: Date?, _ status: WorkingStatus) {
+    super.init()
+    
     self.tableViewMasterDelegate = tableViewMasterDelegate
+    
+    let end = endDate ?? DateManager.shared.getAvailableServiceTimeRange().max
+    let start = DateManager.shared.date2String(with: .time, startDate, .hour24)
+    
+    rowsInfo = [
+      SelectableRowsData.init(
+        section: ScheduleModalDaySectionsIdentifiers.start.rawValue,
+        data: getStatusName(for: 0),
+        checkedState: status == .working ? 1 : 0
+      ),
+      SelectableRowsData.init(
+        section: ScheduleModalDaySectionsIdentifiers.start.rawValue,
+        data: getStatusName(for: 1),
+        checkedState: status == .off ? 1 : 0
+      )
+    ]
     
     sectionsInfo = [
       ExpandableSectionData.init(
         section: ScheduleModalDaySectionsIdentifiers.start.rawValue,
         placeholder: "Start time:",
-        display: DateManager.shared.date2String(with: .time, startDate, .hour24),
+        display: start,
         isExpanded: false,
         rowsCount: 1
       ),
       ExpandableSectionData.init(
         section: ScheduleModalDaySectionsIdentifiers.end.rawValue,
         placeholder: "End time:",
-        display: DateManager.shared.date2String(with: .time, DateManager.shared.getAvailableServiceTimeRange().max, .hour24),
+        display: DateManager.shared.date2String(with: .time, end, .hour24),
         isExpanded: false,
         rowsCount: 1
       ),
@@ -52,6 +78,28 @@ class ScheduleModalDayDataSource: NSObject {
     sectionsInfo[ScheduleModalDaySectionsIdentifiers.start.rawValue].containsDataOfType = .pickable
     sectionsInfo[ScheduleModalDaySectionsIdentifiers.end.rawValue].containsDataOfType = .pickable
     sectionsInfo[ScheduleModalDaySectionsIdentifiers.status.rawValue].containsDataOfType = .selectable
+  }
+  
+  private func getStatusName(for index: Int) -> String {
+    return index == 0 ? "Working" : "Not working"
+  }
+  
+  private func processChecking(_ tableView: UITableView, for indexPath: IndexPath) {
+    for index in 0..<rowsInfo.count {
+      let loopIndexPath = IndexPath(row: index, section: indexPath.section)
+      let cell = tableView.cellForRow(at: loopIndexPath) as! ScheduleModalTableViewSelectableRow
+      
+      let isChecked = loopIndexPath == indexPath
+      
+      cell.accessoryType = isChecked ? .checkmark : .none
+      rowsInfo[index].checkedState = isChecked ? 1 : 0
+    }
+  }
+  
+  private func onDateChanged(newDate: Date, for indexPath: IndexPath) {
+    rowsInfo[indexPath.row].data = DateManager.shared.date2String(with: .time, newDate, .hour24)
+    sectionsInfo[indexPath.section].displayData = rowsInfo[indexPath.row].data
+    tableViewMasterDelegate.redrawSection(indexPath)
   }
 }
 
@@ -87,9 +135,18 @@ extension ScheduleModalDayDataSource: UITableViewDataSource, UITableViewDelegate
     case .selectable:
       guard let cell = tableViewMasterDelegate.dequeueReusableCell(identifier: ScheduleEventTableView.selectableCellIdentifier, for: indexPath) as? ScheduleModalTableViewSelectableRow else { fatalError("selectable cell fials")}
       
+      cell.setup(getStatusName(for: indexPath.row), identifier: indexPath)
+      
+      if rowsInfo[indexPath.row].checkedState == 1 {
+        cell.accessoryType = .checkmark
+      }
+      
       return cell
     case .pickable:
       guard let cell = tableViewMasterDelegate.dequeueReusableCell(identifier: ScheduleEventTableView.timePickingCellIdentifier, for: indexPath) as? ScheduleModalTableViewDatePickerRow else { fatalError("pickable cell fials")}
+      
+      cell.setup(identifier: indexPath, onValueChangedHandler: onDateChanged)
+      cell.set(dateToDisplay: sectionsInfo[indexPath.section].displayData, datesRange: timeRange)
       
       return cell
     case .common:
@@ -108,7 +165,25 @@ extension ScheduleModalDayDataSource: UITableViewDataSource, UITableViewDelegate
     return header
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let cellGroup = ScheduleModalDaySectionsIdentifiers(rawValue: indexPath.section) else {
+      fatalError()
+    }
+    
+    if cellGroup == .status {
+      processChecking(tableView, for: indexPath)
+    }
+  }
+  
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 60
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    guard let cellGroup = ScheduleModalDaySectionsIdentifiers(rawValue: indexPath.section) else {
+      fatalError()
+    }
+    
+    return cellGroup == .status ? 40 : 160
   }
 }

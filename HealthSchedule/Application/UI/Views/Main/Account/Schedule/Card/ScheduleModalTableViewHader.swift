@@ -19,6 +19,13 @@ class ScheduleModalTableViewHader: UITableViewHeaderFooterView {
   var collapseDelegate: ExandableHeaderViewDelegate!
   var data: ExpandableSectionData!
   
+  override func setNeedsLayout() {
+    super.setNeedsLayout()
+    if let data = data {
+      displayingLabel.text = data.displayData      
+    }
+  }
+  
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
     addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectHeader)))

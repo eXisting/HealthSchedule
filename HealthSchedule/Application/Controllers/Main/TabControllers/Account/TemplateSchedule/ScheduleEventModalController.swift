@@ -12,15 +12,16 @@ protocol TableViewMasteringDelegate {
   func dequeueReusableHeader(identifier: String) -> UITableViewHeaderFooterView?
   func dequeueReusableCell(identifier: String, for indexPath: IndexPath) -> UITableViewCell
   func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation)
+  func redrawSection(_ path: IndexPath)
 }
 
 class ScheduleEventModalController: UIViewController {
   private let mainView = ScheduleEventModalView()
   private var model: ScheduleModalDayModel!
   
-  convenience init(startDate: Date, delegate: ScheduleNavigationItemDelegate) {
+  convenience init(startDate: Date, delegate: ScheduleNavigationItemDelegate, endDate: Date? = nil, status: WorkingStatus = .working) {
     self.init()
-    model = ScheduleModalDayModel(startDate: startDate, saveDelegate: delegate, tableViewMasterDelegate: self)
+    model = ScheduleModalDayModel(startDate: startDate, saveDelegate: delegate, tableViewMasterDelegate: self, endDate, status)
   }
   
   override func loadView() {
@@ -59,6 +60,15 @@ extension ScheduleEventModalController: TableViewMasteringDelegate {
   
   func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation) {
     mainView.tableView.reloadSections(path, with: animation)
+  }
+  
+  func redrawSection(_ path: IndexPath) {
+    guard let header = mainView.tableView.headerView(forSection: path.section) as? ScheduleModalTableViewHader else {
+      fatalError()
+    }
+    
+    header.data.displayData = model.dataSource[path.section].displayData
+    header.setNeedsLayout()
   }
 }
 

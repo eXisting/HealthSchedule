@@ -12,8 +12,14 @@ class ScheduleModalDayModel {
   var dataSource: ScheduleModalDayDataSource
   private var saveDelegate: ScheduleNavigationItemDelegate
   
-  init(startDate: Date, saveDelegate: ScheduleNavigationItemDelegate, tableViewMasterDelegate: TableViewMasteringDelegate) {
-    dataSource = ScheduleModalDayDataSource(startDate, tableViewMasterDelegate: tableViewMasterDelegate)
+  init(
+    startDate: Date,
+    saveDelegate: ScheduleNavigationItemDelegate,
+    tableViewMasterDelegate: TableViewMasteringDelegate,
+    _ endDate: Date?,
+    _ status: WorkingStatus
+  ) {
+    dataSource = ScheduleModalDayDataSource(startDate, tableViewMasterDelegate: tableViewMasterDelegate, endDate, status)
     self.saveDelegate = saveDelegate
   }
   

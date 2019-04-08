@@ -70,6 +70,33 @@ class ScheduleEventModalView: UIView {
     actionsBlock?.addBackgroundView(actionsBackground)
     
     NSLayoutConstraint(
+      item: tableView,
+      attribute: .height,
+      relatedBy: .equal,
+      toItem: container,
+      attribute: .height,
+      multiplier: 0.85,
+      constant: 0).isActive = true
+    
+    NSLayoutConstraint(
+      item: tableView,
+      attribute: .width,
+      relatedBy: .equal,
+      toItem: container,
+      attribute: .width,
+      multiplier: 1,
+      constant: 0).isActive = true
+    
+    NSLayoutConstraint(
+      item: actionsBlock!,
+      attribute: .width,
+      relatedBy: .equal,
+      toItem: container,
+      attribute: .width,
+      multiplier: 1,
+      constant: 0).isActive = true
+
+    NSLayoutConstraint(
       item: actionsBlock!,
       attribute: .height,
       relatedBy: .equal,
@@ -80,9 +107,11 @@ class ScheduleEventModalView: UIView {
   }
   
   private func customizeViews() {
+    backgroundColor = .white
+    
     container.axis = .vertical
-    container.distribution = .fill
-    container.alignment = .fill
+    container.distribution = .equalSpacing
+    container.alignment = .top
     
     actionsBlock?.axis = .horizontal
     actionsBlock?.distribution = .fillEqually
