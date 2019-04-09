@@ -56,7 +56,7 @@
     <entity name="ScheduleDayTemplate" representedClassName="ScheduleDayTemplate" syncable="YES" codeGenerationType="class">
         <attribute name="end" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="provider_id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="providerId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="start" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="working" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="provider" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="scheduleDayTemplate" inverseEntity="User" syncable="YES"/>
@@ -100,9 +100,9 @@
         <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="208"/>
         <element name="Request" positionX="-464.71875" positionY="-172.3515625" width="128" height="195"/>
         <element name="Role" positionX="-712.4140625" positionY="-619.92578125" width="128" height="88"/>
+        <element name="ScheduleDayTemplate" positionX="-657" positionY="-477" width="128" height="135"/>
         <element name="Service" positionX="-288.98828125" positionY="126.453125" width="128" height="135"/>
         <element name="User" positionX="-706.875" positionY="-452.6953125" width="128" height="270"/>
         <element name="UserImage" positionX="-700.59765625" positionY="-21.62109375" width="128" height="105"/>
-        <element name="ScheduleDayTemplate" positionX="-657" positionY="-477" width="128" height="135"/>
     </elements>
 </model>

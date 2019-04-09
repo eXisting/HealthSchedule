@@ -691,6 +691,15 @@
 			path = Authenticatiion;
 			sourceTree = "<group>";
 		};
+		ED4B3608225CD05800BFDEED /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				DB0B7C4E225644F00035C593 /* DefaultEvent.swift */,
+				EDB6B45A225B856500B8EA8B /* TemplateDayRowsCommonData.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		ED58DD8E2257493500BDD57C /* JZViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1021,11 +1030,10 @@
 		EDE03ED9225354FD00DBAA0F /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				DB0B7C4E225644F00035C593 /* DefaultEvent.swift */,
+				ED4B3608225CD05800BFDEED /* Elements */,
 				EDB6B456225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift */,
 				EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */,
 				EDE03EDA2253550D00DBAA0F /* ScheduleModel.swift */,
-				EDB6B45A225B856500B8EA8B /* TemplateDayRowsCommonData.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";

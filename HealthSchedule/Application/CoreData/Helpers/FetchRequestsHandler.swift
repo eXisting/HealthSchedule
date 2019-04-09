@@ -147,4 +147,22 @@ class FetchRequestsHandler {
       abort()
     }
   }
+  
+  func getScheduleDays(context: NSManagedObjectContext? = nil) -> [ScheduleDayTemplate] {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<ScheduleDayTemplate> = ScheduleDayTemplate.fetchRequest()
+    guard let currentUser = getCurrentUser(context: workingContext) else {
+      fatalError()
+    }
+    
+    fetchRequest.predicate = NSPredicate(format: "providerId == \(Int16(currentUser.id))")
+    
+    do {
+      return try workingContext.fetch(fetchRequest)
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
 }

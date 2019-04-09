@@ -18,6 +18,10 @@ protocol ScheduleEventHandling {
   func updateAddEvent(event: DefaultEvent)
 }
 
+protocol ScheduleEventsRefreshing {
+  func refresh()
+}
+
 class ScheduleViewController: UIViewController {
   private let titleName = "Schedule template"
 
@@ -50,28 +54,37 @@ class ScheduleViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    model.delegate = self
     
     setupBasic()
     setupCalendarView()
     setupNaviBar()
+    
+    model.loadFromCoreData()
   }
     
   // Support device orientation change
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     JZWeekViewHelper.viewTransitionHandler(to: size, weekView: calendarWeekView)
   }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    refresh()
+  }
     
   private func setupCalendarView() {
     calendarWeekView.baseDelegate = self
   
-    let monday = Date.today().previous(.monday)
-    let saturday = Date.today().next(.saturday)
+    let monday = Date.today().currentWeekMonday
+    let saturday = Date.today().next(.saturday, considerToday: true)
     let scrollableRange: (Date?, Date?) = (startDate: monday, endDate: saturday)
     
     calendarWeekView.setupCalendar(numOfDays: 7,
                                      setDate: Date(),
                                      allEvents: model.eventsByDate,
-                                     scrollType: .pageScroll,
+                                     scrollType: .sectionScroll,
+                                     firstDayOfWeek: .Monday,
                                      scrollableRange: scrollableRange)
     
     // LongPress delegate, datasorce and type setup
@@ -106,6 +119,12 @@ extension ScheduleViewController: JZBaseViewDelegate {
   }
 }
 
+extension ScheduleViewController: ScheduleEventsRefreshing {
+  func refresh() {
+    calendarWeekView.forceReload(reloadEvents: model.eventsByDate)
+  }
+}
+
 extension ScheduleViewController: ScheduleEventHandling {
   func updateAddEvent(event: DefaultEvent) {
     if model.eventsByDate[event.startDate.startOfDay] == nil {
@@ -114,7 +133,7 @@ extension ScheduleViewController: ScheduleEventHandling {
     
     model.events.append(event)
     model.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: model.events)
-    calendarWeekView.forceReload(reloadEvents: model.eventsByDate)
+    refresh()
   }
 }
 

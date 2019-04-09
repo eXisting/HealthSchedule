@@ -66,6 +66,32 @@ extension Date {
     return calendar.weekdaySymbols
   }
   
+  var currentWeekMonday: Date {
+    return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+  }
+
+  static func dayIndex2WeekDay(_ index: Int) -> Weekday {
+    switch index {
+    case 0:
+      return .monday
+    case 1:
+      return .tuesday
+    case 2:
+      return .wednesday
+    case 3:
+      return .thursday
+    case 4:
+      return .friday
+    case 5:
+      return .saturday
+    case 6:
+      return .sunday
+      
+    default:
+      return .monday
+    }
+  }
+  
   enum Weekday: String {
     case monday, tuesday, wednesday, thursday, friday, saturday, sunday
   }

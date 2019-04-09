@@ -133,6 +133,10 @@ class DateManager {
     return start > end ? .grater : .less
   }
   
+  func getDateAccordingToThisWeek(weekDayIndex: Int) -> Date {
+    return Date().currentWeekMonday.add(component: .day, value: weekDayIndex)
+  }
+  
   private init() {
     dateFormatter.dateFormat = DateFormatType.date.rawValue
     defaultDate = dateFormatter.date(from: "1000-01-01")

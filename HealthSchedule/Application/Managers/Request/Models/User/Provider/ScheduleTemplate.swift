@@ -47,9 +47,9 @@ struct RemoteScheduleTemplateDay: Codable {
     working = try container.decode(Bool.self, forKey: .working)
 
     let startDateString = try container.decode(String.self, forKey: .start)
-    startTime = DateManager.shared.stringToDate(startDateString)
+    startTime = DateManager.shared.stringToDate(startDateString, format: .fullTime, .hour24)
     
     let endDateString = try container.decode(String.self, forKey: .end)
-    endTime = DateManager.shared.stringToDate(endDateString, format: .time, .hour24)
+    endTime = DateManager.shared.stringToDate(endDateString, format: .fullTime, .hour24)
   }
 }

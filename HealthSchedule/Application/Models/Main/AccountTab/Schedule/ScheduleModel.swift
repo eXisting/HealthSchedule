@@ -11,19 +11,47 @@ import JZCalendarWeekView
 
 class ScheduleModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
-
-  lazy var eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
+  private var scheduleDays: [ScheduleDayTemplate] = []
+  
+  var delegate: ScheduleEventsRefreshing!
+  
+  var eventsByDate: [Date: [DefaultEvent]] = [:]
   var events: [DefaultEvent] = []
   
-  func loadProviderScheduleTemplate(_ completion: @escaping () -> Void) {
-    requestManager.getScheduleTemplate { response in
+  func loadFromCoreData() {
+    scheduleDays = DataBaseManager.shared.fetchRequestsHandler.getScheduleDays(context: DataBaseManager.shared.mainContext)
+    days2Events()
+    delegate.refresh()
+  }
+  
+  func reloadProviderScheduleTemplate(_ completion: @escaping () -> Void) {
+    requestManager.getScheduleTemplate {
+      response in
       if response == ResponseStatus.success.rawValue {
-        
+        completion()
       }
     }
   }
   
+  private func days2Events() {
+    for day in scheduleDays {
+      let event = DefaultEvent(
+        id: String(day.id),
+        title: "",
+        startDate: day.start!,
+        endDate: day.end!,
+        location: "",
+        status: day.working
+      )
+
+      events.append(event)
+    }
+    
+    eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
+  }
+  
   private func saveTemplate(_ completion: @escaping (String) -> Void) {
+    // TODO: Save API
     completion(ResponseStatus.success.rawValue)
   }
 }

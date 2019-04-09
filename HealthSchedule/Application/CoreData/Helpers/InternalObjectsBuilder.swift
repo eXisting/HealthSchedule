@@ -55,11 +55,15 @@ class InternalObjectsBuilder {
     }
   }
   
-  func build(day: ScheduleDayTemplate, attachedUser: User, _ remote: RemoteScheduleTemplateDay, context: NSManagedObjectContext) {
+  func build(day: ScheduleDayTemplate, _ index: Int, attachedUser: User, _ remote: RemoteScheduleTemplateDay, context: NSManagedObjectContext) {
     day.id = Int16(remote.id)
     day.working = remote.working
-    day.start = remote.startTime
-    day.end = remote.endTime
+    day.providerId = attachedUser.id
+    
+    let datePart = DateManager.shared.getDateAccordingToThisWeek(weekDayIndex: index)
+
+    day.start = DateManager.shared.combineDateWithTime(date: datePart, time: remote.startTime)
+    day.end = DateManager.shared.combineDateWithTime(date: datePart, time: remote.endTime)
     
     day.provider = attachedUser
     attachedUser.addToScheduleDayTemplate(day)

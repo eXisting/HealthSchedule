@@ -219,7 +219,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      self?.databaseManager.insertUpdateScheduleDayTemplate(from: list, context: DataBaseManager.shared.mainContext)
+      self?.databaseManager.insertUpdateScheduleDayTemplate(from: list)
       
       completion(ResponseStatus.success.rawValue)
     }
