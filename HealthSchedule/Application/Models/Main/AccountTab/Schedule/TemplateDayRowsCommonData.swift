@@ -11,5 +11,5 @@ import UIKit
 struct SelectableRowsData {
   var section: Int
   var data: String
-  var checkedState: Int
+  var checkedState: Bool
 }

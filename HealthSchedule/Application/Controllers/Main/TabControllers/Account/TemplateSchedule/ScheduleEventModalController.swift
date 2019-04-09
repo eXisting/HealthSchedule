@@ -19,9 +19,11 @@ class ScheduleEventModalController: UIViewController {
   private let mainView = ScheduleEventModalView()
   private var model: ScheduleModalDayModel!
   
-  convenience init(startDate: Date, delegate: ScheduleNavigationItemDelegate, endDate: Date? = nil, status: WorkingStatus = .working) {
+  var eventsDelegate: ScheduleEventHandling!
+  
+  convenience init(startDate: Date, endDate: Date? = nil, status: WorkingStatus = .working) {
     self.init()
-    model = ScheduleModalDayModel(startDate: startDate, saveDelegate: delegate, tableViewMasterDelegate: self, endDate, status)
+    model = ScheduleModalDayModel(startDate: startDate, tableViewMasterDelegate: self, endDate, status)
   }
   
   override func loadView() {
@@ -41,7 +43,10 @@ class ScheduleEventModalController: UIViewController {
   }
   
   private func onSaveClickHandle() {
-    model.save(errorCall: showWarningAlert, onSuccess: { dismiss(animated: true, completion: nil) })
+    model.save(errorCall: showWarningAlert, onSuccess: { event in
+      eventsDelegate.updateAddEvent(event: event)
+      dismiss(animated: true, completion: nil) }
+    )
   }
   
   private func onCancelClickHandle() {

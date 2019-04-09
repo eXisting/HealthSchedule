@@ -7,26 +7,37 @@
 //
 
 import UIKit
+import JZCalendarWeekView
 
 class ScheduleModalDayModel {
   var dataSource: ScheduleModalDayDataSource
-  private var saveDelegate: ScheduleNavigationItemDelegate
   
   init(
     startDate: Date,
-    saveDelegate: ScheduleNavigationItemDelegate,
     tableViewMasterDelegate: TableViewMasteringDelegate,
     _ endDate: Date?,
     _ status: WorkingStatus
   ) {
     dataSource = ScheduleModalDayDataSource(startDate, tableViewMasterDelegate: tableViewMasterDelegate, endDate, status)
-    self.saveDelegate = saveDelegate
   }
   
-  func save(errorCall: (String) -> Void, onSuccess: () -> Void) {
+  func save(errorCall: (String) -> Void, onSuccess: (DefaultEvent) -> Void) {
     if isValidSaveData() {
-      saveDelegate.save()
-      onSuccess()
+      let start = dataSource[ScheduleModalDaySectionsIdentifiers.start.rawValue].displayData
+      let end = dataSource[ScheduleModalDaySectionsIdentifiers.end.rawValue].displayData
+      let status = dataSource[ScheduleModalDaySectionsIdentifiers.status.rawValue].displayData
+      
+      let startDate = DateManager.shared.stringToDate(start, format: .time, .hour24)
+      let endDate = DateManager.shared.stringToDate(end, format: .time, .hour24)
+
+      let newEvent = DefaultEvent(
+        id: UUID().uuidString,
+        title: "Something",
+        startDate: startDate,
+        endDate: endDate,
+        location: "Any")
+      
+      onSuccess(newEvent)
     } else {
       errorCall("Start date should be less then end date")
     }
@@ -40,6 +51,6 @@ class ScheduleModalDayModel {
       locale: .hour24
     )
 
-    return startDateToEndDate == .equal || startDateToEndDate == .grater
+    return startDateToEndDate != .equal || startDateToEndDate != .grater
   }
 }

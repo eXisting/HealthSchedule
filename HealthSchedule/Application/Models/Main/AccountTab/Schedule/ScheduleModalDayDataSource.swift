@@ -42,12 +42,12 @@ class ScheduleModalDayDataSource: NSObject {
       SelectableRowsData.init(
         section: ScheduleModalDaySectionsIdentifiers.start.rawValue,
         data: getStatusName(for: 0),
-        checkedState: status == .working ? 1 : 0
+        checkedState: status == .working ? true : false
       ),
       SelectableRowsData.init(
         section: ScheduleModalDaySectionsIdentifiers.start.rawValue,
         data: getStatusName(for: 1),
-        checkedState: status == .off ? 1 : 0
+        checkedState: status == .off ? true : false
       )
     ]
     
@@ -87,12 +87,15 @@ class ScheduleModalDayDataSource: NSObject {
   private func processChecking(_ tableView: UITableView, for indexPath: IndexPath) {
     for index in 0..<rowsInfo.count {
       let loopIndexPath = IndexPath(row: index, section: indexPath.section)
-      let cell = tableView.cellForRow(at: loopIndexPath) as! ScheduleModalTableViewSelectableRow
+      rowsInfo[index].checkedState = false
+      guard let cell = tableView.cellForRow(at: loopIndexPath) as? ScheduleModalTableViewSelectableRow else {
+        continue
+      }
       
       let isChecked = loopIndexPath == indexPath
       
       cell.accessoryType = isChecked ? .checkmark : .none
-      rowsInfo[index].checkedState = isChecked ? 1 : 0
+      rowsInfo[index].checkedState = isChecked
     }
   }
   
@@ -137,7 +140,7 @@ extension ScheduleModalDayDataSource: UITableViewDataSource, UITableViewDelegate
       
       cell.setup(getStatusName(for: indexPath.row), identifier: indexPath)
       
-      if rowsInfo[indexPath.row].checkedState == 1 {
+      if rowsInfo[indexPath.row].checkedState {
         cell.accessoryType = .checkmark
       }
       

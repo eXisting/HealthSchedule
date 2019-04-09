@@ -14,6 +14,10 @@ protocol ScheduleNavigationItemDelegate {
   func save()
 }
 
+protocol ScheduleEventHandling {
+  func updateAddEvent(event: DefaultEvent)
+}
+
 class ScheduleViewController: UIViewController {
   private let titleName = "Schedule template"
 
@@ -102,25 +106,24 @@ extension ScheduleViewController: JZBaseViewDelegate {
   }
 }
 
+extension ScheduleViewController: ScheduleEventHandling {
+  func updateAddEvent(event: DefaultEvent) {
+    if model.eventsByDate[event.startDate.startOfDay] == nil {
+      model.eventsByDate[event.startDate.startOfDay] = [DefaultEvent]()
+    }
+
+    model.events.append(event)
+    model.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: model.events)
+    calendarWeekView.forceReload(reloadEvents: model.eventsByDate)
+  }
+}
+
 extension ScheduleViewController: JZLongPressViewDelegate, JZLongPressViewDataSource {
   
   func weekView(_ weekView: JZLongPressWeekView, didEndAddNewLongPressAt startDate: Date) {
-    let controller = ScheduleEventModalController(startDate: startDate, delegate: model)
+    let controller = ScheduleEventModalController(startDate: startDate)
+    controller.eventsDelegate = self
     customPresentViewController(presenter, viewController: controller, animated: true)
-//    let newEvent = DefaultEvent(
-//      id: UUID().uuidString,
-//      title: event.title,
-//      startDate: event.startDate,
-//      endDate: event.endDate,
-//      location: event.location ?? "")
-//
-//    if model.eventsByDate[event.startDate.startOfDay] == nil {
-//      model.eventsByDate[event.startDate.startOfDay] = [DefaultEvent]()
-//    }
-//
-//    model.events.append(newEvent)
-//    model.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: model.events)
-//    calendarWeekView.forceReload(reloadEvents: model.eventsByDate)
   }
   
   func weekView(_ weekView: JZLongPressWeekView, didBeginLongPressOn cell: JZLongPressEventCell) {
