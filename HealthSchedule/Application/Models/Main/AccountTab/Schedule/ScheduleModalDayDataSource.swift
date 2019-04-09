@@ -14,9 +14,9 @@ enum ScheduleModalDaySectionsIdentifiers: Int {
   case status = 2
 }
 
-enum WorkingStatus: Int {
-  case working
-  case off
+enum ScheduleModalStatusIndexes: Int {
+  case working = 0
+  case off = 1
 }
 
 class ScheduleModalDayDataSource: NSObject {
@@ -41,12 +41,12 @@ class ScheduleModalDayDataSource: NSObject {
     rowsInfo = [
       SelectableRowsData.init(
         section: ScheduleModalDaySectionsIdentifiers.start.rawValue,
-        data: getStatusName(for: 0),
+        data: getStatusName(for: ScheduleModalStatusIndexes.working.rawValue),
         checkedState: status == .working ? true : false
       ),
       SelectableRowsData.init(
         section: ScheduleModalDaySectionsIdentifiers.start.rawValue,
-        data: getStatusName(for: 1),
+        data: getStatusName(for: ScheduleModalStatusIndexes.off.rawValue),
         checkedState: status == .off ? true : false
       )
     ]
@@ -69,7 +69,7 @@ class ScheduleModalDayDataSource: NSObject {
       ExpandableSectionData.init(
         section: ScheduleModalDaySectionsIdentifiers.status.rawValue,
         placeholder: "Status:",
-        display: "Working",
+        display: status.rawValue,
         isExpanded: false,
         rowsCount: 2
       )
@@ -81,22 +81,36 @@ class ScheduleModalDayDataSource: NSObject {
   }
   
   private func getStatusName(for index: Int) -> String {
-    return index == 0 ? "Working" : "Not working"
+    return index == ScheduleModalStatusIndexes.working.rawValue ?
+      WorkingStatus.working.rawValue : WorkingStatus.off.rawValue
   }
   
   private func processChecking(_ tableView: UITableView, for indexPath: IndexPath) {
     for index in 0..<rowsInfo.count {
       let loopIndexPath = IndexPath(row: index, section: indexPath.section)
-      rowsInfo[index].checkedState = false
+      
       guard let cell = tableView.cellForRow(at: loopIndexPath) as? ScheduleModalTableViewSelectableRow else {
+        rowsInfo[index].checkedState = false
         continue
       }
       
       let isChecked = loopIndexPath == indexPath
       
-      cell.accessoryType = isChecked ? .checkmark : .none
+      var accessoryType = UITableViewCell.AccessoryType.none
+      
+      if isChecked {
+        accessoryType = .checkmark
+      }
+      
+      cell.accessoryType = accessoryType
       rowsInfo[index].checkedState = isChecked
     }
+    
+    let isWorkingChecked = rowsInfo[ScheduleModalStatusIndexes.working.rawValue].checkedState
+    sectionsInfo[indexPath.section].displayData = isWorkingChecked ?
+      WorkingStatus.working.rawValue : WorkingStatus.off.rawValue
+    
+    tableViewMasterDelegate.redrawSection(indexPath)
   }
   
   private func onDateChanged(newDate: Date, for indexPath: IndexPath) {

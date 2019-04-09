@@ -68,7 +68,7 @@ class ScheduleViewController: UIViewController {
     let saturday = Date.today().next(.saturday)
     let scrollableRange: (Date?, Date?) = (startDate: monday, endDate: saturday)
     
-      calendarWeekView.setupCalendar(numOfDays: 7,
+    calendarWeekView.setupCalendar(numOfDays: 7,
                                      setDate: Date(),
                                      allEvents: model.eventsByDate,
                                      scrollType: .pageScroll,
@@ -111,7 +111,7 @@ extension ScheduleViewController: ScheduleEventHandling {
     if model.eventsByDate[event.startDate.startOfDay] == nil {
       model.eventsByDate[event.startDate.startOfDay] = [DefaultEvent]()
     }
-
+    
     model.events.append(event)
     model.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: model.events)
     calendarWeekView.forceReload(reloadEvents: model.eventsByDate)
@@ -132,6 +132,7 @@ extension ScheduleViewController: JZLongPressViewDelegate, JZLongPressViewDataSo
     
   func weekView(_ weekView: JZLongPressWeekView, viewForAddNewLongPressAt startDate: Date) -> UIView {
     let view = UINib(nibName: EventCell.className, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EventCell
+    view.titleLabel.text = "Place event"
     return view
   }
 }

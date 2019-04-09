@@ -9,16 +9,18 @@
 import UIKit
 import JZCalendarWeekView
 
+enum WorkingStatus: String {
+  case working = "Working"
+  case off = "Not working"
+}
+
 class ScheduleModalDayModel {
+  private var chosenStartDate: Date
   var dataSource: ScheduleModalDayDataSource
   
-  init(
-    startDate: Date,
-    tableViewMasterDelegate: TableViewMasteringDelegate,
-    _ endDate: Date?,
-    _ status: WorkingStatus
-  ) {
-    dataSource = ScheduleModalDayDataSource(startDate, tableViewMasterDelegate: tableViewMasterDelegate, endDate, status)
+  init(startDate: Date, tableViewMasterDelegate: TableViewMasteringDelegate, _ endDate: Date?, _ status: WorkingStatus) {
+    chosenStartDate = startDate
+    dataSource = ScheduleModalDayDataSource(chosenStartDate, tableViewMasterDelegate: tableViewMasterDelegate, endDate, status)
   }
   
   func save(errorCall: (String) -> Void, onSuccess: (DefaultEvent) -> Void) {
@@ -27,20 +29,32 @@ class ScheduleModalDayModel {
       let end = dataSource[ScheduleModalDaySectionsIdentifiers.end.rawValue].displayData
       let status = dataSource[ScheduleModalDaySectionsIdentifiers.status.rawValue].displayData
       
-      let startDate = DateManager.shared.stringToDate(start, format: .time, .hour24)
-      let endDate = DateManager.shared.stringToDate(end, format: .time, .hour24)
+      let startTime = DateManager.shared.stringToDate(start, format: .time, .hour24)
+      let endTime = DateManager.shared.stringToDate(end, format: .time, .hour24)
+      
+      guard let startDate = DateManager.shared.combineDateWithTime(date: chosenStartDate, time: startTime),
+        let endDate = DateManager.shared.combineDateWithTime(date: chosenStartDate, time: endTime) else {
+          print("Cannot combine dates!")
+          return
+      }
 
       let newEvent = DefaultEvent(
         id: UUID().uuidString,
-        title: "Something",
+        title: "",
         startDate: startDate,
         endDate: endDate,
-        location: "Any")
+        location: "",
+        status: statusName2Bool(status)
+      )
       
       onSuccess(newEvent)
     } else {
       errorCall("Start date should be less then end date")
     }
+  }
+  
+  private func statusName2Bool(_ name: String) -> Bool {
+    return name == WorkingStatus.working.rawValue
   }
   
   private func isValidSaveData() -> Bool {
