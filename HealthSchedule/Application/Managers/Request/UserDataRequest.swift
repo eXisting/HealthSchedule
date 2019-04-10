@@ -19,7 +19,7 @@ protocol ProviderInfoRequesting {
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
   
-  func getScheduleTemplate(completion: @escaping (String?) -> Void)
+  func getScheduleTemplate(completion: @escaping (String) -> Void)
   func saveScheduleTemplates(_ data: [String: [Dictionary<String, Any>]], completion: @escaping (String) -> Void)
 
   func getProviderServices(completion: @escaping (String) -> Void)
@@ -41,7 +41,9 @@ protocol UserDataUpdating {
 class UserDataRequest {
   private let requestsManager = RequestManager()
   private let databaseManager = DataBaseManager.shared
-    
+  
+  typealias FreshScheduleDayData = (dayIndex: Int16, start: Date, end: Date, working: Bool)
+  
   private func requestProviderData() {
     getProfessions() { list in print("Professions obtained!") }
     // TODO: Load rest data here
@@ -290,11 +292,11 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
-  func getScheduleTemplate(completion: @escaping (String?) -> Void) {
+  func getScheduleTemplate(completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteScheduleTemplateDay.self, from: Endpoints.scheduleTemplate, RequestManager.sessionToken.asParams()) {
       [weak self] list, response in
-      if response.error != nil {
-        completion(response.error)
+      if let error = response.error {
+        completion(error)
         return
       }
       
@@ -305,18 +307,18 @@ extension UserDataRequest: ProviderInfoRequesting {
   }
   
   func saveScheduleTemplates(_ data: Parser.JsonArrayDictionary, completion: @escaping (String) -> Void) {
-    guard let data = Serializer.getDataFrom(json: data) else {
+    guard let postData = Serializer.getDataFrom(json: data) else {
       return
     }
     
-    requestsManager.postAsync(to: Endpoints.scheduleTemplate.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
-      serverMessage, response in
+    requestsManager.postAsync(to: Endpoints.scheduleTemplate.rawValue, as: .put, postData, RequestManager.sessionToken.asParams()) {
+      [weak self] serverMessage, response in
       if let error = response.error {
         completion(error)
         return
       }
-
-      completion(ResponseStatus.success.rawValue)
+      
+      self?.getScheduleTemplate(completion: completion)
     }
   }
 }

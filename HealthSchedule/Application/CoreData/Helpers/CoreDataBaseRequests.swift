@@ -304,11 +304,11 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     let dayEntityObject = NSEntityDescription.entity(forEntityName: scheduleDayTemplateEntity, in: workingContext)
     
-    for dayIndex in 0..<days.count {
-      let day = days[dayIndex]
-      
+    for day in days {
       let fetchRequest: NSFetchRequest<ScheduleDayTemplate> = ScheduleDayTemplate.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(day.id))")
+      
+      // id new every time so use weekDay to find proper day
+      fetchRequest.predicate = NSPredicate(format: "weekDayIndex == \(Int16(day.weekDay))")
       fetchRequest.fetchLimit = 1
       
       guard let currentProvider = fetchRequestsHandler.getCurrentUser(context: workingContext) else {
@@ -320,12 +320,12 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
         
         // Update
         if result.count > 0 {
-          builder.build(day: result.first!, dayIndex, attachedUser: currentProvider, day, context: workingContext)
+          builder.build(day: result.first!, day.weekDay, attachedUser: currentProvider, day, context: workingContext)
         }
         // Insert
         else {
           let templateDay = NSManagedObject(entity: dayEntityObject!, insertInto: workingContext) as! ScheduleDayTemplate
-          builder.build(day: templateDay, dayIndex, attachedUser: currentProvider, day, context: workingContext)
+          builder.build(day: templateDay, day.weekDay, attachedUser: currentProvider, day, context: workingContext)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
