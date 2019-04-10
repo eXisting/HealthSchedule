@@ -117,7 +117,7 @@ class ScheduleEventModalView: UIView {
     actionsBlock?.distribution = .fillEqually
     actionsBlock?.alignment = .fill
     
-    acceptButton?.setTitle("SAVE", for: .normal)
+    acceptButton?.setTitle("CONFIRM", for: .normal)
     declineButton?.setTitle("CANCEL", for: .normal)
     
     acceptButton?.setTitleColor(.blue, for: .normal)
