@@ -66,6 +66,6 @@ class ScheduleModalDayModel {
       locale: .hour24
     )
 
-    return startDateToEndDate != .equal || startDateToEndDate != .grater
+    return startDateToEndDate == .orderedAscending
   }
 }
