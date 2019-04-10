@@ -23,14 +23,12 @@ class ScheduleModel {
     if scheduleDays.count == 0 {
       reloadProviderScheduleTemplate { [weak self] in
         self?.days2Events()
-        self?.delegate.refresh()
       }
-      
       return
     }
     
     days2Events()
-    delegate.refresh()
+    eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
   }
   
   func reloadProviderScheduleTemplate(_ completion: @escaping () -> Void) {

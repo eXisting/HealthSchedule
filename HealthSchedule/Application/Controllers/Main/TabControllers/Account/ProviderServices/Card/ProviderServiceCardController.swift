@@ -128,18 +128,26 @@ extension ProviderServiceCardController: UITextFieldDelegate {
   }
 }
 
+extension ProviderServiceCardController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(for: self, "Error", message, .alert)
+  }
+}
+
+
 extension ProviderServiceCardController: ProviderServiceHandling {
   func back() {
     navigationController?.popViewController(animated: true)
   }
   
   func main() {
-    model.postService { status in
-      if status == ResponseStatus.success.rawValue {
-        // TODO
+    model.postService { [weak self] status in
+      if status != ResponseStatus.success.rawValue {
+        self?.showWarningAlert(message: status)
+        return
       }
       
-      print(status)
+      self?.back()
     }
   }
 }

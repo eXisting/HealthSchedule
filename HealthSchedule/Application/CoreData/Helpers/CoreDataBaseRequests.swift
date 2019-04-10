@@ -350,50 +350,51 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   }
   
   func deleteAllRecords(context: NSManagedObjectContext? = nil) {
-    let workingContext = provider.provideWorkingContext(basedOn: context)
-    
-    var fetchRequests: [NSFetchRequest<NSFetchRequestResult>] = [
-      Service.fetchRequest(),
-      ProviderService.fetchRequest(),
-      Request.fetchRequest(),
-      ScheduleDayTemplate.fetchRequest()
-    ]
-    
-    if let existingUser = fetchRequestsHandler.getCurrentUser(context: workingContext) {
-      let cityRequest: NSFetchRequest<NSFetchRequestResult> = City.fetchRequest()
-      cityRequest.predicate = NSPredicate(format: "id != \(existingUser.cityId)")
-      cityRequest.fetchLimit = 1
-
-      let usersRequest: NSFetchRequest<NSFetchRequestResult> = User.fetchRequest()
-      usersRequest.predicate = NSPredicate(format: "id != \(existingUser.id)")
-      usersRequest.fetchLimit = 1
-
-      let userRoleRequest: NSFetchRequest<NSFetchRequestResult> = Role.fetchRequest()
-      userRoleRequest.predicate = NSPredicate(format: "id != \(existingUser.roleId)")
-      userRoleRequest.fetchLimit = 1
-      
-      if let image = existingUser.image {
-        let userImageRequest: NSFetchRequest<NSFetchRequestResult> = UserImage.fetchRequest()
-        userImageRequest.predicate = NSPredicate(format: "id != \(image.id)")
-        
-        fetchRequests.append(userImageRequest)
-      }
-      
-      fetchRequests.append(cityRequest)
-      fetchRequests.append(usersRequest)
-      fetchRequests.append(userRoleRequest)
-    }
-    
-    for deleteRequest in fetchRequests {
-      let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteRequest)
-      
-      do {
-        try workingContext.execute(deleteRequest)
-        saveContext(workingContext)
-      } catch {
-        print ("Error while cleaning Core Data: \(error.localizedDescription)")
-      }
-    }
+    // TODO: REFACTOR THIS
+//    let workingContext = provider.provideWorkingContext(basedOn: context)
+//
+//    var fetchRequests: [NSFetchRequest<NSFetchRequestResult>] = [
+//      Service.fetchRequest(),
+//      ProviderService.fetchRequest(),
+//      Request.fetchRequest(),
+//      ScheduleDayTemplate.fetchRequest()
+//    ]
+//
+//    if let existingUser = fetchRequestsHandler.getCurrentUser(context: workingContext) {
+//      let cityRequest: NSFetchRequest<NSFetchRequestResult> = City.fetchRequest()
+//      cityRequest.predicate = NSPredicate(format: "id != \(existingUser.cityId)")
+//      cityRequest.fetchLimit = 1
+//
+//      let usersRequest: NSFetchRequest<NSFetchRequestResult> = User.fetchRequest()
+//      usersRequest.predicate = NSPredicate(format: "id != \(existingUser.id)")
+//      usersRequest.fetchLimit = 1
+//
+//      let userRoleRequest: NSFetchRequest<NSFetchRequestResult> = Role.fetchRequest()
+//      userRoleRequest.predicate = NSPredicate(format: "id != \(existingUser.roleId)")
+//      userRoleRequest.fetchLimit = 1
+//
+//      if let image = existingUser.image {
+//        let userImageRequest: NSFetchRequest<NSFetchRequestResult> = UserImage.fetchRequest()
+//        userImageRequest.predicate = NSPredicate(format: "id != \(image.id)")
+//
+//        fetchRequests.append(userImageRequest)
+//      }
+//
+//      fetchRequests.append(cityRequest)
+//      fetchRequests.append(usersRequest)
+//      fetchRequests.append(userRoleRequest)
+//    }
+//
+//    for deleteRequest in fetchRequests {
+//      let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteRequest)
+//
+//      do {
+//        try workingContext.execute(deleteRequest)
+//        saveContext(workingContext)
+//      } catch {
+//        print ("Error while cleaning Core Data: \(error.localizedDescription)")
+//      }
+//    }
   }
   
   // MARK: -Contexts merging using recursive function

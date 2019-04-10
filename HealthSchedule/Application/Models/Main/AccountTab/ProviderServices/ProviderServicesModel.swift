@@ -15,6 +15,11 @@ class ProviderServicesModel {
   func loadServices(_ completion: @escaping (String) -> Void) {
     requestManager.getProviderServices(completion: completion)
   }
+  
+  func requestFromCoreData(_ completion: @escaping () -> Void) {
+    let _ = DataBaseManager.shared.providerServicesFrc.fetchedObjects
+    completion()
+  }
 }
 
 class ProviderServicesDataSource: NSObject, UITableViewDataSource {

@@ -38,6 +38,18 @@ class ProviderServicesController: UIViewController {
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
     setupNavigationBarAppearance()
+    
+    startLoadServices()
+  }
+  
+  private func startLoadServices() {
+    DispatchQueue.global(qos: .background).async {
+      self.model.requestFromCoreData {
+        DispatchQueue.main.async {
+          self.mainView.reloadData()
+        }
+      }
+    }
   }
   
   private func setupNavigationBarAppearance() {

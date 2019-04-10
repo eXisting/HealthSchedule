@@ -60,7 +60,7 @@ class ScheduleViewController: UIViewController {
     setupCalendarView()
     setupNaviBar()
     
-    model.loadFromCoreData()
+    startLoadTemplates()
   }
     
   // Support device orientation change
@@ -68,11 +68,6 @@ class ScheduleViewController: UIViewController {
     JZWeekViewHelper.viewTransitionHandler(to: size, weekView: calendarWeekView)
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    refresh()
-  }
-    
   private func setupCalendarView() {
     calendarWeekView.baseDelegate = self
   
@@ -97,9 +92,18 @@ class ScheduleViewController: UIViewController {
     calendarWeekView.moveTimeMinInterval = 15
   }
 
-  func setupBasic() {
+  private func setupBasic() {
     // Add this to fix lower than iOS11 problems
     self.automaticallyAdjustsScrollViewInsets = false
+  }
+  
+  private func startLoadTemplates() {
+    DispatchQueue.global(qos: .background).async {
+      self.model.loadFromCoreData()
+      DispatchQueue.main.async {
+        self.refresh()
+      }
+    }
   }
   
   private func setupNaviBar() {
