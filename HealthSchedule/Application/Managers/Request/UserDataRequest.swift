@@ -264,7 +264,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      self?.databaseManager.insertUpdateProviderServices(from: list, context: DataBaseManager.shared.mainContext)
+      self?.databaseManager.insertUpdateProviderServices(from: list)
       
       completion(ResponseStatus.success.rawValue)
     }

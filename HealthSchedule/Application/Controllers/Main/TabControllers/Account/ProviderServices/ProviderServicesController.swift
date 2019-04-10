@@ -38,29 +38,23 @@ class ProviderServicesController: UIViewController {
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
     setupNavigationBarAppearance()
-
-    model.getStoredServices(onServicesLoaded)
   }
   
   private func setupNavigationBarAppearance() {
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.backgroundColor = .gray
   }
-  
-  private func onServicesLoaded(response: String) {
-    if response != ResponseStatus.success.rawValue {
-      return
-    }
-    
-    DispatchQueue.main.async {
-      self.mainView.reloadData()
-    }
-  }
 }
 
 extension ProviderServicesController: RefreshingTableView {
   func refresh(_ completion: @escaping (String) -> Void) {
-    model.loadServices(completion)
+    model.loadServices { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        self?.showWarningAlert(message: response)
+      }
+      
+      completion(response)
+    }
   }
 }
 
@@ -72,6 +66,12 @@ extension ProviderServicesController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let providerService = DataBaseManager.shared.providerServicesFrc.object(at: indexPath)
     navigationController?.pushViewController(ProviderServiceCardController(service: providerService), animated: true)
+  }
+}
+
+extension ProviderServicesController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(for: self, "Error", message, .alert)
   }
 }
 
