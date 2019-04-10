@@ -127,11 +127,7 @@ extension ScheduleViewController: ScheduleEventsRefreshing {
 
 extension ScheduleViewController: ScheduleEventHandling {
   func updateAddEvent(event: DefaultEvent) {
-    if model.eventsByDate[event.startDate.startOfDay] == nil {
-      model.eventsByDate[event.startDate.startOfDay] = [DefaultEvent]()
-    }
-    
-    model.events.append(event)
+    model.insertUpdateEvent(event)
     model.eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: model.events)
     refresh()
   }
@@ -146,7 +142,15 @@ extension ScheduleViewController: JZLongPressViewDelegate, JZLongPressViewDataSo
   }
   
   func weekView(_ weekView: JZLongPressWeekView, didBeginLongPressOn cell: JZLongPressEventCell) {
-    // TODO: - Show alert about deletion or editing
+    let event = cell.event as! DefaultEvent
+    let controller = ScheduleEventModalController(
+      startDate: event.startDate,
+      endDate: event.endDate,
+      status: event.status ? .working : .off
+    )
+    
+    controller.eventsDelegate = self
+    customPresentViewController(presenter, viewController: controller, animated: true)
   }
     
   func weekView(_ weekView: JZLongPressWeekView, viewForAddNewLongPressAt startDate: Date) -> UIView {

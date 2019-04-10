@@ -37,7 +37,7 @@ class ScheduleModalDayModel {
           print("Cannot combine dates!")
           return
       }
-      
+
       let newEvent = DefaultEvent(
         id: UUID().uuidString,
         title: "",
@@ -45,7 +45,7 @@ class ScheduleModalDayModel {
         endDate: endDate,
         location: "",
         status: statusName2Bool(status),
-        weekDayIndex: DateManager.shared.date2WeekDayIndex(startDate)
+        weekDayIndex: DateManager.shared.date2WeekDayIndex(chosenStartDate)
       )
       
       onSuccess(newEvent)

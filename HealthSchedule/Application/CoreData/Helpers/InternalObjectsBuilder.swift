@@ -59,6 +59,7 @@ class InternalObjectsBuilder {
     day.id = Int16(remote.id)
     day.working = remote.working
     day.providerId = attachedUser.id
+    day.weekDayIndex = Int16(index)
     
     let datePart = DateManager.shared.getDateAccordingToThisWeek(weekDayIndex: index)
 

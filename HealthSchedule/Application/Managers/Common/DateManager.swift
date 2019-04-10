@@ -138,8 +138,15 @@ class DateManager {
   }
   
   func date2WeekDayIndex(_ date: Date) -> Int {
-    // week index - 1 cause working in ISO format
-    return Calendar.current.component(.weekday, from: date) - 1
+    // week index - 2 cause working in ISO format and values starts from 1
+    let index = Calendar(identifier: .iso8601).dateComponents([.weekday], from: date).weekday! - 2
+    
+    // if index is negative - it is last day of the week - return its index as 6
+    if index < 0 {
+      return 6
+    }
+    
+    return index
   }
   
   private init() {

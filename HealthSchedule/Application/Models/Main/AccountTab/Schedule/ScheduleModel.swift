@@ -42,10 +42,17 @@ class ScheduleModel {
     }
   }
   
+  func insertUpdateEvent(_ newEvent: DefaultEvent) {
+    if let index = events.firstIndex(where: { $0.weekDayIndex == newEvent.weekDayIndex }) {
+      events[index] = newEvent
+      return
+    }
+    
+    events.append(newEvent)
+  }
+  
   private func days2Events() {
-    for index in 0..<scheduleDays.count {
-      let day = scheduleDays[index]
-      
+    for day in scheduleDays {
       let event = DefaultEvent(
         id: String(day.id),
         title: "",
@@ -53,7 +60,7 @@ class ScheduleModel {
         endDate: day.end!,
         location: "",
         status: day.working,
-        weekDayIndex: index
+        weekDayIndex: Int(day.weekDayIndex)
       )
 
       events.append(event)
