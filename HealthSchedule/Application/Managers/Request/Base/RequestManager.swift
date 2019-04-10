@@ -72,7 +72,7 @@ class RequestManager {
   func postAsync(
     to url: String,
     as requestType: RequestType,
-    _ data: Parser.JsonDictionary?,
+    _ data: Any?,
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (Any, ServerResponse) -> Void) {
     

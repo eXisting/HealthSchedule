@@ -16,7 +16,7 @@ class UrlSessionHandler {
   func startSessionTask(
     _ url: String,
     _ type: RequestType = .get,
-    body: Parser.JsonDictionary? = nil,
+    body: Any? = nil,
     params: Parser.JsonDictionary? = nil,
     completion: @escaping (Any, ServerResponse) -> Void) {
     
@@ -81,7 +81,7 @@ private extension UrlSessionHandler {
     _ url: String,
     _ method: String,
     _ params: Parser.JsonDictionary?,
-    _ body: Parser.JsonDictionary? = nil) -> URLRequest? {
+    _ body: Any? = nil) -> URLRequest? {
     
     var parameterString = ""
     
@@ -100,11 +100,17 @@ private extension UrlSessionHandler {
     request.setValue("application/json", forHTTPHeaderField: "Accept")
     request.httpMethod = method
     
-    guard let data = body?.asDataString().data(using: .ascii) else {
-      return request
+    if let jsonDictBody = body as? Parser.JsonDictionary {
+      guard let data = jsonDictBody.asDataString().data(using: .ascii) else {
+        return request
+      }
+      
+      request.httpBody = data
+    } else {
+      // application/json; charset=utf-8 fixs problem with array serialization
+      request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+      request.httpBody = (body as? Data)
     }
-    
-    request.httpBody = data
     
     return request
   }

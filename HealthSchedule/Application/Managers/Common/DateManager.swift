@@ -137,6 +137,11 @@ class DateManager {
     return Date().currentWeekMonday.add(component: .day, value: weekDayIndex)
   }
   
+  func date2WeekDayIndex(_ date: Date) -> Int {
+    // week index - 1 cause working in ISO format
+    return Calendar.current.component(.weekday, from: date) - 1
+  }
+  
   private init() {
     dateFormatter.dateFormat = DateFormatType.date.rawValue
     defaultDate = dateFormatter.date(from: "1000-01-01")

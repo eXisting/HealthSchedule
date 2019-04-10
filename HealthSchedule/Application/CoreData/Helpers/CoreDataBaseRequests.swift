@@ -355,7 +355,8 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     var fetchRequests: [NSFetchRequest<NSFetchRequestResult>] = [
       Service.fetchRequest(),
       ProviderService.fetchRequest(),
-      Request.fetchRequest()
+      Request.fetchRequest(),
+      ScheduleDayTemplate.fetchRequest()
     ]
     
     if let existingUser = fetchRequestsHandler.getCurrentUser(context: workingContext) {

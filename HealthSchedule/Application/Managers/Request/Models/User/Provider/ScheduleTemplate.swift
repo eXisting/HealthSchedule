@@ -14,7 +14,8 @@ enum ScheduleTemplateJsonFields: String, CodingKey {
   case weekDay = "week_day"
   case start = "start_time"
   case end = "end_time"
-  case working
+  case working = "working"
+  case schedules = "schedules"
 }
 
 struct RemoteScheduleTemplateDay: Codable {
