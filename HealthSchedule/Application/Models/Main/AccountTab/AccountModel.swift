@@ -129,11 +129,9 @@ class AccountDataSource: NSObject, UITableViewDataSource {
           fatalError("Cannot cast to AccountPlacemarkCell!")
       }
       
-      placemarkCell.setPlaceholderWithText(rowData.title)
-      placemarkCell.value = rowData.data
-      placemarkCell.delegate = textFieldDelegate
-      placemarkCell.identifier = indexPath
-      placemarkCell.fieldSubtype = rowData.subtype
+      placemarkCell.configureCell(key: rowData.title, value: rowData.data, fieldSubtype: rowData.subtype, delegate: textFieldDelegate)
+      placemarkCell.configureIdentity(identifier: indexPath, subType: rowData.subtype)
+      
       return placemarkCell
     }
     

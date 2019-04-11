@@ -37,7 +37,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     let customType = PresentationType.popup
     
     let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .coverVerticalFromTop
+    customPresenter.transitionType = .crossDissolve
     customPresenter.dismissTransitionType = .crossDissolve
     customPresenter.roundCorners = true
     customPresenter.backgroundColor = .lightGray
@@ -175,7 +175,8 @@ extension AccountViewController: UITextFieldDelegate {
     
     switch identifyingTextField.subType {
       case .datePicker:
-        return false
+        identifyingTextField.aciton?()
+        return true
       case .cityPicker:
         presentCityPicker(with: identifier)
         return false

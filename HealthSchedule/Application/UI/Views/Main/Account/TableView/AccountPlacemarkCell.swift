@@ -11,30 +11,26 @@ import UIKit
 class AccountPlacemarkCell: UITableViewCell {
   private let placemark = UILabel()
   private let editableField = IdentifyingTextField()
+  private var datePicker: DatePickerView?
   
-  var identifier: IndexPath? {
-    set { editableField.identifier = newValue }
-    get { return editableField.identifier }
-  }
-  
-  var fieldSubtype: AccountRowSubtype {
-    set { editableField.subType = newValue }
-    get { return editableField.subType }
-  }
-  
-  var value: String? {
-    get {
-      return editableField.text
-    }
-    set {
-      editableField.text = newValue
+  func configureCell(key: String, value: String?, fieldSubtype: AccountRowSubtype, delegate: UITextFieldDelegate) {
+    placemark.text = key
+    editableField.placeholder = key
+    editableField.text = value
+    editableField.delegate = delegate
+    editableField.subType = fieldSubtype
+    
+    if editableField.subType == .datePicker {
+      datePicker = DatePickerView()
+      datePicker?.setup(target: editableField, shouldAddTarget: false, isBirthdayPicker: true)
+      datePicker?.setupInitialTime(data: editableField.text)
+      editableField.aciton = datePicker?.showDatePicker
     }
   }
   
-  var delegate: UITextFieldDelegate? {
-    didSet {
-      editableField.delegate = delegate
-    }
+  func configureIdentity(identifier: IndexPath, subType: AccountRowSubtype) {
+    editableField.identifier = identifier
+    editableField.subType = subType
   }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -49,11 +45,6 @@ class AccountPlacemarkCell: UITableViewCell {
   
   func setUserInteraction(_ value: Bool) {
     editableField.isUserInteractionEnabled = value
-  }
-  
-  func setPlaceholderWithText(_ text: String) {
-    editableField.placeholder = text
-    placemark.text = text
   }
   
   private func laidOutViews() {

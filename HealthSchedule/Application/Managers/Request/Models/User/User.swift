@@ -88,7 +88,7 @@ extension RemoteUser: Codable {
     photo = try? container.decode(ProfileImage.self, forKey: .image)
 
     let birthdayString = try container.decode(String.self, forKey: .birthday)
-    birthday = DateManager.shared.stringToDate(birthdayString)
+    birthday = DateManager.shared.stringToDate(birthdayString, format: .dateTime)
     
     providerData = ProviderData()
   }

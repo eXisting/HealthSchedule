@@ -54,19 +54,14 @@ extension UserDataRequest: UserDataUpdating {
   func updateInfo(with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
     let data = Parser.processGeneralUserData(collectedData)
     
-    requestsManager.postAsync(
-      to: Endpoints.updateUserInfo.rawValue,
-      as: .put, data, RequestManager.sessionToken.asParams()) {
-        serverData, response in
-      
+    requestsManager.postAsync(to: Endpoints.updateUserInfo.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
+        [weak self] serverData, response in
         if let error = response.error {
           completion(error)
           return
         }
         
-        // TODO - save to core data
-        
-        completion(ResponseStatus.success.rawValue)
+        self?.getUser(completion)
       }
   }
   
