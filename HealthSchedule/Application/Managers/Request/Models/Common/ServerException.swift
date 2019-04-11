@@ -31,4 +31,6 @@ enum ResponseStatus: String {
   
   case cannotProceed = "Server cannot proceed your request!"
   case serverError = "Server error!"
+  
+  case passwordsMismatch = "New password and confirm password are empty or does not match!"
 }

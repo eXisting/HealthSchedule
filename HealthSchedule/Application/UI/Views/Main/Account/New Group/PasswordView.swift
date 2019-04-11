@@ -25,6 +25,15 @@ class PasswordView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func isConfirmValid() -> Bool {    
+    guard let newPassword = newPasswordField.text,
+      let confirmPassword =  newPasswordConfirmField.text else {
+        return false
+    }
+    
+    return !newPassword.isEmpty && !confirmPassword.isEmpty && confirmPassword == newPassword
+  }
+  
   func set(textFieldsDelegate: UITextFieldDelegate) {
     oldPasswordField.delegate = textFieldsDelegate
     newPasswordField.delegate = textFieldsDelegate
@@ -36,7 +45,6 @@ class PasswordView: UIView {
     
     data[UserJsonFields.oldPassword.rawValue] = oldPasswordField.text
     data[UserJsonFields.newPassword.rawValue] = newPasswordField.text
-    data[UserJsonFields.confirmPassword.rawValue] = newPasswordConfirmField.text
 
     return data
   }

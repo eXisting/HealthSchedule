@@ -9,9 +9,9 @@
 import UIKit
 
 class PasswordModel {
+  private let requestManager: CommonDataRequesting = UserDataRequest()
+  
   func save(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
-    
-    
-    completion(ResponseStatus.success.rawValue)
+    requestManager.changePassword(with: data, completion)
   }
 }

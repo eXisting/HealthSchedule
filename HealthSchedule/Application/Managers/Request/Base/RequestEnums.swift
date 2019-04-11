@@ -33,6 +33,7 @@ enum Endpoints: String {
 
   // GET / PUT
   case scheduleTemplate = "/api/provider/schedules"
+  case password = "/api/user/password"
 }
 
 enum RequestType: String {

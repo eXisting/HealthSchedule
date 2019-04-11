@@ -29,6 +29,7 @@ protocol ProviderInfoRequesting {
 protocol CommonDataRequesting {
   func getRequests(completion: @escaping (String) -> Void)
   func getUser(_ completion: @escaping (String) -> Void)
+  func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
 }
 
 protocol UserDataUpdating {
@@ -109,6 +110,18 @@ extension UserDataRequest: CommonDataRequesting {
       // TODO: refactor this
       if remoteUser.role?.name == "provider" {
         self?.requestProviderData()
+      }
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    requestsManager.postAsync(to: Endpoints.password.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
+      data, response in
+      if let error = response.error {
+        completion(error)
+        return
       }
       
       completion(ResponseStatus.success.rawValue)

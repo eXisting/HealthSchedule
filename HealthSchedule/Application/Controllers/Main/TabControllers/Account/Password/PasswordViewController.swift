@@ -62,11 +62,20 @@ extension PasswordViewController: GeneralItemHandlingDelegate {
   }
   
   func main() {
+    if !mainView.isConfirmValid() {
+      showWarningAlert(message: ResponseStatus.passwordsMismatch.rawValue)
+      return
+    }
+    
     model.save(with: mainView.collectData()) { [weak self] response in
       if response != ResponseStatus.success.rawValue {
         DispatchQueue.main.async {
           self?.showWarningAlert(message: response)
         }
+      }
+      
+      DispatchQueue.main.async {
+        self?.back()
       }
     }
   }
