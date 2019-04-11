@@ -15,8 +15,9 @@ enum Endpoints: String {
   // GET COMMON
   case allCities = "/api/cities"
   case allProfessions = "/api/category/doctors/professions"
-  case allServices = "/api/services"
-  
+  case allServices = "/api/services/all"
+  case allServicesForCity = "/api/services"
+
   // POST
   case signUpAsUser = "/api/register/user"
   case signUpAsProvider = "/api/register/provider"

@@ -26,7 +26,7 @@ class CommonDataRequest {
     var params = RequestManager.sessionToken.asParams()
     params[UserJsonFields.cityId.rawValue] = String(cityId)
     
-    requestsManager.getListAsync(for: RemoteService.self, from: .allServices, params) {
+    requestsManager.getListAsync(for: RemoteService.self, from: .allServicesForCity, params) {
       (services, response) in
       
       if let _ = response.error {
@@ -34,24 +34,23 @@ class CommonDataRequest {
         return
       }
       
-      // TODO: Come up with caching solution
-      
       completion(services)
     }
   }
   
   func getAllServices(_ completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteService.self, from: .allServices, RequestManager.sessionToken.asParams()) {
-      (services, response) in
+      [weak self] (services, response) in
       
       if let error = response.error {
         completion(error)
         return
       }
       
-      // TODO: Come up with caching solution
-      
-      completion(ResponseStatus.success.rawValue)
+      DispatchQueue.global(qos: .userInteractive).async {
+        self!.databaseManager.insertUpdateServices(from: services)
+        completion(ResponseStatus.success.rawValue)
+      }
     }
   }
   
@@ -64,9 +63,10 @@ class CommonDataRequest {
         return
       }
       
-      self?.databaseManager.insertUpdateCities(from: cities, context: DataBaseManager.shared.mainContext)
-      
-      completion(ResponseStatus.success.rawValue)
+      DispatchQueue.global(qos: .userInteractive).async {
+        self?.databaseManager.insertUpdateCities(from: cities)
+        completion(ResponseStatus.success.rawValue)
+      }
     }
   }
 }
