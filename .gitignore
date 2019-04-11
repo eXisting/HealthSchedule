@@ -1,1 +1,6 @@
 health.code-workspace
+Gemfile
+fastlane/Appfile
+fastlane/Fastfile
+fastlane/README.md
+fastlane/report.xml
