@@ -14,9 +14,11 @@ class SearchView: UIView {
   private let headerView = NavigationHoverHeaderView()
   private let searchButton = UIButton()
   
-  var searchDelegate: SearchResponsible?
+  var searchDelegate: SearchResponsible!
 
-  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, searchDelegate: SearchResponsible) {
+    self.searchDelegate = searchDelegate
+
     laidOutViews()
     customizeViews()
     

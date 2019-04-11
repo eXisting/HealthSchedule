@@ -10,6 +10,8 @@ import UIKit
 import FSCalendar
 
 class TimetableView: UIView {
+  typealias DateTimeInterval = (day: Date, startTime: Date, endTime: Date)
+  
   let calendar = FSCalendar()
   
   private let timePickerContainer = UIView()
@@ -27,7 +29,7 @@ class TimetableView: UIView {
     calendar.dataSource = dataSource
   }
   
-  func getChosenDateTimeInterval() -> (day: Date, start: Date, end: Date) {
+  func getChosenDateTimeInterval() -> DateTimeInterval {
     let day = calendar.selectedDate ?? calendar.today ?? Date()    
     return (day, startPicker.date, endPicker.date)
   }

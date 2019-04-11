@@ -18,7 +18,7 @@ class SearchModel {
   private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
   
-  var dateTimeInterval: (day: Date, start: Date, end: Date)?
+  var dateTimeInterval: TimetableView.DateTimeInterval?
   var serviceId: Int?
   
   var searchOptions = [
@@ -35,8 +35,8 @@ class SearchModel {
       return (errorMessage: "Choose date and time interval!", [:])
     }
     
-    let startDateTime = DateManager.shared.combineDateWithTime(date: interval.day, time: interval.start)
-    let endDateTime = DateManager.shared.combineDateWithTime(date: interval.day, time: interval.end)
+    let startDateTime = DateManager.shared.combineDateWithTime(date: interval.day, time: interval.startTime)
+    let endDateTime = DateManager.shared.combineDateWithTime(date: interval.day, time: interval.endTime)
     
     return (nil, ["serviceId": service, "start": startDateTime as Any, "end": endDateTime as Any])
   }

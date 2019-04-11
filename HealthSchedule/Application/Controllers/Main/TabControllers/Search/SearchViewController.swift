@@ -8,19 +8,16 @@
 
 import UIKit
 
+protocol SearchPickResponsible {
+  func pickHandler(from optionControllerWithKey: SearchOptionKey, data: Any)
+}
+
 protocol SearchResponsible {
   func startSearch()
 }
 
-protocol OptionsCollectioning {
-  func storeDate(_ date: (day: Date, start: Date, end: Date))
-  func storeService(_ id: Int)
-}
-
 class SearchViewController: UIViewController {
   private let titleName = "Booking"
-  
-  private var rootNavigation: SearchNavigationController!
   
   private let mainView = SearchView()
   private let model = SearchModel()
@@ -36,38 +33,62 @@ class SearchViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    rootNavigation = (navigationController as! SearchNavigationController)
-    
+    mainView.setup(delegate: self, dataSource: self, searchDelegate: self)
+    setupNavigationItem()
+  }
+  
+  private func setupNavigationItem() {
     let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
     navigationController?.navigationBar.titleTextAttributes = textAttributes
     navigationItem.title = titleName
+  }
+  
+  private func pushController(with optionKey: SearchOptionKey) {
+    switch optionKey {
+    case .service:
+      let controller = ServicesViewController()
+      controller.delegate = self
+      navigationController?.pushViewController(controller, animated: true)
+    case .dateTime:
+      let controller = TimetableViewController()
+      controller.delegate = self
+      navigationController?.pushViewController(controller, animated: true)
+    }
+  }
+}
+
+extension SearchViewController: SearchPickResponsible {
+  func pickHandler(from optionControllerWithKey: SearchOptionKey, data: Any) {
+    switch optionControllerWithKey {
+    case .dateTime:
+      guard let data = data as? TimetableView.DateTimeInterval else {
+        showWarningAlert(message: "Contact the developer!")
+        return
+      }
+      
+      model.dateTimeInterval = data
+    case .service:
+      guard let data = data as? Int else {
+        showWarningAlert(message: "Contact the developer!")
+        return
+      }
+      
+      model.serviceId = data
+    }
     
-    mainView.setup(delegate: self, dataSource: self)
-    mainView.searchDelegate = self
+    navigationController?.popViewController(animated: true)
   }
 }
 
 extension SearchViewController: SearchResponsible {
   func startSearch() {
-    // TDOO: collect and pass data
     let searchData = model.getSearchOptions()
     if let warningMessage = searchData.errorMessage {
       showWarningAlert(message: warningMessage)
       return
     }
     
-    rootNavigation.presentResultController()
-  }
-}
-
-extension SearchViewController: OptionsCollectioning {
-  func storeDate(_ date: (day: Date, start: Date, end: Date)) {
-    model.dateTimeInterval = date
-  }
-  
-  func storeService(_ id: Int) {
-    model.serviceId = id
+    navigationController?.present(ResultViewController(), animated: true)
   }
 }
 
@@ -96,7 +117,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    rootNavigation.pushController(for: model.searchOptions[indexPath.row])
+    pushController(with: model.searchOptions[indexPath.row])
   }
 }
 

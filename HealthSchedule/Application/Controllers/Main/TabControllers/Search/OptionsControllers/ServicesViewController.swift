@@ -13,8 +13,6 @@ import UIEmptyState
 class ServicesViewController: UITableViewController {
   private let titleName = "Services"
   
-  private var parentNavigationController: SearchNavigationController!
-  
   private let presenter: Presentr = {
     let customType = PresentationType.popup
     
@@ -30,6 +28,8 @@ class ServicesViewController: UITableViewController {
   private let model = ServicesModel()
   private let searchBar = UISearchBar()
   
+  var delegate: SearchPickResponsible?
+  
   override func loadView() {
     super.loadView()
     navigationItem.titleView = searchBar
@@ -41,8 +41,6 @@ class ServicesViewController: UITableViewController {
     
     self.emptyStateDataSource = self
     self.emptyStateDelegate = self
-    
-    parentNavigationController = (navigationController as! SearchNavigationController)
     
     // Remove seperator lines from empty cells
     self.tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -73,7 +71,7 @@ class ServicesViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     model.serviceId = model.services[indexPath.row].id
-    parentNavigationController.popFromService(model.serviceId!)
+    delegate?.pickHandler(from: .service, data: model.serviceId as Any)
   }
 }
 

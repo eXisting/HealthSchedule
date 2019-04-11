@@ -12,10 +12,10 @@ import FSCalendar
 class TimetableViewController: UIViewController {
   private let titleName = "Date and Time"
   
-  private var parentNavigationController: SearchNavigationController!
-  
   private let model = TimetableModel()
   private let mainView = TimetableView()
+  
+  var delegate: SearchPickResponsible?
   
   override func loadView() {
     super.loadView()
@@ -24,8 +24,6 @@ class TimetableViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    parentNavigationController = (navigationController as? SearchNavigationController)
     mainView.setup(dataSource: model.dataSourceHandler)
     
     navigationItem.title = titleName
@@ -34,15 +32,14 @@ class TimetableViewController: UIViewController {
   
   @objc private func onDone() {
     let dateTimeInterval = mainView.getChosenDateTimeInterval()
-    if dateTimeInterval.end < dateTimeInterval.start {
+    if dateTimeInterval.endTime < dateTimeInterval.startTime {
       showWarningAlert(message: "End time cannot be grater then start time!")
       return
     }
     
-    parentNavigationController.popFromTimetable(dateTimeInterval)
+    delegate?.pickHandler(from: .dateTime, data: dateTimeInterval as Any)    
   }
 }
-
 
 extension TimetableViewController: ErrorShowable {
   func showWarningAlert(message: String) {
