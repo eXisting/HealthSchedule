@@ -29,12 +29,11 @@ protocol ProviderInfoRequesting {
 protocol CommonDataRequesting {
   func getRequests(completion: @escaping (String) -> Void)
   func getUser(_ completion: @escaping (String) -> Void)
-  func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
 }
 
 protocol UserDataUpdating {
   func updateInfo(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
-  func updatePassword(with newPassword: String, _ completion: @escaping (String) -> Void)
+  func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void)
   func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
 }
@@ -44,11 +43,6 @@ class UserDataRequest {
   private let databaseManager = DataBaseManager.shared
   
   typealias FreshScheduleDayData = (dayIndex: Int16, start: Date, end: Date, working: Bool)
-  
-  private func requestProviderData() {
-    getProfessions() { list in print("Professions obtained!") }
-    // TODO: Load rest data here
-  }
 }
 
 extension UserDataRequest: UserDataUpdating {
@@ -66,12 +60,20 @@ extension UserDataRequest: UserDataUpdating {
       }
   }
   
-  func updatePassword(with newPassword: String, _ completion: @escaping (String) -> Void) {
-    
+  func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void) {
+    // TODO
   }
   
-  func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void) {
-    
+  func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    requestsManager.postAsync(to: Endpoints.password.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
+      data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      completion(ResponseStatus.success.rawValue)
+    }
   }
   
   func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
@@ -106,23 +108,6 @@ extension UserDataRequest: CommonDataRequesting {
       }
       
       self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
-      
-      // TODO: refactor this
-      if remoteUser.role?.name == "provider" {
-        self?.requestProviderData()
-      }
-      
-      completion(ResponseStatus.success.rawValue)
-    }
-  }
-  
-  func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
-    requestsManager.postAsync(to: Endpoints.password.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
-      data, response in
-      if let error = response.error {
-        completion(error)
-        return
-      }
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -184,11 +169,6 @@ extension UserDataRequest: AuthenticationProviding {
       
       self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
-      // TODO: refactor this
-      if remoteUser.role?.name == "provider" {
-        self?.requestProviderData()
-      }
-      
       completion(nil)
     }
   }
@@ -212,10 +192,6 @@ extension UserDataRequest: AuthenticationProviding {
       }
       
       self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
-      
-      if userType == .provider {
-        self?.requestProviderData()
-      }
       
       completion(nil)
     }

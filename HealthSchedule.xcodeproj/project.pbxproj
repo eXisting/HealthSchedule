@@ -631,6 +631,15 @@
 			path = Password;
 			sourceTree = "<group>";
 		};
+		ED3E96D8225F54E100C8F602 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */,
+				ED4483102204AA4400BE8EF0 /* UserDataRequest.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
 		ED4482ED22044EEE00BE8EF0 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,10 +652,9 @@
 		ED4482F622045D4E00BE8EF0 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				ED3E96D8225F54E100C8F602 /* Public */,
 				ED4482FF220466D800BE8EF0 /* Base */,
 				ED6CBE7D21EDDDE900860010 /* Models */,
-				ED4483102204AA4400BE8EF0 /* UserDataRequest.swift */,
-				EDD2A84A2239239F00B52E68 /* CommonDataRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";

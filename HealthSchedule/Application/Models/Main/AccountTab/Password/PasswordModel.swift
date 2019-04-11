@@ -9,7 +9,7 @@
 import UIKit
 
 class PasswordModel {
-  private let requestManager: CommonDataRequesting = UserDataRequest()
+  private let requestManager: UserDataUpdating = UserDataRequest()
   
   func save(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
     requestManager.changePassword(with: data, completion)
