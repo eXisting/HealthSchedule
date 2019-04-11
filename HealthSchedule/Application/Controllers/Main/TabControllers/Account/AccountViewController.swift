@@ -71,11 +71,11 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   private func pushController(for disclosureType: AccountRowType) {
     switch disclosureType {
     case .profession:
-      navigationController?.pushViewController(UIViewController(), animated: true)
+      navigationController?.pushViewController(ProfessionsViewController(), animated: true)
     case .service:
       navigationController?.pushViewController(ProviderServicesController(), animated: true)
     case .address:
-      navigationController?.pushViewController(UIViewController(), animated: true)
+      navigationController?.pushViewController(AddressViewController(), animated: true)
     case .schedule:
       let story = UIStoryboard.init(name: "JZCalendar", bundle: nil)
       guard let viewController = story.instantiateInitialViewController() else {
@@ -83,8 +83,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
       }
       navigationController?.pushViewController(viewController, animated: true)
     case .password:
-      navigationController?.pushViewController(UIViewController(), animated: true)
-      
+      navigationController?.pushViewController(PasswordViewController(), animated: true)
     case .general:
       return
     }

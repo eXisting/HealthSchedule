@@ -85,6 +85,8 @@ class TimetableView: UIView {
   }
   
   private func customizeViews() {
+    backgroundColor = .white
+    
     startLabel.text = "FROM"
     startLabel.font = startLabel.font.withSize(20)
     startLabel.textAlignment = .center
