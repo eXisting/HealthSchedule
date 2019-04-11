@@ -11,7 +11,7 @@ import CoreData
 
 class ProviderServicesController: UIViewController {
   private let titleName = "Your services"
-  private var customNavigationItem: ProviderServicesNavigationItem?
+  private var customNavigationItem: GeneralActionSaveNavigationItem?
   
   private let mainView = ProviderServicesTableView()
   private let model = ProviderServicesModel()
@@ -19,7 +19,7 @@ class ProviderServicesController: UIViewController {
   override var navigationItem: UINavigationItem {
     get {
       if customNavigationItem == nil {
-        customNavigationItem = ProviderServicesNavigationItem(title: titleName, delegate: self, type: .create)
+        customNavigationItem = GeneralActionSaveNavigationItem(title: titleName, delegate: self, type: .create)
       }
       
       return customNavigationItem!
@@ -125,7 +125,7 @@ extension ProviderServicesController: NSFetchedResultsControllerDelegate {
   }
 }
 
-extension ProviderServicesController: ProviderServiceHandling {
+extension ProviderServicesController: GeneralItemHandlingDelegate {
   func back() {    
     navigationController?.popViewController(animated: true)
   }

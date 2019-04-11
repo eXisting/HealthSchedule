@@ -63,6 +63,8 @@
 		ED3E96C9225F354100C8F602 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96C8225F354100C8F602 /* PasswordViewController.swift */; };
 		ED3E96CC225F35B000C8F602 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96CB225F35B000C8F602 /* AddressViewController.swift */; };
 		ED3E96CF225F387B00C8F602 /* ProfessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96CE225F387B00C8F602 /* ProfessionsViewController.swift */; };
+		ED3E96D2225F39F300C8F602 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96D1225F39F300C8F602 /* PasswordView.swift */; };
+		ED3E96D7225F42C700C8F602 /* PasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96D6225F42C700C8F602 /* PasswordModel.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
 		ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482F2220457B600BE8EF0 /* Serializer.swift */; };
 		ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */; };
@@ -80,7 +82,7 @@
 		ED6B131922422F1D00938ACA /* IdentifyingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */; };
 		ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED6CBE7821ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld */; };
 		ED7359022254B2A0006C318C /* ProviderServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359012254B2A0006C318C /* ProviderServicesController.swift */; };
-		ED7359052254B335006C318C /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359042254B335006C318C /* NavigationItem.swift */; };
+		ED7359052254B335006C318C /* GeneralActionSaveNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359042254B335006C318C /* GeneralActionSaveNavigationItem.swift */; };
 		ED7359082254B8D6006C318C /* ProviderServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359072254B8D6006C318C /* ProviderServicesModel.swift */; };
 		ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */; };
 		ED73590C2254C28A006C318C /* ProviderServicesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED73590B2254C28A006C318C /* ProviderServicesTableView.swift */; };
@@ -211,6 +213,8 @@
 		ED3E96C8225F354100C8F602 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		ED3E96CB225F35B000C8F602 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		ED3E96CE225F387B00C8F602 /* ProfessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionsViewController.swift; sourceTree = "<group>"; };
+		ED3E96D1225F39F300C8F602 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		ED3E96D6225F42C700C8F602 /* PasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModel.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		ED4482F2220457B600BE8EF0 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensions.swift; sourceTree = "<group>"; };
@@ -228,7 +232,7 @@
 		ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyingTextField.swift; sourceTree = "<group>"; };
 		ED6CBE7921ECCDBD00860010 /* MainCoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainCoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		ED7359012254B2A0006C318C /* ProviderServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesController.swift; sourceTree = "<group>"; };
-		ED7359042254B335006C318C /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
+		ED7359042254B335006C318C /* GeneralActionSaveNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralActionSaveNavigationItem.swift; sourceTree = "<group>"; };
 		ED7359072254B8D6006C318C /* ProviderServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesModel.swift; sourceTree = "<group>"; };
 		ED7359092254B9CA006C318C /* FetchResultControllersComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResultControllersComposer.swift; sourceTree = "<group>"; };
 		ED73590B2254C28A006C318C /* ProviderServicesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesTableView.swift; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 				ED58DD8E2257493500BDD57C /* JZViews */,
 				ED231B4E222E8FB000A80FC9 /* TableView */,
 				ED231B272229840600A80FC9 /* NavigationHoverHeaderView.swift */,
+				ED7359042254B335006C318C /* GeneralActionSaveNavigationItem.swift */,
 				ED6B131822422F1D00938ACA /* IdentifyingTextField.swift */,
 			);
 			path = Common;
@@ -607,6 +612,23 @@
 				ED3E96CE225F387B00C8F602 /* ProfessionsViewController.swift */,
 			);
 			path = Professions;
+			sourceTree = "<group>";
+		};
+		ED3E96D0225F39E200C8F602 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				ED3E96D1225F39F300C8F602 /* PasswordView.swift */,
+			);
+			name = Password;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		ED3E96D5225F42BA00C8F602 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				ED3E96D6225F42C700C8F602 /* PasswordModel.swift */,
+			);
+			path = Password;
 			sourceTree = "<group>";
 		};
 		ED4482ED22044EEE00BE8EF0 /* Parser */ = {
@@ -765,7 +787,6 @@
 			isa = PBXGroup;
 			children = (
 				ED73592622550890006C318C /* CardTableView */,
-				ED7359042254B335006C318C /* NavigationItem.swift */,
 				ED73590B2254C28A006C318C /* ProviderServicesTableView.swift */,
 				ED73590F2254C48A006C318C /* ProviderServiceHeader.swift */,
 				ED7359112254C4D7006C318C /* ProviderServiceCell.swift */,
@@ -812,6 +833,7 @@
 		ED825FEA2241481600456D0F /* AccountTab */ = {
 			isa = PBXGroup;
 			children = (
+				ED3E96D5225F42BA00C8F602 /* Password */,
 				EDE03ED9225354FD00DBAA0F /* Schedule */,
 				ED7359062254B8C5006C318C /* ProviderServices */,
 				EDD2A8322237CC7100B52E68 /* AccountModel.swift */,
@@ -949,6 +971,7 @@
 		EDCFB46322294F0F00A6B56F /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				ED3E96D0225F39E200C8F602 /* Password */,
 				EDE03EDC2253553600DBAA0F /* Schedule */,
 				ED7359032254B322006C318C /* ProviderServices */,
 				ED231B2D222D482200A80FC9 /* TableView */,
@@ -1223,7 +1246,7 @@
 			files = (
 				EDB6B447225B415700B8EA8B /* ScheduleEventModalController.swift in Sources */,
 				ED73591A2255002E006C318C /* ProviderServiceModel.swift in Sources */,
-				ED7359052254B335006C318C /* NavigationItem.swift in Sources */,
+				ED7359052254B335006C318C /* GeneralActionSaveNavigationItem.swift in Sources */,
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
 				DB0B7C66225644F10035C593 /* LongPressEventCell.swift in Sources */,
 				ED231B31222D48FF00A80FC9 /* AccountTableView.swift in Sources */,
@@ -1235,6 +1258,7 @@
 				EDD2A8332237CC7100B52E68 /* AccountModel.swift in Sources */,
 				ED1ED02421FF353400141CF5 /* Category.swift in Sources */,
 				EDD2A8312237B22400B52E68 /* UserDefaultsKeys.swift in Sources */,
+				ED3E96D7225F42C700C8F602 /* PasswordModel.swift in Sources */,
 				ED98CE3C2242856500B95696 /* RequestCardTableView.swift in Sources */,
 				ED6B131922422F1D00938ACA /* IdentifyingTextField.swift in Sources */,
 				ED98CE3F2242861400B95696 /* RequestCardModel.swift in Sources */,
@@ -1348,6 +1372,7 @@
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
 				ED7359122254C4D7006C318C /* ProviderServiceCell.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
+				ED3E96D2225F39F300C8F602 /* PasswordView.swift in Sources */,
 				DB0B7C68225644F10035C593 /* ScheduleViewController.swift in Sources */,
 				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,
 				EDE03ED62252494500DBAA0F /* RequestStatusExtension.swift in Sources */,

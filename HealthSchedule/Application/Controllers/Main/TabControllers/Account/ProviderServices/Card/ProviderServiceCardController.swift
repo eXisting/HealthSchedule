@@ -15,12 +15,12 @@ class ProviderServiceCardController: UIViewController {
   private var model: ProviderServiceModel!
   private let mainView = ProviderServiceGeneralTableView()
 
-  private var customNavigationItem: ProviderServicesNavigationItem?
+  private var customNavigationItem: GeneralActionSaveNavigationItem?
   
   override var navigationItem: UINavigationItem {
     get {
       if customNavigationItem == nil {
-        customNavigationItem = ProviderServicesNavigationItem(title: titleName, delegate: self, type: .save)
+        customNavigationItem = GeneralActionSaveNavigationItem(title: titleName, delegate: self, type: .save)
       }
       
       return customNavigationItem!
@@ -135,7 +135,7 @@ extension ProviderServiceCardController: ErrorShowable {
 }
 
 
-extension ProviderServiceCardController: ProviderServiceHandling {
+extension ProviderServiceCardController: GeneralItemHandlingDelegate {
   func back() {
     navigationController?.popViewController(animated: true)
   }

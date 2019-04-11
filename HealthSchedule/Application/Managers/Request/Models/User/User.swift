@@ -17,6 +17,10 @@ enum UserJsonFields: String, CodingKey {
   case city
   case password
   
+  case confirmPassword = "password_confirm"
+  case oldPassword = "old_password"
+  case newPassword = "new_password"
+
   case firstName = "first_name"
   case lastName = "last_name"
   case status = "confirmed_status"
