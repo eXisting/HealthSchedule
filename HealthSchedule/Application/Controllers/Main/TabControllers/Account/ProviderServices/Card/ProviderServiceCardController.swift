@@ -147,7 +147,9 @@ extension ProviderServiceCardController: ProviderServiceHandling {
         return
       }
       
-      self?.back()
+      DispatchQueue.main.async {
+        self?.back()        
+      }
     }
   }
 }
