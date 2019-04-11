@@ -154,10 +154,8 @@ extension ScheduleModalDayDataSource: UITableViewDataSource, UITableViewDelegate
       
       cell.setup(getStatusName(for: indexPath.row), identifier: indexPath)
       
-      if rowsInfo[indexPath.row].checkedState {
-        cell.accessoryType = .checkmark
-      }
-      
+      cell.accessoryType = rowsInfo[indexPath.row].checkedState ? .checkmark : .none
+            
       return cell
     case .pickable:
       guard let cell = tableViewMasterDelegate.dequeueReusableCell(identifier: ScheduleEventTableView.timePickingCellIdentifier, for: indexPath) as? ScheduleModalTableViewDatePickerRow else { fatalError("pickable cell fials")}

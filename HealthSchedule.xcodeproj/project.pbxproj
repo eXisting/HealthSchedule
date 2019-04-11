@@ -245,7 +245,7 @@
 		EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalServicesViewController.swift; sourceTree = "<group>"; };
 		EDB6B446225B415700B8EA8B /* ScheduleEventModalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEventModalController.swift; sourceTree = "<group>"; };
 		EDB6B448225B42E100B8EA8B /* ScheduleEventTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEventTableView.swift; sourceTree = "<group>"; };
-		EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModalDayModel.swift; sourceTree = "<group>"; };
+		EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleModalDayModel.swift; path = HealthSchedule/Application/Models/Main/AccountTab/Schedule/Card/ScheduleModalDayModel.swift; sourceTree = SOURCE_ROOT; };
 		EDB6B44D225B4BA200B8EA8B /* ScheduleModalTableViewHader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModalTableViewHader.swift; sourceTree = "<group>"; };
 		EDB6B450225B4E3A00B8EA8B /* ExpandableSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSectionData.swift; sourceTree = "<group>"; };
 		EDB6B452225B5B7C00B8EA8B /* ScheduleModalTableViewRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModalTableViewRows.swift; sourceTree = "<group>"; };
@@ -695,7 +695,6 @@
 			isa = PBXGroup;
 			children = (
 				DB0B7C4E225644F00035C593 /* DefaultEvent.swift */,
-				EDB6B45A225B856500B8EA8B /* TemplateDayRowsCommonData.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -786,6 +785,16 @@
 				ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */,
 			);
 			path = AccountTab;
+			sourceTree = "<group>";
+		};
+		ED838BDF225F219A00E2A791 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				EDB6B456225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift */,
+				EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */,
+				EDB6B45A225B856500B8EA8B /* TemplateDayRowsCommonData.swift */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		ED98CE382242767100B95696 /* Common */ = {
@@ -1030,9 +1039,8 @@
 		EDE03ED9225354FD00DBAA0F /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				ED838BDF225F219A00E2A791 /* Card */,
 				ED4B3608225CD05800BFDEED /* Elements */,
-				EDB6B456225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift */,
-				EDB6B44B225B453300B8EA8B /* ScheduleModalDayModel.swift */,
 				EDE03EDA2253550D00DBAA0F /* ScheduleModel.swift */,
 			);
 			path = Schedule;
