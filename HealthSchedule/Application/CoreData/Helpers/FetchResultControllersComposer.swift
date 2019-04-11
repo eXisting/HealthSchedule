@@ -58,13 +58,19 @@ class FetchResultControllersComposer {
       primarySortDescriptor
     ]
     
+    let context = DataBaseManager.shared.mainContext
+    
+    fetchRequest.predicate = NSPredicate(
+      format: "providerId == \(DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: context)!.id)"
+    )
+    
     fetchRequest.returnsObjectsAsFaults = false
     fetchRequest.relationshipKeyPathsForPrefetching = ["service"]//, "address"]
     fetchRequest.fetchBatchSize = 20
     
     let controller = NSFetchedResultsController(
       fetchRequest: fetchRequest,
-      managedObjectContext: DataBaseManager.shared.mainContext,
+      managedObjectContext: context,
       sectionNameKeyPath: nil,//"service.name",
       cacheName: nil)
     

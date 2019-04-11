@@ -15,11 +15,6 @@ class RequestsModel {
   func loadRequests(_ callback: @escaping (String) -> Void) {
     userRequestController.getRequests(completion: callback)
   }
-  
-  func getStoredRequests(_ callback: @escaping (String) -> Void) {
-    guard let _ = DataBaseManager.shared.requestsResultController.fetchedObjects else { return }
-    callback(ResponseStatus.success.rawValue)
-  }
 }
 
 class RequestsDataSource: NSObject, UITableViewDataSource {

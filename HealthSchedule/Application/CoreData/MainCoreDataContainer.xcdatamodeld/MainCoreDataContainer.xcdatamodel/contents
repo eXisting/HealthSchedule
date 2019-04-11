@@ -28,7 +28,7 @@
         <attribute name="duration" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="price" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="providerId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="providerId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="serviceDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serviceId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="providerService" inverseEntity="Address" syncable="YES"/>
@@ -98,7 +98,7 @@
         <element name="Category" positionX="-153.4609375" positionY="-137.39453125" width="128" height="88"/>
         <element name="City" positionX="-859.96484375" positionY="-180.12890625" width="128" height="88"/>
         <element name="Profession" positionX="-106.28125" positionY="32.203125" width="128" height="120"/>
-        <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="208"/>
+        <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="210"/>
         <element name="Request" positionX="-464.71875" positionY="-172.3515625" width="128" height="195"/>
         <element name="Role" positionX="-712.4140625" positionY="-619.92578125" width="128" height="88"/>
         <element name="ScheduleDayTemplate" positionX="-657" positionY="-477" width="128" height="150"/>

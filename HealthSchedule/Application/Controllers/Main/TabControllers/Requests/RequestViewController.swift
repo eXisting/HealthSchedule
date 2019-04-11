@@ -45,17 +45,11 @@ class RequestViewController: UIViewController {
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
-    
-    model.getStoredRequests(onRequestsLoaded)
   }
   
   private func onRequestsLoaded(response: String) {
     if response != ResponseStatus.success.rawValue {
       showWarningAlert(message: response)
-    }
-    
-    DispatchQueue.main.async {
-      self.mainView.reloadData()
     }
   }
 }
@@ -84,7 +78,15 @@ extension RequestViewController: UITableViewDelegate {
 
 extension RequestViewController: RefreshingTableView {
   func refresh(_ completion: @escaping (String) -> Void) {
-    model.loadRequests(completion)
+    model.loadRequests { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.showWarningAlert(message: response)
+        }
+      }
+      
+      completion(response)
+    }
   }
 }
 

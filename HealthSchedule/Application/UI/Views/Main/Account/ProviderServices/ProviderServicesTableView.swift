@@ -38,11 +38,7 @@ class ProviderServicesTableView: UITableView {
   @objc private func refresh(_ sender: Any) {
     refreshDelegate?.refresh {
       [weak self] responseStatus in
-      DispatchQueue.main.async {
-        if responseStatus == ResponseStatus.success.rawValue {
-          self?.reloadData()
-        }
-        
+      DispatchQueue.main.async {        
         self?.refreshControl?.endRefreshing()
       }
     }

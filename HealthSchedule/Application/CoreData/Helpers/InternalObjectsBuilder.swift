@@ -118,7 +118,7 @@ class InternalObjectsBuilder {
   func build(providerService: ProviderService, _ remote: RemoteProviderService, context: NSManagedObjectContext) {
     providerService.id = Int16(remote.id)
     providerService.addressId = Int16(remote.address.id)
-    providerService.providerId = Int16(remote.providerId)
+    providerService.providerId = Int32(remote.providerId)
     providerService.serviceId = Int16(remote.service.id)
     providerService.price = remote.price
     providerService.serviceDescription = remote.description
