@@ -18,6 +18,8 @@ enum ProviderServiceJsonFields: String, CodingKey {
   case service
   case address
   case provider = "provider"
+  
+  case serviceId = "service_id"
 }
 
 struct RemoteProviderService {

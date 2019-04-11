@@ -18,27 +18,32 @@ protocol ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
+  
+  func getScheduleTemplate(completion: @escaping (String) -> Void)
+  func saveScheduleTemplates(_ data: [String: [Dictionary<String, Any>]], completion: @escaping (String) -> Void)
+
+  func getProviderServices(completion: @escaping (String) -> Void)
+  func createUpdateProviderService(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
 }
 
 protocol CommonDataRequesting {
-  func getRequests(completion: @escaping ([RemoteRequest]) -> Void)
+  func getRequests(completion: @escaping (String) -> Void)
   func getUser(_ completion: @escaping (String) -> Void)
-  func getRecomendations()
 }
 
 protocol UserDataUpdating {
   func updateInfo(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   func updatePassword(with newPassword: String, _ completion: @escaping (String) -> Void)
   func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void)
+  func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
 }
 
 class UserDataRequest {
-  
-  private static var user: RemoteUser?
-  
   private let requestsManager = RequestManager()
   private let databaseManager = DataBaseManager.shared
-    
+  
+  typealias FreshScheduleDayData = (dayIndex: Int16, start: Date, end: Date, working: Bool)
+  
   private func requestProviderData() {
     getProfessions() { list in print("Professions obtained!") }
     // TODO: Load rest data here
@@ -46,8 +51,8 @@ class UserDataRequest {
 }
 
 extension UserDataRequest: UserDataUpdating {
-  func updateInfo(with collecedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
-    let data = Parser.processGeneralUserData(collecedData)
+  func updateInfo(with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    let data = Parser.processGeneralUserData(collectedData)
     
     requestsManager.postAsync(
       to: Endpoints.updateUserInfo.rawValue,
@@ -72,6 +77,21 @@ extension UserDataRequest: UserDataUpdating {
   func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void) {
     
   }
+  
+  func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    let endpoint = "\(Endpoints.requests.rawValue)/\(id)"
+    
+    requestsManager.postAsync(to: endpoint, as: .put, collectedData, RequestManager.sessionToken.asParams()) {
+      [weak self] serverData, response in
+      
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      self?.getRequest(id) { innerResponse in completion(innerResponse) }
+    }
+  }
 }
 
 extension UserDataRequest: CommonDataRequesting {
@@ -89,7 +109,7 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      // TODO: Update user in core data
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       // TODO: refactor this
       if remoteUser.role?.name == "provider" {
@@ -100,21 +120,37 @@ extension UserDataRequest: CommonDataRequesting {
     }
   }
   
-  func getRequests(completion: @escaping ([RemoteRequest]) -> Void) {
+  func getRequests(completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken.asParams()) {
-      (list, response) in
+      [weak self] (list, response) in
       if let error = response.error {
-        print(error)
-        completion([])
+        completion(error)
         return
       }
       
-      completion(list)
+      self?.databaseManager.insertUpdateRequests(from: list)
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
   
-  func getRecomendations() {
-    // TODO: - Optional for now
+  private func getRequest(_ id: Int, _ completion: @escaping (String) -> Void) {
+    let endpoint = "\(Endpoints.requests.rawValue)/\(id)"
+    
+    requestsManager.getAsync(for: RemoteRequest.self, from: endpoint, RequestManager.sessionToken.asParams()) {
+      [weak self] element, response in
+      
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      guard let remoteRequest = element else { completion(ResponseStatus.serverError.rawValue); return }
+      
+      self?.databaseManager.insertUpdateRequests(from: [remoteRequest])
+      
+      completion(ResponseStatus.success.rawValue)
+    }
   }
 }
 
@@ -124,6 +160,7 @@ extension UserDataRequest: AuthenticationProviding {
   }
   
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
+//    let postBody = ["username": "provider@example.org", "password": password]
     let postBody = ["username": login, "password": password]
     requestsManager.signIn(userData: postBody) {
       [weak self] (user, response) in
@@ -137,9 +174,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      if self?.databaseManager.getCurrentUser() == nil {
-        self?.databaseManager.insertUsers(from: [remoteUser])
-      }
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       // TODO: refactor this
       if remoteUser.role?.name == "provider" {
@@ -168,7 +203,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      UserDataRequest.user = remoteUser
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       if userType == .provider {
         self?.requestProviderData()
@@ -188,7 +223,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      UserDataRequest.user?.providerData?.professions = list
+      // TODO: Insert into core data
       
       completion(nil)
     }
@@ -218,6 +253,73 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       completion(nil)
+    }
+  }
+  
+  func getProviderServices(completion: @escaping (String) -> Void) {
+    requestsManager.getListAsync(for: RemoteProviderService.self, from: .providerServices, RequestManager.sessionToken.asParams()) {
+      [weak self] list, response in
+      
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      self?.databaseManager.insertUpdateProviderServices(from: list)
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func createUpdateProviderService(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void) {
+    var endpoint = Endpoints.providerServices.rawValue
+    var requestType: RequestType = .post
+    
+    if !isCreate {
+      endpoint.append("/")
+      endpoint.append(data[ProviderServiceJsonFields.id.rawValue]!)
+      
+      requestType = .put
+    }
+    
+    requestsManager.postAsync(to: endpoint, as: requestType, data, RequestManager.sessionToken.asParams()) {
+      serverMessage, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func getScheduleTemplate(completion: @escaping (String) -> Void) {
+    requestsManager.getListAsync(for: RemoteScheduleTemplateDay.self, from: Endpoints.scheduleTemplate, RequestManager.sessionToken.asParams()) {
+      [weak self] list, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      self?.databaseManager.insertUpdateScheduleDayTemplate(from: list)
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func saveScheduleTemplates(_ data: Parser.JsonArrayDictionary, completion: @escaping (String) -> Void) {
+    guard let postData = Serializer.getDataFrom(json: data) else {
+      return
+    }
+    
+    requestsManager.postAsync(to: Endpoints.scheduleTemplate.rawValue, as: .put, postData, RequestManager.sessionToken.asParams()) {
+      [weak self] serverMessage, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      self?.getScheduleTemplate(completion: completion)
     }
   }
 }

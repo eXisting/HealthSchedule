@@ -18,24 +18,36 @@ class RequestListRow: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     laidOutViews()
     customizeViews()
+    
+    selectionStyle = .none
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func populateCell(serviceName: String, price: String, visitedDate: String, status: String) {
+  func populateCell(serviceName: String, price: String, visitedDate: String, status: RequestStatusName) {
     self.serviceName.text = serviceName
     self.price.text = price
     self.visitedDate.text = visitedDate
-    self.statusLabel.text = status
+    self.statusLabel.text = status.rawValue
     
-    determineStatusColor()
-  }
-  
-  private func determineStatusColor() {
-    // TODO: refactor
-    statusLabel.textColor = statusLabel.text == "Done" ? .green : .yellow
+    var statusColor: UIColor
+    
+    switch status {
+    case .done:
+      statusColor = .black
+    case .pending:
+      statusColor = .blue
+    case .rejected:
+      statusColor = .red
+    case .accepted:
+      statusColor = .green
+    case .unknown:
+      statusColor = .gray
+    }
+    
+    statusLabel.textColor = statusColor
   }
   
   private func laidOutViews() {

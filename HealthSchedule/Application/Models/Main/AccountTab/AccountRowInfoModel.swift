@@ -21,11 +21,12 @@ enum AccountRowType {
 enum AccountRowSubtype {
   case datePicker
   case cityPicker
+  case servicePicker
   
   case none
 }
 
-protocol AccountRowDataContaining {
+protocol CommonRowDataContaining {
   var id: Int? { get set }
   var data: String? { get set }
   var keyName: String? { get }
@@ -36,7 +37,7 @@ protocol AccountRowDataContaining {
   func asKeyValuePair() -> (key: String, value: String)
 }
 
-class BaseCellInfo: AccountRowDataContaining {
+class BaseCellInfo: CommonRowDataContaining {
   var id: Int?
   var data: String?
   var keyName: String?

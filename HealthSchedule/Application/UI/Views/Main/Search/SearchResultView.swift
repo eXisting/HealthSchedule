@@ -29,7 +29,7 @@ class SearchResultView: UIView {
     
     dismissButton.translatesAutoresizingMaskIntoConstraints = false
     
-    NSLayoutConstraint(item: dismissButton, attribute: .top, relatedBy: .equal, toItem: self.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
+    NSLayoutConstraint(item: dismissButton, attribute: .top, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
     NSLayoutConstraint(item: dismissButton, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.65, constant: 0).isActive = true
     NSLayoutConstraint(item: dismissButton, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
   }

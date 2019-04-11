@@ -37,5 +37,13 @@ class Serializer {
   class func encodeWithJsonSerializer(data: Data) -> Any? {    
     return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
   }
+  
+  class func jsonString(from object: Any) -> String? {
+    guard let data = getDataFrom(json: object) else {
+      return nil
+    }
+    
+    return String(data: data, encoding: .utf8)
+  }
 }
 

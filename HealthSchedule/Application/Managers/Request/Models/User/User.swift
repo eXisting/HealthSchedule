@@ -30,6 +30,8 @@ enum UserJsonFields: String, CodingKey {
 enum UserTypeName: String {
   case client = "Client"
   case provider = "Provider"
+  
+  case unknown = "unknown"
 }
 
 enum UserType: Int, Codable {

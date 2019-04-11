@@ -9,22 +9,37 @@
 import UIKit
 
 class RequestCardViewController: UIViewController {
-  private let mainView = RequestCardTableView()
-  private let model = RequestCardModel()
+  private let mainView = RequestCardContainerView()
+  private var model: RequestCardModel!
   
   override func loadView() {
     super.loadView()
     view = mainView
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    mainView.setup(delegate: self, dataSource: model)
+  convenience init(_ request: Request) {
+    self.init()
+    model = RequestCardModel(request: request)
   }
   
-  func set(_ request: RemoteRequest) {
-    title = request.providerService.service.title
-    model.procceedRequest(request)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    mainView.setup(hasActions: model.isRequestHasActions(), role: model.getCurrentUserRole())
+    mainView.tableView.setup(delegate: self, dataSource: model.dataSource)
+    mainView.setup(acceptHandler: onAccept, declineHandler: onDecline)
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    mainView.laidOutViews()
+  }
+  
+  @objc func onAccept() {
+    model.updateRequest(status: .accepted)
+  }
+  
+  @objc func onDecline() {
+    model.updateRequest(status: .rejected)
   }
 }
 
@@ -46,9 +61,9 @@ extension RequestCardViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let cell = tableView.cellForRow(at: indexPath) else {
-      return
-    }
+//    guard let cell = tableView.cellForRow(at: indexPath) else {
+//      return
+//    }
     
     // TODO: present provider view on first row click
   }

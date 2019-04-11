@@ -39,7 +39,6 @@ class RequestListTableView: UITableView {
     refreshDelegate?.refresh {
       [weak self] _ in
       DispatchQueue.main.async {
-        self?.reloadData()
         self?.refreshControl?.endRefreshing()
       }
     }

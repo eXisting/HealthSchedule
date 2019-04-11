@@ -29,8 +29,10 @@ enum Endpoints: String {
   
   // GET / POST / DELETE ( /{id} )
   case providerProfessions = "/api/provider/professions"
-  
+  case providerServices = "/api/provider/services"
+
   // GET / PUT
+  case scheduleTemplate = "/api/provider/schedules"
 }
 
 enum RequestType: String {

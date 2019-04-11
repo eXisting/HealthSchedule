@@ -48,7 +48,9 @@ class DateManager {
     return date
   }
   
-  func dateToString(_ date: Date) -> String {
+  func dateToString(_ date: Date?) -> String {
+    guard let date = date else { return "no date" }
+    
     return dateFormatter.string(from: date)
   }
   
@@ -68,6 +70,13 @@ class DateManager {
     let maxDate = calendar.date(byAdding: dateComponents, to: currentDate)
     
     return (minDate!, maxDate!)
+  }
+  
+  func getAvailableServiceTimeRange() -> (min: Date, max: Date) {
+    let minDate = DateManager.shared.stringToDate("06:00", format: .time, .hour24)
+    let maxDate = DateManager.shared.stringToDate("23:00", format: .time, .hour24)
+
+    return (minDate, maxDate)
   }
   
   func getExpirationDate(expires: Int) -> Date {
@@ -105,6 +114,28 @@ class DateManager {
     mergedComponments.second = timeComponents.second!
     
     return calendar.date(from: mergedComponments)
+  }
+  
+  func compareDates(start: String, end: String, format: DateFormatType, locale: DateTimeLocale) -> ComparisonResult {
+    let start = DateManager.shared.stringToDate(start, format: format, locale)
+    let end = DateManager.shared.stringToDate(end, format: format, locale)
+    return Calendar.current.compare(start, to: end, toGranularity: .minute)
+  }
+  
+  func getDateAccordingToThisWeek(weekDayIndex: Int) -> Date {
+    return Date().currentWeekMonday.add(component: .day, value: weekDayIndex)
+  }
+  
+  func date2WeekDayIndex(_ date: Date) -> Int {
+    // week index - 2 cause working in ISO format and values starts from 1
+    let index = Calendar(identifier: .iso8601).dateComponents([.weekday], from: date).weekday! - 2
+    
+    // if index is negative - it is last day of the week - return its index as 6
+    if index < 0 {
+      return 6
+    }
+    
+    return index
   }
   
   private init() {

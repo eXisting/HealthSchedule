@@ -16,7 +16,7 @@ class RequestManager {
   // C9 server endpoint
   private let rootEndpoint = "https://schedule-exist228.c9users.io"
   
-  private let request = UrlSessionHandler.shared
+  private let sessionHandler = UrlSessionHandler()
   
   // MARK: - GET
   
@@ -26,7 +26,7 @@ class RequestManager {
     _ headers: Parser.JsonDictionary?,
     _ completion: @escaping ([T], ServerResponse) -> Void) {
     
-    request.startSessionTask(buildEndpoint(endpoint.rawValue), params: headers) {
+    sessionHandler.startSessionTask(buildEndpoint(endpoint.rawValue), params: headers) {
       (json, response) in
       let result = Parser.anyArrayToObjectArray(destination: T.self, json)
       completion(result, response)
@@ -38,8 +38,16 @@ class RequestManager {
     from endpoint: Endpoints,
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (T?, ServerResponse) -> Void) {
+    getAsync(for: type, from: endpoint.rawValue, params, completion)
+  }
+  
+  func getAsync<T: Decodable>(
+    for type: T.Type,
+    from endpoint: String,
+    _ params: Parser.JsonDictionary?,
+    _ completion: @escaping (T?, ServerResponse) -> Void) {
     
-    request.startSessionTask(buildEndpoint(endpoint.rawValue), params: params) {
+    sessionHandler.startSessionTask(buildEndpoint(endpoint), params: params) {
       (json, response) in
       guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
         completion(nil, response)
@@ -56,7 +64,7 @@ class RequestManager {
       return
     }
     
-    request.getData(from: urlObject, completion: completion)
+    sessionHandler.getData(from: urlObject, completion: completion)
   }
   
   // MARK: - POST
@@ -64,11 +72,11 @@ class RequestManager {
   func postAsync(
     to url: String,
     as requestType: RequestType,
-    _ data: Parser.JsonDictionary?,
+    _ data: Any?,
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (Any, ServerResponse) -> Void) {
     
-    request.startSessionTask(buildEndpoint(url), requestType, body: data, params: params, completion: completion)
+    sessionHandler.startSessionTask(buildEndpoint(url), requestType, body: data, params: params, completion: completion)
   }
   
   // MARK: - AUTHENTICATION

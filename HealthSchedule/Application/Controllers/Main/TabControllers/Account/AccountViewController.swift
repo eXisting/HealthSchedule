@@ -9,16 +9,17 @@
 import UIKit
 import Presentr
 
-protocol AccountHandlableDelegate {
+protocol AccountHandlableDelegate: class {
   func logout()
   func save()
+  func loadUserPhoto(imageData: Data)
 }
 
 class AccountViewController: UIViewController, SetupableTabBarItem {
   private let titleName = "Account"
   
   private let mainView = ProfileView()
-  private let model = AccountModel()
+  private var model: AccountModel!
   
   private var customNavigationItem: AccountNavigationItem?
   
@@ -52,6 +53,8 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    model = AccountModel(accountHandlingDelegate: self)
+    
     model.dataSource.textFieldDelegate = self
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
@@ -70,11 +73,15 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     case .profession:
       navigationController?.pushViewController(UIViewController(), animated: true)
     case .service:
-      navigationController?.pushViewController(UIViewController(), animated: true)
+      navigationController?.pushViewController(ProviderServicesController(), animated: true)
     case .address:
       navigationController?.pushViewController(UIViewController(), animated: true)
     case .schedule:
-      navigationController?.pushViewController(UIViewController(), animated: true)
+      let story = UIStoryboard.init(name: "JZCalendar", bundle: nil)
+      guard let viewController = story.instantiateInitialViewController() else {
+        fatalError("Initial view controller has not been set!")
+      }
+      navigationController?.pushViewController(viewController, animated: true)
     case .password:
       navigationController?.pushViewController(UIViewController(), animated: true)
       
@@ -98,6 +105,14 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
 }
 
 extension AccountViewController: AccountHandlableDelegate {
+  func loadUserPhoto(imageData: Data) {
+    guard let image = UIImage(data: imageData) else { return }
+    
+    DispatchQueue.main.async {
+      self.mainView.setImage(image)
+    }
+  }
+  
   func logout() {
     NotificationCenter.default.post(name: .LogoutCalled, object: nil)
   }
@@ -113,7 +128,7 @@ extension AccountViewController: RefreshingTableView {
   }
 }
 
-extension AccountViewController: CityPickHandling {
+extension AccountViewController: ModalPickHandling {
   func picked(id: Int, title: String) {
     guard let identifier = model.presentedIdetifier else {
       return
@@ -135,7 +150,7 @@ extension AccountViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let rowData = model.dataSource[indexPath.section][indexPath.row]
+    let rowData: CommonRowDataContaining = model.dataSource[indexPath.section][indexPath.row]
     pushController(for: rowData.type)
   }
   
@@ -164,7 +179,7 @@ extension AccountViewController: UITextFieldDelegate {
       case .cityPicker:
         presentCityPicker(with: identifier)
         return false
-      case .none:
+      case .servicePicker, .none:
         return true
     }
   }

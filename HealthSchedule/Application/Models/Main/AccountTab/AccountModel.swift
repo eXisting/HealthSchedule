@@ -12,12 +12,16 @@ class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
+
+  private unowned var accountHandlingDelegate: AccountHandlableDelegate
   
   let dataSource = AccountDataSource()
   var presentedIdetifier: IndexPath?
   
-  init() {
-    guard let user = databaseManager.getCurrentUser() else {
+  init(accountHandlingDelegate: AccountHandlableDelegate) {
+    self.accountHandlingDelegate = accountHandlingDelegate
+    
+    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
       print("AccountModel failed!")
       return
     }
@@ -33,10 +37,13 @@ class AccountModel {
         return
       }
       
-      guard let user = self?.databaseManager.getCurrentUser() else {
+      guard let user = self?.databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
         completion(ResponseStatus.applicationError.rawValue)
         return
       }
+      
+      // urlsession Error code 1002
+      //self?.initializeUserImage(from: user.image?.url)
       
       self?.dataSource.refresheData(from: user)
       completion(ResponseStatus.success.rawValue)
@@ -44,12 +51,24 @@ class AccountModel {
   }
   
   func getCities(_ completion: @escaping ([City]) -> Void) {
+    let cachedCities = databaseManager.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext)
+    if cachedCities.count > 1 {
+      completion(cachedCities)
+      return
+    }
+    
     commonDataRequestController.getCities {
       [weak self] status in
       if status == ResponseStatus.success.rawValue {
-        completion(self!.databaseManager.getCties())
+        completion(self!.databaseManager.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext))
       }
     }
+  }
+  
+  func initializeUserImage(from url: String?) {
+    guard let url = url else { return }
+    
+    commonDataRequestController.getImage(from: url, completion: accountHandlingDelegate.loadUserPhoto)
   }
   
   func changeText(by indexPath: IndexPath, with text: String?) {

@@ -37,7 +37,7 @@ extension RemoteRequest: Codable {
     try container.encode(id, forKey: .id)
     try container.encode(userId, forKey: .userId)
     try container.encode(providerService, forKey: .providerService)
-    try container.encode(status.bool, forKey: .status)
+    try container.encode(status.value, forKey: .status)
     try container.encode(rate, forKey: .rate)
     try container.encode(description, forKey: .description)
 
@@ -56,33 +56,63 @@ extension RemoteRequest: Codable {
     let dateString = try container.decode(String.self, forKey: .requestAt)
     requestAt = DateManager.shared.stringToDate(dateString, format: .dateTime)
     
-    // TODO - not casting right
-    
-    let statusBool: Bool? = try? container.decode(Bool.self, forKey: .status)
-    status = ReqeustStatus(statusBool)
+    let statusInt = try container.decode(Int.self, forKey: .status)
+    status = ReqeustStatus(statusInt)
   }
 }
 
-struct ReqeustStatus {
-  var bool: Bool?
-  var value: Int
-  var title: String
+enum RequestStatusName: String {
+  case done = "Done"
+  case pending = "Pending"
+  case rejected = "Rejected"
+  case accepted = "Accepted"
   
-  init(_ status: Bool?) {
-    bool = status
-    
-    if bool == nil {
-      value = 3
-      title = "Pending"
+  case unknown = "Unknown status"
+}
+
+struct ReqeustStatus {
+  var value: Int
+  var title: RequestStatusName
+  
+  init(_ status: Int?) {
+    guard let status = status else {
+      value = 4
+      title = .unknown
       return
     }
     
-    if bool! {
-      value = 1
-      title = "Done"
-    } else {
-      value = 2
-      title = "Rejected"
+    value = status
+    
+    title = ReqeustStatus.statusValue2RequestStatusName(value: value)
+  }
+  
+  static func statusValue2RequestStatusName(value: Int) -> RequestStatusName {
+    switch value {
+    case 1:
+      return .rejected
+    case 2:
+      return .done
+    case 3:
+      return .pending
+    case 4:
+      return .accepted
+    default:
+      return .unknown
+    }
+  }
+  
+  static func statusName2RValue(value: RequestStatusName) -> Int {
+    switch value {
+    case .rejected:
+      return 2
+    case .done:
+      return 4
+    case .pending:
+      return 3
+    case .accepted:
+      return 1
+    default:
+      return 5
     }
   }
 }

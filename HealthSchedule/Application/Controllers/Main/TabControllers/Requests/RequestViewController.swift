@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import Presentr
 
 class RequestViewController: UIViewController {
@@ -40,15 +41,15 @@ class RequestViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mainView.setup(delegate: self, dataSource: model)
-    mainView.refreshDelegate = self
+    DataBaseManager.shared.setFrcDelegate(for: .request, delegate: self)
     
-    model.loadRequests(onRequestsLoaded)
+    mainView.setup(delegate: self, dataSource: model.dataSource)
+    mainView.refreshDelegate = self
   }
   
-  private func onRequestsLoaded() {
-    DispatchQueue.main.async {
-      self.mainView.reloadData()
+  private func onRequestsLoaded(response: String) {
+    if response != ResponseStatus.success.rawValue {
+      showWarningAlert(message: response)
     }
   }
 }
@@ -70,16 +71,82 @@ extension RequestViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let controller = RequestCardViewController()
-    controller.set(model[indexPath.row])
+    let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath))
     customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }
 
 extension RequestViewController: RefreshingTableView {
   func refresh(_ completion: @escaping (String) -> Void) {
-    model.loadRequests {
-      completion(ResponseStatus.success.rawValue)
+    model.loadRequests { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.showWarningAlert(message: response)
+        }
+      }
+      
+      completion(response)
     }
+  }
+}
+
+extension RequestViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(for: self, "Warning", message, .alert)
+  }
+}
+
+extension RequestViewController: NSFetchedResultsControllerDelegate {
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    mainView.beginUpdates()
+  }
+  
+  func controller(
+    _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+    didChange anObject: Any,
+    at indexPath: IndexPath?,
+    for type: NSFetchedResultsChangeType,
+    newIndexPath: IndexPath?) {
+    
+    switch (type) {
+    case .insert:
+      if let indexPath = newIndexPath {
+        mainView.insertRows(at: [indexPath], with: .fade)
+      }
+      break;
+    case .delete:
+      if let indexPath = indexPath {
+        mainView.deleteRows(at: [indexPath], with: .fade)
+      }
+      break;
+    case .update:
+      if let indexPath = indexPath {
+        guard let cell = mainView.cellForRow(at: indexPath) as? RequestListRow,
+          let requestObject = anObject as? Request else { return }
+        
+        cell.populateCell(
+          serviceName: requestObject.service?.name ?? "Unkown name",
+          price: String(requestObject.providerService?.price ?? 0.0),
+          visitedDate: DateManager.shared.dateToString(requestObject.requestedAt),
+          status: requestObject.status2RequestStatusName()
+        )
+      }
+      break;
+      
+    case .move:
+      if let indexPath = indexPath {
+        mainView.deleteRows(at: [indexPath], with: .fade)
+      }
+      
+      if let newIndexPath = newIndexPath {
+        mainView.insertRows(at: [newIndexPath], with: .fade)
+      }
+      break;
+      
+    }
+  }
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    mainView.endUpdates()
   }
 }

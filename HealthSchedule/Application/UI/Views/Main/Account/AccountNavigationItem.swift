@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class AccountNavigationItem: UINavigationItem {
   var delegate: AccountHandlableDelegate
   

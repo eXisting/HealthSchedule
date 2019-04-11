@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol CityPickHandling {
+protocol ModalPickHandling {
   func picked(id: Int, title: String)
 }
 
 class ModalCityViewController: UITableViewController {
-  var storeDelegate: CityPickHandling!
+  var storeDelegate: ModalPickHandling!
   var cititesList: [City] = []
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

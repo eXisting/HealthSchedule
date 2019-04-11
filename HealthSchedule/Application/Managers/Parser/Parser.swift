@@ -10,7 +10,8 @@ import UIKit
 
 class Parser {
   typealias JsonDictionary = [String:String]
-  
+  typealias JsonArrayDictionary = [String: [Dictionary<String, Any>]]
+
   class func anyArrayToObjectArray<DestinationType: Decodable>(destination: DestinationType.Type, _ data: Any) -> [DestinationType] {
     var result = [DestinationType]()
     

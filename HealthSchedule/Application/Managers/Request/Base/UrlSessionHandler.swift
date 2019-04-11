@@ -10,17 +10,13 @@ import UIKit
 
 class UrlSessionHandler {
   
-  static let shared = UrlSessionHandler()
-  
   private let defaultSession = URLSession(configuration: .default)
   private let emptyJson: Parser.JsonDictionary = [:]
-  
-  private init() {}
-  
+    
   func startSessionTask(
     _ url: String,
     _ type: RequestType = .get,
-    body: Parser.JsonDictionary? = nil,
+    body: Any? = nil,
     params: Parser.JsonDictionary? = nil,
     completion: @escaping (Any, ServerResponse) -> Void) {
     
@@ -42,11 +38,14 @@ class UrlSessionHandler {
       }
       
       guard let json = Serializer.encodeWithJsonSerializer(data: jsonData) else {
-        completion(self!.emptyJson,  ServerResponse(ResponseStatus.serverError.rawValue))
+        completion(self!.emptyJson, ServerResponse(ResponseStatus.serverError.rawValue))
         return
       }
       
+      // TODO: only 14 requests parsed from json but response is full - 23
+      
       guard let serverError = Parser.anyToObject(destination: ServerResponse.self, json) else {
+        // if object has been casted - return without exception
         completion(json, ServerResponse())
         return
       }
@@ -82,7 +81,7 @@ private extension UrlSessionHandler {
     _ url: String,
     _ method: String,
     _ params: Parser.JsonDictionary?,
-    _ body: Parser.JsonDictionary? = nil) -> URLRequest? {
+    _ body: Any? = nil) -> URLRequest? {
     
     var parameterString = ""
     
@@ -101,13 +100,17 @@ private extension UrlSessionHandler {
     request.setValue("application/json", forHTTPHeaderField: "Accept")
     request.httpMethod = method
     
-    request.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
-    
-    guard let data = body?.asDataString().data(using: .ascii) else {
-      return request
+    if let jsonDictBody = body as? Parser.JsonDictionary {
+      guard let data = jsonDictBody.asDataString().data(using: .ascii) else {
+        return request
+      }
+      
+      request.httpBody = data
+    } else {
+      // application/json; charset=utf-8 fixs problem with array serialization
+      request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+      request.httpBody = (body as? Data)
     }
-    
-    request.httpBody = data
     
     return request
   }

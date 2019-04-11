@@ -34,7 +34,24 @@ class CommonDataRequest {
         return
       }
       
+      // TODO: Come up with caching solution
+      
       completion(services)
+    }
+  }
+  
+  func getAllServices(_ completion: @escaping (String) -> Void) {
+    requestsManager.getListAsync(for: RemoteService.self, from: .allServices, RequestManager.sessionToken.asParams()) {
+      (services, response) in
+      
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      // TODO: Come up with caching solution
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
   
@@ -47,7 +64,7 @@ class CommonDataRequest {
         return
       }
       
-      self?.databaseManager.insertUpdateCities(from: cities)
+      self?.databaseManager.insertUpdateCities(from: cities, context: DataBaseManager.shared.mainContext)
       
       completion(ResponseStatus.success.rawValue)
     }
