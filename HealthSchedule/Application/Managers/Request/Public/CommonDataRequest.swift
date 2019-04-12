@@ -70,13 +70,8 @@ class CommonDataRequest {
     }
   }
   
-  func getProviders(by serviceId: Int, within interval: (Date, Date), _ completion: @escaping (String) -> Void) {
-    var params: Parser.JsonDictionary = [:]
-    params[AvailableTimeJson.serviceId.rawValue] = String(serviceId)
-    params[AvailableTimeJson.dateFrom.rawValue] = DateManager.shared.date2String(with: .date, interval.0)
-    params[AvailableTimeJson.dateTo.rawValue] = DateManager.shared.date2String(with: .date, interval.1)
-    
-    let getParams = params.merging(RequestManager.sessionToken.asParams(), uniquingKeysWith: { first,second in return first })
+  func getAvailableTimesList(_ data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    let getParams = data.merging(RequestManager.sessionToken.asParams(), uniquingKeysWith: { first,second in return first })
     
     requestsManager.getAvailableTimes(params: getParams) {
       object, response in

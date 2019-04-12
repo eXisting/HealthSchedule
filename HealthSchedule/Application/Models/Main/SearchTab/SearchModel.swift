@@ -20,6 +20,7 @@ class SearchModel {
   
   var dateTimeInterval: TimetableView.DateTimeInterval?
   var serviceId: Int?
+  var cityId: Int?
   
   var searchOptions = [
     SearchOptionKey.service,
@@ -41,10 +42,14 @@ class SearchModel {
     return (nil, ["serviceId": service, "start": startDateTime as Any, "end": endDateTime as Any])
   }
   
-  func startSearch() {
+  func startSearch(_ completion: @escaping (String) -> Void) {
     //serviceId!, within: (dateTimeInterval!.startTime, dateTimeInterval!.endTime)) {
-    commonDataRequestController.getProviders(by: 1, within: (Date(), Date().add(component: .day, value: 1))) {
-      response in
-    }
+    var params: Parser.JsonDictionary = [:]
+    params[AvailableTimeJson.serviceId.rawValue] = String(1)//String(serviceId!)
+    //params[AvailableTimeJson.cityId.rawValue] = String(2)//String(cityId!)
+    params[AvailableTimeJson.dateFrom.rawValue] = DateManager.shared.date2String(with: .date, Date())//DateManager.shared.date2String(with: .date, dateTimeInterval!.startTime)
+    params[AvailableTimeJson.dateTo.rawValue] = DateManager.shared.date2String(with: .date, Date().add(component: .day, value: 1))//DateManager.shared.date2String(with: .date, dateTimeInterval!.endTime)
+    
+    commonDataRequestController.getAvailableTimesList(params, completion)
   }
 }

@@ -71,7 +71,7 @@ class ServicesViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     model.serviceId = model.services[indexPath.row].id
-    delegate?.pickHandler(from: .service, data: model.serviceId as Any)
+    delegate?.pickHandler(from: .service, data: (model.serviceId, model.cityId) as Any)
   }
 }
 

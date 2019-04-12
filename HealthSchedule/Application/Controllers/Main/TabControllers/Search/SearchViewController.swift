@@ -68,12 +68,13 @@ extension SearchViewController: SearchPickResponsible {
       
       model.dateTimeInterval = data
     case .service:
-      guard let data = data as? Int else {
+      guard let data = data as? (serviceId: Int, cityId: Int) else {
         showWarningAlert(message: "Contact the developer!")
         return
       }
       
-      model.serviceId = data
+      model.serviceId = data.serviceId
+      model.cityId = data.cityId
     }
     
     navigationController?.popViewController(animated: true)
@@ -88,11 +89,17 @@ extension SearchViewController: SearchResponsible {
 //      return
 //    }
     
-    model.startSearch()
-    
-    // TODO: Load
-    
-    navigationController?.present(ResultViewController(), animated: true)
+    model.startSearch { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        self?.showWarningAlert(message: response)
+        return
+      }
+      
+      
+      DispatchQueue.main.async {
+        self?.navigationController?.present(ResultViewController(), animated: true)
+      }
+    }
   }
 }
 
