@@ -40,4 +40,11 @@ class SearchModel {
     
     return (nil, ["serviceId": service, "start": startDateTime as Any, "end": endDateTime as Any])
   }
+  
+  func startSearch() {
+    //serviceId!, within: (dateTimeInterval!.startTime, dateTimeInterval!.endTime)) {
+    commonDataRequestController.getProviders(by: 1, within: (Date(), Date().add(component: .day, value: 1))) {
+      response in
+    }
+  }
 }

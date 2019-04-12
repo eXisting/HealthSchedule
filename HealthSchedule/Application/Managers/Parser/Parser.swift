@@ -56,4 +56,42 @@ class Parser {
     processedData["phone"] = processedData["phone"]?.filter("01234567890.".contains)
     return processedData
   }
+  
+  class func processAvailableTimes(_ json: Any) -> RemoteAvailableTimeContainer.AvailableDatesSortedArray {
+    guard let dict = json as? [String: Any] else {
+      fatalError()
+    }
+    
+    var parsedArray: RemoteAvailableTimeContainer.AvailableDatesSortedArray = []
+    
+    for element in dict {
+      guard let elementValues = element.value as? [String: Any] else {
+        fatalError()
+      }
+      
+      guard let date = elementValues[AvailableTimeJson.date.rawValue] as? String else {
+        fatalError()
+      }
+      
+      guard let timesForDate = elementValues[AvailableTimeJson.times.rawValue] as? [String: [Int]] else {
+        fatalError()
+      }
+      
+      var timesArray: RemoteAvailableTimeContainer.AvailableTimesSortedArray = []
+      for timeElement in timesForDate {
+        let timeValue = DateManager.shared.stringToDate(timeElement.key, format: .fullTime, .hour24)
+        
+        if var existingArray = timesArray.first(where: {$0.0 == timeValue} ) {
+          existingArray.1.append(contentsOf: timeElement.value)
+        } else {
+          timesArray.append((timeValue, timeElement.value))
+        }
+      }
+      
+      let dateValue = DateManager.shared.stringToDate(date, format: .date, .posix)
+      parsedArray.append((dateValue, timesArray.sorted(by: { $0.0 < $1.0 } )))
+    }
+    
+    return parsedArray.sorted(by: { $0.0 < $1.0 } )
+  }
 }

@@ -64,6 +64,7 @@
 		ED3E96CF225F387B00C8F602 /* ProfessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96CE225F387B00C8F602 /* ProfessionsViewController.swift */; };
 		ED3E96D2225F39F300C8F602 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96D1225F39F300C8F602 /* PasswordView.swift */; };
 		ED3E96D7225F42C700C8F602 /* PasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96D6225F42C700C8F602 /* PasswordModel.swift */; };
+		ED3E96DC225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
 		ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482F2220457B600BE8EF0 /* Serializer.swift */; };
 		ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */; };
@@ -213,6 +214,7 @@
 		ED3E96CE225F387B00C8F602 /* ProfessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionsViewController.swift; sourceTree = "<group>"; };
 		ED3E96D1225F39F300C8F602 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		ED3E96D6225F42C700C8F602 /* PasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModel.swift; sourceTree = "<group>"; };
+		ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAvailableTimeContainer.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		ED4482F2220457B600BE8EF0 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensions.swift; sourceTree = "<group>"; };
@@ -707,6 +709,7 @@
 				ED52F16D220C6D4000568CBC /* ServerException.swift */,
 				EDD2A82522314CE800B52E68 /* Request.swift */,
 				EDD2A84822391E8E00B52E68 /* Service.swift */,
+				ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1322,6 +1325,7 @@
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
 				ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */,
 				ED3A156D220B1B400013BD60 /* DetailedinfoMainView.swift in Sources */,
+				ED3E96DC225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift in Sources */,
 				ED3E96C9225F354100C8F602 /* PasswordViewController.swift in Sources */,
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
 				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,

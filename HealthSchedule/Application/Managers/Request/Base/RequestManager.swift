@@ -58,6 +58,20 @@ class RequestManager {
     }
   }
   
+  func getAvailableTimes(params: Parser.JsonDictionary, _ completion: @escaping (RemoteAvailableTimeContainer?, String) -> Void ) {
+    let endpoint = buildEndpoint(Endpoints.availableProvidersByInterval.rawValue)
+    
+    sessionHandler.startSessionTask(endpoint, .get, params: params) {
+      json, response in
+      if let error = response.error {
+        completion(nil, error)
+        return
+      }
+      
+      completion(RemoteAvailableTimeContainer(json: json), ResponseStatus.success.rawValue)
+    }
+  }
+  
   func getDataAsync(from url: String, _ completion: @escaping (Data?) -> Void) {
     guard let urlObject = URL(string: url) else {
       completion(nil)

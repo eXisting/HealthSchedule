@@ -82,11 +82,15 @@ extension SearchViewController: SearchPickResponsible {
 
 extension SearchViewController: SearchResponsible {
   func startSearch() {
-    let searchData = model.getSearchOptions()
-    if let warningMessage = searchData.errorMessage {
-      showWarningAlert(message: warningMessage)
-      return
-    }
+//    let searchData = model.getSearchOptions()
+//    if let warningMessage = searchData.errorMessage {
+//      showWarningAlert(message: warningMessage)
+//      return
+//    }
+    
+    model.startSearch()
+    
+    // TODO: Load
     
     navigationController?.present(ResultViewController(), animated: true)
   }
