@@ -27,19 +27,16 @@ class SearchModel {
     SearchOptionKey.dateTime
   ]
   
-  func getSearchOptions() -> (errorMessage: String?, [String: Any]) {
-    guard let service = serviceId else {
-      return (errorMessage: "Choose service!", [:])
+  func validateSearchOptions() -> String? {
+    guard let _ = serviceId else {
+      return ("Choose service!")
     }
     
-    guard let interval = dateTimeInterval else {
-      return (errorMessage: "Choose date and time interval!", [:])
+    guard let _ = dateTimeInterval else {
+      return "Choose date and time interval!"
     }
     
-    let startDateTime = DateManager.shared.combineDateWithTime(date: interval.day, time: interval.startTime)
-    let endDateTime = DateManager.shared.combineDateWithTime(date: interval.day, time: interval.endTime)
-    
-    return (nil, ["serviceId": service, "start": startDateTime as Any, "end": endDateTime as Any])
+    return nil
   }
   
   func startSearch(_ completion: @escaping (String) -> Void) {

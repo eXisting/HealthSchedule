@@ -65,6 +65,7 @@
 		ED3E96D2225F39F300C8F602 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96D1225F39F300C8F602 /* PasswordView.swift */; };
 		ED3E96D7225F42C700C8F602 /* PasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96D6225F42C700C8F602 /* PasswordModel.swift */; };
 		ED3E96DC225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */; };
+		ED3E96DE2260D2C500C8F602 /* ImageLabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96DD2260D2C500C8F602 /* ImageLabled.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
 		ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482F2220457B600BE8EF0 /* Serializer.swift */; };
 		ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */; };
@@ -215,6 +216,7 @@
 		ED3E96D1225F39F300C8F602 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		ED3E96D6225F42C700C8F602 /* PasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModel.swift; sourceTree = "<group>"; };
 		ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAvailableTimeContainer.swift; sourceTree = "<group>"; };
+		ED3E96DD2260D2C500C8F602 /* ImageLabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLabled.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		ED4482F2220457B600BE8EF0 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensions.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 				DB8519372208CC0E00CCF452 /* ViewLines.swift */,
 				DB8519392208EECB00CCF452 /* StackViewBackground.swift */,
 				DB85193B2208F1B900CCF452 /* ImageViewColorChange.swift */,
+				ED3E96DD2260D2C500C8F602 /* ImageLabled.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1306,6 +1309,7 @@
 				ED44830E2204A52500BE8EF0 /* Role.swift in Sources */,
 				EDB6B455225B675C00B8EA8B /* ScheduleEventModalView.swift in Sources */,
 				EDE03EEB22537D3200DBAA0F /* ScheduleNavigationItem.swift in Sources */,
+				ED3E96DE2260D2C500C8F602 /* ImageLabled.swift in Sources */,
 				EDB6B451225B4E3A00B8EA8B /* ExpandableSectionData.swift in Sources */,
 				EDD2A863223BEF7900B52E68 /* ModalCityViewController.swift in Sources */,
 				ED825FE82241008600456D0F /* RequestCardViewController.swift in Sources */,

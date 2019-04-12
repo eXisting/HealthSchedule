@@ -14,6 +14,8 @@ class TimetableModel {
 }
 
 class CalendarDataSourceHandler: NSObject, FSCalendarDataSource {
+  
+  
   func minimumDate(for calendar: FSCalendar) -> Date {
     return Date()
   }

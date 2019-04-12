@@ -24,20 +24,41 @@ class TimetableViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mainView.setup(dataSource: model.dataSourceHandler)
+    mainView.setup(dataSource: model.dataSourceHandler, delegate: self)
     
     navigationItem.title = titleName
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDone))
   }
   
   @objc private func onDone() {
-    let dateTimeInterval = mainView.getChosenDateTimeInterval()
-    if dateTimeInterval.endTime < dateTimeInterval.startTime {
-      showWarningAlert(message: "End time cannot be grater then start time!")
+    guard let dateTimeInterval = mainView.getChosenDateTimeInterval() else {
+      showWarningAlert(message: "You must choose start date at least!")
       return
     }
-    
+        
     delegate?.pickHandler(from: .dateTime, data: dateTimeInterval as Any)    
+  }
+}
+
+extension TimetableViewController: FSCalendarDelegate {
+  func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+    let sortedSelectedDates = calendar.selectedDates.sorted(by: { $0 < $1 })
+    
+    if sortedSelectedDates.count == 2 {
+      calendar.deselect(date < sortedSelectedDates.first! ? sortedSelectedDates.first! : sortedSelectedDates.last!)
+    }
+    
+    return true
+  }
+  
+  func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    let sortedSelectedDates = calendar.selectedDates.sorted(by: { $0 < $1 })
+    mainView.updateLabels(sortedSelectedDates)
+  }
+  
+  func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    let sortedSelectedDates = calendar.selectedDates.sorted(by: { $0 < $1 })
+    mainView.updateLabels(sortedSelectedDates)
   }
 }
 

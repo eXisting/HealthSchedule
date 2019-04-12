@@ -10,107 +10,78 @@ import UIKit
 import FSCalendar
 
 class TimetableView: UIView {
-  typealias DateTimeInterval = (day: Date, startTime: Date, endTime: Date)
+  private let container = UIStackView()
+
+  typealias DateTimeInterval = (start: Date, end: Date?)
   
   let calendar = FSCalendar()
-  
-  private let timePickerContainer = UIView()
-  
-  private let startLabel = UILabel()
-  private let endLabel = UILabel()
+ 
+  let startlabel = UILabel()
+  let endlabel = UILabel()
 
-  private let startPicker = UIDatePicker()
-  private let endPicker = UIDatePicker()
-
-  func setup(dataSource: FSCalendarDataSource) {
+  func setup(dataSource: FSCalendarDataSource, delegate: FSCalendarDelegate) {
     laidOutViews()
     customizeViews()
     
     calendar.dataSource = dataSource
+    calendar.delegate = delegate
   }
   
-  func getChosenDateTimeInterval() -> DateTimeInterval {
-    let day = calendar.selectedDate ?? calendar.today ?? Date()    
-    return (day, startPicker.date, endPicker.date)
+  func getChosenDateTimeInterval() -> DateTimeInterval? {
+    let days = calendar.selectedDates.sorted(by: { $0 < $1 } )
+    
+    guard let start = days.first else {
+      return nil
+    }
+    
+    if days.count == 2 {
+      return (start, days.last!)
+    }
+    
+    return (start, nil)
+  }
+  
+  func updateLabels(_ dates: [Date]) {
+    if dates.count == 1 {
+      startlabel.text = "Start: \(DateManager.shared.date2String(with: .date, dates.first!))"
+      endlabel.text = ""
+      return
+    }
+    
+    startlabel.text = dates.first == nil ? "" : "Start: \(DateManager.shared.date2String(with: .date, dates.first!))"
+    endlabel.text = dates.last == nil ? "" : "End: \(DateManager.shared.date2String(with: .date, dates.last!))"
   }
   
   private func laidOutViews() {
     addSubview(calendar)
+    addSubview(container)
     
-    addSubview(timePickerContainer)
-
-    timePickerContainer.addSubview(startLabel)
-    timePickerContainer.addSubview(endLabel)
-    
-    timePickerContainer.addSubview(startPicker)
-    timePickerContainer.addSubview(endPicker)
+    container.addArrangedSubview(startlabel)
+    container.addArrangedSubview(endlabel)
 
     calendar.translatesAutoresizingMaskIntoConstraints = false
+    container.translatesAutoresizingMaskIntoConstraints = false
 
-    timePickerContainer.translatesAutoresizingMaskIntoConstraints = false
-
-    startLabel.translatesAutoresizingMaskIntoConstraints = false
-    endLabel.translatesAutoresizingMaskIntoConstraints = false
-    
-    startPicker.translatesAutoresizingMaskIntoConstraints = false
-    endPicker.translatesAutoresizingMaskIntoConstraints = false
-
-    NSLayoutConstraint(item: calendar, attribute: .top, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
+    NSLayoutConstraint(item: calendar, attribute: .top, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
     NSLayoutConstraint(item: calendar, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: calendar, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.95, constant: 0).isActive = true
-    NSLayoutConstraint(item: calendar, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.4, constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: startLabel, attribute: .top, relatedBy: .equal, toItem: timePickerContainer, attribute: .top, multiplier: 1, constant: 8).isActive = true
-    NSLayoutConstraint(item: startLabel, attribute: .left, relatedBy: .equal, toItem: timePickerContainer, attribute: .left, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: startLabel, attribute: .height, relatedBy: .equal, toItem: timePickerContainer, attribute: .height, multiplier: 0.05, constant: 0).isActive = true
-    NSLayoutConstraint(item: startLabel, attribute: .width, relatedBy: .equal, toItem: timePickerContainer, attribute: .width, multiplier: 0.5, constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: endLabel, attribute: .top, relatedBy: .equal, toItem: startLabel, attribute: .top, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: endLabel, attribute: .height, relatedBy: .equal, toItem: startLabel, attribute: .height, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: endLabel, attribute: .width, relatedBy: .equal, toItem: startLabel, attribute: .width, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: endLabel, attribute: .right, relatedBy: .equal, toItem: timePickerContainer, attribute: .right, multiplier: 1, constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: startPicker, attribute: .top, relatedBy: .equal, toItem: startLabel, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: startPicker, attribute: .left, relatedBy: .equal, toItem: startLabel, attribute: .left, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: startPicker, attribute: .width, relatedBy: .equal, toItem: startLabel, attribute: .width, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: startPicker, attribute: .bottom, relatedBy: .equal, toItem: timePickerContainer, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: endPicker, attribute: .top, relatedBy: .equal, toItem: endLabel, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: endPicker, attribute: .right, relatedBy: .equal, toItem: endLabel, attribute: .right, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: endPicker, attribute: .width, relatedBy: .equal, toItem: endLabel, attribute: .width, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: endPicker, attribute: .bottom, relatedBy: .equal, toItem: timePickerContainer, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-    
-    NSLayoutConstraint(item: timePickerContainer, attribute: .top, relatedBy: .equal, toItem: calendar, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: timePickerContainer, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: timePickerContainer, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: timePickerContainer, attribute: .bottom, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .bottom, multiplier: 0.9, constant: 0).isActive = true
+    NSLayoutConstraint(item: calendar, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.5, constant: 0).isActive = true
+
+    NSLayoutConstraint(item: container, attribute: .top, relatedBy: .equal, toItem: calendar, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
+    NSLayoutConstraint(item: container, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+    NSLayoutConstraint(item: container, attribute: .width, relatedBy: .equal, toItem: calendar, attribute: .width, multiplier: 0.8, constant: 0).isActive = true
+    NSLayoutConstraint(item: container, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.2, constant: 0).isActive = true
   }
   
   private func customizeViews() {
     backgroundColor = .white
     
-    startLabel.text = "FROM"
-    startLabel.font = startLabel.font.withSize(20)
-    startLabel.textAlignment = .center
-    startLabel.adjustsFontSizeToFitWidth = true
-    startLabel.adjustsFontForContentSizeCategory = true
+    container.axis = .vertical
+    container.distribution = .fillEqually
+    container.alignment = .fill
     
-    endLabel.text = "TO"
-    endLabel.font = endLabel.font.withSize(20)
-    endLabel.textAlignment = .center
-    endLabel.adjustsFontSizeToFitWidth = true
-    endLabel.adjustsFontForContentSizeCategory = true
-    
-    startPicker.datePickerMode = .time
-    startPicker.minuteInterval = 10
-    startPicker.locale = DateManager.shared.getLocale(.hour24)
-    startPicker.date = DateManager.shared.stringToDate("05:00", format: .time)
-    startPicker.minimumDate = startPicker.date
-
-    endPicker.datePickerMode = .time
-    endPicker.locale = DateManager.shared.getLocale(.hour24)
-    endPicker.date = DateManager.shared.stringToDate("23:00", format: .time)
-    endPicker.maximumDate = endPicker.date
-    endPicker.minuteInterval = 10
+    calendar.scrollDirection = .vertical
+    calendar.appearance.todayColor = .lightGray
+    calendar.allowsMultipleSelection = true
   }
 }
