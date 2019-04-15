@@ -82,6 +82,7 @@ class CommonDataRequest {
       
       // TODO: Insert into core data
       
+      ResultsTableViewHandler.container = object
       completion(response)
     }
   }

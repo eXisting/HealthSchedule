@@ -10,6 +10,4 @@ import UIKit
 
 class ResultsModel {
   let tableViewContentHandler = ResultsTableViewHandler()
-  
-  
 }

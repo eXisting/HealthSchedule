@@ -10,20 +10,32 @@ import UIKit
 import FoldingCell
 
 class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
-  private let closeHeight: CGFloat = 91
+  static var container: RemoteAvailableTimeContainer!
+  
+  private let closeHeight: CGFloat = 90
   private let openHeight: CGFloat = 166
   private var itemHeight = [CGFloat](repeating: 91.0, count: 20)
   
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return ResultsTableViewHandler.container.data.count
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return itemHeight.count
+    return ResultsTableViewHandler.container.data[section].1.count
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return itemHeight[indexPath.row]
+    return 90
+  }
+  
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return DateManager.shared.date2String(with: .date, ResultsTableViewHandler.container.data[section].0)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath)
+    
+    cell.textLabel?.text = DateManager.shared.date2String(with: .time, ResultsTableViewHandler.container.data[indexPath.section].1[indexPath.row].0, .hour24)
     
     return cell
   }
@@ -50,11 +62,11 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     let cell = cell as! FoldingCell
     
-    if itemHeight[indexPath.row] == closeHeight {
+//    if itemHeight[indexPath.row] == closeHeight {
       cell.unfold(false, animated: false, completion:nil)
-    } else {
-      cell.unfold(true, animated: false, completion: nil)
-    }
+//    } else {
+//      cell.unfold(true, animated: false, completion: nil)
+//    }
   }
 }
 
