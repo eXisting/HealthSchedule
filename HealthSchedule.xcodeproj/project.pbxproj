@@ -66,6 +66,9 @@
 		ED3E96D7225F42C700C8F602 /* PasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96D6225F42C700C8F602 /* PasswordModel.swift */; };
 		ED3E96DC225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */; };
 		ED3E96DE2260D2C500C8F602 /* ImageLabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96DD2260D2C500C8F602 /* ImageLabled.swift */; };
+		ED3E96E122647DE800C8F602 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96E022647DE800C8F602 /* SearchResultCell.swift */; };
+		ED3E96E3226486E200C8F602 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96E2226486E200C8F602 /* Model.swift */; };
+		ED3E96E52264904F00C8F602 /* TableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96E42264904F00C8F602 /* TableViewHandler.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
 		ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482F2220457B600BE8EF0 /* Serializer.swift */; };
 		ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */; };
@@ -217,6 +220,9 @@
 		ED3E96D6225F42C700C8F602 /* PasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModel.swift; sourceTree = "<group>"; };
 		ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAvailableTimeContainer.swift; sourceTree = "<group>"; };
 		ED3E96DD2260D2C500C8F602 /* ImageLabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLabled.swift; sourceTree = "<group>"; };
+		ED3E96E022647DE800C8F602 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		ED3E96E2226486E200C8F602 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		ED3E96E42264904F00C8F602 /* TableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHandler.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		ED4482F2220457B600BE8EF0 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensions.swift; sourceTree = "<group>"; };
@@ -641,6 +647,48 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
+		ED3E96DF22647DB000C8F602 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				EDCE60B9223FB41200734FBC /* SearchResultView.swift */,
+				ED3E96E022647DE800C8F602 /* SearchResultCell.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		ED3E96E62264906B00C8F602 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				ED3E96E2226486E200C8F602 /* Model.swift */,
+				ED3E96E42264904F00C8F602 /* TableViewHandler.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		ED3E96E7226490A800C8F602 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		ED3E96E8226490B800C8F602 /* TimeTable */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
+			);
+			path = TimeTable;
+			sourceTree = "<group>";
+		};
+		ED3E96E9226490C600C8F602 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EDD2A85D223BC79900B52E68 /* ServicesModel.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		ED4482ED22044EEE00BE8EF0 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
@@ -1015,9 +1063,9 @@
 		EDD2A8342238021F00B52E68 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				ED3E96DF22647DB000C8F602 /* Result */,
 				EDD2A83A2238029F00B52E68 /* TableView */,
 				EDD2A8362238026C00B52E68 /* SearchView.swift */,
-				EDCE60B9223FB41200734FBC /* SearchResultView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1079,9 +1127,10 @@
 		EDD2A85C223BC77300B52E68 /* SearchTab */ = {
 			isa = PBXGroup;
 			children = (
-				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
-				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
-				EDD2A85D223BC79900B52E68 /* ServicesModel.swift */,
+				ED3E96E9226490C600C8F602 /* Services */,
+				ED3E96E8226490B800C8F602 /* TimeTable */,
+				ED3E96E7226490A800C8F602 /* Search */,
+				ED3E96E62264906B00C8F602 /* Result */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -1229,7 +1278,9 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HealthSchedule/Pods-HealthSchedule-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/EasyPeasy/EasyPeasy.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
 				"${BUILT_PRODUCTS_DIR}/JZCalendarWeekView/JZCalendarWeekView.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/UIEmptyState/UIEmptyState.framework",
@@ -1238,7 +1289,9 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyPeasy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JZCalendarWeekView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIEmptyState.framework",
@@ -1316,12 +1369,14 @@
 				ED73592522550860006C318C /* ProviderServiceGeneralTableView.swift in Sources */,
 				ED34D7FC2209D2000025BACF /* MainSignUpInfoView.swift in Sources */,
 				ED4483112204AA4400BE8EF0 /* UserDataRequest.swift in Sources */,
+				ED3E96E52264904F00C8F602 /* TableViewHandler.swift in Sources */,
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
 				EDD2A8372238026C00B52E68 /* SearchView.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
 				EDB6B457225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift in Sources */,
 				ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */,
 				DB0B7C79225644F10035C593 /* CustomWeekView.swift in Sources */,
+				ED3E96E122647DE800C8F602 /* SearchResultCell.swift in Sources */,
 				ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */,
 				EDB6B44C225B453300B8EA8B /* ScheduleModalDayModel.swift in Sources */,
 				ED73590C2254C28A006C318C /* ProviderServicesTableView.swift in Sources */,
@@ -1332,6 +1387,7 @@
 				ED3E96DC225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift in Sources */,
 				ED3E96C9225F354100C8F602 /* PasswordViewController.swift in Sources */,
 				EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */,
+				ED3E96E3226486E200C8F602 /* Model.swift in Sources */,
 				EDCFB45C22281E2F00A6B56F /* RootNavigationController.swift in Sources */,
 				ED7359022254B2A0006C318C /* ProviderServicesController.swift in Sources */,
 				ED7359222255071E006C318C /* ProviderServiceRowModel.swift in Sources */,

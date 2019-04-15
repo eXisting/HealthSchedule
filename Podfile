@@ -10,6 +10,8 @@ target 'HealthSchedule' do
   pod 'FSCalendar'
   pod 'Presentr'
   pod 'UIEmptyState'
+  pod 'FoldingCell'
+  pod "EasyPeasy"
   pod 'JZCalendarWeekView', :git => 'https://github.com/eXisting/JZCalendarWeekView', :branch => 'master'
 
 end

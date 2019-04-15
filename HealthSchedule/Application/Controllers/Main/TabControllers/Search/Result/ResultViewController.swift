@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import FoldingCell
 
 protocol DismissableController {
   func dismiss()
 }
 
 class ResultViewController: UIViewController {
+  private let model = ResultsModel()
   private let mainView = SearchResultView()
   
   override func loadView() {
@@ -22,7 +24,7 @@ class ResultViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mainView.setup()
+    mainView.setup(delegate: model.tableViewContentHandler, dataSource: model.tableViewContentHandler)
     mainView.dismissDelegate = self
   }
 }
