@@ -10,46 +10,50 @@ import UIKit
 import FoldingCell
 
 class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
-  static var container: RemoteAvailableTimeContainer!
-  
-  private let closeHeight: CGFloat = 90
-  private let openHeight: CGFloat = 166
-  private var itemHeight = [CGFloat](repeating: 91.0, count: 20)
+  private var data: [ResultSectionModel] = []
+    
+  init(dataModels: [ResultSectionModel]) {
+    data = dataModels
+  }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return ResultsTableViewHandler.container.data.count
+    return data.count
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return data[section].sectionHeight
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return ResultsTableViewHandler.container.data[section].1.count
+    return data[section].numberOfRows
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 90
+    return data[indexPath.section].rows[indexPath.row].rowHeight
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return DateManager.shared.date2String(with: .date, ResultsTableViewHandler.container.data[section].0)
+    return data[section].sectionName
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath)
     
-    cell.textLabel?.text = DateManager.shared.date2String(with: .time, ResultsTableViewHandler.container.data[indexPath.section].1[indexPath.row].0, .hour24)
+    //cell.textLabel?.text = DateManager.shared.date2String(with: .time, data[indexPath.section].rows[indexPath.row].time, .hour24)
     
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! FoldingCell
+    let cell = tableView.cellForRow(at: indexPath) as! SearchResultFoldingCell
     
     var duration = 0.0
-    if itemHeight[indexPath.row] == closeHeight { // open cell
-      itemHeight[indexPath.row] = openHeight
+    if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
+      data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
       cell.unfold(true, animated: true, completion: nil)
       duration = 0.5
     } else { // close cell
-      itemHeight[indexPath.row] = closeHeight
+      data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.collapsedHeight)
       cell.unfold(false, animated: true, completion: nil)
       duration = 1.1
     }
@@ -60,13 +64,13 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    let cell = cell as! FoldingCell
+    let cell = cell as! SearchResultFoldingCell
     
-//    if itemHeight[indexPath.row] == closeHeight {
+    if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight {
       cell.unfold(false, animated: false, completion:nil)
-//    } else {
-//      cell.unfold(true, animated: false, completion: nil)
-//    }
+    } else {
+      cell.unfold(true, animated: false, completion: nil)
+    }
   }
 }
 

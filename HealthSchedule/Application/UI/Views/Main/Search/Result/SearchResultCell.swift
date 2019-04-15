@@ -12,14 +12,21 @@ import EasyPeasy
 
 class SearchResultFoldingCell: FoldingCell {
   
+  let maxHeight: CGFloat = 250
+  let collapsedHeight: CGFloat = 70
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     containerView = createContainerView()
     foregroundView = createForegroundView()
     
+    itemCount = 4
+    
     // super class method configure views
     commonInit()
+    
+    self.clipsToBounds = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -29,7 +36,7 @@ class SearchResultFoldingCell: FoldingCell {
   override func animationDuration(_ itemIndex: NSInteger, type: AnimationType) -> TimeInterval {
     
     // durations count equal it itemCount
-    let durations = [0.33, 0.26, 0.26] // timing animation for each view
+    let durations = [0.33, 0.33, 0.33, 0.33] // timing animation for each view
     return durations[itemIndex]
   }
 }
@@ -46,7 +53,7 @@ extension SearchResultFoldingCell {
     contentView.addSubview(foregroundView)
     
     foregroundView.easy.layout([
-      Height(75),
+      Height(collapsedHeight), //padding
       Left(8),
       Right(8)
     ])
@@ -72,7 +79,7 @@ extension SearchResultFoldingCell {
     
     // add constraints
     containerView.easy.layout([
-      Height(CGFloat(75 * itemCount)),
+      Height(CGFloat(120 * itemCount)),
       Left(8),
       Right(8)
     ])
@@ -87,11 +94,4 @@ extension SearchResultFoldingCell {
     
     return containerView
   }
-}
-
-
-internal func Init<Type>(value : Type, block: @escaping (_ object: Type) -> Void) -> Type
-{
-  block(value)
-  return value
 }

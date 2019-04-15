@@ -69,6 +69,8 @@
 		ED3E96E122647DE800C8F602 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96E022647DE800C8F602 /* SearchResultCell.swift */; };
 		ED3E96E3226486E200C8F602 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96E2226486E200C8F602 /* Model.swift */; };
 		ED3E96E52264904F00C8F602 /* TableViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96E42264904F00C8F602 /* TableViewHandler.swift */; };
+		ED3E96ED2264AA2500C8F602 /* ResultSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96EC2264AA2500C8F602 /* ResultSectionModel.swift */; };
+		ED3E96EF2264AA5800C8F602 /* ResultRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E96EE2264AA5800C8F602 /* ResultRowModel.swift */; };
 		ED4482EC22044B4A00BE8EF0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482EB22044B4A00BE8EF0 /* Token.swift */; };
 		ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482F2220457B600BE8EF0 /* Serializer.swift */; };
 		ED4482FC22045E4700BE8EF0 /* SystemExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */; };
@@ -223,6 +225,8 @@
 		ED3E96E022647DE800C8F602 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		ED3E96E2226486E200C8F602 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		ED3E96E42264904F00C8F602 /* TableViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHandler.swift; sourceTree = "<group>"; };
+		ED3E96EC2264AA2500C8F602 /* ResultSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSectionModel.swift; sourceTree = "<group>"; };
+		ED3E96EE2264AA5800C8F602 /* ResultRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRowModel.swift; sourceTree = "<group>"; };
 		ED4482EB22044B4A00BE8EF0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		ED4482F2220457B600BE8EF0 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensions.swift; sourceTree = "<group>"; };
@@ -661,6 +665,8 @@
 			children = (
 				ED3E96E2226486E200C8F602 /* Model.swift */,
 				ED3E96E42264904F00C8F602 /* TableViewHandler.swift */,
+				ED3E96EC2264AA2500C8F602 /* ResultSectionModel.swift */,
+				ED3E96EE2264AA5800C8F602 /* ResultRowModel.swift */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -1347,6 +1353,7 @@
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
+				ED3E96ED2264AA2500C8F602 /* ResultSectionModel.swift in Sources */,
 				EDB6B443225797AE00B8EA8B /* ModalServicesViewController.swift in Sources */,
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
@@ -1422,6 +1429,7 @@
 				ED6CBE7A21ECCDBD00860010 /* MainCoreDataContainer.xcdatamodeld in Sources */,
 				EDD2A84B2239239F00B52E68 /* CommonDataRequest.swift in Sources */,
 				ED231B2122295A1700A80FC9 /* SearchViewController.swift in Sources */,
+				ED3E96EF2264AA5800C8F602 /* ResultRowModel.swift in Sources */,
 				ED448306220477B900BE8EF0 /* ProviderData.swift in Sources */,
 				ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */,
 				EDE03EE92253754000DBAA0F /* DateExtension.swift in Sources */,

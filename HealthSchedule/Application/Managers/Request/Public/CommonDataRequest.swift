@@ -70,20 +70,22 @@ class CommonDataRequest {
     }
   }
   
-  func getAvailableTimesList(_ data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+  func getAvailableTimesList(_ data: Parser.JsonDictionary, _ completion: @escaping (RemoteAvailableTimeContainer?) -> Void) {
     let getParams = data.merging(RequestManager.sessionToken.asParams(), uniquingKeysWith: { first,second in return first })
     
     requestsManager.getAvailableTimes(params: getParams) {
       object, response in
       if response != ResponseStatus.success.rawValue {
-        completion(response)
+        completion(nil)
         return
       }
       
-      // TODO: Insert into core data
+      // NOTE: Core data mocked until either:
+      // 1. Server will send push notification about data changing so app should download new data in background and save it by hash
+      // 2. Implement service which will observ data on server and compare it with stored data, but still need an API request
+      // for now it's just returning obtained data
       
-      ResultsTableViewHandler.container = object
-      completion(response)
+      completion(object)
     }
   }
 }

@@ -39,7 +39,7 @@ class SearchModel {
     return nil
   }
   
-  func startSearch(_ completion: @escaping (String) -> Void) {
+  func startSearch(_ completion: @escaping (RemoteAvailableTimeContainer?) -> Void) {
     //serviceId!, within: (dateTimeInterval!.startTime, dateTimeInterval!.endTime)) {
     var params: Parser.JsonDictionary = [:]
     params[AvailableTimeJson.serviceId.rawValue] = String(1)//String(serviceId!)

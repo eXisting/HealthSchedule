@@ -20,7 +20,8 @@ enum AvailableTimeJson: String {
 
 struct RemoteAvailableTimeContainer {
   typealias AvailableDatesSortedArray = [(Date, AvailableTimesSortedArray)]
-  typealias AvailableTimesSortedArray = [(Date, [Int])]
+  typealias TimeIdsPair = (Date, [Int])
+  typealias AvailableTimesSortedArray = [TimeIdsPair]
   
   private var parsedResponse: AvailableDatesSortedArray
   

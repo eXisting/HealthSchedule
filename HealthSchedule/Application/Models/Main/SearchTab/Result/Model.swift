@@ -9,5 +9,18 @@
 import UIKit
 
 class ResultsModel {
-  let tableViewContentHandler = ResultsTableViewHandler()
+  private var container: RemoteAvailableTimeContainer
+  
+  var tableViewContentHandler: ResultsTableViewHandler
+  
+  init(container: RemoteAvailableTimeContainer) {
+    self.container = container
+    
+    var sections: [ResultSectionModel] = []
+    for parsedData in self.container.data {
+      sections.append(.init(day: parsedData.0, dayTimes: parsedData.1))
+    }
+    
+    tableViewContentHandler = ResultsTableViewHandler(dataModels: sections)
+  }
 }

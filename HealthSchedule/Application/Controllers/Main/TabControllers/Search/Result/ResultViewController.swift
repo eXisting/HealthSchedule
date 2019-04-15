@@ -14,8 +14,13 @@ protocol DismissableController {
 }
 
 class ResultViewController: UIViewController {
-  private let model = ResultsModel()
+  private var model: ResultsModel!
   private let mainView = SearchResultView()
+  
+  convenience init(data: RemoteAvailableTimeContainer) {
+    self.init()
+    model = ResultsModel(container: data)
+  }
   
   override func loadView() {
     super.loadView()

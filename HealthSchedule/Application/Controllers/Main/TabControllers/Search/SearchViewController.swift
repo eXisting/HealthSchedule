@@ -89,15 +89,14 @@ extension SearchViewController: SearchResponsible {
 //      return
 //    }
     
-    model.startSearch { [weak self] response in
-      if response != ResponseStatus.success.rawValue {
-        self?.showWarningAlert(message: response)
+    model.startSearch { [weak self] data in
+      guard let data = data else {
+        self?.showWarningAlert(message: "Something wrong with request. Try again later")
         return
       }
       
-      
       DispatchQueue.main.async {
-        self?.navigationController?.present(ResultViewController(), animated: true)
+        self?.navigationController?.present(ResultViewController(data: data), animated: true)
       }
     }
   }

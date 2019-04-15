@@ -74,3 +74,9 @@ extension UIView {
     }
   }
 }
+
+internal func Init<Type>(value : Type, block: @escaping (_ object: Type) -> Void) -> Type
+{
+  block(value)
+  return value
+}
