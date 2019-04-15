@@ -62,6 +62,19 @@
         <attribute name="working" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="provider" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="scheduleDayTemplate" inverseEntity="User" syncable="YES"/>
     </entity>
+    <entity name="SearchDayTimeResult" representedClassName="SearchDayTimeResult" syncable="YES" codeGenerationType="class">
+        <attribute name="time" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="day" maxCount="1" deletionRule="Nullify" destinationEntity="SearchResultContainer" inverseName="availableTimes" inverseEntity="SearchResultContainer" syncable="YES"/>
+    </entity>
+    <entity name="SearchRequest" representedClassName="SearchRequest" syncable="YES" codeGenerationType="class">
+        <attribute name="requestHash" attributeType="String" syncable="YES"/>
+        <relationship name="resultContainer" toMany="YES" deletionRule="Cascade" destinationEntity="SearchResultContainer" inverseName="searchRequest" inverseEntity="SearchResultContainer" syncable="YES"/>
+    </entity>
+    <entity name="SearchResultContainer" representedClassName="SearchResultContainer" syncable="YES" codeGenerationType="class">
+        <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="availableTimes" maxCount="1" deletionRule="Cascade" destinationEntity="SearchDayTimeResult" inverseName="day" inverseEntity="SearchDayTimeResult" syncable="YES"/>
+        <relationship name="searchRequest" maxCount="1" deletionRule="Nullify" destinationEntity="SearchRequest" inverseName="resultContainer" inverseEntity="SearchRequest" syncable="YES"/>
+    </entity>
     <entity name="Service" representedClassName="Service" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -96,14 +109,17 @@
     <elements>
         <element name="Address" positionX="-482.84765625" positionY="-509.30078125" width="128" height="105"/>
         <element name="Category" positionX="-153.4609375" positionY="-137.39453125" width="128" height="88"/>
-        <element name="City" positionX="-859.96484375" positionY="-180.12890625" width="128" height="88"/>
+        <element name="City" positionX="-869.4296875" positionY="-147.08203125" width="128" height="88"/>
         <element name="Profession" positionX="-106.28125" positionY="32.203125" width="128" height="120"/>
         <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="210"/>
         <element name="Request" positionX="-464.71875" positionY="-172.3515625" width="128" height="195"/>
         <element name="Role" positionX="-712.4140625" positionY="-619.92578125" width="128" height="88"/>
-        <element name="ScheduleDayTemplate" positionX="-657" positionY="-477" width="128" height="150"/>
+        <element name="ScheduleDayTemplate" positionX="-928.03515625" positionY="-612.26171875" width="128" height="150"/>
         <element name="Service" positionX="-288.98828125" positionY="126.453125" width="128" height="135"/>
-        <element name="User" positionX="-706.875" positionY="-452.6953125" width="128" height="270"/>
+        <element name="User" positionX="-706.875" positionY="-452.6953125" width="128" height="268"/>
         <element name="UserImage" positionX="-700.59765625" positionY="-21.62109375" width="128" height="105"/>
+        <element name="SearchRequest" positionX="-984.48828125" positionY="-414.0625" width="128" height="73"/>
+        <element name="SearchResultContainer" positionX="-1024.01171875" positionY="-229.80859375" width="128" height="88"/>
+        <element name="SearchDayTimeResult" positionX="-1018.54296875" positionY="-14.234375" width="128" height="73"/>
     </elements>
 </model>
