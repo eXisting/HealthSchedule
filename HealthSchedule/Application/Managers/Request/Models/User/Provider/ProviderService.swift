@@ -17,6 +17,8 @@ enum ProviderServiceJsonFields: String, CodingKey {
   case providerId = "provider_id"
   case service
   case address
+  
+  case user
   case provider = "provider"
   
   case serviceId = "service_id"
@@ -63,6 +65,10 @@ extension RemoteProviderService: Codable {
     description = try container.decode(String.self, forKey: .description)
     provider = try? container.decode(RemoteUser.self, forKey: .provider)
 
+    if provider == nil {
+      provider = try? container.decode(RemoteUser.self, forKey: .user)
+    }
+    
     let dateString = try container.decode(String.self, forKey: .interval)
     
     interval = DateManager.shared.stringToDate(dateString, format: .fullTime, .none)

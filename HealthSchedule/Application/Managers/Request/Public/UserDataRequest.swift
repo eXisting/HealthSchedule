@@ -77,7 +77,7 @@ extension UserDataRequest: UserDataUpdating {
   }
   
   func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
-    let endpoint = "\(Endpoints.requests.rawValue)/\(id)"
+    let endpoint = "\(Endpoints.providerRequests.rawValue)/\(id)"
     
     requestsManager.postAsync(to: endpoint, as: .put, collectedData, RequestManager.sessionToken.asParams()) {
       [weak self] serverData, response in
@@ -114,7 +114,13 @@ extension UserDataRequest: CommonDataRequesting {
   }
   
   func getRequests(completion: @escaping (String) -> Void) {
-    requestsManager.getListAsync(for: RemoteRequest.self, from: .requests, RequestManager.sessionToken.asParams()) {
+    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+      fatalError()
+    }
+    
+    let endpoint = Int(user.roleId) == UserType.client.rawValue ? Endpoints.userRequests : Endpoints.providerRequests
+    
+    requestsManager.getListAsync(for: RemoteRequest.self, from: endpoint, RequestManager.sessionToken.asParams()) {
       [weak self] (list, response) in
       if let error = response.error {
         completion(error)
@@ -128,9 +134,14 @@ extension UserDataRequest: CommonDataRequesting {
   }
   
   private func getRequest(_ id: Int, _ completion: @escaping (String) -> Void) {
-    let endpoint = "\(Endpoints.requests.rawValue)/\(id)"
+    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+      fatalError()
+    }
     
-    requestsManager.getAsync(for: RemoteRequest.self, from: endpoint, RequestManager.sessionToken.asParams()) {
+    let endpoint = Int(user.roleId) == UserType.client.rawValue ? Endpoints.userRequests : Endpoints.providerRequests
+    let route = "\(endpoint)/\(id)"
+    
+    requestsManager.getAsync(for: RemoteRequest.self, from: route, RequestManager.sessionToken.asParams()) {
       [weak self] element, response in
       
       if let error = response.error {

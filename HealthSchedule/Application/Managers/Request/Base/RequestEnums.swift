@@ -10,8 +10,8 @@ enum Endpoints: String {
   // GET
   case user = "/api/user"
   case provider = "/api/provider"
-  case requests = "/api/user/requests"
-
+  case userRequests = "/api/user/requests"
+  
   // GET COMMON
   case allCities = "/api/cities"
   case allProfessions = "/api/category/doctors/professions"
@@ -28,14 +28,15 @@ enum Endpoints: String {
   // PUT
   case providerAddress = "/api/provider/address"
   case updateUserInfo = "/api/user/info"
-  
-  // GET / POST / DELETE ( /{id} )
-  case providerProfessions = "/api/provider/professions"
-  case providerServices = "/api/provider/services"
 
   // GET / PUT
   case scheduleTemplate = "/api/provider/schedules"
   case password = "/api/user/password"
+  
+  // GET / POST / DELETE ( /{id} )
+  case providerRequests = "/api/provider/requests"
+  case providerProfessions = "/api/provider/professions"
+  case providerServices = "/api/provider/services"
 }
 
 enum RequestType: String {
