@@ -29,13 +29,17 @@ protocol ProviderInfoRequesting {
 protocol CommonDataRequesting {
   func getRequests(completion: @escaping (String) -> Void)
   func getUser(_ completion: @escaping (String) -> Void)
+  
+  func getUser(by id: Int, _ completion: @escaping (String) -> Void)
 }
 
 protocol UserDataUpdating {
   func updateInfo(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void)
+  
   func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
+  func makeRequests(toProviderWith collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
 }
 
 class UserDataRequest {
@@ -90,9 +94,43 @@ extension UserDataRequest: UserDataUpdating {
       self?.getRequest(id) { innerResponse in completion(innerResponse) }
     }
   }
+  
+  func makeRequests(toProviderWith collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    requestsManager.postAsync(to: Endpoints.userRequests.rawValue, as: .post, collectedData, RequestManager.sessionToken.asParams()) {
+      data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
 }
 
 extension UserDataRequest: CommonDataRequesting {
+  func getUser(by id: Int, _ completion: @escaping (String) -> Void) {
+    let endpoint = "\(Endpoints.providerById.rawValue)/\(id)"
+    
+    requestsManager.getAsync(for: RemoteUser.self, from: endpoint, RequestManager.sessionToken.asParams()) {
+      [weak self] provider, response in
+      
+      guard let remoteUser = provider else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
   func getUser(_ completion: @escaping (String) -> Void) {
     requestsManager.getAsync(for: RemoteUser.self, from: .user, RequestManager.sessionToken.asParams()) {
       [weak self] (user, response) in

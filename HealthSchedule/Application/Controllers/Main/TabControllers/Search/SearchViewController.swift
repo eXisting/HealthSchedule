@@ -96,7 +96,7 @@ extension SearchViewController: SearchResponsible {
       }
       
       DispatchQueue.main.async {
-        self?.navigationController?.present(ResultViewController(data: data), animated: true)
+        self?.navigationController?.present(ResultViewController(data: data, serviceId: 2), animated: true)
       }
     }
   }

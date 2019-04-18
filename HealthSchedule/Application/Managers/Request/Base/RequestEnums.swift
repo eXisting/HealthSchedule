@@ -37,6 +37,7 @@ enum Endpoints: String {
   case providerRequests = "/api/provider/requests"
   case providerProfessions = "/api/provider/professions"
   case providerServices = "/api/provider/services"
+  case providerById = "/api/user/providers"
 }
 
 enum RequestType: String {

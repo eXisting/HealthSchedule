@@ -17,9 +17,9 @@ class ResultViewController: UIViewController {
   private var model: ResultsModel!
   private let mainView = SearchResultView()
   
-  convenience init(data: RemoteAvailableTimeContainer) {
+  convenience init(data: RemoteAvailableTimeContainer, serviceId: Int) {
     self.init()
-    model = ResultsModel(container: data)
+    model = ResultsModel(container: data, serviceId)
   }
   
   override func loadView() {
@@ -31,6 +31,12 @@ class ResultViewController: UIViewController {
     super.viewDidLoad()
     mainView.setup(delegate: model.tableViewContentHandler, dataSource: model.tableViewContentHandler)
     mainView.dismissDelegate = self
+  }
+}
+
+extension ResultViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    AlertHandler.ShowAlert(for: self, "Notice", message, .alert)
   }
 }
 
