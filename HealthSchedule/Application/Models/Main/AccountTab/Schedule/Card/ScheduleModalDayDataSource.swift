@@ -120,7 +120,7 @@ class ScheduleModalDayDataSource: NSObject {
   }
 }
 
-extension ScheduleModalDayDataSource: ExandableHeaderViewDelegate {
+extension ScheduleModalDayDataSource: ExpandableHeaderViewDelegate {
   func toogleExpand(for header: UITableViewHeaderFooterView, section: Int) {
     sectionsInfo[section].isExpanded = !sectionsInfo[section].isExpanded
     

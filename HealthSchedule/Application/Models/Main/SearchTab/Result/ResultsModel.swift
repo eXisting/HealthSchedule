@@ -17,7 +17,7 @@ class ResultsModel {
   
   private var service: Service!
   
-  init(container: RemoteAvailableTimeContainer, _ serviceId: Int) {
+  init(delegate: TableViewSectionsReloading, container: RemoteAvailableTimeContainer, _ serviceId: Int) {
     self.serviceId = serviceId
     
     getServiceData()
@@ -29,6 +29,7 @@ class ResultsModel {
     
     tableViewContentHandler = ResultsTableViewHandler(dataModels: sections, sendRequestHandler: sendRequest)
     tableViewContentHandler.service = service
+    tableViewContentHandler.delegate = delegate
   }
   
   func sendRequest(providerId: Int, time: Date) {

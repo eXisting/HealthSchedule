@@ -11,7 +11,9 @@ import UIKit
 struct ResultSectionModel: CommonSectionDataContaining {
   var numberOfRows: Int
   var sectionName: String
-  var sectionHeight: CGFloat = 45
+  var sectionHeight: CGFloat = 60
+  
+  var isExpanded = false
   
   var rows: [ResultRowModel]
   
@@ -24,5 +26,9 @@ struct ResultSectionModel: CommonSectionDataContaining {
     
     numberOfRows = rows.count
     sectionName = DateManager.shared.date2String(with: .date, day)
+  }
+  
+  func getNumberOfRows() -> Int {
+    return isExpanded ? numberOfRows : 0
   }
 }

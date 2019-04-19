@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ExandableHeaderViewDelegate {
+protocol ExpandableHeaderViewDelegate {
   func toogleExpand(for header: UITableViewHeaderFooterView, section: Int)
 }
 
@@ -16,7 +16,7 @@ class ScheduleModalTableViewHader: UITableViewHeaderFooterView {
   private let displayingLabel = UILabel()
   private let placholderLabel = UILabel()
   
-  var collapseDelegate: ExandableHeaderViewDelegate!
+  var collapseDelegate: ExpandableHeaderViewDelegate!
   var data: ExpandableSectionData!
   
   override func setNeedsLayout() {

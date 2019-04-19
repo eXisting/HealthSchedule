@@ -15,6 +15,7 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   
   private var sendRequestHandler: ((Int, Date) -> Void)!
   
+  var delegate: TableViewSectionsReloading!
   var service: Service!
   
   init(dataModels: [ResultSectionModel], sendRequestHandler: @escaping (Int, Date) -> Void) {
@@ -32,7 +33,7 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return data[section].numberOfRows
+    return data[section].getNumberOfRows()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -41,6 +42,24 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return data[section].sectionName
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SearchResultView.headerReuseIdentifier) as! CommonExpandableSection
+
+    let sectionData = data[section]
+    
+    header.data = ExpandableSectionData(
+      section: section,
+      placeholder: "",
+      display: sectionData.sectionName,
+      isExpanded: sectionData.isExpanded,
+      rowsCount: sectionData.numberOfRows
+    )
+
+    header.collapseDelegate = self
+
+    return header
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,3 +112,13 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
 }
 
+extension ResultsTableViewHandler: ExpandableHeaderViewDelegate {
+  func toogleExpand(for header: UITableViewHeaderFooterView, section: Int) {
+    let expandableHeader = header as! CommonExpandableSection
+    
+    data[section].isExpanded = !data[section].isExpanded
+    expandableHeader.data.isExpanded = data[section].isExpanded
+    
+    delegate.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
+  }
+}

@@ -19,7 +19,7 @@ class ResultViewController: UIViewController {
   
   convenience init(data: RemoteAvailableTimeContainer, serviceId: Int) {
     self.init()
-    model = ResultsModel(container: data, serviceId)
+    model = ResultsModel(delegate: self, container: data, serviceId)
   }
   
   override func loadView() {
@@ -43,5 +43,11 @@ extension ResultViewController: ErrorShowable {
 extension ResultViewController: DismissableController {
   func dismiss() {
     dismiss(animated: true)
+  }
+}
+
+extension ResultViewController: TableViewSectionsReloading {
+  func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation) {
+    mainView.reloadSections(path, with: animation)
   }
 }

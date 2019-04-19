@@ -11,7 +11,8 @@ import EasyPeasy
 
 class SearchResultView: UIView {
   static var cellReuseIdentifier = "DemoFoldingCell"
-  
+  static var headerReuseIdentifier = "CommonExpandableSection"
+
   private let tableView = UITableView()
   private let dismissButton = UIButton()
 
@@ -25,8 +26,16 @@ class SearchResultView: UIView {
     tableView.dataSource = dataSource
     
     tableView.register(SearchResultFoldingCell.self, forCellReuseIdentifier: SearchResultView.cellReuseIdentifier)
+    tableView.register(CommonExpandableSection.self, forHeaderFooterViewReuseIdentifier: SearchResultView.headerReuseIdentifier)
     
     dismissButton.addTarget(self, action: #selector(onDismissButtonClick), for: .touchDown)
+    
+    // Remove last underline in table view
+    tableView.tableFooterView = UIView(frame: .zero)
+  }
+  
+  func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation) {
+    tableView.reloadSections(path, with: animation)
   }
   
   @objc private func onDismissButtonClick() {

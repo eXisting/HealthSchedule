@@ -8,10 +8,13 @@
 
 import UIKit
 
-protocol TableViewMasteringDelegate {
+protocol TableViewSectionsReloading {
+  func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation)
+}
+
+protocol TableViewMasteringDelegate: TableViewSectionsReloading {
   func dequeueReusableHeader(identifier: String) -> UITableViewHeaderFooterView?
   func dequeueReusableCell(identifier: String, for indexPath: IndexPath) -> UITableViewCell
-  func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation)
   func redrawSection(_ path: IndexPath)
 }
 
