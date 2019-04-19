@@ -11,13 +11,10 @@ import FoldingCell
 import EasyPeasy
 
 class SearchResultFoldingCell: FoldingCell {
+  private let displayLabel = UILabel()
   
   let maxHeight: CGFloat = 400
   let collapsedHeight: CGFloat = 70
-  
-  let duration = 0.3 // timing animation for each view
-  
-  let displayLabel = UILabel()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,7 +24,7 @@ class SearchResultFoldingCell: FoldingCell {
     
     setupDisplayLabel()
     
-    itemCount = 4
+    itemCount = 4 // used for calculation of the height
     
     // super class method configure views
     commonInit()
@@ -45,6 +42,10 @@ class SearchResultFoldingCell: FoldingCell {
     providerView.setupTableView(delegate: delegate, dataSource: dataSource)
   }
   
+  func setupDisplayTime(_ text: String) {
+    displayLabel.text = text
+  }
+  
   func reloadTableView() {
     let providerView = (containerView as! SearchElementProviderView)
     providerView.reloadData()
@@ -55,7 +56,11 @@ class SearchResultFoldingCell: FoldingCell {
   }
   
   override func animationDuration(_ itemIndex: NSInteger, type: AnimationType) -> TimeInterval {
-    return duration
+    if type == .close {
+      return 0.5
+    }
+    
+    return 0.4 // timing animation for each view
   }
 }
 

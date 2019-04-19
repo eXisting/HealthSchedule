@@ -11,7 +11,7 @@ import UIKit
 class ResultsModel {
   private let requestManager: UserDataUpdating = UserDataRequest()
   private let commonRequestManager = CommonDataRequest()
-
+  
   var tableViewContentHandler: ResultsTableViewHandler!
   var serviceId: Int
   
@@ -19,6 +19,7 @@ class ResultsModel {
   
   init(container: RemoteAvailableTimeContainer, _ serviceId: Int) {
     self.serviceId = serviceId
+    
     getServiceData()
     
     var sections: [ResultSectionModel] = []

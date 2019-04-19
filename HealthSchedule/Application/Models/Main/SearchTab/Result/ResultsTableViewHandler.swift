@@ -18,10 +18,9 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   var service: Service!
   
   init(dataModels: [ResultSectionModel], sendRequestHandler: @escaping (Int, Date) -> Void) {
-    data = dataModels
     self.sendRequestHandler = sendRequestHandler
     
-   
+    data = dataModels
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,8 +47,7 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath) as! SearchResultFoldingCell
     
     cell.setupCollapsedView(delegate: cellModel.dataSource, dataSource: cellModel.dataSource, identifier: indexPath, onRequestClick: onSendRequest)
-    cellModel.setupProviderCard(with: data[indexPath.section].rows[indexPath.row].userIds[0], for: service, delegate: cell.reloadTableView)
-    cell.displayLabel.text = DateManager.shared.date2String(with: .time, data[indexPath.section].rows[indexPath.row].time, .hour24)
+    cell.setupDisplayTime(DateManager.shared.date2String(with: .time, data[indexPath.section].rows[indexPath.row].time, .hour24))
     
     return cell
   }
@@ -57,8 +55,8 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath) as! SearchResultFoldingCell
     
-    cellModel.clearDataSource()
-
+    cellModel.setupProviderCard(with: data[indexPath.section].rows[indexPath.row].userIds[0], for: service, delegate: cell.reloadTableView)
+    
     if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
       data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
       cell.unfold(true, animated: true, completion: nil)

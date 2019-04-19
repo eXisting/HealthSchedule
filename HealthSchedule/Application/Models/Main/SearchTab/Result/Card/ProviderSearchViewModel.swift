@@ -12,14 +12,10 @@ class ProviderSearchViewModel {
   private let requestManager: CommonDataRequesting = UserDataRequest()
   private var serviceName: String!
   private var providerService: ProviderService?
-  
-  var onDataProcessed: (() -> Void)?
+
   let dataSource = ProviderSearchViewDataSource()
   
-  func clearDataSource() {
-    dataSource.data = []
-    onDataProcessed?()
-  }
+  var onDataProcessed: (() -> Void)?
   
   func setupProviderCard(with id: Int, for service: Service, delegate: @escaping () -> Void) {
     onDataProcessed = delegate
@@ -51,6 +47,8 @@ class ProviderSearchViewModel {
   }
   
   private func process(_ user: User) {
+    dataSource.data = []
+    
     var tableViewData: [Any] = []
     
     tableViewData.append(user.name as Any)
