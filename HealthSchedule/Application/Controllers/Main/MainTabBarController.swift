@@ -25,13 +25,20 @@ class MainTabBarController: UITabBarController {
   private let requestTab = RequestViewController()
   private let accountTab = AccountViewController()
   
+  lazy var requestManager = CommonDataRequest()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
     homeNavigationController = UINavigationController(rootViewController: homeTab)
     requestNavigationController = UINavigationController(rootViewController: requestTab)
     accountNavigationController = UINavigationController(rootViewController: accountTab)
-
+    
+    DispatchQueue.global(qos: .userInitiated).sync {
+      requestManager.getAllServices { _ in }
+      requestManager.getCities { _ in }
+    }
+    
     let tabBarItems = [
       homeNavigationController,
       requestNavigationController,
