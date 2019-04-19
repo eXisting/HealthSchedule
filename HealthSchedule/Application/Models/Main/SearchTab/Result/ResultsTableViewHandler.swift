@@ -11,17 +11,17 @@ import FoldingCell
 
 class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
   private var data: [ResultSectionModel] = []
-  private var cellModels: [Int: [ProviderSearchViewModel]] = [:]
+  private var cellModel = ProviderSearchViewModel()
   
   private var sendRequestHandler: ((Int, Date) -> Void)!
+  
+  var service: Service!
   
   init(dataModels: [ResultSectionModel], sendRequestHandler: @escaping (Int, Date) -> Void) {
     data = dataModels
     self.sendRequestHandler = sendRequestHandler
     
-    for index in 0..<data.count {
-      cellModels[index] = [ProviderSearchViewModel].init(repeating: ProviderSearchViewModel(), count: data[index].numberOfRows)
-    }
+   
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,9 +47,9 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath) as! SearchResultFoldingCell
     
-    let cellModel = cellModels[indexPath.section]![indexPath.row]
     cell.setupCollapsedView(delegate: cellModel.dataSource, dataSource: cellModel.dataSource, identifier: indexPath, onRequestClick: onSendRequest)
-    //cell.textLabel?.text = DateManager.shared.date2String(with: .time, data[indexPath.section].rows[indexPath.row].time, .hour24)
+    cellModel.setupProviderCard(with: data[indexPath.section].rows[indexPath.row].userIds[0], for: service, delegate: cell.reloadTableView)
+    cell.displayLabel.text = DateManager.shared.date2String(with: .time, data[indexPath.section].rows[indexPath.row].time, .hour24)
     
     return cell
   }
@@ -57,26 +57,17 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath) as! SearchResultFoldingCell
     
-    var duration = 0.0
+    cellModel.clearDataSource()
+
     if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
       data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
       cell.unfold(true, animated: true, completion: nil)
-      
-      let cellModel = cellModels[indexPath.section]![indexPath.row]
-      
-      cellModel.setupProviderCard(with: data[indexPath.section].rows[indexPath.row].userIds.first!)
-      
-      duration = 0.5
     } else { // close cell
       data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.collapsedHeight)
       cell.unfold(false, animated: true, completion: nil)
-      
-      duration = 1.1
     }
     
-    UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
-      tableView.reloadRows(at: [indexPath], with: .automatic)
-    }, completion: nil)
+    tableView.reloadRows(at: [indexPath], with: .automatic)
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

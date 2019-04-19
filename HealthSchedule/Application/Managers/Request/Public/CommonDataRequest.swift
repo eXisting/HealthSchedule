@@ -26,7 +26,7 @@ class CommonDataRequest {
     var params = RequestManager.sessionToken.asParams()
     params[UserJsonFields.cityId.rawValue] = String(cityId)
     
-    requestsManager.getListAsync(for: RemoteService.self, from: .allServicesForCity, params) {
+    requestsManager.getListAsync(for: RemoteService.self, from: .services, params) {
       (services, response) in
       
       if let _ = response.error {

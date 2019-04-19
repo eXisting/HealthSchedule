@@ -26,6 +26,8 @@ enum UserJsonFields: String, CodingKey {
   case status = "confirmed_status"
   case birthday = "birthday_at"
   
+  case fullName = "fullName"
+  
   // Edit fields
   case cityId = "city_id"
 }

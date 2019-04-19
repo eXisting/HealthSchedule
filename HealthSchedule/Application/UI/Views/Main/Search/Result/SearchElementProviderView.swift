@@ -25,6 +25,8 @@ class SearchElementProviderView: UIView {
     
     tableView.isUserInteractionEnabled = false
     actionButton.isUserInteractionEnabled = true
+    
+    tableView.register(RequestCardImageRow.self, forCellReuseIdentifier: "RequestCardImageRow")
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -40,6 +42,12 @@ class SearchElementProviderView: UIView {
     identifier = identity
     onButtonClickAction = action
     actionButton.addTarget(self, action: #selector(onButtonClick), for: .touchUpInside)
+  }
+  
+  func reloadData() {
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
   }
   
   @objc private func onButtonClick() {
@@ -61,15 +69,16 @@ class SearchElementProviderView: UIView {
     ])
     
     actionButton.easy.layout([
-      Top(>=8).to(tableView, .bottom).with(.high),
+      Top(16).to(tableView, .bottom).with(.required),
       Width(*0.65).like(self),
       CenterX().to(self),
-      Bottom(>=8).to(self).with(.low)
+      Bottom(>=16).to(self)
     ])
   }
   
   private func customizeViews() {
-    backgroundColor = .white
+    tableView.backgroundColor = UIColor(red: 213, green: 235, blue: 235)
+    backgroundColor = UIColor(red: 213, green: 235, blue: 235)
     
     actionButton.roundBorder()
     actionButton.setTitle("SEND REQUEST", for: .normal)

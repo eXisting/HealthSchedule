@@ -10,42 +10,58 @@ import UIKit
 
 class ProviderSearchViewModel {
   private let requestManager: CommonDataRequesting = UserDataRequest()
+  private var serviceName: String!
+  private var providerService: ProviderService?
   
+  var onDataProcessed: (() -> Void)?
   let dataSource = ProviderSearchViewDataSource()
   
-  func setupProviderCard(with id: Int) {
-    if let user = DataBaseManager.shared.fetchRequestsHandler.getUser(byId: id, context: DataBaseManager.shared.mainContext) {
-      DispatchQueue.global(qos: .userInteractive).async {
-        self.process(user)
-      }
-      
+  func clearDataSource() {
+    dataSource.data = []
+    onDataProcessed?()
+  }
+  
+  func setupProviderCard(with id: Int, for service: Service, delegate: @escaping () -> Void) {
+    onDataProcessed = delegate
+    
+    handleProviderServiceLoading(Int(service.id))
+    handleUserLoading(id)
+  }
+  
+  private func handleProviderServiceLoading(_ serviceId: Int) {
+    // TODO: Rewrite backend
+  }
+  
+  private func handleUserLoading(_ userId: Int) {
+    if let user = DataBaseManager.shared.fetchRequestsHandler.getUser(byId: userId, context: DataBaseManager.shared.mainContext) {
+      process(user)
       return
     }
     
-    requestManager.getUser(by: id) { response in
+    requestManager.getUser(by: userId) { [weak self] response in
       if response != ResponseStatus.success.rawValue {
         print(response)
         return
       }
       
-      if let user = DataBaseManager.shared.fetchRequestsHandler.getUser(byId: id, context: DataBaseManager.shared.mainContext) {
-        self.process(user)
+      if let user = DataBaseManager.shared.fetchRequestsHandler.getUser(byId: userId, context: DataBaseManager.shared.mainContext) {
+        self?.process(user)
       }
     }
   }
   
   private func process(_ user: User) {
-    // TODO: Init data source
-    print(user.name)
-  }
-}
+    var tableViewData: [Any] = []
+    
+    tableViewData.append(user.name as Any)
+    tableViewData.append("Age: \(DateManager.shared.calculateAge(user.birthday!))" as Any)
+    tableViewData.append("City: \(user.city?.name ?? "Unknown location")" as Any)
+    tableViewData.append("Price: Free" as Any)
+    tableViewData.append("Service: Unknown service" as Any)
 
-class ProviderSearchViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    dataSource.data = tableViewData
+    dataSource.userPhotoData = user.image?.url
+    
+    onDataProcessed?()
   }
 }

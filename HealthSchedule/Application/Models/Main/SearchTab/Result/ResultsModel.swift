@@ -10,12 +10,16 @@ import UIKit
 
 class ResultsModel {
   private let requestManager: UserDataUpdating = UserDataRequest()
-  
+  private let commonRequestManager = CommonDataRequest()
+
   var tableViewContentHandler: ResultsTableViewHandler!
   var serviceId: Int
   
+  private var service: Service!
+  
   init(container: RemoteAvailableTimeContainer, _ serviceId: Int) {
     self.serviceId = serviceId
+    getServiceData()
     
     var sections: [ResultSectionModel] = []
     for parsedData in container.data {
@@ -23,6 +27,7 @@ class ResultsModel {
     }
     
     tableViewContentHandler = ResultsTableViewHandler(dataModels: sections, sendRequestHandler: sendRequest)
+    tableViewContentHandler.service = service
   }
   
   func sendRequest(providerId: Int, time: Date) {
@@ -34,6 +39,12 @@ class ResultsModel {
     
     requestManager.makeRequests(toProviderWith: data) { response in
       print(response)
+    }
+  }
+  
+  private func getServiceData() {
+    if let coreDataService = DataBaseManager.shared.fetchRequestsHandler.getService(by: serviceId, context: DataBaseManager.shared.mainContext) {
+      service = coreDataService
     }
   }
 }

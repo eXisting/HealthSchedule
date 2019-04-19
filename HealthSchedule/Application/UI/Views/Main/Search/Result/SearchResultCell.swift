@@ -12,14 +12,20 @@ import EasyPeasy
 
 class SearchResultFoldingCell: FoldingCell {
   
-  let maxHeight: CGFloat = 250
+  let maxHeight: CGFloat = 400
   let collapsedHeight: CGFloat = 70
+  
+  let duration = 0.3 // timing animation for each view
+  
+  let displayLabel = UILabel()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     containerView = createContainerView()
     foregroundView = createForegroundView()
+    
+    setupDisplayLabel()
     
     itemCount = 4
     
@@ -37,7 +43,11 @@ class SearchResultFoldingCell: FoldingCell {
     let providerView = (containerView as! SearchElementProviderView)
     providerView.setup(identity: identifier, action: onRequestClick)
     providerView.setupTableView(delegate: delegate, dataSource: dataSource)
-    
+  }
+  
+  func reloadTableView() {
+    let providerView = (containerView as! SearchElementProviderView)
+    providerView.reloadData()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -45,10 +55,7 @@ class SearchResultFoldingCell: FoldingCell {
   }
   
   override func animationDuration(_ itemIndex: NSInteger, type: AnimationType) -> TimeInterval {
-    
-    // durations count equal it itemCount
-    let durations = [0.33, 0.33, 0.33, 0.33] // timing animation for each view
-    return durations[itemIndex]
+    return duration
   }
 }
 
@@ -57,7 +64,6 @@ extension SearchResultFoldingCell {
   
   private func createForegroundView() -> RotatedView {
     let foregroundView = Init(value: RotatedView(frame: .zero)) {
-      $0.backgroundColor = .red
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -82,7 +88,6 @@ extension SearchResultFoldingCell {
   
   private func createContainerView() -> SearchElementProviderView {
     let containerView = Init(value: SearchElementProviderView(frame: .zero)) {
-      $0.backgroundColor = .green
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -90,7 +95,7 @@ extension SearchResultFoldingCell {
     
     // add constraints
     containerView.easy.layout([
-      Height(CGFloat(120 * itemCount)),
+      Height(maxHeight),
       Left(8),
       Right(8)
     ])
@@ -104,5 +109,11 @@ extension SearchResultFoldingCell {
     containerView.layoutIfNeeded()
     
     return containerView
+  }
+  
+  private func setupDisplayLabel() {
+    displayLabel.translatesAutoresizingMaskIntoConstraints = false
+    foregroundView.addSubview(displayLabel)
+    displayLabel.pin(to: foregroundView)
   }
 }

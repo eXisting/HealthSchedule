@@ -51,7 +51,7 @@ class RequestCardImageRow: UITableViewCell {
     photo.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
     
-    NSLayoutConstraint(item: photo, attribute: .height, relatedBy: .equal, toItem: photo, attribute: .width, multiplier: 1, constant: 0).isActive = true
+    NSLayoutConstraint(item: photo, attribute: .width, relatedBy: .equal, toItem: container, attribute: .width, multiplier: 0.4, constant: 0).isActive = true
 
     NSLayoutConstraint(item: container, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.8, constant: 0).isActive = true
     NSLayoutConstraint(item: container, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.9, constant: 0).isActive = true
@@ -63,7 +63,9 @@ class RequestCardImageRow: UITableViewCell {
     container.alignment = .fill
     container.distribution = .fill
     container.axis = .horizontal
-    container.spacing = 8.0
+    
+    photo.contentMode = .scaleAspectFit
+    nameLabel.frame = nameLabel.frame.inset(by: UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 8))
     
     nameLabel.adjustsFontSizeToFitWidth = true
     nameLabel.font = UIFont.boldSystemFont(ofSize: 20)

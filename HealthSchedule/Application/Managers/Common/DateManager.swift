@@ -138,6 +138,14 @@ class DateManager {
     return index
   }
   
+  func calculateAge(_ birthday: Date) -> Int {
+    let now = Date()
+    let calendar = Calendar.current
+    
+    let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+    return ageComponents.year!
+  }
+  
   private init() {
     dateFormatter.dateFormat = DateFormatType.date.rawValue
     defaultDate = dateFormatter.date(from: "1000-01-01")

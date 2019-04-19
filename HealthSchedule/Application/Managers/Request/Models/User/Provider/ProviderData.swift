@@ -10,6 +10,7 @@ import UIKit
 
 enum ProviderDataJsonFields: String, CodingKey {
   case address
+  case professions
 }
 
 struct ProviderData {
