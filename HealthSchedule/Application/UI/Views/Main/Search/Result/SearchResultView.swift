@@ -12,13 +12,18 @@ import EasyPeasy
 class SearchResultView: UIView {
   static var cellReuseIdentifier = "FoldingCell"
   static var headerReuseIdentifier = "CommonExpandableSection"
-
+  
+  private let headerTitle = UILabel()
+  private let headerView = NavigationHoverHeaderView()
+  
   private let tableView = UITableView()
   private let dismissButton = UIButton()
 
   var dismissDelegate: DismissableController?
   
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+    headerView.setup()
+    
     laidOutViews()
     customizeViews()
     
@@ -43,24 +48,33 @@ class SearchResultView: UIView {
   }
   
   private func laidOutViews() {
+    addSubview(headerView)
     addSubview(dismissButton)
     addSubview(tableView)
     
+    headerView.translatesAutoresizingMaskIntoConstraints = false
     tableView.translatesAutoresizingMaskIntoConstraints = false
     dismissButton.translatesAutoresizingMaskIntoConstraints = false
     
-    tableView.easy.layout([
-      Height(*0.8).like(self),
+    headerView.easy.layout([
+      Height(*0.1).like(self),
       Width().like(self),
       CenterX().to(self),
       Top().to(self)
     ])
     
+    tableView.easy.layout([
+      Width().like(self),
+      CenterX().to(self),
+      Top().to(headerView, .bottom),
+      Bottom(==16).to(dismissButton, .top)
+    ])
+    
     dismissButton.easy.layout([
       Width(*0.65).like(self),
       CenterX().to(self),
-      Top(>=8).to(tableView, .bottom).with(.low),
-      Bottom(>=16).to(self).with(.high)
+      Height(*0.08).like(self),
+      Bottom(>=16).to(self)
     ])
   }
   
@@ -68,7 +82,7 @@ class SearchResultView: UIView {
     backgroundColor = .white
     
     dismissButton.roundBorder()
-    dismissButton.setTitle("Close", for: .normal)
+    dismissButton.setTitle("CLOSE", for: .normal)
     dismissButton.backgroundColor = .clear
     dismissButton.setTitleColor(.black, for: .normal)
     
