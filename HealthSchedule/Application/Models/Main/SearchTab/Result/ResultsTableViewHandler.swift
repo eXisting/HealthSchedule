@@ -65,7 +65,9 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
       cell.unfold(false, animated: true, completion: nil)
     }
     
-    tableView.reloadRows(at: [indexPath], with: .automatic)
+    UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCrossDissolve, animations: {
+      tableView.reloadRows(at: [indexPath], with: .automatic)
+    }, completion: nil)
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

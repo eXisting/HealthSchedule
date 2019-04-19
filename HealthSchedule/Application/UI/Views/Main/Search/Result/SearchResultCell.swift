@@ -69,6 +69,7 @@ extension SearchResultFoldingCell {
   
   private func createForegroundView() -> RotatedView {
     let foregroundView = Init(value: RotatedView(frame: .zero)) {
+      $0.backgroundColor = UIColor.init(red:0.87, green:1.00, blue:0.84, alpha:1.0)
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
