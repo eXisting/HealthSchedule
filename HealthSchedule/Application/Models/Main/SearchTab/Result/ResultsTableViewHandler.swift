@@ -33,7 +33,14 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return data[section].getNumberOfRows()
+    let sectionData = data[section]
+    
+    var totalNumberOfRows = 0
+    for rowIndex in 0..<sectionData.getNumberOfRows() {
+      totalNumberOfRows += sectionData.rows[rowIndex].userIds.count
+    }
+    
+    return totalNumberOfRows
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -63,18 +70,43 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath) as! SearchResultFoldingCell
+    let itemAndSubsectionIndex = computeItemAndSubsectionIndex(for: indexPath)
     
-    cell.setupCollapsedView(delegate: cellModel.dataSource, dataSource: cellModel.dataSource, identifier: indexPath, onRequestClick: onSendRequest)
-    cell.setupDisplayTime(DateManager.shared.date2String(with: .time, data[indexPath.section].rows[indexPath.row].time, .hour24))
+    let subsectionIndex = itemAndSubsectionIndex.section
+    let itemIndex = itemAndSubsectionIndex.row
     
-    return cell
+    let sectionData = data[indexPath.section]
+    let rowData = sectionData.rows[subsectionIndex]
+    
+    if itemIndex < 0 {
+      // Section header
+      let cell = UITableViewCell()
+      cell.selectionStyle = .none
+      cell.textLabel?.text = DateManager.shared.date2String(with: .time, rowData.time, .hour24)
+      return cell
+    } else {
+      // Row Item
+      let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath) as! SearchResultFoldingCell
+      
+      cell.setupCollapsedView(delegate: cellModel.dataSource, dataSource: cellModel.dataSource, identifier: indexPath, onRequestClick: onSendRequest)
+      cell.setupDisplayTime("UserID: \(rowData.userIds[itemIndex])")
+      
+      return cell
+    }
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! SearchResultFoldingCell
+    guard let cell = tableView.cellForRow(at: indexPath) as? SearchResultFoldingCell else {
+      return
+    }
     
-    cellModel.setupProviderCard(with: data[indexPath.section].rows[indexPath.row].userIds[0], for: service, delegate: cell.reloadTableView)
+    let itemAndSubsectionIndex = computeItemAndSubsectionIndex(for: indexPath)
+    let subsectionIndex = itemAndSubsectionIndex.section
+    let itemIndex = itemAndSubsectionIndex.row
+    
+    let userId = data[indexPath.section].rows[subsectionIndex].userIds[itemIndex]
+    
+    cellModel.setupProviderCard(with: userId, for: service, delegate: cell.reloadTableView)
     
     if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
       data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
@@ -90,7 +122,9 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    let cell = cell as! SearchResultFoldingCell
+    guard let cell = cell as? SearchResultFoldingCell else {
+      return
+    }
     
     if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight {
       cell.unfold(false, animated: false, completion:nil)
@@ -109,6 +143,28 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
     }
     
     sendRequestHandler(providerId, bookingTime)
+  }
+  
+  private func computeItemAndSubsectionIndex(for indexPath: IndexPath?) -> IndexPath {
+    var sectionItems = data[Int(indexPath?.section ?? 0)]
+    var itemIndex: Int = indexPath?.row ?? 0
+    var subsectionIndex: Int = 0
+    
+    for i in 0..<sectionItems.getNumberOfRows() {
+      // First row for each section item is header
+      itemIndex -= 1
+      
+      // Check if the item index is within this subsection's items
+      let subsectionItems = sectionItems.rows[i]
+      if itemIndex < subsectionItems.userIds.count {
+        subsectionIndex = i
+        break
+      } else {
+        itemIndex -= subsectionItems.userIds.count
+      }
+    }
+    
+    return IndexPath(row: itemIndex, section: subsectionIndex)
   }
 }
 

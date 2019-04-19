@@ -10,7 +10,7 @@ import UIKit
 import EasyPeasy
 
 class SearchResultView: UIView {
-  static var cellReuseIdentifier = "DemoFoldingCell"
+  static var cellReuseIdentifier = "FoldingCell"
   static var headerReuseIdentifier = "CommonExpandableSection"
 
   private let tableView = UITableView()
