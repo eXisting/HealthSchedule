@@ -134,9 +134,18 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
   
   private func onSendRequest(_ identity: IndexPath) {
-    let providerId = data[identity.section].rows[identity.row].userIds.first!
-    let choosenTime = data[identity.section].rows[identity.row].time
-    let chosenDate = DateManager.shared.stringToDate(data[identity.section].sectionName, format: .date)
+    let subSectionItemIndexPath = computeItemAndSubsectionIndex(for: identity)
+    
+    let section = identity.section
+    let subSection = subSectionItemIndexPath.section
+    let row = subSectionItemIndexPath.row
+    
+    let sectionData = data[identity.section]
+    let rowData = sectionData.rows[subSection]
+    
+    let providerId = rowData.userIds[row]
+    let choosenTime = data[section].rows[subSection].time
+    let chosenDate = DateManager.shared.stringToDate(data[section].sectionName, format: .date)
     
     guard let bookingTime = DateManager.shared.combineDateWithTime(date: chosenDate, time: choosenTime) else {
       fatalError()
