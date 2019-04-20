@@ -81,7 +81,6 @@ class TimetableView: UIView {
     container.alignment = .fill
     
     calendar.scrollDirection = .vertical
-    calendar.appearance.todayColor = .lightGray
     calendar.allowsMultipleSelection = true
   }
 }

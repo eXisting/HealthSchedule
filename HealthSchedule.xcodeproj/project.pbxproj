@@ -691,12 +691,12 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		ED3E96E8226490B800C8F602 /* TimeTable */ = {
+		ED3E96E8226490B800C8F602 /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
 				EDD2A8502239567700B52E68 /* TimetableModel.swift */,
 			);
-			path = TimeTable;
+			path = Timetable;
 			sourceTree = "<group>";
 		};
 		ED3E96E9226490C600C8F602 /* Services */ = {
@@ -1090,6 +1090,7 @@
 		EDD2A8342238021F00B52E68 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				EDD2A84D2239533900B52E68 /* Timetable */,
 				ED3E96DF22647DB000C8F602 /* Result */,
 				EDD2A83A2238029F00B52E68 /* TableView */,
 				EDD2A8362238026C00B52E68 /* SearchView.swift */,
@@ -1100,7 +1101,6 @@
 		EDD2A8352238022D00B52E68 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				EDD2A84D2239533900B52E68 /* Timetable */,
 				EDCFB46322294F0F00A6B56F /* Account */,
 				ED231B43222E755400A80FC9 /* Requests */,
 				EDD2A8342238021F00B52E68 /* Search */,
@@ -1155,7 +1155,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3E96E9226490C600C8F602 /* Services */,
-				ED3E96E8226490B800C8F602 /* TimeTable */,
+				ED3E96E8226490B800C8F602 /* Timetable */,
 				ED3E96E7226490A800C8F602 /* Search */,
 			);
 			path = SearchTab;
