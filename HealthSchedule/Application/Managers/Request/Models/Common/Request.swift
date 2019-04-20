@@ -50,7 +50,7 @@ extension RemoteRequest: Codable {
     id = try container.decode(Int.self, forKey: .id)
     userId = try container.decode(Int.self, forKey: .userId)
     providerService = try container.decode(RemoteProviderService.self, forKey: .providerService)
-    rate = try container.decode(Int.self, forKey: .rate)
+    rate = try? container.decode(Int.self, forKey: .rate)
     description = try container.decode(String.self, forKey: .description)
 
     let dateString = try container.decode(String.self, forKey: .requestAt)
