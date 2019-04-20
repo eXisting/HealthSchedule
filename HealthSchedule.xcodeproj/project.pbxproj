@@ -685,6 +685,7 @@
 		ED3E96E7226490A800C8F602 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				ED3E96E62264906B00C8F602 /* Result */,
 				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
 			);
 			path = Search;
@@ -1156,7 +1157,6 @@
 				ED3E96E9226490C600C8F602 /* Services */,
 				ED3E96E8226490B800C8F602 /* TimeTable */,
 				ED3E96E7226490A800C8F602 /* Search */,
-				ED3E96E62264906B00C8F602 /* Result */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";

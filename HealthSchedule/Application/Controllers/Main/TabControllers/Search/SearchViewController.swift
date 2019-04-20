@@ -83,11 +83,10 @@ extension SearchViewController: SearchPickResponsible {
 
 extension SearchViewController: SearchResponsible {
   func startSearch() {
-//    let searchData = model.getSearchOptions()
-//    if let warningMessage = searchData.errorMessage {
-//      showWarningAlert(message: warningMessage)
-//      return
-//    }
+    if let error = model.validateSearchOptions() {
+      showWarningAlert(message: error)
+      return
+    }
     
     model.startSearch { [weak self] data in
       guard let data = data else {
@@ -96,7 +95,7 @@ extension SearchViewController: SearchResponsible {
       }
       
       DispatchQueue.main.async {
-        self?.navigationController?.present(ResultViewController(data: data, serviceId: 2), animated: true)
+        self?.navigationController?.present(ResultViewController(data: data, serviceId: self!.model.serviceId!), animated: true)
       }
     }
   }

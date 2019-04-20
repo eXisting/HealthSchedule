@@ -40,12 +40,14 @@ class SearchModel {
   }
   
   func startSearch(_ completion: @escaping (RemoteAvailableTimeContainer?) -> Void) {
-    //serviceId!, within: (dateTimeInterval!.startTime, dateTimeInterval!.endTime)) {
     var params: Parser.JsonDictionary = [:]
-    params[AvailableTimeJson.serviceId.rawValue] = String(1)//String(serviceId!)
-    //params[AvailableTimeJson.cityId.rawValue] = String(2)//String(cityId!)
-    params[AvailableTimeJson.dateFrom.rawValue] = DateManager.shared.date2String(with: .date, Date())//DateManager.shared.date2String(with: .date, dateTimeInterval!.startTime)
-    params[AvailableTimeJson.dateTo.rawValue] = DateManager.shared.date2String(with: .date, Date().add(component: .day, value: 1))//DateManager.shared.date2String(with: .date, dateTimeInterval!.endTime)
+    params[AvailableTimeJson.serviceId.rawValue] = String(serviceId!)
+    params[AvailableTimeJson.cityId.rawValue] = String(cityId!)
+    params[AvailableTimeJson.dateFrom.rawValue] = DateManager.shared.date2String(with: .date, dateTimeInterval!.start)
+    
+    if let endDate = dateTimeInterval?.end {
+      params[AvailableTimeJson.dateTo.rawValue] = DateManager.shared.date2String(with: .date, endDate)      
+    }
     
     commonDataRequestController.getAvailableTimesList(params, completion)
   }
