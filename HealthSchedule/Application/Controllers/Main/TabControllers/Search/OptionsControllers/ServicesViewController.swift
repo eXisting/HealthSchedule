@@ -100,7 +100,7 @@ extension ServicesViewController: ModalPickHandling {
     searchBar.text = title
     
     startAnimating(
-      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      CGSize(width: view.frame.width / 1.5, height: view.frame.height * 0.35),
       message: "Searching services...",
       type: NVActivityIndicatorType.orbit,
       color: .white,
