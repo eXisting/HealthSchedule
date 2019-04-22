@@ -7,12 +7,30 @@
 //
 
 import UIKit
+import Presentr
 
 class RequestsView: UIView {
   private let headerView = NavigationHoverHeaderView()
   private let searchButton = UIButton()
   
   let tableView = RequestListTableView()
+  
+  lazy var presenter: Presentr = {
+    let customType = PresentationType.custom(
+      width: .fluid(percentage: 0.8),
+      height: .fluid(percentage: 0.6),
+      center: .center
+    )
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .crossDissolve
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    customPresenter.cornerRadius = 10
+    return customPresenter
+  }()
   
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, refreshDelegate: RefreshingTableView) {
     laidOutViews()

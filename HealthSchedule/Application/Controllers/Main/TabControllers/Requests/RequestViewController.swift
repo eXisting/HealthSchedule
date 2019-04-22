@@ -9,29 +9,15 @@
 import UIKit
 import CoreData
 import Presentr
+import NVActivityIndicatorView
 
-class RequestViewController: UIViewController {
+class RequestViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Requests"
   
   private let mainView = RequestsView()
   private let model = RequestsModel()
   
-  private lazy var presenter: Presentr = {
-    let customType = PresentationType.custom(
-      width: .fluid(percentage: 0.8),
-      height: .fluid(percentage: 0.6),
-      center: .center
-    )
-    
-    let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .crossDissolve
-    customPresenter.dismissTransitionType = .crossDissolve
-    customPresenter.roundCorners = true
-    customPresenter.backgroundColor = .lightGray
-    customPresenter.backgroundOpacity = 0.5
-    customPresenter.cornerRadius = 10
-    return customPresenter
-  }()
+  private var activityIndicator: NVActivityIndicatorView!
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
@@ -40,6 +26,7 @@ class RequestViewController: UIViewController {
   override func loadView() {
     super.loadView()
     view = mainView
+    activityIndicator = NVActivityIndicatorView(frame: view.frame, type: NVActivityIndicatorType.ballPulse, color: .orange, padding: 16)
   }
   
   override func viewDidLoad() {
@@ -68,6 +55,14 @@ class RequestViewController: UIViewController {
   
   private func onInnerActionButtonCallback() {
     dismiss(animated: true)
+    
+    startAnimating(
+      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      message: "Refreshing...",
+      type: .ballPulse,
+      color: .white,
+      padding: 16
+    )
   }
 }
 
@@ -89,7 +84,7 @@ extension RequestViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath), onInnerActionButtonCallback)
-    customPresentViewController(presenter, viewController: controller, animated: true)
+    customPresentViewController(mainView.presenter, viewController: controller, animated: true)
   }
   
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -173,5 +168,6 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     mainView.tableView.endUpdates()
+    stopAnimating()
   }
 }
