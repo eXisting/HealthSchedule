@@ -43,6 +43,8 @@ class RequestViewController: UIViewController {
     
     DataBaseManager.shared.setFrcDelegate(for: .request, delegate: self)
     
+    model.errorHandling = self
+    
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
   }
@@ -77,6 +79,14 @@ extension RequestViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath), onInnerActionButtonCallback)
     customPresentViewController(presenter, viewController: controller, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    let request = DataBaseManager.shared.requestsResultController.object(at: indexPath)
+    
+    let status = request.status2RequestStatusName()
+    
+    return (status == .rejected || status == .done) ? UITableViewCell.EditingStyle.delete : .none
   }
 }
 

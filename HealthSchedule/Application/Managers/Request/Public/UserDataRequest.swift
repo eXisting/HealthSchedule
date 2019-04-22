@@ -38,6 +38,7 @@ protocol UserDataUpdating {
   func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void)
   
+  func deleteRequest(id: Int, _ completion: @escaping (String) -> Void)
   func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   func makeRequests(toProviderWith collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
 }
@@ -99,6 +100,20 @@ extension UserDataRequest: UserDataUpdating {
   
   func makeRequests(toProviderWith collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
     requestsManager.postAsync(to: Endpoints.userRequests.rawValue, as: .post, collectedData, RequestManager.sessionToken.asParams()) {
+      data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func deleteRequest(id: Int, _ completion: @escaping (String) -> Void) {
+    let endpoint = "\(Endpoints.providerRequests.rawValue)/\(id)"
+    
+    requestsManager.postAsync(to: endpoint, as: .delete, nil, RequestManager.sessionToken.asParams()) {
       data, response in
       if let error = response.error {
         completion(error)
@@ -204,8 +219,8 @@ extension UserDataRequest: AuthenticationProviding {
   }
   
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
-    let postBody = ["username": "provider@example.org", "password": password]
-//    let postBody = ["username": login, "password": password]
+//    let postBody = ["username": "provider@example.org", "password": password]
+    let postBody = ["username": login, "password": password]
     requestsManager.signIn(userData: postBody) {
       [weak self] (user, response) in
       guard let remoteUser = user else {

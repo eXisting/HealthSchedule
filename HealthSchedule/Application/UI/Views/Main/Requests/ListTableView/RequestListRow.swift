@@ -32,6 +32,10 @@ class RequestListRow: UITableViewCell {
     self.visitedDate.text = visitedDate
     self.statusLabel.text = status.rawValue
     
+    status2Color(status)
+  }
+  
+  private func status2Color(_ status: RequestStatusName) {
     var statusColor: UIColor
     
     switch status {

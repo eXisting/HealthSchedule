@@ -56,6 +56,11 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
+    if requestList.isEmpty {
+      deleteAllRequests(context: workingContext)
+      return
+    }
+    
     let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: workingContext)
     
     for remoteRequest in requestList {
@@ -351,6 +356,22 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     workingContext.processPendingChanges()
     saveContext(workingContext)
+  }
+  
+  func deleteAllRequests(context: NSManagedObjectContext? = nil) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Request.fetchRequest()
+    
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    
+    do {
+      try workingContext.execute(deleteRequest)
+      saveContext(workingContext)
+    } catch {
+      print ("Error while cleaning Core Data: \(error.localizedDescription)")
+    }
+
   }
   
   func deleteAllRecords(context: NSManagedObjectContext? = nil) {
