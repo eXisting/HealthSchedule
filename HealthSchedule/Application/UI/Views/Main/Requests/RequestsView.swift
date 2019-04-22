@@ -26,8 +26,8 @@ class RequestsView: UIView {
     customPresenter.transitionType = .crossDissolve
     customPresenter.dismissTransitionType = .crossDissolve
     customPresenter.roundCorners = true
-    customPresenter.backgroundColor = .lightGray
-    customPresenter.backgroundOpacity = 0.5
+    customPresenter.backgroundColor = .black
+    customPresenter.backgroundOpacity = 0.7
     customPresenter.cornerRadius = 10
     return customPresenter
   }()

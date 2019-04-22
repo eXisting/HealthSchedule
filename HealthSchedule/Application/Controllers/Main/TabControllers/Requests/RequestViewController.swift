@@ -17,8 +17,6 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
   private let mainView = RequestsView()
   private let model = RequestsModel()
   
-  private var activityIndicator: NVActivityIndicatorView!
-  
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
@@ -26,7 +24,6 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
   override func loadView() {
     super.loadView()
     view = mainView
-    activityIndicator = NVActivityIndicatorView(frame: view.frame, type: NVActivityIndicatorType.ballPulse, color: .orange, padding: 16)
   }
   
   override func viewDidLoad() {
