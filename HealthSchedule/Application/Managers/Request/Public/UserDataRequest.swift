@@ -81,14 +81,9 @@ extension UserDataRequest: UserDataUpdating {
   }
   
   func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
-    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
-      fatalError()
-    }
+    let endpoint = "\(Endpoints.providerRequests.rawValue)/\(id)"
     
-    let endpoint = Int(user.roleId) == UserType.client.rawValue ? Endpoints.userRequests : Endpoints.providerRequests
-    let route = "\(endpoint)/\(id)"
-    
-    requestsManager.postAsync(to: route, as: .put, collectedData, RequestManager.sessionToken.asParams()) {
+    requestsManager.postAsync(to: endpoint, as: .put, collectedData, RequestManager.sessionToken.asParams()) {
       [weak self] serverData, response in
       
       if let error = response.error {

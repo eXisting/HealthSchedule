@@ -101,13 +101,13 @@ struct ReqeustStatus {
   static func statusValue2RequestStatusName(value: Int) -> RequestStatusName {
     switch value {
     case 1:
-      return .rejected
-    case 2:
       return .done
+    case 2:
+      return .rejected
     case 3:
-      return .pending
-    case 4:
       return .accepted
+    case 4:
+      return .pending
     default:
       return .unknown
     }
@@ -115,13 +115,13 @@ struct ReqeustStatus {
   
   static func statusName2RValue(value: RequestStatusName) -> Int {
     switch value {
+    case .accepted:
+      return 3
     case .rejected:
       return 2
-    case .done:
-      return 4
     case .pending:
-      return 3
-    case .accepted:
+      return 4
+    case .done:
       return 1
     default:
       return 5

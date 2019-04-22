@@ -13,7 +13,13 @@ class RequestsModel {
   let dataSource = RequestsDataSource()
   
   func loadRequests(_ callback: @escaping (String) -> Void) {
-    userRequestController.getRequests(completion: callback)
+    userRequestController.getRequests { response in
+      do {
+        try DataBaseManager.shared.requestsResultController.performFetch()
+        callback(response)
+      }
+      catch { callback(error.localizedDescription) }
+    }
   }
 }
 
