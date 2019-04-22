@@ -154,6 +154,7 @@
 		EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD262201F21700E38879 /* ProviderService.swift */; };
 		EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */; };
 		EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3CD2C220304DA00E38879 /* DateManager.swift */; };
+		EDDCBEDD226E026300FD5DA5 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDCBEDC226E026300FD5DA5 /* SearchDataSource.swift */; };
 		EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */; };
 		EDE03ED42252394000DBAA0F /* RoleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED32252394000DBAA0F /* RoleExtensions.swift */; };
 		EDE03ED62252494500DBAA0F /* RequestStatusExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE03ED52252494500DBAA0F /* RequestStatusExtension.swift */; };
@@ -315,6 +316,7 @@
 		EDD3CD262201F21700E38879 /* ProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderService.swift; sourceTree = "<group>"; };
 		EDD3CD2A2201F3FD00E38879 /* ScheduleDateException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateException.swift; sourceTree = "<group>"; };
 		EDD3CD2C220304DA00E38879 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		EDDCBEDC226E026300FD5DA5 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		EDE03ED022521DE800DBAA0F /* RequestCardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardContainerView.swift; sourceTree = "<group>"; };
 		EDE03ED32252394000DBAA0F /* RoleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleExtensions.swift; sourceTree = "<group>"; };
 		EDE03ED52252494500DBAA0F /* RequestStatusExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusExtension.swift; sourceTree = "<group>"; };
@@ -693,6 +695,7 @@
 			children = (
 				ED3E96E62264906B00C8F602 /* Result */,
 				EDD2A83B2238042E00B52E68 /* SearchModel.swift */,
+				EDDCBEDC226E026300FD5DA5 /* SearchDataSource.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1390,6 +1393,7 @@
 				ED98CE462243997600B95696 /* RequestCardImageRow.swift in Sources */,
 				ED3E96CF225F387B00C8F602 /* ProfessionsViewController.swift in Sources */,
 				DBE4886F223AD2560096F7D7 /* AccountNavigationItem.swift in Sources */,
+				EDDCBEDD226E026300FD5DA5 /* SearchDataSource.swift in Sources */,
 				DB0B7C77225644F10035C593 /* HourRowHeader.swift in Sources */,
 				EDE03ED122521DE800DBAA0F /* RequestCardContainerView.swift in Sources */,
 				ED44831C22086FF300BE8EF0 /* AuthMainView.swift in Sources */,

@@ -9,8 +9,9 @@
 import UIKit
 import Presentr
 import UIEmptyState
+import NVActivityIndicatorView
 
-class ServicesViewController: UITableViewController {
+class ServicesViewController: UITableViewController, NVActivityIndicatorViewable {
   private let titleName = "Services"
   
   private let presenter: Presentr = {
@@ -97,9 +98,20 @@ extension ServicesViewController: ModalPickHandling {
   func picked(id: Int, title: String) {
     model.cityId = id
     searchBar.text = title
+    
+    startAnimating(
+      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      message: "Searching services...",
+      type: NVActivityIndicatorType.orbit,
+      color: .white,
+      padding: 16
+    )
+    
     model.startLoadServices {
       [weak self] in
       DispatchQueue.main.async {
+        self?.stopAnimating()
+
         self?.tableView.reloadData()
         self?.reloadEmptyState()
       }

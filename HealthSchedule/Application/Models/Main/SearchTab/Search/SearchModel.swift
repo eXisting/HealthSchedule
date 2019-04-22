@@ -18,14 +18,11 @@ class SearchModel {
   private let commonDataRequestController = CommonDataRequest()
   private let databaseManager = DataBaseManager.shared
   
+  let dataSource = SearchDataSource()
+  
   var dateTimeInterval: TimetableView.DateTimeInterval?
   var serviceId: Int?
   var cityId: Int?
-  
-  var searchOptions = [
-    SearchOptionKey.service,
-    SearchOptionKey.dateTime
-  ]
   
   func validateSearchOptions() -> String? {
     guard let _ = serviceId else {
