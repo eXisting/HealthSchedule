@@ -19,7 +19,7 @@ class RequestViewController: UIViewController {
   private lazy var presenter: Presentr = {
     let customType = PresentationType.custom(
       width: .fluid(percentage: 0.8),
-      height: .fluid(percentage: 0.5),
+      height: .fluid(percentage: 0.6),
       center: .center
     )
     
@@ -52,6 +52,10 @@ class RequestViewController: UIViewController {
       showWarningAlert(message: response)
     }
   }
+  
+  private func onInnerActionButtonCallback() {
+    dismiss(animated: true)
+  }
 }
 
 // MARK: -Extensions
@@ -71,7 +75,7 @@ extension RequestViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath))
+    let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath), onInnerActionButtonCallback)
     customPresentViewController(presenter, viewController: controller, animated: true)
   }
 }

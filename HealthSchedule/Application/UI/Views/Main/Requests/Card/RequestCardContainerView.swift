@@ -21,8 +21,8 @@ class RequestCardContainerView: UIView {
   private var onAcceptClickHandler: (() -> Void)?
   private var onDeclineClickHandler: (() -> Void)?
 
-  func setup(hasActions: Bool, role: Role) {
-    buildHierachy(hasActions, role)
+  func setup(actionsCount: Int, role: Role) {
+    buildHierachy(actionsCount, role)
     customizeViews()
   }
   
@@ -38,8 +38,7 @@ class RequestCardContainerView: UIView {
   }
   
   func laidOutViews() {
-    actionsBackground.addBorder(side: .top, thickness: 2, color: .lightGray)
-    actionsBackground.addBorder(side: .bottom, thickness: 2, color: .lightGray)
+    actionsBackground.addBorder(side: .top, thickness: 0.5, color: .lightGray)
   }
   
   @objc private func onAcceptClick() {
@@ -50,7 +49,7 @@ class RequestCardContainerView: UIView {
     onDeclineClickHandler?()
   }
 
-  private func buildHierachy(_ hasActions: Bool, _ role: Role) {
+  private func buildHierachy(_ actionsCount: Int, _ role: Role) {
     addSubview(container)
     
     container.translatesAutoresizingMaskIntoConstraints = false
@@ -58,14 +57,16 @@ class RequestCardContainerView: UIView {
 
     container.addArrangedSubview(tableView)
     
-    if hasActions {
+    if actionsCount > 0 {
       actionsBlock = UIStackView()
       container.addArrangedSubview(actionsBlock!)
       
       declineButton = UIButton(type: UIButton.ButtonType.roundedRect)
       actionsBlock!.addArrangedSubview(declineButton!)
       
-      processUserType(role)
+      if actionsCount > 1 {
+        processUserType(role)
+      }
       
       actionsBackground.backgroundColor = .white
       actionsBlock?.addBackgroundView(actionsBackground)
@@ -93,8 +94,8 @@ class RequestCardContainerView: UIView {
     acceptButton?.setTitle("ACCEPT", for: .normal)
     declineButton?.setTitle("DECLINE", for: .normal)
     
-    acceptButton?.setTitleColor(.green, for: .normal)
-    declineButton?.setTitleColor(.red, for: .normal)
+    acceptButton?.setTitleColor(.blue, for: .normal)
+    declineButton?.setTitleColor(.black, for: .normal)
   }
   
   private func processUserType(_ role: Role) {

@@ -12,19 +12,22 @@ class RequestCardViewController: UIViewController {
   private let mainView = RequestCardContainerView()
   private var model: RequestCardModel!
   
+  private var completion: (() -> Void)!
+  
   override func loadView() {
     super.loadView()
     view = mainView
   }
   
-  convenience init(_ request: Request) {
+  convenience init(_ request: Request, _ completion: @escaping () -> Void) {
     self.init()
+    self.completion = completion
     model = RequestCardModel(request: request)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mainView.setup(hasActions: model.isRequestHasActions(), role: model.getCurrentUserRole())
+    mainView.setup(actionsCount: model.getActionsCount(), role: model.getCurrentUserRole())
     mainView.tableView.setup(delegate: self, dataSource: model.dataSource)
     mainView.setup(acceptHandler: onAccept, declineHandler: onDecline)
   }
@@ -36,10 +39,12 @@ class RequestCardViewController: UIViewController {
   
   @objc func onAccept() {
     model.updateRequest(status: .accepted)
+    completion()
   }
   
   @objc func onDecline() {
     model.updateRequest(status: .rejected)
+    completion()
   }
 }
 

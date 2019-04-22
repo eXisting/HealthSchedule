@@ -91,7 +91,9 @@ extension UserDataRequest: UserDataUpdating {
         return
       }
       
-      self?.getRequest(id) { innerResponse in completion(innerResponse) }
+      self?.getRequest(id) { innerResponse in
+        completion(innerResponse)
+      }
     }
   }
   
@@ -177,7 +179,7 @@ extension UserDataRequest: CommonDataRequesting {
     }
     
     let endpoint = Int(user.roleId) == UserType.client.rawValue ? Endpoints.userRequests : Endpoints.providerRequests
-    let route = "\(endpoint)/\(id)"
+    let route = "\(endpoint.rawValue)/\(id)"
     
     requestsManager.getAsync(for: RemoteRequest.self, from: route, RequestManager.sessionToken.asParams()) {
       [weak self] element, response in

@@ -22,9 +22,16 @@ class RequestCardModel {
     dataSource.imageProcessing = loadImage
   }
   
-  func isRequestHasActions() -> Bool {
+  func getActionsCount() -> Int {
     let requestStatus = ReqeustStatus.statusValue2RequestStatusName(value: Int(request.status))
-    return requestStatus == .pending || requestStatus == .accepted
+    
+    if requestStatus == .pending {
+      return 2
+    } else if requestStatus == .accepted {
+      return 1
+    }
+    
+    return 0
   }
   
   func getCurrentUserRole() -> Role {
