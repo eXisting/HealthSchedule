@@ -36,6 +36,7 @@
 		ED10DB362269F14F00234B27 /* CommonExpandableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */; };
 		ED15159B226879D400FF44F6 /* ProviderSearchViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15159A226879D400FF44F6 /* ProviderSearchViewDataSource.swift */; };
 		ED1B8E03226DB03E00E12EAC /* RequestCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B8E02226DB03E00E12EAC /* RequestCardDataSource.swift */; };
+		ED1B8E05226DECD700E12EAC /* RequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B8E04226DECD700E12EAC /* RequestsView.swift */; };
 		ED1ED01A21FF199100141CF5 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01921FF199100141CF5 /* City.swift */; };
 		ED1ED01E21FF2A1500141CF5 /* XibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */; };
 		ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ED02121FF34B700141CF5 /* RequestManager.swift */; };
@@ -197,6 +198,7 @@
 		ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExpandableSection.swift; sourceTree = "<group>"; };
 		ED15159A226879D400FF44F6 /* ProviderSearchViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSearchViewDataSource.swift; sourceTree = "<group>"; };
 		ED1B8E02226DB03E00E12EAC /* RequestCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardDataSource.swift; sourceTree = "<group>"; };
+		ED1B8E04226DECD700E12EAC /* RequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsView.swift; sourceTree = "<group>"; };
 		ED1ED01921FF199100141CF5 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		ED1ED01D21FF2A1500141CF5 /* XibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibLoad.swift; sourceTree = "<group>"; };
 		ED1ED02121FF34B700141CF5 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 			children = (
 				EDE03ECF22521DD200DBAA0F /* Card */,
 				ED231B49222E7A1C00A80FC9 /* ListTableView */,
+				ED1B8E04226DECD700E12EAC /* RequestsView.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1475,6 +1478,7 @@
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,
 				ED7359122254C4D7006C318C /* ProviderServiceCell.swift in Sources */,
 				ED44830C2204A23400BE8EF0 /* Address.swift in Sources */,
+				ED1B8E05226DECD700E12EAC /* RequestsView.swift in Sources */,
 				ED3E96D2225F39F300C8F602 /* PasswordView.swift in Sources */,
 				DB0B7C68225644F10035C593 /* ScheduleViewController.swift in Sources */,
 				EDD2A8472239191E00B52E68 /* TimetableViewController.swift in Sources */,

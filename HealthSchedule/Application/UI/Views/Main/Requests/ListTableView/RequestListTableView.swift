@@ -11,12 +11,12 @@ import UIKit
 class RequestListTableView: UITableView {
   private let customRefreshControl = UIRefreshControl()
   
-  var refreshDelegate: RefreshingTableView?
+  private var refreshDelegate: RefreshingTableView?
   
   static let cellIdentifier = "RequestRow"
   static let sectionIdentifier = "RequestListSection"
 
-  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, refreshDelegate: RefreshingTableView) {
     self.delegate = delegate
     self.dataSource = dataSource
   

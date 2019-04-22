@@ -13,7 +13,7 @@ import Presentr
 class RequestViewController: UIViewController {
   private let titleName = "Requests"
   
-  private let mainView = RequestListTableView()
+  private let mainView = RequestsView()
   private let model = RequestsModel()
   
   private lazy var presenter: Presentr = {
@@ -33,6 +33,10 @@ class RequestViewController: UIViewController {
     return customPresenter
   }()
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   override func loadView() {
     super.loadView()
     view = mainView
@@ -45,8 +49,15 @@ class RequestViewController: UIViewController {
     
     model.errorHandling = self
     
-    mainView.setup(delegate: self, dataSource: model.dataSource)
-    mainView.refreshDelegate = self
+    mainView.setup(delegate: self, dataSource: model.dataSource, refreshDelegate: self)
+    
+    setupNavigationItem()
+  }
+  
+  private func setupNavigationItem() {
+    let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+    navigationController?.navigationBar.titleTextAttributes = textAttributes
+    navigationItem.title = titleName
   }
   
   private func onRequestsLoaded(response: String) {
@@ -112,7 +123,7 @@ extension RequestViewController: ErrorShowable {
 
 extension RequestViewController: NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    mainView.beginUpdates()
+    mainView.tableView.beginUpdates()
   }
   
   func controller(
@@ -125,17 +136,17 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
     switch (type) {
     case .insert:
       if let indexPath = newIndexPath {
-        mainView.insertRows(at: [indexPath], with: .fade)
+        mainView.tableView.insertRows(at: [indexPath], with: .fade)
       }
       break;
     case .delete:
       if let indexPath = indexPath {
-        mainView.deleteRows(at: [indexPath], with: .fade)
+        mainView.tableView.deleteRows(at: [indexPath], with: .fade)
       }
       break;
     case .update:
       if let indexPath = indexPath {
-        guard let cell = mainView.cellForRow(at: indexPath) as? RequestListRow,
+        guard let cell = mainView.tableView.cellForRow(at: indexPath) as? RequestListRow,
           let requestObject = anObject as? Request else { return }
         
         cell.populateCell(
@@ -149,11 +160,11 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
       
     case .move:
       if let indexPath = indexPath {
-        mainView.deleteRows(at: [indexPath], with: .fade)
+        mainView.tableView.deleteRows(at: [indexPath], with: .fade)
       }
       
       if let newIndexPath = newIndexPath {
-        mainView.insertRows(at: [newIndexPath], with: .fade)
+        mainView.tableView.insertRows(at: [newIndexPath], with: .fade)
       }
       break;
       
@@ -161,6 +172,6 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
   }
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    mainView.endUpdates()
+    mainView.tableView.endUpdates()
   }
 }
