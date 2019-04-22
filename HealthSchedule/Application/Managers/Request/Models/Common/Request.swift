@@ -21,7 +21,8 @@ enum RequestJsonFields: String, CodingKey {
 
 struct RemoteRequest {
   var id: Int
-  var userId: Int
+  var customerId: Int
+  var providerId: Int
   
   var rate: Int?
   var description: String
@@ -29,13 +30,16 @@ struct RemoteRequest {
   
   var status: ReqeustStatus
   var providerService: RemoteProviderService
+  
+  var customer: RemoteUser?
+  var isUserSide: Bool = true
 }
 
 extension RemoteRequest: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: RequestJsonFields.self)
     try container.encode(id, forKey: .id)
-    try container.encode(userId, forKey: .userId)
+    try container.encode(customerId, forKey: .userId)
     try container.encode(providerService, forKey: .providerService)
     try container.encode(status.value, forKey: .status)
     try container.encode(rate, forKey: .rate)
@@ -48,8 +52,7 @@ extension RemoteRequest: Codable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: RequestJsonFields.self)
     id = try container.decode(Int.self, forKey: .id)
-    userId = try container.decode(Int.self, forKey: .userId)
-    providerService = try container.decode(RemoteProviderService.self, forKey: .providerService)
+    customerId = try container.decode(Int.self, forKey: .userId)
     rate = try? container.decode(Int.self, forKey: .rate)
     description = try container.decode(String.self, forKey: .description)
 
@@ -58,6 +61,15 @@ extension RemoteRequest: Codable {
     
     let statusInt = try container.decode(Int.self, forKey: .status)
     status = ReqeustStatus(statusInt)
+    
+    providerService = try container.decode(RemoteProviderService.self, forKey: .providerService)
+    customer = providerService.customer
+    
+    if customer != nil {
+      isUserSide = false
+    }
+    
+    providerId = providerService.providerId
   }
 }
 

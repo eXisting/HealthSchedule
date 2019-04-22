@@ -33,8 +33,10 @@ class RequestCardProviderRowModel: RequestRowDataContaining {
   var rowHeight: CGFloat = 90
   
   init(request: Request) {
-    data = request.providerService?.provider?.name ?? "Unknown name"
+    let userToDisplay = request.isUserSide ? request.provider : request.customer
+    
+    data = userToDisplay?.name ?? "Unknown name"
     additionalData = request.providerService?.provider?.phone
-    imageUrl = request.providerService?.provider?.image?.url
+    imageUrl = userToDisplay?.image?.url
   }
 }

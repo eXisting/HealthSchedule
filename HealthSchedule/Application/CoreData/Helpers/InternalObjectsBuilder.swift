@@ -95,24 +95,33 @@ class InternalObjectsBuilder {
     request.requestDescription = remote.description
     request.requestedAt = remote.requestAt
     request.status = Int16(remote.status.value)
-    request.userId = Int16(remote.userId)
+    request.customerId = Int16(remote.customerId)
     request.serviceId = Int16(remote.providerService.service.id)
+    request.isUserSide = remote.isUserSide
     
     if let rate = remote.rate {
       request.rate = Int16(rate)
     }
     
+    let attachedCustomer = fetchHandler.getUser(byId: remote.customerId, context: context)
+    let attachedProvider = fetchHandler.getUser(byId: remote.providerId, context: context)
+
+    if let customer = attachedCustomer {
+      request.customer = customer
+      customer.addToCustomerRequests(request)
+    }
+    
+    request.provider = attachedProvider
+    attachedProvider?.addToProviderRequests(request)
+
     let providerService = fetchHandler.getProviderService(by: remote.providerService.id, context: context)
     let generalService = fetchHandler.getService(by: remote.providerService.service.id, context: context)
-    let attachedUser = fetchHandler.getUser(byId: remote.userId, context: context)
-
+    
     request.providerService = providerService
     request.service = generalService
-    request.user = attachedUser
-
+    
     providerService?.addToRequest(request)
     generalService?.addToRequest(request)
-    attachedUser?.addToRequest(request)
   }
   
   func build(providerService: ProviderService, _ remote: RemoteProviderService, context: NSManagedObjectContext) {
@@ -125,12 +134,13 @@ class InternalObjectsBuilder {
     providerService.duration = remote.interval
     
     let generalService = fetchHandler.getService(by: remote.service.id, context: context)
-    let provider = fetchHandler.getUser(byId: Int(providerService.providerId), context: context)
+    
+    if let provider = fetchHandler.getUser(byId: Int(providerService.providerId), context: context) {
+      providerService.provider = provider
+      provider.addToProviderService(providerService)
+    }
     
     providerService.service = generalService
-    providerService.provider = provider
-    
     generalService?.addToProviderService(providerService)
-    provider?.addToProviderService(providerService)
   }
 }

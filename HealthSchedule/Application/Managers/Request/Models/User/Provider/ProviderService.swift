@@ -34,27 +34,12 @@ struct RemoteProviderService {
   
   var address: RemoteAddress
   var service: RemoteService
+  
   var provider: RemoteUser?
+  var customer: RemoteUser?
 }
 
-extension RemoteProviderService: Codable {
-  func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: ProviderServiceJsonFields.self)
-    try container.encode(id, forKey: .id)
-    try container.encode(providerId, forKey: .providerId)
-    try container.encode(service, forKey: .service)
-    try container.encode(address, forKey: .address)
-    try container.encode(price, forKey: .price)
-    try container.encode(description, forKey: .description)
-    
-    if provider != nil {
-      try container.encode(provider, forKey: .provider)
-    }
-    
-    let intervalDateString = DateManager.shared.date2String(with: .time, interval, .hour24)
-    try container.encode(intervalDateString, forKey: .interval)
-  }
-  
+extension RemoteProviderService: Codable {  
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ProviderServiceJsonFields.self)
     id = try container.decode(Int.self, forKey: .id)
@@ -66,7 +51,7 @@ extension RemoteProviderService: Codable {
     provider = try? container.decode(RemoteUser.self, forKey: .provider)
 
     if provider == nil {
-      provider = try? container.decode(RemoteUser.self, forKey: .user)
+      customer = try? container.decode(RemoteUser.self, forKey: .user)
     }
     
     let dateString = try container.decode(String.self, forKey: .interval)

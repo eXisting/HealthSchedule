@@ -19,8 +19,8 @@ protocol CoreDataRequestsPerformable {
   
   func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext?)
   func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext?)
-  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext?)
   
+  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext?)
   // Delete
   
   func delete(with id: NSManagedObjectID, context: NSManagedObjectContext?)
@@ -73,6 +73,10 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
           // Insert
         else {
           insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
+          
+          if let customer = remoteRequest.customer {
+            insertUpdateUsers(from: [customer], context: workingContext)
+          }
           
           let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
           builder.build(request: request, remoteRequest, context: workingContext)
@@ -299,7 +303,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
-  func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext?) {
+  func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let dayEntityObject = NSEntityDescription.entity(forEntityName: scheduleDayTemplateEntity, in: workingContext)

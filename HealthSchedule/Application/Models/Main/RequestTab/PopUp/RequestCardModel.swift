@@ -13,13 +13,13 @@ class RequestCardModel {
   private let requestManager: UserDataUpdating = UserDataRequest()
   private var request: Request
   
-  let dataSource = RequestCardDataSource()
+  var dataSource: RequestCardDataSource
   
   init(request: Request) {
     self.request = request
-    dataSource.imageProcessing = loadImage
     
-    procceedRequest()
+    dataSource = RequestCardDataSource(request)
+    dataSource.imageProcessing = loadImage
   }
   
   func isRequestHasActions() -> Bool {
@@ -52,15 +52,7 @@ class RequestCardModel {
   }
   
   subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
-    return dataSource.data[forSectionIndex]
-  }
-  
-  private func procceedRequest() {
-    dataSource.data = [
-      RequestCardProviderSectionModel(request: request),
-      RequestCardScheduleSectionModel(request: request),
-      RequestCardInfoSectionModel(request: request)
-    ]
+    return dataSource[forSectionIndex]
   }
   
   private func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
@@ -75,44 +67,5 @@ class RequestCardModel {
       
       completion(image)
     }
-  }
-}
-
-class RequestCardDataSource: NSObject, UITableViewDataSource {
-  fileprivate typealias ProcessingFunction = (String?, @escaping (UIImage) -> Void) -> Void
-  
-  fileprivate var data: [RequestSectionDataContaining] = []
-  fileprivate var imageProcessing: ProcessingFunction!
-  
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return data.count
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return data[section].numberOfRows
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let rowData = data[indexPath.section][indexPath.row]
-    
-    if let providerRowData = rowData as? RequestCardProviderRowModel {
-      let cell = tableView.dequeueReusableCell(withIdentifier: RequestCardTableView.cellIdentifier, for: indexPath) as! RequestCardImageRow
-      cell.populateCell(name: providerRowData.data)
-
-      imageProcessing(providerRowData.imageUrl) { image in
-        DispatchQueue.main.async {
-          cell.photoImage = image
-        }
-      }
-      
-      return cell
-    }
-    
-    let cell = UITableViewCell()
-    cell.textLabel?.text = "\(rowData.title): \(rowData.data)"
-    cell.textLabel?.numberOfLines = 10
-    cell.textLabel?.lineBreakMode = .byWordWrapping
-    cell.selectionStyle = .none
-    return cell
   }
 }
