@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 protocol SearchPickResponsible {
   func pickHandler(from optionControllerWithKey: SearchOptionKey, data: Any)
@@ -16,7 +17,7 @@ protocol SearchResponsible {
   func startSearch()
 }
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Booking"
   
   private let mainView = SearchView()
@@ -35,6 +36,11 @@ class SearchViewController: UIViewController {
     super.viewDidLoad()
     mainView.setup(delegate: self, dataSource: self, searchDelegate: self)
     setupNavigationItem()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    stopAnimating()
   }
   
   private func setupNavigationItem() {
@@ -88,7 +94,17 @@ extension SearchViewController: SearchResponsible {
       return
     }
     
+    startAnimating(
+      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      message: "Searching...",
+      type: NVActivityIndicatorType.orbit,
+      color: .white,
+      padding: 16
+    )
+    
     model.startSearch { [weak self] data in
+      self?.stopAnimating()
+      
       guard let data = data else {
         self?.showWarningAlert(message: "Something wrong with request. Try again later")
         return
