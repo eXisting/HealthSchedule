@@ -12,7 +12,7 @@ class SearchView: UIView {
   private let tableView = SearchTableView()
   
   private let headerView = NavigationHoverHeaderView()
-  private let searchButton = UIButton()
+  private let searchButton = UIButton(type: UIButton.ButtonType.roundedRect)
   
   var searchDelegate: SearchResponsible!
 
@@ -25,7 +25,7 @@ class SearchView: UIView {
     headerView.setup()
     tableView.setup(delegate: delegate, dataSource: dataSource)
     
-    searchButton.addTarget(self, action: #selector(onSearchButtonClick), for: .touchDown)
+    searchButton.addTarget(self, action: #selector(onSearchButtonClick), for: .touchUpInside)
   }
   
   @objc private func onSearchButtonClick() {
