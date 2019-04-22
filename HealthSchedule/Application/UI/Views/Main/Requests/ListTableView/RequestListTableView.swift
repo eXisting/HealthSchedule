@@ -32,6 +32,9 @@ class RequestListTableView: UITableView {
     // Configure Refresh Control
     refreshControl = customRefreshControl
     refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    
+    self.refreshDelegate = refreshDelegate
+    
     customize()
   }
   
