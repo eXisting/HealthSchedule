@@ -144,8 +144,12 @@ extension SearchViewController: UITableViewDelegate {
     }
   }
   
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    return indexPath.section == SearchDataSource.SectionsIndexes.chosenOptions.rawValue ? .delete : .none
+  }
+  
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 10
+    return section == SearchDataSource.SectionsIndexes.chosenOptions.rawValue ? 30 : 10
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

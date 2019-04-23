@@ -18,11 +18,22 @@ class SearchModel {
   
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let commonDataRequestController = CommonDataRequest()
-  let dataSource = SearchDataSource()
+  var dataSource: SearchDataSource
+  
+  init() {
+    dataSource = SearchDataSource()
+    dataSource.deleteHandleFunc = handleChosenOptionDelete
+  }
   
   var dateTimeInterval: TimetableView.DateTimeInterval? {
     didSet {
-      var datesInterval: String = DateManager.shared.date2String(with: .date, dateTimeInterval!.start)
+      guard let interval = dateTimeInterval else {
+        dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.range.rawValue] = ("" as Any)
+        delegate.reloadSections(NSIndexSet(index: SearchDataSource.SectionsIndexes.chosenOptions.rawValue) as IndexSet, with: .automatic)
+        return
+      }
+      
+      var datesInterval: String = DateManager.shared.date2String(with: .date, interval.start)
       if let end = dateTimeInterval?.end {
         datesInterval.append(" - \(DateManager.shared.date2String(with: .date, end))")
       } else { datesInterval.append(" - end of month") }
@@ -36,7 +47,13 @@ class SearchModel {
   
   var serviceId: Int? {
     didSet {
-      let serviceName = DataBaseManager.shared.fetchRequestsHandler.getService(by: serviceId!, context: DataBaseManager.shared.mainContext)!.name!
+      guard let serviceId = serviceId else {
+        dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.service.rawValue] = ("" as Any)
+        delegate.reloadSections(NSIndexSet(index: SearchDataSource.SectionsIndexes.chosenOptions.rawValue) as IndexSet, with: .automatic)
+        return
+      }
+      
+      let serviceName = DataBaseManager.shared.fetchRequestsHandler.getService(by: serviceId, context: DataBaseManager.shared.mainContext)!.name!
       let displayText = "Service: \(serviceName)"
       
       dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.service.rawValue] = (displayText as Any)
@@ -46,7 +63,13 @@ class SearchModel {
   
   var cityId: Int? {
     didSet {
-      let cityName = DataBaseManager.shared.fetchRequestsHandler.getCity(byId: cityId!, context: DataBaseManager.shared.mainContext)!.name!
+      guard let cityId = cityId else {
+        dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.city.rawValue] = ("" as Any)
+        delegate.reloadSections(NSIndexSet(index: SearchDataSource.SectionsIndexes.chosenOptions.rawValue) as IndexSet, with: .automatic)
+        return
+      }
+      
+      let cityName = DataBaseManager.shared.fetchRequestsHandler.getCity(byId: cityId, context: DataBaseManager.shared.mainContext)!.name!
       let displayText = "City: \(cityName)"
       
       dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.city.rawValue] = (displayText as Any)
@@ -60,7 +83,7 @@ class SearchModel {
     }
     
     guard let _ = dateTimeInterval else {
-      return "Choose date and time interval!"
+      return "Choose date interval or start date!"
     }
     
     return nil
@@ -77,5 +100,15 @@ class SearchModel {
     }
     
     commonDataRequestController.getAvailableTimesList(params, completion)
+  }
+  
+  private func handleChosenOptionDelete(_ option: SearchDataSource.ChosenOptionsRows) {
+    switch option {
+    case .city, .service:
+      cityId = nil
+      serviceId = nil
+    case .range:
+      dateTimeInterval = nil
+    }
   }
 }

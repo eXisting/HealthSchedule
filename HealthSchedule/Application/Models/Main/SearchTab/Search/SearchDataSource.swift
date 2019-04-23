@@ -9,11 +9,11 @@
 import UIKit
 
 class SearchDataSource: NSObject, UITableViewDataSource {
+  // note: order is important
   enum SectionsIndexes: Int {
     case searchOptions = 0; case chosenOptions = 1
   }
   
-  // note: order is important
   enum ChosenOptionsRows: Int {
     case service = 0; case city = 1; case range = 2
   }
@@ -22,6 +22,10 @@ class SearchDataSource: NSObject, UITableViewDataSource {
     [SearchOptionKey.service, SearchOptionKey.dateTime],
     ["", "", ""]
   ]
+  
+  var deleteHandleFunc: ((SearchDataSource.ChosenOptionsRows) -> Void)!
+  
+  // MARK: DataSource
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return sectionsData.count
@@ -54,6 +58,7 @@ class SearchDataSource: NSObject, UITableViewDataSource {
       
       defaultCell.textLabel?.text = value
       defaultCell.selectionStyle = .none
+      defaultCell.backgroundColor = UIColor(red: 255, green: 246, blue: 224)
       return defaultCell
     }
     
@@ -61,5 +66,17 @@ class SearchDataSource: NSObject, UITableViewDataSource {
     cell.textLabel?.text = (sectionsData[indexPath.section][indexPath.row] as! SearchOptionKey).rawValue
     cell.selectionStyle = .none
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      var chosenOption = ChosenOptionsRows(rawValue: indexPath.row)!
+      
+      if (sectionsData[indexPath.section][indexPath.row] as! String).isEmpty {
+        chosenOption = .range
+      }
+      
+      deleteHandleFunc(chosenOption)
+    }
   }
 }
