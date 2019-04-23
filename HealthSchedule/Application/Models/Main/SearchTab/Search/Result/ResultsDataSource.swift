@@ -11,10 +11,10 @@ import FoldingCell
 
 class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   private var data: [ResultSectionModel] = []
-  private var cellModel = ProviderSearchViewModel()
+  private var cellModels: [ProviderSearchViewModel]
   
   private var sendRequestHandler: ((Int, Date) -> Void)!
-  
+    
   var delegate: TableViewSectionsReloading!
   var service: Service!
   
@@ -22,6 +22,8 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     self.sendRequestHandler = sendRequestHandler
     
     data = dataModels
+    
+    cellModels = [ProviderSearchViewModel].init(repeating: ProviderSearchViewModel(), count: data.count)
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,7 +90,7 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
       // Row Item
       let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath) as! SearchResultFoldingCell
       
-      cell.setupCollapsedView(delegate: cellModel.dataSource, dataSource: cellModel.dataSource, identifier: indexPath, onRequestClick: onSendRequest)
+      cell.setupCollapsedView(delegate: cellModels[itemIndex].dataSource, dataSource: cellModels[itemIndex].dataSource, identifier: indexPath, onRequestClick: onSendRequest)
       
       if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // isClosed cell
         cell.setupDisplayTime("UserID: \(rowData.userIds[itemIndex])")
@@ -111,7 +113,7 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     cell.isUserInteractionEnabled = false
     
-    cellModel.setupProviderCard(with: userId, for: service) { [weak self] isProcessed in
+    cellModels[itemIndex].setupProviderCard(with: userId, for: service) { [weak self] isProcessed in
       DispatchQueue.main.async {
         if self!.data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
           self!.data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
@@ -137,8 +139,10 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight {
       cell.unfold(false, animated: false, completion:nil)
+      cell.reloadTableView()
     } else {
       cell.unfold(true, animated: false, completion: nil)
+      cell.reloadTableView()
     }
   }
   
