@@ -15,38 +15,38 @@ class ProviderSearchViewModel {
 
   let dataSource = ProviderSearchViewDataSource()
   
-  var onDataProcessed: (() -> Void)?
-  
-  func setupProviderCard(with id: Int, for service: Service, delegate: @escaping () -> Void) {
-    onDataProcessed = delegate
-    
+  func setupProviderCard(with id: Int, for service: Service, _ completion: @escaping (Bool) -> Void) {
     handleProviderServiceLoading(Int(service.id))
-    handleUserLoading(id)
+    handleUserLoading(id, completion)
   }
   
   private func handleProviderServiceLoading(_ serviceId: Int) {
     // TODO: Rewrite backend
   }
   
-  private func handleUserLoading(_ userId: Int) {
+  private func handleUserLoading(_ userId: Int, _ completion: @escaping (Bool) -> Void) {
     if let user = DataBaseManager.shared.fetchRequestsHandler.getUser(byId: userId, context: DataBaseManager.shared.mainContext) {
-      process(user)
+      process(user, completion)
       return
     }
     
     requestManager.getUser(by: userId) { [weak self] response in
       if response != ResponseStatus.success.rawValue {
         print(response)
+        completion(false)
         return
       }
       
       if let user = DataBaseManager.shared.fetchRequestsHandler.getUser(byId: userId, context: DataBaseManager.shared.mainContext) {
-        self?.process(user)
+        self?.process(user, completion)
+        return
       }
+      
+      completion(false)
     }
   }
   
-  private func process(_ user: User) {
+  private func process(_ user: User, _ completion: @escaping (Bool) -> Void) {
     dataSource.data = []
     
     var tableViewData: [Any] = []
@@ -60,6 +60,6 @@ class ProviderSearchViewModel {
     dataSource.data = tableViewData
     dataSource.userPhotoData = user.image?.url
     
-    onDataProcessed?()
+    completion(true)
   }
 }

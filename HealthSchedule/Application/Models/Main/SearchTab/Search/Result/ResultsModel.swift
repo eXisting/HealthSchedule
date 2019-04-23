@@ -12,7 +12,7 @@ class ResultsModel {
   private let requestManager: UserDataUpdating = UserDataRequest()
   private let commonRequestManager = CommonDataRequest()
   
-  var tableViewContentHandler: ResultsTableViewHandler!
+  var tableViewContentHandler: ResultsDataSource!
   var serviceId: Int
   
   private var service: Service!
@@ -27,7 +27,7 @@ class ResultsModel {
       sections.append(.init(day: parsedData.0, dayTimes: parsedData.1))
     }
     
-    tableViewContentHandler = ResultsTableViewHandler(dataModels: sections, sendRequestHandler: sendRequest)
+    tableViewContentHandler = ResultsDataSource(dataModels: sections, sendRequestHandler: sendRequest)
     tableViewContentHandler.service = service
     tableViewContentHandler.delegate = delegate
   }

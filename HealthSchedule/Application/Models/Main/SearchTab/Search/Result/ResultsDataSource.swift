@@ -9,7 +9,7 @@
 import UIKit
 import FoldingCell
 
-class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
+class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   private var data: [ResultSectionModel] = []
   private var cellModel = ProviderSearchViewModel()
   
@@ -89,7 +89,10 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
       let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath) as! SearchResultFoldingCell
       
       cell.setupCollapsedView(delegate: cellModel.dataSource, dataSource: cellModel.dataSource, identifier: indexPath, onRequestClick: onSendRequest)
-      cell.setupDisplayTime("UserID: \(rowData.userIds[itemIndex])")
+      
+      if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // isClosed cell
+        cell.setupDisplayTime("UserID: \(rowData.userIds[itemIndex])")
+      }
       
       return cell
     }
@@ -106,19 +109,25 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
     
     let userId = data[indexPath.section].rows[subsectionIndex].userIds[itemIndex]
     
-    cellModel.setupProviderCard(with: userId, for: service, delegate: cell.reloadTableView)
+    cell.isUserInteractionEnabled = false
     
-    if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
-      data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
-      cell.unfold(true, animated: true, completion: nil)
-    } else { // close cell
-      data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.collapsedHeight)
-      cell.unfold(false, animated: true, completion: nil)
+    cellModel.setupProviderCard(with: userId, for: service) { [weak self] isProcessed in
+      DispatchQueue.main.async {
+        if self!.data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
+          self!.data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
+          cell.unfold(true, animated: true, completion: {
+            cell.isUserInteractionEnabled = true
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+          })
+        } else { // close cell
+          self!.data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.collapsedHeight)
+          cell.unfold(false, animated: true, completion: {
+            cell.isUserInteractionEnabled = true
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+          })
+        }
+      }
     }
-    
-    UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCrossDissolve, animations: {
-      tableView.reloadRows(at: [indexPath], with: .automatic)
-    }, completion: nil)
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -132,6 +141,8 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
       cell.unfold(true, animated: false, completion: nil)
     }
   }
+  
+  // MARK: Handlers
   
   private func onSendRequest(_ identity: IndexPath) {
     let subSectionItemIndexPath = computeItemAndSubsectionIndex(for: identity)
@@ -177,7 +188,7 @@ class ResultsTableViewHandler: NSObject, UITableViewDataSource, UITableViewDeleg
   }
 }
 
-extension ResultsTableViewHandler: ExpandableHeaderViewDelegate {
+extension ResultsDataSource: ExpandableHeaderViewDelegate {
   func toogleExpand(for header: UITableViewHeaderFooterView, section: Int) {
     let expandableHeader = header as! CommonExpandableSection
     

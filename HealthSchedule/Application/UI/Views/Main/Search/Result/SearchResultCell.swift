@@ -24,7 +24,7 @@ class SearchResultFoldingCell: FoldingCell {
     
     setupDisplayLabel()
     
-    itemCount = 4 // used for calculation of the height
+    itemCount = 3 // used for calculation of the height
     
     // super class method configure views
     commonInit()
@@ -56,11 +56,7 @@ class SearchResultFoldingCell: FoldingCell {
   }
   
   override func animationDuration(_ itemIndex: NSInteger, type: AnimationType) -> TimeInterval {
-    if type == .close {
-      return 0.5
-    }
-    
-    return 0.4 // timing animation for each view
+    return 0.005 // timing animation for each view
   }
 }
 
