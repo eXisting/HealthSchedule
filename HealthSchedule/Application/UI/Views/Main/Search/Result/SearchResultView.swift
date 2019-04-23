@@ -17,7 +17,7 @@ class SearchResultView: UIView {
   private let headerView = NavigationHoverHeaderView()
   
   private let tableView = UITableView()
-  private let dismissButton = UIButton()
+  private let dismissButton = UIButton(type: UIButton.ButtonType.roundedRect)
 
   var dismissDelegate: DismissableController?
   
@@ -33,7 +33,7 @@ class SearchResultView: UIView {
     tableView.register(SearchResultFoldingCell.self, forCellReuseIdentifier: SearchResultView.cellReuseIdentifier)
     tableView.register(CommonExpandableSection.self, forHeaderFooterViewReuseIdentifier: SearchResultView.headerReuseIdentifier)
     
-    dismissButton.addTarget(self, action: #selector(onDismissButtonClick), for: .touchDown)
+    dismissButton.addTarget(self, action: #selector(onDismissButtonClick), for: .touchUpInside)
     
     // Remove last underline in table view
     tableView.tableFooterView = UIView(frame: .zero)
