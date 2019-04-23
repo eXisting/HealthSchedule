@@ -59,7 +59,7 @@ class Parser {
   
   class func processAvailableTimes(_ json: Any) -> RemoteAvailableTimeContainer.AvailableDatesSortedArray {
     guard let dict = json as? [String: Any] else {
-      fatalError()
+      return []
     }
     
     var parsedArray: RemoteAvailableTimeContainer.AvailableDatesSortedArray = []
