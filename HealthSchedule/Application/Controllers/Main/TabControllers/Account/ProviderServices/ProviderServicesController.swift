@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 import CoreData
 
 class ProviderServicesController: UIViewController {
@@ -71,7 +72,7 @@ extension ProviderServicesController: UITableViewDelegate {
 
 extension ProviderServicesController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(for: self, "Error", message, .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 

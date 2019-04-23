@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 import NVActivityIndicatorView
 
 protocol SearchPickResponsible {
@@ -111,6 +112,14 @@ extension SearchViewController: SearchResponsible {
         return
       }
       
+      if data.isResponseEmpty() {
+        DispatchQueue.main.async {
+          CDAlertView(title: "Sorry...", message: "There are no bookings available", type: .custom(image: UIImage(named:"Icons/sad-smile")!)).show()
+        }
+        
+        return
+      }
+      
       DispatchQueue.main.async {
         self?.navigationController?.present(ResultViewController(data: data, serviceId: self!.model.serviceId!), animated: true)
       }
@@ -159,10 +168,6 @@ extension SearchViewController: UITableViewDelegate {
 
 extension SearchViewController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(
-      for: self,
-      "Warning",
-      message,
-      .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }

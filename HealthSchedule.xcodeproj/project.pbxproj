@@ -53,7 +53,6 @@
 		ED2AC3F1224B8B2100AB6D9F /* InternalObjectsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */; };
 		ED2AC3F3224B8BD600AB6D9F /* FetchRequestsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */; };
 		ED330C6321EF87B8001019FC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */; };
-		ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6721F0748B001019FC /* AlertHandler.swift */; };
 		ED330C6C21F08536001019FC /* SignUpRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C6B21F08536001019FC /* SignUpRootViewController.swift */; };
 		ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9021F21B35001019FC /* DesignableTextField.swift */; };
 		ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED330C9221F223AE001019FC /* BlurHandler.swift */; };
@@ -216,7 +215,6 @@
 		ED2AC3F0224B8B2100AB6D9F /* InternalObjectsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalObjectsBuilder.swift; sourceTree = "<group>"; };
 		ED2AC3F2224B8BD600AB6D9F /* FetchRequestsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestsHandler.swift; sourceTree = "<group>"; };
 		ED330C6221EF87B8001019FC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
-		ED330C6721F0748B001019FC /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		ED330C6B21F08536001019FC /* SignUpRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootViewController.swift; sourceTree = "<group>"; };
 		ED330C9021F21B35001019FC /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		ED330C9221F223AE001019FC /* BlurHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHandler.swift; sourceTree = "<group>"; };
@@ -1039,7 +1037,6 @@
 		EDCFB450222807CE00A6B56F /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				ED330C6721F0748B001019FC /* AlertHandler.swift */,
 				ED330C9221F223AE001019FC /* BlurHandler.swift */,
 			);
 			path = UI;
@@ -1313,6 +1310,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HealthSchedule/Pods-HealthSchedule-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CDAlertView/CDAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyPeasy/EasyPeasy.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
@@ -1325,6 +1323,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CDAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyPeasy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
@@ -1448,7 +1447,6 @@
 				ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */,
 				ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */,
 				DB0B7C74225644F10035C593 /* Extensions.swift in Sources */,
-				ED330C6821F0748B001019FC /* AlertHandler.swift in Sources */,
 				EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,
 				DB0B7C78225644F10035C593 /* CurrentTimelineAll.swift in Sources */,

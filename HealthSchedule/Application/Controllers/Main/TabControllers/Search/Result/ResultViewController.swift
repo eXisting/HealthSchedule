@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 import FoldingCell
 
 protocol DismissableController {
@@ -36,7 +37,7 @@ class ResultViewController: UIViewController {
 
 extension ResultViewController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(for: self, "Notice", message, .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 

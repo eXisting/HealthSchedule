@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 
 class PasswordViewController: UIViewController {
   private let titleName = "Change password"
@@ -45,7 +46,7 @@ class PasswordViewController: UIViewController {
 
 extension PasswordViewController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(for: self, "Failure", message, .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 

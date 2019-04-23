@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 
 class SignUpRootViewController: UIViewController {
   
@@ -52,11 +53,7 @@ class SignUpRootViewController: UIViewController {
 
 extension SignUpRootViewController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(
-      for: self,
-      "Warning",
-      message,
-      .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 

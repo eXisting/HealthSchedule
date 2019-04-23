@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Presentr
+import CDAlertView
 import NVActivityIndicatorView
 
 class RequestViewController: UIViewController, NVActivityIndicatorViewable {
@@ -109,7 +110,7 @@ extension RequestViewController: RefreshingTableView {
 
 extension RequestViewController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(for: self, "Warning", message, .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 

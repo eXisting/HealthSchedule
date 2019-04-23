@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 import Presentr
 
 class ProviderServiceCardController: UIViewController {
@@ -130,7 +131,7 @@ extension ProviderServiceCardController: UITextFieldDelegate {
 
 extension ProviderServiceCardController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(for: self, "Error", message, .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 

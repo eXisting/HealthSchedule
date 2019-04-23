@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 
 class AuthenticationViewController: UIViewController {
   private var rootNavigation: RootNavigationPresentable!
@@ -64,11 +65,7 @@ class AuthenticationViewController: UIViewController {
 
 extension AuthenticationViewController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(
-      for: self,
-      "Warning",
-      message,
-      .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 

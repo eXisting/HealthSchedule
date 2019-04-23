@@ -39,7 +39,7 @@ struct RemoteAvailableTimeContainer {
     return data.first(where: { return $0.0 == date } )?.1 ?? []
   }
   
-  func printAllKeys() {
-    data.forEach({print($0.0)})
+  func isResponseEmpty() -> Bool {
+    return data.isEmpty
   }
 }

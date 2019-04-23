@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 import FSCalendar
 
 class TimetableViewController: UIViewController {
@@ -64,10 +65,6 @@ extension TimetableViewController: FSCalendarDelegate {
 
 extension TimetableViewController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(
-      for: self,
-      "Warning",
-      message,
-      .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }

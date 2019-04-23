@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 
 protocol TableViewSectionsReloading {
   func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation)
@@ -83,6 +84,6 @@ extension ScheduleEventModalController: TableViewMasteringDelegate {
 
 extension ScheduleEventModalController: ErrorShowable {
   func showWarningAlert(message: String) {
-    AlertHandler.ShowAlert(for: self, "Error", message, .alert)
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
