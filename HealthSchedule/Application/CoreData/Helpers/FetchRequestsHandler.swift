@@ -70,7 +70,7 @@ class FetchRequestsHandler {
     }
   }
   
-  func getCtiy(byId id: Int, context: NSManagedObjectContext? = nil) -> City? {
+  func getCity(byId id: Int, context: NSManagedObjectContext? = nil) -> City? {
     let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<City> = City.fetchRequest()

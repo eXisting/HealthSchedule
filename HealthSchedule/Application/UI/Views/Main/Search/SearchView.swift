@@ -28,6 +28,10 @@ class SearchView: UIView {
     searchButton.addTarget(self, action: #selector(onSearchButtonClick), for: .touchUpInside)
   }
   
+  func reloadSections(_ at: IndexSet, _ animation: UITableView.RowAnimation) {
+    tableView.reloadSections(at, with: animation)
+  }
+  
   @objc private func onSearchButtonClick() {
     searchDelegate?.startSearch()
   }

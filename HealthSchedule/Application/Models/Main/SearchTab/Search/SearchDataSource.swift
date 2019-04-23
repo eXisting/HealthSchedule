@@ -9,18 +9,56 @@
 import UIKit
 
 class SearchDataSource: NSObject, UITableViewDataSource {
-  let searchOptions = [
-    SearchOptionKey.service,
-    SearchOptionKey.dateTime
+  enum SectionsIndexes: Int {
+    case searchOptions = 0; case chosenOptions = 1
+  }
+  
+  // note: order is important
+  enum ChosenOptionsRows: Int {
+    case service = 0; case city = 1; case range = 2
+  }
+  
+  var sectionsData: [[Any]] = [
+    [SearchOptionKey.service, SearchOptionKey.dateTime],
+    ["", "", ""]
   ]
   
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return sectionsData.count
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return searchOptions.count
+    if section == SectionsIndexes.chosenOptions.rawValue {
+      var rowsActualCount = sectionsData[section].count
+
+      sectionsData[section].forEach({ element in
+        if (element as! String).isEmpty {
+          rowsActualCount -= 1
+        }
+      })
+
+      return rowsActualCount
+    }
+    
+    return sectionsData[section].count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if indexPath.section == SectionsIndexes.chosenOptions.rawValue {
+      let defaultCell = UITableViewCell()
+      
+      var value = (sectionsData[indexPath.section][indexPath.row] as! String)
+      if value.isEmpty {
+        value = (sectionsData[indexPath.section][ChosenOptionsRows.range.rawValue] as! String)
+      }
+      
+      defaultCell.textLabel?.text = value
+      defaultCell.selectionStyle = .none
+      return defaultCell
+    }
+    
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableView.cellIdentifier, for: indexPath)
-    cell.textLabel?.text = searchOptions[indexPath.row].rawValue
+    cell.textLabel?.text = (sectionsData[indexPath.section][indexPath.row] as! SearchOptionKey).rawValue
     cell.selectionStyle = .none
     return cell
   }

@@ -26,7 +26,7 @@ class InternalObjectsBuilder {
     if let city = remoteUser.city {
       user.cityId = Int16(city.id)
       
-      let city = fetchHandler.getCtiy(byId: Int(user.cityId), context: context)
+      let city = fetchHandler.getCity(byId: Int(user.cityId), context: context)
       city?.addToUser(user)
       user.city = city
     }

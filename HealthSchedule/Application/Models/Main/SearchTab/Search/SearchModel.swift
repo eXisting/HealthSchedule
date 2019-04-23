@@ -14,15 +14,45 @@ enum SearchOptionKey: String {
 }
 
 class SearchModel {
+  var delegate: TableViewSectionsReloading!
+  
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let commonDataRequestController = CommonDataRequest()
-  private let databaseManager = DataBaseManager.shared
-  
   let dataSource = SearchDataSource()
   
-  var dateTimeInterval: TimetableView.DateTimeInterval?
-  var serviceId: Int?
-  var cityId: Int?
+  var dateTimeInterval: TimetableView.DateTimeInterval? {
+    didSet {
+      var datesInterval: String = DateManager.shared.date2String(with: .date, dateTimeInterval!.start)
+      if let end = dateTimeInterval?.end {
+        datesInterval.append(" - \(DateManager.shared.date2String(with: .date, end))")
+      } else { datesInterval.append(" - end of month") }
+      
+      let displayText = "Dates interval: \(datesInterval)"
+      
+      dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.range.rawValue] = (displayText as Any)
+      delegate.reloadSections(NSIndexSet(index: SearchDataSource.SectionsIndexes.chosenOptions.rawValue) as IndexSet, with: .automatic)
+    }
+  }
+  
+  var serviceId: Int? {
+    didSet {
+      let serviceName = DataBaseManager.shared.fetchRequestsHandler.getService(by: serviceId!, context: DataBaseManager.shared.mainContext)!.name!
+      let displayText = "Service: \(serviceName)"
+      
+      dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.service.rawValue] = (displayText as Any)
+      delegate.reloadSections(NSIndexSet(index: SearchDataSource.SectionsIndexes.chosenOptions.rawValue) as IndexSet, with: .automatic)
+    }
+  }
+  
+  var cityId: Int? {
+    didSet {
+      let cityName = DataBaseManager.shared.fetchRequestsHandler.getCity(byId: cityId!, context: DataBaseManager.shared.mainContext)!.name!
+      let displayText = "City: \(cityName)"
+      
+      dataSource.sectionsData[SearchDataSource.SectionsIndexes.chosenOptions.rawValue][SearchDataSource.ChosenOptionsRows.city.rawValue] = (displayText as Any)
+      delegate.reloadSections(NSIndexSet(index: SearchDataSource.SectionsIndexes.chosenOptions.rawValue) as IndexSet, with: .automatic)
+    }
+  }
   
   func validateSearchOptions() -> String? {
     guard let _ = serviceId else {

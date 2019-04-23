@@ -35,6 +35,7 @@ class SearchViewController: UIViewController, NVActivityIndicatorViewable {
   override func viewDidLoad() {
     super.viewDidLoad()
     mainView.setup(delegate: self, dataSource: self.model.dataSource, searchDelegate: self)
+    model.delegate = self
     setupNavigationItem()
   }
   
@@ -126,13 +127,29 @@ extension SearchViewController: SetupableTabBarItem {
   }
 }
 
+extension SearchViewController: TableViewSectionsReloading {
+  func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation) {
+    mainView.reloadSections(path, animation)
+  }
+}
+
 extension SearchViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return view.frame.height * 0.1
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    pushController(with: model.dataSource.searchOptions[indexPath.row])
+    if indexPath.section == SearchDataSource.SectionsIndexes.searchOptions.rawValue {
+      pushController(with: model.dataSource.sectionsData[indexPath.section][indexPath.row] as! SearchOptionKey)
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 10
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    return UIView()
   }
 }
 
