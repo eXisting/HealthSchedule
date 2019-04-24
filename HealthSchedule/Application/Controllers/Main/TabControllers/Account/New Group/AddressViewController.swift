@@ -36,10 +36,15 @@ class AddressViewController: UIViewController {
     super.viewDidLoad()
     mainView.set(textFieldsDelegate: self)
     
+    fetchAddress()
+    
+    setupNavigationBarAppearance()
+  }
+  
+  private func fetchAddress() {
     DispatchQueue.global(qos: .userInteractive).sync {
       self.mainView.setup(self.model.getAddress())
     }
-    setupNavigationBarAppearance()
   }
   
   private func setupNavigationBarAppearance() {

@@ -33,21 +33,8 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     }
   }
   
-  let presenter: Presentr = {
-    let customType = PresentationType.popup
-    
-    let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .crossDissolve
-    customPresenter.dismissTransitionType = .crossDissolve
-    customPresenter.roundCorners = true
-    customPresenter.backgroundColor = .lightGray
-    customPresenter.backgroundOpacity = 0.5
-    return customPresenter
-  }()
-  
   override func loadView() {
     super.loadView()
-    
     view = mainView
   }
   
@@ -97,7 +84,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
         controller.storeDelegate = self
         controller.cititesList = cities
         self!.model.presentedIdetifier = identifier
-        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
+        self!.customPresentViewController(self!.mainView.presenter, viewController: controller, animated: true)
       }
     }
   }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 class ProfileView: UIView {
   
@@ -14,6 +15,18 @@ class ProfileView: UIView {
   private let tableView = AccountTableView()
   
   let datepickerView = DatePickerView()
+  
+  lazy var presenter: Presentr = {
+    let customType = PresentationType.popup
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .crossDissolve
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    return customPresenter
+  }()
   
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     laidOutViews()

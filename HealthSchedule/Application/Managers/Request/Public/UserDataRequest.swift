@@ -220,8 +220,8 @@ extension UserDataRequest: AuthenticationProviding {
   }
   
   func login(login: String, password: String, completion: @escaping (String?) -> Void) {
-//    let postBody = ["username": "provider@example.org", "password": password]
-    let postBody = ["username": login, "password": password]
+    let postBody = ["username": "provider@example.org", "password": password]
+//    let postBody = ["username": login, "password": password]
     requestsManager.signIn(userData: postBody) {
       user, response in
       guard let remoteUser = user else {
