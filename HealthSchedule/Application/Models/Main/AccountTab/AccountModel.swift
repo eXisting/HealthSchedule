@@ -11,7 +11,6 @@ import UIKit
 class AccountModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let commonDataRequestController = CommonDataRequest()
-  private let databaseManager = DataBaseManager.shared
 
   private unowned var accountHandlingDelegate: AccountHandlableDelegate
   
@@ -21,7 +20,7 @@ class AccountModel {
   init(accountHandlingDelegate: AccountHandlableDelegate) {
     self.accountHandlingDelegate = accountHandlingDelegate
     
-    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+    guard let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
       print("AccountModel failed!")
       return
     }
@@ -37,7 +36,7 @@ class AccountModel {
         return
       }
       
-      guard let user = self?.databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+      guard let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
         completion(ResponseStatus.applicationError.rawValue)
         return
       }
@@ -51,16 +50,15 @@ class AccountModel {
   }
   
   func getCities(_ completion: @escaping ([City]) -> Void) {
-    let cachedCities = databaseManager.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext)
+    let cachedCities = DataBaseManager.shared.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext)
     if cachedCities.count > 1 {
       completion(cachedCities)
       return
     }
     
-    commonDataRequestController.getCities {
-      [weak self] status in
+    commonDataRequestController.getCities { status in
       if status == ResponseStatus.success.rawValue {
-        completion(self!.databaseManager.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext))
+        completion(DataBaseManager.shared.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext))
       }
     }
   }
@@ -105,9 +103,10 @@ class AccountDataSource: NSObject, UITableViewDataSource {
     
     data.append(GeneralInfoAccountSectionModel(user: user))
     data.append(SecureInfoAccountSectionModel(user: user))
-    //if user.role?.name == "provider" {
-    data.append(ProviderInfoAccountSectionModel(user: user))
-    //}
+    
+    if user.role!.id == UserType.provider.rawValue {
+      data.append(ProviderInfoAccountSectionModel(user: user))
+    }
   }
   
   subscript(forSectionIndex: Int) -> AccountSectionDataContaining {
