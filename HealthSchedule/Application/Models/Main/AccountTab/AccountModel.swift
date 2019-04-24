@@ -104,7 +104,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
     data.append(GeneralInfoAccountSectionModel(user: user))
     data.append(SecureInfoAccountSectionModel(user: user))
     
-    if user.role!.id == UserType.provider.rawValue {
+    if user.roleId == UserType.provider.rawValue {
       data.append(ProviderInfoAccountSectionModel(user: user))
     }
   }

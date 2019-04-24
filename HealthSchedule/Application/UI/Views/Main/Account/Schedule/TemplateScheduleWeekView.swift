@@ -10,7 +10,6 @@ import UIKit
 import JZCalendarWeekView
 
 class TemplateScheduleWeekView: JZLongPressWeekView {
-    
   override func registerViewClasses() {
     super.registerViewClasses()
     
@@ -24,11 +23,6 @@ class TemplateScheduleWeekView: JZLongPressWeekView {
   }
   
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    if kind == JZSupplementaryViewKinds.allDayHeader {
-      let alldayHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kind, for: indexPath) as! JZAllDayHeader
-    
-      return alldayHeader
-    }
     return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
   }
     

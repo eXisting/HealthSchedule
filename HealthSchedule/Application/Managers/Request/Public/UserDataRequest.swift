@@ -280,6 +280,20 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
+  func removeProfession(with id: Int, completion: @escaping (String?) -> Void) {
+    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
+    
+    requestsManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken.asParams()) {
+      (serverMessage, response) in
+      if response.error != nil {
+        completion(response.error)
+        return
+      }
+      
+      completion(nil)
+    }
+  }
+  
   func getAddress(by id: Int, _ completion: @escaping (String) -> Void) {
     var params = RequestManager.sessionToken.asParams()
     params[ProviderDataJsonFields.addressId.rawValue] = String(id)
@@ -319,20 +333,6 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       self?.getAddress(by: addressId, completion)
-    }
-  }
-  
-  func removeProfession(with id: Int, completion: @escaping (String?) -> Void) {
-    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
-    
-    requestsManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken.asParams()) {
-      (serverMessage, response) in
-      if response.error != nil {
-        completion(response.error)
-        return
-      }
-      
-      completion(nil)
     }
   }
   

@@ -20,15 +20,25 @@ class ScheduleModel {
   
   func loadFromCoreData() {
     scheduleDays = DataBaseManager.shared.fetchRequestsHandler.getScheduleDays(context: DataBaseManager.shared.mainContext)
+    
     if scheduleDays.count == 0 {
       reloadProviderScheduleTemplate { [weak self] in
+        self?.scheduleDays = DataBaseManager.shared.fetchRequestsHandler.getScheduleDays(context: DataBaseManager.shared.mainContext)
         self?.days2Events()
+        
+        DispatchQueue.main.async {
+          self?.delegate.refresh()
+        }
       }
       return
     }
     
     days2Events()
     eventsByDate = JZWeekViewHelper.getIntraEventsByDate(originalEvents: events)
+    
+    DispatchQueue.main.async {
+      self.delegate.refresh()
+    }
   }
   
   func reloadProviderScheduleTemplate(_ completion: @escaping () -> Void) {

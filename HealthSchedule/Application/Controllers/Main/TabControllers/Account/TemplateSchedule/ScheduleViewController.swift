@@ -9,6 +9,7 @@
 import UIKit
 import Presentr
 import JZCalendarWeekView
+import NVActivityIndicatorView
 
 protocol ScheduleNavigationItemDelegate {
   func save()
@@ -22,13 +23,13 @@ protocol ScheduleEventsRefreshing {
   func refresh()
 }
 
-class ScheduleViewController: UIViewController {
+class ScheduleViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Schedule template"
 
-  @IBOutlet weak var calendarWeekView: JZLongPressWeekView!
+  @IBOutlet weak var calendarWeekView: TemplateScheduleWeekView!
   private let model = ScheduleModel()
   
-  let presenter: Presentr = {
+  private lazy var presenter: Presentr = {
     let customType = PresentationType.popup
     
     let customPresenter = Presentr(presentationType: customType)
@@ -37,6 +38,7 @@ class ScheduleViewController: UIViewController {
     customPresenter.roundCorners = true
     customPresenter.backgroundColor = .lightGray
     customPresenter.backgroundOpacity = 0.5
+    customPresenter.cornerRadius = 50
     return customPresenter
   }()
   
@@ -98,11 +100,13 @@ class ScheduleViewController: UIViewController {
   }
   
   private func startLoadTemplates() {
+    if model.eventsByDate.isEmpty {
+      let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+      startAnimating(size, type: .ballScaleRippleMultiple, color: .white, displayTimeThreshold: 5, minimumDisplayTime: 2)
+    }
+    
     DispatchQueue.global(qos: .background).async {
       self.model.loadFromCoreData()
-      DispatchQueue.main.async {
-        self.refresh()
-      }
     }
   }
   
@@ -126,6 +130,12 @@ extension ScheduleViewController: JZBaseViewDelegate {
 extension ScheduleViewController: ScheduleEventsRefreshing {
   func refresh() {
     calendarWeekView.forceReload(reloadEvents: model.eventsByDate)
+    
+    if self.isAnimating {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        self.stopAnimating()
+      }
+    }
   }
 }
 
