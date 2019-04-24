@@ -293,7 +293,7 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       guard let address = data else {
-        completion(ResponseStatus.applicationError.rawValue)
+        completion(ResponseStatus.success.rawValue)
         return
       }
       
