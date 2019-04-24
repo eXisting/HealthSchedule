@@ -22,6 +22,7 @@ enum AccountRowSubtype {
   case datePicker
   case cityPicker
   case servicePicker
+  case professionPicker
   
   case none
 }

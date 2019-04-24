@@ -23,7 +23,7 @@ class AccountPlacemarkCell: UITableViewCell {
     if editableField.subType == .datePicker {
       datePicker = DatePickerView()
       datePicker?.setup(target: editableField, shouldAddTarget: false, isBirthdayPicker: true)
-      datePicker?.setupInitialTime(data: editableField.text)
+      datePicker?.setupInitial(data: editableField.text, format: .date, dateTimeLocale: .none)
       editableField.aciton = datePicker?.showDatePicker
     }
   }

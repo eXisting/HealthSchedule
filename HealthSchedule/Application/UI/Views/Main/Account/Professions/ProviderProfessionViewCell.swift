@@ -1,19 +1,19 @@
 //
-//  ProviderServiceCell.swift
+//  ProfessionViewCell.swift
 //  HealthSchedule
 //
-//  Created by sys-246 on 4/3/19.
+//  Created by sys-246 on 4/24/19.
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
 import UIKit
 
-class ProviderServiceCell: UITableViewCell {
+class ProviderProfessionViewCell: UITableViewCell {
   private let container = UIStackView()
   
   private let idLabel = UILabel()
-  private let priceLabel = UILabel()
-  private let duration = UILabel()
+  private let cityLabel = UILabel()
+  private let companyLabel = UILabel()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,18 +27,18 @@ class ProviderServiceCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func setupData(id: Int, price: Double, duration: Date?) {
+  func setupData(id: Int, city: String, company: String) {
     idLabel.text = "ID: \(id)"
-    priceLabel.text = "Price: \(price)"
-    self.duration.text = "Duration \(duration != nil ? DateManager.shared.date2String(with: .time, duration!, .hour24) : "no_duration")"
+    cityLabel.text = "City: \(city)"
+    companyLabel.text = "Company \(company)"
   }
   
   private func laidOutViews() {
     addSubview(container)
     
     container.addArrangedSubview(idLabel)
-    container.addArrangedSubview(priceLabel)
-    container.addArrangedSubview(duration)
+    container.addArrangedSubview(cityLabel)
+    container.addArrangedSubview(companyLabel)
     
     container.translatesAutoresizingMaskIntoConstraints = false
     idLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -57,3 +57,4 @@ class ProviderServiceCell: UITableViewCell {
     idLabel.textColor = .orange
   }
 }
+

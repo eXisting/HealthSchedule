@@ -44,18 +44,21 @@ class DatePickerView: UIView {
     }
   }
   
-  func setCustomPickerMode(mode: UIDatePicker.Mode, interval: Int) {
+  func setCustomPickerMode(mode: UIDatePicker.Mode, interval: Int?) {
     datePicker.datePickerMode = mode
-    datePicker.minuteInterval = interval
+    
+    if let interval = interval {
+      datePicker.minuteInterval = interval
+    }
     
     if mode == .time {      
       datePicker.locale = DateManager.shared.getLocale(.hour24)
     }    
   }
   
-  func setupInitialTime(data: String?) {
+  func setupInitial(data: String?, format: DateFormatType, dateTimeLocale: DateTimeLocale) {
     if let data = data {
-      datePicker.date = DateManager.shared.stringToDate(data, format: .time, .hour24)      
+      datePicker.date = DateManager.shared.stringToDate(data, format: format, dateTimeLocale)
     }
   }
   

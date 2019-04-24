@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProviderServiceRow: UITableViewCell {
+class GeneralIdentifyingRow: UITableViewCell {
   private let container = UIStackView()
   
   private let editableField = IdentifyingTextField()
@@ -34,10 +34,13 @@ class ProviderServiceRow: UITableViewCell {
     if editableField.subType == .datePicker {
       datePicker = DatePickerView()
       datePicker?.setup(target: editableField)
-      datePicker?.setCustomPickerMode(mode: .time, interval: 20)
-      datePicker?.setupInitialTime(data: editableField.text)
       editableField.aciton = datePicker?.showDatePicker
     }
+  }
+  
+  func setupDatePicker(_ mode: UIDatePicker.Mode, format: DateFormatType, locale: DateTimeLocale, _ interval: Int?) {
+    datePicker?.setCustomPickerMode(mode: mode, interval: interval)
+    datePicker?.setupInitial(data: editableField.text, format: format, dateTimeLocale: locale)
   }
   
   func configureIdentity(identifier: IndexPath, subType: AccountRowSubtype) {

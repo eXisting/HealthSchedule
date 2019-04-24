@@ -1,8 +1,8 @@
 //
-//  ProviderServiceAddController.swift
+//  ProviderProfessionCardViewController.swift
 //  HealthSchedule
 //
-//  Created by sys-246 on 4/3/19.
+//  Created by sys-246 on 4/24/19.
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import UIKit
 import CDAlertView
 import Presentr
 
-class ProviderServiceCardController: UIViewController {
-  private let titleName = "Add new service"
+class ProviderProfessionCardViewController: UIViewController {
+  private let titleName = "Add new experience"
   
-  private var model: ProviderServiceModel!
-  private let mainView = ProviderServiceGeneralTableView()
-
+  private var model: ProviderProfessionModel!
+  private let mainView = ProviderProfessionElementTableView()
+  
   private var customNavigationItem: GeneralActionSaveNavigationItem?
   
   override var navigationItem: UINavigationItem {
@@ -28,21 +28,9 @@ class ProviderServiceCardController: UIViewController {
     }
   }
   
-  private let presenter: Presentr = {
-    let customType = PresentationType.popup
-    
-    let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .crossDissolve
-    customPresenter.dismissTransitionType = .crossDissolve
-    customPresenter.roundCorners = true
-    customPresenter.backgroundColor = .lightGray
-    customPresenter.backgroundOpacity = 0.5
-    return customPresenter
-  }()
-  
-  convenience init(service: ProviderService?) {
+  convenience init(profession: ProviderProfession?) {
     self.init()
-    model = ProviderServiceModel(service: service)
+    model = ProviderProfessionModel(profession: profession)
   }
   
   override func loadView() {
@@ -59,25 +47,30 @@ class ProviderServiceCardController: UIViewController {
     model.instantiateData()
   }
   
-  private func presentServicePicker(with identifier: IndexPath) {
-    model.loadServices {
-      [weak self] services in
+  private func presentProfessionsPicker(with identifier: IndexPath) {
+    model.getProfessions {
+      [weak self] professions in
       DispatchQueue.main.async {
-        let controller = ModalServicesViewController()
-        controller.storeDelegate = self
-        controller.list = services
-        self!.model.serviceIdentifier = identifier
-        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
+        // TODO
+      }
+    }
+  }
+  
+  private func presentCityPicker(with identifier: IndexPath) {
+    model.getCities {
+      [weak self] cities in
+      DispatchQueue.main.async {
+        // TODO
       }
     }
   }
 }
 
-extension ProviderServiceCardController: ModalPickHandling {
+extension ProviderProfessionCardViewController: ModalPickHandling {
   func picked(id: Int, title: String) {
     guard let path = model.serviceIdentifier else { return }
     
-    model.setPickedService(for: path, serviceId: id, serviceName: title)
+    // TODO
     
     DispatchQueue.main.async {
       self.mainView.reloadRows(at: [path], with: .automatic)
@@ -85,9 +78,9 @@ extension ProviderServiceCardController: ModalPickHandling {
   }
 }
 
-extension ProviderServiceCardController: UITableViewDelegate {
+extension ProviderProfessionCardViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return model[indexPath.section][indexPath.row].rowHeight
+    return 60
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -95,7 +88,7 @@ extension ProviderServiceCardController: UITableViewDelegate {
   }
 }
 
-extension ProviderServiceCardController: UITextFieldDelegate {
+extension ProviderProfessionCardViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
@@ -111,10 +104,13 @@ extension ProviderServiceCardController: UITextFieldDelegate {
     case .datePicker:
       identifyingTextField.aciton?()
       return true
-    case .servicePicker:
-      presentServicePicker(with: indexPath)
+    case .professionPicker:
+      presentProfessionsPicker(with: indexPath)
       return false
-    case .cityPicker, .professionPicker, .none:
+    case .cityPicker:
+      presentCityPicker(with: indexPath)
+      return false
+    case .servicePicker, .none:
       return true
     }
   }
@@ -129,27 +125,27 @@ extension ProviderServiceCardController: UITextFieldDelegate {
   }
 }
 
-extension ProviderServiceCardController: ErrorShowable {
+extension ProviderProfessionCardViewController: ErrorShowable {
   func showWarningAlert(message: String) {
     CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 
 
-extension ProviderServiceCardController: GeneralItemHandlingDelegate {
+extension ProviderProfessionCardViewController: GeneralItemHandlingDelegate {
   func back() {
     navigationController?.popViewController(animated: true)
   }
   
   func main() {
-    model.postService { [weak self] status in
+    model.saveProviderProfession { [weak self] status in
       if status != ResponseStatus.success.rawValue {
         self?.showWarningAlert(message: status)
         return
       }
       
       DispatchQueue.main.async {
-        self?.back()        
+        self?.back()
       }
     }
   }

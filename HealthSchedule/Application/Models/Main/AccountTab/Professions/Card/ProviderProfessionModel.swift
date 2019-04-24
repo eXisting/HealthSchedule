@@ -1,60 +1,58 @@
 //
-//  CreateProviderServiceModel.swift
+//  ProviderProfessionModel.swift
 //  HealthSchedule
 //
-//  Created by sys-246 on 4/3/19.
+//  Created by sys-246 on 4/24/19.
 //  Copyright © 2019 sys-246. All rights reserved.
 //
 
 import UIKit
 
-class ProviderServiceModel {
+class ProviderProfessionModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
   private let commonRequests = CommonDataRequest()
-  private var existingService: ProviderService?
+  private var existingProfession: ProviderProfession?
   
-  let dataSource = ProviderServiceCardDataSource()
+  let dataSource = ProviderProfessionCardDataSource()
   
   var serviceIdentifier: IndexPath?
   
-  init(service: ProviderService?) {
-    existingService = service
+  init(profession: ProviderProfession?) {
+    existingProfession = profession
   }
   
   func instantiateData() {
     dataSource.data = [
-      ProviderServiceGeneralSectionModel(service: existingService),
-      ProviderServiceDurationSectionModel(service: existingService)
+      ProviderProfessionGeneralSectionModel(profession: existingProfession),
+      ProviderProfessionTimeIntervalSectionModel(profession: existingProfession)
     ]
   }
   
-  func postService(_ completion: @escaping (String) -> Void) {
-    var data = collectData()
-    //mock
-    data["address"] = "Something"
-    requestManager.createUpdateProviderService(with: data, isCreate: existingService == nil, completion: completion)
+  func saveProviderProfession(_ completion: @escaping (String) -> Void) {
+    
   }
   
-  func loadServices(_ completion: @escaping ([Service]) -> Void) {
-    let services = DataBaseManager.shared.fetchRequestsHandler.getServices(context: DataBaseManager.shared.mainContext)
-    if services.count > 1 {
-      completion(services)
-      return
-    }
-
-    commonRequests.getAllServices { status in
-      if status != ResponseStatus.success.rawValue { return }
-      completion(DataBaseManager.shared.fetchRequestsHandler.getServices(context: DataBaseManager.shared.mainContext))
-    }
+  func getCities(_ completion: @escaping ([City]) -> Void) {
+    
   }
   
-  func setPickedService(for path: IndexPath, serviceId: Int?, serviceName: String?) {    
+  func getProfessions(_ completion: @escaping ([Profession]) -> Void) {
+    
+  }
+  
+  func setPickedProfession(for path: IndexPath, professionId: Int?, professionName: String?) {
     var rowData = dataSource.data[path.section][path.row]
-    rowData.data = serviceName
-    rowData.id = serviceId
+    rowData.data = professionName
+    rowData.id = professionId
   }
   
-  subscript(forSectionIndex: Int) -> ProviderServiceSectionDataContaining {
+  func setPickedCity(for path: IndexPath, cityId: Int?, cityName: String?) {
+    var rowData = dataSource.data[path.section][path.row]
+    rowData.data = cityName
+    rowData.id = cityId
+  }
+  
+  subscript(forSectionIndex: Int) -> ProviderProfessionSectionDataContaining {
     return dataSource.data[forSectionIndex]
   }
   
@@ -72,17 +70,17 @@ class ProviderServiceModel {
       })
     }
     
-    if let service = existingService {
-      result["id"] = String(service.id)
+    if let providerProfession = existingProfession {
+      result["id"] = String(providerProfession.id)
     }
     
     return result
   }
 }
 
-class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {
+class ProviderProfessionCardDataSource: NSObject, UITableViewDataSource {
   var textFieldDelegate: UITextFieldDelegate!
-  fileprivate var data: [ProviderServiceSectionDataContaining] = []
+  fileprivate var data: [ProviderProfessionSectionDataContaining] = []
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return data.count
@@ -99,11 +97,11 @@ class ProviderServiceCardDataSource: NSObject, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let rowData = data[indexPath.section][indexPath.row]
     let cell = tableView.dequeueReusableCell(withIdentifier: ProviderServiceGeneralTableView.cellIdentifier, for: indexPath) as! GeneralIdentifyingRow
-      
+    
     cell.configureIdentity(identifier: indexPath, subType: rowData.subtype)
     cell.configureCell(key: rowData.title, value: rowData.data, delegate: textFieldDelegate)
-    cell.setupDatePicker(.time, format: .time, locale: .hour24, 20)
     
     return cell
   }
 }
+

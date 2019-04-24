@@ -15,9 +15,10 @@ class ProviderServiceGeneralTableView: UITableView {
     self.delegate = delegate
     self.dataSource = dataSource
     
-    register(ProviderServiceRow.self, forCellReuseIdentifier: ProviderServiceGeneralTableView.cellIdentifier)
+    register(GeneralIdentifyingRow.self, forCellReuseIdentifier: ProviderServiceGeneralTableView.cellIdentifier)
     
     showsVerticalScrollIndicator = false
+    alwaysBounceVertical = false
     
     // Remove last underline in table view
     tableFooterView = UIView(frame: .zero)

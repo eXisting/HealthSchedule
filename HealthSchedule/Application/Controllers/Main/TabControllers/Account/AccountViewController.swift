@@ -166,7 +166,7 @@ extension AccountViewController: UITextFieldDelegate {
       case .cityPicker:
         presentCityPicker(with: identifier)
         return false
-      case .servicePicker, .none:
+      case .servicePicker, .professionPicker, .none:
         return true
     }
   }

@@ -9,19 +9,33 @@
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profession" inverseName="category" inverseEntity="Profession" syncable="YES"/>
+        <relationship name="profession" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Profession" inverseName="category" inverseEntity="Profession" syncable="YES"/>
     </entity>
     <entity name="City" representedClassName="City" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="user" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="city" inverseEntity="User" syncable="YES"/>
+        <relationship name="providerProfession" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProviderProfession" inverseName="city" inverseEntity="ProviderProfession" syncable="YES"/>
+        <relationship name="user" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="User" inverseName="city" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Profession" representedClassName="Profession" syncable="YES" codeGenerationType="class">
         <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="category" inverseEntity="Category" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="profession" inverseEntity="Category" syncable="YES"/>
+        <relationship name="providerProfession" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ProviderProfession" inverseName="profession" inverseEntity="ProviderProfession" syncable="YES"/>
         <relationship name="service" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="profession" inverseEntity="Service" syncable="YES"/>
+    </entity>
+    <entity name="ProviderProfession" representedClassName="ProviderProfession" syncable="YES" codeGenerationType="class">
+        <attribute name="cityId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="companyName" attributeType="String" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="professionId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="providerId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="start" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="city" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="providerProfession" inverseEntity="City" syncable="YES"/>
+        <relationship name="profession" maxCount="1" deletionRule="Nullify" destinationEntity="Profession" inverseName="providerProfession" inverseEntity="Profession" syncable="YES"/>
+        <relationship name="provider" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="providerProfession" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="ProviderService" representedClassName="ProviderService" syncable="YES" codeGenerationType="class">
         <attribute name="addressId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -86,6 +100,7 @@
         <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="user" inverseEntity="City" syncable="YES"/>
         <relationship name="customerRequests" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Request" inverseName="customer" inverseEntity="Request" syncable="YES"/>
         <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserImage" inverseName="user" inverseEntity="UserImage" syncable="YES"/>
+        <relationship name="providerProfession" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProviderProfession" inverseName="provider" inverseEntity="ProviderProfession" syncable="YES"/>
         <relationship name="providerRequests" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Request" inverseName="provider" inverseEntity="Request" syncable="YES"/>
         <relationship name="providerService" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ProviderService" inverseName="provider" inverseEntity="ProviderService" syncable="YES"/>
         <relationship name="role" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Role" inverseName="user" inverseEntity="Role" syncable="YES"/>
@@ -99,15 +114,16 @@
     </entity>
     <elements>
         <element name="Address" positionX="-482.84765625" positionY="-509.30078125" width="128" height="105"/>
-        <element name="Category" positionX="-153.4609375" positionY="-137.39453125" width="128" height="88"/>
-        <element name="City" positionX="-869.4296875" positionY="-147.08203125" width="128" height="88"/>
-        <element name="Profession" positionX="-106.28125" positionY="32.203125" width="128" height="120"/>
+        <element name="Category" positionX="-153.4609375" positionY="-137.39453125" width="128" height="90"/>
+        <element name="City" positionX="-869.4296875" positionY="-147.08203125" width="128" height="105"/>
+        <element name="Profession" positionX="-106.28125" positionY="32.203125" width="128" height="135"/>
         <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="210"/>
         <element name="Request" positionX="-464.71875" positionY="-172.3515625" width="128" height="240"/>
         <element name="Role" positionX="-712.4140625" positionY="-619.92578125" width="128" height="88"/>
         <element name="ScheduleDayTemplate" positionX="-928.03515625" positionY="-612.26171875" width="128" height="150"/>
         <element name="Service" positionX="-288.98828125" positionY="126.453125" width="128" height="135"/>
-        <element name="User" positionX="-706.875" positionY="-452.6953125" width="128" height="285"/>
+        <element name="User" positionX="-706.875" positionY="-452.6953125" width="128" height="300"/>
         <element name="UserImage" positionX="-700.59765625" positionY="-21.62109375" width="128" height="105"/>
+        <element name="ProviderProfession" positionX="-893.1953125" positionY="138.80859375" width="128" height="195"/>
     </elements>
 </model>
