@@ -25,12 +25,12 @@ enum Endpoints: String {
   case signIn = "/api/login"
   
   // PUT
-  case providerAddress = "/api/provider/address"
   case updateUserInfo = "/api/user/info"
 
   // GET / PUT
   case scheduleTemplate = "/api/provider/schedules"
   case password = "/api/user/password"
+  case address = "/api/provider/address"
   
   // GET / POST / DELETE ( /{id} )
   case providerRequests = "/api/provider/requests"

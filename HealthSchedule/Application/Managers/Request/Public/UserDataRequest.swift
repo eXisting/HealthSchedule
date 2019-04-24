@@ -16,8 +16,10 @@ protocol AuthenticationProviding {
 
 protocol ProviderInfoRequesting {
   func getProfessions(completion: @escaping (String?) -> Void)
-  func saveAddress(_ address: String, completion: @escaping (String?) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
+
+  func getAddress(by id: Int, _ completion: @escaping (String) -> Void)
+  func saveAddress(_ address: String, completion: @escaping (String) -> Void)
   
   func getScheduleTemplate(completion: @escaping (String) -> Void)
   func saveScheduleTemplates(_ data: [String: [Dictionary<String, Any>]], completion: @escaping (String) -> Void)
@@ -45,7 +47,6 @@ protocol UserDataUpdating {
 
 class UserDataRequest {
   private let requestsManager = RequestManager()
-  private let databaseManager = DataBaseManager.shared
   
   typealias FreshScheduleDayData = (dayIndex: Int16, start: Date, end: Date, working: Bool)
 }
@@ -130,7 +131,7 @@ extension UserDataRequest: CommonDataRequesting {
     let endpoint = "\(Endpoints.providerById.rawValue)/\(id)"
     
     requestsManager.getAsync(for: RemoteUser.self, from: endpoint, RequestManager.sessionToken.asParams()) {
-      [weak self] provider, response in
+      provider, response in
       
       guard let remoteUser = provider else {
         completion(ResponseStatus.applicationError.rawValue)
@@ -142,7 +143,7 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      self?.databaseManager.insertUpdateUsers(from: [remoteUser])
+      DataBaseManager.shared.insertUpdateUsers(from: [remoteUser])
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -150,7 +151,7 @@ extension UserDataRequest: CommonDataRequesting {
   
   func getUser(_ completion: @escaping (String) -> Void) {
     requestsManager.getAsync(for: RemoteUser.self, from: .user, RequestManager.sessionToken.asParams()) {
-      [weak self] (user, response) in
+      user, response in
       
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
@@ -162,34 +163,34 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
+      DataBaseManager.shared.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       completion(ResponseStatus.success.rawValue)
     }
   }
   
   func getRequests(completion: @escaping (String) -> Void) {
-    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+    guard let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
       fatalError()
     }
     
     let endpoint = Int(user.roleId) == UserType.client.rawValue ? Endpoints.userRequests : Endpoints.providerRequests
     
     requestsManager.getListAsync(for: RemoteRequest.self, from: endpoint, RequestManager.sessionToken.asParams()) {
-      [weak self] (list, response) in
+      list, response in
       if let error = response.error {
         completion(error)
         return
       }
       
-      self?.databaseManager.insertUpdateRequests(from: list)
+      DataBaseManager.shared.insertUpdateRequests(from: list)
       
       completion(ResponseStatus.success.rawValue)
     }
   }
   
   private func getRequest(_ id: Int, _ completion: @escaping (String) -> Void) {
-    guard let user = databaseManager.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+    guard let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
       fatalError()
     }
     
@@ -197,7 +198,7 @@ extension UserDataRequest: CommonDataRequesting {
     let route = "\(endpoint.rawValue)/\(id)"
     
     requestsManager.getAsync(for: RemoteRequest.self, from: route, RequestManager.sessionToken.asParams()) {
-      [weak self] element, response in
+      element, response in
       
       if let error = response.error {
         completion(error)
@@ -206,7 +207,7 @@ extension UserDataRequest: CommonDataRequesting {
       
       guard let remoteRequest = element else { completion(ResponseStatus.serverError.rawValue); return }
       
-      self?.databaseManager.insertUpdateRequests(from: [remoteRequest])
+      DataBaseManager.shared.insertUpdateRequests(from: [remoteRequest])
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -222,7 +223,7 @@ extension UserDataRequest: AuthenticationProviding {
 //    let postBody = ["username": "provider@example.org", "password": password]
     let postBody = ["username": login, "password": password]
     requestsManager.signIn(userData: postBody) {
-      [weak self] (user, response) in
+      user, response in
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
         return
@@ -233,7 +234,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
+      DataBaseManager.shared.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       completion(nil)
     }
@@ -246,7 +247,7 @@ extension UserDataRequest: AuthenticationProviding {
     }
     
     requestsManager.signUp(authType: userType, userData: data) {
-      [weak self] (user, response) in
+      user, response in
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
         return
@@ -257,7 +258,7 @@ extension UserDataRequest: AuthenticationProviding {
         return
       }
       
-      self?.databaseManager.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
+      DataBaseManager.shared.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
       completion(nil)
     }
@@ -279,16 +280,45 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
-  func saveAddress(_ address: String, completion: @escaping (String?) -> Void) {
-    let data = ["address": address]
-    requestsManager.postAsync(to: Endpoints.providerAddress.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
-      (address, response) in
-      if response.error != nil {
-        completion(response.error)
+  func getAddress(by id: Int, _ completion: @escaping (String) -> Void) {
+    var params = RequestManager.sessionToken.asParams()
+    params[ProviderDataJsonFields.addressId.rawValue] = String(id)
+    
+    requestsManager.getAsync(for: RemoteAddress.self, from: Endpoints.address.rawValue, params) {
+      data, response in
+      
+      if let error = response.error {
+        completion(error)
         return
       }
       
-      completion(nil)
+      guard let address = data else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
+      DataBaseManager.shared.insertUpdateUserAddress(from: address)
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func saveAddress(_ address: String, completion: @escaping (String) -> Void) {
+    let data = [ProviderDataJsonFields.address.rawValue: address]
+    requestsManager.postAsync(to: Endpoints.address.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
+      [weak self] data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      guard let address = data as? [String: Any],
+        let addressId = address[ProviderDataJsonFields.addressId.rawValue] as? Int else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
+      self?.getAddress(by: addressId, completion)
     }
   }
   
@@ -308,14 +338,14 @@ extension UserDataRequest: ProviderInfoRequesting {
   
   func getProviderServices(completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteProviderService.self, from: .providerServices, RequestManager.sessionToken.asParams()) {
-      [weak self] list, response in
+      list, response in
       
       if let error = response.error {
         completion(error)
         return
       }
       
-      self?.databaseManager.insertUpdateProviderServices(from: list)
+      DataBaseManager.shared.insertUpdateProviderServices(from: list)
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -345,13 +375,13 @@ extension UserDataRequest: ProviderInfoRequesting {
   
   func getScheduleTemplate(completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteScheduleTemplateDay.self, from: Endpoints.scheduleTemplate, RequestManager.sessionToken.asParams()) {
-      [weak self] list, response in
+      list, response in
       if let error = response.error {
         completion(error)
         return
       }
       
-      self?.databaseManager.insertUpdateScheduleDayTemplate(from: list)
+      DataBaseManager.shared.insertUpdateScheduleDayTemplate(from: list)
       
       completion(ResponseStatus.success.rawValue)
     }

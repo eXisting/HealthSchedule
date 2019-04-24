@@ -36,6 +36,18 @@ class InternalObjectsBuilder {
     } else {
       user.roleId = Int16(4) // magic number
     }
+    
+    if let address = remoteUser.address {
+      user.addressId = Int16(address.id)
+    }
+  }
+  
+  func build(address: Address, attachedUser: User, _ remote: RemoteAddress, context: NSManagedObjectContext) {
+    address.id = Int16(remote.id)
+    address.address = remote.address
+        
+    attachedUser.address = address
+    address.user = attachedUser
   }
   
   func build(role: Role, attachedUser: User, _ remoteRole: RemoteRole, context: NSManagedObjectContext) {

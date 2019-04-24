@@ -16,6 +16,7 @@ enum UserJsonFields: String, CodingKey {
   case role
   case city
   case password
+  case address
   
   case confirmPassword = "password_confirm"
   case oldPassword = "old_password"
@@ -58,7 +59,7 @@ struct RemoteUser {
   var city: RemoteCity?
   var photo: ProfileImage?
   
-  var providerData: ProviderData?
+  var address: RemoteAddress?
   
   func getFullName() -> String {
     return "\(firstName) \(lastName)"
@@ -96,6 +97,6 @@ extension RemoteUser: Codable {
     let birthdayString = try container.decode(String.self, forKey: .birthday)
     birthday = DateManager.shared.stringToDate(birthdayString, format: .dateTime)
     
-    providerData = ProviderData()
+    address = try? container.decode(RemoteAddress.self, forKey: .address)
   }
 }

@@ -10,9 +10,12 @@ import CoreData
 
 protocol CoreDataRequestsPerformable {
   // Update / insert
+
+  func insertUpdateUserAddress(from remote: RemoteAddress, context: NSManagedObjectContext?)
   
-  func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext?)
   func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext?)
+  func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext?)
+
   func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext?)
   
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext?)
@@ -21,8 +24,8 @@ protocol CoreDataRequestsPerformable {
   func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext?)
   
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext?)
-  // Delete
   
+  // Delete
   func delete(with id: NSManagedObjectID, context: NSManagedObjectContext?)
 }
 
@@ -36,6 +39,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   
   // MARK: -Entities names constants
   
+  private let addressEntity = "Address"
   private let userEntity = "User"
   private let userImageEntity = "UserImage"
   private let cityEntity = "City"
@@ -199,6 +203,39 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
+  func insertUpdateUserAddress(from remote: RemoteAddress, context: NSManagedObjectContext? = nil) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let userAddressEntity = NSEntityDescription.entity(forEntityName: addressEntity, in: workingContext)
+    
+    let fetchRequest: NSFetchRequest<Address> = Address.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
+    fetchRequest.fetchLimit = 1
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      
+      guard let user = fetchRequestsHandler.getCurrentUser(context: workingContext) else {
+        fatalError()
+      }
+
+      if let userAttachedAddress = user.address {
+        workingContext.delete(userAttachedAddress)
+      }
+      
+      let address = result.count > 0 ?
+        result.first! : (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
+      
+      builder.build(address: address, attachedUser: user, remote, context: workingContext)
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+  }
+  
   func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
@@ -297,6 +334,10 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
           if let remoteRole = remoteUser.role {
             insertUpdateRoles(from: remoteRole, for: user, context: workingContext)
           }
+          
+          if let remoteAddress = remoteUser.address {
+            insertUpdateUserAddress(from: remoteAddress, context: workingContext)
+          }
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -371,7 +412,21 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     } catch {
       print ("Error while cleaning Core Data: \(error.localizedDescription)")
     }
-
+  }
+  
+  func delete(context: NSManagedObjectContext? = nil) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Request.fetchRequest()
+    
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    
+    do {
+      try workingContext.execute(deleteRequest)
+      saveContext(workingContext)
+    } catch {
+      print ("Error while cleaning Core Data: \(error.localizedDescription)")
+    }
   }
   
   func deleteAllRecords(context: NSManagedObjectContext? = nil) {
