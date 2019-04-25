@@ -17,7 +17,7 @@ class RequestsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('provider_service_id');
-            $table->boolean('status')->nullable()->default(null);
+            $table->tinyInteger('status');
             $table->tinyInteger('rate')->nullable()->default(null);
             $table->text('description');
             $table->dateTime('request_at');

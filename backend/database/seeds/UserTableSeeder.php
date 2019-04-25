@@ -63,9 +63,10 @@ class UserTableSeeder extends Seeder
         $requestStatuses = collect([]);
 
         collect( [
-            [ 'title' => 'Принято', 'name' => 'accepted' ] ,
-            [ 'title' => 'Отклонено', 'name' => 'rejected' ] ,
-            [ 'title' => 'Пройдено', 'name' => 'passed' ] ,
+            [ 'title' => 'Пройдено', 'name' => 'passed'],
+            [ 'title' => 'Отклонено', 'name' => 'rejected'],
+            [ 'title' => 'Принято', 'name' => 'accepted'],
+            [ 'title' => 'Ожидание', 'name' => 'pending'],
         ] )->each( function( $item ) use ( &$requestStatuses )
         {
             $requestStatuses = $requestStatuses->merge( factory( \App\Models\RequestStatus::class , 1 )->create( $item ) );
@@ -93,8 +94,8 @@ class UserTableSeeder extends Seeder
 
         $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->pluck('id')->each(function ($provider_id) {
             for ($weekday=0; $weekday<=6; $weekday++) {
-                $start_time = \Carbon\Carbon::createFromTime(rand(7,11), rand(0,45));
-                $end_time = \Carbon\Carbon::createFromTime(rand(13,22), rand(0,45));
+                $start_time = \Carbon\Carbon::createFromTime(rand(7,11), $this->roundToTheNearestAnything(rand(0,45), 20));
+                $end_time = \Carbon\Carbon::createFromTime(rand(13,22), $this->roundToTheNearestAnything(rand(0,45), 20));
 
                 factory(\App\Models\ProviderSchedule::class, 1)
                     ->create([
@@ -112,8 +113,8 @@ class UserTableSeeder extends Seeder
 
         $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->random(rand(2,3))->pluck('id')->each(function ($provider_id) {
             collect([1,2,3,4])->random(rand(1,3))->each(function ($day_count) use ($provider_id) {
-                $start_time = \Carbon\Carbon::createFromTime(rand(7,11), rand(0,45));
-                $end_time = \Carbon\Carbon::createFromTime(rand(13,22), rand(0,45));
+                $start_time = \Carbon\Carbon::createFromTime(rand(7,11), $this->roundToTheNearestAnything(rand(0,45), 20));
+                $end_time = \Carbon\Carbon::createFromTime(rand(13,22), $this->roundToTheNearestAnything(rand(0,45), 20));
                 $exception_at = \Carbon\Carbon::now()->addWeek(1)->addDays($day_count)->toDateTimeString();
 
                 factory(\App\Models\ProviderExceptionSchedule::class, 1)
@@ -159,8 +160,10 @@ class UserTableSeeder extends Seeder
         #region ProviderServices
 
         $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->each(function ($provider) use ($services) {
+//            $professions = $provider->professions;
             if(count($provider->professions)) {
                 $provider->professions->each(function ($prof) use ($provider) {
+//                    dd($provider);
                     if(count($prof->services)) {
 
                         $prof->services->each(function ($service) use ($provider) {
@@ -182,5 +185,11 @@ class UserTableSeeder extends Seeder
 
         #endregion
 
+    }
+    
+    private function roundToTheNearestAnything($value, $roundTo)
+    {
+        $mod = $value%$roundTo;
+        return $value+($mod<($roundTo/2)?-$mod:$roundTo-$mod);
     }
 }

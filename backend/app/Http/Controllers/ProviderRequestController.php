@@ -33,8 +33,25 @@ class ProviderRequestController extends RequestController
     public function requests()
     {
         /** @var Request $requests */
-        $requests = $this->authUser->providerRequests()->get();
-        return response()->json($requests);
+        $requests = $this->authUser->providerRequests()
+            ->with(
+                'providerService.address',
+                'providerService.service'
+            )->get();
+        
+        $result = [];
+        foreach($requests as $request) {
+            $requestUser = $this->authUser->getUser($request->user_id);
+            $request->providerService["user"] = $requestUser;
+            $requestUser["role"] = $this->authUser->getRole($requestUser->user_role_id);
+            $requestUser["city"] = $this->authUser->getCity($requestUser->city_id);
+            unset($requestUser["user_role_id"]);
+            unset($requestUser["role_id"]);
+            
+            $result[] = $request;
+        }
+        
+        return response()->json($result);
     }
 
 
@@ -44,7 +61,7 @@ class ProviderRequestController extends RequestController
      */
     public function request($request_id)
     {
-        $request = $this->request->getRequestWithUser($request_id);
+        $request = $this->request->getRequestWithProviderService($request_id);
 
         if(!$request) {
             return response()->json(['message' => 'Request not found']);

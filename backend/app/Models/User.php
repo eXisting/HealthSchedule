@@ -236,6 +236,25 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Recommendation::class, 'provider_id', 'id');
     }
+    
+    #region Custom
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\Find
+     */
+    public function getUser($id) {
+        return $this->find($id);
+    }
+    
+    public function getRole($id) {
+        return UserRole::find($id);
+    }
+    
+    public function getCity($id) {
+        return City::find($id);
+    }
+    
+    #endregion
 
     //endregion
 }

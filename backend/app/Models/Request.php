@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $id
  * @property integer $user_id
  * @property integer $provider_service_id
- * @property boolean $status
+ * @property integer $status
  * @property integer $rate
  * @property string $description
  * @property Carbon $request_at
@@ -42,7 +42,7 @@ class Request extends Model
     protected $casts = [
         'user_id' => 'integer',
         'provider_service_id' => 'integer',
-        'status' => 'boolean',
+        'status' => 'integer',
         'rate' => 'integer',
         'description' => 'string',
         'request_at' => 'datetime',

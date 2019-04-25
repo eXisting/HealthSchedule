@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Provider\Address\UpdateProviderAddressRequest;
 use App\Models\Address;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 /**
  * Class ProviderAddressController
@@ -22,7 +23,17 @@ class ProviderAddressController extends AuthUserController
     {
         parent::__construct();
     }
-
+    
+    public function getById(Request $request) 
+    {
+        if ($request->address_id == null) 
+        {
+            return response()->json(["error" => "Provide address id!"]); 
+        }
+        
+        return response()->json(Address::find($request->address_id)); 
+    }
+    
     /**
      * @param UpdateProviderAddressRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -47,7 +58,7 @@ class ProviderAddressController extends AuthUserController
             }
         }
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, "address_id" => $address->id]);
     }
 
 }

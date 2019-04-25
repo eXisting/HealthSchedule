@@ -32,8 +32,10 @@ class UpdateUserRequestRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required|string',
-            'request_at' =>  'required|date|date_format:"Y-m-d H:i:s"',
+            // to be able to decline request
+            'status' => 'required|integer|exists:request_statuses,id',
+            // 'description' => 'required|string',
+            // 'request_at' =>  'required|date|date_format:"Y-m-d H:i:s"',
         ];
     }
 }

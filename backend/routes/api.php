@@ -19,11 +19,17 @@ Route::prefix('register')->group(function () {
 });
 
 Route::middleware('jwt.auth')->group(function () {
+    
     Route::prefix('services')->group(function () {
+        // By city id as params
         Route::get('/', 'ServiceController@all');
         Route::get('/{service}/providers/{provider}', 'ProviderServiceController@getAllProviderServices');
+        
+        // All services
+        Route::get('/all', 'ServiceController@getAllServices');
+        Route::get('/{id}', 'ServiceController@getService');
     });
-
+    
     Route::prefix('user')->group(function () {
         Route::get('/', 'AuthUserController@get');
 
@@ -38,17 +44,17 @@ Route::middleware('jwt.auth')->group(function () {
             Route::get('/{provider}', 'UserController@provider');
         });
 
-        Route::prefix('recommendations')->group(function () {
-            Route::get('/', 'UserRecommendationController@recommendations');
-            Route::get('/{recommendation_id}', 'UserRecommendationController@recommendation');
-            Route::put('/{recommendation}/{recommendation_status}', 'RecommendationController@changeStatus');
-        });
+        // Not needed now
+        // Route::prefix('recommendations')->group(function () {
+        //     Route::get('/', 'UserRecommendationController@recommendations');
+        //     Route::get('/{recommendation_id}', 'UserRecommendationController@recommendation');
+        //     Route::put('/{recommendation}/{recommendation_status}', 'RecommendationController@changeStatus');
+        // });
 
         Route::prefix('requests')->group(function () {
             Route::get('/', 'UserRequestController@requests');
             Route::get('/{request_id}', 'UserRequestController@request');
             Route::post('/', 'UserRequestController@store');
-            Route::put('/{request}', 'UserRequestController@update');
             Route::put('/{request}/rate', 'UserRequestController@updateRate');
         });
     });
@@ -58,23 +64,29 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::get('/available-times', 'ProviderController@getDateTimes');
 
-        Route::put('/address', 'ProviderAddressController@update');
+        Route::prefix('address')->group(function(){
+            Route::get('/', 'ProviderAddressController@getById');
+            Route::put('/', 'ProviderAddressController@update');
+        });
 
         Route::prefix('users')->group(function () {
             Route::get('/', 'ProviderController@users');
             Route::get('/{user}', 'ProviderController@user');
         });
 
-        Route::prefix('recommendations')->group(function () {
-            Route::get('/', 'ProviderRecommendationController@recommendations');
-            Route::get('/{recommendation_id}', 'ProviderRecommendationController@recommendation');
-            Route::post('/', 'ProviderRecommendationController@store');
-        });
+        // Not needed now
+        // Route::prefix('recommendations')->group(function () {
+        //     Route::get('/', 'ProviderRecommendationController@recommendations');
+        //     Route::get('/{recommendation_id}', 'ProviderRecommendationController@recommendation');
+        //     Route::post('/', 'ProviderRecommendationController@store');
+        // });
 
         Route::prefix('requests')->group(function () {
             Route::get('/', 'ProviderRequestController@requests');
             Route::get('/{request_id}', 'ProviderRequestController@request');
+            Route::put('/{request}', 'UserRequestController@update');
             Route::put('/{request}/{request_status}', 'RequestController@changeStatus');
+            Route::delete('/{request}', 'UserRequestController@delete');
         });
 
         Route::prefix('professions')->group(function () {
@@ -86,15 +98,17 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::prefix('services')->group(function () {
             Route::get('/', 'ProviderServiceController@all');
+            // get provider service
+            Route::get('/{service}', 'ProviderServiceController@getService');
             Route::post('/', 'ProviderServiceController@create');
             Route::put('/{providerService}', 'ProviderServiceController@update');
             Route::delete('/{providerService}', 'ProviderServiceController@delete');
         });
 
-        Route::prefix('verifies')->group(function () {
-            Route::post('/', 'ProviderVerifyController@create');
-            Route::delete('/{provider_verify}', 'ProviderVerifyController@delete');
-        });
+        // Route::prefix('verifies')->group(function () {
+        //     Route::post('/', 'ProviderVerifyController@create');
+        //     Route::delete('/{provider_verify}', 'ProviderVerifyController@delete');
+        // });
 
         Route::prefix('schedules')->group(function () {
             Route::get('/', 'ProviderScheduleController@all');

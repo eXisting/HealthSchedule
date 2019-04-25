@@ -24,6 +24,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'confirmed_status' => $faker->boolean,
         'email_verified_at' => now(),
+        'birthday_at' => now(),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
     ];
@@ -110,11 +111,12 @@ $factory->define(App\Models\Request::class, function (Faker $faker) {
             $status = null;
             break;
     }
+    // $status_value = rand(1, 3);
     return [
         'user_id' => \App\Models\User::query()->where('user_role_id', \App\Models\UserRole::CLIENT)->inRandomOrder()->first()->id,
         'provider_service_id' => \App\Models\ProviderService::query()->inRandomOrder()->first()->id,
-        // 'status_id' => \App\Models\RequestStatus::query()->inRandomOrder()->first()->id,
-        'status' => $status,
+        'status' => \App\Models\RequestStatus::query()->inRandomOrder()->first()->id,
+        // 'status' => $status_value,
         'rate' => $status ? rand(1, 5) : null,
         'description' => $faker->text,
         'request_at' => $status ? \Carbon\Carbon::now()->addDays(rand(-10, -1))->toDateTimeString() : \Carbon\Carbon::now()->addDays(rand(5, 60))->toDateTimeString(),
@@ -150,7 +152,6 @@ $factory->define(App\Models\ProviderService::class, function (Faker $faker) {
     return [
         'address_id' => factory(\App\Models\Address::class)->create()->id,
         'price' => rand(100, 500),
-        'name' => $faker->name,
         'description' => $faker->text,
         'interval' => \Carbon\Carbon::createFromTime(rand(0, 1), $minutes->random())
     ];

@@ -10,6 +10,8 @@ use App\Models\ProviderSchedule;
 use DB;
 use Illuminate\Support\Collection;
 use Gate;
+use DateInterval;
+use DatePeriod;
 
 /**
  * Class ProviderController
@@ -100,17 +102,38 @@ class ProviderController extends AuthUserController
         $service_id = $request->service_id;
         $provider_service_id = $request->provider_service_id;
         $from = $request->get('date_from') ? \Carbon\Carbon::parse($request->date_from) : \Carbon\Carbon::now();
-        $to = $request->get('date_to') ? \Carbon\Carbon::parse($request->date_to) : new \Carbon\Carbon('last day of this month');
-
+        $to = $request->get('date_to') ? \Carbon\Carbon::parse($request->date_to) : new \Carbon\Carbon("last day of this month");
         $arrDateWithDayOfWeek = collect([]);
-
-        for ($weekDay = $from->dayOfWeek, $date = $from->day; $date <= $from->daysInMonth; $weekDay++, $date++) {
-            $arrDateWithDayOfWeek->push(['week_day' => $weekDay, 'date' => \Carbon\Carbon::create($from->year, $from->month, $date)->toDateString()]);
-
-            if ($weekDay == 6 && $date <= $from->daysInMonth) {
-                $weekDay = -1;
+        
+        // if we have dates boundaries - iterate between
+        if ($request->get('date_from') != null && $request->get('date_to') != null) {
+            $interval = DateInterval::createFromDateString('1 day');
+            $period = new DatePeriod($from, $interval, $to);
+            
+            $daysForSearchCount = $from->diff($to)->days;
+            
+            if ($daysForSearchCount > 31) {
+                return response()->json(['message' => 'Interval is too big for search!']);
+            }
+            
+            foreach ($period as $dt) {
+                $formattedDate = $dt->format("Y-m-d");
+                $unixTimestamp = strtotime($formattedDate);
+                $dayOfWeek = date("N", $unixTimestamp) - 1;
+                $arrDateWithDayOfWeek->push(['week_day' => $dayOfWeek, 'date' => $formattedDate]);
+            }
+        } else {
+            // just fetch all dates to the end of start date month
+            for ($weekDay=$from->dayOfWeek, $date=$from->day; $date<=$from->daysInMonth; $weekDay++, $date++) {
+    
+                $arrDateWithDayOfWeek->push(['week_day' => $weekDay, 'date' => \Carbon\Carbon::create($from->year, $from->month, $date)->toDateString() ]);
+    
+                if($weekDay == 6 && $date<=$from->daysInMonth) {
+                    $weekDay=-1;
+                }
             }
         }
+        
 
 //        $providerServices = (new \App\Models\ProviderService())->query()
 //            ->whereHas('provider', function ($query) use ($city_id) {
