@@ -7,6 +7,7 @@ use App\Http\Requests\User\UpdateUserImageRequest;
 use App\Models\User;
 use App\Models\UserImage;
 use App\Repositories\UserImageRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class UserImageController
@@ -38,16 +39,16 @@ class UserImageController extends AuthUserController
     {
         $image = $this->authUser->image;
 
-        if($image) {
+        if ($image) {
             FileManager::deleteFile($image->image_path);
             try {
                 $image->delete();
             } catch (\Exception $e) {
-                return response()->json(['success' => false,'message' => $e->getMessage()]);
+                return response()->json(['success' => false, 'message' => $e->getMessage()]);
             }
         }
 
-        if($request->hasFile('photo')) {
+        if ($request->hasFile('photo')) {
             /** @var UserImage $newImage */
             $newImage = $this->image->save($request->file('photo'), 'user_photo', $this->authUser->id);
 
@@ -55,7 +56,5 @@ class UserImageController extends AuthUserController
         } else {
             return response()->json(['success' => false, 'message' => 'Has not image in request body']);
         }
-
     }
-
 }
