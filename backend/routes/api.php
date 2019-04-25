@@ -21,6 +21,7 @@ Route::prefix('register')->group(function () {
 Route::middleware('jwt.auth')->group(function () {
     Route::prefix('services')->group(function () {
         Route::get('/', 'ServiceController@all');
+        Route::get('/{service}/providers/{provider}', 'ProviderServiceController@getAllProviderServices');
     });
 
     Route::prefix('user')->group(function () {

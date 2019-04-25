@@ -8,6 +8,7 @@ use App\Models\ProviderService;
 use App\Models\User;
 use App\Repositories\AddressRepository;
 use Gate;
+use App\Models\Service;
 
 /**
  * Class ProviderProfessionController
@@ -91,5 +92,17 @@ class ProviderServiceController extends AuthUserController
         }
 
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * @param Service $service
+     * @param User $provider
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllProviderServices(Service $service, User $provider)
+    {
+        return response()->json(
+            $provider->providerServices->where('service_id', $service->id)->all()
+        );
     }
 }
