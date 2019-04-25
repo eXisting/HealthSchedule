@@ -104,12 +104,11 @@ class ProviderController extends AuthUserController
 
         $arrDateWithDayOfWeek = collect([]);
 
-        for ($weekDay=$from->dayOfWeek, $date=$from->day; $date<=$from->daysInMonth; $weekDay++, $date++) {
+        for ($weekDay = $from->dayOfWeek, $date = $from->day; $date <= $from->daysInMonth; $weekDay++, $date++) {
+            $arrDateWithDayOfWeek->push(['week_day' => $weekDay, 'date' => \Carbon\Carbon::create($from->year, $from->month, $date)->toDateString()]);
 
-            $arrDateWithDayOfWeek->push(['week_day' => $weekDay, 'date' => \Carbon\Carbon::create($from->year, $from->month, $date)->toDateString() ]);
-
-            if($weekDay == 6 && $date<=$from->daysInMonth) {
-                $weekDay=-1;
+            if ($weekDay == 6 && $date <= $from->daysInMonth) {
+                $weekDay = -1;
             }
         }
 
@@ -137,21 +136,20 @@ class ProviderController extends AuthUserController
 
         $query = (new \App\Models\ProviderService())->query();
 
-        if($city_id) {
+        if ($city_id) {
             $query->whereHas('provider', function ($query) use ($city_id) {
                 /** @var \Illuminate\Database\Query\Builder $query */
                 $query->where('city_id', $city_id);
             });
         }
 
-        if($service_id) {
+        if ($service_id) {
             $query->where('service_id', $service_id);
         }
 
-        if($provider_service_id) {
+        if ($provider_service_id) {
             $query->where('id', $provider_service_id);
         }
-
         $providerServices = $query->with([
             'requests' => function ($query) use ($from, $to) {
                 /** @var \Illuminate\Database\Query\Builder $query */
@@ -159,11 +157,11 @@ class ProviderController extends AuthUserController
                     $query->where('status', null)->orWhere('status', 1);
                 })->whereBetween('request_at', [$from, $to]);
             },
-            'provider.providerSchedules' => function($query) {
+            'provider.providerSchedules' => function ($query) {
                 $query->where('working', 1);
             },
-            'provider.providerExceptionSchedules' => function($query) use ($from, $to) {
-                $query->whereBetween('exception_at', array($from->toDateString(), $to->toDateString()))
+            'provider.providerExceptionSchedules' => function ($query) use ($from, $to) {
+                $query->whereBetween('exception_at', [$from->toDateString(), $to->toDateString()])
                     ->where('working', 1);
             }])->get();
 
@@ -188,7 +186,7 @@ class ProviderController extends AuthUserController
 
             $exceptionSchedules = $providerService->provider->providerExceptionSchedules;
 
-            if(count($providerService->schedules) && count($exceptionSchedules)) {
+            if (count($providerService->schedules) && count($exceptionSchedules)) {
                 $providerService->schedules->each(function ($schedule) use (&$providerService, $exceptionSchedules) {
                     /**
                      * @var \Illuminate\Support\Collection $schedule
@@ -197,7 +195,7 @@ class ProviderController extends AuthUserController
 
                     $exceptionSchedules->each(function ($exceptionSchedule) use (&$providerService, $schedule) {
                         /** @var \App\Models\ProviderExceptionSchedule $exceptionSchedule */
-                        if(\Carbon\Carbon::parse($exceptionSchedule->exception_at)->toDateString() == $schedule['date']) {
+                        if (\Carbon\Carbon::parse($exceptionSchedule->exception_at)->toDateString() == $schedule['date']) {
                             $schedule['start_time'] = $exceptionSchedule->start_time;
                             $schedule['end_time'] = $exceptionSchedule->end_time;
                         }
@@ -207,10 +205,9 @@ class ProviderController extends AuthUserController
                 });
             }
 
-            $startInterval = \Carbon\Carbon::createFromTime(0,0);
+            $startInterval = \Carbon\Carbon::createFromTime(0, 0);
 
             $providerService->schedules = $providerService->schedules->map(function ($schedule) use (&$providerService, $startInterval) {
-
                 $interval = $startInterval->diffInMinutes(\Carbon\Carbon::parse($providerService->interval));
 
                 $current_time = \Carbon\Carbon::parse($schedule['start_time']);
@@ -227,14 +224,13 @@ class ProviderController extends AuthUserController
                 return $schedule;
             });
 
-
-            $providerService->requests->each(function ($req) use (&$providerService){
+            $providerService->requests->each(function ($req) use (&$providerService) {
                 /** @var \App\Models\Request $req */
                 $reqDateTime = \Carbon\Carbon::parse($req->request_at);
                 $reqDate = $reqDateTime->toDateString();
                 $reqTime = $reqDateTime->toTimeString();
                 $providerService->schedules = $providerService->schedules->map(function ($schedule) use ($reqDate, $reqTime) {
-                    if($schedule['date'] == $reqDate) {
+                    if ($schedule['date'] == $reqDate) {
                         $schedule['times_by_interval'] = $schedule['times_by_interval']->filter(function ($value) use ($reqTime) {
                             return $value != $reqTime;
                         });
@@ -245,8 +241,6 @@ class ProviderController extends AuthUserController
             });
 
             $schedules = $providerService->schedules;
-
-
 
             $schedules = $schedules->map(function ($data) use ($providerService) {
                 $data['times_by_interval'] = $data['times_by_interval']->map(function ($time, $key) use ($providerService) {
@@ -267,7 +261,6 @@ class ProviderController extends AuthUserController
             });
 
             $times = $times->groupBy('time')->map(function ($time) {
-
                 $provider_ids = collect([]);
 
                 $time->each(function ($item) use (&$provider_ids) {
@@ -277,14 +270,12 @@ class ProviderController extends AuthUserController
                 return $provider_ids;
             });
 
-            if($times->count()) {
+            if ($times->count()) {
                 return ['date' => $date, 'times' => $times];
             }
         })->filter(function ($item, $date) {
-
             return $item != null;
         });
-
         return response()->json($schedulesArr);
     }
 }

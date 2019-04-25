@@ -38,6 +38,7 @@ class UpdateProviderServiceRequest extends FormRequest
             'address' => 'required|string',
             'service_id' => 'required|integer|exists:services,id',
             'price' => 'required|numeric',
+            'name' => 'required|string',
             'description' => 'required|string',
             'interval' => 'required|date_format:H:i',
         ];

@@ -32,7 +32,7 @@ class ProviderService extends Model
      * @var array
      */
     protected $fillable = [
-        'address_id', 'provider_id', 'service_id', 'price', 'description', 'interval',
+        'address_id', 'provider_id', 'service_id', 'price', 'name', 'description', 'interval',
     ];
 
     /**
@@ -45,6 +45,7 @@ class ProviderService extends Model
         'provider_id' => 'integer',
         'service_id' => 'integer',
         'price' => 'double',
+        'name' => 'string',
         'description' => 'string',
         'interval' => 'time',
     ];

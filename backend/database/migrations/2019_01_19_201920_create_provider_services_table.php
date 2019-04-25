@@ -19,13 +19,14 @@ class CreateProviderServicesTable extends Migration
             $table->unsignedInteger('provider_id');
             $table->unsignedInteger('service_id');
             $table->double('price');
+            $table->string('name');
             $table->text('description');
             $table->time('interval');
             $table->timestamps();
 
-            $table->foreign( 'address_id' )->references( 'id' )->on( 'addresses' );
-            $table->foreign( 'provider_id' )->references( 'id' )->on( 'users' );
-            $table->foreign( 'service_id' )->references( 'id' )->on( 'services' );
+            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('provider_id')->references('id')->on('users');
+            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 

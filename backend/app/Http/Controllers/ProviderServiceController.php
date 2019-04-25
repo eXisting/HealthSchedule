@@ -17,7 +17,6 @@ use Gate;
  */
 class ProviderServiceController extends AuthUserController
 {
-
     /**
      * ProviderProfessionController constructor.
      */
@@ -48,7 +47,7 @@ class ProviderServiceController extends AuthUserController
 
         $result = $this->authUser->providerServices()->create($data);
 
-        if($result) {
+        if ($result) {
             return response()->json(['success' => true]);
         }
 
@@ -62,7 +61,7 @@ class ProviderServiceController extends AuthUserController
      */
     public function update(ProviderService $providerService, UpdateProviderServiceRequest $request)
     {
-        if(Gate::denies('provider-update-service', $providerService)) {
+        if (Gate::denies('provider-update-service', $providerService)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
@@ -81,17 +80,16 @@ class ProviderServiceController extends AuthUserController
      */
     public function delete(ProviderService $providerService)
     {
-        if(Gate::denies('provider-delete-service', $providerService)) {
+        if (Gate::denies('provider-delete-service', $providerService)) {
             return response()->json(['message' => 'Not enough rights']);
         }
 
         try {
             $providerService->delete();
         } catch (\Exception $e) {
-            return response()->json(['success' => false,'message' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
 
         return response()->json(['success' => true]);
     }
-
 }

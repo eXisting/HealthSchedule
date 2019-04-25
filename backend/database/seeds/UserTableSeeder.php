@@ -159,10 +159,8 @@ class UserTableSeeder extends Seeder
         #region ProviderServices
 
         $users->where('user_role_id', \App\Models\UserRole::PROVIDER)->each(function ($provider) use ($services) {
-//            $professions = $provider->professions;
             if(count($provider->professions)) {
                 $provider->professions->each(function ($prof) use ($provider) {
-//                    dd($provider);
                     if(count($prof->services)) {
 
                         $prof->services->each(function ($service) use ($provider) {

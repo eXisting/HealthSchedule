@@ -150,6 +150,7 @@ $factory->define(App\Models\ProviderService::class, function (Faker $faker) {
     return [
         'address_id' => factory(\App\Models\Address::class)->create()->id,
         'price' => rand(100, 500),
+        'name' => $faker->name,
         'description' => $faker->text,
         'interval' => \Carbon\Carbon::createFromTime(rand(0, 1), $minutes->random())
     ];

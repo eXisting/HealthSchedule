@@ -4,7 +4,6 @@ namespace App\Http\Requests\Provider\Service;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Validator;
 
 /**
  * Class CreateProviderServiceRequest
@@ -39,9 +38,9 @@ class CreateProviderServiceRequest extends FormRequest
             'address' => 'required|string',
             'service_id' => 'required|integer|exists:services,id',
             'price' => 'required|numeric',
+            'name' => 'required|string',
             'description' => 'required|string',
             'interval' => 'required|date_format:H:i',
         ];
-
     }
 }
