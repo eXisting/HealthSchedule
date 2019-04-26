@@ -274,7 +274,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      // TODO: Insert into core data
+      DataBaseManager.shared.insertUpdateProviderProfessions(from: list)
       
       completion(ResponseStatus.success.rawValue)
     }

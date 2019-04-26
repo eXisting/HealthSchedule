@@ -104,7 +104,7 @@ class FetchResultControllersComposer {
     )
     
     fetchRequest.returnsObjectsAsFaults = false
-    fetchRequest.relationshipKeyPathsForPrefetching = ["profession", "city"]
+    fetchRequest.relationshipKeyPathsForPrefetching = ["city", "profession"]
     fetchRequest.fetchBatchSize = 20
     
     let controller = NSFetchedResultsController(
