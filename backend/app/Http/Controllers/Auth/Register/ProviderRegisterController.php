@@ -8,7 +8,6 @@ use App\Models\UserRole;
 use App\Repositories\ProviderRepository;
 use App\Repositories\ProviderVerifyRepository;
 use Carbon\Carbon;
-use Validator;
 use JWTAuth;
 
 class ProviderRegisterController extends RegisterController implements RegisterInterface
@@ -53,7 +52,7 @@ class ProviderRegisterController extends RegisterController implements RegisterI
 
         $provider = $this->provider->model->create($providerData);
 
-        if(!$provider) {
+        if (!$provider) {
             return response()->json(['message' => 'Provider did not create']);
         }
 

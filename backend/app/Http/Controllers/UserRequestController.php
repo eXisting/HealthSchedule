@@ -76,21 +76,20 @@ class UserRequestController extends RequestController
 
         if (!$providerService) {
             return response(['success' => false], 404);
-        
+        }
+
         $currentUser = User::find($this->authUser->id);
-        
-        if ($currentUser != null) 
-        {
+
+        if ($currentUser != null) {
             $userFullName = $currentUser->first_name . ' ' . $currentUser->last_name;
-            
-            PushNotificationsController::sendNewRequestNotification("device_id_example", $this->authUser->name);
+
+            PushNotificationsController::sendNewRequestNotification('device_id_example', $this->authUser->name);
         }
 
         $data = array_merge($request->all(), ['provider_service_id' => $providerService->id]);
 
         $this->request->create($this->authUser->id, $data);
 
-        
         return response()->json(['success' => true]);
     }
 
@@ -121,13 +120,13 @@ class UserRequestController extends RequestController
 
         return response()->json(['success' => $request->update($rateRequest->all())]);
     }
-    
+
     public function delete(Request $request)
     {
         try {
             $request->delete();
         } catch (\Exception $e) {
-            return response()->json(['success' => false,'message' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
 
         return response()->json(['success' => true]);

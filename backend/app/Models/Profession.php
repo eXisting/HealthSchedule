@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Profession extends Model
 {
-    #region Properties
+    //region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -42,13 +42,13 @@ class Profession extends Model
         'title' => 'string',
     ];
 
-    #endregion
+    //endregion
 
-    #region Methods
+    //region Methods
 
-    #endregion
+    //endregion
 
-    #region Relationships
+    //region Relationships
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -74,5 +74,5 @@ class Profession extends Model
         return $this->hasManyThrough(User::class, ProviderProfession::class, 'profession_id', 'id', 'id', 'provider_id');
     }
 
-    #endregion
+    //endregion
 }

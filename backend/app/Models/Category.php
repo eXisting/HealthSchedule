@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
-    #region Properties
+    //region Properties
 
     /**
      * The attributes that are mass assignable.
@@ -38,21 +38,13 @@ class Category extends Model
         'title' => 'string'
     ];
 
-    #endregion
+    //endregion
 
-    #region Methods
+    //region Methods
 
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'name';
-    }
+    //endregion
 
-    #endregion
-
-    #region Relationships
+    //region Relationships
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -62,5 +54,5 @@ class Category extends Model
         return $this->hasMany(Profession::class, 'category_id');
     }
 
-    #endregion
+    //endregion
 }

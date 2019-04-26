@@ -19,17 +19,16 @@ Route::prefix('register')->group(function () {
 });
 
 Route::middleware('jwt.auth')->group(function () {
-    
     Route::prefix('services')->group(function () {
         // By city id as params
         Route::get('/', 'ServiceController@all');
         Route::get('/{service}/providers/{provider}', 'ProviderServiceController@getAllProviderServices');
-        
+
         // All services
         Route::get('/all', 'ServiceController@getAllServices');
         Route::get('/{id}', 'ServiceController@getService');
     });
-    
+
     Route::prefix('user')->group(function () {
         Route::get('/', 'AuthUserController@get');
 
@@ -64,7 +63,7 @@ Route::middleware('jwt.auth')->group(function () {
 
         Route::get('/available-times', 'ProviderController@getDateTimes');
 
-        Route::prefix('address')->group(function(){
+        Route::prefix('address')->group(function () {
             Route::get('/', 'ProviderAddressController@getById');
             Route::put('/', 'ProviderAddressController@update');
         });
@@ -125,6 +124,4 @@ Route::middleware('jwt.auth')->group(function () {
 });
 
 Route::get('/category/{category}/professions', 'ProfessionsController@professions');
-
 Route::get('/cities', 'CityController@all');
-//Get /category/{category_id}/professions ()(professions)
