@@ -11,12 +11,14 @@ import CoreData
 enum FrcDelegateType {
   case request
   case providerService
+  case providerProfessions
 }
 
 class FetchResultControllersComposer {
   private weak var requestsFrcDelegate: NSFetchedResultsControllerDelegate?
   private weak var providerServicesFrcDelegate: NSFetchedResultsControllerDelegate?
-  
+  private weak var providerProfessionsFrcDelegate: NSFetchedResultsControllerDelegate?
+
   lazy var requestsFetchResultController: NSFetchedResultsController<Request> = {
     let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
     
@@ -86,12 +88,51 @@ class FetchResultControllersComposer {
     return controller
   }()
   
+  lazy var providerProfessionsFetchResultController: NSFetchedResultsController<ProviderProfession> = {
+    let fetchRequest: NSFetchRequest<ProviderProfession> = ProviderProfession.fetchRequest()
+    
+    let primarySortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+    
+    fetchRequest.sortDescriptors = [
+      primarySortDescriptor
+    ]
+    
+    let context = DataBaseManager.shared.mainContext
+    
+    fetchRequest.predicate = NSPredicate(
+      format: "providerId == \(DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: context)!.id)"
+    )
+    
+    fetchRequest.returnsObjectsAsFaults = false
+    fetchRequest.relationshipKeyPathsForPrefetching = ["profession", "city"]
+    fetchRequest.fetchBatchSize = 20
+    
+    let controller = NSFetchedResultsController(
+      fetchRequest: fetchRequest,
+      managedObjectContext: context,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
+    
+    controller.delegate = providerServicesFrcDelegate
+    
+    do {
+      let _ = try controller.performFetch()
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+    
+    return controller
+  }()
+  
   func setDelegate(for frcType: FrcDelegateType, delegate: NSFetchedResultsControllerDelegate?) {
     switch frcType {
     case .providerService:
       providerServicesFrcDelegate = delegate
     case .request:
       requestsFrcDelegate = delegate
+    case .providerProfessions:
+      providerProfessionsFrcDelegate = delegate
     }
   }
 }

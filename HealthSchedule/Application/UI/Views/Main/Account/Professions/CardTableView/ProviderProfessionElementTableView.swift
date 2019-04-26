@@ -19,7 +19,7 @@ class ProviderProfessionElementTableView: UITableView {
     customPresenter.roundCorners = true
     customPresenter.backgroundColor = .lightGray
     customPresenter.backgroundOpacity = 0.5
-    customPresenter.cornerRadius = 50
+    customPresenter.cornerRadius = 15
     return customPresenter
   }()
   

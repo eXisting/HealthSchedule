@@ -95,7 +95,7 @@ extension ServicesViewController: UISearchBarDelegate {
 }
 
 extension ServicesViewController: ModalPickHandling {
-  func picked(id: Int, title: String) {
+  func picked(id: Int, title: String, _ type: ModalPickType = .service) {
     model.cityId = id
     searchBar.text = title
     

@@ -50,6 +50,37 @@ class InternalObjectsBuilder {
     address.user = attachedUser
   }
   
+  func build(providerProfession: ProviderProfession, _ remote: RemoteProviderProfession, context: NSManagedObjectContext) {
+    providerProfession.id = Int16(remote.id)
+    providerProfession.cityId = Int16(remote.cityId)
+    providerProfession.companyName = remote.companyName
+    providerProfession.professionId = Int32(remote.professionId)
+    providerProfession.start = remote.startAt
+    providerProfession.end = remote.endAt
+    providerProfession.providerId = Int32(remote.providerId)
+    
+    guard let profession = fetchHandler.getProfession(by: remote.professionId, context: context),
+      let city = fetchHandler.getCity(byId: remote.cityId, context: context),
+      let provider = fetchHandler.getUser(byId: remote.providerId, context: context) else {
+      fatalError("You must insert cities, professions and provier before ProviderProfession!")
+    }
+    
+    providerProfession.city = city
+    city.addToProviderProfession(providerProfession)
+        
+    providerProfession.provider = provider
+    provider.addToProviderProfession(providerProfession)
+    
+    providerProfession.profession = profession
+    profession.addToProviderProfession(providerProfession)
+  }
+  
+  func build(profession: Profession, _ remote: RemoteProfession, context: NSManagedObjectContext) {
+    profession.id = Int32(remote.id)
+    profession.categoryId = Int16(remote.categoryId)
+    profession.name = remote.title
+  }
+  
   func build(role: Role, attachedUser: User, _ remoteRole: RemoteRole, context: NSManagedObjectContext) {
     role.id = Int16(remoteRole.id)
     role.name = remoteRole.title
@@ -97,9 +128,17 @@ class InternalObjectsBuilder {
     city.name = remoteCity.title
   }
   
-  func build(service: Service, _ remoteService: RemoteService) {
+  func build(service: Service, _ remoteService: RemoteService, context: NSManagedObjectContext) {
     service.id = Int16(remoteService.id)
     service.name = remoteService.title
+    service.professionId = Int16(remoteService.professionId)
+    
+    guard let profession = fetchHandler.getProfession(by: remoteService.professionId, context: context) else {
+      fatalError("You must insert professions before services!")
+    }
+    
+    profession.addToService(service)
+    service.profession = profession
   }
   
   func build(request: Request, _ remote: RemoteRequest, context: NSManagedObjectContext) {

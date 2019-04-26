@@ -51,7 +51,10 @@ class ProviderProfessionCardViewController: UIViewController {
     model.getProfessions {
       [weak self] professions in
       DispatchQueue.main.async {
-        // TODO
+        let controller = ModalProfessionViewController()
+        controller.list = professions
+        controller.storeDelegate = self
+        self?.customPresentViewController(self!.mainView.presenter, viewController: controller, animated: true)
       }
     }
   }
@@ -59,18 +62,40 @@ class ProviderProfessionCardViewController: UIViewController {
   private func presentCityPicker(with identifier: IndexPath) {
     model.getCities {
       [weak self] cities in
+      if cities.count <= 1 {
+        DispatchQueue.main.async {
+          self!.showWarningAlert(message: "Cannot get cities list...")
+          return
+        }
+      }
+      
       DispatchQueue.main.async {
-        // TODO
+        let controller = ModalCityViewController()
+        controller.cititesList = cities
+        controller.storeDelegate = self
+        self!.model.cityIdentifier = identifier
+        self!.customPresentViewController(self!.mainView.presenter, viewController: controller, animated: true)
       }
     }
   }
 }
 
 extension ProviderProfessionCardViewController: ModalPickHandling {
-  func picked(id: Int, title: String) {
-    guard let path = model.serviceIdentifier else { return }
+  func picked(id: Int, title: String, _ type: ModalPickType) {
+    var path: IndexPath!
     
-    // TODO
+    switch type {
+    case .city:
+      guard let cityPath = model.cityIdentifier else { return }
+      path = cityPath
+      model.setPickedCity(for: path, cityId: id, cityName: title)
+    case .profession:
+      guard let professionPath = model.professionIdentifier else { return }
+      path = professionPath
+      model.setPickedProfession(for: path, professionId: id, professionName: title)
+    case .service:
+      return
+    }
     
     DispatchQueue.main.async {
       self.mainView.reloadRows(at: [path], with: .automatic)

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CDAlertView
+import NVActivityIndicatorView
 
 protocol SetupableTabBarItem {
   func setupTabBarItem()
@@ -16,7 +18,7 @@ protocol RefreshingTableView {
   func refresh(_ completion: @escaping (String) -> Void)
 }
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, NVActivityIndicatorViewable {
   private var homeNavigationController: UINavigationController!
   private var requestNavigationController: UINavigationController!
   private var accountNavigationController: UINavigationController!
@@ -29,27 +31,11 @@ class MainTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    homeNavigationController = UINavigationController(rootViewController: homeTab)
-    requestNavigationController = UINavigationController(rootViewController: requestTab)
-    accountNavigationController = UINavigationController(rootViewController: accountTab)
     
-    DispatchQueue.global(qos: .userInitiated).sync {
-      requestManager.getAllServices { _ in }
-      requestManager.getCities { _ in }
-    }
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballPulse, color: .white, displayTimeThreshold: 5, minimumDisplayTime: 2)
     
-    let tabBarItems = [
-      homeNavigationController,
-      requestNavigationController,
-      accountNavigationController
-    ]
-
-    tabBarItems.forEach { item in
-      (item?.viewControllers.first as! SetupableTabBarItem).setupTabBarItem()
-    }
-
-    setViewControllers((tabBarItems as! [UIViewController]), animated: true)
+    preloadRequiredData()
     
     view.backgroundColor = .white
   }
@@ -58,5 +44,60 @@ class MainTabBarController: UITabBarController {
     viewControllers?.forEach {
       controller in (controller as? UINavigationController)?.popToRootViewController(animated: false)
     }
+  }
+  
+  private func instantiateControllers() {
+    homeNavigationController = UINavigationController(rootViewController: homeTab)
+    requestNavigationController = UINavigationController(rootViewController: requestTab)
+    accountNavigationController = UINavigationController(rootViewController: accountTab)
+    
+    let tabBarItems = [
+      homeNavigationController,
+      requestNavigationController,
+      accountNavigationController
+    ]
+    
+    tabBarItems.forEach { item in
+      (item?.viewControllers.first as! SetupableTabBarItem).setupTabBarItem()
+    }
+    
+    setViewControllers((tabBarItems as! [UIViewController]), animated: true)
+    
+    stopAnimating()
+  }
+  
+  private func preloadRequiredData() {
+    // TODO: refactor with threads
+    
+    requestManager.getCities { [weak self] status in
+      if status != ResponseStatus.success.rawValue {
+        self?.showWarningAlert(message: "Application cannot get required cities from the server!")
+        exit(1);
+      }
+      
+      self?.requestManager.getProfessions { [weak self] status in
+        if status != ResponseStatus.success.rawValue {
+          self?.showWarningAlert(message: "Application cannot get required professions from the server!")
+          exit(1);
+        }
+        
+        self?.requestManager.getAllServices { [weak self] status in
+          if status != ResponseStatus.success.rawValue {
+            self?.showWarningAlert(message: "Application cannot get required services from the server!")
+            exit(1);
+          }
+          
+          DispatchQueue.main.async {
+            self?.instantiateControllers()            
+          }
+        }
+      }
+    }
+  }
+}
+
+extension MainTabBarController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    CDAlertView(title: "Critical error", message: message, type: .error).show()
   }
 }

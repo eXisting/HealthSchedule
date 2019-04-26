@@ -115,7 +115,7 @@ extension AccountViewController: RefreshingTableView {
 }
 
 extension AccountViewController: ModalPickHandling {
-  func picked(id: Int, title: String) {
+  func picked(id: Int, title: String, _ type: ModalPickType = .city) {
     guard let identifier = model.presentedIdetifier else {
       return
     }

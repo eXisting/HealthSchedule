@@ -27,21 +27,21 @@ class ProviderProfessionGeneralSectionModel: ProviderProfessionSectionDataContai
         title: "Profession:",
         type: .general,
         subtype: .professionPicker,
-        keyName: ProviderProfessionJsonFields.professionId.rawValue
+        keyName: ProfessionJsonFields.professionId.rawValue
       ),
       ProviderServiceTextRowModel(
         data: profession != nil ? String(profession!.city!.name!) : nil,
         title: "City:",
         type: .general,
         subtype: .cityPicker,
-        keyName: ProviderProfessionJsonFields.cityId.rawValue
+        keyName: ProfessionJsonFields.cityId.rawValue
       ),
       ProviderServiceTextRowModel(
         data: profession?.companyName,
-        title: "Company name:",
+        title: "Company:",
         type: .general,
         subtype: .none,
-        keyName: ProviderProfessionJsonFields.companyName.rawValue
+        keyName: ProfessionJsonFields.companyName.rawValue
       )
     ]
     
@@ -89,14 +89,14 @@ class ProviderProfessionTimeIntervalSectionModel: ProviderProfessionSectionDataC
         title: "Start:",
         type: .general,
         subtype: .datePicker,
-        keyName: ProviderProfessionJsonFields.startAt.rawValue,
+        keyName: ProfessionJsonFields.startAt.rawValue,
         date: profession?.start
       ),
       ProviderProfessioneDateRowModel(
         title: "End:",
         type: .general,
         subtype: .datePicker,
-        keyName: ProviderProfessionJsonFields.startAt.rawValue,
+        keyName: ProfessionJsonFields.startAt.rawValue,
         date: profession?.start
       )
     ]

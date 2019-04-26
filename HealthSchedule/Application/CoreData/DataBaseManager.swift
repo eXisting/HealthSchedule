@@ -74,6 +74,10 @@ class DataBaseManager: NSObject {
     return frcComposer.providerServicesFetchResultController
   }
   
+  var providerProfessionFrc: NSFetchedResultsController<ProviderProfession> {
+    return frcComposer.providerProfessionsFetchResultController
+  }
+  
   func setFrcDelegate(for frcType: FrcDelegateType, delegate: NSFetchedResultsControllerDelegate?) {
     frcComposer.setDelegate(for: frcType, delegate: delegate)
   }
@@ -114,6 +118,14 @@ extension DataBaseManager: ContextsProviding {
 
 
 extension DataBaseManager: CoreDataRequestsPerformable {
+  func insertUpdateProfessions(from list: [RemoteProfession], context: NSManagedObjectContext? = nil) {
+    executer.insertUpdateProfessions(from: list, context: context)
+  }
+  
+  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], context: NSManagedObjectContext? = nil) {
+    executer.insertUpdateProviderProfessions(from: list, context: context)
+  }
+  
   func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext? = nil) {
     executer.insertUpdateScheduleDayTemplate(from: days, context: context)
   }

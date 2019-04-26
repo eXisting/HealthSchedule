@@ -15,8 +15,9 @@ class ProviderProfessionModel {
   
   let dataSource = ProviderProfessionCardDataSource()
   
-  var serviceIdentifier: IndexPath?
-  
+  var professionIdentifier: IndexPath?
+  var cityIdentifier: IndexPath?
+
   init(profession: ProviderProfession?) {
     existingProfession = profession
   }
@@ -33,11 +34,21 @@ class ProviderProfessionModel {
   }
   
   func getCities(_ completion: @escaping ([City]) -> Void) {
+    let cachedCities = DataBaseManager.shared.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext)
+    if cachedCities.count > 1 {
+      completion(cachedCities)
+      return
+    }
     
+    commonRequests.getCities { status in
+      if status == ResponseStatus.success.rawValue {
+        completion(DataBaseManager.shared.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext))
+      }
+    }
   }
   
   func getProfessions(_ completion: @escaping ([Profession]) -> Void) {
-    
+    completion([])
   }
   
   func setPickedProfession(for path: IndexPath, professionId: Int?, professionName: String?) {

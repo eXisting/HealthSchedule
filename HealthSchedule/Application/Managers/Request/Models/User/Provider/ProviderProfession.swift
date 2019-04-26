@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ProviderProfessionJsonFields: String, CodingKey {
+enum ProfessionJsonFields: String, CodingKey {
   case id
   case providerId = "provider_id"
   case professionId = "profession_id"
@@ -17,6 +17,9 @@ enum ProviderProfessionJsonFields: String, CodingKey {
   
   case startAt = "start_at"
   case endAt = "end_at"
+  
+  case title
+  case categoryId = "category_id"
 }
 
 struct RemoteProviderProfession {
@@ -32,7 +35,7 @@ struct RemoteProviderProfession {
 
 extension RemoteProviderProfession: Codable {
   func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: ProviderProfessionJsonFields.self)
+    var container = encoder.container(keyedBy: ProfessionJsonFields.self)
     try container.encode(id, forKey: .id)
     try container.encode(providerId, forKey: .providerId)
     try container.encode(professionId, forKey: .professionId)
@@ -52,7 +55,7 @@ extension RemoteProviderProfession: Codable {
   }
   
   init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: ProviderProfessionJsonFields.self)
+    let container = try decoder.container(keyedBy: ProfessionJsonFields.self)
     id = try container.decode(Int.self, forKey: .id)
     providerId = try container.decode(Int.self, forKey: .providerId)
     professionId = try container.decode(Int.self, forKey: .professionId)

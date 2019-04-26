@@ -40,33 +40,45 @@ class CommonDataRequest {
   
   func getAllServices(_ completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteService.self, from: .allServices, RequestManager.sessionToken.asParams()) {
-      [weak self] (services, response) in
+      services, response in
       
       if let error = response.error {
         completion(error)
         return
       }
       
-      DispatchQueue.global(qos: .userInteractive).async {
-        self!.databaseManager.insertUpdateServices(from: services)
-        completion(ResponseStatus.success.rawValue)
-      }
+      DataBaseManager.shared.insertUpdateServices(from: services)
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
   
   func getCities(_ completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteCity.self, from: .allCities, nil) {
-      [weak self] (cities, response) in
+      cities, response in
       
       if let error = response.error {
         completion(error)
         return
       }
       
-      DispatchQueue.global(qos: .userInteractive).async {
-        self?.databaseManager.insertUpdateCities(from: cities)
-        completion(ResponseStatus.success.rawValue)
+      DataBaseManager.shared.insertUpdateCities(from: cities)
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func getProfessions(_ completion: @escaping (String) -> Void) {
+    requestsManager.getListAsync(for: RemoteProfession.self, from: .allProfessions, nil) {
+      list, response in
+      if let error = response.error {
+        completion(error)
+        return
       }
+      
+      DataBaseManager.shared.insertUpdateProfessions(from: list)
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
   

@@ -74,7 +74,7 @@ class ProviderServiceCardController: UIViewController {
 }
 
 extension ProviderServiceCardController: ModalPickHandling {
-  func picked(id: Int, title: String) {
+  func picked(id: Int, title: String, _ type: ModalPickType = .service) {
     guard let path = model.serviceIdentifier else { return }
     
     model.setPickedService(for: path, serviceId: id, serviceName: title)

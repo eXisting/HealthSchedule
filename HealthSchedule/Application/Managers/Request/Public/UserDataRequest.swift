@@ -15,7 +15,7 @@ protocol AuthenticationProviding {
 }
 
 protocol ProviderInfoRequesting {
-  func getProfessions(completion: @escaping (String?) -> Void)
+  func getProviderProfessions(completion: @escaping (String) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
 
   func getAddress(by id: Int, _ completion: @escaping (String) -> Void)
@@ -266,17 +266,17 @@ extension UserDataRequest: AuthenticationProviding {
 }
 
 extension UserDataRequest: ProviderInfoRequesting {
-  func getProfessions(completion: @escaping (String?) -> Void) {
+  func getProviderProfessions(completion: @escaping (String) -> Void) {
     requestsManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken.asParams()) {
-      (list, response) in
-      if response.error != nil {
-        completion(response.error)
+      list, response in
+      if let error = response.error {
+        completion(error)
         return
       }
       
       // TODO: Insert into core data
       
-      completion(nil)
+      completion(ResponseStatus.success.rawValue)
     }
   }
   

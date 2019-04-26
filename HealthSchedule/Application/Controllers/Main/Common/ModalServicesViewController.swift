@@ -18,7 +18,7 @@ class ModalServicesViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let service = list[indexPath.row]
-    storeDelegate.picked(id: Int(service.id), title: service.name!)
+    storeDelegate.picked(id: Int(service.id), title: service.name!, .service)
     dismiss(animated: true)
   }
   

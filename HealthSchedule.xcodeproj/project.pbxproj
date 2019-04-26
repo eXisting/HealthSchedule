@@ -171,6 +171,8 @@
 		EDE6B3F822709F3A0087DFCE /* ProviderProfessinSectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE6B3F722709F3A0087DFCE /* ProviderProfessinSectionModels.swift */; };
 		EDE6B3FB2270A4DA0087DFCE /* ProviderProfessionElementTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE6B3FA2270A4DA0087DFCE /* ProviderProfessionElementTableView.swift */; };
 		EDE6B4022270A8F70087DFCE /* ProviderProfessionCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE6B4012270A8F70087DFCE /* ProviderProfessionCardViewController.swift */; };
+		EDE6B4042272FD3D0087DFCE /* ModalProfessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE6B4032272FD3D0087DFCE /* ModalProfessionViewController.swift */; };
+		EDE6B406227304E60087DFCE /* Profession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE6B405227304E60087DFCE /* Profession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -342,6 +344,8 @@
 		EDE6B3F722709F3A0087DFCE /* ProviderProfessinSectionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfessinSectionModels.swift; sourceTree = "<group>"; };
 		EDE6B3FA2270A4DA0087DFCE /* ProviderProfessionElementTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfessionElementTableView.swift; sourceTree = "<group>"; };
 		EDE6B4012270A8F70087DFCE /* ProviderProfessionCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfessionCardViewController.swift; sourceTree = "<group>"; };
+		EDE6B4032272FD3D0087DFCE /* ModalProfessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalProfessionViewController.swift; sourceTree = "<group>"; };
+		EDE6B405227304E60087DFCE /* Profession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -816,6 +820,7 @@
 				EDD2A82522314CE800B52E68 /* Request.swift */,
 				EDD2A84822391E8E00B52E68 /* Service.swift */,
 				ED3E96DB225F7B8300C8F602 /* RemoteAvailableTimeContainer.swift */,
+				EDE6B405227304E60087DFCE /* Profession.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -974,6 +979,7 @@
 			children = (
 				EDD2A862223BEF7900B52E68 /* ModalCityViewController.swift */,
 				EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */,
+				EDE6B4032272FD3D0087DFCE /* ModalProfessionViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1512,6 +1518,7 @@
 				EDB6B44C225B453300B8EA8B /* ScheduleModalDayModel.swift in Sources */,
 				ED73590C2254C28A006C318C /* ProviderServicesTableView.swift in Sources */,
 				ED10DB362269F14F00234B27 /* CommonExpandableSection.swift in Sources */,
+				EDE6B4042272FD3D0087DFCE /* ModalProfessionViewController.swift in Sources */,
 				ED1ED02921FF5C2D00141CF5 /* ValidationManager.swift in Sources */,
 				DB8519382208CC0E00CCF452 /* ViewLines.swift in Sources */,
 				ED825FEC2241485100456D0F /* AccountSectionInfoModel.swift in Sources */,
@@ -1534,6 +1541,7 @@
 				ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
 				ED2AC3F3224B8BD600AB6D9F /* FetchRequestsHandler.swift in Sources */,
+				EDE6B406227304E60087DFCE /* Profession.swift in Sources */,
 				ED1B8E03226DB03E00E12EAC /* RequestCardDataSource.swift in Sources */,
 				EDD2A82A22367AF000B52E68 /* AuthenticationModel.swift in Sources */,
 				EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */,

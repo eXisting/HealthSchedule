@@ -20,6 +20,9 @@ protocol CoreDataRequestsPerformable {
   
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext?)
   
+  func insertUpdateProfessions(from list: [RemoteProfession], context: NSManagedObjectContext?)
+  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], context: NSManagedObjectContext?)
+  
   func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext?)
   func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext?)
   
@@ -46,6 +49,8 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   private let serviceEntity = "Service"
   private let requestEntity = "Request"
   private let providerServiceEntity = "ProviderService"
+  private let providerProfessionEntity = "ProviderProfession"
+  private let professionEntity = "Profession"
   private let roleEntity = "Role"
   private let scheduleDayTemplateEntity = "ScheduleDayTemplate"
 
@@ -147,12 +152,12 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
         
         // Update
         if result.count > 0 {
-          builder.build(service: result.first!, remoteService)
+          builder.build(service: result.first!, remoteService, context: workingContext)
         }
           // Insert
         else {
           let service = NSManagedObject(entity: serviceEntityObject!, insertInto: workingContext) as! Service
-          builder.build(service: service, remoteService)
+          builder.build(service: service, remoteService, context: workingContext)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
@@ -192,6 +197,70 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
           
           let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: workingContext) as! ProviderService
           builder.build(providerService: providerService, service, context: workingContext)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
+    }
+    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+  }
+  
+  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], context: NSManagedObjectContext? = nil) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let professionEntity = NSEntityDescription.entity(forEntityName: providerProfessionEntity, in: workingContext)
+    
+    for remote in list {
+      let fetchRequest: NSFetchRequest<ProviderProfession> = ProviderProfession.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
+      fetchRequest.fetchLimit = 1
+      
+      do {
+        let result = try workingContext.fetch(fetchRequest)
+        
+        // Update
+        if result.count > 0 {
+          builder.build(providerProfession: result.first!, remote, context: workingContext)
+        }
+        // Insert
+        else {
+          let providerProfession = NSManagedObject(entity: professionEntity!, insertInto: workingContext) as! ProviderProfession
+          builder.build(providerProfession: providerProfession, remote, context: workingContext)
+        }
+      } catch {
+        print("Unexpected error: \(error.localizedDescription)")
+        abort()
+      }
+    }
+    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+  }
+  
+  func insertUpdateProfessions(from list: [RemoteProfession], context: NSManagedObjectContext? = nil) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let generalProfessionEntity = NSEntityDescription.entity(forEntityName: professionEntity, in: workingContext)
+    
+    for remote in list {
+      let fetchRequest: NSFetchRequest<Profession> = Profession.fetchRequest()
+      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
+      fetchRequest.fetchLimit = 1
+      
+      do {
+        let result = try workingContext.fetch(fetchRequest)
+
+        // Update
+        if result.count > 0 {
+          builder.build(profession: result.first!, remote, context: workingContext)
+        }
+          // Insert
+        else {
+          let profession = NSManagedObject(entity: generalProfessionEntity!, insertInto: workingContext) as! Profession
+          builder.build(profession: profession, remote, context: workingContext)
         }
       } catch {
         print("Unexpected error: \(error.localizedDescription)")

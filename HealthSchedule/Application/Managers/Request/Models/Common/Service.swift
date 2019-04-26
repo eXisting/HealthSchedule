@@ -8,10 +8,21 @@
 
 import UIKit
 
-struct RemoteService {
-  var id: Int
-  var name: String
-  var title: String
+enum RemoteServiceJsonFields: String, CodingKey {
+  case id
+  case title
+  case professionId = "profession_id"
 }
 
-extension RemoteService: Codable {}
+struct RemoteService: Codable {
+  var id: Int
+  var title: String
+  var professionId: Int
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: RemoteServiceJsonFields.self)
+    id = try container.decode(Int.self, forKey: .id)
+    title = try container.decode(String.self, forKey: .title)
+    professionId = try container.decode(Int.self, forKey: .professionId)
+  }
+}
