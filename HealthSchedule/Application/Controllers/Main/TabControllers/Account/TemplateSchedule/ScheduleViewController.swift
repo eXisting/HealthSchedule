@@ -29,19 +29,6 @@ class ScheduleViewController: UIViewController, NVActivityIndicatorViewable {
   @IBOutlet weak var calendarWeekView: TemplateScheduleWeekView!
   private let model = ScheduleModel()
   
-  private lazy var presenter: Presentr = {
-    let customType = PresentationType.popup
-    
-    let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .crossDissolve
-    customPresenter.dismissTransitionType = .crossDissolve
-    customPresenter.roundCorners = true
-    customPresenter.backgroundColor = .lightGray
-    customPresenter.backgroundOpacity = 0.5
-    customPresenter.cornerRadius = 50
-    return customPresenter
-  }()
-  
   private var customNavigationItem: ScheduleNavigationItem?
   
   override var navigationItem: UINavigationItem {
@@ -152,7 +139,7 @@ extension ScheduleViewController: JZLongPressViewDelegate, JZLongPressViewDataSo
   func weekView(_ weekView: JZLongPressWeekView, didEndAddNewLongPressAt startDate: Date) {
     let controller = ScheduleEventModalController(startDate: startDate)
     controller.eventsDelegate = self
-    customPresentViewController(presenter, viewController: controller, animated: true)
+    customPresentViewController(calendarWeekView.presenter, viewController: controller, animated: true)
   }
   
   func weekView(_ weekView: JZLongPressWeekView, didBeginLongPressOn cell: JZLongPressEventCell) {
@@ -164,7 +151,7 @@ extension ScheduleViewController: JZLongPressViewDelegate, JZLongPressViewDataSo
     )
     
     controller.eventsDelegate = self
-    customPresentViewController(presenter, viewController: controller, animated: true)
+    customPresentViewController(calendarWeekView.presenter, viewController: controller, animated: true)
   }
     
   func weekView(_ weekView: JZLongPressWeekView, viewForAddNewLongPressAt startDate: Date) -> UIView {

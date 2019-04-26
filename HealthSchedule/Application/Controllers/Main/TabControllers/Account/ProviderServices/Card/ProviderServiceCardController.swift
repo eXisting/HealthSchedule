@@ -28,18 +28,6 @@ class ProviderServiceCardController: UIViewController {
     }
   }
   
-  private let presenter: Presentr = {
-    let customType = PresentationType.popup
-    
-    let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .crossDissolve
-    customPresenter.dismissTransitionType = .crossDissolve
-    customPresenter.roundCorners = true
-    customPresenter.backgroundColor = .lightGray
-    customPresenter.backgroundOpacity = 0.5
-    return customPresenter
-  }()
-  
   convenience init(service: ProviderService?) {
     self.init()
     model = ProviderServiceModel(service: service)
@@ -67,7 +55,7 @@ class ProviderServiceCardController: UIViewController {
         controller.storeDelegate = self
         controller.list = services
         self!.model.serviceIdentifier = identifier
-        self!.customPresentViewController(self!.presenter, viewController: controller, animated: true)
+        self!.customPresentViewController(self!.mainView.presenter, viewController: controller, animated: true)
       }
     }
   }

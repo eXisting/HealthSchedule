@@ -8,8 +8,9 @@
 
 import UIKit
 import CDAlertView
+import NVActivityIndicatorView
 
-class AuthenticationViewController: UIViewController {
+class AuthenticationViewController: UIViewController, NVActivityIndicatorViewable {
   private var rootNavigation: RootNavigationPresentable!
   
   private var mainView: AuthMainView!
@@ -55,11 +56,18 @@ class AuthenticationViewController: UIViewController {
   }
   
   @objc private func onSignInClick() {
+    showLoader()
+    
     model.signIn(formData: mainView.getFormData(), mainView.signInButton)
   }
   
   @objc private func onSignUpClick() {
     rootNavigation.presentSignUpController()
+  }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleMultiple, color: .white, minimumDisplayTime: 2, backgroundColor: UIColor.black.withAlphaComponent(0.85))
   }
 }
 

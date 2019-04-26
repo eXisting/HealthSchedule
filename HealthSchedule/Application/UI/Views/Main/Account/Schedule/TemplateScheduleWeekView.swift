@@ -7,9 +7,23 @@
 //
 
 import UIKit
+import Presentr
 import JZCalendarWeekView
 
 class TemplateScheduleWeekView: JZLongPressWeekView {
+  lazy var presenter: Presentr = {
+    let customType = PresentationType.popup
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .crossDissolve
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    customPresenter.cornerRadius = 10
+    return customPresenter
+  }()
+  
   override func registerViewClasses() {
     super.registerViewClasses()
     

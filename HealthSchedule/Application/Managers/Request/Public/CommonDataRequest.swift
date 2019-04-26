@@ -25,10 +25,10 @@ class CommonDataRequest {
   func getServices(for cityId: Int, _ completion: @escaping ([RemoteService]) -> Void) {
     var params = RequestManager.sessionToken.asParams()
     params[UserJsonFields.cityId.rawValue] = String(cityId)
+    params[ProfessionJsonFields.categoryId.rawValue] = String(1) // for current app - 1 is working category
     
     requestsManager.getListAsync(for: RemoteService.self, from: .services, params) {
       (services, response) in
-      
       if let _ = response.error {
         completion([])
         return

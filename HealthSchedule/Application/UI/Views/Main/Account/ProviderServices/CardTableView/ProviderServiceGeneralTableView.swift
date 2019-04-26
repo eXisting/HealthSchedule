@@ -7,9 +7,23 @@
 //
 
 import UIKit
+import Presentr
 
 class ProviderServiceGeneralTableView: UITableView {
   static let cellIdentifier = "ProviderCreateRowCell"
+  
+  lazy var presenter: Presentr = {
+    let customType = PresentationType.popup
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .crossDissolve
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = true
+    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundOpacity = 0.5
+    customPresenter.cornerRadius = 10
+    return customPresenter
+  }()
   
   func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
     self.delegate = delegate

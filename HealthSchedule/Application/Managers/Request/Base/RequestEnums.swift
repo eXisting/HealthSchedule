@@ -15,8 +15,8 @@ enum Endpoints: String {
   // GET COMMON
   case allCities = "/api/cities"
   case availableProvidersByInterval = "/api/provider/available-times"
-  case allServices = "/api/services/all/2" // 2 - is current category for app
-  case allProfessions = "/api/category/2/professions" // 2 - is current category for app
+  case allServices = "/api/services/all/1" // 1 - is current category for app
+  case allProfessions = "/api/category/1/professions" // 1 - is current category for app
   
   // POST
   case signUpAsUser = "/api/register/user"

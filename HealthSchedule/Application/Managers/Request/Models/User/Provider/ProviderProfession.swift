@@ -63,7 +63,7 @@ extension RemoteProviderProfession: Codable {
     companyName = try container.decode(String.self, forKey: .companyName)
     
     let startDateString = try container.decode(String.self, forKey: .startAt)
-    startAt = DateManager.shared.stringToDate(startDateString)
+    startAt = DateManager.shared.stringToDate(startDateString, format: .dateTime)
     
     let endDateString = try? container.decode(String.self, forKey: .endAt)
     guard let endAtString = endDateString else {
@@ -71,6 +71,6 @@ extension RemoteProviderProfession: Codable {
       return
     }
     
-    endAt = DateManager.shared.stringToDate(endAtString)
+    endAt = DateManager.shared.stringToDate(endAtString, format: .dateTime)
   }
 }

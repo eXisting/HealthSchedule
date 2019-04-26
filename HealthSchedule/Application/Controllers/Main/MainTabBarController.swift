@@ -32,9 +32,6 @@ class MainTabBarController: UITabBarController, NVActivityIndicatorViewable {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
-    startAnimating(size, type: .ballPulse, color: .white, displayTimeThreshold: 5, minimumDisplayTime: 2)
-    
     preloadRequiredData()
     
     view.backgroundColor = .white
@@ -63,11 +60,11 @@ class MainTabBarController: UITabBarController, NVActivityIndicatorViewable {
     
     setViewControllers((tabBarItems as! [UIViewController]), animated: true)
     
-    stopAnimating()
+    self.stopAnimating()
   }
   
   private func preloadRequiredData() {
-    // TODO: refactor with threads
+    let semaphore = DispatchSemaphore(value: 0)
     
     requestManager.getCities { [weak self] status in
       if status != ResponseStatus.success.rawValue {
@@ -75,24 +72,31 @@ class MainTabBarController: UITabBarController, NVActivityIndicatorViewable {
         exit(1);
       }
       
-      self?.requestManager.getProfessions { [weak self] status in
-        if status != ResponseStatus.success.rawValue {
-          self?.showWarningAlert(message: "Application cannot get required professions from the server!")
-          exit(1);
-        }
-        
-        self?.requestManager.getAllServices { [weak self] status in
-          if status != ResponseStatus.success.rawValue {
-            self?.showWarningAlert(message: "Application cannot get required services from the server!")
-            exit(1);
-          }
-          
-          DispatchQueue.main.async {
-            self?.instantiateControllers()            
-          }
-        }
-      }
+      semaphore.signal()
     }
+    
+    semaphore.wait()
+    requestManager.getProfessions { [weak self] status in
+      if status != ResponseStatus.success.rawValue {
+        self?.showWarningAlert(message: "Application cannot get required professions from the server!")
+        exit(1);
+      }
+      
+      semaphore.signal()
+    }
+    
+    semaphore.wait()
+    requestManager.getAllServices { [weak self] status in
+      if status != ResponseStatus.success.rawValue {
+        self?.showWarningAlert(message: "Application cannot get required services from the server!")
+        exit(1);
+      }
+      
+      semaphore.signal()
+    }
+    
+    semaphore.wait()
+    instantiateControllers()
   }
 }
 
