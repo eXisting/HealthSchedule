@@ -25,6 +25,7 @@ class ProfileView: UIView {
     customPresenter.roundCorners = true
     customPresenter.backgroundColor = .lightGray
     customPresenter.backgroundOpacity = 0.5
+    customPresenter.cornerRadius = 10
     return customPresenter
   }()
   
