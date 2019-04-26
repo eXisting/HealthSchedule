@@ -16,6 +16,7 @@ protocol AuthenticationProviding {
 
 protocol ProviderInfoRequesting {
   func getProviderProfessions(completion: @escaping (String) -> Void)
+  func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
 
   func getAddress(by id: Int, _ completion: @escaping (String) -> Void)
@@ -346,6 +347,28 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       DataBaseManager.shared.insertUpdateProviderServices(from: list)
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void) {
+    var endpoint = Endpoints.providerProfessions.rawValue
+    var requestType: RequestType = .post
+    
+    if !isCreate {
+      endpoint.append("/")
+      endpoint.append(data[ProfessionJsonFields.id.rawValue]!)
+      
+      requestType = .put
+    }
+    
+    requestsManager.postAsync(to: endpoint, as: requestType, data, RequestManager.sessionToken.asParams()) {
+      serverMessage, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
       
       completion(ResponseStatus.success.rawValue)
     }

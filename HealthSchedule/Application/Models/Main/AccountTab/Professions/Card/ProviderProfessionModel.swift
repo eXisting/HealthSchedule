@@ -30,7 +30,7 @@ class ProviderProfessionModel {
   }
   
   func saveProviderProfession(_ completion: @escaping (String) -> Void) {
-    
+    requestManager.createUpdateProviderProfession(with: collectData(), isCreate: existingProfession == nil, completion: completion)
   }
   
   func getCities(_ completion: @escaping ([City]) -> Void) {
@@ -48,7 +48,17 @@ class ProviderProfessionModel {
   }
   
   func getProfessions(_ completion: @escaping ([Profession]) -> Void) {
-    completion([])
+    let cached = DataBaseManager.shared.fetchRequestsHandler.getProfessions(context: DataBaseManager.shared.mainContext)
+    if cached.count > 1 {
+      completion(cached)
+      return
+    }
+    
+    commonRequests.getProfessions { status in
+      if status == ResponseStatus.success.rawValue {
+        completion(DataBaseManager.shared.fetchRequestsHandler.getProfessions(context: DataBaseManager.shared.mainContext))
+      }
+    }
   }
   
   func setPickedProfession(for path: IndexPath, professionId: Int?, professionName: String?) {
@@ -82,7 +92,7 @@ class ProviderProfessionModel {
     }
     
     if let providerProfession = existingProfession {
-      result["id"] = String(providerProfession.id)
+      result[ProfessionJsonFields.id.rawValue] = String(providerProfession.id)
     }
     
     return result

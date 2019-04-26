@@ -50,10 +50,18 @@ class ProviderProfessionCardViewController: UIViewController {
   private func presentProfessionsPicker(with identifier: IndexPath) {
     model.getProfessions {
       [weak self] professions in
+      if professions.count <= 1 {
+        DispatchQueue.main.async {
+          self!.showWarningAlert(message: "Cannot get professions list...")
+          return
+        }
+      }
+      
       DispatchQueue.main.async {
         let controller = ModalProfessionViewController()
         controller.list = professions
         controller.storeDelegate = self
+        self!.model.professionIdentifier = identifier
         self?.customPresentViewController(self!.mainView.presenter, viewController: controller, animated: true)
       }
     }
@@ -165,8 +173,10 @@ extension ProviderProfessionCardViewController: GeneralItemHandlingDelegate {
   func main() {
     model.saveProviderProfession { [weak self] status in
       if status != ResponseStatus.success.rawValue {
-        self?.showWarningAlert(message: status)
-        return
+        DispatchQueue.main.async {
+          self?.showWarningAlert(message: status)
+          return
+        }
       }
       
       DispatchQueue.main.async {

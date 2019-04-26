@@ -30,6 +30,7 @@ class ProviderProfessionGeneralSectionModel: ProviderProfessionSectionDataContai
         keyName: ProfessionJsonFields.professionId.rawValue
       ),
       ProviderServiceTextRowModel(
+        id: profession != nil ? Int(profession!.city!.id) : nil,
         data: profession != nil ? String(profession!.city!.name!) : nil,
         title: "City:",
         type: .general,
@@ -96,8 +97,8 @@ class ProviderProfessionTimeIntervalSectionModel: ProviderProfessionSectionDataC
         title: "End:",
         type: .general,
         subtype: .datePicker,
-        keyName: ProfessionJsonFields.startAt.rawValue,
-        date: profession?.start
+        keyName: ProfessionJsonFields.endAt.rawValue,
+        date: profession?.end
       )
     ]
     
