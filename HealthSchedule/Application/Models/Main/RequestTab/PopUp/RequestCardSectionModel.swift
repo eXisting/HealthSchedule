@@ -64,7 +64,7 @@ class RequestCardInfoSectionModel: RequestSectionDataContaining {
   
   init(request: Request) {
     rows = [
-      RequestCardTextRowModel(title: "Service", data: request.providerService?.name ?? "Title unknown"),
+      RequestCardTextRowModel(title: "Service", data: request.providerService?.name ?? request.service?.name ?? "Title unknown"),
       RequestCardTextRowModel(title: "Price", data: String(request.providerService?.price ?? 0.0)),
       RequestCardTextRowModel(title: "Duration", data:  DateManager.shared.date2String(with: .time, request.providerService?.duration ?? Date(), .hour24)),
       RequestCardTextRowModel(title: "Description", data: request.requestDescription ?? "No description")
