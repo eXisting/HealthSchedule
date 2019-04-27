@@ -32,6 +32,8 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    autoLogin()
+    
     mainView.setUpViews(textFieldsDelegate: self)
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
     mainView.signUpButton.addTarget(self, action: #selector(onSignUpClick), for: .touchDown)
@@ -40,22 +42,6 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(true)
-    model.autoLogin { [weak self] response in
-      if response == ResponseStatus.success.rawValue {
-        DispatchQueue.main.async {
-          self?.rootNavigation.presentHome()
-        }
-        return
-      }
-      
-      DispatchQueue.main.async {
-        self?.showWarningAlert(message: response)
-      }
-    }
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -86,6 +72,26 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
   
   @objc private func onSignUpClick() {
     rootNavigation.presentSignUpController()
+  }
+  
+  private func autoLogin() {
+    model.autoLogin { [weak self] response in
+      if response == ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.rootNavigation.presentHome()
+        }
+        return
+      }
+      
+      if response == UserDefaultsKeys.logutTriggered.rawValue
+        || response == UserDefaultsKeys.applicationLaunchedOnce.rawValue {
+        return
+      }
+      
+      DispatchQueue.main.async {
+        self?.showWarningAlert(message: response)
+      }
+    }
   }
   
   private func showLoader() {

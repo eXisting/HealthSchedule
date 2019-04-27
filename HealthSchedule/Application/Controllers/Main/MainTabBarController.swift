@@ -61,6 +61,7 @@ class MainTabBarController: UITabBarController, NVActivityIndicatorViewable {
     setViewControllers((tabBarItems as! [UIViewController]), animated: true)
     
     self.stopAnimating()
+    UserDefaults.standard.set(true, forKey: UserDefaultsKeys.applicationLaunchedOnce.rawValue)
   }
   
   private func preloadRequiredData() {

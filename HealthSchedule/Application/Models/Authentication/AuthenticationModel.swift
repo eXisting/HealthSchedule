@@ -41,6 +41,21 @@ extension AuthenticationModel: SigningIn {
       return
     }
     
+    let isUserTriggeredLogout = UserDefaults.standard.bool(forKey: UserDefaultsKeys.logutTriggered.rawValue)
+    let isAppRunBefore = UserDefaults.standard.bool(forKey: UserDefaultsKeys.applicationLaunchedOnce.rawValue)
+    
+    // if user has initiated - do nothing
+    if isUserTriggeredLogout && isAppRunBefore {
+      completion(UserDefaultsKeys.logutTriggered.rawValue)
+      return
+    }
+    
+    // if app has been launched for the first time - do nothing
+    if !isUserTriggeredLogout && !isAppRunBefore {
+      completion(UserDefaultsKeys.applicationLaunchedOnce.rawValue)
+      return
+    }
+    
     completion(ResponseStatus.tokenExpired.rawValue)
   }
   

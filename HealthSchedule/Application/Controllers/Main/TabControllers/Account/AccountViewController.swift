@@ -100,6 +100,7 @@ extension AccountViewController: AccountHandlableDelegate {
   }
   
   func logout() {
+    UserDefaults.standard.set(true, forKey: UserDefaultsKeys.logutTriggered.rawValue)
     NotificationCenter.default.post(name: .LogoutCalled, object: nil)
   }
   
