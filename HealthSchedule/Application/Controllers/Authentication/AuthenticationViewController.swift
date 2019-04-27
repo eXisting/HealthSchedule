@@ -44,9 +44,17 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
-    // TODO: Come up with solution
-    model.autoLogin { [weak self] in
-      self?.rootNavigation.presentHome()
+    model.autoLogin { [weak self] response in
+      if response == ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.rootNavigation.presentHome()
+        }
+        return
+      }
+      
+      DispatchQueue.main.async {
+        self?.showWarningAlert(message: response)
+      }
     }
   }
   
@@ -57,8 +65,19 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
   
   @objc private func onSignInClick() {
     showLoader()
+    mainView.signInButton?.isUserInteractionEnabled = false
     
-    model.signIn(formData: mainView.getFormData(), mainView.signInButton)
+    model.signIn(formData: mainView.getFormData()) { [weak self] response in
+      if response == ResponseStatus.success.rawValue {
+        self?.rootNavigation.presentHome()
+        self?.mainView.signInButton?.isUserInteractionEnabled = true
+        return
+      }
+      
+      self?.showWarningAlert(message: response)
+      self?.mainView.signInButton?.isUserInteractionEnabled = true
+      self?.stopAnimating()
+    }
   }
   
   @objc private func onSignUpClick() {

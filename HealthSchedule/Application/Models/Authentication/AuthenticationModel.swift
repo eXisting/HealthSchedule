@@ -9,8 +9,8 @@
 import UIKit
 
 protocol SigningIn {
-  func autoLogin(_ completion: @escaping () -> Void)
-  func signIn(formData: (login: String, password: String)?, _ sender: UIButton?)
+  func autoLogin(_ completion: @escaping (String) -> Void)
+  func signIn(formData: (login: String, password: String)?, _ completion: @escaping (String) -> Void)
 }
 
 protocol SigningUp {
@@ -30,38 +30,33 @@ class AuthenticationModel {
 }
 
 extension AuthenticationModel: SigningIn {
-  func autoLogin(_ completion: @escaping () -> Void) {
+  func autoLogin(_ completion: @escaping (String) -> Void) {
     RequestManager.rememberTokenFromUserDefualts()
     
     if Token.isValid() {
-      // TODO: Get data from keychain and auto login
+      // TODO: Refresh token
       
       // mock - just show next window
-      completion()
+      completion(ResponseStatus.success.rawValue)
+      return
     }
+    
+    completion(ResponseStatus.tokenExpired.rawValue)
   }
   
-  func signIn(formData: (login: String, password: String)?, _ sender: UIButton?) {
-    sender?.isUserInteractionEnabled = false
-    
+  func signIn(formData: (login: String, password: String)?, _ completion: @escaping (String) -> Void) {
     guard let formData = formData else {
       errorShowable.showWarningAlert(message: "Either login or password are not filled!")
       return
     }
     
-    userRequestController.login(login: formData.login, password: formData.password) {
-      [weak self] error in
-      DispatchQueue.main.async {
-        if let error = error {
-          sender?.isUserInteractionEnabled = true
-          
-          self?.errorShowable.showWarningAlert(message: error)
-          return
-        }
-        
-        self?.presentResponsible.presentHome()
-        sender?.isUserInteractionEnabled = true
+    userRequestController.login(login: formData.login, password: formData.password) { error in
+      if let error = error {
+        completion(error)
+        return
       }
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
 }

@@ -28,6 +28,7 @@ enum ResponseStatus: String {
   case success
   case invalidData = "Passed data is invalid!"
   case applicationError = "Applicaton error! Contact developer"
+  case tokenExpired = "Session is expired! Sign in again!"
   
   case cannotProceed = "Server cannot proceed your request!"
   case serverError = "Server error!"
