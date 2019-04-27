@@ -39,6 +39,7 @@ class AddressViewController: UIViewController {
     fetchAddress()
     
     setupNavigationBarAppearance()
+    hideKeyboardWhenTappedAround()
   }
   
   private func fetchAddress() {

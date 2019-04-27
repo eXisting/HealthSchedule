@@ -45,6 +45,7 @@ class ProviderServiceCardController: UIViewController {
     mainView.setup(delegate: self, dataSource: model.dataSource)
     
     model.instantiateData()
+    hideKeyboardWhenTappedAround()
   }
   
   private func presentServicePicker(with identifier: IndexPath) {

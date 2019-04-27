@@ -45,6 +45,7 @@ class ProviderProfessionCardViewController: UIViewController {
     mainView.setup(delegate: self, dataSource: model.dataSource)
     
     model.instantiateData()
+    hideKeyboardWhenTappedAround()
   }
   
   private func presentProfessionsPicker(with identifier: IndexPath) {

@@ -125,6 +125,7 @@
 		EDB6B457225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B456225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift */; };
 		EDB6B45B225B856500B8EA8B /* TemplateDayRowsCommonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B45A225B856500B8EA8B /* TemplateDayRowsCommonData.swift */; };
 		EDBA927B2274B31F00794C9A /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBA927A2274B31F00794C9A /* AccountDataSource.swift */; };
+		EDBA927D2274C2ED00794C9A /* ControllersExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBA927C2274C2ED00794C9A /* ControllersExtensions.swift */; };
 		EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE60B9223FB41200734FBC /* SearchResultView.swift */; };
 		EDCFB45222280AD500A6B56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */; };
 		EDCFB45522280D2100A6B56F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB45422280D2100A6B56F /* DatePickerView.swift */; };
@@ -299,6 +300,7 @@
 		EDB6B456225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModalDayDataSource.swift; sourceTree = "<group>"; };
 		EDB6B45A225B856500B8EA8B /* TemplateDayRowsCommonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateDayRowsCommonData.swift; sourceTree = "<group>"; };
 		EDBA927A2274B31F00794C9A /* AccountDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataSource.swift; sourceTree = "<group>"; };
+		EDBA927C2274C2ED00794C9A /* ControllersExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersExtensions.swift; sourceTree = "<group>"; };
 		EDCE60B9223FB41200734FBC /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		EDCFB45122280AD500A6B56F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HealthSchedule/Application/UI/Storyboards/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		EDCFB45422280D2100A6B56F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -776,6 +778,7 @@
 				DB0B7C57225644F00035C593 /* JZUtils */,
 				EDD2A8302237B22300B52E68 /* UserDefaultsKeys.swift */,
 				ED4482FB22045E4700BE8EF0 /* SystemExtensions.swift */,
+				EDBA927C2274C2ED00794C9A /* ControllersExtensions.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1468,6 +1471,7 @@
 				EDE03EED2253808800DBAA0F /* ScheduleTemplate.swift in Sources */,
 				ED231B4B222E7A2A00A80FC9 /* RequestListTableView.swift in Sources */,
 				EDE03ED42252394000DBAA0F /* RoleExtensions.swift in Sources */,
+				EDBA927D2274C2ED00794C9A /* ControllersExtensions.swift in Sources */,
 				DB0B7C7A225644F10035C593 /* BlackGridLine.swift in Sources */,
 				ED1ED01A21FF199100141CF5 /* City.swift in Sources */,
 				ED4483152208380E00BE8EF0 /* RequestEnums.swift in Sources */,

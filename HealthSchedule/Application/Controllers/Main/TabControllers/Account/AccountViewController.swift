@@ -46,6 +46,8 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.setRefreshDelegate(delegate: self)
+    
+    hideKeyboardWhenTappedAround()
   }
   
   func setupTabBarItem() {

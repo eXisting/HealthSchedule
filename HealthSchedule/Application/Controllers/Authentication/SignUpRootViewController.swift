@@ -33,6 +33,8 @@ class SignUpRootViewController: UIViewController {
     mainView.addTargets()
     
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
+    
+    hideKeyboardWhenTappedAround()
   }
   
   func signUp() {

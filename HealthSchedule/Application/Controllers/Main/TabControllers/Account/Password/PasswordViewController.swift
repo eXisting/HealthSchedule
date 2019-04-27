@@ -36,6 +36,8 @@ class PasswordViewController: UIViewController {
     super.viewDidLoad()
     mainView.set(textFieldsDelegate: self)
     setupNavigationBarAppearance()
+    
+    hideKeyboardWhenTappedAround()
   }
   
   private func setupNavigationBarAppearance() {

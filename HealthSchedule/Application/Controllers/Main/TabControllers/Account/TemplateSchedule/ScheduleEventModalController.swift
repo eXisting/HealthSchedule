@@ -39,6 +39,8 @@ class ScheduleEventModalController: UIViewController {
     super.viewDidLoad()
     mainView.setup(acceptHandler: onSaveClickHandle, declineHandler: onCancelClickHandle)
     mainView.tableView.setup(delegate: model.dataSource, dataSource: model.dataSource)
+    
+    hideKeyboardWhenTappedAround()
   }
   
   override func viewWillLayoutSubviews() {

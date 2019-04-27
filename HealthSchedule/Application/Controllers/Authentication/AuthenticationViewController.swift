@@ -37,6 +37,8 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
     mainView.setUpViews(textFieldsDelegate: self)
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
     mainView.signUpButton.addTarget(self, action: #selector(onSignUpClick), for: .touchDown)
+    
+    hideKeyboardWhenTappedAround()
   }
   
   override func viewWillAppear(_ animated: Bool) {
