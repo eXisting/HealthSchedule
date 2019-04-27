@@ -287,7 +287,7 @@ class ProviderController extends AuthUserController
                 $provider_ids = collect([]);
 
                 $time->each(function ($item) use (&$provider_ids) {
-                    $provider_ids = $provider_ids->merge($item['provider_ids']);
+                    $provider_ids = $provider_ids->merge($item['provider_ids'])->unique();
                 });
 
                 return $provider_ids;
