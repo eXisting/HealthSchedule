@@ -12,13 +12,21 @@ class ProviderProfessionsModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
   var dataSource = ProviderProfessionsDataSource()
   
-  func loadProviderProfessions(_ completion: @escaping (String) -> Void) {
-    requestManager.getProviderProfessions(completion: completion)
+  func prefetch() {
+    do {
+      try DataBaseManager.shared.providerProfessionFrc.performFetch()
+    }
+    catch { print(error.localizedDescription) }
   }
   
-  func requestFromCoreData(_ completion: @escaping () -> Void) {
-    let _ = DataBaseManager.shared.providerServicesFrc.fetchedObjects
-    completion()
+  func loadProviderProfessions(_ completion: @escaping (String) -> Void) {
+    requestManager.getProviderProfessions(with: nil) { response in
+      do {
+        try DataBaseManager.shared.providerProfessionFrc.performFetch()
+        completion(response)
+      }
+      catch { completion(error.localizedDescription) }
+    }
   }
 }
 

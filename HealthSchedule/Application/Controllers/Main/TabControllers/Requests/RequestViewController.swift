@@ -33,6 +33,7 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
     DataBaseManager.shared.setFrcDelegate(for: .request, delegate: self)
     
     model.errorHandling = self
+    model.prefetch()
     
     mainView.setup(delegate: self, dataSource: model.dataSource, refreshDelegate: self)
     

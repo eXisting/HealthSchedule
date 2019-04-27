@@ -16,6 +16,13 @@ class RequestsModel {
     didSet { dataSource.deleteHandler = deleteRequest }
   }
   
+  func prefetch() {
+    do {
+      try DataBaseManager.shared.requestsResultController.performFetch()
+    }
+    catch { print(error.localizedDescription) }
+  }
+  
   func loadRequests(_ callback: @escaping (String) -> Void) {
     userRequestController.getRequests { response in
       do {

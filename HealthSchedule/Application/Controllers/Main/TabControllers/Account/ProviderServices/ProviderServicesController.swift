@@ -9,8 +9,9 @@
 import UIKit
 import CDAlertView
 import CoreData
+import NVActivityIndicatorView
 
-class ProviderServicesController: UIViewController {
+class ProviderServicesController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Your services"
   private var customNavigationItem: GeneralActionSaveNavigationItem?
   
@@ -35,9 +36,11 @@ class ProviderServicesController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     DataBaseManager.shared.setFrcDelegate(for: .providerService, delegate: self)
-
+    model.prefetch()
+    
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
+    
     setupNavigationBarAppearance()
   }
   

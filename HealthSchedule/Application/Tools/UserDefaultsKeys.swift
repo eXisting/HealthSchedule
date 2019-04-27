@@ -12,6 +12,8 @@ enum UserDefaultsKeys: String {
   case sessionToken = "SessionToken"
   case sessionExpires = "SessionExpires"
   case userUniqueId = "UserUniqueId"
+  case logutTriggered = "LogoutTriggered"
+  case applicationLaunchedOnce = "LaunchedOnce"
 }
 
 extension Notification.Name {

@@ -36,6 +36,7 @@ class ProfessionsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     DataBaseManager.shared.setFrcDelegate(for: .providerProfessions, delegate: self)
+    model.prefetch()
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self

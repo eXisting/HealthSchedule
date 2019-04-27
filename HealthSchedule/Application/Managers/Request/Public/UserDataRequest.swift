@@ -15,7 +15,7 @@ protocol AuthenticationProviding {
 }
 
 protocol ProviderInfoRequesting {
-  func getProviderProfessions(completion: @escaping (String) -> Void)
+  func getProviderProfessions(with providerId: Int?, completion: @escaping (String) -> Void)
   func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
 
@@ -267,8 +267,13 @@ extension UserDataRequest: AuthenticationProviding {
 }
 
 extension UserDataRequest: ProviderInfoRequesting {
-  func getProviderProfessions(completion: @escaping (String) -> Void) {
-    requestsManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, RequestManager.sessionToken.asParams()) {
+  func getProviderProfessions(with providerId: Int?, completion: @escaping (String) -> Void) {
+    var params = RequestManager.sessionToken.asParams()
+    if let id = providerId {
+      params[ProfessionJsonFields.providerId.rawValue] = String(id)      
+    }
+    
+    requestsManager.getListAsync(for: RemoteProviderProfession.self, from: .providerProfessions, params) {
       list, response in
       if let error = response.error {
         completion(error)

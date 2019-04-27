@@ -12,13 +12,21 @@ class ProviderServicesModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
   var dataSource = ProviderServicesDataSource()
   
-  func loadServices(_ completion: @escaping (String) -> Void) {
-    requestManager.getProviderServices(completion: completion)
+  func prefetch() {
+    do {
+      try DataBaseManager.shared.providerServicesFrc.performFetch()
+    }
+    catch { print(error.localizedDescription) }
   }
   
-  func requestFromCoreData(_ completion: @escaping () -> Void) {
-    let _ = DataBaseManager.shared.providerServicesFrc.fetchedObjects
-    completion()
+  func loadServices(_ completion: @escaping (String) -> Void) {
+    requestManager.getProviderServices { response in
+      do {
+        try DataBaseManager.shared.providerServicesFrc.performFetch()
+        completion(response)
+      }
+      catch { completion(error.localizedDescription) }
+    }
   }
 }
 

@@ -72,8 +72,8 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
         DispatchQueue.main.async {
           self?.rootNavigation.presentHome()
           self?.mainView.signInButton?.isUserInteractionEnabled = true
-          return
         }
+        return
       }
       
       DispatchQueue.main.async {
