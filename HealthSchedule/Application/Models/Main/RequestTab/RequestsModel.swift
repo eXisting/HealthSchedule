@@ -62,7 +62,7 @@ class RequestsDataSource: NSObject, UITableViewDataSource {
     let request = DataBaseManager.shared.requestsResultController.object(at: indexPath)
     
     cell.populateCell(
-      serviceName: request.service?.name ?? "Unkown name",
+      serviceName: request.providerService?.name ?? "Unkown name",
       price: String(request.providerService?.price ?? 0.0),
       visitedDate: DateManager.shared.dateToString(request.requestedAt),
       status: request.status2RequestStatusName()
