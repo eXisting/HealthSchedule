@@ -8,6 +8,8 @@ use App\Models\ProviderProfession;
 use App\Models\User;
 use Gate;
 
+use Illuminate\Http\Request;
+
 /**
  * Class ProviderProfessionController
  *
@@ -28,8 +30,19 @@ class ProviderProfessionController extends AuthUserController
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function all()
+    public function all(Request $request)
     {
+        $particularId = $request->get('provider_id');
+        if ($particularId != null)
+        {
+            $result = ProviderProfession::query()
+                ->where('provider_id', $particularId)
+                ->with('profession', 'city')
+                ->get();
+            
+            return response()->json($result);
+        }
+        
         return response()->json($this->authUser->providerProfessions()->with('profession', 'city')->get());
     }
 
@@ -46,8 +59,6 @@ class ProviderProfessionController extends AuthUserController
         } catch (\Exception $e) {
             return response()->json(['success' => false,'message' => $e->getMessage()]);
         }
-
-        $result = $this->authUser->providerProfessions()->create($data);
 
         if($result) {
             return response()->json(['success' => true]);
