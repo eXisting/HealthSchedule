@@ -84,6 +84,7 @@ extension RequestViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath), onInnerActionButtonCallback)
     customPresentViewController(mainView.presenter, viewController: controller, animated: true)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {

@@ -76,6 +76,7 @@ extension ProfessionsViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let providerProfession = DataBaseManager.shared.providerProfessionFrc.object(at: indexPath)
     navigationController?.pushViewController(ProviderProfessionCardViewController(profession: providerProfession), animated: true)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 }
 

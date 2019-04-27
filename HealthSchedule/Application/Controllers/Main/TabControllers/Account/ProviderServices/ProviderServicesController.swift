@@ -70,6 +70,7 @@ extension ProviderServicesController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let providerService = DataBaseManager.shared.providerServicesFrc.object(at: indexPath)
     navigationController?.pushViewController(ProviderServiceCardController(service: providerService), animated: true)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 }
 
