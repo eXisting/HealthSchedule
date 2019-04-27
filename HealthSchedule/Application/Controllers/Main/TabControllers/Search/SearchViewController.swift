@@ -150,6 +150,7 @@ extension SearchViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == SearchDataSource.SectionsIndexes.searchOptions.rawValue {
       pushController(with: model.dataSource.sectionsData[indexPath.section][indexPath.row] as! SearchOptionKey)
+      tableView.deselectRow(at: indexPath, animated: true)
     }
   }
   

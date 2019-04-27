@@ -64,7 +64,6 @@ class SearchDataSource: NSObject, UITableViewDataSource {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableView.cellIdentifier, for: indexPath)
     cell.textLabel?.text = (sectionsData[indexPath.section][indexPath.row] as! SearchOptionKey).rawValue
-    cell.selectionStyle = .none
     return cell
   }
   

@@ -45,7 +45,7 @@ class SearchView: UIView {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     searchButton.translatesAutoresizingMaskIntoConstraints = false
 
-    NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 8).isActive = true
+    NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: headerView, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
     NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: searchButton, attribute: .top, multiplier: 1, constant: 8).isActive = true
     NSLayoutConstraint(item: tableView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: tableView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
@@ -56,7 +56,7 @@ class SearchView: UIView {
     NSLayoutConstraint(item: searchButton, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.05, constant: 0).isActive = true
     
     NSLayoutConstraint(item: headerView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: headerView, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1, constant: 0).isActive = true
+    NSLayoutConstraint(item: headerView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.1, constant: 0).isActive = true
     NSLayoutConstraint(item: headerView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0).isActive = true
     NSLayoutConstraint(item: headerView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
   }
@@ -66,5 +66,9 @@ class SearchView: UIView {
     searchButton.setTitle("SEARCH", for: .normal)
     searchButton.backgroundColor = .clear
     searchButton.setTitleColor(.black, for: .normal)
+    
+    tableView.backgroundColor = UIColor.groupTableViewBackground
+    backgroundColor = UIColor.groupTableViewBackground
+    searchButton.backgroundColor = .white
   }
 }
