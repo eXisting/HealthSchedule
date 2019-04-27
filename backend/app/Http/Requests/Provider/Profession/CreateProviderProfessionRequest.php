@@ -39,7 +39,7 @@ class CreateProviderProfessionRequest extends FormRequest
             'company_name' => 'required|string',
             'city_id' => 'required|integer|exists:cities,id',
             'start_at' => 'required|date|date_format:"Y-m-d"',
-            'end_at' => 'required|date|date_format:"Y-m-d"',
+            'end_at' => 'nullable|date|date_format:"Y-m-d"',
         ];
     }
 }

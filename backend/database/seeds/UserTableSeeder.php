@@ -36,7 +36,7 @@ class UserTableSeeder extends Seeder
 
         $userImage = collect([]);
 
-        $users->random(5)->pluck('id')->each(function ($user_id) use (&$userImage) {
+        $users->random(10)->pluck('id')->each(function ($user_id) use (&$userImage) {
             $userImage = $userImage->merge( factory(\App\Models\UserImage::class, 1)->create([ 'user_id' => $user_id ]) );
         });
 
@@ -44,7 +44,7 @@ class UserTableSeeder extends Seeder
 
         #region Categories
 
-        $categories = factory(\App\Models\Category::class, 10)->create();
+        $categories = factory(\App\Models\Category::class, 1)->create();
 
         #endregion
 
@@ -52,8 +52,8 @@ class UserTableSeeder extends Seeder
 
         $professions = collect([]);
 
-        $categories->random(8)->pluck('id')->each(function ($category_id) use (&$professions) {
-            $professions = $professions->merge( factory(\App\Models\Profession::class, 6)->create([ 'category_id' => $category_id ]) );
+        $categories->random(1)->pluck('id')->each(function ($category_id) use (&$professions) {
+            $professions = $professions->merge( factory(\App\Models\Profession::class, 60)->create([ 'category_id' => $category_id ]) );
         });
 
         #endregion
@@ -140,7 +140,7 @@ class UserTableSeeder extends Seeder
             $count = $category->professions->count();
 
             if($count) {
-                $category->professions->random(rand(1,$count > 3 ? $count-3: $count))->each(function ($prof) use ($user) {
+                $category->professions->random(rand(2,3))->each(function ($prof) use ($user) {
                     factory(\App\Models\ProviderProfession::class, 1)->create([
                         'provider_id' => $user->id,
                         'profession_id' => $prof->id,
@@ -167,7 +167,7 @@ class UserTableSeeder extends Seeder
                     if(count($prof->services)) {
 
                         $prof->services->each(function ($service) use ($provider) {
-                            factory(\App\Models\ProviderService::class, 1)->create([
+                            factory(\App\Models\ProviderService::class, 25)->create([
                                 'provider_id' => $provider->id,
                                 'service_id' => $service->id
                             ]);
@@ -179,7 +179,7 @@ class UserTableSeeder extends Seeder
 
         #endregion
 
-        #region Services
+        #region Requests
 
         $request = factory(\App\Models\Request::class, 60)->create();
 

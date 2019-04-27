@@ -20,12 +20,12 @@ Route::prefix('register')->group(function () {
 
 Route::middleware('jwt.auth')->group(function () {
     Route::prefix('services')->group(function () {
-        // By city id as params
+        // By city id + category_id as params
         Route::get('/', 'ServiceController@all');
         Route::get('/{service}/providers/{provider}', 'ProviderServiceController@getAllProviderServices');
 
         // All services
-        Route::get('/all', 'ServiceController@getAllServices');
+        Route::get('/all/{category}', 'ServiceController@getAllServices');
         Route::get('/{id}', 'ServiceController@getService');
     });
 

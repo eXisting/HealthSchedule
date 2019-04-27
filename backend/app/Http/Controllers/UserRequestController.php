@@ -78,18 +78,11 @@ class UserRequestController extends RequestController
             return response(['success' => false], 404);
         }
 
-        $currentUser = User::find($this->authUser->id);
-
-        if ($currentUser != null) {
-            $userFullName = $currentUser->first_name . ' ' . $currentUser->last_name;
-
-            PushNotificationsController::sendNewRequestNotification('device_id_example', $this->authUser->name);
-        }
-
-        $data = array_merge($request->all(), ['provider_service_id' => $providerService->id]);
+        $data = array_merge($request->all(), ['provider_service_id' => $providerService->id], ['status' => 4]);
 
         $this->request->create($this->authUser->id, $data);
 
+        PushNotificationsController::sendNewRequestNotification("device_id_example", $this->authUser->name);
         return response()->json(['success' => true]);
     }
 

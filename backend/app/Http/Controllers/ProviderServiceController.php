@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Repositories\AddressRepository;
 use Gate;
 use App\Models\Service;
+use Illuminate\Http\Request;
 
 /**
  * Class ProviderProfessionController
@@ -18,6 +19,7 @@ use App\Models\Service;
  */
 class ProviderServiceController extends AuthUserController
 {
+
     /**
      * ProviderProfessionController constructor.
      */
@@ -32,6 +34,11 @@ class ProviderServiceController extends AuthUserController
     public function all()
     {
         return response()->json($this->authUser->providerServices()->with('address', 'service')->get());
+    }
+
+    public function getService(Request $request)
+    {
+        return response()->json(Service::find($request->service));
     }
 
     /**

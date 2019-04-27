@@ -69,7 +69,7 @@ class City extends Model
      *
      * @return \Illuminate\Support\Collection
      */
-    public function services()
+    public function services($category_id)
     {
         //select * from services
         //left join provider_services on provider_services.service_id = services.id
@@ -77,12 +77,14 @@ class City extends Model
         //left join cities on users.city_id = cities.id
         //where cities.id = 1
         return DB::table('services')
-            ->select('services.id', 'services.name', 'services.title')
+            ->select('services.id', 'services.name', 'services.title', 'services.profession_id')
             ->leftJoin('provider_services', 'provider_services.service_id', '=', 'services.id')
+            ->leftJoin('professions', 'professions.id', '=', 'services.id')
             ->leftJoin('users', 'provider_services.provider_id', '=', 'users.id')
             ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
             ->groupBy('services.id')
             ->where('cities.id', $this->id)
+            ->where('professions.category_id', $category_id)
             ->get();
     }
 
