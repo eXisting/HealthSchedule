@@ -46,6 +46,7 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    // WARNING: Throws for multiple providers per time
     return data[indexPath.section].rows[indexPath.row].rowHeight
   }
   
