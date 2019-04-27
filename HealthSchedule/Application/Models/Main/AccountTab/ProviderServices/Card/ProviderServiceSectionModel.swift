@@ -22,6 +22,13 @@ class ProviderServiceGeneralSectionModel: ProviderServiceSectionDataContaining {
   init(service: ProviderService?) {
     rows = [
       ProviderServiceTextRowModel(
+        data: service?.name,
+        title: "Name:",
+        type: .general,
+        subtype: .none,
+        keyName: ProviderServiceJsonFields.name.rawValue
+      ),
+      ProviderServiceTextRowModel(
         id: service != nil ? Int(service!.serviceId) : nil,
         data: service?.service?.name,
         title: "Service:",

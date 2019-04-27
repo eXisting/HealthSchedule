@@ -13,6 +13,7 @@ enum ProviderServiceJsonFields: String, CodingKey {
   case price
   case description
   case interval
+  case name
   
   case providerId = "provider_id"
   case service
@@ -29,6 +30,7 @@ struct RemoteProviderService {
   var providerId: Int
   var price: Double
   var description: String
+  var name: String
   
   var interval: Date
   
@@ -48,6 +50,7 @@ extension RemoteProviderService: Codable {
     address = try container.decode(RemoteAddress.self, forKey: .address)
     price = try container.decode(Double.self, forKey: .price)
     description = try container.decode(String.self, forKey: .description)
+    name = try container.decode(String.self, forKey: .name)
     provider = try? container.decode(RemoteUser.self, forKey: .provider)
 
     if provider == nil {

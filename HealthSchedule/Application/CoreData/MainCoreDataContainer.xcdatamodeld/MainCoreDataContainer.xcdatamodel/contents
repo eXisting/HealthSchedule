@@ -35,6 +35,7 @@
         <attribute name="addressId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="providerId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="serviceDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -110,13 +111,13 @@
         <element name="Address" positionX="-482.84765625" positionY="-509.30078125" width="128" height="105"/>
         <element name="City" positionX="-969.80078125" positionY="-179.421875" width="128" height="103"/>
         <element name="Profession" positionX="-106.28125" positionY="32.203125" width="128" height="118"/>
-        <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="210"/>
+        <element name="ProviderProfession" positionX="-885.23828125" positionY="-1.65234375" width="128" height="195"/>
+        <element name="ProviderService" positionX="-210.671875" positionY="-387.4609375" width="128" height="225"/>
         <element name="Request" positionX="-480.3671875" positionY="-168.5859375" width="128" height="240"/>
         <element name="Role" positionX="-712.4140625" positionY="-619.92578125" width="128" height="88"/>
         <element name="ScheduleDayTemplate" positionX="-928.03515625" positionY="-612.26171875" width="128" height="150"/>
         <element name="Service" positionX="-268.66796875" positionY="220.00390625" width="128" height="133"/>
         <element name="User" positionX="-706.875" positionY="-452.6953125" width="128" height="298"/>
         <element name="UserImage" positionX="-700.59765625" positionY="-21.62109375" width="128" height="105"/>
-        <element name="ProviderProfession" positionX="-885.23828125" positionY="-1.65234375" width="128" height="195"/>
     </elements>
 </model>

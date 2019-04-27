@@ -183,6 +183,7 @@ class InternalObjectsBuilder {
     providerService.price = remote.price
     providerService.serviceDescription = remote.description
     providerService.duration = remote.interval
+    providerService.name = remote.name
     
     let generalService = fetchHandler.getService(by: remote.service.id, context: context)
     
