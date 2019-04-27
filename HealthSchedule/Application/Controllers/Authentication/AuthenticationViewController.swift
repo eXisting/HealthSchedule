@@ -69,14 +69,18 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
     
     model.signIn(formData: mainView.getFormData()) { [weak self] response in
       if response == ResponseStatus.success.rawValue {
-        self?.rootNavigation.presentHome()
-        self?.mainView.signInButton?.isUserInteractionEnabled = true
-        return
+        DispatchQueue.main.async {
+          self?.rootNavigation.presentHome()
+          self?.mainView.signInButton?.isUserInteractionEnabled = true
+          return
+        }
       }
       
-      self?.showWarningAlert(message: response)
-      self?.mainView.signInButton?.isUserInteractionEnabled = true
-      self?.stopAnimating()
+      DispatchQueue.main.async {
+        self?.showWarningAlert(message: response)
+        self?.mainView.signInButton?.isUserInteractionEnabled = true
+        self?.stopAnimating()
+      }
     }
   }
   
