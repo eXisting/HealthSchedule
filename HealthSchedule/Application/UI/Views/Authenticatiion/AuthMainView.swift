@@ -21,8 +21,8 @@ class AuthMainView: UIView {
   func setUpViews(textFieldsDelegate: UITextFieldDelegate) {
     setUpLogo()
     setUpBackground()
-    setUpTextFields(textFieldsDelegate: textFieldsDelegate)
     setUpLoginButton()
+    setUpTextFields(textFieldsDelegate: textFieldsDelegate)
   }
   
   func getFormData() -> (login: String, password: String)? {
@@ -71,6 +71,6 @@ class AuthMainView: UIView {
   
   private func setUpLoginButton() {
     signInButton.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-    signInButton.roundCorners(by: signInButton.frame.size.height / 1.5)
+    signInButton.roundBorder(isClear: false)
   }
 }

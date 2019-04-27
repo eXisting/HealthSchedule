@@ -64,7 +64,6 @@ class SearchView: UIView {
   private func customizeViews() {    
     searchButton.roundBorder()
     searchButton.setTitle("SEARCH", for: .normal)
-    searchButton.backgroundColor = .clear
     searchButton.setTitleColor(.black, for: .normal)
     
     tableView.backgroundColor = UIColor.groupTableViewBackground

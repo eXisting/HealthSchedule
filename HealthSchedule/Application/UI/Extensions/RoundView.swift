@@ -16,9 +16,12 @@ extension UIView {
 }
 
 extension UIButton {
-  func roundBorder() {
-    backgroundColor = .clear
-    tintColor = .lightGray
+  func roundBorder(isClear: Bool = true) {
+    if isClear {
+      backgroundColor = .clear
+      tintColor = .lightGray
+    }
+    
     layer.cornerRadius = 15
     layer.borderWidth = 1
   }
