@@ -13,7 +13,7 @@ protocol CoreDataRequestsPerformable {
 
   func insertUpdateUserAddress(from remote: RemoteAddress, context: NSManagedObjectContext?)
   
-  func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext?)
+  func insertUpdateUserImage(from remote: ProfileImage, for user: User, context: NSManagedObjectContext?)
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext?)
 
   func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext?)
@@ -305,13 +305,13 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
-  func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext? = nil) {
+  func insertUpdateUserImage(from remote: ProfileImage, for user: User, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let profileImageEntityObject = NSEntityDescription.entity(forEntityName: userImageEntity, in: workingContext)
     
     let fetchRequest: NSFetchRequest<UserImage> = UserImage.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(photo.id))")
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
     fetchRequest.fetchLimit = 1
     
     do {
@@ -319,12 +319,12 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       
       // Update
       if result.count > 0 {
-        builder.build(image: result.first!, with: Int(result.first!.userId), photo, context: workingContext)
+        builder.build(image: result.first!, for: user, remote, context: workingContext)
       }
         // Insert
       else {
         let userImage = NSManagedObject(entity: profileImageEntityObject!, insertInto: workingContext) as! UserImage
-        builder.build(image: userImage, with: photo.userId, photo, context: workingContext)
+        builder.build(image: userImage, for: user, remote, context: workingContext)
       }
     } catch {
       print("Unexpected error: \(error.localizedDescription)")
@@ -397,7 +397,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
           // Optional relations
           
           if let remoteImage = remoteUser.photo {
-            insertUpdateUserImage(from: remoteImage, context: workingContext)
+            insertUpdateUserImage(from: remoteImage, for: user, context: workingContext)
           }
           
           if let remoteRole = remoteUser.role {

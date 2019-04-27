@@ -138,8 +138,8 @@ extension DataBaseManager: CoreDataRequestsPerformable {
     executer.insertUpdateUsers(from: remoteUsers, context: context)
   }
   
-  func insertUpdateUserImage(from photo: ProfileImage, context: NSManagedObjectContext? = nil) {
-    executer.insertUpdateUserImage(from: photo, context: context)
+  func insertUpdateUserImage(from remote: ProfileImage, for user: User, context: NSManagedObjectContext? = nil) {
+    executer.insertUpdateUserImage(from: remote, for: user, context: context)
   }
   
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil) {

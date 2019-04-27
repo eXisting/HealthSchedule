@@ -40,6 +40,12 @@ class InternalObjectsBuilder {
     if let address = remoteUser.address {
       user.addressId = Int16(address.id)
     }
+    
+    if let photo = remoteUser.photo {
+      let userImage = fetchHandler.getPhoto(by: photo.id, context: context)
+      userImage?.url = photo.url
+      userImage?.userId = Int32(photo.userId)
+    }
   }
   
   func build(address: Address, attachedUser: User, _ remote: RemoteAddress, context: NSManagedObjectContext) {
@@ -113,13 +119,12 @@ class InternalObjectsBuilder {
     attachedUser.addToScheduleDayTemplate(day)
   }
   
-  func build(image: UserImage, with userId: Int, _ remoteImage: ProfileImage, context: NSManagedObjectContext) {
+  func build(image: UserImage, for user: User, _ remoteImage: ProfileImage, context: NSManagedObjectContext) {
     image.id = Int32(remoteImage.id)
     image.url = remoteImage.url
-    image.userId = Int32(userId)
+    image.userId = user.id
     
-    let user = fetchHandler.getUser(byId: userId, context: context)
-    user?.image = image
+    user.image = image
     image.user = user
   }
   

@@ -26,6 +26,7 @@ class AccountModel {
     }
     
     dataSource.instantiate(from: user)
+    initializeUserImage(from: user.image?.url)
   }
   
   func reloadRemoteUser(_ completion: @escaping (String) -> Void) {
@@ -42,7 +43,7 @@ class AccountModel {
       }
       
       // urlsession Error code 1002
-      //self?.initializeUserImage(from: user.image?.url)
+      self?.initializeUserImage(from: user.image?.url)
       
       self?.dataSource.instantiate(from: user)
       completion(ResponseStatus.success.rawValue)
@@ -66,7 +67,7 @@ class AccountModel {
   func initializeUserImage(from url: String?) {
     guard let url = url else { return }
     
-    commonDataRequestController.getImage(from: url, completion: accountHandlingDelegate.loadUserPhoto)
+    commonDataRequestController.getImage(from: url, isLaravelRelated: false, completion: accountHandlingDelegate.loadUserPhoto)
   }
   
   func changeText(by indexPath: IndexPath, with text: String?) {

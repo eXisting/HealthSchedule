@@ -72,8 +72,10 @@ class RequestManager {
     }
   }
   
-  func getDataAsync(from url: String, _ completion: @escaping (Data?) -> Void) {
-    guard let urlObject = URL(string: url) else {
+  func getDataAsync(from url: String, _ laravelRelated: Bool = true, _ completion: @escaping (Data?) -> Void) {
+    let endpoint = laravelRelated ? buildEndpoint(url) : url
+    
+    guard let urlObject = URL(string: endpoint) else {
       completion(nil)
       return
     }

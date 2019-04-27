@@ -164,7 +164,7 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      DataBaseManager.shared.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
+      DataBaseManager.shared.insertUpdateUsers(from: [remoteUser])
       
       completion(ResponseStatus.success.rawValue)
     }
