@@ -25,7 +25,7 @@ class AccountModel {
       return
     }
     
-    dataSource.refresheData(from: user)
+    dataSource.instantiate(from: user)
   }
   
   func reloadRemoteUser(_ completion: @escaping (String) -> Void) {
@@ -44,7 +44,7 @@ class AccountModel {
       // urlsession Error code 1002
       //self?.initializeUserImage(from: user.image?.url)
       
-      self?.dataSource.refresheData(from: user)
+      self?.dataSource.instantiate(from: user)
       completion(ResponseStatus.success.rawValue)
     }
   }
@@ -70,82 +70,16 @@ class AccountModel {
   }
   
   func changeText(by indexPath: IndexPath, with text: String?) {
-    dataSource.data[indexPath.section].set(data: text, for: indexPath.row)
+    dataSource[indexPath.section].set(data: text, for: indexPath.row)
   }
   
   func changeStoredId(by indexPath: IndexPath, newId: Int) {
-    dataSource.data[indexPath.section].set(id: newId, for: indexPath.row)
+    dataSource[indexPath.section].set(id: newId, for: indexPath.row)
   }
   
   func handleSave() {
-    var collectedData: Parser.JsonDictionary = [:]
-    
-    dataSource.data.forEach { item in
-      let sectionJson = item.asJson()
-      collectedData.merge(sectionJson, uniquingKeysWith: { thisKey, insertedKey in
-        return thisKey
-      })
-    }
-    
-    (userRequestController as? UserDataUpdating)?.updateInfo(with: collectedData) {
+    (userRequestController as? UserDataUpdating)?.updateInfo(with: dataSource.collectData()) {
       response in print(response)
     }
-  }
-}
-
-
-class AccountDataSource: NSObject, UITableViewDataSource {
-  var textFieldDelegate: UITextFieldDelegate!
-  fileprivate var data: [AccountSectionDataContaining] = []
-  
-  fileprivate func refresheData(from user: User) {
-    data = []
-    
-    data.append(GeneralInfoAccountSectionModel(user: user))
-    data.append(SecureInfoAccountSectionModel(user: user))
-    
-    if user.roleId == UserType.provider.rawValue {
-      data.append(ProviderInfoAccountSectionModel(user: user))
-    }
-  }
-  
-  subscript(forSectionIndex: Int) -> AccountSectionDataContaining {
-    return data[forSectionIndex]
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return data[section].numberOfRows
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    // TODO: Split it
-    
-    let rowData = data[indexPath.section][indexPath.row]
-    if rowData.type == .general {
-      guard let placemarkCell = tableView.dequeueReusableCell(
-        withIdentifier: AccountTableView.placemarkCellIdentifier,
-        for: indexPath) as? AccountPlacemarkCell else {
-          fatalError("Cannot cast to AccountPlacemarkCell!")
-      }
-      
-      placemarkCell.configureCell(key: rowData.title, value: rowData.data, fieldSubtype: rowData.subtype, delegate: textFieldDelegate)
-      placemarkCell.configureIdentity(identifier: indexPath, subType: rowData.subtype)
-      
-      return placemarkCell
-    }
-    
-    guard let disclosureCell = tableView.dequeueReusableCell(
-      withIdentifier: AccountTableView.disclosureCellIdentifier,
-      for: indexPath) as? AccountDisclosureCell else {
-        fatalError("Cannot cast to AccountDisclosureCell!")
-    }
-    
-    disclosureCell.value = rowData.title
-    
-    return disclosureCell
-  }
-  
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return data.count
   }
 }
