@@ -10,6 +10,7 @@ import UIKit
 
 class RequestsDataSource: NSObject, UITableViewDataSource {
   var deleteHandler: ((Int, @escaping (Bool) -> Void) -> Void)!
+  var loaderHandler: LoaderShowable!
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return DataBaseManager.shared.requestsResultController.sections?.count ?? 0
@@ -37,10 +38,15 @@ class RequestsDataSource: NSObject, UITableViewDataSource {
     let request = DataBaseManager.shared.requestsResultController.object(at: indexPath)
     
     if editingStyle == .delete {
-      deleteHandler(Int(request.id)) { isSuccess in
+      loaderHandler.showLoader()
+      
+      deleteHandler(Int(request.id)) { [weak self] isSuccess in
         if isSuccess {
           DataBaseManager.shared.delete(with: request.objectID)
+          return
         }
+        
+        self?.loaderHandler.hideLoader()
       }
     }
   }

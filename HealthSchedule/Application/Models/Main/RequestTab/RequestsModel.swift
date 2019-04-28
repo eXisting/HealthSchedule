@@ -12,8 +12,13 @@ class RequestsModel {
   private let userRequestController: CommonDataRequesting = UserDataRequest()
   private let source = RequestsDataSource()
   
-  var errorHandling: ErrorShowable! {
-    didSet { source.deleteHandler = deleteRequest }
+  private var errorHandling: ErrorShowable
+  
+  init(errorDelegate: ErrorShowable, loaderDelegate: LoaderShowable) {
+    errorHandling = errorDelegate
+    
+    source.loaderHandler = loaderDelegate
+    source.deleteHandler = deleteRequest
   }
   
   func prefetch() {

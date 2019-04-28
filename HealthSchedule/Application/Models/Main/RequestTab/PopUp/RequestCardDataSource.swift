@@ -10,11 +10,15 @@ import UIKit
 
 class RequestCardDataSource: NSObject, UITableViewDataSource {
   typealias ProcessingFunction = (String?, @escaping (UIImage) -> Void) -> Void
-  var imageProcessing: ProcessingFunction!
+  var imageProcessing: ProcessingFunction
+  var errorDelegate: ErrorShowable
   
   private var data: [RequestSectionDataContaining] = []
   
-  init(_ request: Request) {
+  init(_ request: Request, imageLoader: @escaping ProcessingFunction, errorDelegate: ErrorShowable) {
+    self.errorDelegate = errorDelegate
+    imageProcessing = imageLoader
+    
     data = [
       RequestCardProviderSectionModel(request: request),
       RequestCardScheduleSectionModel(request: request),

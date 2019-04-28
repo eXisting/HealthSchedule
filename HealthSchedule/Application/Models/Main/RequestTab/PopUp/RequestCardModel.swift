@@ -11,15 +11,17 @@ import UIKit
 class RequestCardModel {
   private let commmonDataRequestController = CommonDataRequest()
   private let requestManager: UserDataUpdating = UserDataRequest()
+  
   private var request: Request
+  private var errorDelegate: ErrorShowable
+  private var source: RequestCardDataSource!
   
-  var dataSource: RequestCardDataSource
-  
-  init(request: Request) {
+  init(request: Request, errorDelegate: ErrorShowable) {
     self.request = request
+    self.errorDelegate = errorDelegate
     
-    dataSource = RequestCardDataSource(request)
-    dataSource.imageProcessing = loadImage
+    source = RequestCardDataSource(request, imageLoader: loadImage, errorDelegate: errorDelegate)
+    source.imageProcessing = loadImage
   }
   
   func getActionsCount() -> Int {
@@ -49,17 +51,15 @@ class RequestCardModel {
       RequestJsonFields.status.rawValue: String(ReqeustStatus.statusName2RValue(value: status))
     ]
     
-    requestManager.updateRequest(id: Int(request.id), with: postData) { response in
-      // THE GIVEN DATA WAS INVALID
-      
-      // TODO: Call reload cell
-      
-      print(response)
+    requestManager.updateRequest(id: Int(request.id), with: postData) { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        self?.errorDelegate.showWarningAlert(message: response)
+      }
     }
   }
   
   subscript(forSectionIndex: Int) -> RequestSectionDataContaining {
-    return dataSource[forSectionIndex]
+    return source[forSectionIndex]
   }
   
   private func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
@@ -74,5 +74,11 @@ class RequestCardModel {
       
       completion(image)
     }
+  }
+}
+
+extension RequestCardModel: DataSourceContaining {
+  var dataSource: UITableViewDataSource {
+    return source
   }
 }

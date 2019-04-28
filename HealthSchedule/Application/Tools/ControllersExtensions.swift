@@ -12,6 +12,11 @@ protocol DataSourceContaining {
   var dataSource: UITableViewDataSource { get }
 }
 
+protocol LoaderShowable {
+  func showLoader()
+  func hideLoader()
+}
+
 extension UIViewController {
   
   /// Methods allows your view controller to dismiss any keyboard handled on outside area tapped. It is using gesture recognizer on self

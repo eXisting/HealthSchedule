@@ -16,7 +16,7 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Requests"
   
   private let mainView = RequestsView()
-  private let model = RequestsModel()
+  private var model: RequestsModel!
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
@@ -29,10 +29,9 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    model = RequestsModel(errorDelegate: self, loaderDelegate: self)
     
     DataBaseManager.shared.setFrcDelegate(for: .request, delegate: self)
-    
-    model.errorHandling = self
     model.prefetch()
     
     mainView.setup(delegate: self, dataSource: model.dataSource, refreshDelegate: self)
@@ -55,13 +54,7 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
   private func onInnerActionButtonCallback() {
     dismiss(animated: true)
     
-    startAnimating(
-      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
-      message: "Refreshing...",
-      type: .ballPulse,
-      color: .white,
-      padding: 16
-    )
+    showLoader()
   }
 }
 
@@ -107,6 +100,22 @@ extension RequestViewController: RefreshingTableView {
       
       completion(response)
     }
+  }
+}
+
+extension RequestViewController: LoaderShowable {
+  func showLoader() {
+    startAnimating(
+      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      message: "Refreshing...",
+      type: .ballPulse,
+      color: .white,
+      padding: 16
+    )
+  }
+  
+  func hideLoader() {
+    stopAnimating()
   }
 }
 
@@ -168,6 +177,9 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     mainView.tableView.endUpdates()
-    stopAnimating()
+    
+    if self.isAnimating {
+      stopAnimating()      
+    }
   }
 }

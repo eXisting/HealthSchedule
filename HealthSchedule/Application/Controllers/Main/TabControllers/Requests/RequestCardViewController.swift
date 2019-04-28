@@ -7,22 +7,24 @@
 //
 
 import UIKit
+import CDAlertView
 
 class RequestCardViewController: UIViewController {
   private let mainView = RequestCardContainerView()
   private var model: RequestCardModel!
   
-  private var completion: (() -> Void)!
+  private var parentAction: (() -> Void)!
   
   override func loadView() {
     super.loadView()
     view = mainView
   }
   
-  convenience init(_ request: Request, _ completion: @escaping () -> Void) {
+  convenience init(_ request: Request, _ parentAction: @escaping () -> Void) {
     self.init()
-    self.completion = completion
-    model = RequestCardModel(request: request)
+    self.parentAction = parentAction
+    
+    model = RequestCardModel(request: request, errorDelegate: self)
   }
   
   override func viewDidLoad() {
@@ -39,12 +41,12 @@ class RequestCardViewController: UIViewController {
   
   @objc func onAccept() {
     model.updateRequest(status: .accepted)
-    completion()
+    parentAction()
   }
   
   @objc func onDecline() {
     model.updateRequest(status: .rejected)
-    completion()
+    parentAction()
   }
 }
 
@@ -71,5 +73,11 @@ extension RequestCardViewController: UITableViewDelegate {
 //    }
     
     // TODO: present provider view on first row click
+  }
+}
+
+extension RequestCardViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
