@@ -47,7 +47,6 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
       
       imageProcessing(imageContainingData.imageUrl) { image in
         DispatchQueue.main.async {
-          print(cell.frame)
           cell.setImage(image)
           imageContainingData.image = image
         }
