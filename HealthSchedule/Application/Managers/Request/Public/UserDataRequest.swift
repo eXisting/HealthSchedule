@@ -19,7 +19,6 @@ protocol ProviderInfoRequesting {
   func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
 
-  func getUserAddress(by id: Int, _ completion: @escaping (String) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String) -> Void)
   
   func getScheduleTemplate(completion: @escaping (String) -> Void)
@@ -300,29 +299,6 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
-  func getUserAddress(by id: Int, _ completion: @escaping (String) -> Void) {
-    var params = RequestManager.sessionToken.asParams()
-    params[ProviderDataJsonFields.addressId.rawValue] = String(id)
-    
-    requestsManager.getAsync(for: RemoteAddress.self, from: Endpoints.address.rawValue, params) {
-      data, response in
-      
-      if let error = response.error {
-        completion(error)
-        return
-      }
-      
-      guard let address = data else {
-        completion(ResponseStatus.success.rawValue)
-        return
-      }
-      
-      DataBaseManager.shared.insertUpdateUserAddress(from: address)
-      
-      completion(ResponseStatus.success.rawValue)
-    }
-  }
-  
   func saveAddress(_ address: String, completion: @escaping (String) -> Void) {
     let data = [ProviderDataJsonFields.address.rawValue: address]
     requestsManager.postAsync(to: Endpoints.address.rawValue, as: .put, data, RequestManager.sessionToken.asParams()) {
@@ -428,6 +404,30 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       self?.getScheduleTemplate(completion: completion)
+    }
+  }
+  
+  private func getUserAddress(by id: Int, _ completion: @escaping (String) -> Void) {
+    var params = RequestManager.sessionToken.asParams()
+    params[ProviderDataJsonFields.addressId.rawValue] = String(id)
+    
+    requestsManager.getAsync(for: RemoteAddress.self, from: Endpoints.address.rawValue, params) {
+      data, response in
+      
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      guard let address = data,
+        let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+          completion(ResponseStatus.applicationError.rawValue)
+          return
+      }
+      
+      DataBaseManager.shared.insertUpdateUserAddress(from: address, for: user)
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
 }

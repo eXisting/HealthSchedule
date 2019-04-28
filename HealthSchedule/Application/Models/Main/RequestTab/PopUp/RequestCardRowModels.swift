@@ -25,12 +25,14 @@ class RequestCardTextRowModel: RequestRowDataContaining {
   }
 }
 
-class RequestCardProviderRowModel: RequestRowDataContaining {
+class RequestCardUserRowModel: RequestRowDataContaining {
   var data: String
   var title: String = ""
   var additionalData: String?
   var imageUrl: String?
   var rowHeight: CGFloat = 90
+  
+  var image: UIImage?
   
   init(request: Request) {
     let userToDisplay = request.isUserSide ? request.provider : request.customer

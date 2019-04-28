@@ -25,7 +25,6 @@ class ProviderSearchViewDataSource: NSObject, UITableViewDataSource, UITableView
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCardImageRow") as! RequestCardImageRow
       cell.populateCell(name: data[indexPath.row] as! String)
-//      print(data[indexPath.row])
       cell.backgroundColor = .clear
       return cell
     }

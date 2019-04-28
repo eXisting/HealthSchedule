@@ -67,7 +67,7 @@ class RequestCardModel {
       return
     }
     
-    commmonDataRequestController.getImage(from: url) { data in
+    commmonDataRequestController.getImage(from: url, isLaravelRelated: false) { data in
       guard let image = UIImage(data: data) else {
         return
       }

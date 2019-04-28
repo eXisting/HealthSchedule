@@ -130,12 +130,8 @@ extension DataBaseManager: CoreDataRequestsPerformable {
     executer.insertUpdateScheduleDayTemplate(from: days, context: context)
   }
   
-  func insertUpdateServiceAddress(from remote: RemoteAddress, for providerService: RemoteProviderService, context: NSManagedObjectContext? = nil) {
-    executer.insertUpdateUserAddress(from: remote, context: context)
-  }
-  
-  func insertUpdateUserAddress(from remote: RemoteAddress, context: NSManagedObjectContext? = nil) {
-    executer.insertUpdateUserAddress(from: remote, context: context)
+  func insertUpdateUserAddress(from remote: RemoteAddress, for user: User, context: NSManagedObjectContext? = nil) {
+    executer.insertUpdateUserAddress(from: remote, for: user, context: context)
   }
   
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext? = nil) {

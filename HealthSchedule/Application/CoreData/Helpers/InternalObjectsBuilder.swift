@@ -204,11 +204,6 @@ class InternalObjectsBuilder {
       provider.addToProviderService(providerService)
     }
     
-    if let address = fetchHandler.getAddress(by: remote.address.id, context: context) {
-      address.providerService = providerService
-      providerService.address = address
-    }
-    
     providerService.service = generalService
     generalService?.addToProviderService(providerService)
   }

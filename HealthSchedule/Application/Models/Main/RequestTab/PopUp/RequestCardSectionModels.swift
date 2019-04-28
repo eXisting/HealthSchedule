@@ -23,7 +23,7 @@ class RequestCardProviderSectionModel: RequestSectionDataContaining {
   
   init(request: Request) {
     rows = [
-      RequestCardProviderRowModel(request: request)
+      RequestCardUserRowModel(request: request)
     ]
     
     numberOfRows = rows.count

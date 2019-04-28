@@ -41,13 +41,15 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let rowData = data[indexPath.section][indexPath.row]
     
-    if let providerRowData = rowData as? RequestCardProviderRowModel {
+    if let imageContainingData = rowData as? RequestCardUserRowModel {
       let cell = tableView.dequeueReusableCell(withIdentifier: RequestCardTableView.cellIdentifier, for: indexPath) as! RequestCardImageRow
-      cell.populateCell(name: providerRowData.data)
+      cell.populateCell(name: imageContainingData.data)
       
-      imageProcessing(providerRowData.imageUrl) { image in
+      imageProcessing(imageContainingData.imageUrl) { image in
         DispatchQueue.main.async {
-          cell.photoImage = image
+          print(cell.frame)
+          cell.setImage(image)
+          imageContainingData.image = image
         }
       }
       

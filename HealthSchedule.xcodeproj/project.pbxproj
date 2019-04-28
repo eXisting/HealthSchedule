@@ -112,8 +112,8 @@
 		ED98CBC921F7377700523EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED089A5321E77D13006A8523 /* Assets.xcassets */; };
 		ED98CE3C2242856500B95696 /* RequestCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE3B2242856500B95696 /* RequestCardTableView.swift */; };
 		ED98CE3F2242861400B95696 /* RequestCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE3E2242861400B95696 /* RequestCardModel.swift */; };
-		ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */; };
-		ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE422242891100B95696 /* RequestCardRowModel.swift */; };
+		ED98CE41224288E800B95696 /* RequestCardSectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE40224288E800B95696 /* RequestCardSectionModels.swift */; };
+		ED98CE432242891100B95696 /* RequestCardRowModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE422242891100B95696 /* RequestCardRowModels.swift */; };
 		ED98CE462243997600B95696 /* RequestCardImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98CE452243997600B95696 /* RequestCardImageRow.swift */; };
 		EDB6B443225797AE00B8EA8B /* ModalServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */; };
 		EDB6B447225B415700B8EA8B /* ScheduleEventModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6B446225B415700B8EA8B /* ScheduleEventModalController.swift */; };
@@ -288,8 +288,8 @@
 		ED825FED2241488D00456D0F /* AccountRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowInfoModel.swift; sourceTree = "<group>"; };
 		ED98CE3B2242856500B95696 /* RequestCardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardTableView.swift; sourceTree = "<group>"; };
 		ED98CE3E2242861400B95696 /* RequestCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardModel.swift; sourceTree = "<group>"; };
-		ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardSectionModel.swift; sourceTree = "<group>"; };
-		ED98CE422242891100B95696 /* RequestCardRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardRowModel.swift; sourceTree = "<group>"; };
+		ED98CE40224288E800B95696 /* RequestCardSectionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardSectionModels.swift; sourceTree = "<group>"; };
+		ED98CE422242891100B95696 /* RequestCardRowModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardRowModels.swift; sourceTree = "<group>"; };
 		ED98CE452243997600B95696 /* RequestCardImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCardImageRow.swift; sourceTree = "<group>"; };
 		EDB6B442225797AE00B8EA8B /* ModalServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalServicesViewController.swift; sourceTree = "<group>"; };
 		EDB6B446225B415700B8EA8B /* ScheduleEventModalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEventModalController.swift; sourceTree = "<group>"; };
@@ -602,8 +602,8 @@
 			isa = PBXGroup;
 			children = (
 				ED98CE3E2242861400B95696 /* RequestCardModel.swift */,
-				ED98CE40224288E800B95696 /* RequestCardSectionModel.swift */,
-				ED98CE422242891100B95696 /* RequestCardRowModel.swift */,
+				ED98CE40224288E800B95696 /* RequestCardSectionModels.swift */,
+				ED98CE422242891100B95696 /* RequestCardRowModels.swift */,
 				ED1B8E02226DB03E00E12EAC /* RequestCardDataSource.swift */,
 			);
 			path = PopUp;
@@ -1549,7 +1549,7 @@
 				ED7359082254B8D6006C318C /* ProviderServicesModel.swift in Sources */,
 				EDD2A8402239059A00B52E68 /* SearchOptionRow.swift in Sources */,
 				EDE6B3F822709F3A0087DFCE /* ProviderProfessinSectionModels.swift in Sources */,
-				ED98CE41224288E800B95696 /* RequestCardSectionModel.swift in Sources */,
+				ED98CE41224288E800B95696 /* RequestCardSectionModels.swift in Sources */,
 				EDD2A82622314CE800B52E68 /* Request.swift in Sources */,
 				ED2AC3F3224B8BD600AB6D9F /* FetchRequestsHandler.swift in Sources */,
 				EDE6B406227304E60087DFCE /* Profession.swift in Sources */,
@@ -1558,7 +1558,7 @@
 				EDD2A85E223BC79900B52E68 /* ServicesModel.swift in Sources */,
 				ED44830122046B0A00BE8EF0 /* Parser.swift in Sources */,
 				ED825FEE2241488D00456D0F /* AccountRowInfoModel.swift in Sources */,
-				ED98CE432242891100B95696 /* RequestCardRowModel.swift in Sources */,
+				ED98CE432242891100B95696 /* RequestCardRowModels.swift in Sources */,
 				DB0B7C74225644F10035C593 /* Extensions.swift in Sources */,
 				EDCE60BA223FB41200734FBC /* SearchResultView.swift in Sources */,
 				EDD3CD272201F21700E38879 /* ProviderService.swift in Sources */,

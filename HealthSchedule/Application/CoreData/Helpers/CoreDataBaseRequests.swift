@@ -11,8 +11,7 @@ import CoreData
 protocol CoreDataRequestsPerformable {
   // Update / insert
 
-  func insertUpdateUserAddress(from remote: RemoteAddress, context: NSManagedObjectContext?)
-  func insertUpdateServiceAddress(from remote: RemoteAddress, for remoteService: RemoteProviderService, context: NSManagedObjectContext?)
+  func insertUpdateUserAddress(from remote: RemoteAddress, for user: User, context: NSManagedObjectContext?)
 
   func insertUpdateUserImage(from remote: ProfileImage, for user: User, context: NSManagedObjectContext?)
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext?)
@@ -80,22 +79,21 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       
       do {
         let result = try workingContext.fetch(fetchRequest)
+        var existingRequest = result.first
         
-        // Update
-        if result.count > 0 {
-          builder.build(request: result.first!, remoteRequest, context: workingContext)
+        if existingRequest == nil {
+          existingRequest = (NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request)
         }
-          // Insert
-        else {
-          insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
-          
-          if let customer = remoteRequest.customer {
-            insertUpdateUsers(from: [customer], context: workingContext)
-          }
-          
-          let request = NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request
-          builder.build(request: request, remoteRequest, context: workingContext)
+        
+        guard let request = existingRequest else { fatalError() }
+        
+        insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
+        
+        if let customer = remoteRequest.customer {
+          insertUpdateUsers(from: [customer], context: workingContext)
         }
+        
+        builder.build(request: request, remoteRequest, context: workingContext)
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
         abort()
@@ -176,25 +174,22 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: workingContext)
     
     for remote in list {
-      // Required fields which can be changed remotely
-      insertUpdateServiceAddress(from: remote.address, for: remote, context: workingContext)
+      var existingService = fetchRequestsHandler.getProviderService(by: remote.id, context: workingContext)
       
-      // Update
-      if let providerService = fetchRequestsHandler.getProviderService(by: remote.id, context: workingContext) {
-        builder.build(providerService: providerService, remote, context: workingContext)
+      if existingService == nil {
+        existingService = (NSManagedObject(entity: providerServiceEntityObject!, insertInto: workingContext) as! ProviderService)
       }
-      // Insert
-      else {
-        // Required fields
-        insertUpdateServices(from: [remote.service], context: workingContext)
-        
-        if let remoteUser = remote.provider {
-          insertUpdateUsers(from: [remoteUser], context: workingContext)
-        }
-        
-        let providerService = NSManagedObject(entity: providerServiceEntityObject!, insertInto: workingContext) as! ProviderService
-        builder.build(providerService: providerService, remote, context: workingContext)
+      
+      guard let providerService = existingService else { fatalError() }
+      
+      builder.build(providerService: providerService, remote, context: workingContext)
+      
+      if let remoteUser = remote.provider {
+        insertUpdateUsers(from: [remoteUser], context: workingContext)
       }
+      
+      // Required fields
+      insertUpdateServiceAddress(from: remote.address, for: providerService, context: workingContext)
     }
     
     workingContext.processPendingChanges()
@@ -265,24 +260,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
-  func insertUpdateServiceAddress(from remote: RemoteAddress, for remoteService: RemoteProviderService, context: NSManagedObjectContext? = nil) {
-    let workingContext = provider.provideWorkingContext(basedOn: context)
-    
-    let userAddressEntity = NSEntityDescription.entity(forEntityName: addressEntity, in: workingContext)
-    
-    let existingAddress = fetchRequestsHandler.getAddress(by: remote.id, context: workingContext)
-    let providerService = fetchRequestsHandler.getProviderService(by: remote.id, context: workingContext)
-    
-    let address = (existingAddress != nil) ?
-      existingAddress! : (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
-    
-    builder.build(address: address, attachedUser: nil, attachedProviderService: providerService, remote, context: workingContext)
-
-    workingContext.processPendingChanges()
-    saveContext(workingContext)
-  }
-  
-  func insertUpdateUserAddress(from remote: RemoteAddress, context: NSManagedObjectContext? = nil) {
+  func insertUpdateUserAddress(from remote: RemoteAddress, for user: User, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let userAddressEntity = NSEntityDescription.entity(forEntityName: addressEntity, in: workingContext)
@@ -293,10 +271,6 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     do {
       let result = try workingContext.fetch(fetchRequest)
-      
-      guard let user = fetchRequestsHandler.getCurrentUser(context: workingContext) else {
-        fatalError()
-      }
 
       if let userAttachedAddress = user.address {
         workingContext.delete(userAttachedAddress)
@@ -381,46 +355,35 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     let userEntityObject = NSEntityDescription.entity(forEntityName: userEntity, in: workingContext)
     
     for remoteUser in remoteUsers {
-      let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteUser.id))")
-      fetchRequest.fetchLimit = 1
+      var existingUser = fetchRequestsHandler.getUser(byId: remoteUser.id, context: workingContext)
       
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(user: result.first!, remoteUser, context: workingContext)
-        }
-          // Insert
-        else {
-          
-          // Required relations
-          
-          if let remoteCity = remoteUser.city {
-            insertUpdateCities(from: [remoteCity], context: workingContext)
-          }
-          
-          let user = NSManagedObject(entity: userEntityObject!, insertInto: workingContext) as! User
-          builder.build(user: user, remoteUser, context: workingContext)
-          
-          // Optional relations
-          
-          if let remoteImage = remoteUser.photo {
-            insertUpdateUserImage(from: remoteImage, for: user, context: workingContext)
-          }
-          
-          if let remoteRole = remoteUser.role {
-            insertUpdateRoles(from: remoteRole, for: user, context: workingContext)
-          }
-          
-          if let remoteAddress = remoteUser.address {
-            insertUpdateUserAddress(from: remoteAddress, context: workingContext)
-          }
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
+      if existingUser == nil {
+        // create
+        existingUser = (NSManagedObject(entity: userEntityObject!, insertInto: workingContext) as! User)
+      }
+      
+      guard let user = existingUser else { fatalError() }
+      
+      // Required relation
+      
+      if let remoteCity = remoteUser.city {
+        insertUpdateCities(from: [remoteCity], context: workingContext)
+      }
+      
+      builder.build(user: user, remoteUser, context: workingContext)
+      
+      // Optional relations
+      
+      if let remoteImage = remoteUser.photo {
+        insertUpdateUserImage(from: remoteImage, for: user, context: workingContext)
+      }
+      
+      if let remoteRole = remoteUser.role {
+        insertUpdateRoles(from: remoteRole, for: user, context: workingContext)
+      }
+      
+      if let remoteAddress = remoteUser.address {
+        insertUpdateUserAddress(from: remoteAddress, for: user, context: workingContext)
       }
     }
     
@@ -464,6 +427,24 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     workingContext.processPendingChanges()
     saveContext(workingContext)
+  }
+  
+  // MARK: -Private
+  
+  private func insertUpdateServiceAddress(from remote: RemoteAddress, for providerService: ProviderService, context: NSManagedObjectContext? = nil) {
+    let workingContext = provider.provideWorkingContext(basedOn: context)
+    
+    let userAddressEntity = NSEntityDescription.entity(forEntityName: addressEntity, in: workingContext)
+    
+    var existingAddress = fetchRequestsHandler.getAddress(by: remote.id, context: workingContext)
+    
+    if existingAddress == nil {
+      existingAddress = (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
+    }
+    
+    guard let address = existingAddress else { fatalError() }
+    
+    builder.build(address: address, attachedUser: nil, attachedProviderService: providerService, remote, context: workingContext)
   }
   
   // MARK: -Delete
