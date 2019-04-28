@@ -145,7 +145,7 @@ extension RequestViewController: NSFetchedResultsControllerDelegate {
           let requestObject = anObject as? Request else { return }
         
         cell.populateCell(
-          serviceName: requestObject.service?.name ?? "Unkown name",
+          serviceName: requestObject.providerService?.name ?? requestObject.service?.name ?? "Unkown name",
           price: String(requestObject.providerService?.price ?? 0.0),
           visitedDate: DateManager.shared.dateToString(requestObject.requestedAt),
           status: requestObject.status2RequestStatusName()

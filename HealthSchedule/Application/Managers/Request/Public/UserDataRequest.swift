@@ -19,7 +19,7 @@ protocol ProviderInfoRequesting {
   func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
 
-  func getAddress(by id: Int, _ completion: @escaping (String) -> Void)
+  func getUserAddress(by id: Int, _ completion: @escaping (String) -> Void)
   func saveAddress(_ address: String, completion: @escaping (String) -> Void)
   
   func getScheduleTemplate(completion: @escaping (String) -> Void)
@@ -300,7 +300,7 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
-  func getAddress(by id: Int, _ completion: @escaping (String) -> Void) {
+  func getUserAddress(by id: Int, _ completion: @escaping (String) -> Void) {
     var params = RequestManager.sessionToken.asParams()
     params[ProviderDataJsonFields.addressId.rawValue] = String(id)
     
@@ -338,7 +338,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      self?.getAddress(by: addressId, completion)
+      self?.getUserAddress(by: addressId, completion)
     }
   }
   

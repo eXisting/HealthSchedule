@@ -30,8 +30,6 @@ class ProviderServiceModel {
   
   func postService(_ completion: @escaping (String) -> Void) {
     var data = collectData()
-    //mock
-    data["address"] = "Something"
     requestManager.createUpdateProviderService(with: data, isCreate: existingService == nil, completion: completion)
   }
   

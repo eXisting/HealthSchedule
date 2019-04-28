@@ -44,6 +44,13 @@ class ProviderServiceGeneralSectionModel: ProviderServiceSectionDataContaining {
         keyName: ProviderServiceJsonFields.price.rawValue
       ),
       ProviderServiceTextRowModel(
+        data: service != nil ? String(service!.address?.address ?? "") : nil,
+        title: "Address:",
+        type: .general,
+        subtype: .none,
+        keyName: ProviderServiceJsonFields.address.rawValue
+      ),
+      ProviderServiceTextRowModel(
         data: service?.serviceDescription,
         title: "Description:",
         type: .general,

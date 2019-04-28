@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DataSourceContaining {
+  var dataSource: UITableViewDataSource { get }
+}
+
 extension UIViewController {
   
   /// Methods allows your view controller to dismiss any keyboard handled on outside area tapped. It is using gesture recognizer on self

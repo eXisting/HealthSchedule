@@ -48,12 +48,19 @@ class InternalObjectsBuilder {
     }
   }
   
-  func build(address: Address, attachedUser: User, _ remote: RemoteAddress, context: NSManagedObjectContext) {
+  func build(address: Address, attachedUser: User?, attachedProviderService: ProviderService?, _ remote: RemoteAddress, context: NSManagedObjectContext) {
     address.id = Int16(remote.id)
     address.address = remote.address
-        
-    attachedUser.address = address
-    address.user = attachedUser
+    
+    if let user = attachedUser {
+      user.address = address
+      address.user = user
+    }
+    
+    if let service = attachedProviderService {
+      service.address = address
+      address.providerService = service
+    }
   }
   
   func build(providerProfession: ProviderProfession, _ remote: RemoteProviderProfession, context: NSManagedObjectContext) {
@@ -195,6 +202,11 @@ class InternalObjectsBuilder {
     if let provider = fetchHandler.getUser(byId: Int(providerService.providerId), context: context) {
       providerService.provider = provider
       provider.addToProviderService(providerService)
+    }
+    
+    if let address = fetchHandler.getAddress(by: remote.address.id, context: context) {
+      address.providerService = providerService
+      providerService.address = address
     }
     
     providerService.service = generalService
