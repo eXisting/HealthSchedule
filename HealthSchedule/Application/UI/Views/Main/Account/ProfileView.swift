@@ -15,6 +15,8 @@ class ProfileView: UIView {
   private let profileImageView = UIImageView()
   private let tableView = AccountTableView()
   
+  private var imagePickerDelegate: ImagePickerDelegate!
+  
   let datepickerView = DatePickerView()
   
   lazy var presenter: Presentr = {
@@ -30,11 +32,16 @@ class ProfileView: UIView {
     return customPresenter
   }()
   
-  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+  func setup(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, imagePickerDelegate: ImagePickerDelegate) {
     laidOutViews()
     customizeViews()
     
     tableView.setup(delegate: delegate, dataSource: dataSource)
+    
+    self.imagePickerDelegate = imagePickerDelegate
+    
+    let singleTap = UITapGestureRecognizer(target: self, action: #selector(pickImage))
+    profileImageView.addGestureRecognizer(singleTap)
     
     toggleSpinner()
   }
@@ -57,6 +64,10 @@ class ProfileView: UIView {
   
   func reloadRows(at indexPath: [IndexPath]) {
     tableView.reloadRows(at: indexPath, with: .fade)
+  }
+  
+  @objc private func pickImage() {
+    imagePickerDelegate.presentPicker()
   }
   
   private func laidOutViews() {
@@ -89,10 +100,11 @@ class ProfileView: UIView {
       CenterY().to(profileImageView, .centerY),
       Height().like(profileImageView, .height),
       Width().like(profileImageView, .width)
-      ])
+    ])
   }
   
   private func customizeViews() {
+    profileImageView.isUserInteractionEnabled = true
     spinner.color = .black
   }
   

@@ -8,6 +8,7 @@
 
 import UIKit
 import Presentr
+import NVActivityIndicatorView
 
 protocol AccountHandlableDelegate: class {
   func logout()
@@ -15,7 +16,7 @@ protocol AccountHandlableDelegate: class {
   func set(image: UIImage)
 }
 
-class AccountViewController: UIViewController, SetupableTabBarItem {
+class AccountViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Account"
   
   private let mainView = ProfileView()
@@ -33,6 +34,8 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     }
   }
   
+  private let imagePickerController = ImagePickerController()
+  
   override func loadView() {
     super.loadView()
     view = mainView
@@ -42,19 +45,13 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
     super.viewDidLoad()
     model = AccountModel(accountHandlingDelegate: self)
     
+    
     model.dataSource.textFieldDelegate = self
     
-    mainView.setup(delegate: self, dataSource: model.dataSource)
+    mainView.setup(delegate: self, dataSource: model.dataSource, imagePickerDelegate: self)
     mainView.setRefreshDelegate(delegate: self)
     
     hideKeyboardWhenTappedAround()
-  }
-  
-  func setupTabBarItem() {
-    tabBarItem.title = titleName
-    
-    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/account")
-    tabBarItem.image = UIImage(named: "TabBarIcons/account")
   }
   
   private func pushController(for disclosureType: AccountRowType) {
@@ -109,6 +106,15 @@ extension AccountViewController: AccountHandlableDelegate {
   }
 }
 
+extension AccountViewController: SetupableTabBarItem {
+  func setupTabBarItem() {
+    tabBarItem.title = titleName
+    
+    tabBarItem.selectedImage = UIImage(named: "TabBarIcons/account")
+    tabBarItem.image = UIImage(named: "TabBarIcons/account")
+  }
+}
+
 extension AccountViewController: RefreshingTableView {
   func refresh(_ completion: @escaping (String) -> Void) {
     model.reloadRemoteUser(completion)
@@ -124,6 +130,33 @@ extension AccountViewController: ModalPickHandling {
     model.changeText(by: identifier, with: title)
     model.changeStoredId(by: identifier, newId: id)
     mainView.reloadRows(at: [identifier])
+  }
+}
+
+extension AccountViewController: ImagePickerDelegate {
+  func populateImageView(with image: UIImage?) {
+    guard let image = image else { return }
+    
+    mainView.setImage(image)
+  }
+  
+  func presentPicker() {
+    if !imagePickerController.isInitialized {
+      let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+      startAnimating(size, type: .lineScale, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.5))
+    }
+    
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      self!.imagePickerController.setup(delegate: self!, with: .photoLibrary)
+      
+      DispatchQueue.main.async { [weak self] in
+        self!.present(self!.imagePickerController.picker, animated: true, completion: { [weak self] in
+          if self!.isAnimating {
+            self!.stopAnimating()
+          }
+        })
+      }
+    }
   }
 }
 
