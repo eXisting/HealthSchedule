@@ -12,9 +12,10 @@ class CommonDataRequest {
   private let requestsManager = RequestManager()
   private let databaseManager = DataBaseManager.shared
   
-  func getImage(from url: String, isLaravelRelated: Bool = true, completion: @escaping (Data) -> Void) {
+  func getImage(from url: String, isLaravelRelated: Bool = true, completion: @escaping (Data?) -> Void) {
     requestsManager.getDataAsync(from: url, isLaravelRelated) { (data) in
       guard let imageData = data else {
+        completion(nil)
         return
       }
       

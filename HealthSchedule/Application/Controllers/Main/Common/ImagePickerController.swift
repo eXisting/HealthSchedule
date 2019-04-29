@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ImagePickerDelegate {
-  func populateImageView(with image: UIImage?)
+  func populateImageView(with image: UIImage?, named: String?)
   func presentPicker()
 }
 
@@ -34,8 +34,10 @@ class ImagePickerController: NSObject {
 extension ImagePickerController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     let chosenImage = info[UIImagePickerController.InfoKey.editedImage]
+    let imageURL = info[UIImagePickerController.InfoKey.imageURL] as! URL
+    let imageName = imageURL.lastPathComponent
     
-    self.delegate.populateImageView(with: chosenImage as? UIImage)
+    self.delegate.populateImageView(with: chosenImage as? UIImage, named: imageName)
     
     picker.dismiss(animated: true, completion: nil)
   }

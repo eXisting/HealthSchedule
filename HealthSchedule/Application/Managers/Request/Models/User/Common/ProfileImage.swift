@@ -12,6 +12,9 @@ enum ProfileImageJsonFields: String, CodingKey {
   case id
   case userId = "user_id"
   case url = "image_path"
+  
+  case filename = "filename"
+  case mimeType = "mimeType"
 }
 
 struct ProfileImage {

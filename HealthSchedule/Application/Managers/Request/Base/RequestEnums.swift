@@ -26,6 +26,7 @@ enum Endpoints: String {
   
   // PUT
   case updateUserInfo = "/api/user/info"
+  case updatePhoto = "/api/user/photo"
 
   // GET / PUT
   case scheduleTemplate = "/api/provider/schedules"
@@ -40,7 +41,7 @@ enum Endpoints: String {
   case services = "/api/services"
 }
 
-enum RequestType: String {
+enum RequestMethodType: String {
   case get = "GET"
   case post = "POST"
   case put = "PUT"

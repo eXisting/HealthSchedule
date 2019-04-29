@@ -8,6 +8,7 @@
 
 import UIKit
 import Presentr
+import CDAlertView
 import NVActivityIndicatorView
 
 protocol AccountHandlableDelegate: class {
@@ -43,10 +44,7 @@ class AccountViewController: UIViewController, NVActivityIndicatorViewable {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    model = AccountModel(accountHandlingDelegate: self)
-    
-    
-    model.dataSource.textFieldDelegate = self
+    model = AccountModel(accountHandlingDelegate: self, textFieldDelegate: self)
     
     mainView.setup(delegate: self, dataSource: model.dataSource, imagePickerDelegate: self)
     mainView.setRefreshDelegate(delegate: self)
@@ -87,6 +85,11 @@ class AccountViewController: UIViewController, NVActivityIndicatorViewable {
       }
     }
   }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleRipple, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.75))
+  }
 }
 
 extension AccountViewController: AccountHandlableDelegate {
@@ -102,7 +105,28 @@ extension AccountViewController: AccountHandlableDelegate {
   }
   
   func save() {
-    model.handleSave()
+    showLoader()
+    
+    model.handleSave { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.stopAnimating()
+          self?.showWarningAlert(message: response)
+        }
+        
+        return
+      }
+      
+      DispatchQueue.main.async {
+        self?.stopAnimating()
+      }
+    }
+  }
+}
+
+extension AccountViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
 
@@ -134,8 +158,11 @@ extension AccountViewController: ModalPickHandling {
 }
 
 extension AccountViewController: ImagePickerDelegate {
-  func populateImageView(with image: UIImage?) {
-    guard let image = image else { return }
+  func populateImageView(with image: UIImage?, named: String?) {
+    guard let image = image, let name = named else { return }
+    
+    model.imageName = name
+    model.userImageData = image.jpegData(compressionQuality: 1)
     
     mainView.setImage(image)
   }
@@ -162,7 +189,7 @@ extension AccountViewController: ImagePickerDelegate {
 
 extension AccountViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return model.dataSource[section].sectionHeight
+    return model[section].sectionHeight
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -170,14 +197,14 @@ extension AccountViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let rowData: CommonRowDataContaining = model.dataSource[indexPath.section][indexPath.row]
+    let rowData: CommonRowDataContaining = model[indexPath.section][indexPath.row]
     pushController(for: rowData.type)
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountTableView.sectionIdentifier) as! CommonSection
-    header.setup(title: model.dataSource[section].sectionName, backgroundColor: CommonSection.lightSectionColor)
+    header.setup(title: model[section].sectionName, backgroundColor: CommonSection.lightSectionColor)
     return header
   }
 }

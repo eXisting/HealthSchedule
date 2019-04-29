@@ -77,23 +77,22 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteRequest.id))")
       fetchRequest.fetchLimit = 1
       
+      // Required fields
+      insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
+      
+      if let customer = remoteRequest.customer {
+        insertUpdateUsers(from: [customer], context: workingContext)
+      }
+      
       do {
         let result = try workingContext.fetch(fetchRequest)
-        var existingRequest = result.first
         
-        if existingRequest == nil {
-          existingRequest = (NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request)
+        if !result.isEmpty {
+          builder.build(request: result.first!, remoteRequest, context: workingContext)
+        } else {
+          let object = (NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request)
+          builder.build(request: object, remoteRequest, context: workingContext)
         }
-        
-        guard let request = existingRequest else { fatalError() }
-        
-        insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
-        
-        if let customer = remoteRequest.customer {
-          insertUpdateUsers(from: [customer], context: workingContext)
-        }
-        
-        builder.build(request: request, remoteRequest, context: workingContext)
       } catch {
         print("Unexpected error: \(error.localizedDescription)")
         abort()
@@ -110,26 +109,15 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     let cityEntityObject = NSEntityDescription.entity(forEntityName: cityEntity, in: workingContext)
     
     for remoteCity in cityList {
-      let fetchRequest: NSFetchRequest<City> = City.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteCity.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          result.first?.name = remoteCity.title
-        }
-          // Insert
-        else {
-          let city = NSManagedObject(entity: cityEntityObject!, insertInto: workingContext) as! City
-          builder.build(city: city, remoteCity)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
+      // update
+      if let city = fetchRequestsHandler.getCity(byId: remoteCity.id, context: workingContext) {
+        city.name = remoteCity.title
+        continue
       }
+      
+      // insert
+      let city = NSManagedObject(entity: cityEntityObject!, insertInto: workingContext) as! City
+      builder.build(city: city, remoteCity)
     }
     
     workingContext.processPendingChanges()
@@ -142,26 +130,15 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     let serviceEntityObject = NSEntityDescription.entity(forEntityName: serviceEntity, in: workingContext)
     
     for remoteService in serviceList {
-      let fetchRequest: NSFetchRequest<Service> = Service.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteService.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(service: result.first!, remoteService, context: workingContext)
-        }
-          // Insert
-        else {
-          let service = NSManagedObject(entity: serviceEntityObject!, insertInto: workingContext) as! Service
-          builder.build(service: service, remoteService, context: workingContext)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
+      // update
+      if let service = fetchRequestsHandler.getService(by: remoteService.id, context: workingContext) {
+        builder.build(service: service, remoteService, context: workingContext)
+        continue
       }
+      
+      // insert
+      let service = NSManagedObject(entity: serviceEntityObject!, insertInto: workingContext) as! Service
+      builder.build(service: service, remoteService, context: workingContext)
     }
     
     workingContext.processPendingChanges()
@@ -234,26 +211,15 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     let generalProfessionEntity = NSEntityDescription.entity(forEntityName: professionEntity, in: workingContext)
     
     for remote in list {
-      let fetchRequest: NSFetchRequest<Profession> = Profession.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
-      fetchRequest.fetchLimit = 1
-      
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-
-        // Update
-        if result.count > 0 {
-          builder.build(profession: result.first!, remote, context: workingContext)
-        }
-          // Insert
-        else {
-          let profession = NSManagedObject(entity: generalProfessionEntity!, insertInto: workingContext) as! Profession
-          builder.build(profession: profession, remote, context: workingContext)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
+      // update
+      if let profession = fetchRequestsHandler.getProfession(by: remote.id, context: workingContext) {
+        builder.build(profession: profession, remote, context: workingContext)
+        continue
       }
+      
+      // insert
+      let profession = NSManagedObject(entity: generalProfessionEntity!, insertInto: workingContext) as! Profession
+      builder.build(profession: profession, remote, context: workingContext)
     }
     
     workingContext.processPendingChanges()
@@ -265,25 +231,17 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     let userAddressEntity = NSEntityDescription.entity(forEntityName: addressEntity, in: workingContext)
     
-    let fetchRequest: NSFetchRequest<Address> = Address.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
-    fetchRequest.fetchLimit = 1
+    var address = fetchRequestsHandler.getAddress(by: remote.id, context: workingContext)
     
-    do {
-      let result = try workingContext.fetch(fetchRequest)
-
-      if let userAttachedAddress = user.address {
-        workingContext.delete(userAttachedAddress)
-      }
-      
-      let address = result.count > 0 ?
-        result.first! : (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
-      
-      builder.build(address: address, attachedUser: user, attachedProviderService: nil, remote, context: workingContext)
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
+    if let userAttachedAddress = user.address {
+      workingContext.delete(userAttachedAddress)
     }
+    
+    if address == nil {
+      address = (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
+    }
+    
+    builder.build(address: address!, attachedUser: user, attachedProviderService: nil, remote, context: workingContext)
     
     workingContext.processPendingChanges()
     saveContext(workingContext)
@@ -294,32 +252,19 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     let profileImageEntityObject = NSEntityDescription.entity(forEntityName: userImageEntity, in: workingContext)
     
-    let fetchRequest: NSFetchRequest<UserImage> = UserImage.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
-    fetchRequest.fetchLimit = 1
-    
-    do {
-      let result = try workingContext.fetch(fetchRequest)
-      
-      // Update
-      if result.count > 0 {
-        builder.build(image: result.first!, for: user, remote, context: workingContext)
-      }
-        // Insert
-      else {
-        let userImage = NSManagedObject(entity: profileImageEntityObject!, insertInto: workingContext) as! UserImage
-        builder.build(image: userImage, for: user, remote, context: workingContext)
-      }
-    } catch {
-      print("Unexpected error: \(error.localizedDescription)")
-      abort()
+    if let image = user.image {
+      workingContext.delete(image)
     }
+      
+    let userImage = NSManagedObject(entity: profileImageEntityObject!, insertInto: workingContext) as! UserImage
+    
+    builder.build(image: userImage, for: user, remote, context: workingContext)
     
     workingContext.processPendingChanges()
     saveContext(workingContext)
   }
   
-  func insertUpdateRoles(from remoteRole: RemoteRole, for user: User, context: NSManagedObjectContext? = nil) {
+  private func insertUpdateRoles(from remoteRole: RemoteRole, for user: User, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let roleEntityObject = NSEntityDescription.entity(forEntityName: roleEntity, in: workingContext)

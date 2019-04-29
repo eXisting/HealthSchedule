@@ -11,17 +11,21 @@ import UIKit
 class AccountDataSource: NSObject, UITableViewDataSource {
   private var data: [AccountSectionDataContaining] = []
   
-  var textFieldDelegate: UITextFieldDelegate!
+  private var textFieldDelegate: UITextFieldDelegate!
   
   func instantiate(from user: User) {
-    data = []
-    
-    data.append(GeneralInfoAccountSectionModel(user: user))
-    data.append(SecureInfoAccountSectionModel(user: user))
+    data = [
+      GeneralInfoAccountSectionModel(user: user),
+      SecureInfoAccountSectionModel(user: user)
+    ]
     
     if user.roleId == UserType.provider.rawValue {
       data.append(ProviderInfoAccountSectionModel(user: user))
     }
+  }
+  
+  func setDelegate(_ textFieldDelegate: UITextFieldDelegate) {
+    self.textFieldDelegate = textFieldDelegate
   }
   
   subscript(forSectionIndex: Int) -> AccountSectionDataContaining {

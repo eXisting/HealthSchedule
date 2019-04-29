@@ -38,7 +38,7 @@ protocol CommonDataRequesting {
 protocol UserDataUpdating {
   func updateInfo(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
-  func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void)
+  func updatePhoto(with photoData: Data, infoDict: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
   
   func deleteRequest(id: Int, _ completion: @escaping (String) -> Void)
   func updateRequest(id: Int, with collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void)
@@ -66,8 +66,16 @@ extension UserDataRequest: UserDataUpdating {
       }
   }
   
-  func updatePhoto(with photoData: Data, _ completion: @escaping (String) -> Void) {
-    // TODO
+  func updatePhoto(with photoData: Data, infoDict: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
+    requestsManager.uploadImage(photoData, infoDict) {
+      [weak self] data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      self?.getUser(completion)
+    }
   }
   
   func changePassword(with data: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
@@ -335,7 +343,7 @@ extension UserDataRequest: ProviderInfoRequesting {
   
   func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void) {
     var endpoint = Endpoints.providerProfessions.rawValue
-    var requestType: RequestType = .post
+    var requestType: RequestMethodType = .post
     
     if !isCreate {
       endpoint.append("/")
@@ -357,7 +365,7 @@ extension UserDataRequest: ProviderInfoRequesting {
   
   func createUpdateProviderService(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void) {
     var endpoint = Endpoints.providerServices.rawValue
-    var requestType: RequestType = .post
+    var requestType: RequestMethodType = .post
     
     if !isCreate {
       endpoint.append("/")

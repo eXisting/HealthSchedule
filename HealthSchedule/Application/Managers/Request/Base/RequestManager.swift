@@ -23,10 +23,12 @@ class RequestManager {
   func getListAsync<T: Decodable>(
     for type: T.Type,
     from endpoint: Endpoints,
-    _ headers: Parser.JsonDictionary?,
+    _ params: Parser.JsonDictionary?,
     _ completion: @escaping ([T], ServerResponse) -> Void) {
     
-    sessionHandler.startSessionTask(buildEndpoint(endpoint.rawValue), params: headers) {
+    let request = sessionHandler.buildRequest(for: .http, buildEndpoint(endpoint.rawValue), .get, params)
+    
+    sessionHandler.startSessionTask(with: request) {
       (json, response) in
       let result = Parser.anyArrayToObjectArray(destination: T.self, json)
       completion(result, response)
@@ -47,7 +49,9 @@ class RequestManager {
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (T?, ServerResponse) -> Void) {
     
-    sessionHandler.startSessionTask(buildEndpoint(endpoint), params: params) {
+    let request = sessionHandler.buildRequest(for: .http, buildEndpoint(endpoint), .get, params)
+    
+    sessionHandler.startSessionTask(with: request) {
       (json, response) in
       guard let initableObject = Parser.anyToObject(destination: T.self, json) else {
         completion(nil, response)
@@ -58,10 +62,13 @@ class RequestManager {
     }
   }
   
+  // Cannot be parsed using regular serialization
   func getAvailableTimes(params: Parser.JsonDictionary, _ completion: @escaping (RemoteAvailableTimeContainer?, String) -> Void ) {
     let endpoint = buildEndpoint(Endpoints.availableProvidersByInterval.rawValue)
     
-    sessionHandler.startSessionTask(endpoint, .get, params: params) {
+    let request = sessionHandler.buildRequest(for: .http, endpoint, .get, params)
+    
+    sessionHandler.startSessionTask(with: request) {
       json, response in
       if let error = response.error {
         completion(nil, error)
@@ -87,12 +94,27 @@ class RequestManager {
   
   func postAsync(
     to url: String,
-    as requestType: RequestType,
+    as requestType: RequestMethodType,
     _ data: Any?,
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping (Any, ServerResponse) -> Void) {
     
-    sessionHandler.startSessionTask(buildEndpoint(url), requestType, body: data, params: params, completion: completion)
+    let request = sessionHandler.buildRequest(for: .http, buildEndpoint(url), requestType, params, data)
+    
+    sessionHandler.startSessionTask(with: request, completion: completion)
+  }
+  
+  func uploadImage(_ data: Data, _ info: Parser.JsonDictionary, _ completion: @escaping (Any, ServerResponse) -> Void) {
+    let url = buildEndpoint(Endpoints.updatePhoto.rawValue)
+    
+    let params = info.merging(RequestManager.sessionToken.asParams(), uniquingKeysWith: {
+      first, second in
+      return first
+    })
+    
+    let request = sessionHandler.buildRequest(for: .multipart, url, .post, params, data)
+    
+    sessionHandler.startSessionTask(with: request, completion: completion)
   }
   
   // MARK: - AUTHENTICATION

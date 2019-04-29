@@ -63,9 +63,18 @@ class RequestCardModel {
   }
   
   private func loadImage(by url: String, _ completion: @escaping (UIImage) -> Void) {
-    commmonDataRequestController.getImage(from: url, isLaravelRelated: false) { data in
+    let isRemoteImage = url.contains("http")
+    
+    commmonDataRequestController.getImage(from: url, isLaravelRelated: !isRemoteImage) { data in
+      let displayImage = UIImage(named: "Pictures/chooseProfile")!
+      
+      guard let data = data else {
+        completion(displayImage)
+        return
+      }
+      
       guard let image = UIImage(data: data) else {
-        completion(UIImage(named: "Pictures/chooseProfile")!)
+        completion(displayImage)
         return
       }
       

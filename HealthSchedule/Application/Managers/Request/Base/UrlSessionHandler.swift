@@ -9,18 +9,19 @@
 import UIKit
 
 class UrlSessionHandler {
+  enum RequestType {
+    case multipart
+    case http
+  }
   
   private let defaultSession = URLSession(configuration: .default)
   private let emptyJson: Parser.JsonDictionary = [:]
     
   func startSessionTask(
-    _ url: String,
-    _ type: RequestType = .get,
-    body: Any? = nil,
-    params: Parser.JsonDictionary? = nil,
-    completion: @escaping (Any, ServerResponse) -> Void) {
-    
-    guard let urlRequest = buildUrlRequest(url, type.rawValue, params, body) else {
+    with request: URLRequest?,
+    completion: @escaping (Any, ServerResponse) -> Void
+  ) {
+    guard let urlRequest = request else {
       completion(emptyJson, ServerResponse(ResponseStatus.cannotProceed.rawValue))
       return
     }
@@ -72,16 +73,32 @@ class UrlSessionHandler {
       completion(objectData)
     }.resume()
   }
+  
+  func buildRequest(
+    for type: RequestType,
+    _ url: String,
+    _ method: RequestMethodType,
+    _ params: Parser.JsonDictionary? = nil,
+    _ body: Any? = nil
+  ) -> URLRequest? {
+    switch type {
+    case .multipart:
+      return multipartUploadRequest(url, method, params, body as! Data)
+    case .http:
+      return httpRequest(url, method, params, body)
+    }
+  }
 }
 
 // MARK: - HELPERS
 
 private extension UrlSessionHandler {
-  private func buildUrlRequest(
+  private func httpRequest(
     _ url: String,
-    _ method: String,
+    _ method: RequestMethodType,
     _ params: Parser.JsonDictionary?,
-    _ body: Any? = nil) -> URLRequest? {
+    _ body: Any? = nil
+  ) -> URLRequest? {
     
     var parameterString = ""
     
@@ -98,7 +115,7 @@ private extension UrlSessionHandler {
     
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     request.setValue("application/json", forHTTPHeaderField: "Accept")
-    request.httpMethod = method
+    request.httpMethod = method.rawValue
     
     if let jsonDictBody = body as? Parser.JsonDictionary {
       guard let data = jsonDictBody.asDataString().data(using: .ascii) else {
@@ -115,9 +132,68 @@ private extension UrlSessionHandler {
     return request
   }
   
+  private func multipartUploadRequest(
+    _ url: String,
+    _ method: RequestMethodType = .post,
+    _ params: Parser.JsonDictionary?,
+    _ data: Data
+  ) -> URLRequest? {
+    
+    guard let params = params else {
+      print("params in multipart request is nil")
+      return nil
+    }
+    
+    guard let filename = params[ProfileImageJsonFields.filename.rawValue],
+      let mimeType = params[ProfileImageJsonFields.mimeType.rawValue],
+      let token = params[TokenJsonFields.token.rawValue] else {
+      print("Some params are not passed")
+      return nil
+    }
+    
+    //?token=1234 insertion to the end of url
+    let parameterString = [TokenJsonFields.token.rawValue: token].asParamsString()
+    guard let url = URL(string: url + parameterString) else {
+      print("Error: cannot create URL")
+      return nil
+    }
+    
+    let boundary = "Boundary-\(UUID().uuidString)"
+    let boundaryPrefix = "--\(boundary)\r\n"
+    
+    var request = URLRequest(url: url)
+    request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+    
+    let body = NSMutableData()
+    
+    body.appendString(boundaryPrefix)
+    body.appendString("Content-Disposition: form-data; name=\"_method\"\r\n\r\n")
+    body.appendString("PUT\r\n")
+    
+    body.appendString(boundaryPrefix)
+    body.appendString("Content-Disposition: form-data; name=\"photo\"; filename=\"\(filename)\"\r\n")
+    body.appendString("Content-Type: \(mimeType)\r\n\r\n")
+    body.append(data)
+    body.appendString("\r\n")
+    body.appendString("--".appending(boundary.appending("--")))
+    
+    request.httpMethod = method.rawValue
+    request.httpBody = body as Data
+    
+    return request
+  }
+  
   static private func debugResponse(_ jsonData: Data) {
     if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
       print(JSONString)
     }
+  }
+}
+
+// Extension for possibility to append string into multipart upload
+extension NSMutableData {
+  func appendString(_ string: String) {
+    let data = string.data(using: String.Encoding.utf8, allowLossyConversion: false)
+    append(data!)
   }
 }
