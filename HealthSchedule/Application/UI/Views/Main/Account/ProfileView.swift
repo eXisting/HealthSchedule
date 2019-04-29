@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import EasyPeasy
 import Presentr
 
 class ProfileView: UIView {
-  
+  private var spinner = UIActivityIndicatorView(style: .whiteLarge)
   private let profileImageView = UIImageView()
   private let tableView = AccountTableView()
   
@@ -34,16 +35,20 @@ class ProfileView: UIView {
     customizeViews()
     
     tableView.setup(delegate: delegate, dataSource: dataSource)
+    
+    toggleSpinner()
   }
   
   func setImage(_ image: UIImage) {
+    profileImageView.roundCorners(by: profileImageView.frame.height / 2)
+
+    toggleSpinner()
+    
     UIView.transition(with: profileImageView,
                       duration: 0.75,
                       options: .transitionCrossDissolve,
                       animations: { [weak self] in self?.profileImageView.image = image },
                       completion: nil)
-    
-    profileImageView.roundCorners(by: profileImageView.frame.height / 2)
   }
   
   func setRefreshDelegate(delegate: RefreshingTableView) {
@@ -57,22 +62,46 @@ class ProfileView: UIView {
   private func laidOutViews() {
     addSubview(profileImageView)
     addSubview(tableView)
+    addSubview(spinner)
     
+    spinner.translatesAutoresizingMaskIntoConstraints = false
     profileImageView.translatesAutoresizingMaskIntoConstraints = false
     tableView.translatesAutoresizingMaskIntoConstraints = false
 
     NSLayoutConstraint(item: profileImageView, attribute: .top, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 16).isActive = true
-    NSLayoutConstraint(item: profileImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: profileImageView, attribute: .height, relatedBy: .equal, toItem: profileImageView, attribute: .width, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: profileImageView, attribute: .width, relatedBy: .lessThanOrEqual, toItem: self, attribute: .height, multiplier: 0.2, constant: 0).isActive = true
-
-    NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: profileImageView, attribute: .bottom, multiplier: 1, constant: 16).isActive = true
     NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: self.compatibleSafeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -8).isActive = true
-    NSLayoutConstraint(item: tableView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0).isActive = true
-    NSLayoutConstraint(item: tableView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+   
+    profileImageView.easy.layout([
+      CenterX().to(self),
+      Height().like(profileImageView, .width).with(.high),
+      Width(<=0.2).like(self, .height),
+      Height(*0.2).like(self).with(.required)
+    ])
+
+    tableView.easy.layout([
+      Top(==16).to(profileImageView, .bottom),
+      Width().like(self),
+      CenterX().to(self)
+    ])
+    
+    spinner.easy.layout([
+      CenterX().to(profileImageView, .centerX),
+      CenterY().to(profileImageView, .centerY),
+      Height().like(profileImageView, .height),
+      Width().like(profileImageView, .width)
+      ])
   }
   
   private func customizeViews() {
-    profileImageView.image = UIImage(named: "Pictures/chooseProfile")
+    spinner.color = .black
+  }
+  
+  private func toggleSpinner() {
+    if spinner.isAnimating {
+      spinner.stopAnimating()
+      spinner.removeFromSuperview()
+    } else {
+      spinner.startAnimating()
+    }
   }
 }

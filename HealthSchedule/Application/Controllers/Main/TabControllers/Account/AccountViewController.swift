@@ -12,7 +12,7 @@ import Presentr
 protocol AccountHandlableDelegate: class {
   func logout()
   func save()
-  func loadUserPhoto(imageData: Data)
+  func set(image: UIImage)
 }
 
 class AccountViewController: UIViewController, SetupableTabBarItem {
@@ -93,9 +93,7 @@ class AccountViewController: UIViewController, SetupableTabBarItem {
 }
 
 extension AccountViewController: AccountHandlableDelegate {
-  func loadUserPhoto(imageData: Data) {
-    guard let image = UIImage(data: imageData) else { return }
-    
+  func set(image: UIImage) {
     DispatchQueue.main.async {
       self.mainView.setImage(image)
     }

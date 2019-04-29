@@ -11,6 +11,7 @@ import EasyPeasy
 
 class RequestCardImageRow: UITableViewCell {
   private let photo = UIImageView()
+  private var spinner = UIActivityIndicatorView(style: .whiteLarge)
   private let nameLabel = UILabel()
   
   var photoImage: UIImage? {
@@ -21,6 +22,8 @@ class RequestCardImageRow: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     laidOutViews()
     customizeViews()
+    
+    toggleSpinner()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -28,24 +31,27 @@ class RequestCardImageRow: UITableViewCell {
   }
   
   func populateCell(name: String) {
-    nameLabel.text = name    
-    photo.image = UIImage(named: "Pictures/chooseProfile")
+    nameLabel.text = name
   }
   
   func setImage(_ image: UIImage) {
+    photo.roundCorners(by: photo.frame.height / 2)
+    
+    toggleSpinner()
+    
     UIView.transition(with: photo,
                       duration: 0.75,
                       options: .transitionCrossDissolve,
                       animations: { [weak self] in self?.photo.image = image },
                       completion: nil)
-
-    photo.roundCorners(by: photo.frame.height / 2)
   }
   
   private func laidOutViews() {
     addSubview(photo)
     addSubview(nameLabel)
+    addSubview(spinner)
     
+    spinner.translatesAutoresizingMaskIntoConstraints = false
     photo.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
     
@@ -61,6 +67,13 @@ class RequestCardImageRow: UITableViewCell {
       Right(*0.95).to(self),
       Left(==16).to(photo, .right)
     ])
+    
+    spinner.easy.layout([
+      CenterX().to(photo, .centerX),
+      CenterY().to(photo, .centerY),
+      Height().like(photo, .height),
+      Width().like(photo, .width)
+    ])
   }
   
   private func customizeViews() {
@@ -69,7 +82,17 @@ class RequestCardImageRow: UITableViewCell {
     nameLabel.adjustsFontSizeToFitWidth = true
     nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
     
-    photo.roundCorners(by: photo.frame.height / 2)
+    spinner.color = .black
+    
     selectionStyle = .none
+  }
+  
+  private func toggleSpinner() {
+    if spinner.isAnimating {
+      spinner.stopAnimating()
+      spinner.removeFromSuperview()
+    } else {
+      spinner.startAnimating()
+    }
   }
 }

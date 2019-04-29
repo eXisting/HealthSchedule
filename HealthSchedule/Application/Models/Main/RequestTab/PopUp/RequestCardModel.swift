@@ -62,13 +62,10 @@ class RequestCardModel {
     return source[forSectionIndex]
   }
   
-  private func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
-    guard let url = url else {
-      return
-    }
-    
+  private func loadImage(by url: String, _ completion: @escaping (UIImage) -> Void) {
     commmonDataRequestController.getImage(from: url, isLaravelRelated: false) { data in
       guard let image = UIImage(data: data) else {
+        completion(UIImage(named: "Pictures/chooseProfile")!)
         return
       }
       

@@ -33,6 +33,7 @@
 		ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */; };
 		ED089A8C21E8EF1A006A8523 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */; };
 		ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9E21EC8848006A8523 /* ProfileView.swift */; };
+		ED09BB09227714AB00DA5B4D /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09BB08227714AB00DA5B4D /* CacheManager.swift */; };
 		ED10DB362269F14F00234B27 /* CommonExpandableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */; };
 		ED1495C32275CA7900C66421 /* RequestsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1495C22275CA7900C66421 /* RequestsDataSource.swift */; };
 		ED15159B226879D400FF44F6 /* ProviderSearchViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15159A226879D400FF44F6 /* ProviderSearchViewDataSource.swift */; };
@@ -210,6 +211,7 @@
 		ED089A8521E89B6A006A8523 /* UrlSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionHandler.swift; sourceTree = "<group>"; };
 		ED089A8B21E8EF1A006A8523 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED089A9E21EC8848006A8523 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		ED09BB08227714AB00DA5B4D /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExpandableSection.swift; sourceTree = "<group>"; };
 		ED1495C22275CA7900C66421 /* RequestsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsDataSource.swift; sourceTree = "<group>"; };
 		ED15159A226879D400FF44F6 /* ProviderSearchViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSearchViewDataSource.swift; sourceTree = "<group>"; };
@@ -848,6 +850,7 @@
 				EDD3CD2C220304DA00E38879 /* DateManager.swift */,
 				ED1ED02821FF5C2D00141CF5 /* ValidationManager.swift */,
 				EDE03EE82253754000DBAA0F /* DateExtension.swift */,
+				ED09BB08227714AB00DA5B4D /* CacheManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1520,6 +1523,7 @@
 				ED231B2F222D486600A80FC9 /* CommonSection.swift in Sources */,
 				EDD2A8372238026C00B52E68 /* SearchView.swift in Sources */,
 				ED34D7F522088F230025BACF /* RoundView.swift in Sources */,
+				ED09BB09227714AB00DA5B4D /* CacheManager.swift in Sources */,
 				EDB6B457225B6FAC00B8EA8B /* ScheduleModalDayDataSource.swift in Sources */,
 				ED231B33222D498800A80FC9 /* AccountDisclosureCell.swift in Sources */,
 				DB0B7C79225644F10035C593 /* CustomWeekView.swift in Sources */,

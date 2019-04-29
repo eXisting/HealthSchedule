@@ -9,7 +9,7 @@
 import UIKit
 
 class RequestCardDataSource: NSObject, UITableViewDataSource {
-  typealias ProcessingFunction = (String?, @escaping (UIImage) -> Void) -> Void
+  typealias ProcessingFunction = (String, @escaping (UIImage) -> Void) -> Void
   var imageProcessing: ProcessingFunction
   var errorDelegate: ErrorShowable
   
@@ -43,14 +43,8 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
     
     if let imageContainingData = rowData as? RequestCardUserRowModel {
       let cell = tableView.dequeueReusableCell(withIdentifier: RequestCardTableView.cellIdentifier, for: indexPath) as! RequestCardImageRow
-      cell.populateCell(name: imageContainingData.data)
       
-      imageProcessing(imageContainingData.imageUrl) { image in
-        DispatchQueue.main.async {
-          cell.setImage(image)
-          imageContainingData.image = image
-        }
-      }
+      initialize(cell, with: imageContainingData)
       
       return cell
     }
@@ -61,5 +55,30 @@ class RequestCardDataSource: NSObject, UITableViewDataSource {
     cell.textLabel?.lineBreakMode = .byWordWrapping
     cell.selectionStyle = .none
     return cell
+  }
+  
+  private func initialize(_ cell: RequestCardImageRow, with imageContainingData: RequestCardUserRowModel) {
+    cell.populateCell(name: imageContainingData.data)
+    
+    guard let imageUrl = imageContainingData.imageUrl else { return }
+    
+    if let cachedImage = CacheManager.shared.getFromCache(by: imageUrl as AnyObject) as? UIImage {
+      // Should perfrom on another thread in order to not reload row
+      DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.main.async {
+          cell.setImage(cachedImage)
+        }
+      }
+      
+      return
+    }
+    
+    
+    imageProcessing(imageUrl) { image in
+      DispatchQueue.main.async {
+        CacheManager.shared.saveToCache(imageUrl as AnyObject, image)
+        cell.setImage(image)
+      }
+    }
   }
 }

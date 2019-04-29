@@ -67,7 +67,20 @@ class AccountModel {
   func initializeUserImage(from url: String?) {
     guard let url = url else { return }
     
-    commonDataRequestController.getImage(from: url, isLaravelRelated: false, completion: accountHandlingDelegate.loadUserPhoto)
+    if let cachedImage = CacheManager.shared.getFromCache(by: url as AnyObject) as? UIImage {
+      accountHandlingDelegate.set(image: cachedImage)
+      return
+    }
+    
+    commonDataRequestController.getImage(from: url, isLaravelRelated: false) { [weak self] data in
+      guard let image = UIImage(data: data) else {
+        self?.accountHandlingDelegate.set(image: UIImage(named: "Pictures/chooseProfile")!)
+        return
+      }
+      
+      CacheManager.shared.saveToCache(url as AnyObject, image)
+      self?.accountHandlingDelegate.set(image: image)
+    }
   }
   
   func changeText(by indexPath: IndexPath, with text: String?) {

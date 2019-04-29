@@ -32,8 +32,6 @@ class RequestCardUserRowModel: RequestRowDataContaining {
   var imageUrl: String?
   var rowHeight: CGFloat = 90
   
-  var image: UIImage?
-  
   init(request: Request) {
     let userToDisplay = request.isUserSide ? request.provider : request.customer
     
