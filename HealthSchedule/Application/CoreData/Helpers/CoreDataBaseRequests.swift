@@ -234,7 +234,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     var address = fetchRequestsHandler.getAddress(by: remote.id, context: workingContext)
     
     if let userAttachedAddress = user.address {
-      workingContext.delete(userAttachedAddress)
+      delete(with: image.objectID, context: workingContext)
     }
     
     if address == nil {
@@ -253,7 +253,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     let profileImageEntityObject = NSEntityDescription.entity(forEntityName: userImageEntity, in: workingContext)
     
     if let image = user.image {
-      workingContext.delete(image)
+      delete(with: image.objectID, context: workingContext)
     }
       
     let userImage = NSManagedObject(entity: profileImageEntityObject!, insertInto: workingContext) as! UserImage
