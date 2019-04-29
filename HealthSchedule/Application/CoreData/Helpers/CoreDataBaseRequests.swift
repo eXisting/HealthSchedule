@@ -234,7 +234,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     var address = fetchRequestsHandler.getAddress(by: remote.id, context: workingContext)
     
     if let userAttachedAddress = user.address {
-      delete(with: image.objectID, context: workingContext)
+      delete(with: userAttachedAddress.objectID, context: workingContext)
     }
     
     if address == nil {
