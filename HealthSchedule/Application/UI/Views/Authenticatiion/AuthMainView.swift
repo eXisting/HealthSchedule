@@ -39,7 +39,7 @@ class AuthMainView: UIView {
     
     background.frame = frame
     background.contentMode = .scaleAspectFill
-    
+    background.clipsToBounds = true
     insertSubview(background, at: 0)
   }
   
