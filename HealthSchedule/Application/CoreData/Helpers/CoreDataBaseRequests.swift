@@ -11,7 +11,7 @@ import CoreData
 protocol CoreDataRequestsPerformable {
   // Update / insert
 
-  func insertUpdateUserAddress(from remote: RemoteAddress, for user: User, context: NSManagedObjectContext?)
+  func insertUpdateUserAddress(from remote: RemoteAddress, for userId: Int, context: NSManagedObjectContext?)
 
   func insertUpdateUserImage(from remote: ProfileImage, for user: User, context: NSManagedObjectContext?)
   func insertUpdateUsers(from remoteUsers: [RemoteUser], context: NSManagedObjectContext?)
@@ -226,22 +226,20 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
-  func insertUpdateUserAddress(from remote: RemoteAddress, for user: User, context: NSManagedObjectContext? = nil) {
+  func insertUpdateUserAddress(from remote: RemoteAddress, for userId: Int, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let userAddressEntity = NSEntityDescription.entity(forEntityName: addressEntity, in: workingContext)
     
-    var address = fetchRequestsHandler.getAddress(by: remote.id, context: workingContext)
-    
-    if let userAttachedAddress = user.address {
-      delete(with: userAttachedAddress.objectID, context: workingContext)
+    guard let user = fetchRequestsHandler.getCurrentUser(context: workingContext) else { fatalError("Should contain user!") }
+
+    if let existingAddress = user.address {
+      delete(with: existingAddress.objectID, context: workingContext)
     }
+   
+    let address = (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
     
-    if address == nil {
-      address = (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
-    }
-    
-    builder.build(address: address!, attachedUser: user, attachedProviderService: nil, remote, context: workingContext)
+    builder.build(address: address, attachedUser: user, attachedProviderService: nil, remote, context: workingContext)
     
     workingContext.processPendingChanges()
     saveContext(workingContext)
@@ -328,7 +326,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       }
       
       if let remoteAddress = remoteUser.address {
-        insertUpdateUserAddress(from: remoteAddress, for: user, context: workingContext)
+        insertUpdateUserAddress(from: remoteAddress, for: remoteUser.id, context: workingContext)
       }
     }
     

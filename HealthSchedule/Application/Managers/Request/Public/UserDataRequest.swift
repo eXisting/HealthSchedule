@@ -433,7 +433,7 @@ extension UserDataRequest: ProviderInfoRequesting {
           return
       }
       
-      DataBaseManager.shared.insertUpdateUserAddress(from: address, for: user)
+      DataBaseManager.shared.insertUpdateUserAddress(from: address, for: Int(user.id))
       
       completion(ResponseStatus.success.rawValue)
     }
