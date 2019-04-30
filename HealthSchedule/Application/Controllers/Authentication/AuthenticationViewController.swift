@@ -53,9 +53,14 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
   
   @objc private func onSignInClick() {
     showLoader()
+    
     mainView.signInButton?.isUserInteractionEnabled = false
     
     model.signIn(formData: mainView.getFormData()) { [weak self] response in
+      DispatchQueue.main.async {
+        self?.stopAnimating()
+      }
+      
       if response == ResponseStatus.success.rawValue {
         DispatchQueue.main.async {
           self?.rootNavigation.presentHome()
@@ -67,7 +72,6 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
       DispatchQueue.main.async {
         self?.showWarningAlert(message: response)
         self?.mainView.signInButton?.isUserInteractionEnabled = true
-        self?.stopAnimating()
       }
     }
   }
