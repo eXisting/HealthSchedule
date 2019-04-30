@@ -93,15 +93,7 @@ class ScheduleModel {
     return [ScheduleTemplateJsonFields.schedules.rawValue: result]
   }
   
-  private func saveTemplate(_ completion: @escaping (String) -> Void) {
+  func saveTemplate(_ completion: @escaping (String) -> Void) {
     requestManager.saveScheduleTemplates(collectData(), completion: completion)
-  }
-}
-
-extension ScheduleModel: ScheduleNavigationItemDelegate {
-  func save() {
-    saveTemplate { status in
-      print(status)
-    }
   }
 }

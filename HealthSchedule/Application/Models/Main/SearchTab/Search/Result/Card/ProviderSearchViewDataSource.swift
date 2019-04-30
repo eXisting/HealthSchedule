@@ -31,7 +31,7 @@ class ProviderSearchViewDataSource: NSObject, UITableViewDataSource, UITableView
     
     let cell = UITableViewCell()
     cell.backgroundColor = .clear
-    cell.textLabel?.text = data[indexPath.row] as! String
+    cell.textLabel?.text = (data[indexPath.row] as! String)
     return cell
   }
   

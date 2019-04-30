@@ -8,6 +8,7 @@
 
 import UIKit
 import Presentr
+import CDAlertView
 import JZCalendarWeekView
 import NVActivityIndicatorView
 
@@ -34,7 +35,7 @@ class ScheduleViewController: UIViewController, NVActivityIndicatorViewable {
   override var navigationItem: UINavigationItem {
     get {
       if customNavigationItem == nil {
-        customNavigationItem = ScheduleNavigationItem(title: titleName, delegate: model)
+        customNavigationItem = ScheduleNavigationItem(title: titleName, delegate: self)
       }
       
       return customNavigationItem!
@@ -82,13 +83,23 @@ class ScheduleViewController: UIViewController, NVActivityIndicatorViewable {
   
   private func startLoadTemplates() {
     if model.eventsByDate.isEmpty {
-      let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
-      startAnimating(size, type: .ballScaleRippleMultiple, color: .white, displayTimeThreshold: 5, minimumDisplayTime: 2)
+      showLoader()
     }
     
     DispatchQueue.global(qos: .background).async {
       self.model.loadFromCoreData()
     }
+  }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleRippleMultiple, color: .white, displayTimeThreshold: 5, minimumDisplayTime: 2)
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
   }
   
   private func setupNaviBar() {
@@ -116,6 +127,30 @@ extension ScheduleViewController: ScheduleEventsRefreshing {
       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
         self.stopAnimating()
       }
+    }
+  }
+}
+
+extension ScheduleViewController: ErrorShowable {
+  func showWarningAlert(message: String) {
+    CDAlertView(title: "Warning", message: message, type: .warning).show()
+  }
+}
+
+extension ScheduleViewController: ScheduleNavigationItemDelegate {
+  func save() {
+    showLoader()
+    
+    model.saveTemplate { [weak self] status in
+      if status != ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.showWarningAlert(message: status)
+        }
+        
+        return
+      }
+      
+      self?.stopAnimating()
     }
   }
 }
