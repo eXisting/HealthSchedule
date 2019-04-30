@@ -38,6 +38,9 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
     mainView.signInButton.addTarget(self, action: #selector(onSignInClick), for: .touchDown)
     mainView.signUpButton.addTarget(self, action: #selector(onSignUpClick), for: .touchDown)
     
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
     hideKeyboardWhenTappedAround()
   }
   
@@ -80,6 +83,20 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
     rootNavigation.presentSignUpController()
   }
   
+  @objc func keyboardWillShow(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+      if self.view.frame.origin.y == 0 {
+        self.view.frame.origin.y -= keyboardSize.height / 2
+      }
+    }
+  }
+  
+  @objc func keyboardWillHide(notification: NSNotification) {
+    if self.view.frame.origin.y != 0 {
+      self.view.frame.origin.y = 0
+    }
+  }
+  
   private func autoLogin() {
     model.autoLogin { [weak self] response in
       if response == ResponseStatus.success.rawValue {
@@ -113,15 +130,6 @@ extension AuthenticationViewController: ErrorShowable {
 }
 
 extension AuthenticationViewController: UITextFieldDelegate {
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-    performScreenScroll(up: true)
-  }
-  
-  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-    performScreenScroll(up: false)
-    return true
-  }
-  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     switch textField {
     case mainView.loginField:
@@ -134,16 +142,5 @@ extension AuthenticationViewController: UITextFieldDelegate {
     }
     
     return false
-  }
-  
-  private func performScreenScroll(up: Bool) {
-    UIView.beginAnimations(nil, context: nil)
-    UIView.setAnimationDuration(0.35)
-    var frame = self.view.frame
-    let yValue = frame.origin.y + (up ? -1 : 1) * frame.height * 0.2
-    
-    frame.origin.y = yValue
-    self.view.frame = frame
-    UIView.commitAnimations()
   }
 }
