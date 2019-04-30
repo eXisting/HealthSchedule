@@ -9,9 +9,8 @@
 import UIKit
 import CDAlertView
 import CoreData
-import NVActivityIndicatorView
 
-class ProviderServicesController: UIViewController, NVActivityIndicatorViewable {
+class ProviderServicesController: UIViewController {
   private let titleName = "Your services"
   private var customNavigationItem: GeneralActionSaveNavigationItem?
   

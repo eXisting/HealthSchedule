@@ -113,7 +113,7 @@ class FetchResultControllersComposer {
       sectionNameKeyPath: nil,
       cacheName: nil)
     
-    controller.delegate = providerServicesFrcDelegate
+    controller.delegate = providerProfessionsFrcDelegate
     
     do {
       let _ = try controller.performFetch()
