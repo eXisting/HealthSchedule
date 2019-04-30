@@ -9,8 +9,7 @@
 import UIKit
 
 @IBDesignable
-class DesignableTextField: UITextField {
-  
+class DesignableTextField: IdentifyingTextField {
   let imageSize: CGFloat = 30.0
   
   override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
@@ -57,5 +56,9 @@ class DesignableTextField: UITextField {
       leftViewMode = UITextField.ViewMode.never
       leftView = nil
     }
+  }
+  
+  override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    return super.canPerformAction(action, withSender: sender)
   }
 }

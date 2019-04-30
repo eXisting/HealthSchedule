@@ -72,6 +72,12 @@ class RequestCardViewController: UIViewController, NVActivityIndicatorViewable {
       color: .white,
       padding: 16
     )
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
   }
 }
 

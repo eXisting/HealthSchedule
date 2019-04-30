@@ -29,7 +29,7 @@ class ProviderServiceModel {
   }
   
   func postService(_ completion: @escaping (String) -> Void) {
-    var data = collectData()
+    let data = collectData()
     requestManager.createUpdateProviderService(with: data, isCreate: existingService == nil, completion: completion)
   }
   

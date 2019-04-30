@@ -10,8 +10,8 @@ import UIKit
 
 protocol AuthenticationProviding {
   func refreshToken(completion: @escaping () -> Void)
-  func login(login: String, password: String, completion: @escaping (String?) -> Void)
-  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void)
+  func login(login: String, password: String, completion: @escaping (String) -> Void)
+  func register(userType: UserType, _ postData: Parser.JsonDictionary, completion: @escaping (String) -> Void)
 }
 
 protocol ProviderInfoRequesting {
@@ -227,48 +227,41 @@ extension UserDataRequest: AuthenticationProviding {
     // TODO
   }
   
-  func login(login: String, password: String, completion: @escaping (String?) -> Void) {
+  func login(login: String, password: String, completion: @escaping (String) -> Void) {
     let postBody = ["username": "provider@example.org", "password": password]
 //    let postBody = ["username": login, "password": password]
-    requestsManager.signIn(userData: postBody) {
-      user, response in
+    requestsManager.signIn(userData: postBody) { user, response in
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
         return
       }
       
-      if response.error != nil {
-        completion(response.error)
+      if let error = response.error {
+        completion(error)
         return
       }
       
       DataBaseManager.shared.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
-      completion(nil)
+      completion(ResponseStatus.success.rawValue)
     }
   }
   
-  func register(userType: UserType, _ postData: [String: Any], completion: @escaping (String?) -> Void) {
-    guard let data = postData as? Parser.JsonDictionary else {
-      completion(ResponseStatus.invalidData.rawValue)
-      return
-    }
-    
-    requestsManager.signUp(authType: userType, userData: data) {
-      user, response in
+  func register(userType: UserType, _ postData: Parser.JsonDictionary, completion: @escaping (String) -> Void) {
+    requestsManager.signUp(authType: userType, userData: postData) { user, response in
       guard let remoteUser = user else {
         completion(ResponseStatus.applicationError.rawValue)
         return
       }
       
-      if response.error != nil {
-        completion(response.error)
+      if let error = response.error {
+        completion(error)
         return
       }
       
       DataBaseManager.shared.insertUpdateUsers(from: [remoteUser], context: DataBaseManager.shared.mainContext)
       
-      completion(nil)
+      completion(ResponseStatus.success.rawValue)
     }
   }
 }

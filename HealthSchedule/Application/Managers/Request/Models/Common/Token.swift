@@ -34,6 +34,12 @@ struct Token {
     
     return expirationData > Date()
   }
+  
+  static func clear() {
+    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.sessionToken.rawValue)
+    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.sessionExpires.rawValue)
+    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userUniqueId.rawValue)
+  }
 }
 
 extension Token: Codable {}

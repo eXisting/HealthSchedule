@@ -107,6 +107,12 @@ extension ServicesViewController: ModalPickHandling {
       padding: 16
     )
     
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
+    
     model.startLoadServices {
       [weak self] in
       DispatchQueue.main.async {

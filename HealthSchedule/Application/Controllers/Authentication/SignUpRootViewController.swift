@@ -8,8 +8,9 @@
 
 import UIKit
 import CDAlertView
+import NVActivityIndicatorView
 
-class SignUpRootViewController: UIViewController {
+class SignUpRootViewController: UIViewController, NVActivityIndicatorViewable {
   
   // test data
   //var signUpData: Parser.JsonDictionary = ["email":"johnsmit@gmail.com", "password":"qwerty123", "first_name":"Ann", "last_name":"Yan", "birthday_at":"2019-01-31", "phone":""]
@@ -34,10 +35,15 @@ class SignUpRootViewController: UIViewController {
     
     mainView.nextButton.addTarget(self, action: #selector(onNextClick), for: .touchDown)
     
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
     hideKeyboardWhenTappedAround()
   }
   
   func signUp() {
+    showLoader()
+    
     model.signUp(data: mainView.collectedData, userType: mainView.userType)
   }
   
@@ -51,24 +57,45 @@ class SignUpRootViewController: UIViewController {
     
     signUp()
   }
+  
+  @objc private func keyboardWillShow(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+      if self.view.frame.origin.y == 0 {
+        self.view.frame.origin.y -= keyboardSize.height / 3
+      }
+    }
+  }
+  
+  @objc private func keyboardWillHide(notification: NSNotification) {
+    if self.view.frame.origin.y != 0 {
+      self.view.frame.origin.y = 0
+    }
+  }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleMultiple, color: .white, minimumDisplayTime: 2, backgroundColor: UIColor.black.withAlphaComponent(0.85))
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
+  }
 }
 
 extension SignUpRootViewController: ErrorShowable {
   func showWarningAlert(message: String) {
+    if isAnimating {
+      stopAnimating()
+    }
+    
     CDAlertView(title: "Warning", message: message, type: .warning).show()
+    Token.clear()
   }
 }
 
 extension SignUpRootViewController: UITextFieldDelegate {
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-    performScreenScroll(up: true)
-  }
-  
-  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-    performScreenScroll(up: false)
-    return true
-  }
-  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     switch textField {
     case mainView.nameFIeld:
@@ -84,16 +111,5 @@ extension SignUpRootViewController: UITextFieldDelegate {
     }
     
     return false
-  }
-  
-  private func performScreenScroll(up: Bool) {
-    UIView.beginAnimations(nil, context: nil)
-    UIView.setAnimationDuration(0.35)
-    var frame = self.view.frame
-    let yValue = frame.origin.y + (up ? -1 : 1) * frame.height * 0.1
-    
-    frame.origin.y = yValue
-    self.view.frame = frame
-    UIView.commitAnimations()
   }
 }

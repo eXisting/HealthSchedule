@@ -19,9 +19,13 @@ class IdentifyingTextField: UITextField {
   }
   
   override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-    if subType == .datePicker && action == #selector(UIResponderStandardEditActions.paste(_:)) {
+    let cutPasteActionType = action == #selector(UIResponderStandardEditActions.paste(_:))
+      || action == #selector(UIResponderStandardEditActions.cut(_:))
+    
+    if subType == .datePicker && cutPasteActionType {
       return false
     }
+    
     return super.canPerformAction(action, withSender: sender)
   }
 }

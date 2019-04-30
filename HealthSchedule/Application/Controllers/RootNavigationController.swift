@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 protocol ErrorShowable {
   func showWarningAlert(message: String)
@@ -27,9 +28,7 @@ class RootNavigationController: UINavigationController {
   }
   
   @objc func popNavigationStackOnLogout() {
-    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.sessionToken.rawValue)
-    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.sessionExpires.rawValue)
-    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userUniqueId.rawValue)
+    Token.clear()
     
     popToRootViewController(animated: true)
     dismiss(animated: true)

@@ -45,7 +45,6 @@ class ScheduleViewController: UIViewController, NVActivityIndicatorViewable {
     super.viewDidLoad()
     model.delegate = self
     
-    setupBasic()
     setupCalendarView()
     setupNaviBar()
     
@@ -79,11 +78,6 @@ class ScheduleViewController: UIViewController, NVActivityIndicatorViewable {
     // Optional
     calendarWeekView.addNewDurationMins = 120
     calendarWeekView.moveTimeMinInterval = 15
-  }
-
-  private func setupBasic() {
-    // Add this to fix lower than iOS11 problems
-    self.automaticallyAdjustsScrollViewInsets = false
   }
   
   private func startLoadTemplates() {

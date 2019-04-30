@@ -14,7 +14,7 @@ protocol SigningIn {
 }
 
 protocol SigningUp {
-  func signUp(data: [String: Any], userType: UserType)
+  func signUp(data: Parser.JsonDictionary, userType: UserType)
 }
 
 class AuthenticationModel {
@@ -65,9 +65,9 @@ extension AuthenticationModel: SigningIn {
       return
     }
     
-    userRequestController.login(login: formData.login, password: formData.password) { error in
-      if let error = error {
-        completion(error)
+    userRequestController.login(login: formData.login, password: formData.password) { response in
+      if response != ResponseStatus.success.rawValue {
+        completion(response)
         return
       }
       
@@ -77,16 +77,15 @@ extension AuthenticationModel: SigningIn {
 }
 
 extension AuthenticationModel: SigningUp {
-  func signUp(data: [String: Any], userType: UserType) {
+  func signUp(data: Parser.JsonDictionary, userType: UserType) {
     if !validateSignUpData(data) {
       errorShowable.showWarningAlert(message: ResponseStatus.invalidData.rawValue)
     }
     
-    userRequestController.register(userType: userType, data) {
-      [weak self] error in
+    userRequestController.register(userType: userType, data) { [weak self] response in
       DispatchQueue.main.async {
-        if let error = error {
-          self?.errorShowable.showWarningAlert(message: error)
+        if response != ResponseStatus.success.rawValue {
+          self?.errorShowable.showWarningAlert(message: response)
           return
         }
         

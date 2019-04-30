@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bMn-Sa-2VV">
-                                <rect key="frame" x="114" y="149.66666666666666" width="186" height="37.666666666666657"/>
+                                <rect key="frame" x="114" y="140" width="186" height="37.666666666666657"/>
                                 <segments>
                                     <segment title="Client"/>
                                     <segment title="Provider"/>
@@ -31,7 +31,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FMe-iD-CRR" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="310.66666666666669" height="66.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/user"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
@@ -45,7 +45,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vjM-Xa-19I" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="66.333333333333343" width="310.66666666666669" height="66.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/email"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
@@ -59,7 +59,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="v3x-eX-ZAP" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="132.66666666666666" width="310.66666666666669" height="66"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/lock"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
@@ -73,7 +73,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x6d-Px-G74" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="198.66666666666666" width="310.66666666666669" height="66.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Icons/phone"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
@@ -84,11 +84,16 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DD/MM/YYYY" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="plY-Sc-w1J">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DD/MM/YYYY" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="plY-Sc-w1J" customClass="DesignableTextField" customModule="HealthSchedule" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="265" width="310.66666666666669" height="66.333333333333314"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -109,7 +114,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="trB-fP-oa3" firstAttribute="height" secondItem="V99-xb-hKp" secondAttribute="height" multiplier="0.45" id="0mr-Of-5tl"/>
-                            <constraint firstItem="trB-fP-oa3" firstAttribute="top" secondItem="bMn-Sa-2VV" secondAttribute="bottom" constant="16" id="1cG-hi-aAc"/>
+                            <constraint firstItem="trB-fP-oa3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bMn-Sa-2VV" secondAttribute="bottom" constant="16" id="1cG-hi-aAc"/>
                             <constraint firstItem="trB-fP-oa3" firstAttribute="centerX" secondItem="V99-xb-hKp" secondAttribute="centerX" id="5Fm-Jv-OWl"/>
                             <constraint firstItem="bMn-Sa-2VV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="h4R-Gh-EVr" secondAttribute="top" constant="8" id="KBu-hl-beh"/>
                             <constraint firstItem="bMn-Sa-2VV" firstAttribute="height" secondItem="V99-xb-hKp" secondAttribute="height" multiplier="0.05" id="L6T-U8-klh"/>
@@ -122,6 +127,7 @@
                             <constraint firstItem="h4R-Gh-EVr" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Wiw-IJ-8b8" secondAttribute="bottom" constant="8" id="r6g-AE-eO0"/>
                             <constraint firstItem="h4R-Gh-EVr" firstAttribute="bottom" secondItem="Wiw-IJ-8b8" secondAttribute="bottom" priority="750" constant="50" id="wVc-ZW-FcH"/>
                             <constraint firstItem="Wiw-IJ-8b8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="trB-fP-oa3" secondAttribute="bottom" constant="8" id="xsL-zX-NEd"/>
+                            <constraint firstItem="bMn-Sa-2VV" firstAttribute="top" secondItem="h4R-Gh-EVr" secondAttribute="top" multiplier="7" priority="250" id="zSS-bq-bFd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h4R-Gh-EVr"/>
                         <connections>
@@ -153,22 +159,22 @@
                                 <state key="normal" image="Icons/next"/>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Dvj-ln-tRg">
-                                <rect key="frame" x="41.333333333333343" y="110.33333333333331" width="331.33333333333326" height="221"/>
+                                <rect key="frame" x="10.333333333333343" y="140" width="393.33333333333326" height="220.66666666666663"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dHI-tQ-rTu">
-                                <rect key="frame" x="124.33333333333333" y="363.33333333333331" width="165.33333333333337" height="165.33333333333331"/>
+                                <rect key="frame" x="108.66666666666667" y="392.66666666666669" width="196.66666666666663" height="196.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provide you verify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMc-kS-n5H">
-                                        <rect key="frame" x="14.333333333333329" y="0.0" width="136.66666666666669" height="20.333333333333332"/>
+                                        <rect key="frame" x="29.999999999999986" y="0.0" width="136.66666666666663" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IEb-OY-pjf">
-                                        <rect key="frame" x="9.0000000000000142" y="28.333333333333371" width="147.33333333333337" height="137"/>
+                                        <rect key="frame" x="24.666666666666671" y="28.333333333333314" width="147.33333333333331" height="168.33333333333334"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -179,11 +185,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dHI-tQ-rTu" firstAttribute="height" relation="lessThanOrEqual" secondItem="h0O-Pj-ZbZ" secondAttribute="height" multiplier="0.3" priority="750" id="5Ks-kA-fod"/>
-                            <constraint firstItem="Dvj-ln-tRg" firstAttribute="width" secondItem="h0O-Pj-ZbZ" secondAttribute="width" multiplier="0.8" id="5Pq-r1-Dd7"/>
-                            <constraint firstItem="Dvj-ln-tRg" firstAttribute="centerY" secondItem="h0O-Pj-ZbZ" secondAttribute="centerY" multiplier="0.6" id="6xX-wT-rJ2"/>
+                            <constraint firstItem="Dvj-ln-tRg" firstAttribute="width" secondItem="h0O-Pj-ZbZ" secondAttribute="width" multiplier="0.95" id="5Pq-r1-Dd7"/>
                             <constraint firstItem="dHI-tQ-rTu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Dvj-ln-tRg" secondAttribute="bottom" constant="8" id="894-O7-NO1"/>
+                            <constraint firstItem="Dvj-ln-tRg" firstAttribute="top" secondItem="HQy-hA-9ig" secondAttribute="top" multiplier="7" priority="250" id="8Ea-TP-gSA"/>
                             <constraint firstItem="eb2-Pm-BKV" firstAttribute="width" secondItem="eb2-Pm-BKV" secondAttribute="height" id="93C-JC-dd5"/>
                             <constraint firstItem="eb2-Pm-BKV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dHI-tQ-rTu" secondAttribute="bottom" constant="8" id="C6d-lm-c1o"/>
+                            <constraint firstItem="Dvj-ln-tRg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HQy-hA-9ig" secondAttribute="top" constant="8" id="PQa-fp-gTU"/>
                             <constraint firstItem="Dvj-ln-tRg" firstAttribute="centerX" secondItem="h0O-Pj-ZbZ" secondAttribute="centerX" id="Q2z-Ur-192"/>
                             <constraint firstItem="HQy-hA-9ig" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="eb2-Pm-BKV" secondAttribute="bottom" constant="8" id="QM9-YA-Qc6"/>
                             <constraint firstItem="dHI-tQ-rTu" firstAttribute="width" secondItem="Dvj-ln-tRg" secondAttribute="width" multiplier="0.5" id="U17-ts-n5D"/>

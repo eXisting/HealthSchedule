@@ -88,15 +88,15 @@ extension RemoteUser: Codable {
     firstName = try container.decode(String.self, forKey: .firstName)
     lastName = try container.decode(String.self, forKey: .lastName)
     email = try container.decode(String.self, forKey: .email)
-    phone = try container.decode(String.self, forKey: .phone)
     status = try container.decode(Bool.self, forKey: .status)
-    city = try? container.decode(RemoteCity.self, forKey: .city)
-    role = try? container.decode(RemoteRole.self, forKey: .role)
-    photo = try? container.decode(ProfileImage.self, forKey: .image)
 
     let birthdayString = try container.decode(String.self, forKey: .birthday)
     birthday = DateManager.shared.stringToDate(birthdayString, format: .dateTime)
-    
-    address = try? container.decode(RemoteAddress.self, forKey: .address)
+
+    phone = try? container.decode(String.self, forKey: .phone)
+    city = try? container.decode(RemoteCity.self, forKey: .city)
+    role = try? container.decode(RemoteRole.self, forKey: .role)
+    photo = try? container.decode(ProfileImage.self, forKey: .image)
+    address = try? container.decode(RemoteAddress.self, forKey: .address)    
   }
 }

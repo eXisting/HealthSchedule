@@ -16,18 +16,18 @@ class MainSignUpInfoView: UIView {
   @IBOutlet weak var passwordField: DesignableTextField!
   @IBOutlet weak var nameFIeld: DesignableTextField!
   @IBOutlet weak var phoneField: DesignableTextField!
-  @IBOutlet weak var datePickerField: UITextField!
+  @IBOutlet weak var datePickerField: DesignableTextField!
   
   @IBOutlet weak var nextButton: UIButton!
   
   private var datePicker: DatePickerView!
   
-  private(set) var collectedData: [String: Any] = [:]
+  private(set) var collectedData: Parser.JsonDictionary = [:]
   private(set) var userType: UserType = .client
   
   func addTargets() {
-    [emailField, passwordField, nameFIeld]
-      .forEach({ $0.addTarget(self, action: #selector(collectData), for: .editingChanged) })
+    [emailField, passwordField, nameFIeld, datePickerField]
+      .forEach({ $0.addTarget(self, action: #selector(collectData), for: .allEditingEvents) })
     
     userPicker.addTarget(self, action: #selector(userTypeSwitch), for: .valueChanged)
   }
@@ -131,10 +131,15 @@ class MainSignUpInfoView: UIView {
       string: "Birthday",
       attributes: [NSAttributedString.Key.strokeColor: UIColor.black])
     
-    nameFIeld.delegate = textFieldsDelegate
+    datePickerField.leftPadding = 0
+    
+    nameFIeld.delegate = textFieldsDelegate     
     emailField.delegate = textFieldsDelegate
     passwordField.delegate = textFieldsDelegate
     phoneField.delegate = textFieldsDelegate
+    datePickerField.delegate = textFieldsDelegate
+    
+    datePickerField.subType = .datePicker
   }
   
   private func setUpBackground() {

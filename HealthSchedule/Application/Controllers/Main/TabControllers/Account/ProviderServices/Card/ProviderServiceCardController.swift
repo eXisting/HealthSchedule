@@ -65,6 +65,12 @@ class ProviderServiceCardController: UIViewController, NVActivityIndicatorViewab
   private func showLoader() {
     let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
     startAnimating(size, type: .ballScaleRipple, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.75))
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
   }
 }
 

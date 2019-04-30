@@ -68,7 +68,12 @@ class AccountModel {
   }
   
   func initializeUserImage(from url: String?) {
-    guard let url = url else { return }
+    let defaultImage = UIImage(named: "Pictures/chooseProfile")!
+    
+    guard let url = url else {
+      accountHandlingDelegate.set(image: defaultImage)
+      return
+    }
     
     let isRemoteImage = url.contains("http")
     let splited = url.split(separator: Character("/"))
@@ -84,12 +89,12 @@ class AccountModel {
     commonDataRequestController.getImage(from: url, isLaravelRelated: !isRemoteImage) {
       [weak self] data in
       guard let data = data else {
-        self?.accountHandlingDelegate.set(image: UIImage(named: "Pictures/chooseProfile")!)
+        self?.accountHandlingDelegate.set(image: defaultImage)
         return
       }
       
       guard let image = UIImage(data: data) else {
-        self?.accountHandlingDelegate.set(image: UIImage(named: "Pictures/chooseProfile")!)
+        self?.accountHandlingDelegate.set(image: defaultImage)
         return
       }
       
@@ -118,8 +123,10 @@ class AccountModel {
       }
     }
     
-    guard let photoData = userImageData,
-      let photoName = imageName else { return }
+    guard let photoData = userImageData, let photoName = imageName else {
+      completion(ResponseStatus.success.rawValue)
+      return
+    }
     
     var info: Parser.JsonDictionary = [:]
     info[ProfileImageJsonFields.filename.rawValue] = photoName

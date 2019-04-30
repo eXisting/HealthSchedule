@@ -144,14 +144,16 @@ extension RequestManager {
     _ data: Parser.JsonDictionary?,
     _ completion: @escaping (RemoteUser?, ServerResponse) -> Void) {
     
-    postAsync(to: url, as: .post, data, nil) {
-      [weak self] (tokenJson, tokenResponse) in
-      if tokenResponse.error != nil {
-        completion(nil, tokenResponse)
+    postAsync(to: url, as: .post, data, nil) { [weak self] tokenJson, response in
+      if let _ = response.error {
+        completion(nil, response)
         return
       }
       
-      self?.rememberToken(from: tokenJson)
+      if !self!.rememberToken(from: tokenJson) {
+        completion(nil, ServerResponse(ResponseStatus.cannotProceed.rawValue))
+        return
+      }
       
       self?.getAsync(for: RemoteUser.self, from: Endpoints.user, RequestManager.sessionToken.asParams()) {
         (userObject, serverResponse) in
@@ -173,15 +175,21 @@ extension RequestManager {
     return rootEndpoint + route
   }
   
-  private func rememberToken(from json: Any) {
+  private func rememberToken(from json: Any) -> Bool {
     guard let token = Parser.anyToObject(destination: Token.self, json) else {
-      return
+      return false
     }
     
-    let expireDate = DateManager.shared.getExpirationDate(expires: token.expires!)
+    guard let expires = token.expires else {
+      return false
+    }
+    
+    let expireDate = DateManager.shared.getExpirationDate(expires: expires)
     UserDefaults.standard.set(token.token, forKey: UserDefaultsKeys.sessionToken.rawValue)
     UserDefaults.standard.set(expireDate, forKey: UserDefaultsKeys.sessionExpires.rawValue)
-    print(token.token)
+//    print(token.token)
     RequestManager.sessionToken = token
+    
+    return true
   }
 }

@@ -120,12 +120,19 @@ class AuthenticationViewController: UIViewController, NVActivityIndicatorViewabl
   private func showLoader() {
     let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
     startAnimating(size, type: .ballScaleMultiple, color: .white, minimumDisplayTime: 2, backgroundColor: UIColor.black.withAlphaComponent(0.85))
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
   }
 }
 
 extension AuthenticationViewController: ErrorShowable {
   func showWarningAlert(message: String) {
     CDAlertView(title: "Warning", message: message, type: .warning).show()
+    Token.clear()
   }
 }
 
