@@ -37,7 +37,7 @@ class ProviderProfessionPickableRowModel: CommonRowDataContaining {
     }
     
     guard let chosenId = id else {
-      return (key: key, value: data!)
+      return (key: key, value: "")
     }
     
     return (key: key, value: String(chosenId))
@@ -75,7 +75,7 @@ class ProviderProfessionTextRowModel: CommonRowDataContaining {
     }
     
     guard let chosenId = id else {
-      return (key: key, value: data!)
+      return (key: key, value: "")
     }
     
     return (key: key, value: String(chosenId))
