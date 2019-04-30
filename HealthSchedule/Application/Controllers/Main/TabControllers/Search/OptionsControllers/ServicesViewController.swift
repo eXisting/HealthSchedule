@@ -23,6 +23,7 @@ class ServicesViewController: UITableViewController, NVActivityIndicatorViewable
     customPresenter.roundCorners = true
     customPresenter.backgroundColor = .lightGray
     customPresenter.backgroundOpacity = 0.5
+    customPresenter.cornerRadius = 10
     return customPresenter
   }()
   
@@ -78,8 +79,9 @@ class ServicesViewController: UITableViewController, NVActivityIndicatorViewable
 
 extension ServicesViewController: UISearchBarDelegate {
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-    model.getCities {
-      [weak self] cities in
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      let cities = self!.model.getCities()
+      
       DispatchQueue.main.async {
         let controller = ModalCityViewController()
         controller.storeDelegate = self
@@ -88,9 +90,12 @@ extension ServicesViewController: UISearchBarDelegate {
       }
     }
     
-    // TODO: Present preloader
-    
     return false
+  }
+  
+  private func showLoader() {
+    let size = CGSize(width: view.frame.width / 1.5, height: view.frame.height * 0.35)
+    startAnimating(size, message: "Searching services...", type: NVActivityIndicatorType.orbit, color: .white, padding: 16)
   }
 }
 
@@ -99,13 +104,7 @@ extension ServicesViewController: ModalPickHandling {
     model.cityId = id
     searchBar.text = title
     
-    startAnimating(
-      CGSize(width: view.frame.width / 1.5, height: view.frame.height * 0.35),
-      message: "Searching services...",
-      type: NVActivityIndicatorType.orbit,
-      color: .white,
-      padding: 16
-    )
+    showLoader()
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
       if self != nil && self!.isAnimating {

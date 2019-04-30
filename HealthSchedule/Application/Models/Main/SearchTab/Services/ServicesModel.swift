@@ -16,17 +16,8 @@ class ServicesModel {
   
   var services: [RemoteService] = []
       
-  func getCities(_ completion: @escaping ([City]) -> Void) {
-    let cities = DataBaseManager.shared.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext)
-    if cities.count > 1 {
-      completion(cities)
-      return
-    }
-    
-    commonDataRequestController.getCities { status in
-      if status != ResponseStatus.success.rawValue { return }
-        completion(DataBaseManager.shared.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext))
-    }
+  func getCities() -> [City] {
+    return DataBaseManager.shared.fetchRequestsHandler.getCties(context: DataBaseManager.shared.mainContext)
   }
   
   func startLoadServices(_ completion: @escaping () -> Void) {

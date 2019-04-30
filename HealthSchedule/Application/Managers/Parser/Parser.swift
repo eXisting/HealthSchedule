@@ -66,15 +66,15 @@ class Parser {
     
     for element in dict {
       guard let elementValues = element.value as? [String: Any] else {
-        fatalError()
+        return []
       }
       
       guard let date = elementValues[AvailableTimeJson.date.rawValue] as? String else {
-        fatalError()
+        return []
       }
       
       guard let timesForDate = elementValues[AvailableTimeJson.times.rawValue] as? [String: [Int]] else {
-        fatalError()
+        return []
       }
       
       var timesArray: RemoteAvailableTimeContainer.AvailableTimesSortedArray = []
