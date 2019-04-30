@@ -108,17 +108,14 @@ extension AccountViewController: AccountHandlableDelegate {
     showLoader()
     
     model.handleSave { [weak self] response in
-      if response != ResponseStatus.success.rawValue {
-        DispatchQueue.main.async {
-          self?.stopAnimating()
-          self?.showWarningAlert(message: response)
-        }
-        
-        return
-      }
-      
       DispatchQueue.main.async {
         self?.stopAnimating()
+      }
+      
+      if response != ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.showWarningAlert(message: response)
+        }
       }
     }
   }

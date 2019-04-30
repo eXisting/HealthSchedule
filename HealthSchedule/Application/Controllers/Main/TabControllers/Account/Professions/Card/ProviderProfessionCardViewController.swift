@@ -9,8 +9,9 @@
 import UIKit
 import CDAlertView
 import Presentr
+import NVActivityIndicatorView
 
-class ProviderProfessionCardViewController: UIViewController {
+class ProviderProfessionCardViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Add new experience"
   
   private var model: ProviderProfessionModel!
@@ -86,6 +87,11 @@ class ProviderProfessionCardViewController: UIViewController {
         self!.customPresentViewController(self!.mainView.presenter, viewController: controller, animated: true)
       }
     }
+  }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleRipple, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.75))
   }
 }
 
@@ -172,7 +178,13 @@ extension ProviderProfessionCardViewController: GeneralItemHandlingDelegate {
   }
   
   func main() {
+    showLoader()
+    
     model.saveProviderProfession { [weak self] status in
+      DispatchQueue.main.async {
+        self?.stopAnimating()
+      }
+      
       if status != ResponseStatus.success.rawValue {
         DispatchQueue.main.async {
           self?.showWarningAlert(message: status)

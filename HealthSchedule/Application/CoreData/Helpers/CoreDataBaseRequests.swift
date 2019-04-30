@@ -237,6 +237,9 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       delete(with: existingAddress.objectID, context: workingContext)
     }
    
+    workingContext.processPendingChanges()
+    saveContext(workingContext)
+    
     let address = (NSManagedObject(entity: userAddressEntity!, insertInto: workingContext) as! Address)
     
     builder.build(address: address, attachedUser: user, attachedProviderService: nil, remote, context: workingContext)

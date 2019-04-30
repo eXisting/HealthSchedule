@@ -8,8 +8,9 @@
 
 import UIKit
 import CDAlertView
+import NVActivityIndicatorView
 
-class PasswordViewController: UIViewController {
+class PasswordViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Change password"
   
   private let mainView = PasswordView()
@@ -44,10 +45,18 @@ class PasswordViewController: UIViewController {
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.backgroundColor = .gray
   }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleRipple, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.75))
+  }
 }
 
 extension PasswordViewController: ErrorShowable {
   func showWarningAlert(message: String) {
+    if isAnimating {
+      stopAnimating()
+    }
     CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }
@@ -65,6 +74,8 @@ extension PasswordViewController: GeneralItemHandlingDelegate {
   }
   
   func main() {
+    showLoader()
+    
     if !mainView.isConfirmValid() {
       showWarningAlert(message: ResponseStatus.passwordsMismatch.rawValue)
       return
@@ -78,6 +89,7 @@ extension PasswordViewController: GeneralItemHandlingDelegate {
       }
       
       DispatchQueue.main.async {
+        self?.showLoader()
         self?.back()
       }
     }

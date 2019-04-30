@@ -9,8 +9,9 @@
 import UIKit
 import CDAlertView
 import Presentr
+import NVActivityIndicatorView
 
-class ProviderServiceCardController: UIViewController {
+class ProviderServiceCardController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Add new service"
   
   private var model: ProviderServiceModel!
@@ -59,6 +60,11 @@ class ProviderServiceCardController: UIViewController {
         self!.customPresentViewController(self!.mainView.presenter, viewController: controller, animated: true)
       }
     }
+  }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleRipple, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.75))
   }
 }
 
@@ -131,7 +137,13 @@ extension ProviderServiceCardController: GeneralItemHandlingDelegate {
   }
   
   func main() {
+    showLoader()
+    
     model.postService { [weak self] status in
+      DispatchQueue.main.async {
+        self?.stopAnimating()
+      }
+      
       if status != ResponseStatus.success.rawValue {
         self?.showWarningAlert(message: status)
         return

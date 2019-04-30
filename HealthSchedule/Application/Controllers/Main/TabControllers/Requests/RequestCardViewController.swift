@@ -8,8 +8,9 @@
 
 import UIKit
 import CDAlertView
+import NVActivityIndicatorView
 
-class RequestCardViewController: UIViewController {
+class RequestCardViewController: UIViewController, NVActivityIndicatorViewable {
   private let mainView = RequestCardContainerView()
   private var model: RequestCardModel!
   
@@ -39,14 +40,38 @@ class RequestCardViewController: UIViewController {
     mainView.laidOutViews()
   }
   
-  @objc func onAccept() {
-    model.updateRequest(status: .accepted)
-    parentAction()
+  @objc private func onAccept() {
+    showLoader()
+    
+    model.updateRequest(status: .accepted) { [weak self] in
+      DispatchQueue.main.async {
+        self?.stopAnimating()
+      }
+      
+      self?.parentAction()
+    }
   }
   
-  @objc func onDecline() {
-    model.updateRequest(status: .rejected)
-    parentAction()
+  @objc private func onDecline() {
+    showLoader()
+    
+    model.updateRequest(status: .rejected) { [weak self] in
+      DispatchQueue.main.async {
+        self?.stopAnimating()
+      }
+      
+      self?.parentAction()
+    }
+  }
+  
+  private func showLoader() {
+    startAnimating(
+      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      message: "Refreshing...",
+      type: .ballPulse,
+      color: .white,
+      padding: 16
+    )
   }
 }
 
@@ -78,6 +103,10 @@ extension RequestCardViewController: UITableViewDelegate {
 
 extension RequestCardViewController: ErrorShowable {
   func showWarningAlert(message: String) {
+    if isAnimating {
+      stopAnimating()
+    }
+    
     CDAlertView(title: "Warning", message: message, type: .warning).show()
   }
 }

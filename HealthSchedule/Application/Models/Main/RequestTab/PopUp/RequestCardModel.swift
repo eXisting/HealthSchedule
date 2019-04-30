@@ -46,7 +46,7 @@ class RequestCardModel {
     return role
   }
   
-  func updateRequest(status: RequestStatusName) {
+  func updateRequest(status: RequestStatusName, _ completion: @escaping () -> Void) {
     let postData: Parser.JsonDictionary = [
       RequestJsonFields.status.rawValue: String(ReqeustStatus.statusName2RValue(value: status))
     ]
@@ -55,6 +55,8 @@ class RequestCardModel {
       if response != ResponseStatus.success.rawValue {
         self?.errorDelegate.showWarningAlert(message: response)
       }
+      
+      completion()
     }
   }
   

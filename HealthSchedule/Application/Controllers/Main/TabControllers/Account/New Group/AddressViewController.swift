@@ -8,8 +8,9 @@
 
 import UIKit
 import CDAlertView
+import NVActivityIndicatorView
 
-class AddressViewController: UIViewController {
+class AddressViewController: UIViewController, NVActivityIndicatorViewable  {
   private let titleName = "Your address"
   
   private let mainView = AddressView()
@@ -52,6 +53,11 @@ class AddressViewController: UIViewController {
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.navigationBar.backgroundColor = .gray
   }
+  
+  private func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballScaleRipple, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.75))
+  }
 }
 
 extension AddressViewController: ErrorShowable {
@@ -73,12 +79,18 @@ extension AddressViewController: GeneralItemHandlingDelegate {
   }
   
   func main() {
+    showLoader()
+    
     if !mainView.isValid() {
       showWarningAlert(message: ResponseStatus.passwordsMismatch.rawValue)
       return
     }
     
     model.saveAddress(newAddress: mainView.collectData()) { [weak self] response in
+      DispatchQueue.main.async {
+        self?.stopAnimating()
+      }
+      
       if response != ResponseStatus.success.rawValue {
         DispatchQueue.main.async {
           self?.showWarningAlert(message: response)
