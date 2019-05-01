@@ -42,9 +42,7 @@ class UrlSessionHandler {
         completion(self!.emptyJson, ServerResponse(ResponseStatus.serverError.rawValue))
         return
       }
-      
-      // TODO: only 14 requests parsed from json but response is full - 23
-      
+            
       guard let serverError = Parser.anyToObject(destination: ServerResponse.self, json) else {
         // if object has been casted - return without exception
         completion(json, ServerResponse())

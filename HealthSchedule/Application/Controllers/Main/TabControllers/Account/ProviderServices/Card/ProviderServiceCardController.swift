@@ -151,7 +151,9 @@ extension ProviderServiceCardController: GeneralItemHandlingDelegate {
       }
       
       if status != ResponseStatus.success.rawValue {
-        self?.showWarningAlert(message: status)
+        DispatchQueue.main.async {
+          self?.showWarningAlert(message: status)
+        }
         return
       }
       

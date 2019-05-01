@@ -15,6 +15,7 @@ protocol AuthenticationProviding {
 }
 
 protocol ProviderInfoRequesting {
+  /// Returns curent provider professions for nil providerId
   func getProviderProfessions(with providerId: Int?, completion: @escaping (String) -> Void)
   func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
   func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
@@ -109,13 +110,13 @@ extension UserDataRequest: UserDataUpdating {
   
   func makeRequests(toProviderWith collectedData: Parser.JsonDictionary, _ completion: @escaping (String) -> Void) {
     requestsManager.postAsync(to: Endpoints.userRequests.rawValue, as: .post, collectedData, RequestManager.sessionToken.asParams()) {
-      data, response in
+      [weak self] data, response in
       if let error = response.error {
         completion(error)
         return
       }
       
-      completion(ResponseStatus.success.rawValue)
+      self?.getRequests(completion: completion)
     }
   }
   
@@ -346,13 +347,22 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
     
     requestsManager.postAsync(to: endpoint, as: requestType, data, RequestManager.sessionToken.asParams()) {
-      serverMessage, response in
+      [weak self] serverMessage, response in
       if let error = response.error {
         completion(error)
         return
       }
       
-      completion(ResponseStatus.success.rawValue)
+      if requestType == .put {
+        guard let professionId = Int(data[ProfessionJsonFields.id.rawValue]!) else {
+          completion(ResponseStatus.applicationError.rawValue)
+          return
+        }
+        
+        self?.getProviderProfession(by: professionId, completion: completion)
+      } else {
+        self?.getProviderProfessions(with: nil, completion: completion)
+      }
     }
   }
   
@@ -368,13 +378,22 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
     
     requestsManager.postAsync(to: endpoint, as: requestType, data, RequestManager.sessionToken.asParams()) {
-      serverMessage, response in
+      [weak self] serverMessage, response in
       if let error = response.error {
         completion(error)
         return
       }
       
-      completion(ResponseStatus.success.rawValue)
+      if requestType == .put {
+        guard let id = Int(data[ProviderServiceJsonFields.id.rawValue]!) else {
+          completion(ResponseStatus.applicationError.rawValue)
+          return
+        }
+        
+        self?.getProviderService(by: id, completion: completion)
+      } else {
+        self?.getProviderServices(completion: completion)
+      }
     }
   }
   
@@ -405,6 +424,48 @@ extension UserDataRequest: ProviderInfoRequesting {
       }
       
       self?.getScheduleTemplate(completion: completion)
+    }
+  }
+  
+  private func getProviderProfession(by id: Int, completion: @escaping (String) -> Void) {
+    let endpoint = "\(Endpoints.providerProfessions.rawValue)/\(id)"
+    
+    requestsManager.getAsync(for: RemoteProviderProfession.self, from: endpoint, RequestManager.sessionToken.asParams()) {
+      data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      guard let providerProfession = data else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
+      DataBaseManager.shared.insertUpdateProviderProfessions(from: [providerProfession])
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  private func getProviderService(by id: Int, completion: @escaping (String) -> Void) {
+    let endpoint = "\(Endpoints.providerServices.rawValue)/\(id)"
+    
+    requestsManager.getAsync(for: RemoteProviderService.self, from: endpoint, RequestManager.sessionToken.asParams()) {
+      data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      guard let providerSerivce = data else {
+        completion(ResponseStatus.applicationError.rawValue)
+        return
+      }
+      
+      DataBaseManager.shared.insertUpdateProviderServices(from: [providerSerivce])
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
   
