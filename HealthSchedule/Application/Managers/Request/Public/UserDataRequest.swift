@@ -18,7 +18,7 @@ protocol ProviderInfoRequesting {
   /// Returns curent provider professions for nil providerId
   func getProviderProfessions(with providerId: Int?, completion: @escaping (String) -> Void)
   func createUpdateProviderProfession(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
-  func removeProfession(with id: Int, completion: @escaping (String?) -> Void)
+  func removeProfession(with id: Int, completion: @escaping (String) -> Void)
 
   func saveAddress(_ address: String, completion: @escaping (String) -> Void)
   
@@ -27,6 +27,7 @@ protocol ProviderInfoRequesting {
 
   func getProviderServices(completion: @escaping (String) -> Void)
   func createUpdateProviderService(with data: Parser.JsonDictionary, isCreate: Bool, completion: @escaping (String) -> Void)
+  func removeProviderService(with id: Int, completion: @escaping (String) -> Void)
 }
 
 protocol CommonDataRequesting {
@@ -287,17 +288,31 @@ extension UserDataRequest: ProviderInfoRequesting {
     }
   }
   
-  func removeProfession(with id: Int, completion: @escaping (String?) -> Void) {
-    let url = Endpoints.providerProfessions.rawValue + "/\(id)"
+  func removeProfession(with id: Int, completion: @escaping (String) -> Void) {
+    let url = "\(Endpoints.providerProfessions.rawValue)/\(id)"
     
     requestsManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken.asParams()) {
-      (serverMessage, response) in
-      if response.error != nil {
-        completion(response.error)
+      data, response in
+      if let error = response.error {
+        completion(error)
         return
       }
       
-      completion(nil)
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func removeProviderService(with id: Int, completion: @escaping (String) -> Void) {
+    let url = "\(Endpoints.providerServices.rawValue)/\(id)"
+    
+    requestsManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken.asParams()) {
+      [weak self] data, response in
+      if let error = response.error {
+        completion(error)
+        return
+      }
+      
+      completion(ResponseStatus.success.rawValue)
     }
   }
   

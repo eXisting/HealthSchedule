@@ -164,6 +164,38 @@ class FetchRequestsHandler {
     }
   }
   
+  func getRequests(with predicate: NSPredicate? = nil, context: NSManagedObjectContext? = nil) -> [Request] {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+    fetchRequest.predicate = predicate
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      return result
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
+  func getRequest(by id: Int, context: NSManagedObjectContext? = nil) -> Request? {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")
+    fetchRequest.fetchLimit = 1
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      return result.first
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
   func getProfessions(context: NSManagedObjectContext? = nil) -> [Profession] {
     let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
@@ -195,11 +227,12 @@ class FetchRequestsHandler {
     }
   }
   
-  func getProviderServices(context: NSManagedObjectContext? = nil) -> [ProviderService] {
+  func getProviderServices(with predicate: NSPredicate? = nil, context: NSManagedObjectContext? = nil) -> [ProviderService] {
     let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "price", ascending: true)]
+    fetchRequest.predicate = predicate
     
     do {
       let result = try workingContext.fetch(fetchRequest)
@@ -214,6 +247,38 @@ class FetchRequestsHandler {
     let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
     
     let fetchRequest: NSFetchRequest<ProviderService> = ProviderService.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")
+    fetchRequest.fetchLimit = 1
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      return result.first
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
+  func getProviderProfessions(with predicate: NSPredicate? = nil, context: NSManagedObjectContext? = nil) -> [ProviderProfession] {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<ProviderProfession> = ProviderProfession.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+    fetchRequest.predicate = predicate
+    
+    do {
+      let result = try workingContext.fetch(fetchRequest)
+      return result
+    } catch {
+      print("Unexpected error: \(error.localizedDescription)")
+      abort()
+    }
+  }
+  
+  func getProviderProfession(by id: Int, context: NSManagedObjectContext? = nil) -> ProviderProfession? {
+    let workingContext = contextsProviding.provideWorkingContext(basedOn: context)
+    
+    let fetchRequest: NSFetchRequest<ProviderProfession> = ProviderProfession.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "id == \(Int16(id))")
     fetchRequest.fetchLimit = 1
     

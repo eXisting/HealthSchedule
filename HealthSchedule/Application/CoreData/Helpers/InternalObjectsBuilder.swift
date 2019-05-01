@@ -63,7 +63,7 @@ class InternalObjectsBuilder {
     }
   }
   
-  func build(providerProfession: ProviderProfession, _ remote: RemoteProviderProfession, context: NSManagedObjectContext) {
+  func build(providerProfession: ProviderProfession, for provider: User, _ remote: RemoteProviderProfession, context: NSManagedObjectContext) {
     providerProfession.id = Int16(remote.id)
     providerProfession.cityId = Int16(remote.cityId)
     providerProfession.companyName = remote.companyName
@@ -73,8 +73,7 @@ class InternalObjectsBuilder {
     providerProfession.providerId = Int32(remote.providerId)
     
     guard let profession = fetchHandler.getProfession(by: remote.professionId, context: context),
-      let city = fetchHandler.getCity(byId: remote.cityId, context: context),
-      let provider = fetchHandler.getUser(byId: remote.providerId, context: context) else {
+      let city = fetchHandler.getCity(byId: remote.cityId, context: context) else {
       fatalError("You must insert cities, professions and provier before ProviderProfession!")
     }
     

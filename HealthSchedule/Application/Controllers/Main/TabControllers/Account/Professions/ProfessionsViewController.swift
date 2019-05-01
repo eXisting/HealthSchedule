@@ -9,11 +9,12 @@
 import UIKit
 import CoreData
 import CDAlertView
+import NVActivityIndicatorView
 
-class ProfessionsViewController: UIViewController {
+class ProfessionsViewController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Your experience"
   
-  private let model = ProviderProfessionsModel()
+  private var model: ProviderProfessionsModel!
   private let mainView = ProviderProfessionsView()
   
   private var customNavigationItem: GeneralActionSaveNavigationItem?
@@ -35,8 +36,10 @@ class ProfessionsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    model = ProviderProfessionsModel(errorDelegate: self, loaderDelegate: self)
+    
     DataBaseManager.shared.setFrcDelegate(for: .providerProfessions, delegate: self)
-    model.prefetch()
+    model.reFetch {_ in}
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
@@ -68,6 +71,28 @@ extension ProfessionsViewController: ErrorShowable {
   }
 }
 
+extension ProfessionsViewController: LoaderShowable {
+  func showLoader() {
+    startAnimating(
+      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      message: "Refreshing...",
+      type: .ballPulse,
+      color: .white,
+      padding: 16
+    )
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
+  }
+  
+  func hideLoader() {
+    stopAnimating()
+  }
+}
+
 extension ProfessionsViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 90
@@ -77,6 +102,10 @@ extension ProfessionsViewController: UITableViewDelegate {
     let providerProfession = DataBaseManager.shared.providerProfessionFrc.object(at: indexPath)
     navigationController?.pushViewController(ProviderProfessionCardViewController(profession: providerProfession), animated: true)
     tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    return UITableViewCell.EditingStyle.delete
   }
 }
 

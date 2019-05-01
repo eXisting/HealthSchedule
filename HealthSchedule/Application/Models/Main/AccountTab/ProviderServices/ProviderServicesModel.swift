@@ -10,51 +10,52 @@ import UIKit
 
 class ProviderServicesModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
-  var dataSource = ProviderServicesDataSource()
+  private var errorHandling: ErrorShowable
+  private var source = ProviderServicesDataSource()
   
-  func prefetch() {
+  init(errorDelegate: ErrorShowable, loaderDelegate: LoaderShowable) {
+    errorHandling = errorDelegate
+    
+    source.loaderHandler = loaderDelegate
+    source.deleteHandler = deleteService
+  }
+  
+  func reFetch(_ completion: @escaping (String) -> Void) {
     do {
       try DataBaseManager.shared.providerServicesFrc.performFetch()
+      completion(ResponseStatus.success.rawValue)
     }
-    catch { print(error.localizedDescription) }
+    catch { completion(error.localizedDescription) }
   }
   
   func loadServices(_ completion: @escaping (String) -> Void) {
-    requestManager.getProviderServices { response in
-      do {
-        try DataBaseManager.shared.providerServicesFrc.performFetch()
+    requestManager.getProviderServices { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
         completion(response)
+        return
       }
-      catch { completion(error.localizedDescription) }
+      
+      self?.reFetch(completion)
+    }
+  }
+  
+  private func deleteService(_ id: Int, _ completion: @escaping (Bool) -> Void) {
+    requestManager.removeProviderService(with: id) { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.errorHandling.showWarningAlert(message: "Service has not been deleted! Contact the developer!")
+          completion(false)
+        }
+        return
+      }
+      
+      completion(true)
     }
   }
 }
 
-class ProviderServicesDataSource: NSObject, UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    //    if let sections = DataBaseManager.shared.providerServicesFrc.sections {
-    //      return sections.count
-    //    }
-    
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //    if let sections = DataBaseManager.shared.providerServicesFrc.sections {
-    //      let currentSection = sections[section]
-    //      return currentSection.numberOfObjects
-    //    }
-    
-    return DataBaseManager.shared.providerServicesFrc.fetchedObjects?.count ?? 0
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: ProviderServicesTableView.cellIdentifier, for: indexPath) as! ProviderServiceCell
-    
-    let providerService = DataBaseManager.shared.providerServicesFrc.object(at: indexPath)
-    
-    cell.setupData(id: Int(providerService.id), price: providerService.price, duration: providerService.duration)
-    
-    return cell
+extension ProviderServicesModel: DataSourceContaining {
+  var dataSource: UITableViewDataSource {
+    return source
   }
 }

@@ -41,8 +41,10 @@ class RequestsModel {
   private func deleteRequest(_ id: Int, _ completion: @escaping (Bool) -> Void) {
     (userRequestController as! UserDataUpdating).deleteRequest(id: id) { [weak self] response in
       if response != ResponseStatus.success.rawValue {
-        self?.errorHandling.showWarningAlert(message: "Request has not been deleted! Contact the developer!")
-        completion(false)
+        DispatchQueue.main.async {
+          self?.errorHandling.showWarningAlert(message: "Request has not been deleted! Contact the developer!")
+          completion(false)
+        }
         return
       }
       

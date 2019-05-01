@@ -65,42 +65,40 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
-    if requestList.isEmpty {
-      deleteAllRequests(context: workingContext)
-      return
-    }
-    
     let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: workingContext)
     
-    for remoteRequest in requestList {
-      let fetchRequest: NSFetchRequest<Request> = Request.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remoteRequest.id))")
-      fetchRequest.fetchLimit = 1
-      
+    var allRemoteIds: Set<Int> = []
+    
+    for remote in requestList {
       // Required fields
-      insertUpdateProviderServices(from: [remoteRequest.providerService], context: workingContext)
+      insertUpdateProviderServices(from: [remote.providerService], context: workingContext)
       
-      if let customer = remoteRequest.customer {
+      if let customer = remote.customer {
         insertUpdateUsers(from: [customer], context: workingContext)
       }
       
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        if !result.isEmpty {
-          builder.build(request: result.first!, remoteRequest, context: workingContext)
-        } else {
-          let object = (NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request)
-          builder.build(request: object, remoteRequest, context: workingContext)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
+      var storedRequest = fetchRequestsHandler.getRequest(by: remote.id, context: workingContext)
+      
+      if storedRequest == nil {
+        storedRequest = (NSManagedObject(entity: requestEntityObject!, insertInto: workingContext) as! Request)
       }
+      
+      builder.build(request: storedRequest!, remote, context: workingContext)
+      
+      // Collecting response ids
+      allRemoteIds.insert(remote.id)
     }
-    
+  
     workingContext.processPendingChanges()
     saveContext(workingContext)
+    
+    // Remove all requests which are not present in server response
+    let requests = fetchRequestsHandler.getRequests(with: nil, context: workingContext)
+    let missingRequests = requests.filter({ !allRemoteIds.contains(Int($0.id)) })
+    
+    for missing in missingRequests {
+      delete(with: missing.objectID, context: workingContext)
+    }
   }
   
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext? = nil) {
@@ -150,6 +148,8 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: workingContext)
     
+    var allRemoteIdPairs: [Int: [Int]] = [:]
+    
     for remote in list {
       var existingService = fetchRequestsHandler.getProviderService(by: remote.id, context: workingContext)
       
@@ -167,6 +167,25 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       
       // Required fields
       insertUpdateServiceAddress(from: remote.address, for: providerService, context: workingContext)
+      
+      // Collecting pairs of ids
+      if let _ = allRemoteIdPairs[remote.providerId] {
+        allRemoteIdPairs[remote.providerId]!.append(remote.id)
+      } else {
+        allRemoteIdPairs[remote.providerId] = [remote.id]
+      }
+    }
+      
+      // Remove all provider services which are not present in server response
+    for pair in allRemoteIdPairs {
+      let predicate = NSPredicate(format: "providerId == \(pair.key)")
+      let services = fetchRequestsHandler.getProviderProfessions(with: predicate, context: workingContext)
+        
+      let missingServices = services.filter({ !pair.value.contains(Int($0.id)) })
+        
+      for missing in missingServices {
+        delete(with: missing.objectID, context: workingContext)
+      }
     }
     
     workingContext.processPendingChanges()
@@ -178,31 +197,43 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     let professionEntity = NSEntityDescription.entity(forEntityName: providerProfessionEntity, in: workingContext)
     
+    var allRemoteIdPairs: [Int: [Int]] = [:]
+    
     for remote in list {
-      let fetchRequest: NSFetchRequest<ProviderProfession> = ProviderProfession.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == \(Int16(remote.id))")
-      fetchRequest.fetchLimit = 1
+      var providerProfession = fetchRequestsHandler.getProviderProfession(by: remote.id, context: workingContext)
       
-      do {
-        let result = try workingContext.fetch(fetchRequest)
-        
-        // Update
-        if result.count > 0 {
-          builder.build(providerProfession: result.first!, remote, context: workingContext)
-        }
-        // Insert
-        else {
-          let providerProfession = NSManagedObject(entity: professionEntity!, insertInto: workingContext) as! ProviderProfession
-          builder.build(providerProfession: providerProfession, remote, context: workingContext)
-        }
-      } catch {
-        print("Unexpected error: \(error.localizedDescription)")
-        abort()
+      guard let provider = fetchRequestsHandler.getUser(byId: remote.providerId, context: workingContext) else {
+        fatalError()
+      }
+      
+      if providerProfession == nil {
+        providerProfession = (NSManagedObject(entity: professionEntity!, insertInto: workingContext) as! ProviderProfession)
+      }
+      
+      builder.build(providerProfession: providerProfession!, for: provider, remote, context: workingContext)
+      
+      // Collecting pairs of ids
+      if let _ = allRemoteIdPairs[remote.providerId] {
+        allRemoteIdPairs[remote.providerId]!.append(remote.id)
+      } else {
+        allRemoteIdPairs[remote.providerId] = [remote.id]
       }
     }
     
     workingContext.processPendingChanges()
     saveContext(workingContext)
+    
+    // Remove all provider professions which are not present in server response
+    for pair in allRemoteIdPairs {
+      let predicate = NSPredicate(format: "providerId == \(pair.key)")
+      let professions = fetchRequestsHandler.getProviderProfessions(with: predicate, context: workingContext)
+      
+      let missingProfessions = professions.filter({ !pair.value.contains(Int($0.id)) })
+      
+      for missing in missingProfessions {
+        delete(with: missing.objectID, context: workingContext)
+      }
+    }
   }
   
   func insertUpdateProfessions(from list: [RemoteProfession], context: NSManagedObjectContext? = nil) {
@@ -405,10 +436,10 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
-  func deleteAllRequests(context: NSManagedObjectContext? = nil) {
+  func deleteAllEntities<T: NSManagedObject>(of objectType: T.Type, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
-    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Request.fetchRequest()
+    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = objectType.fetchRequest()
     
     let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     

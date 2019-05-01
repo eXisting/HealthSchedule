@@ -10,43 +10,52 @@ import UIKit
 
 class ProviderProfessionsModel {
   private let requestManager: ProviderInfoRequesting = UserDataRequest()
-  var dataSource = ProviderProfessionsDataSource()
+  private var errorHandling: ErrorShowable
+  private var source = ProviderProfessionsDataSource()
   
-  func prefetch() {
+  init(errorDelegate: ErrorShowable, loaderDelegate: LoaderShowable) {
+    errorHandling = errorDelegate
+    
+    source.loaderHandler = loaderDelegate
+    source.deleteHandler = deleteProfession
+  }
+  
+  func reFetch(_ completion: @escaping (String) -> Void) {
     do {
-      try DataBaseManager.shared.providerProfessionFrc.performFetch()
+      try DataBaseManager.shared.providerServicesFrc.performFetch()
+      completion(ResponseStatus.success.rawValue)
     }
-    catch { print(error.localizedDescription) }
+    catch { completion(error.localizedDescription) }
   }
   
   func loadProviderProfessions(_ completion: @escaping (String) -> Void) {
-    requestManager.getProviderProfessions(with: nil) { response in
-      do {
-        try DataBaseManager.shared.providerProfessionFrc.performFetch()
+    requestManager.getProviderProfessions(with: nil) { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
         completion(response)
+        return
       }
-      catch { completion(error.localizedDescription) }
+      
+      self?.reFetch(completion)
+    }
+  }
+  
+  private func deleteProfession(_ id: Int, _ completion: @escaping (Bool) -> Void) {
+    requestManager.removeProfession(with: id) { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
+        DispatchQueue.main.async {
+          self?.errorHandling.showWarningAlert(message: "Profession has not been deleted! Contact the developer!")
+          completion(false)
+        }
+        return
+      }
+      
+      completion(true)
     }
   }
 }
 
-class ProviderProfessionsDataSource: NSObject, UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return DataBaseManager.shared.providerProfessionFrc.fetchedObjects?.count ?? 0
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: ProviderProfessionsView.cellIdentifier, for: indexPath) as! ProviderProfessionViewCell
-
-    let providerProfession = DataBaseManager.shared.providerProfessionFrc.object(at: indexPath)
-
-    cell.setupData(id: Int(providerProfession.id), city: providerProfession.city!.name!, company: providerProfession.companyName!)
-
-    return cell
+extension ProviderProfessionsModel: DataSourceContaining {
+  var dataSource: UITableViewDataSource {
+    return source
   }
 }
-

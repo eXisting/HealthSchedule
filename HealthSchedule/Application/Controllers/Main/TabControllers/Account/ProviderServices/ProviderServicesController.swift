@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import CDAlertView
 import CoreData
+import CDAlertView
+import NVActivityIndicatorView
 
-class ProviderServicesController: UIViewController {
+class ProviderServicesController: UIViewController, NVActivityIndicatorViewable {
   private let titleName = "Your services"
   private var customNavigationItem: GeneralActionSaveNavigationItem?
   
   private let mainView = ProviderServicesTableView()
-  private let model = ProviderServicesModel()
+  private var model: ProviderServicesModel!
   
   override var navigationItem: UINavigationItem {
     get {
@@ -34,8 +35,10 @@ class ProviderServicesController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    model = ProviderServicesModel(errorDelegate: self, loaderDelegate: self)
+    
     DataBaseManager.shared.setFrcDelegate(for: .providerService, delegate: self)
-    model.prefetch()
+    model.reFetch {_ in}
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self
@@ -71,11 +74,37 @@ extension ProviderServicesController: UITableViewDelegate {
     navigationController?.pushViewController(ProviderServiceCardController(service: providerService), animated: true)
     tableView.deselectRow(at: indexPath, animated: true)
   }
+  
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    return UITableViewCell.EditingStyle.delete
+  }
 }
 
 extension ProviderServicesController: ErrorShowable {
   func showWarningAlert(message: String) {
     CDAlertView(title: "Warning", message: message, type: .warning).show()
+  }
+}
+
+extension ProviderServicesController: LoaderShowable {
+  func showLoader() {
+    startAnimating(
+      CGSize(width: view.frame.width / 2, height: view.frame.height * 0.25),
+      message: "Refreshing...",
+      type: .ballPulse,
+      color: .white,
+      padding: 16
+    )
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
+  }
+  
+  func hideLoader() {
+    stopAnimating()
   }
 }
 

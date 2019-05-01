@@ -35,15 +35,13 @@ class RequestsDataSource: NSObject, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    let request = DataBaseManager.shared.requestsResultController.object(at: indexPath)
-    
     if editingStyle == .delete {
       loaderHandler.showLoader()
       
+      let request = DataBaseManager.shared.requestsResultController.object(at: indexPath)
       deleteHandler(Int(request.id)) { [weak self] isSuccess in
         if isSuccess {
           DataBaseManager.shared.delete(with: request.objectID)
-          return
         }
         
         self?.loaderHandler.hideLoader()
