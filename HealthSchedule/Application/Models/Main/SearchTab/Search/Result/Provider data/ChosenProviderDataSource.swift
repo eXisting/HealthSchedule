@@ -10,11 +10,13 @@ import UIKit
 
 class ChosenProviderDataSource: NSObject, UITableViewDataSource {
   private var services: [ProviderService] = []
-
-  var loaderHandler: LoaderShowable!
   
   func populateServices(_ services: [ProviderService]) {
     self.services = services
+  }
+  
+  subscript(index: Int) -> ProviderService {
+    return services[index]
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {

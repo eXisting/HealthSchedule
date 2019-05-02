@@ -10,24 +10,24 @@ import UIKit
 
 class ChosenProviderModel {
   private let requestManager: CommonDataRequesting = UserDataRequest()
+  private let source = ChosenProviderDataSource()
+
   private var errorHandling: ErrorShowable
   private var loaderHandling: LoaderShowable
-  private var source: ChosenProviderDataSource!
   
   private var providerId: Int
   private var serviceId: Int
+  private(set) var time: Date
   
   init(errorDelegate: ErrorShowable, loaderDelegate: LoaderShowable,
        _ providerId: Int, _ serviceId: Int, _ time: Date
   ) {
     self.providerId = providerId
     self.serviceId = serviceId
+    self.time = time
     
-    source = ChosenProviderDataSource()
     loaderHandling = loaderDelegate
     errorHandling = errorDelegate
-    
-    source.loaderHandler = loaderDelegate
   }
   
   func loadServices(_ completion: @escaping () -> Void) {
@@ -54,6 +54,10 @@ class ChosenProviderModel {
       
       completion()
     }
+  }
+  
+  subscript(index: Int) -> ProviderService {
+    return source[index]
   }
   
   private func stopLoader(with message: String) {

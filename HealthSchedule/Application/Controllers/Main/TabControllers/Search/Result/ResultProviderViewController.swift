@@ -61,7 +61,7 @@ extension ResultProviderViewController: LoaderShowable {
       message: "Refreshing...",
       type: .ballPulse,
       color: .white,
-      padding: 16
+      padding: 30
     )
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { [weak self] in
@@ -88,6 +88,8 @@ extension ResultProviderViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let controller = ProviderServiceDetailViewController(model[indexPath.row], model.time)
+    customPresentViewController(mainView.presenter, viewController: controller, animated: true)
     tableView.deselectRow(at: indexPath, animated: true)
   }
   

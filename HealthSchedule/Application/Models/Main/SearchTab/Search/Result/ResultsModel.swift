@@ -27,23 +27,11 @@ class ResultsModel {
       sections.append(.init(day: parsedData.0, dayTimes: parsedData.1))
     }
     
-    tableViewContentHandler = ResultsDataSource(dataModels: sections, sendRequestHandler: sendRequest)
+    tableViewContentHandler = ResultsDataSource(dataModels: sections)
     tableViewContentHandler.service = service
     tableViewContentHandler.reloadDelegate = reloadDelegate
     tableViewContentHandler.loaderDelegate = loaderDelegate
     tableViewContentHandler.viewDetailsDelegate = viewDelegate
-  }
-  
-  func sendRequest(providerId: Int, time: Date) {
-    var data: Parser.JsonDictionary = [:]
-    data[RequestJsonFields.requestAt.rawValue] = DateManager.shared.date2String(with: .dateTime, time)
-    data[ProviderServiceJsonFields.providerId.rawValue] = String(providerId)
-    data[ProviderServiceJsonFields.serviceId.rawValue] = String(serviceId)
-    data[RequestJsonFields.description.rawValue] = "Hello, I would like to book!"
-    
-    requestManager.makeRequests(toProviderWith: data) { response in
-      print(response)
-    }
   }
   
   private func getServiceData() {

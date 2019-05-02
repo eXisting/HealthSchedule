@@ -13,15 +13,12 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   private var data: [ResultSectionModel] = []
   private var cellModels: [ProviderSearchViewModel]
   
-  private var sendRequestHandler: ((Int, Date) -> Void)!
-    
   var reloadDelegate: TableViewSectionsReloading!
   var loaderDelegate: LoaderShowable!
   var viewDetailsDelegate: PushingUserControllerDelegate!
   var service: Service!
   
-  init(dataModels: [ResultSectionModel], sendRequestHandler: @escaping (Int, Date) -> Void) {
-    self.sendRequestHandler = sendRequestHandler
+  init(dataModels: [ResultSectionModel]) {
     
     data = dataModels
     

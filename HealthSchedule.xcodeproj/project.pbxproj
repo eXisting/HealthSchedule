@@ -38,6 +38,11 @@
 		ED0A68D0227B109F00F86DF4 /* ChosenProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68CF227B109F00F86DF4 /* ChosenProviderView.swift */; };
 		ED0A68D3227B11F900F86DF4 /* ChosenProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68D2227B11F900F86DF4 /* ChosenProviderModel.swift */; };
 		ED0A68D5227B120C00F86DF4 /* ChosenProviderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68D4227B120C00F86DF4 /* ChosenProviderDataSource.swift */; };
+		ED0A68DA227B30DB00F86DF4 /* ProviderServiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68D9227B30DB00F86DF4 /* ProviderServiceDetailViewController.swift */; };
+		ED0A68DC227B310200F86DF4 /* ProviderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68DB227B310200F86DF4 /* ProviderDetailViewController.swift */; };
+		ED0A68DF227B339400F86DF4 /* ChosenProviderServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68DE227B339400F86DF4 /* ChosenProviderServiceModel.swift */; };
+		ED0A68E1227B349300F86DF4 /* ChosenProviderServiceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68E0227B349300F86DF4 /* ChosenProviderServiceDataSource.swift */; };
+		ED0A68E7227B3BE600F86DF4 /* SendRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68E6227B3BE600F86DF4 /* SendRequestView.swift */; };
 		ED0C66262279F015004F3F1F /* ProviderServicesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C66252279F015004F3F1F /* ProviderServicesDataSource.swift */; };
 		ED0C66282279F046004F3F1F /* ProviderProfessionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C66272279F046004F3F1F /* ProviderProfessionsDataSource.swift */; };
 		ED10DB362269F14F00234B27 /* CommonExpandableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */; };
@@ -221,6 +226,11 @@
 		ED0A68CF227B109F00F86DF4 /* ChosenProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderView.swift; sourceTree = "<group>"; };
 		ED0A68D2227B11F900F86DF4 /* ChosenProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderModel.swift; sourceTree = "<group>"; };
 		ED0A68D4227B120C00F86DF4 /* ChosenProviderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderDataSource.swift; sourceTree = "<group>"; };
+		ED0A68D9227B30DB00F86DF4 /* ProviderServiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServiceDetailViewController.swift; sourceTree = "<group>"; };
+		ED0A68DB227B310200F86DF4 /* ProviderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDetailViewController.swift; sourceTree = "<group>"; };
+		ED0A68DE227B339400F86DF4 /* ChosenProviderServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderServiceModel.swift; sourceTree = "<group>"; };
+		ED0A68E0227B349300F86DF4 /* ChosenProviderServiceDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderServiceDataSource.swift; sourceTree = "<group>"; };
+		ED0A68E6227B3BE600F86DF4 /* SendRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRequestView.swift; sourceTree = "<group>"; };
 		ED0C66252279F015004F3F1F /* ProviderServicesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesDataSource.swift; sourceTree = "<group>"; };
 		ED0C66272279F046004F3F1F /* ProviderProfessionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfessionsDataSource.swift; sourceTree = "<group>"; };
 		ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExpandableSection.swift; sourceTree = "<group>"; };
@@ -516,17 +526,53 @@
 			isa = PBXGroup;
 			children = (
 				ED0A68CF227B109F00F86DF4 /* ChosenProviderView.swift */,
+				ED0A68E6227B3BE600F86DF4 /* SendRequestView.swift */,
 			);
 			path = ChosenProvider;
 			sourceTree = "<group>";
 		};
-		ED0A68D1227B11E500F86DF4 /* ChosenProvider */ = {
+		ED0A68D1227B11E500F86DF4 /* Provider data */ = {
 			isa = PBXGroup;
 			children = (
+				ED0A68DD227B338300F86DF4 /* Service card */,
 				ED0A68D2227B11F900F86DF4 /* ChosenProviderModel.swift */,
 				ED0A68D4227B120C00F86DF4 /* ChosenProviderDataSource.swift */,
 			);
-			path = ChosenProvider;
+			path = "Provider data";
+			sourceTree = "<group>";
+		};
+		ED0A68D8227B30B800F86DF4 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A68E5227B3ABC00F86DF4 /* Provider card */,
+				ED0A68E4227B3AB100F86DF4 /* Service card */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		ED0A68DD227B338300F86DF4 /* Service card */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A68DE227B339400F86DF4 /* ChosenProviderServiceModel.swift */,
+				ED0A68E0227B349300F86DF4 /* ChosenProviderServiceDataSource.swift */,
+			);
+			path = "Service card";
+			sourceTree = "<group>";
+		};
+		ED0A68E4227B3AB100F86DF4 /* Service card */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A68D9227B30DB00F86DF4 /* ProviderServiceDetailViewController.swift */,
+			);
+			path = "Service card";
+			sourceTree = "<group>";
+		};
+		ED0A68E5227B3ABC00F86DF4 /* Provider card */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A68DB227B310200F86DF4 /* ProviderDetailViewController.swift */,
+			);
+			path = "Provider card";
 			sourceTree = "<group>";
 		};
 		ED231B2A222D3B1600A80FC9 /* Account */ = {
@@ -731,7 +777,7 @@
 		ED3E96E62264906B00C8F602 /* Result */ = {
 			isa = PBXGroup;
 			children = (
-				ED0A68D1227B11E500F86DF4 /* ChosenProvider */,
+				ED0A68D1227B11E500F86DF4 /* Provider data */,
 				ED3E96F42264CC5600C8F602 /* Card */,
 				ED3E96E2226486E200C8F602 /* ResultsModel.swift */,
 				ED3E96E42264904F00C8F602 /* ResultsDataSource.swift */,
@@ -1208,6 +1254,7 @@
 		EDD2A85B223BBE3B00B52E68 /* Result */ = {
 			isa = PBXGroup;
 			children = (
+				ED0A68D8227B30B800F86DF4 /* Entities */,
 				EDD2A844223918CC00B52E68 /* ResultViewController.swift */,
 				ED0A68CC227B0CC500F86DF4 /* ResultProviderViewController.swift */,
 			);
@@ -1503,17 +1550,20 @@
 				ED7359182254FDAD006C318C /* ProviderServiceCardController.swift in Sources */,
 				EDD2A8392238029C00B52E68 /* SearchTableView.swift in Sources */,
 				ED0A68CD227B0CC500F86DF4 /* ResultProviderViewController.swift in Sources */,
+				ED0A68E1227B349300F86DF4 /* ChosenProviderServiceDataSource.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				EDE6B3F2227095440087DFCE /* ProviderProfessionModel.swift in Sources */,
 				ED231B4D222E850300A80FC9 /* RequestListRow.swift in Sources */,
 				ED0A68D0227B109F00F86DF4 /* ChosenProviderView.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
+				ED0A68DC227B310200F86DF4 /* ProviderDetailViewController.swift in Sources */,
 				ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
 				ED3E96ED2264AA2500C8F602 /* ResultSectionModel.swift in Sources */,
 				EDB6B443225797AE00B8EA8B /* ModalServicesViewController.swift in Sources */,
 				EDD2A82D22367C2800B52E68 /* RequestsModel.swift in Sources */,
 				ED1ED02221FF34B700141CF5 /* RequestManager.swift in Sources */,
+				ED0A68DF227B339400F86DF4 /* ChosenProviderServiceModel.swift in Sources */,
 				EDD2A845223918CC00B52E68 /* ResultViewController.swift in Sources */,
 				EDB6B45B225B856500B8EA8B /* TemplateDayRowsCommonData.swift in Sources */,
 				ED98CE462243997600B95696 /* RequestCardImageRow.swift in Sources */,
@@ -1593,6 +1643,7 @@
 				ED1495C32275CA7900C66421 /* RequestsDataSource.swift in Sources */,
 				ED4482F3220457B600BE8EF0 /* Serializer.swift in Sources */,
 				DB0B7C7C225644F10035C593 /* EventCell.swift in Sources */,
+				ED0A68DA227B30DB00F86DF4 /* ProviderServiceDetailViewController.swift in Sources */,
 				ED330C9321F223AE001019FC /* BlurHandler.swift in Sources */,
 				EDD2A857223A90AB00B52E68 /* AccountPlacemarkCell.swift in Sources */,
 				EDCFB458222819B800A6B56F /* MainTabBarController.swift in Sources */,
@@ -1617,6 +1668,7 @@
 				EDE6B3E922705B120087DFCE /* AddressModel.swift in Sources */,
 				EDD2A84F2239535100B52E68 /* TimetableView.swift in Sources */,
 				EDD2A8512239567700B52E68 /* TimetableModel.swift in Sources */,
+				ED0A68E7227B3BE600F86DF4 /* SendRequestView.swift in Sources */,
 				EDB6B449225B42E100B8EA8B /* ScheduleEventTableView.swift in Sources */,
 				EDB6B44E225B4BA200B8EA8B /* ScheduleModalTableViewHader.swift in Sources */,
 				EDD3CD2D220304DA00E38879 /* DateManager.swift in Sources */,

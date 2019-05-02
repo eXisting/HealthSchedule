@@ -18,7 +18,7 @@ class ChosenProviderView: UIView {
   lazy var presenter: Presentr = {
     let customType = PresentationType.custom(
       width: .fluid(percentage: 0.8),
-      height: .fluid(percentage: 0.8),
+      height: .fluid(percentage: 0.6),
       center: .center
     )
     
@@ -26,7 +26,7 @@ class ChosenProviderView: UIView {
     customPresenter.transitionType = .crossDissolve
     customPresenter.dismissTransitionType = .crossDissolve
     customPresenter.roundCorners = true
-    customPresenter.backgroundColor = .lightGray
+    customPresenter.backgroundColor = .black
     customPresenter.backgroundOpacity = 0.5
     customPresenter.cornerRadius = 10
     return customPresenter
