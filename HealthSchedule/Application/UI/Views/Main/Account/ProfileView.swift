@@ -54,8 +54,13 @@ class ProfileView: UIView {
     UIView.transition(with: profileImageView,
                       duration: 0.75,
                       options: .transitionCrossDissolve,
-                      animations: { [weak self] in self?.profileImageView.image = image },
+                      animations: { [weak self] in
+                        self?.profileImageView.image = image
+                        self?.profileImageView.makeCircleBorder(with: UIColor.black.cgColor, 2)
+                      },
                       completion: nil)
+    
+    
   }
   
   func setRefreshDelegate(delegate: RefreshingTableView) {

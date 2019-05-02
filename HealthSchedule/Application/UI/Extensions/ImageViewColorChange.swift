@@ -13,4 +13,12 @@ extension UIImageView {
     image = image!.withRenderingMode(.alwaysTemplate)
     tintColor = color
   }
+  
+  func makeCircleBorder(with color: CGColor, _ borderRadius: CGFloat) {
+    layer.borderWidth = borderRadius
+    layer.masksToBounds = false
+    layer.borderColor = color
+    layer.cornerRadius = frame.height / 2
+    clipsToBounds = true
+  }
 }

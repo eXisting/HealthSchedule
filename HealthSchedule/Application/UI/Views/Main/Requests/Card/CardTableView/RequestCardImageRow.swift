@@ -42,7 +42,10 @@ class RequestCardImageRow: UITableViewCell {
     UIView.transition(with: photo,
                       duration: 0.75,
                       options: .transitionCrossDissolve,
-                      animations: { [weak self] in self?.photo.image = image },
+                      animations: { [weak self] in
+                        self?.photo.image = image
+                        self?.photo.makeCircleBorder(with: UIColor.black.cgColor, 1)
+                      },
                       completion: nil)
   }
   
