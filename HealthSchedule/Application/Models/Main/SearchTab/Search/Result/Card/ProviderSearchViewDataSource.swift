@@ -10,8 +10,11 @@ import UIKit
 import EasyPeasy
 
 class ProviderSearchViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-  var userPhotoData: String?
+  var userPhoto: UIImage!
+  var service: Service!
   var data: [Any] = []
+  
+  var imageLoadHandler: (String?, (UIImage) -> Void)!
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return data.count
@@ -25,7 +28,8 @@ class ProviderSearchViewDataSource: NSObject, UITableViewDataSource, UITableView
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCardImageRow") as! RequestCardImageRow
       cell.populateCell(name: data[indexPath.row] as! String)
-      cell.backgroundColor = .clear
+      cell.setImage(userPhoto)
+      cell.backgroundColor = .clear      
       return cell
     }
     

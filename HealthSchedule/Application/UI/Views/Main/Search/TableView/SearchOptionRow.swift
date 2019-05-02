@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchOptionRow: UITableViewCell {
-  // TODO: RemoteService object
+  static let lightOrange = UIColor(red: 255, green: 246, blue: 224)
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)

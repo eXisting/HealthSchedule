@@ -13,7 +13,7 @@ import EasyPeasy
 class SearchResultFoldingCell: FoldingCell {
   private let displayLabel = UILabel()
   
-  let maxHeight: CGFloat = 400
+  let maxHeight: CGFloat = 280
   let collapsedHeight: CGFloat = 70
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -65,7 +65,7 @@ extension SearchResultFoldingCell {
   
   private func createForegroundView() -> RotatedView {
     let foregroundView = Init(value: RotatedView(frame: .zero)) {
-      $0.backgroundColor = UIColor.init(red:0.87, green:1.00, blue:0.84, alpha:1.0)
+      $0.backgroundColor = SearchOptionRow.lightOrange
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -90,6 +90,7 @@ extension SearchResultFoldingCell {
   
   private func createContainerView() -> SearchElementProviderView {
     let containerView = Init(value: SearchElementProviderView(frame: .zero)) {
+      $0.backgroundColor = SearchOptionRow.lightOrange
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     

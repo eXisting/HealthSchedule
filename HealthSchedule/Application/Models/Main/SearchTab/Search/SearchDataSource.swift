@@ -58,7 +58,7 @@ class SearchDataSource: NSObject, UITableViewDataSource {
       
       defaultCell.textLabel?.text = value
       defaultCell.selectionStyle = .none
-      defaultCell.backgroundColor = UIColor(red: 255, green: 246, blue: 224)
+      defaultCell.backgroundColor = SearchOptionRow.lightOrange
       return defaultCell
     }
     

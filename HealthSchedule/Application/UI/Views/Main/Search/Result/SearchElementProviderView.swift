@@ -11,7 +11,7 @@ import EasyPeasy
 
 class SearchElementProviderView: UIView {
   private let tableView = UITableView()
-  private let actionButton = UIButton()
+  private let actionButton = UIButton(type: UIButton.ButtonType.roundedRect)
   
   private var onButtonClickAction: ((IndexPath) -> Void)?
   
@@ -69,20 +69,19 @@ class SearchElementProviderView: UIView {
     ])
     
     actionButton.easy.layout([
-      Top(16).to(tableView, .bottom).with(.required),
+      Top(8).to(tableView, .bottom).with(.required),
       Width(*0.65).like(self),
       CenterX().to(self),
-      Bottom(>=16).to(self)
+      Bottom(>=16).to(self).with(.low)
     ])
   }
   
   private func customizeViews() {
-    tableView.backgroundColor = UIColor(red: 213, green: 235, blue: 235)
-    backgroundColor = UIColor(red: 213, green: 235, blue: 235)
-    
     actionButton.roundBorder()
-    actionButton.setTitle("SEND REQUEST", for: .normal)
     actionButton.backgroundColor = .clear
-    actionButton.setTitleColor(.black, for: .normal)
+    actionButton.setTitle("Details", for: .normal)
+    actionButton.setTitleColor(.blue, for: .normal)
+
+    tableView.backgroundColor = SearchOptionRow.lightOrange
   }
 }

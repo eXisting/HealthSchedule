@@ -67,7 +67,7 @@ class AccountModel {
     }
   }
   
-  func initializeUserImage(from url: String?) {
+  private func initializeUserImage(from url: String?) {
     let defaultImage = UIImage(named: "Pictures/chooseProfile")!
     
     guard let url = url else {

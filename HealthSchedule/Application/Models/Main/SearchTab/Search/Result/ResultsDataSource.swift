@@ -16,6 +16,7 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   private var sendRequestHandler: ((Int, Date) -> Void)!
     
   var delegate: TableViewSectionsReloading!
+  var loaderDelegate: LoaderShowable!
   var service: Service!
   
   init(dataModels: [ResultSectionModel], sendRequestHandler: @escaping (Int, Date) -> Void) {
@@ -114,16 +115,27 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     cell.isUserInteractionEnabled = false
     
-    cellModels[itemIndex].setupProviderCard(with: userId, for: service) { [weak self] isProcessed in
-      DispatchQueue.main.async {
-        if self!.data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
-          self!.data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
-          cell.unfold(true, animated: true, completion: {
-            cell.isUserInteractionEnabled = true
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-          })
-        } else { // close cell
-          self!.data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.collapsedHeight)
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      if self!.data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // open cell
+        DispatchQueue.main.async {
+          self?.loaderDelegate.showLoader()
+        }
+        
+        self!.cellModels[itemIndex].setupProviderCard(with: userId, for: self!.service) { [weak self] isProcessed in
+          self?.data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.maxHeight)
+          
+          DispatchQueue.main.async {
+            cell.unfold(true, animated: true, completion: {
+              cell.isUserInteractionEnabled = true
+              tableView.reloadRows(at: [indexPath], with: .automatic)
+            })
+            
+            self?.loaderDelegate.hideLoader()
+          }
+        }
+      } else { // close cell
+        self!.data[indexPath.section].rows[indexPath.row].changeHeight(to: cell.collapsedHeight)
+        DispatchQueue.main.async {
           cell.unfold(false, animated: true, completion: {
             cell.isUserInteractionEnabled = true
             tableView.reloadRows(at: [indexPath], with: .automatic)

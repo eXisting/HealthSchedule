@@ -9,18 +9,19 @@
 import UIKit
 import CDAlertView
 import FoldingCell
+import NVActivityIndicatorView
 
 protocol DismissableController {
   func dismiss()
 }
 
-class ResultViewController: UIViewController {
+class ResultViewController: UIViewController, NVActivityIndicatorViewable {
   private var model: ResultsModel!
   private let mainView = SearchResultView()
   
   convenience init(data: RemoteAvailableTimeContainer, serviceId: Int) {
     self.init()
-    model = ResultsModel(delegate: self, container: data, serviceId)
+    model = ResultsModel(delegate: self, loaderDelegate: self, container: data, serviceId)
   }
   
   override func loadView() {
@@ -50,5 +51,22 @@ extension ResultViewController: DismissableController {
 extension ResultViewController: TableViewSectionsReloading {
   func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation) {
     mainView.reloadSections(path, with: animation)
+  }
+}
+
+extension ResultViewController: LoaderShowable {
+  func showLoader() {
+    let size = CGSize(width: self.view.frame.width / 1.5, height: self.view.frame.height * 0.25)
+    startAnimating(size, type: .ballClipRotate, color: .white, backgroundColor: UIColor.black.withAlphaComponent(0.75))
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: { [weak self] in
+      if self!.isAnimating {
+        self?.stopAnimating()
+      }
+    })
+  }
+  
+  func hideLoader() {
+    stopAnimating()
   }
 }
