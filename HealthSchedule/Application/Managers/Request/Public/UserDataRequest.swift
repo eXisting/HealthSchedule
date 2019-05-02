@@ -32,8 +32,10 @@ protocol ProviderInfoRequesting {
 
 protocol CommonDataRequesting {
   func getRequests(completion: @escaping (String) -> Void)
-  func getUser(_ completion: @escaping (String) -> Void)
   
+  func getProviderBookingServices(for providerId: Int, serviceId: Int, _ completion: @escaping (String) -> Void)
+  
+  func getUser(_ completion: @escaping (String) -> Void)
   func getUser(by id: Int, _ completion: @escaping (String) -> Void)
 }
 
@@ -172,6 +174,18 @@ extension UserDataRequest: CommonDataRequesting {
       }
       
       DataBaseManager.shared.insertUpdateUsers(from: [remoteUser])
+      
+      completion(ResponseStatus.success.rawValue)
+    }
+  }
+  
+  func getProviderBookingServices(for providerId: Int, serviceId: Int, _ completion: @escaping (String) -> Void) {
+    let endpoint = "\(Endpoints.services.rawValue)/\(serviceId)/providers/\(providerId)"
+    
+    requestsManager.getListAsync(for: RemoteProviderService.self, from: endpoint, RequestManager.sessionToken.asParams()) {
+      list, response in
+      
+      DataBaseManager.shared.insertUpdateProviderServices(from: list, isRefetch: false)
       
       completion(ResponseStatus.success.rawValue)
     }

@@ -34,7 +34,7 @@ class ProviderServicesDataSource: NSObject, UITableViewDataSource {
     
     let providerService = DataBaseManager.shared.providerServicesFrc.object(at: indexPath)
     
-    cell.setupData(id: Int(providerService.id), price: providerService.price, duration: providerService.duration)
+    cell.setupData(id: Int(providerService.id), price: providerService.price, name: providerService.name!, duration: providerService.duration)
     
     return cell
   }

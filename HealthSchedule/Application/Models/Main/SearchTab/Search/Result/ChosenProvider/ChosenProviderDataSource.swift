@@ -9,11 +9,29 @@
 import UIKit
 
 class ChosenProviderDataSource: NSObject, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  private var services: [ProviderService] = []
+
+  var loaderHandler: LoaderShowable!
+  
+  func populateServices(_ services: [ProviderService]) {
+    self.services = services
+  }
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return services.count
+  }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: ProviderServicesTableView.cellIdentifier, for: indexPath) as! ProviderServiceCell
+    
+    let providerService = services[indexPath.row]
+    
+    cell.setupData(id: Int(providerService.id), price: providerService.price, name: providerService.name!, duration: providerService.duration)
+    
+    return cell
   }  
 }

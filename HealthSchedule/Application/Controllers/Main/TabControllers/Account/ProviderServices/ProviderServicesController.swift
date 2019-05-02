@@ -135,7 +135,7 @@ extension ProviderServicesController: NSFetchedResultsControllerDelegate {
         guard let cell = mainView.cellForRow(at: indexPath) as? ProviderServiceCell,
           let providerService = anObject as? ProviderService else { return }
         
-        cell.setupData(id: Int(providerService.id), price: providerService.price, duration: providerService.duration)
+        cell.setupData(id: Int(providerService.id), price: providerService.price, name: providerService.name!, duration: providerService.duration)
       }
       break;
       

@@ -11,12 +11,16 @@ import Presentr
 import EasyPeasy
 
 class ChosenProviderView: UIView {
-  private let tableView = AccountTableView()
+  private let tableView = ProviderServicesTableView()
   
   private let headerView = NavigationHoverHeaderView()
   
   lazy var presenter: Presentr = {
-    let customType = PresentationType.popup
+    let customType = PresentationType.custom(
+      width: .fluid(percentage: 0.8),
+      height: .fluid(percentage: 0.8),
+      center: .center
+    )
     
     let customPresenter = Presentr(presentationType: customType)
     customPresenter.transitionType = .crossDissolve
@@ -39,8 +43,8 @@ class ChosenProviderView: UIView {
     tableView.refreshDelegate = delegate
   }
   
-  func reloadRows(at indexPath: [IndexPath]) {
-    tableView.reloadRows(at: indexPath, with: .fade)
+  func reloadTableView() {
+    tableView.reloadData()
   }
   
   private func laidOutViews() {
@@ -59,6 +63,7 @@ class ChosenProviderView: UIView {
     
     tableView.easy.layout([
       Top(==16).to(headerView, .bottom),
+      Bottom(==8).to(self),
       Width().like(self),
       CenterX().to(self)
     ])

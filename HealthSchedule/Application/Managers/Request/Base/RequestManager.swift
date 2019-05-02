@@ -25,8 +25,16 @@ class RequestManager {
     from endpoint: Endpoints,
     _ params: Parser.JsonDictionary?,
     _ completion: @escaping ([T], ServerResponse) -> Void) {
-    
-    let request = sessionHandler.buildRequest(for: .http, buildEndpoint(endpoint.rawValue), .get, params)
+    getListAsync(for: type, from: endpoint.rawValue, params, completion)
+  }
+  
+  func getListAsync<T: Decodable>(
+    for type: T.Type,
+    from endpoint: String,
+    _ params: Parser.JsonDictionary?,
+    _ completion: @escaping ([T], ServerResponse) -> Void) {
+
+    let request = sessionHandler.buildRequest(for: .http, buildEndpoint(endpoint), .get, params)
     
     sessionHandler.startSessionTask(with: request) {
       (json, response) in
