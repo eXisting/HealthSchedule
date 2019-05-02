@@ -34,6 +34,10 @@
 		ED089A9F21EC8848006A8523 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED089A9E21EC8848006A8523 /* ProfileView.swift */; };
 		ED09BB09227714AB00DA5B4D /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09BB08227714AB00DA5B4D /* CacheManager.swift */; };
 		ED09BB0B22772AA900DA5B4D /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09BB0A22772AA900DA5B4D /* ImagePickerController.swift */; };
+		ED0A68CD227B0CC500F86DF4 /* ResultProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68CC227B0CC500F86DF4 /* ResultProviderViewController.swift */; };
+		ED0A68D0227B109F00F86DF4 /* ChosenProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68CF227B109F00F86DF4 /* ChosenProviderView.swift */; };
+		ED0A68D3227B11F900F86DF4 /* ChosenProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68D2227B11F900F86DF4 /* ChosenProviderModel.swift */; };
+		ED0A68D5227B120C00F86DF4 /* ChosenProviderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A68D4227B120C00F86DF4 /* ChosenProviderDataSource.swift */; };
 		ED0C66262279F015004F3F1F /* ProviderServicesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C66252279F015004F3F1F /* ProviderServicesDataSource.swift */; };
 		ED0C66282279F046004F3F1F /* ProviderProfessionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C66272279F046004F3F1F /* ProviderProfessionsDataSource.swift */; };
 		ED10DB362269F14F00234B27 /* CommonExpandableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */; };
@@ -213,6 +217,10 @@
 		ED089A9E21EC8848006A8523 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ED09BB08227714AB00DA5B4D /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		ED09BB0A22772AA900DA5B4D /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		ED0A68CC227B0CC500F86DF4 /* ResultProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultProviderViewController.swift; sourceTree = "<group>"; };
+		ED0A68CF227B109F00F86DF4 /* ChosenProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderView.swift; sourceTree = "<group>"; };
+		ED0A68D2227B11F900F86DF4 /* ChosenProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderModel.swift; sourceTree = "<group>"; };
+		ED0A68D4227B120C00F86DF4 /* ChosenProviderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenProviderDataSource.swift; sourceTree = "<group>"; };
 		ED0C66252279F015004F3F1F /* ProviderServicesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServicesDataSource.swift; sourceTree = "<group>"; };
 		ED0C66272279F046004F3F1F /* ProviderProfessionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfessionsDataSource.swift; sourceTree = "<group>"; };
 		ED10DB352269F14F00234B27 /* CommonExpandableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExpandableSection.swift; sourceTree = "<group>"; };
@@ -504,6 +512,23 @@
 			path = Xibs;
 			sourceTree = "<group>";
 		};
+		ED0A68CE227B108A00F86DF4 /* ChosenProvider */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A68CF227B109F00F86DF4 /* ChosenProviderView.swift */,
+			);
+			path = ChosenProvider;
+			sourceTree = "<group>";
+		};
+		ED0A68D1227B11E500F86DF4 /* ChosenProvider */ = {
+			isa = PBXGroup;
+			children = (
+				ED0A68D2227B11F900F86DF4 /* ChosenProviderModel.swift */,
+				ED0A68D4227B120C00F86DF4 /* ChosenProviderDataSource.swift */,
+			);
+			path = ChosenProvider;
+			sourceTree = "<group>";
+		};
 		ED231B2A222D3B1600A80FC9 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,6 +720,7 @@
 		ED3E96DF22647DB000C8F602 /* Result */ = {
 			isa = PBXGroup;
 			children = (
+				ED0A68CE227B108A00F86DF4 /* ChosenProvider */,
 				EDCE60B9223FB41200734FBC /* SearchResultView.swift */,
 				ED3E96E022647DE800C8F602 /* SearchResultCell.swift */,
 				ED3E96F02264C2EF00C8F602 /* SearchElementProviderView.swift */,
@@ -705,6 +731,7 @@
 		ED3E96E62264906B00C8F602 /* Result */ = {
 			isa = PBXGroup;
 			children = (
+				ED0A68D1227B11E500F86DF4 /* ChosenProvider */,
 				ED3E96F42264CC5600C8F602 /* Card */,
 				ED3E96E2226486E200C8F602 /* ResultsModel.swift */,
 				ED3E96E42264904F00C8F602 /* ResultsDataSource.swift */,
@@ -1182,6 +1209,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD2A844223918CC00B52E68 /* ResultViewController.swift */,
+				ED0A68CC227B0CC500F86DF4 /* ResultProviderViewController.swift */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -1436,6 +1464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDB6B447225B415700B8EA8B /* ScheduleEventModalController.swift in Sources */,
+				ED0A68D5227B120C00F86DF4 /* ChosenProviderDataSource.swift in Sources */,
 				ED73591A2255002E006C318C /* ProviderServiceModel.swift in Sources */,
 				ED7359052254B335006C318C /* GeneralActionSaveNavigationItem.swift in Sources */,
 				ED089A8621E89B6A006A8523 /* UrlSessionHandler.swift in Sources */,
@@ -1473,9 +1502,11 @@
 				ED7359232255071E006C318C /* ProviderServiceSectionModel.swift in Sources */,
 				ED7359182254FDAD006C318C /* ProviderServiceCardController.swift in Sources */,
 				EDD2A8392238029C00B52E68 /* SearchTableView.swift in Sources */,
+				ED0A68CD227B0CC500F86DF4 /* ResultProviderViewController.swift in Sources */,
 				EDD3CD2B2201F3FD00E38879 /* ScheduleDateException.swift in Sources */,
 				EDE6B3F2227095440087DFCE /* ProviderProfessionModel.swift in Sources */,
 				ED231B4D222E850300A80FC9 /* RequestListRow.swift in Sources */,
+				ED0A68D0227B109F00F86DF4 /* ChosenProviderView.swift in Sources */,
 				ED330C9121F21B35001019FC /* DesignableTextField.swift in Sources */,
 				ED73590A2254B9CA006C318C /* FetchResultControllersComposer.swift in Sources */,
 				DBADDE5621F4CD9200C3EA2F /* ProviderSignUpViewController.swift in Sources */,
@@ -1487,6 +1518,7 @@
 				EDB6B45B225B856500B8EA8B /* TemplateDayRowsCommonData.swift in Sources */,
 				ED98CE462243997600B95696 /* RequestCardImageRow.swift in Sources */,
 				ED3E96CF225F387B00C8F602 /* ProfessionsViewController.swift in Sources */,
+				ED0A68D3227B11F900F86DF4 /* ChosenProviderModel.swift in Sources */,
 				DBE4886F223AD2560096F7D7 /* AccountNavigationItem.swift in Sources */,
 				EDDCBEDD226E026300FD5DA5 /* SearchDataSource.swift in Sources */,
 				DB0B7C77225644F10035C593 /* HourRowHeader.swift in Sources */,

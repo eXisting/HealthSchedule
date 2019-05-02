@@ -15,13 +15,23 @@ protocol DismissableController {
   func dismiss()
 }
 
+protocol PushingUserControllerDelegate {
+  func pushController(with userId: Int, serviceId: Int?, time: Date?)
+}
+
 class ResultViewController: UIViewController, NVActivityIndicatorViewable {
+  private let titleName = "Result"
+  
   private var model: ResultsModel!
   private let mainView = SearchResultView()
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   convenience init(data: RemoteAvailableTimeContainer, serviceId: Int) {
     self.init()
-    model = ResultsModel(delegate: self, loaderDelegate: self, container: data, serviceId)
+    model = ResultsModel(reloadDelegate: self, loaderDelegate: self, viewDelegate: self, container: data, serviceId)
   }
   
   override func loadView() {
@@ -33,6 +43,14 @@ class ResultViewController: UIViewController, NVActivityIndicatorViewable {
     super.viewDidLoad()
     mainView.setup(delegate: model.tableViewContentHandler, dataSource: model.tableViewContentHandler)
     mainView.dismissDelegate = self
+    
+    setupNavigationItem()
+  }
+  
+  private func setupNavigationItem() {
+    let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+    navigationController?.navigationBar.titleTextAttributes = textAttributes
+    navigationItem.title = titleName
   }
 }
 
@@ -51,6 +69,18 @@ extension ResultViewController: DismissableController {
 extension ResultViewController: TableViewSectionsReloading {
   func reloadSections(_ path: IndexSet, with animation: UITableView.RowAnimation) {
     mainView.reloadSections(path, with: animation)
+  }
+}
+
+extension ResultViewController: PushingUserControllerDelegate {
+  func pushController(with userId: Int, serviceId: Int?, time: Date?) {
+    guard let serviceId = serviceId, let time = time else {
+      showWarningAlert(message: ResponseStatus.applicationError.rawValue)
+      return
+    }
+    
+    let controller = ResultProviderViewController(providerId: userId, serviceId: serviceId, time: time)
+    navigationController?.pushViewController(controller, animated: true)
   }
 }
 

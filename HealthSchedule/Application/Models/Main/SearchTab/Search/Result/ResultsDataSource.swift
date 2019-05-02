@@ -15,8 +15,9 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   
   private var sendRequestHandler: ((Int, Date) -> Void)!
     
-  var delegate: TableViewSectionsReloading!
+  var reloadDelegate: TableViewSectionsReloading!
   var loaderDelegate: LoaderShowable!
+  var viewDetailsDelegate: PushingUserControllerDelegate!
   var service: Service!
   
   init(dataModels: [ResultSectionModel], sendRequestHandler: @escaping (Int, Date) -> Void) {
@@ -92,7 +93,7 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
       // Row Item
       let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultView.cellReuseIdentifier, for: indexPath) as! SearchResultFoldingCell
       
-      cell.setupCollapsedView(delegate: cellModels[itemIndex].dataSource, dataSource: cellModels[itemIndex].dataSource, identifier: indexPath, onRequestClick: onSendRequest)
+      cell.setupCollapsedView(delegate: cellModels[itemIndex].dataSource, dataSource: cellModels[itemIndex].dataSource, identifier: indexPath, onViewDetails: onViewDetailsClick)
       
       if data[indexPath.section].rows[indexPath.row].rowHeight == cell.collapsedHeight { // isClosed cell
         cell.setupDisplayTime("UserID: \(rowData.userIds[itemIndex])")
@@ -161,7 +162,7 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   
   // MARK: Handlers
   
-  private func onSendRequest(_ identity: IndexPath) {
+  private func onViewDetailsClick(_ identity: IndexPath) {
     let subSectionItemIndexPath = computeItemAndSubsectionIndex(for: identity)
     
     let section = identity.section
@@ -179,7 +180,7 @@ class ResultsDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
       fatalError()
     }
     
-    sendRequestHandler(providerId, bookingTime)
+    viewDetailsDelegate.pushController(with: providerId, serviceId: Int(service.id), time: bookingTime)
   }
   
   private func computeItemAndSubsectionIndex(for indexPath: IndexPath?) -> IndexPath {
@@ -212,6 +213,6 @@ extension ResultsDataSource: ExpandableHeaderViewDelegate {
     data[section].isExpanded = !data[section].isExpanded
     expandableHeader.data.isExpanded = data[section].isExpanded
     
-    delegate.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
+    reloadDelegate.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
   }
 }

@@ -120,14 +120,20 @@ extension SearchViewController: SearchResponsible {
       
       if data.isResponseEmpty() {
         DispatchQueue.main.async {
-          CDAlertView(title: "Sorry...", message: "There are no bookings available", type: .custom(image: UIImage(named:"Icons/sad-smile")!)).show()
+          CDAlertView(
+            title: "Sorry...",
+            message: "There are no bookings available",
+            type: .custom(image: UIImage(named:"Icons/sad-smile")!)
+          ).show()
         }
         
         return
       }
       
       DispatchQueue.main.async {
-        self?.navigationController?.present(ResultViewController(data: data, serviceId: self!.model.serviceId!), animated: true)
+        let resultController = ResultViewController(data: data, serviceId: self!.model.serviceId!)
+        let navigationController = UINavigationController(rootViewController: resultController)
+        self?.navigationController?.present(navigationController, animated: true)
       }
     }
   }

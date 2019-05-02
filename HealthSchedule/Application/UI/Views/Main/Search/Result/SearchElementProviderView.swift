@@ -80,7 +80,7 @@ class SearchElementProviderView: UIView {
     actionButton.roundBorder()
     actionButton.backgroundColor = .clear
     actionButton.setTitle("Details", for: .normal)
-    actionButton.setTitleColor(.blue, for: .normal)
+    actionButton.setTitleColor(.black, for: .normal)
 
     tableView.backgroundColor = SearchOptionRow.lightOrange
   }

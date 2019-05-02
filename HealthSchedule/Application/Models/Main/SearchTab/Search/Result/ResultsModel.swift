@@ -12,12 +12,12 @@ class ResultsModel {
   private let requestManager: UserDataUpdating = UserDataRequest()
   private let commonRequestManager = CommonDataRequest()
   
+  private var service: Service!
+
   var tableViewContentHandler: ResultsDataSource!
   var serviceId: Int
   
-  private var service: Service!
-  
-  init(delegate: TableViewSectionsReloading, loaderDelegate: LoaderShowable, container: RemoteAvailableTimeContainer, _ serviceId: Int) {
+  init(reloadDelegate: TableViewSectionsReloading, loaderDelegate: LoaderShowable, viewDelegate: PushingUserControllerDelegate, container: RemoteAvailableTimeContainer, _ serviceId: Int) {
     self.serviceId = serviceId
     
     getServiceData()
@@ -29,8 +29,9 @@ class ResultsModel {
     
     tableViewContentHandler = ResultsDataSource(dataModels: sections, sendRequestHandler: sendRequest)
     tableViewContentHandler.service = service
-    tableViewContentHandler.delegate = delegate
+    tableViewContentHandler.reloadDelegate = reloadDelegate
     tableViewContentHandler.loaderDelegate = loaderDelegate
+    tableViewContentHandler.viewDetailsDelegate = viewDelegate
   }
   
   func sendRequest(providerId: Int, time: Date) {

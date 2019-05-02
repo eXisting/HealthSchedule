@@ -36,9 +36,9 @@ class SearchResultFoldingCell: FoldingCell {
     delegate: UITableViewDelegate,
     dataSource: UITableViewDataSource,
     identifier: IndexPath,
-    onRequestClick: @escaping (IndexPath) -> Void) {
+    onViewDetails: @escaping (IndexPath) -> Void) {
     let providerView = (containerView as! SearchElementProviderView)
-    providerView.setup(identity: identifier, action: onRequestClick)
+    providerView.setup(identity: identifier, action: onViewDetails)
     providerView.setupTableView(delegate: delegate, dataSource: dataSource)
   }
   
