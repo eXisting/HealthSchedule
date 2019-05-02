@@ -39,7 +39,6 @@ class ProfessionsViewController: UIViewController, NVActivityIndicatorViewable {
     model = ProviderProfessionsModel(errorDelegate: self, loaderDelegate: self)
     
     DataBaseManager.shared.setFrcDelegate(for: .providerProfessions, delegate: self)
-    model.reFetch {_ in}
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self

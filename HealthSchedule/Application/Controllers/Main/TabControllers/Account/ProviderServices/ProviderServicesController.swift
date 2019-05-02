@@ -38,7 +38,6 @@ class ProviderServicesController: UIViewController, NVActivityIndicatorViewable 
     model = ProviderServicesModel(errorDelegate: self, loaderDelegate: self)
     
     DataBaseManager.shared.setFrcDelegate(for: .providerService, delegate: self)
-    model.reFetch {_ in}
     
     mainView.setup(delegate: self, dataSource: model.dataSource)
     mainView.refreshDelegate = self

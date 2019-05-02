@@ -122,8 +122,8 @@ extension DataBaseManager: CoreDataRequestsPerformable {
     executer.insertUpdateProfessions(from: list, context: context)
   }
   
-  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], context: NSManagedObjectContext? = nil) {
-    executer.insertUpdateProviderProfessions(from: list, context: context)
+  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], isRefetch: Bool, context: NSManagedObjectContext? = nil) {
+    executer.insertUpdateProviderProfessions(from: list, isRefetch: isRefetch, context: context)
   }
   
   func insertUpdateScheduleDayTemplate(from days: [RemoteScheduleTemplateDay], context: NSManagedObjectContext? = nil) {
@@ -150,12 +150,12 @@ extension DataBaseManager: CoreDataRequestsPerformable {
     executer.insertUpdateServices(from: serviceList, context: context)
   }
   
-  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil) {
-    executer.insertUpdateProviderServices(from: list, context: context)
+  func insertUpdateProviderServices(from list: [RemoteProviderService], isRefetch: Bool, context: NSManagedObjectContext? = nil) {
+    executer.insertUpdateProviderServices(from: list, isRefetch: isRefetch, context: context)
   }
   
-  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
-    executer.insertUpdateRequests(from: requestList, context: context)
+  func insertUpdateRequests(from requestList: [RemoteRequest], isRefetch: Bool, context: NSManagedObjectContext? = nil) {
+    executer.insertUpdateRequests(from: requestList, isRefetch: isRefetch, context: context)
   }
   
   func delete(with id: NSManagedObjectID, context: NSManagedObjectContext? = nil) {

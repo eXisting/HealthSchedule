@@ -21,12 +21,12 @@ protocol CoreDataRequestsPerformable {
   func insertUpdateCities(from cityList: [RemoteCity], context: NSManagedObjectContext?)
   
   func insertUpdateProfessions(from list: [RemoteProfession], context: NSManagedObjectContext?)
-  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], context: NSManagedObjectContext?)
+  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], isRefetch: Bool, context: NSManagedObjectContext?)
   
   func insertUpdateServices(from serviceList: [RemoteService], context: NSManagedObjectContext?)
-  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext?)
+  func insertUpdateProviderServices(from list: [RemoteProviderService], isRefetch: Bool, context: NSManagedObjectContext?)
   
-  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext?)
+  func insertUpdateRequests(from requestList: [RemoteRequest], isRefetch: Bool, context: NSManagedObjectContext?)
   
   // Delete
   func delete(with id: NSManagedObjectID, context: NSManagedObjectContext?)
@@ -62,7 +62,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
   
   // MARK: -Update / insert
   
-  func insertUpdateRequests(from requestList: [RemoteRequest], context: NSManagedObjectContext? = nil) {
+  func insertUpdateRequests(from requestList: [RemoteRequest], isRefetch: Bool, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let requestEntityObject = NSEntityDescription.entity(forEntityName: requestEntity, in: workingContext)
@@ -71,7 +71,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     
     for remote in requestList {
       // Required fields
-      insertUpdateProviderServices(from: [remote.providerService], context: workingContext)
+      insertUpdateProviderServices(from: [remote.providerService], isRefetch: false, context: workingContext)
       
       if let customer = remote.customer {
         insertUpdateUsers(from: [customer], context: workingContext)
@@ -86,18 +86,22 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       builder.build(request: storedRequest!, remote, context: workingContext)
       
       // Collecting response ids
-      allRemoteIds.insert(remote.id)
+      if isRefetch {
+        allRemoteIds.insert(remote.id)
+      }
     }
   
     workingContext.processPendingChanges()
     saveContext(workingContext)
     
-    // Remove all requests which are not present in server response
-    let requests = fetchRequestsHandler.getRequests(with: nil, context: workingContext)
-    let missingRequests = requests.filter({ !allRemoteIds.contains(Int($0.id)) })
-    
-    for missing in missingRequests {
-      delete(with: missing.objectID, context: workingContext)
+    if isRefetch {
+      // Remove all requests which are not present in server response
+      let requests = fetchRequestsHandler.getRequests(with: nil, context: workingContext)
+      let missingRequests = requests.filter({ !allRemoteIds.contains(Int($0.id)) })
+      
+      for missing in missingRequests {
+        delete(with: missing.objectID, context: workingContext)
+      }
     }
   }
   
@@ -143,7 +147,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
-  func insertUpdateProviderServices(from list: [RemoteProviderService], context: NSManagedObjectContext? = nil) {
+  func insertUpdateProviderServices(from list: [RemoteProviderService], isRefetch: Bool, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let providerServiceEntityObject = NSEntityDescription.entity(forEntityName: providerServiceEntity, in: workingContext)
@@ -192,7 +196,7 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     saveContext(workingContext)
   }
   
-  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], context: NSManagedObjectContext? = nil) {
+  func insertUpdateProviderProfessions(from list: [RemoteProviderProfession], isRefetch: Bool, context: NSManagedObjectContext? = nil) {
     let workingContext = provider.provideWorkingContext(basedOn: context)
     
     let professionEntity = NSEntityDescription.entity(forEntityName: providerProfessionEntity, in: workingContext)
@@ -212,26 +216,30 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       
       builder.build(providerProfession: providerProfession!, for: provider, remote, context: workingContext)
       
-      // Collecting pairs of ids
-      if let _ = allRemoteIdPairs[remote.providerId] {
-        allRemoteIdPairs[remote.providerId]!.append(remote.id)
-      } else {
-        allRemoteIdPairs[remote.providerId] = [remote.id]
+      if isRefetch {
+        // Collecting pairs of ids
+        if let _ = allRemoteIdPairs[remote.providerId] {
+          allRemoteIdPairs[remote.providerId]!.append(remote.id)
+        } else {
+          allRemoteIdPairs[remote.providerId] = [remote.id]
+        }
       }
     }
     
     workingContext.processPendingChanges()
     saveContext(workingContext)
     
-    // Remove all provider professions which are not present in server response
-    for pair in allRemoteIdPairs {
-      let predicate = NSPredicate(format: "providerId == \(pair.key)")
-      let professions = fetchRequestsHandler.getProviderProfessions(with: predicate, context: workingContext)
-      
-      let missingProfessions = professions.filter({ !pair.value.contains(Int($0.id)) })
-      
-      for missing in missingProfessions {
-        delete(with: missing.objectID, context: workingContext)
+    if isRefetch {
+      // Remove all provider professions which are not present in server response
+      for pair in allRemoteIdPairs {
+        let predicate = NSPredicate(format: "providerId == \(pair.key)")
+        let professions = fetchRequestsHandler.getProviderProfessions(with: predicate, context: workingContext)
+        
+        let missingProfessions = professions.filter({ !pair.value.contains(Int($0.id)) })
+        
+        for missing in missingProfessions {
+          delete(with: missing.objectID, context: workingContext)
+        }
       }
     }
   }

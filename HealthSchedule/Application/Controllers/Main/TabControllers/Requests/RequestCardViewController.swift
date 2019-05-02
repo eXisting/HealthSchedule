@@ -14,16 +14,13 @@ class RequestCardViewController: UIViewController, NVActivityIndicatorViewable {
   private let mainView = RequestCardContainerView()
   private var model: RequestCardModel!
   
-  private var parentAction: (() -> Void)!
-  
   override func loadView() {
     super.loadView()
     view = mainView
   }
   
-  convenience init(_ request: Request, _ parentAction: @escaping () -> Void) {
+  convenience init(_ request: Request) {
     self.init()
-    self.parentAction = parentAction
     
     model = RequestCardModel(request: request, errorDelegate: self)
   }
@@ -46,9 +43,8 @@ class RequestCardViewController: UIViewController, NVActivityIndicatorViewable {
     model.updateRequest(status: .accepted) { [weak self] in
       DispatchQueue.main.async {
         self?.stopAnimating()
+        self?.dismiss(animated: true)
       }
-      
-      self?.parentAction()
     }
   }
   
@@ -58,9 +54,8 @@ class RequestCardViewController: UIViewController, NVActivityIndicatorViewable {
     model.updateRequest(status: .rejected) { [weak self] in
       DispatchQueue.main.async {
         self?.stopAnimating()
+        self?.dismiss(animated: true)
       }
-      
-      self?.parentAction()
     }
   }
   

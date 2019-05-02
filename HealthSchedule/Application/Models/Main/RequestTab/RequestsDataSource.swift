@@ -39,12 +39,15 @@ class RequestsDataSource: NSObject, UITableViewDataSource {
       loaderHandler.showLoader()
       
       let request = DataBaseManager.shared.requestsResultController.object(at: indexPath)
+      
       deleteHandler(Int(request.id)) { [weak self] isSuccess in
         if isSuccess {
           DataBaseManager.shared.delete(with: request.objectID)
         }
         
-        self?.loaderHandler.hideLoader()
+        DispatchQueue.main.async {
+          self?.loaderHandler.hideLoader()
+        }
       }
     }
   }

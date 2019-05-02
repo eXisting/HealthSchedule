@@ -21,20 +21,22 @@ class RequestsModel {
     source.deleteHandler = deleteRequest
   }
   
-  func prefetch() {
+  func reFetch(_ completion: @escaping (String) -> Void) {
     do {
       try DataBaseManager.shared.requestsResultController.performFetch()
+      completion(ResponseStatus.success.rawValue)
     }
-    catch { print(error.localizedDescription) }
+    catch { completion(error.localizedDescription) }
   }
   
   func loadRequests(_ callback: @escaping (String) -> Void) {
-    userRequestController.getRequests { response in
-      do {
-        try DataBaseManager.shared.requestsResultController.performFetch()
+    userRequestController.getRequests { [weak self] response in
+      if response != ResponseStatus.success.rawValue {
         callback(response)
+        return
       }
-      catch { callback(error.localizedDescription) }
+      
+      self?.reFetch(callback)
     }
   }
   

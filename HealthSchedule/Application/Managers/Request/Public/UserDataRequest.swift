@@ -103,9 +103,7 @@ extension UserDataRequest: UserDataUpdating {
         return
       }
       
-      self?.getRequest(id) { innerResponse in
-        completion(innerResponse)
-      }
+      self?.getRequest(id, completion)
     }
   }
   
@@ -193,7 +191,7 @@ extension UserDataRequest: CommonDataRequesting {
         return
       }
       
-      DataBaseManager.shared.insertUpdateRequests(from: list)
+      DataBaseManager.shared.insertUpdateRequests(from: list, isRefetch: true)
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -217,7 +215,7 @@ extension UserDataRequest: CommonDataRequesting {
       
       guard let remoteRequest = element else { completion(ResponseStatus.serverError.rawValue); return }
       
-      DataBaseManager.shared.insertUpdateRequests(from: [remoteRequest])
+      DataBaseManager.shared.insertUpdateRequests(from: [remoteRequest], isRefetch: false)
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -282,7 +280,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      DataBaseManager.shared.insertUpdateProviderProfessions(from: list)
+      DataBaseManager.shared.insertUpdateProviderProfessions(from: list, isRefetch: true)
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -306,7 +304,7 @@ extension UserDataRequest: ProviderInfoRequesting {
     let url = "\(Endpoints.providerServices.rawValue)/\(id)"
     
     requestsManager.postAsync(to: url, as: .delete, nil, RequestManager.sessionToken.asParams()) {
-      [weak self] data, response in
+      data, response in
       if let error = response.error {
         completion(error)
         return
@@ -344,7 +342,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      DataBaseManager.shared.insertUpdateProviderServices(from: list)
+      DataBaseManager.shared.insertUpdateProviderServices(from: list, isRefetch: true)
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -457,7 +455,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      DataBaseManager.shared.insertUpdateProviderProfessions(from: [providerProfession])
+      DataBaseManager.shared.insertUpdateProviderProfessions(from: [providerProfession], isRefetch: false)
       
       completion(ResponseStatus.success.rawValue)
     }
@@ -478,7 +476,7 @@ extension UserDataRequest: ProviderInfoRequesting {
         return
       }
       
-      DataBaseManager.shared.insertUpdateProviderServices(from: [providerSerivce])
+      DataBaseManager.shared.insertUpdateProviderServices(from: [providerSerivce], isRefetch: false)
       
       completion(ResponseStatus.success.rawValue)
     }

@@ -22,7 +22,7 @@ class ProviderProfessionsModel {
   
   func reFetch(_ completion: @escaping (String) -> Void) {
     do {
-      try DataBaseManager.shared.providerServicesFrc.performFetch()
+      try DataBaseManager.shared.providerProfessionFrc.performFetch()
       completion(ResponseStatus.success.rawValue)
     }
     catch { completion(error.localizedDescription) }

@@ -53,7 +53,11 @@ class RequestCardModel {
     
     requestManager.updateRequest(id: Int(request.id), with: postData) { [weak self] response in
       if response != ResponseStatus.success.rawValue {
-        self?.errorDelegate.showWarningAlert(message: response)
+        DispatchQueue.main.async {
+          self?.errorDelegate.showWarningAlert(message: response)          
+        }
+        
+        return
       }
       
       completion()

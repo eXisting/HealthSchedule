@@ -32,7 +32,6 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
     model = RequestsModel(errorDelegate: self, loaderDelegate: self)
     
     DataBaseManager.shared.setFrcDelegate(for: .request, delegate: self)
-    model.prefetch()
     
     mainView.setup(delegate: self, dataSource: model.dataSource, refreshDelegate: self)
     
@@ -47,14 +46,10 @@ class RequestViewController: UIViewController, NVActivityIndicatorViewable {
   
   private func onRequestsLoaded(response: String) {
     if response != ResponseStatus.success.rawValue {
-      showWarningAlert(message: response)
+      DispatchQueue.main.async {
+        self.showWarningAlert(message: response)
+      }
     }
-  }
-  
-  private func onInnerActionButtonCallback() {
-    dismiss(animated: true)
-    
-    showLoader()
   }
 }
 
@@ -75,7 +70,7 @@ extension RequestViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath), onInnerActionButtonCallback)
+    let controller = RequestCardViewController(DataBaseManager.shared.requestsResultController.object(at: indexPath))
     customPresentViewController(mainView.presenter, viewController: controller, animated: true)
     tableView.deselectRow(at: indexPath, animated: true)
   }
