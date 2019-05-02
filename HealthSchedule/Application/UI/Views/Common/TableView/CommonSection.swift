@@ -11,14 +11,14 @@ import UIKit
 class CommonSection: UITableViewHeaderFooterView {
   static let lightSectionColor = UIColor.gray.withAlphaComponent(0.005)
   
-  func setup(title: String, backgroundColor: UIColor) {
-    contentView.backgroundColor = backgroundColor
+  func setup(title: String, sectionColor: UIColor? = nil) {
     textLabel?.text = title
+    textLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
     
-    if #available(iOS 11.0, *) {
-      textLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-    } else {
-      // Fallback on earlier versions
+    guard let color = sectionColor else { return }
+    
+    self.backgroundView = Init(value: UIView()) {
+      $0.backgroundColor = color
     }
   }
 }

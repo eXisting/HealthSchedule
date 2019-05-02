@@ -207,7 +207,7 @@ extension AccountViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountTableView.sectionIdentifier) as! CommonSection
-    header.setup(title: model[section].sectionName, backgroundColor: CommonSection.lightSectionColor)
+    header.setup(title: model[section].sectionName, sectionColor: UIColor.groupTableViewBackground)
     return header
   }
 }

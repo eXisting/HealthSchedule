@@ -73,7 +73,7 @@ class SearchResultView: UIView {
     dismissButton.easy.layout([
       Width(*0.65).like(self),
       CenterX().to(self),
-      Height(*0.08).like(self),
+      Height(*0.05).like(self),
       Bottom(>=16).to(self)
     ])
   }
@@ -82,7 +82,7 @@ class SearchResultView: UIView {
     backgroundColor = .white
     
     dismissButton.roundBorder()
-    dismissButton.setTitle("CLOSE", for: .normal)
+    dismissButton.setTitle("Close", for: .normal)
     dismissButton.backgroundColor = .clear
     dismissButton.setTitleColor(.black, for: .normal)
     
