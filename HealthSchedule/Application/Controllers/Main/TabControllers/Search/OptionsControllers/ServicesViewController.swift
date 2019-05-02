@@ -14,7 +14,7 @@ import NVActivityIndicatorView
 class ServicesViewController: UITableViewController, NVActivityIndicatorViewable {
   private let titleName = "Services"
   
-  private let presenter: Presentr = {
+  private lazy var presenter: Presentr = {
     let customType = PresentationType.popup
     
     let customPresenter = Presentr(presentationType: customType)
