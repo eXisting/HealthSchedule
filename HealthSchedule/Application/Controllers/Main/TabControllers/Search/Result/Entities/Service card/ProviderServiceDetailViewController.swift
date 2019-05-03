@@ -27,6 +27,7 @@ class ProviderServiceDetailViewController: UIViewController, NVActivityIndicator
   override func viewDidLoad() {
     super.viewDidLoad()
     mainView.setup(delegate: self, dataSource: model.dataSource, action: sendRequest)
+    mainView.toggleSendButton(for: model.getCurrentUserType())
   }
   
   private func sendRequest() {

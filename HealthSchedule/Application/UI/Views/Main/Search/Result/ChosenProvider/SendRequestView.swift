@@ -30,6 +30,10 @@ class SendRequestView: UIView {
     actionButton.addTarget(self, action: #selector(handleClick), for: .touchUpInside)
   }
   
+  func toggleSendButton(for userType: UserType) {
+    actionButton.isHidden = userType == .provider
+  }
+  
   @objc private func handleClick() {
     actionHandle()
   }

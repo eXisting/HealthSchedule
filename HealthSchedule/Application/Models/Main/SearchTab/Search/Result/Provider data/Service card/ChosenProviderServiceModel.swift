@@ -18,6 +18,8 @@ class ChosenProviderServiceModel {
   private var time: Date
   private var service: ProviderService
   
+  private var userType: UserType?
+  
   init(errorDelegate: ErrorShowable, loaderDelegate: LoaderShowable, _ service: ProviderService, _ time: Date) {
     self.time = time
     self.service = service
@@ -45,6 +47,24 @@ class ChosenProviderServiceModel {
       
       self?.loaderHandling.hideLoader()
     }
+  }
+  
+  func getCurrentUserType() -> UserType {
+    if let type = userType {
+      return type
+    }
+    
+    guard let user = DataBaseManager.shared.fetchRequestsHandler.getCurrentUser(context: DataBaseManager.shared.mainContext) else {
+      fatalError()
+    }
+    
+    guard let role = UserType(rawValue: Int(user.roleId)) else {
+      fatalError()
+    }
+    
+    userType = role
+    
+    return role
   }
   
   private func serviceToData() {
