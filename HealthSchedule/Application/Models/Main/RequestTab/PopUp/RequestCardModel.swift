@@ -9,7 +9,7 @@
 import UIKit
 
 class RequestCardModel {
-  private let commmonDataRequestController = CommonDataRequest()
+  private let commonDataRequestController = CommonDataRequest()
   private let requestManager: UserDataUpdating = UserDataRequest()
   
   private var request: Request
@@ -68,22 +68,33 @@ class RequestCardModel {
     return source[forSectionIndex]
   }
   
-  private func loadImage(by url: String, _ completion: @escaping (UIImage) -> Void) {
+  private func loadImage(by url: String?, _ completion: @escaping (UIImage) -> Void) {
+    let defaultImage = UIImage(named: "Pictures/chooseProfile")!
+    
+    guard let url = url else {
+      completion(defaultImage)
+      return
+    }
+    
     let isRemoteImage = url.contains("http")
     
-    commmonDataRequestController.getImage(from: url, isLaravelRelated: !isRemoteImage) { data in
-      let displayImage = UIImage(named: "Pictures/chooseProfile")!
-      
+    if let cachedImage = CacheManager.shared.getFromCache(by: url as AnyObject) as? UIImage {
+      completion(cachedImage)
+      return
+    }
+    
+    commonDataRequestController.getImage(from: url, isLaravelRelated: !isRemoteImage) { data in
       guard let data = data else {
-        completion(displayImage)
+        completion(defaultImage)
         return
       }
       
       guard let image = UIImage(data: data) else {
-        completion(displayImage)
+        completion(defaultImage)
         return
       }
       
+      CacheManager.shared.saveToCache(url as AnyObject, image)
       completion(image)
     }
   }

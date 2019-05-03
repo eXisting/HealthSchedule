@@ -18,7 +18,7 @@ class ServicesViewController: UITableViewController, NVActivityIndicatorViewable
     let customType = PresentationType.popup
     
     let customPresenter = Presentr(presentationType: customType)
-    customPresenter.transitionType = .coverVerticalFromTop
+    customPresenter.transitionType = .crossDissolve
     customPresenter.dismissTransitionType = .crossDissolve
     customPresenter.roundCorners = true
     customPresenter.backgroundColor = .lightGray

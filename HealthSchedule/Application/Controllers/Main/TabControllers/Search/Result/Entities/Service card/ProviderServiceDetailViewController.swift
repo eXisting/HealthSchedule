@@ -31,7 +31,16 @@ class ProviderServiceDetailViewController: UIViewController, NVActivityIndicator
   }
   
   private func sendRequest() {
-    model.sendRequest()
+    model.sendRequest { [weak self] in
+      DispatchQueue.main.async {
+        self?.hideLoader()
+        CDAlertView(
+          title: "Success",
+          message: "Your book has been sent successfuly! Wait for provider response!",
+          type: .custom(image: UIImage(named:"Icons/done")!)
+        ).show()
+      }
+    }
   }
 }
 
@@ -61,5 +70,6 @@ extension ProviderServiceDetailViewController: LoaderShowable {
   
   func hideLoader() {
     stopAnimating()
+    dismiss(animated: true)
   }
 }

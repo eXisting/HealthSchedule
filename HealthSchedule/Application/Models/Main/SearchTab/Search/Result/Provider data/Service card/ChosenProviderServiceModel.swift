@@ -30,22 +30,24 @@ class ChosenProviderServiceModel {
     serviceToData()
   }
   
-  func sendRequest() {
+  func sendRequest(_ completion: @escaping () -> Void) {
     loaderHandling.showLoader()
     
     var data: Parser.JsonDictionary = [:]
-    data[RequestJsonFields.requestAt.rawValue] = DateManager.shared.date2String(with: .dateTime, time)
-    data[ProviderServiceJsonFields.providerId.rawValue] = String(service.providerId)
-    data[ProviderServiceJsonFields.serviceId.rawValue] = String(service.id)
+    data[RequestJsonFields.requestAt.rawValue] = DateManager.shared.date2String(with: .dateTime, time, .posix)
+    data[ProviderServiceJsonFields.providerServiceId.rawValue] = String(service.id)
     data[RequestJsonFields.description.rawValue] = "Hello, I would like to book!"
     
     requestManager.makeRequests(toProviderWith: data) { [weak self] response in
       if response != ResponseStatus.success.rawValue {
-        self?.stopLoading(with: response)
+        DispatchQueue.main.async {
+          self?.loaderHandling.hideLoader()
+          self?.errorHandling.showWarningAlert(message: response)
+        }
         return
       }
       
-      self?.loaderHandling.hideLoader()
+      completion()
     }
   }
   
@@ -78,13 +80,6 @@ class ChosenProviderServiceModel {
     data.append("Duration: \(DateManager.shared.date2String(with: .time, service.duration!, .hour24))")
     
     source.populateData(data)
-  }
-  
-  private func stopLoading(with message: String) {
-    DispatchQueue.main.async {
-      self.loaderHandling.hideLoader()
-      self.errorHandling.showWarningAlert(message: message)
-    }
   }
 }
 

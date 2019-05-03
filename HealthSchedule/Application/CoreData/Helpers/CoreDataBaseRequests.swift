@@ -73,10 +73,6 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       // Required fields
       insertUpdateProviderServices(from: [remote.providerService], isRefetch: false, context: workingContext)
       
-      if let customer = remote.customer {
-        insertUpdateUsers(from: [customer], context: workingContext)
-      }
-      
       var storedRequest = fetchRequestsHandler.getRequest(by: remote.id, context: workingContext)
       
       if storedRequest == nil {
@@ -155,6 +151,10 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
     var allRemoteIdPairs: [Int: [Int]] = [:]
     
     for remote in list {
+      if let remoteUser = remote.provider {
+        insertUpdateUsers(from: [remoteUser], context: workingContext)
+      }
+      
       var existingService = fetchRequestsHandler.getProviderService(by: remote.id, context: workingContext)
       
       if existingService == nil {
@@ -164,10 +164,6 @@ class CoreDataRequestsBase: CoreDataRequestsPerformable {
       guard let providerService = existingService else { fatalError() }
       
       builder.build(providerService: providerService, remote, context: workingContext)
-      
-      if let remoteUser = remote.provider {
-        insertUpdateUsers(from: [remoteUser], context: workingContext)
-      }
       
       // Required fields
       insertUpdateServiceAddress(from: remote.address, for: providerService, context: workingContext)
